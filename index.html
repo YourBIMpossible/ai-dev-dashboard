@@ -292,6 +292,11 @@ ul.alist li.dec::before{content:"◆";color:var(--amber);}
 ul.alist li.rem::before{content:"○";color:var(--dim);}
 .links a{color:var(--w);text-decoration:none;font-size:12.5px;display:inline-block;margin:0 14px 6px 0;}
 .links a:hover{text-decoration:underline;}
+.path-chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--w);background:rgba(110,168,255,.06);border:1px solid rgba(110,168,255,.18);border-radius:5px;cursor:pointer;padding:3px 9px;margin:0 8px 6px 0;font-family:inherit;transition:background .15s,border-color .15s,color .15s;}
+.path-chip:hover{background:rgba(110,168,255,.12);border-color:rgba(110,168,255,.38);color:#fff;}
+.path-chip.copied{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.4);color:var(--green);}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(30,38,58,.96);border:1px solid rgba(110,168,255,.3);border-radius:8px;padding:8px 18px;font-size:13px;color:var(--text);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:999;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .empty{color:var(--dim);font-style:italic;font-size:12.5px;}
 code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;border-radius:5px;font-size:11.5px;}
 
@@ -420,6 +425,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
   <main id="main"></main>
 </div>
 <div id="ppb" style="display:none;position:fixed;inset:0;z-index:999;cursor:default;" onclick="closePP()"></div>
+<div id="toast"></div>
 <div id="pp" class="pp" style="display:none;"></div>
 <script src="data.js"></script>
 <script src="graph-metrics.js" onerror="void 0"></script>
@@ -448,7 +454,14 @@ window._PR={};
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function fileUrl(p){return'file:///'+p.replace(/\\/g,'/');}
+function pathLink(p,label){const safe=p.replace(/'/g,"\\'");return`<button class="path-chip" onclick="copyPath(this,'${safe}')">${esc(label||p)}</button>`;}
+let _toastTimer;
+function copyPath(el,path){
+  navigator.clipboard.writeText(path).catch(()=>{const i=Object.assign(document.createElement('input'),{value:path,style:'position:fixed;opacity:0'});document.body.appendChild(i);i.select();document.execCommand('copy');i.remove();});
+  el.classList.add('copied');setTimeout(()=>el.classList.remove('copied'),1400);
+  const t=document.getElementById('toast');t.textContent='📋 Path copied — paste in Explorer, VS Code, or Terminal';t.classList.add('show');
+  clearTimeout(_toastTimer);_toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
 function daysAgo(iso){if(!iso)return null;return Math.round((TODAY-new Date(iso+'T00:00:00'))/86400000);}
 function ageHtml(iso){
   const n=daysAgo(iso);if(n===null)return'';
@@ -853,7 +866,7 @@ function project(p){
     if(tot)h+=a.open.map(f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`).join('');
     else h+=`<p class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of the last run.</p>`;
     h+=`<p style="font-size:11.5px;color:var(--dim);margin-top:10px"><span class="trend ${a.trend||'flat'}">${a.trend||'flat'}</span> · ${a.closedLastRun||0} closed last run${a.cadence?' · '+esc(a.cadence):''}</p>`;
-    h+=`<div class="links" style="margin-top:8px"><a href="${fileUrl(a.reportPath)}">Full report</a>${a.ledgerPath?`<a href="${fileUrl(a.ledgerPath)}">Audit ledger</a>`:''}</div></div>`;
+    h+=`<div class="links" style="margin-top:8px">${pathLink(a.reportPath,'Full report')}${a.ledgerPath?pathLink(a.ledgerPath,'Audit ledger'):''}</div></div>`;
   }
 
   // Waves
@@ -861,7 +874,7 @@ function project(p){
     const w=p.waves;
     h+=`<div class="card fade ca-purple" style="animation-delay:.15s;margin-bottom:14px"><h3>Waves${w.updated?` <span style="font-size:9.5px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">ledger updated ${esc(w.updated)}</span>`:''}</h3>`;
     h+=wavePanel(w);
-    if(w.source)h+=`<div class="links" style="margin-top:10px"><a href="${fileUrl(w.source)}">Wave ledger</a></div>`;
+    if(w.source)h+=`<div class="links" style="margin-top:10px">${pathLink(w.source,'Wave ledger')}</div>`;
     h+=`</div>`;
   }
 
@@ -870,7 +883,7 @@ function project(p){
     h+=`<div class="card fade ca-grey" style="animation-delay:.17s;margin-bottom:14px"><h3>Recent activity</h3><div class="tl">${p.recent.map(tlItem).join('')}</div></div>`;
   }
   if((p.links||[]).length){
-    h+=`<div class="card fade ca-grey" style="animation-delay:.19s"><h3>Key files</h3><div class="links">${p.links.map(l=>`<a href="${fileUrl(l.path)}">${esc(l.label)}</a>`).join('')}</div></div>`;
+    h+=`<div class="card fade ca-grey" style="animation-delay:.19s"><h3>Key files</h3><div class="links">${p.links.map(l=>pathLink(l.path,l.label)).join('')}</div></div>`;
   }
   return h;
 }
@@ -905,7 +918,7 @@ function auditView(){
   wa.filter(p=>p.audit.open&&p.audit.open.length).forEach((p,i)=>{
     h+=`<div class="card fade" style="animation-delay:${0.08+i*.04}s;margin-top:13px"><h3>${esc(p.name)} — open findings</h3>`
       +p.audit.open.map(f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`).join('')
-      +`<div class="links" style="margin-top:10px"><a href="${fileUrl(p.audit.reportPath)}">Full report</a>${p.audit.ledgerPath?`<a href="${fileUrl(p.audit.ledgerPath)}">Ledger</a>`:''}</div></div>`;
+      +`<div class="links" style="margin-top:10px">${pathLink(p.audit.reportPath,'Full report')}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Ledger'):''}</div></div>`;
   });
   return h;
 }
@@ -972,9 +985,9 @@ function graphView(){
   const gn=L.godNodes||[];
   if(gn.length)h+=`<div class="card fade" style="animation-delay:.09s;margin-top:13px"><h3>Top god nodes — highest blast radius</h3>${gnBar(gn)}</div>`;
   h+=`<div class="card fade" style="animation-delay:.11s;margin-top:13px"><h3>Quick links</h3><div class="links">`
-    +`<a href="file:///F:/AI-Dev/BIMpossible/backend/graphify-out/graph.html">Interactive node graph</a>`
-    +`<a href="file:///F:/AI-Dev/BIMpossible/backend/graphify-out/dashboard.html">Standalone dashboard</a>`
-    +`<a href="file:///F:/AI-Dev/BIMpossible/backend/graphify-out/GRAPH_REPORT.md">Graph report</a>`
+    +pathLink('F:\\AI-Dev\\BIMpossible\\backend\\graphify-out\\graph.html','Interactive node graph')
+    +pathLink('F:\\AI-Dev\\BIMpossible\\backend\\graphify-out\\dashboard.html','Standalone dashboard')
+    +pathLink('F:\\AI-Dev\\BIMpossible\\backend\\graphify-out\\GRAPH_REPORT.md','Graph report')
     +`</div></div>`;
   return h;
 }
