@@ -17,5 +17,5 @@ if ($staged) {
     git push origin main
     Write-Host "Pushed dashboard data ($timestamp)" -ForegroundColor Green
 } else {
-    Write-Host "Nothing changed — skipping push" -ForegroundColor DarkGray
+    Write-Host "Nothing changed - skipping push" -ForegroundColor DarkGray
 }
