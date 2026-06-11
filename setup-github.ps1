@@ -28,7 +28,7 @@ git add index.html data.js graph-metrics.js .gitignore
 git commit -m "Initial dashboard commit"
 
 # Wire remote — update the URL if the repo name differs
-git remote add origin https://github.com/YourBIMpossible/ai-dev-dashboard.git
+git remote add origin https://github.com/YourBIMpossible/ai-dev-dashboard.git  # already wired
 
 # Push (will prompt for GitHub credentials once; Windows will cache them)
 git push -u origin main
