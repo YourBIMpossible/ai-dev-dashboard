@@ -338,10 +338,62 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 /* ── Fade-in ───────────────────────────────── */
 .fade{opacity:0;transform:translateY(6px);animation:rise .45s cubic-bezier(.22,1,.36,1) forwards;}
 @keyframes rise{to{opacity:1;transform:none;}}
+/* Fix: when glow+fade coexist, combine both animations so rise isn't overridden */
+.card.glow.fade{animation:rise .45s cubic-bezier(.22,1,.36,1) forwards,wglow 3.5s ease-in-out .5s infinite;}
+.card.pglow.fade{animation:rise .45s cubic-bezier(.22,1,.36,1) forwards,pglow 3.5s ease-in-out .5s infinite;}
 @media(prefers-reduced-motion:reduce){
   .fade{animation:none;opacity:1;transform:none;}
   .bar i,.donut circle.val{transition:none;}
   .card.glow,.card.pglow{animation:none;}
+}
+
+/* ── Card accent borders ───────────────────── */
+.ca-blue  {border-left:3px solid rgba(110,168,255,.55);padding-left:19px;}
+.ca-green {border-left:3px solid rgba(52,211,153,.55); padding-left:19px;}
+.ca-amber {border-left:3px solid rgba(251,191,36,.55);  padding-left:19px;}
+.ca-red   {border-left:3px solid rgba(248,113,113,.55); padding-left:19px;}
+.ca-purple{border-left:3px solid rgba(167,139,250,.55); padding-left:19px;}
+.ca-grey  {border-left:3px solid rgba(93,104,128,.4);   padding-left:19px;}
+
+/* ── Project hero card ─────────────────────── */
+.proj-hero{
+  background:linear-gradient(155deg,rgba(20,28,54,.96) 0%,rgba(11,16,36,.94) 100%);
+  border-color:rgba(110,168,255,.28);
+}
+.proj-hero-p{
+  background:linear-gradient(155deg,rgba(40,28,20,.96) 0%,rgba(20,14,10,.94) 100%);
+  border-color:rgba(251,146,60,.28);
+}
+
+/* ── Colored card h3 labels ────────────────── */
+.h3-blue  .card h3,.card.h3-blue h3  {color:rgba(110,168,255,.7);}
+.h3-green .card h3,.card.h3-green h3 {color:rgba(52,211,153,.7);}
+.h3-amber .card h3,.card.h3-amber h3 {color:rgba(251,191,36,.6);}
+.h3-red   .card h3,.card.h3-red h3   {color:rgba(248,113,113,.7);}
+.h3-purple.card h3,.card.h3-purple h3{color:rgba(167,139,250,.7);}
+
+/* ── Stat tile colored accents ─────────────── */
+.stat.ok  {border-left:3px solid rgba(52,211,153,.4);}
+.stat.warn{border-left:3px solid rgba(251,191,36,.4);}
+.stat.bad {border-left:3px solid rgba(248,113,113,.4);}
+.stat.info{border-left:3px solid rgba(110,168,255,.4);}
+
+/* ── Overview hero card ────────────────────── */
+.ov-hero{
+  background:linear-gradient(145deg,rgba(18,26,52,.98) 0%,rgba(14,20,42,.95) 60%,rgba(20,15,42,.9) 100%);
+  border-color:rgba(110,168,255,.3);
+  box-shadow:0 8px 40px rgba(0,0,0,.32),inset 0 1px 0 rgba(110,168,255,.1);
+}
+
+/* ── Section header enhanced ───────────────── */
+.sec-hd .t{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  background:linear-gradient(90deg,var(--w),var(--w2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sec-hd.pers .t{
+  background:linear-gradient(90deg,var(--p),var(--p2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 
 /* ── Responsive ────────────────────────────── */
@@ -647,7 +699,7 @@ function overview(){
   const bp=D.projects.find(p=>p.id==='bimpossible');
   if(bp){
     const pct=overallPct(bp);
-    h+=`<div class="card glow span4" style="padding:22px 24px">`;
+    h+=`<div class="card glow span4 ov-hero" style="padding:22px 24px">`;
     h+=`<div style="display:flex;gap:20px;flex-wrap:wrap">`;
     // Left column
     h+=`<div style="flex:1;min-width:280px">`;
@@ -760,7 +812,7 @@ function project(p){
     +`<p class="sub">${esc(p.oneLiner||'')}</p>`;
 
   // Hero card
-  h+=`<div class="card${p.status==='active'?(isP?' pglow':' glow'):''} fade" style="padding:22px 24px;margin-bottom:14px">`;
+  h+=`<div class="fade"><div class="card${p.status==='active'?(isP?' pglow':' glow'):''} ${isP?'proj-hero-p':'proj-hero'}" style="padding:22px 24px;margin-bottom:14px">`;
   h+=`<div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">`;
   h+=pct!==null?donut(pct,130,p.progress&&p.progress.label||''):'';
   h+=`<div style="flex:1;min-width:260px">`;
@@ -769,29 +821,29 @@ function project(p){
   if(p.branch)h+=`<div style="font-size:12px;color:var(--muted);margin-top:5px">Branch: <code>${esc(p.branch)}</code></div>`;
   if(p.focus)h+=`<div class="focus${isP?' focus-p':''}" style="margin-top:12px"><b>If you only do one thing</b>${esc(p.focus)}</div>`;
   if(p.git&&p.git.warn)h+=`<div class="gwarn">${esc(p.git.warn)}</div>`;
-  h+=`</div></div></div>`;
+  h+=`</div></div></div></div>`; // close: flex-1, flex-wrap, card, fade-wrapper
 
   // Phase bars + activity chart
   h+=`<div class="g g2 fade" style="animation-delay:.05s;margin-bottom:14px">`;
-  h+=`<div class="card${isP?' pers-bars':''}"><h3>${esc((p.progress&&p.progress.label)||'Phases')} <span style="font-size:9.5px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">— click a phase for tasks</span></h3>${phaseBars(p.progress,p.id)}</div>`;
-  h+=`<div class="card"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`;
+  h+=`<div class="card ca-blue${isP?' pers-bars':''}"><h3>${esc((p.progress&&p.progress.label)||'Phases')} <span style="font-size:9.5px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">— click a phase for tasks</span></h3>${phaseBars(p.progress,p.id)}</div>`;
+  h+=`<div class="card ca-grey"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`;
   h+=`</div>`;
 
   // Next actions + decisions/blockers/reminders
   h+=`<div class="g g2 fade" style="animation-delay:.09s;margin-bottom:14px">`;
-  h+=`<div class="card"><h3>Next actions</h3>`;
+  h+=`<div class="card ca-blue"><h3>Next actions</h3>`;
   if((p.nextActions||[]).length)h+=`<ul class="alist">${p.nextActions.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>`;
   else h+=`<p class="empty">none</p>`;
   h+=`</div><div style="display:flex;flex-direction:column;gap:13px">`;
-  if((p.blockers||[]).length)h+=`<div class="card"><h3>Blockers</h3><ul class="alist">${p.blockers.map(b=>`<li class="blk">${esc(b)}</li>`).join('')}</ul></div>`;
-  if((p.pendingDecisions||[]).length)h+=`<div class="card"><h3>Decisions waiting on you</h3><ul class="alist">${p.pendingDecisions.map(d=>`<li class="dec">${esc(d)}</li>`).join('')}</ul></div>`;
-  if((p.reminders||[]).length)h+=`<div class="card"><h3>Watch items</h3><ul class="alist">${p.reminders.map(r=>`<li class="rem">${esc(r)}</li>`).join('')}</ul></div>`;
+  if((p.blockers||[]).length)h+=`<div class="card ca-red"><h3>Blockers</h3><ul class="alist">${p.blockers.map(b=>`<li class="blk">${esc(b)}</li>`).join('')}</ul></div>`;
+  if((p.pendingDecisions||[]).length)h+=`<div class="card ca-amber"><h3>Decisions waiting on you</h3><ul class="alist">${p.pendingDecisions.map(d=>`<li class="dec">${esc(d)}</li>`).join('')}</ul></div>`;
+  if((p.reminders||[]).length)h+=`<div class="card ca-grey"><h3>Watch items</h3><ul class="alist">${p.reminders.map(r=>`<li class="rem">${esc(r)}</li>`).join('')}</ul></div>`;
   h+=`</div></div>`;
 
   // Audit
   if(p.audit){
     const a=p.audit;const tot=SEVS.reduce((s,k)=>s+(a.counts[k]||0),0);
-    h+=`<div class="card fade" style="animation-delay:.13s;margin-bottom:14px"><h3>Audit · ${esc(a.lastRun)} (${esc(a.runType)})</h3>`;
+    h+=`<div class="card fade ca-green" style="animation-delay:.13s;margin-bottom:14px"><h3>Audit · ${esc(a.lastRun)} (${esc(a.runType)})</h3>`;
     h+=`<div class="sevcounts" style="margin-bottom:${tot?'14px':'4px'}">`;
     SEVS.forEach(k=>{
       const n=a.counts[k]||0;
@@ -807,7 +859,7 @@ function project(p){
   // Waves
   if(p.waves){
     const w=p.waves;
-    h+=`<div class="card fade" style="animation-delay:.15s;margin-bottom:14px"><h3>Waves${w.updated?` <span style="font-size:9.5px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">ledger updated ${esc(w.updated)}</span>`:''}</h3>`;
+    h+=`<div class="card fade ca-purple" style="animation-delay:.15s;margin-bottom:14px"><h3>Waves${w.updated?` <span style="font-size:9.5px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">ledger updated ${esc(w.updated)}</span>`:''}</h3>`;
     h+=wavePanel(w);
     if(w.source)h+=`<div class="links" style="margin-top:10px"><a href="${fileUrl(w.source)}">Wave ledger</a></div>`;
     h+=`</div>`;
@@ -815,10 +867,10 @@ function project(p){
 
   // Recent + links
   if((p.recent||[]).length){
-    h+=`<div class="card fade" style="animation-delay:.17s;margin-bottom:14px"><h3>Recent activity</h3><div class="tl">${p.recent.map(tlItem).join('')}</div></div>`;
+    h+=`<div class="card fade ca-grey" style="animation-delay:.17s;margin-bottom:14px"><h3>Recent activity</h3><div class="tl">${p.recent.map(tlItem).join('')}</div></div>`;
   }
   if((p.links||[]).length){
-    h+=`<div class="card fade" style="animation-delay:.19s"><h3>Key files</h3><div class="links">${p.links.map(l=>`<a href="${fileUrl(l.path)}">${esc(l.label)}</a>`).join('')}</div></div>`;
+    h+=`<div class="card fade ca-grey" style="animation-delay:.19s"><h3>Key files</h3><div class="links">${p.links.map(l=>`<a href="${fileUrl(l.path)}">${esc(l.label)}</a>`).join('')}</div></div>`;
   }
   return h;
 }
