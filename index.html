@@ -458,7 +458,7 @@ window._PR={};
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function pathLink(p,label){const safe=p.replace(/'/g,"\\'");return`<button class="path-chip" onclick="copyPath(this,'${safe}')">${esc(label||p)}</button>`;}
+function pathLink(p,label){const safe=p.replace(/\\/g,'\\\\').replace(/'/g,"\\'");return`<button class="path-chip" onclick="copyPath(this,'${safe}')">${esc(label||p)}</button>`;}
 let _toastTimer;
 function copyPath(el,path){
   navigator.clipboard.writeText(path).catch(()=>{const i=Object.assign(document.createElement('input'),{value:path,style:'position:fixed;opacity:0'});document.body.appendChild(i);i.select();document.execCommand('copy');i.remove();});
