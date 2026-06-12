@@ -1,0 +1,60 @@
+// Strategy & Ideas — edit this file freely; it is NOT auto-overwritten by dashboard refresh
+window.STRATEGY_DATA = {
+  updated: "2026-06-11",
+  source: "BIMpossible_StrategicScan_2026-06-11.md",
+  items: [
+    // ── Blind Spots ──────────────────────────────────────────────────────────
+    { id:"bs-1", cat:"blindspot", title:"First 10 clients path doesn't exist",
+      body:"The business case says 'not for sale yet' but there's no articulated bridge between 'internal tool' and 'first 10 external deployments.' Architecture decisions in the next few waves (multi-tenancy, data isolation, onboarding flow, self-serve setup) either open or close that door — they need to be designed before clients arrive, not after the first one shows up." },
+    { id:"bs-2", cat:"blindspot", title:"Onboarding friction will kill early adoption",
+      body:"APS OAuth setup, hub/project configuration, and add-in install are real barriers for a non-technical BIM manager at another firm. No 'first-run experience' exists. Getting a new firm from zero to seeing their first schedule should take under 30 minutes, guided by the product itself — not a setup doc." },
+    { id:"bs-3", cat:"blindspot", title:"Permissions model is undersized for real firms",
+      body:"Wave 6's 'thin permissions' will immediately hit its ceiling. Real AEC firms have layered org structures: project engineers, discipline leads, BIM managers, PMs, principals, clients. Design before going commercial: per-project visibility, discipline-scoped access (MEP team sees MEP), and client/owner read-only portals." },
+    { id:"bs-4", cat:"blindspot", title:"No BIM Health Score concept",
+      body:"Every project tab shows data, but there's no single metric a non-technical stakeholder can hold. A BIM Health Score (0–100) rolled up from completeness checks, parameter fill, naming compliance, and coordination conflicts would give PMs and principals what they actually care about — and makes BIMpossible visible in executive conversations, not just BIM-team conversations." },
+    { id:"bs-5", cat:"blindspot", title:"Data residency and compliance are invisible",
+      body:"The moment you deploy at a second firm — especially healthcare or government — they will ask about SOC 2, HIPAA, and data residency. You don't need SOC 2 today, but you need a clear answer: 'Where is my project data stored, who can access it, and how long do you retain it?' This is a sales-blocking question for certain client types." },
+    { id:"bs-6", cat:"blindspot", title:"Autodesk's roadmap is a risk not explicitly watched",
+      body:"Autodesk is actively building Forma's data API and ACC's intelligence layer. The 'operational data layer above Autodesk' is exactly what Autodesk eventually builds internally. The window is real but not permanent. Maintain a quarterly watch on Forma's roadmap and be explicit about which BIMpossible capabilities are durable vs. likely commoditized within 3 years." },
+    { id:"bs-7", cat:"blindspot", title:"No export-to-regulatory-submission concept",
+      body:"BIMpossible is already used in contexts where outputs feed HCAI permit submittals. There's no 'official output' concept — no audit stamp, no version locking, no 'data as of submittal date X.' Design decision needed: are BIMpossible exports informational only, or submission-grade? This is a liability boundary question." },
+    { id:"bs-8", cat:"blindspot", title:"Revit family library is completely untouched",
+      body:"Phase 5 mentions family library browsing but it's far down the roadmap. BIMpossible already has type-grain data for most discipline schedules. The jump from 'I can see type instances in the project' to 'I can browse the firm's type library across all projects' is shorter than Phase 5 implies and resonates immediately with BIM managers." },
+    { id:"bs-9", cat:"blindspot", title:"AI assistant lacks a non-technical UX paradigm",
+      body:"Phase 4a is built but the UX question — 'how does a PM who has never used Revit ask a useful question?' — isn't deeply answered. The bigger market value is the non-technical user who needs model information but has no BIM vocabulary. Those users need prompt suggestions, example queries, and a guided mode — not an open chat box." },
+    { id:"bs-10", cat:"blindspot", title:"No mobile story",
+      body:"Field personnel, PMs, and clients check project status on phones. The current product is desktop-browser-first. A responsive layout optimized for 'what's the room count on Level 4?' on a phone is absent from the roadmap. This limits who in a client firm actually touches BIMpossible day-to-day." },
+
+    // ── Ideas ─────────────────────────────────────────────────────────────────
+    { id:"idea-1", cat:"idea", title:"'BIM Briefing' — daily email digest",
+      body:"Every morning, one email: 'Here's what changed in your projects overnight.' New rooms, deleted doors, changed parameter values, coordination conflicts, new model versions published. Non-Revit stakeholders (PMs, principals, clients) get BIM intelligence delivered to their inbox without ever logging in. Change tracking is planned — the delivery mechanism is not." },
+    { id:"idea-2", cat:"idea", title:"One-click coordination report",
+      body:"Button on a project page → formatted PDF of every cross-discipline discrepancy (room name mismatches A↔M, equipment IDs in E that don't exist in M, structural members with missing marks). What a coordination meeting produces manually in 2 hours, BIMpossible produces in 10 seconds. A demo-able feature that sells the platform instantly." },
+    { id:"idea-3", cat:"idea", title:"BIM Health Score on every project",
+      body:"A single 0–100 score visible the moment you open a project. Green/yellow/red indicator. Clicking it breaks down: parameter completeness 87%, naming compliance 92%, coordination conflicts 3 open, last sync 2 hours ago. PMs and principals carry this number into project meetings. Makes BIMpossible visible at every level of the client org." },
+    { id:"idea-4", cat:"idea", title:"Firm standards as the product",
+      body:"'Your firm standard says all electrical equipment must have a Panel Name filled in before CD phase. Here are 4 projects failing that check right now.' A standards dashboard a BIM manager sets up once and runs forever. This is the thing BIM managers have wanted for years and the reason they'd fight to get budget for BIMpossible." },
+    { id:"idea-5", cat:"idea", title:"'Ask your model' — self-serve for non-Revit users",
+      body:"Position the AI assistant as the entry point for people who've never touched Revit. 'Anyone on your team can now ask questions about your Revit models in plain English.' Demo: a PM types 'How many patient rooms are on Level 8?' and gets an instant answer. Reframes the product from 'a better BIM dashboard' to 'BIM data for your whole firm.'" },
+    { id:"idea-6", cat:"idea", title:"Submittals package validator",
+      body:"For regulatory submissions (HCAI, building permits): BIMpossible runs an automated checklist — required schedules present, parameter fields populated, sheet numbers matching the discipline index, naming inconsistencies — and produces a validation report. Sell specifically to healthcare, government, and institutional AEC where permit submittals are high-stakes and manual checking is expensive." },
+    { id:"idea-7", cat:"idea", title:"'Time machine' model view",
+      body:"Show any model as it was on any past date. 'Show me this project as it was when we issued the SD set.' Valuable for coordination disputes, owner questions, regulatory review, and claims situations. Once change tracking is live, this is nearly free to expose. Clients use it every time there's a 'that wasn't in the model when we submitted' argument — which happens on every project." },
+    { id:"idea-8", cat:"idea", title:"Project setup wizard as a standalone product",
+      body:"New project setup (ACC provisioning, folder structure, central file from template, view templates, sheet set) is 4–8 hours of BIM manager time per project. A web form that does all of that in one click is a product in itself, immediately saleable to any firm running more than 10 projects a year. Consider pulling this forward — high standalone demonstration value." },
+    { id:"idea-9", cat:"idea", title:"Client/owner read-only portal",
+      body:"Give the owner or client a read-only login showing: current model status, BIM health score, room list, equipment list, coordination summary. No Revit access required. Firms that can tell clients 'you can check the live BIM data for your project anytime' have a sales advantage in project pursuit. Makes BIMpossible a client-facing product, not just a back-office tool." },
+    { id:"idea-10", cat:"idea", title:"Carbon/embodied energy module",
+      body:"BIMpossible already has material quantities, element counts, and type properties for every category. The jump to 'embodied carbon estimate' requires only a mapping to a carbon database (EC3, ICE). ESG reporting is becoming mandatory for large project owners (LEED, WELL, owner-mandated). A 'carbon module' opens an entirely different buyer conversation." },
+
+    // ── Outlook ───────────────────────────────────────────────────────────────
+    { id:"out-1", cat:"outlook", title:"Near term (12–18 months): Proven cross-discipline platform",
+      body:"Current trajectory (Waves 5–9 + remaining discipline waves + schedule push) gets BIMpossible to a state where it genuinely covers all Revit disciplines, pushes data back to the model, and has an AI assistant layer. At that point it's a defensible product with real daily utility. Natural next milestone: first external deployment — a second firm using BIMpossible. Tests onboarding, data isolation, permission model, and whether the value proposition holds outside the founder's team." },
+    { id:"out-2", cat:"outlook", title:"Medium term (2–3 years): Multi-tenant SaaS",
+      body:"Commercial model: SaaS subscription per-seat or per-project, self-serve onboarding, cloud-hosted. Distribution plays: Autodesk App Store (most direct channel to APS-connected firms), AEC technology consultants (Symetri, Applied Software, CADpoint resell and implement tools like this), industry-specific go-to-market (healthcare and government AEC have highest willingness to pay for compliance tools)." },
+    { id:"out-3", cat:"outlook", title:"Long term (3–5 years): Platform with ecosystem",
+      body:"BIMpossible as the data layer other AEC tools integrate with. Bidirectional integrations with Procore/Bluebeam/PlanGrid. FM handover as a product line — the data collected over a project lifecycle is exactly the COBie/IFC deliverable owners need for facilities management. AI-generated specifications anchored in actual model data. Platform API play: cost estimators, energy modelers, scheduling tools all need normalized BIM data — BIMpossible as the source of truth." },
+    { id:"out-4", cat:"outlook", title:"Durable differentiators to protect",
+      body:"1. Firm-owned deployment — data stays in the firm's infrastructure, not on Autodesk's. 2. Discipline-neutral, firm-customizable — Autodesk builds for the median firm; BIMpossible can serve the specific workflows of a specific firm's specific disciplines. 3. AI layer on top of firm data — an assistant that knows your firm's standards and project history. 4. Speed of iteration — a focused single-developer product ships in days what Autodesk puts on a 2-year roadmap." }
+  ]
+};

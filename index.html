@@ -421,6 +421,53 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 /* graph */
 .gmg{grid-template-columns:repeat(4,1fr);margin-bottom:14px;}
 @media(max-width:900px){.gmg{grid-template-columns:repeat(2,1fr);}}
+
+/* ── Strategy view ─────────────────────────────────────────────────── */
+.strat-tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+.strat-tab{background:rgba(22,30,54,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:6px 13px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .15s;font-family:inherit;}
+.strat-tab:hover{border-color:rgba(110,168,255,.35);color:var(--text);}
+.strat-tab.active{background:rgba(110,168,255,.13);border-color:rgba(110,168,255,.44);color:#fff;}
+.strat-tab .tc{display:inline-block;margin-left:5px;background:rgba(255,255,255,.08);border-radius:4px;padding:1px 6px;font-size:10px;}
+.strat-tab.active .tc{background:rgba(110,168,255,.2);}
+.strat-sr{display:flex;align-items:center;gap:7px;margin-bottom:18px;flex-wrap:wrap;}
+.strat-sp{background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:4px 11px;font-size:11px;color:var(--dim);cursor:pointer;transition:all .15s;font-family:inherit;text-transform:capitalize;}
+.strat-sp:hover{border-color:rgba(255,255,255,.18);color:var(--muted);}
+.strat-sp.active{border-color:rgba(110,168,255,.42);color:var(--w);background:rgba(110,168,255,.08);}
+.strat-add-btn{margin-left:auto;background:rgba(110,168,255,.1);border:1px solid rgba(110,168,255,.28);border-radius:8px;padding:6px 14px;font-size:12px;color:var(--w);cursor:pointer;font-family:inherit;transition:all .15s;font-weight:500;}
+.strat-add-btn:hover{background:rgba(110,168,255,.18);border-color:rgba(110,168,255,.5);}
+.strat-form{background:rgba(16,24,46,.97);border:1px solid rgba(110,168,255,.28);border-radius:14px;padding:20px 22px;margin-bottom:16px;box-shadow:inset 0 1px 0 rgba(110,168,255,.1),0 4px 20px rgba(0,0,0,.4);}
+.strat-form label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);display:block;margin-bottom:5px;}
+.strat-form input,.strat-form textarea,.strat-form select{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:8px;padding:8px 12px;color:var(--text);font-family:inherit;font-size:13px;margin-bottom:12px;outline:none;transition:border-color .15s;display:block;}
+.strat-form input:focus,.strat-form textarea:focus,.strat-form select:focus{border-color:rgba(110,168,255,.5);}
+.strat-form textarea{min-height:80px;resize:vertical;}
+.strat-form select option{background:#131928;}
+.strat-fbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:4px;}
+.sf-save{background:rgba(110,168,255,.12);border:1px solid rgba(110,168,255,.38);border-radius:7px;padding:7px 18px;color:var(--w);cursor:pointer;font-family:inherit;font-size:12.5px;font-weight:600;transition:all .15s;}
+.sf-save:hover{background:rgba(110,168,255,.2);}
+.sf-cancel{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:7px 18px;color:var(--muted);cursor:pointer;font-family:inherit;font-size:12.5px;transition:all .15s;}
+.sf-cancel:hover{border-color:rgba(255,255,255,.2);color:var(--text);}
+.strat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:13px;}
+.strat-card{background:rgba(22,30,54,.94);border:1px solid rgba(255,255,255,.11);border-radius:14px;padding:18px 20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 2px 8px rgba(0,0,0,.5),0 10px 28px rgba(0,0,0,.25);transition:border-color .18s,opacity .18s;display:flex;flex-direction:column;}
+.strat-card:hover{border-color:rgba(255,255,255,.19);}
+.strat-card.denied{opacity:.38;}
+.strat-ct{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.strat-cat-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;}
+.strat-stat-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;}
+.strat-title{font-family:Sora;font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;line-height:1.42;}
+.strat-body{font-size:12px;color:var(--muted);line-height:1.65;flex:1;margin-bottom:14px;}
+.strat-acts{display:flex;gap:6px;margin-top:auto;}
+.sa{flex:1;border-radius:7px;padding:6px 8px;font-size:11px;cursor:pointer;border:1px solid;font-family:inherit;transition:all .15s;font-weight:500;text-align:center;}
+.sa-ok{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.22);color:rgba(52,211,153,.75);}
+.sa-ok:hover{background:rgba(52,211,153,.13);border-color:rgba(52,211,153,.48);color:var(--green);}
+.sa-ok.on{background:rgba(52,211,153,.16);border-color:rgba(52,211,153,.6);color:var(--green);font-weight:700;}
+.sa-rs{background:rgba(110,168,255,.06);border-color:rgba(110,168,255,.2);color:rgba(110,168,255,.75);}
+.sa-rs:hover{background:rgba(110,168,255,.13);border-color:rgba(110,168,255,.46);color:var(--w);}
+.sa-rs.on{background:rgba(110,168,255,.16);border-color:rgba(110,168,255,.58);color:var(--w);font-weight:700;}
+.sa-no{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.18);color:rgba(248,113,113,.65);}
+.sa-no:hover{background:rgba(248,113,113,.12);border-color:rgba(248,113,113,.44);color:var(--red);}
+.sa-no.on{background:rgba(248,113,113,.15);border-color:rgba(248,113,113,.55);color:var(--red);font-weight:700;}
+.sa-del{background:transparent;border-color:rgba(255,255,255,.08);color:var(--dim);max-width:34px;}
+.sa-del:hover{border-color:rgba(248,113,113,.35);color:var(--red);}
 </style>
 </head>
 <body>
@@ -433,6 +480,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <div id="pp" class="pp" style="display:none;"></div>
 <script src="data.js"></script>
 <script src="graph-metrics.js" onerror="void 0"></script>
+<script src="strategy.js" onerror="void 0"></script>
 <script>
 const D=window.DASHBOARD_DATA;
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
@@ -452,7 +500,8 @@ const ICO={
   box:'<svg viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>',
   cube:'<svg viewBox="0 0 24 24"><path d="M12 2 4 6.5v9L12 20l8-4.5v-9L12 2z"/><path d="M4 6.5 12 11l8-4.5M12 11v9"/></svg>',
   shield:'<svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6l-7-3z"/><path d="m9 12 2 2 4-4"/></svg>',
-  graph:'<svg viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><line x1="5" y1="7" x2="12" y2="17"/><line x1="19" y1="7" x2="12" y2="17"/><line x1="5" y1="5" x2="19" y2="5"/></svg>'
+  graph:'<svg viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><line x1="5" y1="7" x2="12" y2="17"/><line x1="19" y1="7" x2="12" y2="17"/><line x1="5" y1="5" x2="19" y2="5"/></svg>',
+  idea:'<svg viewBox="0 0 24 24"><path d="M9 21h6m-3-18a6 6 0 0 1 3.75 10.67C15 15 15 16 15 17H9c0-1 0-2-.75-2.33A6 6 0 0 1 12 3z"/></svg>'
 };
 window._PR={};
 
@@ -669,6 +718,8 @@ function buildSide(){
   h+=navI('overview',ICO.grid,'Overview');
   h+=navI('audit',ICO.shield,'Audit',totO?(totO+''):'✓',totH?'color:var(--red)':'color:var(--green)');
   h+=navI('graph',ICO.graph,'Codebase',gmL?gmL+'':'');
+  const _si=getStrategyItems(),_sp=_si.filter(i=>i.status==='pending').length,_sa=_si.filter(i=>i.status==='approved').length;
+  h+=navI('strategy',ICO.idea,'Strategy',_sp?_sp+'?':'');
   h+='<div class="grp-sep"></div><div class="grp-lbl">BIMpossible Work</div>';
   WORK.forEach(id=>{const p=D.projects.find(q=>q.id===id);if(p)h+=navI(p.id,ICO[p.icon]||ICO.cube,p.name,pctStr(p),null,p.status,false);});
   h+='<div class="grp-sep"></div><div class="grp-lbl personal">Personal</div>';
@@ -996,6 +1047,129 @@ function graphView(){
   return h;
 }
 
+// ── Strategy ──────────────────────────────────────────────────────────────
+const SCAT_COLOR={blindspot:'var(--amber)',idea:'var(--w)',outlook:'var(--w2)',custom:'var(--green)'};
+const SCAT_LABEL={blindspot:'Blind Spot',idea:'Idea',outlook:'Outlook',custom:'Custom'};
+const SSTAT_COLOR={pending:'var(--dim)',approved:'var(--green)',researching:'var(--w)',denied:'var(--red)'};
+
+function getStrategyItems(){
+  const base=(window.STRATEGY_DATA?.items||[]).map(it=>({...it,status:(() => { try{return localStorage.getItem('strat.s.'+it.id)||it.status||'pending';}catch(e){return it.status||'pending';} })()}));
+  let custom=[];try{custom=JSON.parse(localStorage.getItem('strat.custom')||'[]');}catch(e){}
+  return [...base,...custom];
+}
+
+function stratAct(id,next){
+  let cur='pending';try{cur=localStorage.getItem('strat.s.'+id)||'pending';}catch(e){}
+  try{localStorage.setItem('strat.s.'+id,cur===next?'pending':next);}catch(e){}
+  show('strategy');
+}
+function stratFilter(type,val){try{localStorage.setItem('strat.'+type,val);}catch(e){}show('strategy');}
+function stratShowForm(visible){const f=document.getElementById('strat-form');if(f)f.style.display=visible?'block':'none';}
+function saveIdea(){
+  const t=document.getElementById('si-title')?.value?.trim();
+  const b=document.getElementById('si-body')?.value?.trim();
+  const c=document.getElementById('si-cat')?.value||'custom';
+  if(!t)return;
+  const id='custom-'+Date.now();
+  let custom=[];try{custom=JSON.parse(localStorage.getItem('strat.custom')||'[]');}catch(e){}
+  custom.push({id,cat:c,title:t,body:b||'',status:'pending'});
+  try{localStorage.setItem('strat.custom',JSON.stringify(custom));}catch(e){}
+  show('strategy');
+}
+function deleteIdea(id){
+  let custom=[];try{custom=JSON.parse(localStorage.getItem('strat.custom')||'[]');}catch(e){}
+  custom=custom.filter(i=>i.id!==id);
+  try{localStorage.setItem('strat.custom',JSON.stringify(custom));}catch(e){}
+  show('strategy');
+}
+
+function strategyView(){
+  const items=getStrategyItems();
+  let catF='all',statF='all';
+  try{catF=localStorage.getItem('strat.cat')||'all';statF=localStorage.getItem('strat.status')||'all';}catch(e){}
+  const counts={all:items.length,blindspot:0,idea:0,outlook:0,custom:0};
+  const sCounts={pending:0,approved:0,researching:0,denied:0};
+  items.forEach(i=>{counts[i.cat]=(counts[i.cat]||0)+1;sCounts[i.status]=(sCounts[i.status]||0)+1;});
+  const filtered=items.filter(i=>(catF==='all'||i.cat===catF)&&(statF==='all'||i.status===statF));
+
+  let h=`<div class="crumbs">Strategy</div><h2 class="page">Strategy &amp; Ideas</h2>
+    <p class="sub">Blind spots, out-of-the-box ideas, and future outlook. Approve, research, or deny each one — status is saved locally.</p>`;
+
+  // Stat strip
+  h+=`<div class="stat-row">
+    <div class="stat info"><div class="v num">${items.length}</div><div class="l">Total</div></div>
+    <div class="stat warn"><div class="v num">${sCounts.pending}</div><div class="l">Pending</div></div>
+    <div class="stat ok"><div class="v num">${sCounts.approved}</div><div class="l">Approved</div></div>
+    <div class="stat info"><div class="v num">${sCounts.researching}</div><div class="l">Researching</div></div>
+    <div class="stat bad"><div class="v num">${sCounts.denied}</div><div class="l">Denied</div></div>
+  </div>`;
+
+  // Category tabs
+  const CATS=[['all','All'],['blindspot','Blind Spots'],['idea','Ideas'],['outlook','Outlook'],['custom','Custom']];
+  h+=`<div class="strat-tabs">`;
+  CATS.forEach(([c,lbl])=>{
+    if(c!=='all'&&!counts[c])return;
+    h+=`<button class="strat-tab${catF===c?' active':''}" onclick="stratFilter('cat','${c}')">${lbl}<span class="tc">${counts[c]||0}</span></button>`;
+  });
+  h+=`</div>`;
+
+  // Status pills + add button
+  h+=`<div class="strat-sr">`;
+  ['all','pending','approved','researching','denied'].forEach(s=>{
+    const n=s==='all'?items.length:sCounts[s];
+    h+=`<button class="strat-sp${statF===s?' active':''}" onclick="stratFilter('status','${s}')">${s} ${n}</button>`;
+  });
+  h+=`<button class="strat-add-btn" onclick="stratShowForm(true)">+ New Idea</button></div>`;
+
+  // Add idea form (hidden until + clicked)
+  h+=`<div id="strat-form" style="display:none">
+    <div class="strat-form">
+      <label>Title</label><input id="si-title" placeholder="One-line idea or observation" autocomplete="off">
+      <label>Category</label>
+      <select id="si-cat">
+        <option value="custom">Custom</option>
+        <option value="blindspot">Blind Spot</option>
+        <option value="idea">Idea</option>
+        <option value="outlook">Outlook</option>
+      </select>
+      <label>Details (optional)</label>
+      <textarea id="si-body" placeholder="Expand on the idea, opportunity, or risk..."></textarea>
+      <div class="strat-fbtns">
+        <button class="sf-cancel" onclick="stratShowForm(false)">Cancel</button>
+        <button class="sf-save" onclick="saveIdea()">Save Idea</button>
+      </div>
+    </div>
+  </div>`;
+
+  // Cards
+  if(!filtered.length){
+    h+=`<p class="empty" style="margin-top:32px;font-size:13.5px">No items match — try a different filter.</p>`;
+  } else {
+    h+=`<div class="strat-grid">`;
+    filtered.forEach(it=>{
+      const st=it.status||'pending';
+      const isCustom=it.id.startsWith('custom-');
+      const safe=it.id.replace(/'/g,"\\'");
+      h+=`<div class="strat-card${st==='denied'?' denied':''}">
+        <div class="strat-ct">
+          <span class="strat-cat-lbl" style="color:${SCAT_COLOR[it.cat]||'var(--dim)'}">${SCAT_LABEL[it.cat]||it.cat}</span>
+          <span class="strat-stat-lbl" style="color:${SSTAT_COLOR[st]||'var(--dim)'}">${st}</span>
+        </div>
+        <div class="strat-title">${esc(it.title)}</div>
+        <div class="strat-body">${esc(it.body)}</div>
+        <div class="strat-acts">
+          <button class="sa sa-ok${st==='approved'?' on':''}" onclick="stratAct('${safe}','approved')">✓ Approve</button>
+          <button class="sa sa-rs${st==='researching'?' on':''}" onclick="stratAct('${safe}','researching')">⊙ Research</button>
+          <button class="sa sa-no${st==='denied'?' on':''}" onclick="stratAct('${safe}','denied')">✕ Deny</button>
+          ${isCustom?`<button class="sa sa-del" onclick="deleteIdea('${safe}')" title="Delete">🗑</button>`:''}
+        </div>
+      </div>`;
+    });
+    h+=`</div>`;
+  }
+  return h;
+}
+
 // ── Router ────────────────────────────────────────────────────────────────
 function show(id){
   closePP();
@@ -1005,6 +1179,7 @@ function show(id){
   if(id==='overview')m.innerHTML=overview();
   else if(id==='audit')m.innerHTML=auditView();
   else if(id==='graph')m.innerHTML=graphView();
+  else if(id==='strategy')m.innerHTML=strategyView();
   else{const p=D.projects.find(q=>q.id===id);m.innerHTML=project(p);}
   m.querySelectorAll('[data-id]').forEach(el=>{if(!el.classList.contains('nav'))el.onclick=()=>show(el.dataset.id);});
   m.querySelectorAll('.ph-click').forEach(el=>{el.onclick=e=>{e.stopPropagation();openPP(el.dataset.pk,el);};});
@@ -1015,7 +1190,7 @@ function show(id){
 buildSide();
 let init='overview';
 try{const s=localStorage.getItem('dash.tab');
-  if(s&&(s==='overview'||s==='audit'||s==='graph'||D.projects.some(p=>p.id===s)))init=s;}catch(e){}
+  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||D.projects.some(p=>p.id===s)))init=s;}catch(e){}
 show(init);
 </script>
 </body>
