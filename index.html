@@ -468,6 +468,26 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .sa-no.on{background:rgba(248,113,113,.15);border-color:rgba(248,113,113,.55);color:var(--red);font-weight:700;}
 .sa-del{background:transparent;border-color:rgba(255,255,255,.08);color:var(--dim);max-width:34px;}
 .sa-del:hover{border-color:rgba(248,113,113,.35);color:var(--red);}
+/* ── Quick Capture & Priority ─────────────────────────────────────────── */
+.strat-capture{background:rgba(14,20,42,.97);border:1px solid rgba(255,255,255,.09);border-radius:14px;margin-bottom:18px;overflow:hidden;}
+.strat-cap-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;cursor:pointer;user-select:none;transition:background .15s;}
+.strat-cap-hdr:hover{background:rgba(255,255,255,.025);}
+.strat-cap-title{font-size:12.5px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px;}
+.strat-cap-cnt{background:rgba(251,146,60,.18);color:var(--p);border-radius:10px;padding:1px 8px;font-size:11px;font-weight:700;}
+.strat-cap-body{padding:0 18px 18px;border-top:1px solid rgba(255,255,255,.06);}
+.strat-cap-ta{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:10px 14px;color:var(--text);font-family:inherit;font-size:13px;resize:vertical;min-height:72px;outline:none;margin-top:14px;transition:border-color .15s;display:block;}
+.strat-cap-ta:focus{border-color:rgba(110,168,255,.45);}
+.strat-cap-save{margin-top:8px;background:rgba(110,168,255,.1);border:1px solid rgba(110,168,255,.28);border-radius:7px;padding:6px 16px;color:var(--w);cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;transition:all .15s;}
+.strat-cap-save:hover{background:rgba(110,168,255,.18);}
+.cap-list{margin-top:14px;display:flex;flex-direction:column;gap:8px;}
+.cap-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;}
+.cap-ts{font-size:10px;color:var(--dim);white-space:nowrap;flex-shrink:0;padding-top:2px;}
+.cap-text{font-size:12.5px;color:var(--muted);flex:1;line-height:1.55;}
+.cap-acts{display:flex;gap:5px;flex-shrink:0;}
+.cap-promote{background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.22);border-radius:6px;padding:4px 10px;font-size:10.5px;color:rgba(52,211,153,.85);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap;}
+.cap-promote:hover{background:rgba(52,211,153,.14);border-color:rgba(52,211,153,.45);}
+.cap-del{background:transparent;border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:4px 8px;font-size:10.5px;color:var(--dim);cursor:pointer;font-family:inherit;transition:all .15s;}
+.cap-del:hover{border-color:rgba(248,113,113,.35);color:var(--red);}
 </style>
 </head>
 <body>
@@ -1048,19 +1068,36 @@ function graphView(){
 }
 
 // ── Strategy ──────────────────────────────────────────────────────────────
-const SCAT_COLOR={blindspot:'var(--amber)',idea:'var(--w)',outlook:'var(--w2)',custom:'var(--green)'};
-const SCAT_LABEL={blindspot:'Blind Spot',idea:'Idea',outlook:'Outlook',custom:'Custom'};
+const SCAT_COLOR={blindspot:'var(--amber)',idea:'var(--w)',outlook:'var(--w2)',custom:'var(--green)',watchlist:'var(--p)'};
+const SCAT_LABEL={blindspot:'Blind Spot',idea:'Idea',outlook:'Outlook',custom:'Custom',watchlist:'Watchlist'};
 const SSTAT_COLOR={pending:'var(--dim)',approved:'var(--green)',researching:'var(--w)',denied:'var(--red)'};
+const SPRI={p1:{c:'var(--red)',l:'P1'},p2:{c:'var(--amber)',l:'P2'},p3:{c:'var(--w)',l:'P3'}};
+const SPRI_NEXT={p1:'p2',p2:'p3',p3:'','':'p1'};
 
 function getStrategyItems(){
-  const base=(window.STRATEGY_DATA?.items||[]).map(it=>({...it,status:(() => { try{return localStorage.getItem('strat.s.'+it.id)||it.status||'pending';}catch(e){return it.status||'pending';} })()}));
-  let custom=[];try{custom=JSON.parse(localStorage.getItem('strat.custom')||'[]');}catch(e){}
+  const base=(window.STRATEGY_DATA?.items||[]).map(it=>({
+    ...it,
+    status:(()=>{try{return localStorage.getItem('strat.s.'+it.id)||it.status||'pending';}catch(e){return it.status||'pending';}})(),
+    priority:(()=>{try{return localStorage.getItem('strat.p.'+it.id)||'';}catch(e){return '';}})()
+  }));
+  let custom=[];
+  try{
+    custom=JSON.parse(localStorage.getItem('strat.custom')||'[]').map(it=>({
+      ...it,
+      priority:localStorage.getItem('strat.p.'+it.id)||it.priority||''
+    }));
+  }catch(e){}
   return [...base,...custom];
 }
 
 function stratAct(id,next){
   let cur='pending';try{cur=localStorage.getItem('strat.s.'+id)||'pending';}catch(e){}
   try{localStorage.setItem('strat.s.'+id,cur===next?'pending':next);}catch(e){}
+  show('strategy');
+}
+function stratPri(id){
+  let cur='';try{cur=localStorage.getItem('strat.p.'+id)||'';}catch(e){}
+  try{localStorage.setItem('strat.p.'+id,SPRI_NEXT[cur]||'');}catch(e){}
   show('strategy');
 }
 function stratFilter(type,val){try{localStorage.setItem('strat.'+type,val);}catch(e){}show('strategy');}
@@ -1072,7 +1109,7 @@ function saveIdea(){
   if(!t)return;
   const id='custom-'+Date.now();
   let custom=[];try{custom=JSON.parse(localStorage.getItem('strat.custom')||'[]');}catch(e){}
-  custom.push({id,cat:c,title:t,body:b||'',status:'pending'});
+  custom.push({id,cat:c,title:t,body:b||'',status:'pending',priority:''});
   try{localStorage.setItem('strat.custom',JSON.stringify(custom));}catch(e){}
   show('strategy');
 }
@@ -1083,29 +1120,109 @@ function deleteIdea(id){
   show('strategy');
 }
 
+// ── Brain dump ─────────────────────────────────────────────────────────────
+function getDumps(){let d=[];try{d=JSON.parse(localStorage.getItem('strat.dumps')||'[]');}catch(e){}return d;}
+function saveDump(){
+  const ta=document.getElementById('cap-ta');
+  const txt=ta?.value?.trim();
+  if(!txt)return;
+  const d=getDumps();
+  d.unshift({id:'dump-'+Date.now(),text:txt,ts:new Date().toISOString()});
+  try{localStorage.setItem('strat.dumps',JSON.stringify(d));}catch(e){}
+  if(ta)ta.value='';
+  show('strategy');
+}
+function deleteDump(id){
+  const d=getDumps().filter(x=>x.id!==id);
+  try{localStorage.setItem('strat.dumps',JSON.stringify(d));}catch(e){}
+  show('strategy');
+}
+function promoteDump(id){
+  const item=getDumps().find(x=>x.id===id);
+  if(!item)return;
+  const txt=item.text;
+  try{localStorage.setItem('strat.dumps',JSON.stringify(getDumps().filter(x=>x.id!==id)));}catch(e){}
+  show('strategy');
+  const f=document.getElementById('strat-form');
+  if(f)f.style.display='block';
+  const t=document.getElementById('si-title');
+  const bx=document.getElementById('si-body');
+  if(t){t.value=txt.length<=120?txt:txt.slice(0,120);}
+  if(bx&&txt.length>120){bx.value=txt;bx.focus();}
+  else if(t)t.focus();
+}
+function toggleCapture(){
+  let open=false;try{open=localStorage.getItem('strat.capture')==='1';}catch(e){}
+  try{localStorage.setItem('strat.capture',open?'0':'1');}catch(e){}
+  show('strategy');
+}
+
 function strategyView(){
   const items=getStrategyItems();
-  let catF='all',statF='all';
-  try{catF=localStorage.getItem('strat.cat')||'all';statF=localStorage.getItem('strat.status')||'all';}catch(e){}
-  const counts={all:items.length,blindspot:0,idea:0,outlook:0,custom:0};
+  let catF='all',statF='all',sortF='pri';
+  try{
+    catF=localStorage.getItem('strat.cat')||'all';
+    statF=localStorage.getItem('strat.status')||'all';
+    sortF=localStorage.getItem('strat.sort')||'pri';
+  }catch(e){}
+  const counts={all:items.length,blindspot:0,idea:0,outlook:0,watchlist:0,custom:0};
   const sCounts={pending:0,approved:0,researching:0,denied:0};
-  items.forEach(i=>{counts[i.cat]=(counts[i.cat]||0)+1;sCounts[i.status]=(sCounts[i.status]||0)+1;});
-  const filtered=items.filter(i=>(catF==='all'||i.cat===catF)&&(statF==='all'||i.status===statF));
+  items.forEach(i=>{if(i.cat in counts)counts[i.cat]++;sCounts[i.status]=(sCounts[i.status]||0)+1;});
+  let filtered=items.filter(i=>(catF==='all'||i.cat===catF)&&(statF==='all'||i.status===statF));
+  const PRIORD={p1:0,p2:1,p3:2,'':3};
+  if(sortF==='pri')filtered=[...filtered].sort((a,b)=>PRIORD[a.priority||'']-(PRIORD[b.priority||'']));
+  else if(sortF==='alpha')filtered=[...filtered].sort((a,b)=>a.title.localeCompare(b.title));
 
   let h=`<div class="crumbs">Strategy</div><h2 class="page">Strategy &amp; Ideas</h2>
-    <p class="sub">Blind spots, out-of-the-box ideas, and future outlook. Approve, research, or deny each one — status is saved locally.</p>`;
+    <p class="sub">Blind spots, ideas, watchlist items, and future outlook. Set priority, approve, research, or deny — all state is saved locally.</p>`;
+
+  // Quick Capture panel
+  let capOpen=false;try{capOpen=localStorage.getItem('strat.capture')==='1';}catch(e){}
+  const dumps=getDumps();
+  h+=`<div class="strat-capture">
+    <div class="strat-cap-hdr" onclick="toggleCapture()">
+      <span class="strat-cap-title">⚡ Quick Capture
+        ${dumps.length?`<span class="strat-cap-cnt">${dumps.length}</span>`:''}
+        <span style="font-size:11px;color:var(--muted);font-weight:400">— dump ideas before they disappear</span>
+      </span>
+      <span style="color:var(--dim);font-size:13px">${capOpen?'▲':'▼'}</span>
+    </div>`;
+  if(capOpen){
+    h+=`<div class="strat-cap-body">
+      <textarea class="strat-cap-ta" id="cap-ta" placeholder="Dump an idea, observation, question, or risk — hit Save or Ctrl+Enter. Promote to a card later." onkeydown="if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();saveDump();}"></textarea>
+      <button class="strat-cap-save" onclick="saveDump()">Save ↵</button>`;
+    if(dumps.length){
+      h+=`<div class="cap-list">`;
+      dumps.forEach(d=>{
+        const ago=Math.floor((Date.now()-new Date(d.ts))/60000);
+        const ts=ago<1?'just now':ago<60?ago+'m ago':ago<1440?Math.floor(ago/60)+'h ago':new Date(d.ts).toLocaleDateString();
+        const safe=d.id.replace(/'/g,"\\'");
+        h+=`<div class="cap-item">
+          <span class="cap-ts">${ts}</span>
+          <span class="cap-text">${esc(d.text.length>180?d.text.slice(0,180)+'…':d.text)}</span>
+          <div class="cap-acts">
+            <button class="cap-promote" onclick="promoteDump('${safe}')">→ Card</button>
+            <button class="cap-del" onclick="deleteDump('${safe}')">✕</button>
+          </div>
+        </div>`;
+      });
+      h+=`</div>`;
+    }
+    h+=`</div>`;
+  }
+  h+=`</div>`;
 
   // Stat strip
   h+=`<div class="stat-row">
     <div class="stat info"><div class="v num">${items.length}</div><div class="l">Total</div></div>
-    <div class="stat warn"><div class="v num">${sCounts.pending}</div><div class="l">Pending</div></div>
-    <div class="stat ok"><div class="v num">${sCounts.approved}</div><div class="l">Approved</div></div>
-    <div class="stat info"><div class="v num">${sCounts.researching}</div><div class="l">Researching</div></div>
-    <div class="stat bad"><div class="v num">${sCounts.denied}</div><div class="l">Denied</div></div>
+    <div class="stat warn"><div class="v num">${sCounts.pending||0}</div><div class="l">Pending</div></div>
+    <div class="stat ok"><div class="v num">${sCounts.approved||0}</div><div class="l">Approved</div></div>
+    <div class="stat info"><div class="v num">${sCounts.researching||0}</div><div class="l">Researching</div></div>
+    <div class="stat bad"><div class="v num">${sCounts.denied||0}</div><div class="l">Denied</div></div>
   </div>`;
 
   // Category tabs
-  const CATS=[['all','All'],['blindspot','Blind Spots'],['idea','Ideas'],['outlook','Outlook'],['custom','Custom']];
+  const CATS=[['all','All'],['blindspot','Blind Spots'],['idea','Ideas'],['outlook','Outlook'],['watchlist','Watchlist'],['custom','Custom']];
   h+=`<div class="strat-tabs">`;
   CATS.forEach(([c,lbl])=>{
     if(c!=='all'&&!counts[c])return;
@@ -1113,33 +1230,39 @@ function strategyView(){
   });
   h+=`</div>`;
 
-  // Status pills + add button
+  // Status pills + sort + add
   h+=`<div class="strat-sr">`;
   ['all','pending','approved','researching','denied'].forEach(s=>{
-    const n=s==='all'?items.length:sCounts[s];
+    const n=s==='all'?items.length:sCounts[s]||0;
     h+=`<button class="strat-sp${statF===s?' active':''}" onclick="stratFilter('status','${s}')">${s} ${n}</button>`;
   });
-  h+=`<button class="strat-add-btn" onclick="stratShowForm(true)">+ New Idea</button></div>`;
+  h+=`<div style="margin-left:auto;display:flex;gap:6px;align-items:center">
+    <select onchange="stratFilter('sort',this.value)" style="background:rgba(22,30,54,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:12px;color:var(--muted);cursor:pointer;font-family:inherit;outline:none;">
+      <option value="pri"${sortF==='pri'?' selected':''}>↑ Priority</option>
+      <option value="alpha"${sortF==='alpha'?' selected':''}>A→Z</option>
+      <option value="default"${sortF==='default'?' selected':''}>Default</option>
+    </select>
+    <button class="strat-add-btn" onclick="stratShowForm(true)">+ New Idea</button>
+  </div></div>`;
 
-  // Add idea form (hidden until + clicked)
-  h+=`<div id="strat-form" style="display:none">
-    <div class="strat-form">
-      <label>Title</label><input id="si-title" placeholder="One-line idea or observation" autocomplete="off">
-      <label>Category</label>
-      <select id="si-cat">
-        <option value="custom">Custom</option>
-        <option value="blindspot">Blind Spot</option>
-        <option value="idea">Idea</option>
-        <option value="outlook">Outlook</option>
-      </select>
-      <label>Details (optional)</label>
-      <textarea id="si-body" placeholder="Expand on the idea, opportunity, or risk..."></textarea>
-      <div class="strat-fbtns">
-        <button class="sf-cancel" onclick="stratShowForm(false)">Cancel</button>
-        <button class="sf-save" onclick="saveIdea()">Save Idea</button>
-      </div>
+  // Add idea form
+  h+=`<div id="strat-form" style="display:none"><div class="strat-form">
+    <label>Title</label><input id="si-title" placeholder="One-line idea or observation" autocomplete="off">
+    <label>Category</label>
+    <select id="si-cat">
+      <option value="custom">Custom</option>
+      <option value="idea">Idea</option>
+      <option value="blindspot">Blind Spot</option>
+      <option value="outlook">Outlook</option>
+      <option value="watchlist">Watchlist</option>
+    </select>
+    <label>Details (optional)</label>
+    <textarea id="si-body" placeholder="Expand on the idea, opportunity, or risk..."></textarea>
+    <div class="strat-fbtns">
+      <button class="sf-cancel" onclick="stratShowForm(false)">Cancel</button>
+      <button class="sf-save" onclick="saveIdea()">Save Idea</button>
     </div>
-  </div>`;
+  </div></div>`;
 
   // Cards
   if(!filtered.length){
@@ -1148,12 +1271,19 @@ function strategyView(){
     h+=`<div class="strat-grid">`;
     filtered.forEach(it=>{
       const st=it.status||'pending';
+      const pri=it.priority||'';
       const isCustom=it.id.startsWith('custom-');
       const safe=it.id.replace(/'/g,"\\'");
+      const priStyle=pri
+        ?`background:rgba(255,255,255,.06);border-color:${SPRI[pri].c};color:${SPRI[pri].c};`
+        :`border-color:rgba(255,255,255,.08);color:var(--dim);`;
       h+=`<div class="strat-card${st==='denied'?' denied':''}">
         <div class="strat-ct">
           <span class="strat-cat-lbl" style="color:${SCAT_COLOR[it.cat]||'var(--dim)'}">${SCAT_LABEL[it.cat]||it.cat}</span>
-          <span class="strat-stat-lbl" style="color:${SSTAT_COLOR[st]||'var(--dim)'}">${st}</span>
+          <div style="display:flex;align-items:center;gap:6px">
+            <button onclick="stratPri('${safe}')" title="Cycle priority: P1→P2→P3→none" style="background:transparent;border:1px solid;border-radius:5px;padding:2px 7px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;letter-spacing:.05em;${priStyle}">${pri?SPRI[pri].l:'—'}</button>
+            <span class="strat-stat-lbl" style="color:${SSTAT_COLOR[st]||'var(--dim)'}">${st}</span>
+          </div>
         </div>
         <div class="strat-title">${esc(it.title)}</div>
         <div class="strat-body">${esc(it.body)}</div>

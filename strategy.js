@@ -1,6 +1,6 @@
 // Strategy & Ideas — edit this file freely; it is NOT auto-overwritten by dashboard refresh
 window.STRATEGY_DATA = {
-  updated: "2026-06-11",
+  updated: "2026-06-12",
   source: "BIMpossible_StrategicScan_2026-06-11.md",
   items: [
     // ── Blind Spots ──────────────────────────────────────────────────────────
@@ -55,6 +55,28 @@ window.STRATEGY_DATA = {
     { id:"out-3", cat:"outlook", title:"Long term (3–5 years): Platform with ecosystem",
       body:"BIMpossible as the data layer other AEC tools integrate with. Bidirectional integrations with Procore/Bluebeam/PlanGrid. FM handover as a product line — the data collected over a project lifecycle is exactly the COBie/IFC deliverable owners need for facilities management. AI-generated specifications anchored in actual model data. Platform API play: cost estimators, energy modelers, scheduling tools all need normalized BIM data — BIMpossible as the source of truth." },
     { id:"out-4", cat:"outlook", title:"Durable differentiators to protect",
-      body:"1. Firm-owned deployment — data stays in the firm's infrastructure, not on Autodesk's. 2. Discipline-neutral, firm-customizable — Autodesk builds for the median firm; BIMpossible can serve the specific workflows of a specific firm's specific disciplines. 3. AI layer on top of firm data — an assistant that knows your firm's standards and project history. 4. Speed of iteration — a focused single-developer product ships in days what Autodesk puts on a 2-year roadmap." }
+      body:"1. Firm-owned deployment — data stays in the firm's infrastructure, not on Autodesk's. 2. Discipline-neutral, firm-customizable — Autodesk builds for the median firm; BIMpossible can serve the specific workflows of a specific firm's specific disciplines. 3. AI layer on top of firm data — an assistant that knows your firm's standards and project history. 4. Speed of iteration — a focused single-developer product ships in days what Autodesk puts on a 2-year roadmap." },
+
+    // ── Watchlist (FG-C5–C10, FG-G1–G4 — registered 2026-06-12) ─────────────
+    { id:"wl-c5", cat:"watchlist", title:"Automated BIM Briefing / daily digest (FG-C5)",
+      body:"Scheduled email or push notification to project stakeholders summarizing model changes since last send: new elements, deleted elements, parameter changes, coordination conflicts, published model versions. Delivery mechanism on top of Phase 3 change-tracking. Activation trigger: when Phase 3 change-tracking ships; or when a pilot deployment surfaces demand for push-notification delivery." },
+    { id:"wl-c6", cat:"watchlist", title:"Client / owner read-only portal (FG-C6)",
+      body:"Scoped, role-gated login for owners or clients showing: current model health, room/equipment list, coordination summary, and basic schedule views — without access to internal firm data or configuration. Requires Wave 6 permissions (external viewer role). Activation trigger: when Wave 6 ships and a pilot client asks for live model access; or when M6 commercial launch surfaces this as a differentiator." },
+    { id:"wl-c7", cat:"watchlist", title:"Portfolio health dashboard — web platform (FG-C7)",
+      body:"Web-platform aggregate view showing BIM Health Score (0–100) per model across a firm's full project portfolio. Distinct from the per-model Model Health Report add-in — the add-in data feeds this platform view over time. Turns per-model snapshots into a durable, portfolio-wide, visible score that PMs and principals can hold across projects. Activation trigger: when Model Health Report add-in ships." },
+    { id:"wl-c8", cat:"watchlist", title:"Multi-firm / multi-company collaboration (FG-C8)",
+      body:"Shared BIMpossible workspace or federated view where the architect, structural engineer, MEP consultant, and owner each see the same project data — each firm in their own tenant, with cross-firm visibility scoped by the project owner's sharing rules. Large projects have 5+ firms all running the same Revit data pain independently. Activation trigger: when the first external deployment proves the multi-tenant architecture works; or when a project team asks to share with a consultant." },
+    { id:"wl-c9", cat:"watchlist", title:"Mobile-optimized interface (FG-C9)",
+      body:"Responsive layout or PWA for field and executive use on phones and tablets — primarily read-only: room counts, model health, recent changes. Field personnel, PMs, and clients check project status on phones. Limits adoption if desktop-only. Activation trigger: when a pilot deployment includes field or executive users who report friction with the desktop interface; or when the client portal (FG-C6) activates, since client access skews mobile." },
+    { id:"wl-c10", cat:"watchlist", title:"Public platform API / third-party integration layer (FG-C10)",
+      body:"Versioned, documented public API letting external tools (Procore, Bluebeam, estimating tools, energy modelers) read BIMpossible project data. Turns BIMpossible into a data source other AEC tools integrate with — rather than everyone re-ingesting from Autodesk independently. The 5-year platform play. Activation trigger: when ≥3 external firm deployments exist and a third party independently requests an integration." },
+    { id:"wl-g1", cat:"watchlist", title:"Autodesk APS Partner Program enrollment (FG-G1)",
+      body:"Official Autodesk Platform Services partner status — access to enterprise customer referrals, co-marketing opportunities, dedicated APS support, and Marketplace listing. The APS Marketplace is the most direct distribution channel for AEC firms already on ACC/Forma. Low cost, high optionality. Being a listed partner changes the sales conversation from cold outreach to warm inbound. Activation trigger: when the first external deployment is live and demonstrable." },
+    { id:"wl-g2", cat:"watchlist", title:"SOC 2 Type II / data residency compliance (FG-G2)",
+      body:"Third-party security certification and documented data residency policy. Required by enterprise AEC firms — especially healthcare, government, and publicly traded companies — before signing a SaaS contract. Without it, certain client segments cannot use BIMpossible regardless of feature quality. Design for it now during Waves 6–8; certify when the client pipeline demands it. Activation trigger: when an enterprise-scale client conversation surfaces the security questionnaire." },
+    { id:"wl-g3", cat:"watchlist", title:"White-label / firm-branded deployment (FG-G3)",
+      body:"Option for deploying firms to replace BIMpossible branding with their own firm name, colors, and logo. Platform stays BIMpossible under the hood; interface presents as the firm's own tool. Unlocks enterprise deals at firms that require brand control as a condition of adoption. Activation trigger: when a pilot firm's feedback or a sales conversation identifies brand control as a deal condition." },
+    { id:"wl-g4", cat:"watchlist", title:"Self-serve onboarding for new deploying firms (FG-G4)",
+      body:"Guided first-run setup flow for a new firm: connect APS credentials, select ACC hub, map projects, configure firm parameters, set roles. Target: zero-to-first-schedule in under 30 minutes without human support. Currently deployment is fully manual — every setup step is a support ticket and a delay. Activation trigger: when the second external firm is being onboarded and the manual setup cost becomes visible; or when M6 commercial launch includes a self-serve signup path." }
   ]
 };
