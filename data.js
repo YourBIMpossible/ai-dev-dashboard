@@ -5,6 +5,7 @@ window.DASHBOARD_DATA = {
   generatedBy: "on-demand refresh (Wave 4.10 sync)",
   activitySince: "2026-05-30",
   projects: [
+    /* PROJECT:bimpossible:START */
     {
       id: "bimpossible",
       name: "BIMpossible Platform",
@@ -169,6 +170,8 @@ window.DASHBOARD_DATA = {
         ]
       }
     },
+    /* PROJECT:bimpossible:END */
+    /* PROJECT:addins:START */
     {
       id: "addins",
       name: "Add-Ins / RevitLink",
@@ -260,6 +263,8 @@ window.DASHBOARD_DATA = {
         open: []
       }
     },
+    /* PROJECT:addins:END */
+    /* PROJECT:site:START */
     {
       id: "site",
       name: "BIMpossible Site",
@@ -353,6 +358,8 @@ window.DASHBOARD_DATA = {
         open: []
       }
     },
+    /* PROJECT:site:END */
+    /* PROJECT:pickem:START */
     {
       id: "pickem",
       name: "Preseason Pick'em",
@@ -409,6 +416,8 @@ window.DASHBOARD_DATA = {
         "2026-06-01 - rankings + scoring engine/leaderboard libs added"
       ]
     },
+    /* PROJECT:pickem:END */
+    /* PROJECT:laundry:START */
     {
       id: "laundry",
       name: "Laundry Gig",
@@ -431,6 +440,8 @@ window.DASHBOARD_DATA = {
       ],
       recent: []
     },
+    /* PROJECT:laundry:END */
+    /* PROJECT:families:START */
     {
       id: "families",
       name: "Families by AI",
@@ -473,5 +484,6 @@ window.DASHBOARD_DATA = {
         "2026-06-11 - git repo scaffolded (code-only, no .rfa binaries); Developmental/One Line Symbols folder updated"
       ]
     }
+    /* PROJECT:families:END */
   ]
 };
