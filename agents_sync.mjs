@@ -1,0 +1,155 @@
+#!/usr/bin/env node
+/**
+ * Claude Code agent/session activity -> dashboard "Agents" tab.
+ *
+ * Inspired by hoangsonww/Claude-Code-Agent-Monitor, but native to Mission Control:
+ * no separate server, no ~/.claude hook changes. Reads LOCAL session data via
+ * `ccusage session` (token/cost per session) and maps each session UUID to its
+ * project folder under ~/.claude/projects (filename listing only — no transcript
+ * content is read). Writes window.DASHBOARD_AGENTS to agents.js and pushes.
+ *
+ * Like usage_sync, this MUST run on the user's machine (local ~/.claude data).
+ *
+ *   node agents_sync.mjs            (sync + git push)
+ *   node agents_sync.mjs --no-push  (just regenerate agents.js)
+ */
+import { execSync } from "node:child_process";
+import { writeFileSync, readFileSync, existsSync, readdirSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
+
+const REPO = "F:/AI-Dev/Dashboard";
+const OUT = `${REPO}/agents.js`;
+const PUSH = !process.argv.includes("--no-push");
+const RECENT_LIMIT = 30;
+
+// Friendly project label from a ~/.claude/projects folder name.
+// Claude encodes the cwd as e.g. "F--AI-Dev-BIMpossible-Site"; worktrees include
+// "claude-worktrees". We can't perfectly invert it, so produce a readable tail.
+function projectLabel(dir) {
+  if (!dir) return "(unknown)";
+  if (dir.includes("claude-worktrees")) return "worktree";
+  return dir
+    .replace(/^[A-Za-z]--/, "")        // drop drive letter "F--"
+    .replace(/^AI-Dev-/, "")            // drop the AI-Dev root
+    .replace(/-/g, " ")
+    .replace(/\s+/g, " ")
+    .trim() || dir;
+}
+
+// Map every session UUID -> its project folder (cheap: filenames only).
+function buildUuidProjectMap() {
+  const root = join(homedir(), ".claude", "projects");
+  const map = {};
+  let dirs = [];
+  try { dirs = readdirSync(root); } catch { return map; }
+  for (const dir of dirs) {
+    try {
+      for (const f of readdirSync(join(root, dir))) {
+        if (f.endsWith(".jsonl")) map[f.slice(0, -6)] = dir;
+      }
+    } catch { /* skip unreadable dir */ }
+  }
+  return map;
+}
+
+function ccusageSession() {
+  const raw = execSync("npx -y ccusage@latest session --json", {
+    encoding: "utf8",
+    maxBuffer: 128 * 1024 * 1024,
+    stdio: ["ignore", "pipe", "ignore"],
+  });
+  return JSON.parse(raw);
+}
+
+function shortModel(m) {
+  return String(m).replace(/-\d{8}$/, "").replace(/^claude-/, "");
+}
+
+console.log("Running ccusage session…");
+const { session, totals } = ccusageSession();
+const uuidProject = buildUuidProjectMap();
+
+// Cutoffs use the newest lastActivity in the data as "now" (Date.now avoided for
+// determinism; the data's own latest timestamp is the reference point).
+const times = session.map((s) => Date.parse(s.metadata?.lastActivity || 0)).filter(Boolean);
+const nowMs = times.length ? Math.max(...times) : 0;
+const DAY = 86400000;
+
+const enriched = session.map((s) => {
+  const dir = uuidProject[s.period];
+  const last = Date.parse(s.metadata?.lastActivity || 0) || 0;
+  return {
+    id: s.period,
+    project: projectLabel(dir),
+    projectDir: dir || "",
+    models: (s.modelsUsed || []).map(shortModel),
+    cost: +(s.totalCost || 0).toFixed(2),
+    tokens: s.totalTokens || 0,
+    last,
+    lastActivity: s.metadata?.lastActivity || null,
+  };
+});
+
+const activeToday = enriched.filter((s) => nowMs - s.last <= DAY).length;
+const active7d = enriched.filter((s) => nowMs - s.last <= 7 * DAY).length;
+
+// By-project aggregation
+const byProjMap = {};
+for (const s of enriched) {
+  const p = (byProjMap[s.project] ||= { project: s.project, sessions: 0, cost: 0, tokens: 0, last: 0 });
+  p.sessions++; p.cost += s.cost; p.tokens += s.tokens; p.last = Math.max(p.last, s.last);
+}
+const byProject = Object.values(byProjMap)
+  .map((p) => ({ ...p, cost: +p.cost.toFixed(2) }))
+  .sort((a, b) => b.cost - a.cost);
+
+const recent = [...enriched]
+  .sort((a, b) => b.last - a.last)
+  .slice(0, RECENT_LIMIT)
+  .map((s) => ({ id: s.id.slice(0, 8), project: s.project, models: s.models, cost: s.cost, tokens: s.tokens, lastActivity: s.lastActivity }));
+
+const agents = {
+  generated: new Date(nowMs || Date.parse("2026-01-01")).toISOString(),
+  source: "ccusage session + ~/.claude/projects map (native, no hooks)",
+  totals: {
+    sessions: session.length,
+    cost: +(totals.totalCost || 0).toFixed(2),
+    tokens: totals.totalTokens || 0,
+    activeToday,
+    active7d,
+    projects: byProject.length,
+  },
+  byProject,
+  recent,
+};
+
+// Skip if nothing but the timestamp moved.
+const stripGen = (u) => { const c = { ...u }; delete c.generated; return JSON.stringify(c); };
+if (existsSync(OUT)) {
+  try {
+    const m = readFileSync(OUT, "utf8").match(/window\.DASHBOARD_AGENTS\s*=\s*([\s\S]*?);\s*$/);
+    if (m && stripGen(JSON.parse(m[1])) === stripGen(agents)) {
+      console.log("No agent-activity change — skipping write/push.");
+      process.exit(0);
+    }
+  } catch { /* rewrite */ }
+}
+
+const banner =
+  "// Auto-generated by agents_sync.mjs — Claude Code session/agent activity.\n" +
+  "// Native (no separate server, no ~/.claude hooks). Cost = API-equivalent. Do not hand-edit.\n";
+writeFileSync(OUT, banner + "window.DASHBOARD_AGENTS = " + JSON.stringify(agents, null, 2) + ";\n", "utf8");
+console.log(`agents.js written: ${agents.totals.sessions} sessions, ${agents.totals.activeToday} active today, ${byProject.length} projects.`);
+
+if (!PUSH) { console.log("--no-push set, skipping git."); process.exit(0); }
+
+function git(a) { return execSync(`git -C "${REPO}" ${a}`, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }); }
+try {
+  git("pull --rebase --autostash origin main");
+  git("add agents.js");
+  if (!git("status --porcelain agents.js").trim()) { console.log("agents.js unchanged."); process.exit(0); }
+  git(`commit -m "agents: refresh Claude Code session activity" -- agents.js`);
+  git("push origin main");
+  console.log("Pushed agents.js.");
+} catch (e) { console.error("git step failed:", e.message); process.exit(1); }

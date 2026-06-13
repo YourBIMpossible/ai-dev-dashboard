@@ -502,6 +502,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <script src="graph-metrics.js" onerror="void 0"></script>
 <script src="strategy.js" onerror="void 0"></script>
 <script src="usage.js" onerror="void 0"></script>
+<script src="agents.js" onerror="void 0"></script>
 <script>
 const D=window.DASHBOARD_DATA;
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
@@ -523,7 +524,8 @@ const ICO={
   shield:'<svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6l-7-3z"/><path d="m9 12 2 2 4-4"/></svg>',
   graph:'<svg viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><line x1="5" y1="7" x2="12" y2="17"/><line x1="19" y1="7" x2="12" y2="17"/><line x1="5" y1="5" x2="19" y2="5"/></svg>',
   idea:'<svg viewBox="0 0 24 24"><path d="M9 21h6m-3-18a6 6 0 0 1 3.75 10.67C15 15 15 16 15 17H9c0-1 0-2-.75-2.33A6 6 0 0 1 12 3z"/></svg>',
-  usage:'<svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>'
+  usage:'<svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>',
+  agents:'<svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M12 4v4M2 13v3M22 13v3"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg>'
 };
 window._PR={};
 
@@ -744,6 +746,8 @@ function buildSide(){
   h+=navI('strategy',ICO.idea,'Strategy',_sp?_sp+'?':'');
   const _u=window.DASHBOARD_USAGE;
   h+=navI('usage',ICO.usage,'Usage',_u?('$'+(_u.allTime.cost>=1000?(_u.allTime.cost/1000).toFixed(_u.allTime.cost>=10000?0:1)+'K':Math.round(_u.allTime.cost))):'');
+  const _ag=window.DASHBOARD_AGENTS;
+  h+=navI('agents',ICO.agents,'Agents',_ag?(_ag.totals.sessions+''):'');
   h+='<div class="grp-sep"></div><div class="grp-lbl">BIMpossible Work</div>';
   WORK.forEach(id=>{const p=D.projects.find(q=>q.id===id);if(p)h+=navI(p.id,ICO[p.icon]||ICO.cube,p.name,pctStr(p),null,p.status,false);});
   h+='<div class="grp-sep"></div><div class="grp-lbl personal">Personal</div>';
@@ -1347,6 +1351,56 @@ function usageView(){
   return h;
 }
 
+// ── Agents (Claude Code session activity, native) ──────────────────────────
+function _ago(iso){
+  if(!iso)return '';
+  const A=window.DASHBOARD_AGENTS;
+  const now=A&&A.generated?Date.parse(A.generated):Date.parse(iso);
+  const m=Math.round((now-Date.parse(iso))/60000);
+  if(m<1)return 'just now'; if(m<60)return m+'m ago';
+  const hr=Math.round(m/60); if(hr<24)return hr+'h ago';
+  return Math.round(hr/24)+'d ago';
+}
+function agentsView(){
+  const A=window.DASHBOARD_AGENTS;
+  if(!A)return '<div class="crumbs">Agents</div><h2 class="page">Claude Code Agents</h2><p class="sub">No agent data yet — run <code>node agents_sync.mjs</code> in F:\\AI-Dev\\Dashboard to populate this view.</p>';
+  const t=A.totals;
+  let h='<div class="crumbs">Agents</div><h2 class="page">Claude Code Agents</h2>';
+  h+='<p class="sub">Session activity across your Claude Code agents (via <b>ccusage</b> + ~/.claude — native, no hooks). Each session is one agent run; cost is API-equivalent. Snapshot, refreshes on sync.</p>';
+  h+=`<div class="stat-row fade">
+    <div class="stat info"><div class="v num">${t.sessions}</div><div class="l">Sessions</div></div>
+    <div class="stat ok"><div class="v num">${t.activeToday}</div><div class="l">Active today</div></div>
+    <div class="stat info"><div class="v num">${t.active7d}</div><div class="l">Active 7d</div></div>
+    <div class="stat info"><div class="v num">${_usd(t.cost)}</div><div class="l">Total value</div></div>
+    <div class="stat"><div class="v num">${t.projects}</div><div class="l">Projects</div></div>
+  </div>`;
+  const bp=A.byProject||[],mx=Math.max(1,...bp.map(p=>p.cost));
+  const rowsP=bp.map(p=>{
+    const pct=Math.round(p.cost/mx*100);
+    return`<div style="display:flex;align-items:center;gap:10px;margin:7px 0">
+      <div style="width:170px;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(p.project)}">${esc(p.project)}</div>
+      <div style="flex:1;height:8px;background:rgba(110,168,255,.08);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--w)"></div></div>
+      <div style="width:44px;text-align:right;font-size:11px;color:var(--dim)" class="num">${p.sessions}×</div>
+      <div style="width:66px;text-align:right;font-size:12px;color:var(--text)" class="num">${_usd(p.cost)}</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.06s;margin-bottom:20px"><h3>By project — sessions &amp; value</h3>${rowsP}</div>`;
+  const rs=A.recent||[];
+  const rowsR=rs.map(s=>{
+    const chips=(s.models||[]).map(m=>`<span style="font-size:9.5px;color:var(--w2);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);border-radius:4px;padding:1px 5px;margin-right:3px;white-space:nowrap">${esc(m)}</span>`).join('');
+    return`<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+      <div style="width:150px;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(s.project)}">${esc(s.project)}</div>
+      <div style="flex:1;min-width:0;overflow:hidden">${chips}</div>
+      <div style="width:80px;text-align:right;font-size:10.5px;color:var(--dim)">${_ago(s.lastActivity)}</div>
+      <div style="width:60px;text-align:right;font-size:11px;color:var(--dim)" class="num">${_tok(s.tokens)}</div>
+      <div style="width:64px;text-align:right;font-size:12px;color:var(--text)" class="num">${_usd(s.cost)}</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.1s"><h3>Recent sessions</h3>${rowsR||'<p class="sub">None.</p>'}</div>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(A.source)} · refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  return h;
+}
+
 function show(id){
   closePP();
   try{localStorage.setItem('dash.tab',id);}catch(e){}
@@ -1357,6 +1411,7 @@ function show(id){
   else if(id==='graph')m.innerHTML=graphView();
   else if(id==='strategy')m.innerHTML=strategyView();
   else if(id==='usage')m.innerHTML=usageView();
+  else if(id==='agents')m.innerHTML=agentsView();
   else{const p=D.projects.find(q=>q.id===id);m.innerHTML=project(p);}
   m.querySelectorAll('[data-id]').forEach(el=>{if(!el.classList.contains('nav'))el.onclick=()=>show(el.dataset.id);});
   m.querySelectorAll('.ph-click').forEach(el=>{el.onclick=e=>{e.stopPropagation();openPP(el.dataset.pk,el);};});
@@ -1367,7 +1422,7 @@ function show(id){
 buildSide();
 let init='overview';
 try{const s=localStorage.getItem('dash.tab');
-  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||s==='usage'||D.projects.some(p=>p.id===s)))init=s;}catch(e){}
+  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||s==='usage'||s==='agents'||D.projects.some(p=>p.id===s)))init=s;}catch(e){}
 show(init);
 </script>
 </body>
