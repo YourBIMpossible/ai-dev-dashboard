@@ -1312,6 +1312,68 @@ function strategyView(){
 }
 
 // ── Router ────────────────────────────────────────────────────────────────
+// ── Rich SVG chart helpers ──────────────────────────────────────────────────
+const CPAL=['#6ea8ff','#a78bfa','#34d399','#fbbf24','#f87171','#22d3ee','#fb923c','#a3e635','#f472b6','#60a5fa'];
+function arcGauge(pct,size,color,big,sub){
+  pct=Math.max(0,Math.min(100,pct));
+  const sw=Math.max(8,Math.round(size*.085)),r=(size-sw)/2-1,c=2*Math.PI*r,arc=0.75;
+  return`<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
+    <svg width="${size}" height="${size}" style="transform:rotate(135deg)">
+      <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--track)" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${c*arc} ${c}"/>
+      <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${c*arc*pct/100} ${c}"/>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="font-family:Sora;font-size:${Math.round(size*.26)}px;font-weight:700;color:var(--text);line-height:1">${big}</div>
+      ${sub?`<div style="font-size:${Math.max(9,Math.round(size*.072))}px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.05em">${sub}</div>`:''}
+    </div></div>`;
+}
+function ringChart(segs,size,big,sub){
+  const sw=Math.max(10,Math.round(size*.15)),r=(size-sw)/2-1,c=2*Math.PI*r;
+  const total=segs.reduce((s,x)=>s+x.value,0)||1;let off=0;
+  const arcs=segs.map(x=>{const len=c*(x.value/total);const el=`<circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${x.color}" stroke-width="${sw}" stroke-dasharray="${len} ${c-len}" stroke-dashoffset="${-off}"><title>${esc(x.label)}</title></circle>`;off+=len;return el;}).join('');
+  return`<div style="position:relative;width:${size}px;height:${size}px;flex-shrink:0">
+    <svg width="${size}" height="${size}" style="transform:rotate(-90deg)"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--track)" stroke-width="${sw}"/>${arcs}</svg>
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+      <div style="font-family:Sora;font-size:${Math.round(size*.15)}px;font-weight:700;color:var(--text);line-height:1.1">${big}</div>
+      ${sub?`<div style="font-size:10px;color:var(--muted)">${sub}</div>`:''}
+    </div></div>`;
+}
+function legend(segs){
+  return'<div style="display:flex;flex-direction:column;gap:8px;min-width:160px">'+segs.map(s=>`<div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="width:10px;height:10px;border-radius:3px;background:${s.color};flex-shrink:0"></span><span style="color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.label)}</span><span class="num" style="color:var(--muted)">${s.right||''}</span></div>`).join('')+'</div>';
+}
+function sankeyFlow(w,totals){
+  const types=(w.subagentTypes||[]).slice(0,7);
+  if(!types.length)return '<p class="sub" style="margin:0">No subagent spawns in the scanned window.</p>';
+  const W=820,padT=14,padB=14,gap=10,H=Math.max(220,types.length*54);
+  const totalSpawn=types.reduce((a,b)=>a+b.count,0)||1;
+  const usable=H-padT-padB-(types.length-1)*gap;
+  let y=padT;const tN=types.map((t,i)=>{const hh=Math.max(20,usable*(t.count/totalSpawn));const o={...t,y,h:hh,color:CPAL[i%CPAL.length]};y+=hh+gap;return o;});
+  const sX=24,sW=110,mX=210,mW=120,tX=400,tW=180,oX=684,oW=112,sMid=H/2,mMid=H/2;
+  const completed=Math.round(totalSpawn*w.successRate/100),errored=Math.max(0,totalSpawn-completed);
+  const cH=Math.max(26,(H-padT-padB-gap)*(completed/totalSpawn)),eH=Math.max(14,errored>0?(H-padT-padB-gap)*(errored/totalSpawn):0),cY=padT,eY=cY+cH+gap;
+  const link=(x1,y1,x2,y2,wd,col,op)=>{const mx=(x1+x2)/2;return`<path d="M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}" fill="none" stroke="${col}" stroke-width="${Math.max(1,wd)}" stroke-opacity="${op}" stroke-linecap="round"/>`;};
+  let links=link(sX+sW,sMid,mX,mMid,16,'#6ea8ff',.3);
+  for(const t of tN){const cy=t.y+t.h/2,wd=Math.max(2,t.h*.5);links+=link(mX+mW,mMid,tX,cy,wd,t.color,.3);links+=link(tX+tW,cy,oX,cY+cH/2,Math.max(2,wd*w.successRate/100),'#34d399',.26);if(errored>0)links+=link(tX+tW,cy,oX,eY+eH/2,Math.max(1,wd*(1-w.successRate/100)),'#f87171',.3);}
+  const node=(x,yy,ww,hh,fill,label,badge)=>`<rect x="${x}" y="${yy}" width="${ww}" height="${hh}" rx="7" fill="${fill}" fill-opacity="0.17" stroke="${fill}" stroke-opacity="0.6"/><text x="${x+10}" y="${yy+hh/2+1}" dominant-baseline="middle" font-size="12" fill="#e2e6f3" font-family="Inter">${esc(label)}</text>${badge!=null?`<text x="${x+ww-9}" y="${yy+hh/2+1}" text-anchor="end" dominant-baseline="middle" font-size="11" fill="#8491a8" font-family="Inter">${badge}</text>`:''}`;
+  let nodes=node(sX,sMid-22,sW,44,'#6ea8ff','Sessions',totals.sessions)+node(mX,mMid-22,mW,44,'#a78bfa','Main agent',totalSpawn);
+  for(const t of tN)nodes+=node(tX,t.y,tW,t.h,t.color,t.type.length>17?t.type.slice(0,16)+'…':t.type,t.count);
+  nodes+=node(oX,cY,oW,cH,'#34d399','Completed',completed)+(errored>0?node(oX,eY,oW,eH,'#f87171','Error',errored):'');
+  const head=[['ORIGIN',sX],['MAIN AGENT',mX],['SUBAGENT TYPES',tX],['OUTCOMES',oX]].map(([t,x])=>`<text x="${x}" y="9" font-size="9" fill="#4d5870" font-family="Inter" letter-spacing="1">${t}</text>`).join('');
+  return`<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H+18}" width="100%" style="min-width:680px;display:block">${head}<g transform="translate(0,14)">${links}${nodes}</g></svg></div>`;
+}
+function heatGrid(days){
+  if(!days||!days.length)return '';
+  const max=Math.max(...days.map(d=>d.cost),1),byDate={};days.forEach(d=>byDate[d.date]=d.cost);
+  const first=new Date(days[0].date+'T00:00:00Z'),last=new Date(days[days.length-1].date+'T00:00:00Z');
+  const start=new Date(first);start.setUTCDate(start.getUTCDate()-start.getUTCDay());
+  const cells=[];let cur=new Date(start);
+  while(cur<=last){const ds=cur.toISOString().slice(0,10);cells.push({ds,v:byDate[ds]||0,col:Math.floor((cur-start)/6048e5),row:cur.getUTCDay()});cur.setUTCDate(cur.getUTCDate()+1);}
+  const cols=Math.max(...cells.map(c=>c.col))+1,cell=14,gap=4,W=cols*(cell+gap),H=7*(cell+gap);
+  const COL=['rgba(110,168,255,.06)','rgba(110,168,255,.3)','rgba(110,168,255,.52)','rgba(110,168,255,.74)','#6ea8ff'];
+  const rects=cells.map(c=>{const lv=c.v===0?0:Math.min(4,Math.ceil(c.v/max*4));return`<rect x="${c.col*(cell+gap)}" y="${c.row*(cell+gap)}" width="${cell}" height="${cell}" rx="3" fill="${COL[lv]}"><title>${c.ds}: $${c.v.toFixed(2)}</title></rect>`;}).join('');
+  return`<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" width="${Math.min(W,640)}" height="${H}" style="display:block">${rects}</svg></div>`;
+}
+
 // ── Usage (Claude Code spend via ccusage) ──────────────────────────────────
 function _usd(n){n=+n||0;return n>=1000?'$'+(n/1000).toFixed(n>=10000?0:1)+'K':'$'+(n>=100?Math.round(n):n.toFixed(2));}
 function _tok(n){n=+n||0;return n>=1e9?(n/1e9).toFixed(1)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':''+n;}
@@ -1348,7 +1410,8 @@ function usageBody(){
       <div style="width:40px;text-align:right;font-size:11px;color:var(--dim)" class="num">${pct}%</div>
     </div>`;
   }).join('');
-  h+=`<div class="card fade" style="animation-delay:.1s"><h3>By model</h3>${rowsM||'<p class="sub">No model breakdown.</p>'}</div>`;
+  const bseg=bm.slice(0,7).map((m,i)=>({label:m.model,value:m.cost,color:CPAL[i%CPAL.length],right:_usd(m.cost)}));
+  h+=`<div class="card fade" style="animation-delay:.1s"><h3>By model</h3><div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:6px">${ringChart(bseg,150,_usd(a.cost),'all-time')}<div style="flex:1;min-width:200px">${legend(bseg)}</div></div>${rowsM||'<p class="sub">No model breakdown.</p>'}</div>`;
   h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(U.source)} · refreshed ${new Date(U.generated).toLocaleString()}</p>`;
   return h;
 }
@@ -1439,23 +1502,20 @@ function healthBody(){
   if(!A||!A.health)return '<p class="sub">No data yet — run <code>node agents_sync.mjs</code>.</p>';
   const hh=A.health;
   let h='<p class="sub">Quality &amp; efficiency signals across your sessions. Cache-hit and error rate are the two worth watching.</p>';
-  h+=`<div class="stat-row fade">
-    <div class="stat ok"><div class="v num">${hh.cacheHitRate}%</div><div class="l">Cache hit rate</div></div>
-    <div class="stat${hh.errorRate>10?' warn':' ok'}"><div class="v num">${hh.errorRate}%</div><div class="l">Tool error rate</div></div>
-    <div class="stat info"><div class="v num">${_usd(hh.avgCostPerSession)}</div><div class="l">Avg / session</div></div>
-    <div class="stat info"><div class="v num">${_tok(hh.avgTokensPerSession)}</div><div class="l">Tokens / session</div></div>
-  </div>`;
-  const mm=(hh.modelMix||[]).filter(m=>m.cost>0),mmx=Math.max(1,...mm.map(m=>m.cost));
-  const mrows=mm.map(m=>{
-    const pct=Math.round(m.cost/mmx*100);
-    return`<div style="display:flex;align-items:center;gap:10px;margin:7px 0">
-      <div style="width:150px;font-size:12px;color:var(--text)">${esc(m.model)}</div>
-      <div style="flex:1;height:8px;background:rgba(110,168,255,.08);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--w)"></div></div>
-      <div style="width:64px;text-align:right;font-size:12px;color:var(--text)" class="num">${_usd(m.cost)}</div>
-      <div style="width:40px;text-align:right;font-size:11px;color:var(--dim)" class="num">${m.pct}%</div>
-    </div>`;
-  }).join('');
-  h+=`<div class="card fade" style="animation-delay:.06s"><h3>Model mix <span style="color:var(--dim);font-weight:400;font-size:11px">(by value)</span></h3>${mrows}</div>`;
+  const score=Math.round(0.5*hh.cacheHitRate+0.5*(100-Math.min(100,hh.errorRate*4)));
+  const sc=score>=80?'var(--green)':score>=60?'var(--amber)':'var(--red)';
+  h+=`<div class="card fade" style="margin-bottom:20px"><div style="display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:space-around">
+    <div style="text-align:center">${arcGauge(score,154,sc,score,'/ 100')}<div style="font-size:12px;color:var(--muted);margin-top:8px;font-weight:600">Health score</div></div>
+    <div style="text-align:center">${arcGauge(hh.cacheHitRate,112,'var(--green)',hh.cacheHitRate+'%','')}<div style="font-size:12px;color:var(--muted);margin-top:8px">Cache hit</div></div>
+    <div style="text-align:center">${arcGauge(Math.min(100,hh.errorRate),112,hh.errorRate>10?'var(--amber)':'var(--w)',hh.errorRate+'%','')}<div style="font-size:12px;color:var(--muted);margin-top:8px">Tool error</div></div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div><div class="num" style="font-family:Sora;font-size:24px;font-weight:700;color:var(--text)">${_usd(hh.avgCostPerSession)}</div><div style="font-size:11px;color:var(--muted)">Avg / session</div></div>
+      <div><div class="num" style="font-family:Sora;font-size:24px;font-weight:700;color:var(--text)">${_tok(hh.avgTokensPerSession)}</div><div style="font-size:11px;color:var(--muted)">Tokens / session</div></div>
+    </div>
+  </div></div>`;
+  const mm=(hh.modelMix||[]).filter(m=>m.cost>0).slice(0,7);
+  const segs=mm.map((m,i)=>({label:m.model,value:m.cost,color:CPAL[i%CPAL.length],right:m.pct+'%'}));
+  h+=`<div class="card fade" style="animation-delay:.06s"><h3>Model mix <span style="color:var(--dim);font-weight:400;font-size:11px">(by value)</span></h3><div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">${ringChart(segs,140,mm.length+'','models')}<div style="flex:1;min-width:160px">${legend(segs)}</div></div></div>`;
   h+=`<div class="card fade" style="animation-delay:.1s;margin-top:20px"><h3>What these mean</h3>
     <div class="sub" style="margin:0;font-size:12px;line-height:1.7">
       <b style="color:var(--green)">Cache hit ${hh.cacheHitRate}%</b> — input tokens served from prompt cache instead of reprocessed. High = fast &amp; cheap; Claude Code normally sits in the 90s.<br>
@@ -1477,21 +1537,11 @@ function workflowsBody(){
     <div class="stat info"><div class="v num">${A.subagents.total}</div><div class="l">Total spawns</div></div>
     <div class="stat"><div class="v num" style="font-size:15px">${esc(w.mostCommonTool)}</div><div class="l">Top tool</div></div>
   </div>`;
-  const st=w.subagentTypes||[],smx=Math.max(1,...st.map(x=>x.count));
-  const flow=st.map(x=>{
-    const pct=Math.round(x.count/smx*100);
-    return`<div style="display:flex;align-items:center;gap:10px;margin:7px 0">
-      <div style="width:190px;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(x.type)}">${esc(x.type)}</div>
-      <div style="flex:1;height:9px;background:rgba(52,211,153,.08);border-radius:5px;overflow:hidden"><div style="width:${pct}%;height:100%;background:linear-gradient(90deg,var(--w),var(--green))"></div></div>
-      <div style="width:48px;text-align:right;font-size:12px;color:var(--text)" class="num">${x.count}</div>
-    </div>`;
-  }).join('');
-  h+=`<div class="card fade" style="animation-delay:.06s"><h3>Agent orchestration graph</h3>
-    <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;font-size:11px;color:var(--muted);flex-wrap:wrap">
-      <span style="padding:4px 10px;border-radius:6px;background:rgba(110,168,255,.12);border:1px solid rgba(110,168,255,.3)">${A.totals.sessions} Sessions</span><span style="color:var(--dim)">→</span>
-      <span style="padding:4px 10px;border-radius:6px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3)">Main agent</span><span style="color:var(--dim)">→</span>
-      <span style="padding:4px 10px;border-radius:6px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)">${st.length} subagent types</span>
-    </div>${flow||'<p class="sub" style="margin:0">No subagent spawns in the scanned window.</p>'}</div>`;
+  h+=`<div class="card fade" style="animation-delay:.06s"><h3>Agent orchestration graph <span style="color:var(--dim);font-weight:400;font-size:11px">— edge weight = frequency</span></h3>${sankeyFlow(w,A.totals)}</div>`;
+  const st=w.subagentTypes||[];
+  const segs=st.slice(0,7).map((x,i)=>({label:x.type,value:x.count,color:CPAL[i%CPAL.length],right:x.count+''}));
+  h+=`<div class="card fade" style="animation-delay:.1s;margin-top:20px"><h3>Subagent type breakdown</h3>
+    <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">${ringChart(segs,150,A.subagents.total,'spawns')}<div style="flex:1;min-width:180px">${legend(segs)}</div></div></div>`;
   h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Most-delegated: <b>${esc(w.topSubagentType)}</b> · from ${A.subagents.scannedSessions} recent sessions · refreshed ${new Date(A.generated).toLocaleString()}</p>`;
   return h;
 }
@@ -1516,14 +1566,13 @@ function analyticsBody(){
       <div style="width:70px;text-align:right;font-size:12px;color:var(--text)" class="num">${_usd(x.cost)}</div>
     </div>`;
   }).join('');
-  h+=`<div class="card fade" style="animation-delay:.06s;margin-bottom:20px"><h3>Cost by weekday</h3>${wrows}</div>`;
-  const mm=((A.health&&A.health.modelMix)||[]).filter(m=>m.cost>0),mmx=Math.max(1,...mm.map(m=>m.cost));
-  const mrows=mm.map(m=>{const pct=Math.round(m.cost/mmx*100);return`<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
-      <div style="width:150px;font-size:12px;color:var(--text)">${esc(m.model)}</div>
-      <div style="flex:1;height:9px;background:rgba(167,139,250,.08);border-radius:5px;overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--w2)"></div></div>
-      <div style="width:64px;text-align:right;font-size:12px;color:var(--text)" class="num">${_usd(m.cost)}</div>
-      <div style="width:40px;text-align:right;font-size:11px;color:var(--dim)" class="num">${m.pct}%</div></div>`;}).join('');
-  h+=`<div class="card fade" style="animation-delay:.1s"><h3>Cost by model</h3>${mrows}</div>`;
+  h+=`<div class="g g2 fade" style="gap:18px;margin-bottom:20px">`;
+  h+=`<div class="card" style="margin:0"><h3>Cost by weekday</h3>${wrows}</div>`;
+  const mm=((A.health&&A.health.modelMix)||[]).filter(m=>m.cost>0).slice(0,7);
+  const segs=mm.map((m,i)=>({label:m.model,value:m.cost,color:CPAL[i%CPAL.length],right:_usd(m.cost)}));
+  h+=`<div class="card" style="margin:0"><h3>Cost by model</h3><div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">${ringChart(segs,150,_usd(an.totalCost),'total')}<div style="flex:1;min-width:150px">${legend(segs)}</div></div></div>`;
+  h+=`</div>`;
+  h+=`<div class="card fade" style="animation-delay:.12s"><h3>Activity heatmap <span style="color:var(--dim);font-weight:400;font-size:11px">— daily spend intensity</span></h3>${heatGrid(A.timeline)}</div>`;
   h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">refreshed ${new Date(A.generated).toLocaleString()}</p>`;
   return h;
 }
