@@ -2,7 +2,7 @@
 repo-workflows
 *.py
 *.mjs
-*.md
+/*.md
 .gitignore
 .assetsignore
 _*
