@@ -97,6 +97,10 @@ main{flex:1;padding:26px 34px 60px;min-width:0;}
 .crumbs{font-size:11px;color:var(--dim);margin-bottom:3px;}
 h2.page{font-size:21px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px;}
 .sub{color:var(--muted);margin-bottom:20px;max-width:82ch;font-size:13px;}
+.mtabs{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08);}
+.mtab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;padding:8px 15px;cursor:pointer;transition:color .15s,border-color .15s;margin-bottom:-1px;}
+.mtab:hover{color:var(--text);}
+.mtab.on{color:var(--w);border-bottom-color:var(--w);}
 
 /* ── Pills ─────────────────────────────────── */
 .pill{
@@ -747,9 +751,6 @@ function buildSide(){
   h+=navI('strategy',ICO.idea,'Strategy',_sp?_sp+'?':'');
   const _u=window.DASHBOARD_USAGE;
   h+=navI('usage',ICO.usage,'Usage',_u?('$'+(_u.allTime.cost>=1000?(_u.allTime.cost/1000).toFixed(_u.allTime.cost>=10000?0:1)+'K':Math.round(_u.allTime.cost))):'');
-  const _ag=window.DASHBOARD_AGENTS;
-  h+=navI('agents',ICO.agents,'Agents',_ag?(_ag.totals.sessions+''):'');
-  if(_ag&&_ag.health)h+=navI('health',ICO.health,'Health',_ag.health.cacheHitRate+'%',_ag.health.errorRate>10?'color:var(--amber)':'color:var(--green)');
   h+='<div class="grp-sep"></div><div class="grp-lbl">BIMpossible Work</div>';
   WORK.forEach(id=>{const p=D.projects.find(q=>q.id===id);if(p)h+=navI(p.id,ICO[p.icon]||ICO.cube,p.name,pctStr(p),null,p.status,false);});
   h+='<div class="grp-sep"></div><div class="grp-lbl personal">Personal</div>';
@@ -1314,12 +1315,11 @@ function strategyView(){
 // ── Usage (Claude Code spend via ccusage) ──────────────────────────────────
 function _usd(n){n=+n||0;return n>=1000?'$'+(n/1000).toFixed(n>=10000?0:1)+'K':'$'+(n>=100?Math.round(n):n.toFixed(2));}
 function _tok(n){n=+n||0;return n>=1e9?(n/1e9).toFixed(1)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':''+n;}
-function usageView(){
+function usageBody(){
   const U=window.DASHBOARD_USAGE;
-  if(!U)return '<div class="crumbs">Usage</div><h2 class="page">Claude Code Usage</h2><p class="sub">No usage data yet — run <code>node usage_sync.mjs</code> in F:\\AI-Dev\\Dashboard to populate this view.</p>';
+  if(!U)return '<p class="sub">No usage data yet — run <code>node usage_sync.mjs</code> in F:\\AI-Dev\\Dashboard.</p>';
   const a=U.allTime;
-  let h='<div class="crumbs">Usage</div><h2 class="page">Claude Code Usage</h2>';
-  h+='<p class="sub">API-equivalent value of local Claude Code usage (via <b>ccusage</b>). You\'re on a subscription — this is what the same token usage would cost at pay-as-you-go API rates: value extracted, not money paid.</p>';
+  let h='<p class="sub">API-equivalent value of local Claude Code usage (via <b>ccusage</b>) — what the same tokens would cost at pay-as-you-go API rates: value extracted, not money paid.</p>';
   h+=`<div class="stat-row fade">
     <div class="stat info"><div class="v num">${_usd(a.cost)}</div><div class="l">All-time value</div></div>
     <div class="stat info"><div class="v num">${_tok(a.totalTokens)}</div><div class="l">Total tokens</div></div>
@@ -1363,12 +1363,11 @@ function _ago(iso){
   const hr=Math.round(m/60); if(hr<24)return hr+'h ago';
   return Math.round(hr/24)+'d ago';
 }
-function agentsView(){
+function agentsBody(){
   const A=window.DASHBOARD_AGENTS;
-  if(!A)return '<div class="crumbs">Agents</div><h2 class="page">Claude Code Agents</h2><p class="sub">No agent data yet — run <code>node agents_sync.mjs</code> in F:\\AI-Dev\\Dashboard to populate this view.</p>';
+  if(!A)return '<p class="sub">No agent data yet — run <code>node agents_sync.mjs</code> in F:\\AI-Dev\\Dashboard.</p>';
   const t=A.totals;
-  let h='<div class="crumbs">Agents</div><h2 class="page">Claude Code Agents</h2>';
-  h+='<p class="sub">Session activity across your Claude Code agents (via <b>ccusage</b> + ~/.claude — native, no hooks). Each session is one agent run; cost is API-equivalent. Snapshot, refreshes on sync.</p>';
+  let h='<p class="sub">Session activity across your Claude Code agents. Each session is one agent run; cost is API-equivalent. Snapshot, refreshes on sync.</p>';
   h+=`<div class="stat-row fade">
     <div class="stat info"><div class="v num">${t.sessions}</div><div class="l">Sessions</div></div>
     <div class="stat ok"><div class="v num">${t.activeToday}</div><div class="l">Active today</div></div>
@@ -1435,12 +1434,11 @@ function agentsView(){
   return h;
 }
 
-function healthView(){
+function healthBody(){
   const A=window.DASHBOARD_AGENTS;
-  if(!A||!A.health)return '<div class="crumbs">Health</div><h2 class="page">System Health</h2><p class="sub">No data yet — run <code>node agents_sync.mjs</code> in F:\\AI-Dev\\Dashboard.</p>';
+  if(!A||!A.health)return '<p class="sub">No data yet — run <code>node agents_sync.mjs</code>.</p>';
   const hh=A.health;
-  let h='<div class="crumbs">Agents / Health</div><h2 class="page">System Health</h2>';
-  h+='<p class="sub">Quality &amp; efficiency signals across your Claude Code sessions, from local data. Cache-hit and error rate are the two worth watching.</p>';
+  let h='<p class="sub">Quality &amp; efficiency signals across your sessions. Cache-hit and error rate are the two worth watching.</p>';
   h+=`<div class="stat-row fade">
     <div class="stat ok"><div class="v num">${hh.cacheHitRate}%</div><div class="l">Cache hit rate</div></div>
     <div class="stat${hh.errorRate>10?' warn':' ok'}"><div class="v num">${hh.errorRate}%</div><div class="l">Tool error rate</div></div>
@@ -1468,6 +1466,118 @@ function healthView(){
   return h;
 }
 
+// ── Workflows (agent orchestration) ─────────────────────────────────────────
+function workflowsBody(){
+  const A=window.DASHBOARD_AGENTS,w=A&&A.workflow;
+  if(!w)return '<p class="sub">No workflow data yet — run <code>node agents_sync.mjs</code>.</p>';
+  let h='<p class="sub">Agent orchestration — how your main agents delegate to subagents. Snapshot from recent sessions.</p>';
+  h+=`<div class="stat-row fade">
+    <div class="stat ok"><div class="v num">${w.successRate}%</div><div class="l">Success rate</div></div>
+    <div class="stat info"><div class="v num">${w.avgSubagentsPerSession}</div><div class="l">Subagents / session</div></div>
+    <div class="stat info"><div class="v num">${A.subagents.total}</div><div class="l">Total spawns</div></div>
+    <div class="stat"><div class="v num" style="font-size:15px">${esc(w.mostCommonTool)}</div><div class="l">Top tool</div></div>
+  </div>`;
+  const st=w.subagentTypes||[],smx=Math.max(1,...st.map(x=>x.count));
+  const flow=st.map(x=>{
+    const pct=Math.round(x.count/smx*100);
+    return`<div style="display:flex;align-items:center;gap:10px;margin:7px 0">
+      <div style="width:190px;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(x.type)}">${esc(x.type)}</div>
+      <div style="flex:1;height:9px;background:rgba(52,211,153,.08);border-radius:5px;overflow:hidden"><div style="width:${pct}%;height:100%;background:linear-gradient(90deg,var(--w),var(--green))"></div></div>
+      <div style="width:48px;text-align:right;font-size:12px;color:var(--text)" class="num">${x.count}</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.06s"><h3>Agent orchestration graph</h3>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;font-size:11px;color:var(--muted);flex-wrap:wrap">
+      <span style="padding:4px 10px;border-radius:6px;background:rgba(110,168,255,.12);border:1px solid rgba(110,168,255,.3)">${A.totals.sessions} Sessions</span><span style="color:var(--dim)">→</span>
+      <span style="padding:4px 10px;border-radius:6px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.3)">Main agent</span><span style="color:var(--dim)">→</span>
+      <span style="padding:4px 10px;border-radius:6px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3)">${st.length} subagent types</span>
+    </div>${flow||'<p class="sub" style="margin:0">No subagent spawns in the scanned window.</p>'}</div>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Most-delegated: <b>${esc(w.topSubagentType)}</b> · from ${A.subagents.scannedSessions} recent sessions · refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  return h;
+}
+
+// ── Analytics ───────────────────────────────────────────────────────────────
+function analyticsBody(){
+  const A=window.DASHBOARD_AGENTS,an=A&&A.analytics;
+  if(!an)return '<p class="sub">No analytics yet — run <code>node agents_sync.mjs</code>.</p>';
+  let h='<p class="sub">Cost &amp; activity analytics across all your Claude Code sessions.</p>';
+  h+=`<div class="stat-row fade">
+    <div class="stat info"><div class="v num">${an.totalSessions}</div><div class="l">Sessions</div></div>
+    <div class="stat info"><div class="v num">${_tok(an.totalTokens)}</div><div class="l">Tokens</div></div>
+    <div class="stat info"><div class="v num">${_usd(an.totalCost)}</div><div class="l">Value</div></div>
+    <div class="stat"><div class="v num">${an.events>=1000?Math.round(an.events/1000)+'K':an.events}</div><div class="l">Events (scanned)</div></div>
+  </div>`;
+  const wd=an.byWeekday||[],wmx=Math.max(1,...wd.map(x=>x.cost));
+  const wrows=wd.map(x=>{
+    const pct=Math.round(x.cost/wmx*100);
+    return`<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+      <div style="width:46px;font-size:12px;color:var(--text)">${x.day}</div>
+      <div style="flex:1;height:9px;background:rgba(110,168,255,.08);border-radius:5px;overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--w)"></div></div>
+      <div style="width:70px;text-align:right;font-size:12px;color:var(--text)" class="num">${_usd(x.cost)}</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.06s;margin-bottom:20px"><h3>Cost by weekday</h3>${wrows}</div>`;
+  const mm=((A.health&&A.health.modelMix)||[]).filter(m=>m.cost>0),mmx=Math.max(1,...mm.map(m=>m.cost));
+  const mrows=mm.map(m=>{const pct=Math.round(m.cost/mmx*100);return`<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+      <div style="width:150px;font-size:12px;color:var(--text)">${esc(m.model)}</div>
+      <div style="flex:1;height:9px;background:rgba(167,139,250,.08);border-radius:5px;overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--w2)"></div></div>
+      <div style="width:64px;text-align:right;font-size:12px;color:var(--text)" class="num">${_usd(m.cost)}</div>
+      <div style="width:40px;text-align:right;font-size:11px;color:var(--dim)" class="num">${m.pct}%</div></div>`;}).join('');
+  h+=`<div class="card fade" style="animation-delay:.1s"><h3>Cost by model</h3>${mrows}</div>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  return h;
+}
+
+// ── Config inventory (~/.claude) ────────────────────────────────────────────
+function configBody(){
+  const A=window.DASHBOARD_AGENTS,c=A&&A.config;
+  if(!c)return '<p class="sub">No config data yet — run <code>node agents_sync.mjs</code>.</p>';
+  let h='<p class="sub">Your Claude Code setup at a glance — from <code>~/.claude</code>.</p>';
+  const items=[['Skills',c.skills],['Subagents',c.subagents],['Slash commands',c.commands],['Output styles',c.outputStyles],['Plugins',c.plugins],['MCP servers',c.mcpServers],['Hooks',c.hooks],['Keybindings',c.keybindings],['Memory',c.memory]];
+  h+='<div class="g g4 fade" style="gap:13px">';
+  for(const [lbl,n] of items)
+    h+=`<div class="card" style="padding:16px 18px"><div style="font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">${lbl}</div><div class="num" style="font-family:Sora;font-size:26px;font-weight:700;color:${n>0?'var(--text)':'var(--dim)'}">${n}</div></div>`;
+  h+='</div>';
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">From ~/.claude config files. MCP servers connected via claude.ai connectors live outside local config, so may read 0 even while their tools are in use. Refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  return h;
+}
+
+// ── Activity (recent tool calls) ────────────────────────────────────────────
+function activityBody(){
+  const A=window.DASHBOARD_AGENTS,ev=A&&A.recentEvents;
+  if(!ev)return '<p class="sub">No activity yet — run <code>node agents_sync.mjs</code>.</p>';
+  let h='<p class="sub">Recent tool activity across your sessions — snapshot of the last '+ev.length+' tool calls, not a live stream.</p>';
+  const rows=ev.map(e=>{
+    const tool=e.tool.replace(/^mcp__/,'').replace(/__/g,' · ');
+    return`<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+      <div style="width:84px;font-size:10.5px;color:var(--dim)">${_ago(e.ts)}</div>
+      <div style="width:150px;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(e.project)}">${esc(e.project)}</div>
+      <div style="flex:1;min-width:0;font-size:12px;color:var(--w);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(e.tool)}">${esc(tool)}</div>
+      <div style="width:66px;text-align:right;font-size:10px;color:var(--dim)" class="num">${esc(e.session)}</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade"><h3>Recent tool calls</h3>${rows||'<p class="sub" style="margin:0">No recent activity.</p>'}</div>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  return h;
+}
+
+// ── Monitor hub (tabbed) ────────────────────────────────────────────────────
+const MTABS=[['usage','Usage'],['agents','Agents'],['workflows','Workflows'],['analytics','Analytics'],['config','Config'],['activity','Activity'],['health','Health']];
+function monitorView(){
+  let mt=window._mtab||'usage';
+  if(!MTABS.some(t=>t[0]===mt))mt='usage';
+  let h='<div class="crumbs">Usage</div><h2 class="page">Claude Code Monitor</h2>';
+  h+='<div class="mtabs">'+MTABS.map(([id,lbl])=>`<button class="mtab${mt===id?' on':''}" data-mt="${id}">${lbl}</button>`).join('')+'</div>';
+  if(mt==='usage')h+=usageBody();
+  else if(mt==='agents')h+=agentsBody();
+  else if(mt==='workflows')h+=workflowsBody();
+  else if(mt==='analytics')h+=analyticsBody();
+  else if(mt==='config')h+=configBody();
+  else if(mt==='activity')h+=activityBody();
+  else if(mt==='health')h+=healthBody();
+  return h;
+}
+
 function show(id){
   closePP();
   try{localStorage.setItem('dash.tab',id);}catch(e){}
@@ -1477,20 +1587,23 @@ function show(id){
   else if(id==='audit')m.innerHTML=auditView();
   else if(id==='graph')m.innerHTML=graphView();
   else if(id==='strategy')m.innerHTML=strategyView();
-  else if(id==='usage')m.innerHTML=usageView();
-  else if(id==='agents')m.innerHTML=agentsView();
-  else if(id==='health')m.innerHTML=healthView();
+  else if(id==='usage')m.innerHTML=monitorView();
   else{const p=D.projects.find(q=>q.id===id);m.innerHTML=project(p);}
   m.querySelectorAll('[data-id]').forEach(el=>{if(!el.classList.contains('nav'))el.onclick=()=>show(el.dataset.id);});
   m.querySelectorAll('.ph-click').forEach(el=>{el.onclick=e=>{e.stopPropagation();openPP(el.dataset.pk,el);};});
+  m.querySelectorAll('.mtab').forEach(el=>{el.onclick=()=>{window._mtab=el.dataset.mt;try{localStorage.setItem('dash.mtab',el.dataset.mt);}catch(e){} show('usage');};});
   animate();
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
 buildSide();
 let init='overview';
-try{const s=localStorage.getItem('dash.tab');
-  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||s==='usage'||s==='agents'||s==='health'||D.projects.some(p=>p.id===s)))init=s;}catch(e){}
+try{
+  let s=localStorage.getItem('dash.tab');
+  window._mtab=localStorage.getItem('dash.mtab')||'usage';
+  if(s==='agents'||s==='health'){window._mtab=s;s='usage';}
+  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||s==='usage'||D.projects.some(p=>p.id===s)))init=s;
+}catch(e){}
 show(init);
 </script>
 </body>

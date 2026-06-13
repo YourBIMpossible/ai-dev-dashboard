@@ -51,6 +51,26 @@ function buildUuidProjectMap() {
   return { map, root };
 }
 
+function configInventory() {
+  const base = join(homedir(), ".claude");
+  const countEntries = (sub, ext) => { try { return readdirSync(join(base, sub)).filter((f) => !ext || f.endsWith(ext)).length; } catch { return 0; } };
+  let settings = {};
+  try { settings = JSON.parse(readFileSync(join(base, "settings.json"), "utf8")); } catch { /* none */ }
+  const mcpServers = settings.mcpServers ? Object.keys(settings.mcpServers).length : 0;
+  let hooks = 0;
+  if (settings.hooks && typeof settings.hooks === "object")
+    for (const k of Object.keys(settings.hooks)) { const v = settings.hooks[k]; hooks += Array.isArray(v) ? v.length : 1; }
+  let keybindings = 0;
+  try { const kb = JSON.parse(readFileSync(join(base, "keybindings.json"), "utf8")); keybindings = Array.isArray(kb) ? kb.length : Object.keys(kb).length; } catch { /* none */ }
+  let memory = 0;
+  try { for (const d of readdirSync(join(base, "projects"))) { try { memory += readdirSync(join(base, "projects", d, "memory")).filter((f) => f.endsWith(".md") && f !== "MEMORY.md").length; } catch { /* */ } } } catch { /* */ }
+  return {
+    skills: countEntries("skills"), subagents: countEntries("agents", ".md"),
+    commands: countEntries("commands", ".md"), outputStyles: countEntries("output-styles", ".md"),
+    plugins: countEntries("plugins"), mcpServers, hooks, keybindings, memory,
+  };
+}
+
 function ccusage(cmd) {
   return JSON.parse(execSync(`npx -y ccusage@latest ${cmd} --json`, {
     encoding: "utf8", maxBuffer: 128 * 1024 * 1024, stdio: ["ignore", "pipe", "ignore"],
@@ -117,9 +137,11 @@ const toScan = [...enriched].filter((s) => s.dir && nowMs - s.last <= SCAN_DAYS 
 
 const tools = {};
 const subBy = {};
-let subTotal = 0, errors = 0, toolCalls = 0, scanned = 0, bytes = 0, bounded = false;
+const subTypes = {};
+const allEvents = [];
+let subTotal = 0, errors = 0, toolCalls = 0, scanned = 0, bytes = 0, bounded = false, eventLines = 0;
 
-async function scanFile(path, project) {
+async function scanFile(path, project, sid) {
   let size = 0;
   try { size = statSync(path).size; } catch { return; }
   if (bytes + size > SCAN_BYTE_BUDGET) { bounded = true; return; }
@@ -131,15 +153,21 @@ async function scanFile(path, project) {
       if (++lines > SCAN_LINE_CAP) { bounded = true; break; }
       if (!line || line[0] !== "{") continue;
       let ev; try { ev = JSON.parse(line); } catch { continue; }
+      eventLines++;
       const content = ev.message?.content;
       if (!Array.isArray(content)) continue;
       for (const b of content) {
         if (b.type === "tool_use") {
           const n = b.name || "?";
           tools[n] = (tools[n] || 0) + 1; toolCalls++;
+          if (ev.timestamp) allEvents.push({ ts: ev.timestamp, tool: n, project, session: sid });
           // Subagent spawns: "Agent" (this env) / "Task" (CLI) / mcp "*spawn_task".
           // NOT TaskCreate/TaskUpdate (those are todo-list tools).
-          if (n === "Agent" || n === "Task" || /spawn_task$/.test(n)) { subTotal++; subBy[project] = (subBy[project] || 0) + 1; }
+          if (n === "Agent" || n === "Task" || /spawn_task$/.test(n)) {
+            subTotal++; subBy[project] = (subBy[project] || 0) + 1;
+            const st = b.input?.subagent_type || b.input?.subagentType || "general-purpose";
+            subTypes[st] = (subTypes[st] || 0) + 1;
+          }
         } else if (b.type === "tool_result" && b.is_error) errors++;
       }
     }
@@ -150,12 +178,24 @@ async function scanFile(path, project) {
 console.log(`Scanning ${toScan.length} recent session transcripts (bounded)…`);
 for (const s of toScan) {
   if (bytes > SCAN_BYTE_BUDGET) { bounded = true; break; }
-  await scanFile(join(projectsRoot, s.dir, `${s.id}.jsonl`), s.project);
+  await scanFile(join(projectsRoot, s.dir, `${s.id}.jsonl`), s.project, s.id.slice(0, 8));
 }
 
 const toolsTotal = Object.values(tools).reduce((a, b) => a + b, 0) || 1;
 const toolList = Object.entries(tools).map(([name, count]) => ({ name, count, pct: Math.round(count / toolsTotal * 100) })).sort((a, b) => b.count - a.count);
 const subList = Object.entries(subBy).map(([project, count]) => ({ project, count })).sort((a, b) => b.count - a.count);
+const subTypeList = Object.entries(subTypes).map(([type, count]) => ({ type, count })).sort((a, b) => b.count - a.count);
+
+// ── Analytics: cost by weekday (from ccusage daily) ───────────────────────────
+const WD = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const wdCost = {};
+for (const d of daily) { const w = WD[new Date(d.period + "T00:00:00Z").getUTCDay()]; wdCost[w] = (wdCost[w] || 0) + (d.totalCost || 0); }
+const byWeekday = WD.map((w) => ({ day: w, cost: +(wdCost[w] || 0).toFixed(2) }));
+
+// ── Recent tool activity (last 40) + config inventory ─────────────────────────
+allEvents.sort((a, b) => (b.ts || "").localeCompare(a.ts || ""));
+const recentEvents = allEvents.slice(0, 40);
+const config = configInventory();
 
 // ── Health ────────────────────────────────────────────────────────────────────
 const cacheDenom = (totals.cacheReadTokens || 0) + (totals.cacheCreationTokens || 0) + (totals.inputTokens || 0);
@@ -175,6 +215,16 @@ const agents = {
   byProject, recent, timeline, health,
   tools: toolList,
   subagents: { total: subTotal, byProject: subList, scannedSessions: scanned, bounded },
+  workflow: {
+    subagentTypes: subTypeList,
+    avgSubagentsPerSession: scanned ? +(subTotal / scanned).toFixed(2) : 0,
+    successRate: toolCalls ? +(100 - (errors / toolCalls * 100)).toFixed(1) : 100,
+    topSubagentType: subTypeList[0] ? subTypeList[0].type : "—",
+    mostCommonTool: toolList[0] ? toolList[0].name : "—",
+  },
+  analytics: { totalSessions: session.length, totalTokens: totals.totalTokens || 0, totalCost: +(totals.totalCost || 0).toFixed(2), events: eventLines, byWeekday },
+  config,
+  recentEvents,
 };
 
 const stripGen = (u) => { const c = { ...u }; delete c.generated; return JSON.stringify(c); };
