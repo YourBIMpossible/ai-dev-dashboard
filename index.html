@@ -1695,8 +1695,8 @@ function codebaseView(){
   h+='<div class="mtabs">'+CTABS.map(([id,lbl])=>`<button class="mtab${ct===id?' on':''}" data-ct="${id}">${lbl}</button>`).join('')+'</div>';
   const GO='vscode://file/F:/AI-Dev/BIMpossible/backend/graphify-out/';
   if(ct==='metrics')h+=graphMetricsBody();
-  else if(ct==='network')h+=`<p class="sub">Interactive map of the most-connected backend modules${window.DASHBOARD_CODEBASE?` (top ${window.DASHBOARD_CODEBASE.shownNodes} of ${window.DASHBOARD_CODEBASE.nodes.toLocaleString()})`:''} — drag to explore, scroll to zoom, color = community.</p>`+codeFrame('codebase/graph-network.html','Interactive node graph',GO+'graph.json');
-  else if(ct==='dashboard')h+='<p class="sub">The graphify dashboard for the BIMpossible backend.</p>'+codeFrame('codebase/graph-dashboard.html','Graphify dashboard',GO+'dashboard.html');
+  else if(ct==='network')h+=`<p class="sub">Interactive map of the most-connected backend modules${window.DASHBOARD_CODEBASE?` (top ${window.DASHBOARD_CODEBASE.shownNodes} of ${window.DASHBOARD_CODEBASE.nodes.toLocaleString()})`:''} — drag to explore, scroll to zoom, color = community.</p>`+codeFrame('codebase/graph-network','Interactive node graph',GO+'graph.json');
+  else if(ct==='dashboard')h+='<p class="sub">The graphify dashboard for the BIMpossible backend.</p>'+codeFrame('codebase/graph-dashboard','Graphify dashboard',GO+'dashboard.html');
   else if(ct==='report')h+=reportBody();
   return h;
 }
