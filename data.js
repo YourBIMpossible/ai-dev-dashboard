@@ -7,444 +7,169 @@ window.DASHBOARD_DATA = {
   projects: [
     /* PROJECT:bimpossible:START */
     {
-  "id": "bimpossible",
-  "name": "BIMpossible Platform",
-  "icon": "layers",
-  "oneLiner": "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
-  "status": "active",
-  "phase": "Wave 4.10 Spec Draft Generation SHIPPED (9c70eb9) — 22 clause libraries across 8 batches (30 FE categories), rule engine + Markdown/Word/PDF renderers, GET /data/elements/spec_draft, SpecDraftLauncher/Modal UI. 1302 BE / 1103 FE tests. Waves 10-17/20/21 + 4.9/4.10 all shipped. Next: prod deploy (5 Alembic migrations) → live smokes.",
-  "focus": "Deploy main to prod: alembic upgrade head (5 migrations) + BIMPOSSIBLE_ADMIN_ENABLED/SECRET + prewarm DB cleanup; then smoke Wave 4.10 spec draft modal + Wave 4.9 classification bar",
-  "progress": {
-    "label": "Program phases",
-    "phases": [
-      {
-        "name": "P0-2 Foundation",
-        "pct": 100,
-        "tasks": [
-          {
-            "label": "Core auth + user model",
-            "status": "done"
-          },
-          {
-            "label": "Database schema + migrations",
-            "status": "done"
-          },
-          {
-            "label": "API gateway + routing",
-            "status": "done"
-          },
-          {
-            "label": "Revit data bridge (ACC read)",
-            "status": "done"
-          },
-          {
-            "label": "Docker/compose dev setup",
-            "status": "done"
-          }
-        ]
+      id: "bimpossible",
+      name: "BIMpossible Platform",
+      icon: "layers",
+      oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
+      status: "active",
+      phase: "Wave 4.10 Spec Draft Generation SHIPPED (9c70eb9) — 22 clause libraries across 8 batches (30 FE categories), rule engine + Markdown/Word/PDF renderers, GET /data/elements/spec_draft, SpecDraftLauncher/Modal UI. 1302 BE / 1103 FE tests. Waves 10-17/20/21 + 4.9/4.10 all shipped. Next: prod deploy (5 Alembic migrations) → live smokes.",
+      focus: "Deploy main to prod: alembic upgrade head (5 migrations) + BIMPOSSIBLE_ADMIN_ENABLED/SECRET + prewarm DB cleanup; then smoke Wave 4.10 spec draft modal + Wave 4.9 classification bar",
+      progress: { label: "Program phases", phases: [
+        { name: "P0-2 Foundation", pct: 100,
+          tasks: [
+            { label: "Core auth + user model", status: "done" },
+            { label: "Database schema + migrations", status: "done" },
+            { label: "API gateway + routing", status: "done" },
+            { label: "Revit data bridge (ACC read)", status: "done" },
+            { label: "Docker/compose dev setup", status: "done" }
+          ]
+        },
+        { name: "P3 Data core", pct: 97, note: "Wave 7 (Phase 3.9 automation) shipped with all 3 live smokes PASSED",
+          tasks: [
+            { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
+            { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
+            { label: "Federated viewer Wave 1", status: "done", note: "06-05" },
+            { label: "3.9 architecture tail (Wave 7)", status: "done", note: "06-12 — calc-field 5k gate, share-by-link, stale-cache banner; all 3 smokes PASSED" }
+          ]
+        },
+        { name: "P4 Assistant", pct: 93, note: "Phase 4b HITL action-enabled assistant shipped + smoke PASSED; schedule-push outline only",
+          tasks: [
+            { label: "B2 rate-limit hardening", status: "done" },
+            { label: "B2 byte-cap + deadline handling", status: "done" },
+            { label: "B2 write-allowlist + injection guard", status: "done" },
+            { label: "Assistant markdown + pill chrome", status: "done", note: "06-07" },
+            { label: "Wave 4.8 close-out: D1-D7 ratification", status: "done", note: "Ratified 06-10" },
+            { label: "Phase 4b action-enabled assistant (HITL)", status: "done", note: "06-11/12 — HITL approval SSE + /assistant/resume; smoke PASSED" },
+            { label: "Schedule-push: staleness cadence, classifier rules, SPF ship location", status: "pending" }
+          ]
+        },
+        { name: "P5 Surfaces / Viewer", pct: 85, note: "Wave 4.9 + Wave 4.10 shipped; XLSX live; viewer waves pending",
+          tasks: [
+            { label: "Federated-viewer Wave 1 smoke (GA-H12)", status: "done" },
+            { label: "CSP hardened - viewer fonts 55→0 violations", status: "done", note: "PR #79 06-10" },
+            { label: "Wave 5 XLSX export", status: "done", note: "06-11 PR #109 — GET /data/elements/xlsx + Sheet button" },
+            { label: "Wave 4.9 Classification Enrichment (OmniClass + CSI schedule columns)", status: "done", note: "SHIPPED 06-12; 17 schedule endpoints; ScheduleClassificationBar; live smoke owed at prod deploy" },
+            { label: "Wave 4.10 Spec Draft Generation", status: "done", note: "SHIPPED 06-12 (9c70eb9) — 22 clause libraries (batches 1-8), rule engine + Markdown/Word/PDF renderers, SpecDraftLauncher/Modal; live UI smoke owed" },
+            { label: "Viewer-wave package scoping", status: "pending", note: "Ownership question logged 06-04" },
+            { label: "Further viewer waves", status: "pending" }
+          ]
+        },
+        { name: "Waves 10-21 Rollout", pct: 75, note: "Waves 10-14/16/17 fully smoked. Waves 20/21 shipped. Waves 15/18/19 not started.",
+          tasks: [
+            { label: "Wave specs drafted", status: "done" },
+            { label: "Waves 10/11/12/13/14/17 discipline-schedule shapers", status: "done", note: "All 6 waves: code shipped + live smokes PASSED 06-11/12" },
+            { label: "Wave 11 Mech smoke PASSED", status: "done", note: "06-11 — 169 Air Terminals + 60 units confirmed" },
+            { label: "Wave 12 Plumbing smoke PASSED", status: "done", note: "06-11 — 1510 fixtures confirmed" },
+            { label: "Wave 13 Structural smoke PASSED", status: "done", note: "06-11 — Framing/Foundation/Column confirmed" },
+            { label: "Wave 14 Fire Protection smoke PASSED", status: "done", note: "06-11 — 268 pendents confirmed" },
+            { label: "Wave 17 ICT smoke PASSED", status: "done", note: "06-11 — 180 devices w/ TIA-606 params confirmed" },
+            { label: "Wave 16 Interiors (bar config)", status: "done", note: "Bar config live via PR #114; 23/23 vitest green; live smoke owed" },
+            { label: "Wave 20 billing cost view + multi-provider BYO keys", status: "done", note: "PR #116; admin smokes PASSED; cost-view UI smoke owed" },
+            { label: "Wave 21 click-to-sort all schedule tables", status: "done", note: "PR #115; 8 tests green" },
+            { label: "Remaining discipline waves (15/18/19)", status: "pending" }
+          ]
+        },
+        { name: "P6 Platform / Billing", pct: 75, note: "Access tiers + billing guardrails shipped; prod deploy pending",
+          tasks: [
+            { label: "Wave 6 thin permissions (SEC-M4 + identity coverage)", status: "done", note: "PR #110 06-11" },
+            { label: "Phase 6 access tiers + billing guardrails", status: "done", note: "PR #112 06-12; client_keys Fernet-encrypted" },
+            { label: "Prod deploy (5 Alembic migrations + env vars)", status: "active", note: "PR #112 on main; deploy + alembic upgrade head + prewarm cleanup required" },
+            { label: "Wire usage_logger.py into SSE chat path", status: "pending" }
+          ]
+        },
+        { name: "P8 Product Data Ingestion", pct: 0, note: "Conditional — gated on Wave 8 (Revit Link write-back). Scoped 2026-06-12.",
+          tasks: [
+            { label: "Wave 8 (Revit Link multi-user write-back) shipped + hardened", status: "blocked", note: "Hard gate — P8 does not activate before write-back is live" },
+            { label: "Multi-format ingest pipeline (PDF/Excel/CSV/DOCX/XML/web)", status: "pending" },
+            { label: "Product type library (model number, manufacturer, series, pricing tier)", status: "pending" },
+            { label: "Schedule field population from product library", status: "pending" },
+            { label: "Revit type parameter write-back via RevitLink", status: "pending" },
+            { label: "Human-review queue for low-confidence extractions", status: "pending", note: "Required before any prod writeback — no silent writes to model" }
+          ]
+        },
+        { name: "P9 Cost Intelligence / Estimating", pct: 0, note: "Conditional — gated on Phase 8 (product library with pricing data). Scoped 2026-06-12.",
+          tasks: [
+            { label: "Phase 8 active with pricing fields in scope", status: "blocked", note: "Hard gate — P9 is blocked if P8 ships spec-only without pricing" },
+            { label: "Cost rollup engine (quantities × product pricing)", status: "pending" },
+            { label: "Budget tracking (designed vs. actual per category/discipline)", status: "pending" },
+            { label: "Submittal validation (proposed vs. specified product, spec diff)", status: "pending" },
+            { label: "Discontinued/obsolete product alerts", status: "pending" },
+            { label: "Design-milestone cost views (SD/DD/CD/CA)", status: "pending" }
+          ]
+        }
+      ]},
+      activity: [37,15,44,44,35,45,46,16,13,0,49,120,29,7],
+      lastActivity: { date: "2026-06-12", summary: "Wave 4.10 Spec Draft Generation shipped (9c70eb9) — 22 clause libraries (batches 1-8, 30 FE categories), rule engine + Markdown/Word/PDF renderers, SpecDraftLauncher/Modal UI. 1302 BE / 1103 FE tests. Waves 11-14/17 smokes all PASSED." },
+      branch: "main at 9c70eb9; 0 open PRs; 0 ahead of origin",
+      git: { warn: "Local fix/perp-audit-* branches may not be retired yet (content merged via PR). Verify with git branch -r." },
+      nextActions: [
+        "Prod deploy: alembic upgrade head (5 migrations), set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, then DELETE stale done-rows in relationship_prewarm_jobs per model",
+        "Post-deploy smoke Wave 4.10: open any schedule → click Spec Draft launcher → verify modal opens + Markdown/Word/PDF downloads work",
+        "Post-deploy smoke Wave 4.9: verify ScheduleClassificationBar renders + ✦ badge on enriched fields",
+        "Wave 20 cost-view UI smoke: /admin → Usage tab → platform total + period change + firm UUID fetch",
+        "Audit expr-eval 2.0.2: grep -r 'evaluate(' frontend/app — prototype pollution CVE, no upstream fix; sanitize or replace with mathjs",
+        "Wire usage_logger.py into SSE chat path (usage metering live in billing but not yet logging chat tokens)",
+        "Wave 8 (Revit Link multi-user) — scoping after prod deploy stabilizes"
+      ],
+      pendingDecisions: [
+        "Schedule-push: staleness cadence, classifier rules, fidelity degradation list, SPF ship location",
+        "Wave 16 Interiors: build dedicated shapers for Ceilings/Flooring now or batch with Wave 15 Civil?"
+      ],
+      blockers: [],
+      reminders: [
+        "Prod deploy owed: 5 Alembic migrations + 2 env vars (BIMPOSSIBLE_ADMIN_ENABLED, BIMPOSSIBLE_ADMIN_SECRET) + prewarm DB cleanup — gates Wave 4.9/4.10/16 live smokes",
+        "expr-eval 2.0.2: 1 high CVE (prototype pollution via evaluate()) — no upstream fix; audit call sites before multi-user deploy",
+        "Wave 4.10 SHIPPED (9c70eb9) — 22 spec clause libs; live UI smoke owed at prod deploy",
+        "Drop _saved_views_snapshot_2026_05_24 after 2026-06-23",
+        "Wave 16 Interiors: build dedicated shapers for Ceilings/Flooring now or batch with Wave 15 Civil?"
+      ],
+      links: [
+        { label: "STATE doc (canonical, 06-12)", path: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_STATE_2026-06-12.md" },
+        { label: "Wave 4.10 spec libs (backend)", path: "F:\\AI-Dev\\BIMpossible\\backend\\spec_sections" },
+        { label: "Wave 4.9 BuildSpec", path: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_Wave49_ClassificationEnrichment_BuildSpec.md" },
+        { label: "Interactive node graph", path: "F:\\AI-Dev\\BIMpossible\\backend\\graphify-out\\graph.html" },
+        { label: "Build log", path: "F:\\AI-Dev\\BIMpossible_Workspace\\01_BuildLog" },
+        { label: "Code", path: "F:\\AI-Dev\\BIMpossible" }
+      ],
+      recent: [
+        "2026-06-12 - Wave 4.10 Spec Draft Generation shipped (9c70eb9): 22 clause libraries (batches 1-8, 30 categories), rule engine + Markdown/Word/PDF renderers, SpecDraftLauncher/Modal UI. 1302 BE / 1103 FE tests. Waves 11/12/13/14/17 smokes all PASSED (MEP/Structural/ICT confirmed live). Wave 4.9 smokes owed at prod deploy.",
+        "2026-06-12 - Wave 7 (Phase 3.9 automation): calc-field 5k gate, share-by-link, stale-cache amber banner; all 3 smokes PASSED. Waves 16/20/21 shipped. _SCHEDULE_EXTRA_CATEGORIES critical bugfix; Wave 10 Windows smoke PASSED. Phase 6 billing + Phase 4b HITL smoke PASSED.",
+        "2026-06-11 - Waves 5/6/6.5 shipped: XLSX export (PR #109), thin permissions (PR #110), action-enabled HITL assistant (PR #111). Audit remediation closed: CORE-1/2/3, LIB-13, SCHED-1/2/3, ASST-1/3. 3 Dependabot bumps merged.",
+        "2026-06-10 - Waves 10-17 discipline schedules close-out: 11 render modes live-smoked PASS. Wave 4.8 CLOSED. Audit B1-B6 + GA wave executed (8 PRs). S-1 + sessions.json encryption live.",
+        "2026-06-09 - Perf fixes wave 4.6.5 + full-project audit (GA-C1)",
+        "2026-06-07 - Schedules quick-access bar merged; assistant markdown + pill chrome",
+        "2026-06-05 - ALL 7 Tier-1 electrical schedules shipped; federated viewer Wave 1; assistant help library"
+      ],
+      audit: {
+        lastRun: "2026-06-10",
+        runType: "Full top-to-bottom (7 adversarial review agents)",
+        cadence: "weekly Mon 6am + on-demand",
+        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
+        closedLastRun: 64,
+        trend: "improving",
+        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-06-10__audit-report-full.md",
+        ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
+        open: []
       },
-      {
-        "name": "P3 Data core",
-        "pct": 97,
-        "note": "Wave 7 (Phase 3.9 automation) shipped with all 3 live smokes PASSED",
-        "tasks": [
-          {
-            "label": "Electrical schedules - 7 Tier-1 shipped",
-            "status": "done",
-            "note": "All 7 deployed 06-05"
-          },
-          {
-            "label": "Schedule quick-access bar (auto-width, drag-resize, persist)",
-            "status": "done",
-            "note": "06-07"
-          },
-          {
-            "label": "Federated viewer Wave 1",
-            "status": "done",
-            "note": "06-05"
-          },
-          {
-            "label": "3.9 architecture tail (Wave 7)",
-            "status": "done",
-            "note": "06-12 — calc-field 5k gate, share-by-link, stale-cache banner; all 3 smokes PASSED"
-          }
-        ]
-      },
-      {
-        "name": "P4 Assistant",
-        "pct": 93,
-        "note": "Phase 4b HITL action-enabled assistant shipped + smoke PASSED; schedule-push outline only",
-        "tasks": [
-          {
-            "label": "B2 rate-limit hardening",
-            "status": "done"
-          },
-          {
-            "label": "B2 byte-cap + deadline handling",
-            "status": "done"
-          },
-          {
-            "label": "B2 write-allowlist + injection guard",
-            "status": "done"
-          },
-          {
-            "label": "Assistant markdown + pill chrome",
-            "status": "done",
-            "note": "06-07"
-          },
-          {
-            "label": "Wave 4.8 close-out: D1-D7 ratification",
-            "status": "done",
-            "note": "Ratified 06-10"
-          },
-          {
-            "label": "Phase 4b action-enabled assistant (HITL)",
-            "status": "done",
-            "note": "06-11/12 — HITL approval SSE + /assistant/resume; smoke PASSED"
-          },
-          {
-            "label": "Schedule-push: staleness cadence, classifier rules, SPF ship location",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "name": "P5 Surfaces / Viewer",
-        "pct": 85,
-        "note": "Wave 4.9 + Wave 4.10 shipped; XLSX live; viewer waves pending",
-        "tasks": [
-          {
-            "label": "Federated-viewer Wave 1 smoke (GA-H12)",
-            "status": "done"
-          },
-          {
-            "label": "CSP hardened - viewer fonts 55→0 violations",
-            "status": "done",
-            "note": "PR #79 06-10"
-          },
-          {
-            "label": "Wave 5 XLSX export",
-            "status": "done",
-            "note": "06-11 PR #109 — GET /data/elements/xlsx + Sheet button"
-          },
-          {
-            "label": "Wave 4.9 Classification Enrichment (OmniClass + CSI schedule columns)",
-            "status": "done",
-            "note": "SHIPPED 06-12; 17 schedule endpoints; ScheduleClassificationBar; live smoke owed at prod deploy"
-          },
-          {
-            "label": "Wave 4.10 Spec Draft Generation",
-            "status": "done",
-            "note": "SHIPPED 06-12 (9c70eb9) — 22 clause libraries (batches 1-8), rule engine + Markdown/Word/PDF renderers, SpecDraftLauncher/Modal; live UI smoke owed"
-          },
-          {
-            "label": "Viewer-wave package scoping",
-            "status": "pending",
-            "note": "Ownership question logged 06-04"
-          },
-          {
-            "label": "Further viewer waves",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "name": "Waves 10-21 Rollout",
-        "pct": 75,
-        "note": "Waves 10-14/16/17 fully smoked. Waves 20/21 shipped. Waves 15/18/19 not started.",
-        "tasks": [
-          {
-            "label": "Wave specs drafted",
-            "status": "done"
-          },
-          {
-            "label": "Waves 10/11/12/13/14/17 discipline-schedule shapers",
-            "status": "done",
-            "note": "All 6 waves: code shipped + live smokes PASSED 06-11/12"
-          },
-          {
-            "label": "Wave 11 Mech smoke PASSED",
-            "status": "done",
-            "note": "06-11 — 169 Air Terminals + 60 units confirmed"
-          },
-          {
-            "label": "Wave 12 Plumbing smoke PASSED",
-            "status": "done",
-            "note": "06-11 — 1510 fixtures confirmed"
-          },
-          {
-            "label": "Wave 13 Structural smoke PASSED",
-            "status": "done",
-            "note": "06-11 — Framing/Foundation/Column confirmed"
-          },
-          {
-            "label": "Wave 14 Fire Protection smoke PASSED",
-            "status": "done",
-            "note": "06-11 — 268 pendents confirmed"
-          },
-          {
-            "label": "Wave 17 ICT smoke PASSED",
-            "status": "done",
-            "note": "06-11 — 180 devices w/ TIA-606 params confirmed"
-          },
-          {
-            "label": "Wave 16 Interiors (bar config)",
-            "status": "done",
-            "note": "Bar config live via PR #114; 23/23 vitest green; live smoke owed"
-          },
-          {
-            "label": "Wave 20 billing cost view + multi-provider BYO keys",
-            "status": "done",
-            "note": "PR #116; admin smokes PASSED; cost-view UI smoke owed"
-          },
-          {
-            "label": "Wave 21 click-to-sort all schedule tables",
-            "status": "done",
-            "note": "PR #115; 8 tests green"
-          },
-          {
-            "label": "Remaining discipline waves (15/18/19)",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "name": "P6 Platform / Billing",
-        "pct": 75,
-        "note": "Access tiers + billing guardrails shipped; prod deploy pending",
-        "tasks": [
-          {
-            "label": "Wave 6 thin permissions (SEC-M4 + identity coverage)",
-            "status": "done",
-            "note": "PR #110 06-11"
-          },
-          {
-            "label": "Phase 6 access tiers + billing guardrails",
-            "status": "done",
-            "note": "PR #112 06-12; client_keys Fernet-encrypted"
-          },
-          {
-            "label": "Prod deploy (5 Alembic migrations + env vars)",
-            "status": "active",
-            "note": "PR #112 on main; deploy + alembic upgrade head + prewarm cleanup required"
-          },
-          {
-            "label": "Wire usage_logger.py into SSE chat path",
-            "status": "pending"
-          }
-        ]
-      },
-      {
-        "name": "P8 Product Data Ingestion",
-        "pct": 0,
-        "note": "Conditional — gated on Wave 8 (Revit Link write-back). Scoped 2026-06-12.",
-        "tasks": [
-          {
-            "label": "Wave 8 (Revit Link multi-user write-back) shipped + hardened",
-            "status": "blocked",
-            "note": "Hard gate — P8 does not activate before write-back is live"
-          },
-          {
-            "label": "Multi-format ingest pipeline (PDF/Excel/CSV/DOCX/XML/web)",
-            "status": "pending"
-          },
-          {
-            "label": "Product type library (model number, manufacturer, series, pricing tier)",
-            "status": "pending"
-          },
-          {
-            "label": "Schedule field population from product library",
-            "status": "pending"
-          },
-          {
-            "label": "Revit type parameter write-back via RevitLink",
-            "status": "pending"
-          },
-          {
-            "label": "Human-review queue for low-confidence extractions",
-            "status": "pending",
-            "note": "Required before any prod writeback — no silent writes to model"
-          }
-        ]
-      },
-      {
-        "name": "P9 Cost Intelligence / Estimating",
-        "pct": 0,
-        "note": "Conditional — gated on Phase 8 (product library with pricing data). Scoped 2026-06-12.",
-        "tasks": [
-          {
-            "label": "Phase 8 active with pricing fields in scope",
-            "status": "blocked",
-            "note": "Hard gate — P9 is blocked if P8 ships spec-only without pricing"
-          },
-          {
-            "label": "Cost rollup engine (quantities × product pricing)",
-            "status": "pending"
-          },
-          {
-            "label": "Budget tracking (designed vs. actual per category/discipline)",
-            "status": "pending"
-          },
-          {
-            "label": "Submittal validation (proposed vs. specified product, spec diff)",
-            "status": "pending"
-          },
-          {
-            "label": "Discontinued/obsolete product alerts",
-            "status": "pending"
-          },
-          {
-            "label": "Design-milestone cost views (SD/DD/CD/CA)",
-            "status": "pending"
-          }
+      waves: {
+        updated: "2026-06-12",
+        source: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
+        summary: { done: 26, built: 3, inFlight: 0, ahead: 5 },
+        current: [
+          { id: "1", title: "Foundation consolidation", status: "PARTIAL", note: "Open: Alembic baseline (HIGH-8), Phase 3.5 migration to live DB, confirm audit branches merged" },
+          { id: "10-14,17", title: "Discipline schedule shapers (Arch/Mech/Plumb/Struct/FP/ICT)", status: "SHIPPED", date: "2026-06-11/12", note: "All 6 smokes PASSED: Arch(4 windows), Mech(169+60), Plumb(1510), Struct(Framing/Found/Col), FP(268 pendents), ICT(180 devices)" },
+          { id: "16", title: "Interiors schedule bar config", status: "BUILT", date: "2026-06-12", note: "23/23 vitest green; dedicated shapers for Ceilings/Flooring still pending; live smoke owed" },
+          { id: "4.9", title: "Classification Enrichment (OmniClass + CSI)", status: "SHIPPED", date: "2026-06-12", note: "17 schedule endpoints + ScheduleClassificationBar + ✦ badge; live smoke owed at prod deploy" },
+          { id: "4.10", title: "Spec Draft Generation", status: "BUILT", date: "2026-06-12", note: "22 clause libraries (30 FE categories); rule engine + Markdown/Word/PDF renderers; SpecDraftLauncher/Modal UI; live UI smoke owed" },
+          { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED", note: "Next code wave after prod deploy stabilizes; gates Phase 8 (Product Data Ingestion)" }
+        ],
+        lastCompleted: { id: "4.10", title: "Spec Draft Generation", date: "2026-06-12" },
+        drift: [
+          "No wave-*-complete git tags exist — Complete-Wave.ps1 tagging isn't in use; ledger is the sole completion signal (FYI)",
+          "WAVE-STATUS.md ledger missing rows for waves 10-21 — summary counts estimated from GitHub PRs + STATE doc; add ledger rows to make counts authoritative"
         ]
       }
-    ]
-  },
-  "activity": [37, 15, 44, 44, 35, 45, 46, 16, 13, 0, 49, 120, 29, 7],
-  "lastActivity": {
-    "date": "2026-06-12",
-    "summary": "Wave 4.10 Spec Draft Generation shipped (9c70eb9) — 22 clause libraries (batches 1-8, 30 FE categories), rule engine + Markdown/Word/PDF renderers, SpecDraftLauncher/Modal UI. 1302 BE / 1103 FE tests. Waves 11-14/17 smokes all PASSED."
-  },
-  "branch": "main at 9c70eb9; 0 open PRs; 0 ahead of origin",
-  "git": {
-    "warn": "Local fix/perp-audit-* branches may not be retired yet (content merged via PR). Verify with git branch -r."
-  },
-  "nextActions": [
-    "Prod deploy: alembic upgrade head (5 migrations), set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, then DELETE stale done-rows in relationship_prewarm_jobs per model",
-    "Post-deploy smoke Wave 4.10: open any schedule → click Spec Draft launcher → verify modal opens + Markdown/Word/PDF downloads work",
-    "Post-deploy smoke Wave 4.9: verify ScheduleClassificationBar renders + ✦ badge on enriched fields",
-    "Wave 20 cost-view UI smoke: /admin → Usage tab → platform total + period change + firm UUID fetch",
-    "Audit expr-eval 2.0.2: grep -r 'evaluate(' frontend/app — prototype pollution CVE, no upstream fix; sanitize or replace with mathjs",
-    "Wire usage_logger.py into SSE chat path (usage metering live in billing but not yet logging chat tokens)",
-    "Wave 8 (Revit Link multi-user) — scoping after prod deploy stabilizes"
-  ],
-  "pendingDecisions": [
-    "Schedule-push: staleness cadence, classifier rules, fidelity degradation list, SPF ship location",
-    "Wave 16 Interiors: build dedicated shapers for Ceilings/Flooring now or batch with Wave 15 Civil?"
-  ],
-  "blockers": [],
-  "reminders": [
-    "Prod deploy owed: 5 Alembic migrations + 2 env vars (BIMPOSSIBLE_ADMIN_ENABLED, BIMPOSSIBLE_ADMIN_SECRET) + prewarm DB cleanup — gates Wave 4.9/4.10/16 live smokes",
-    "expr-eval 2.0.2: 1 high CVE (prototype pollution via evaluate()) — no upstream fix; audit call sites before multi-user deploy",
-    "Wave 4.10 SHIPPED (9c70eb9) — 22 spec clause libs; live UI smoke owed at prod deploy",
-    "Drop _saved_views_snapshot_2026_05_24 after 2026-06-23",
-    "Wave 16 Interiors: build dedicated shapers for Ceilings/Flooring now or batch with Wave 15 Civil?"
-  ],
-  "links": [
-    {
-      "label": "STATE doc (canonical, 06-12)",
-      "path": "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_STATE_2026-06-12.md"
     },
-    {
-      "label": "Wave 4.10 spec libs (backend)",
-      "path": "F:\\AI-Dev\\BIMpossible\\backend\\spec_sections"
-    },
-    {
-      "label": "Wave 4.9 BuildSpec",
-      "path": "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_Wave49_ClassificationEnrichment_BuildSpec.md"
-    },
-    {
-      "label": "Interactive node graph",
-      "path": "F:\\AI-Dev\\BIMpossible\\backend\\graphify-out\\graph.html"
-    },
-    {
-      "label": "Build log",
-      "path": "F:\\AI-Dev\\BIMpossible_Workspace\\01_BuildLog"
-    },
-    {
-      "label": "Code",
-      "path": "F:\\AI-Dev\\BIMpossible"
-    }
-  ],
-  "recent": [
-    "2026-06-12 - Wave 4.10 Spec Draft Generation shipped (9c70eb9): 22 clause libraries (batches 1-8, 30 categories), rule engine + Markdown/Word/PDF renderers, SpecDraftLauncher/Modal UI. 1302 BE / 1103 FE tests. Waves 11/12/13/14/17 smokes all PASSED (MEP/Structural/ICT confirmed live). Wave 4.9 smokes owed at prod deploy.",
-    "2026-06-12 - Wave 7 (Phase 3.9 automation): calc-field 5k gate, share-by-link, stale-cache amber banner; all 3 smokes PASSED. Waves 16/20/21 shipped. _SCHEDULE_EXTRA_CATEGORIES critical bugfix; Wave 10 Windows smoke PASSED. Phase 6 billing + Phase 4b HITL smoke PASSED.",
-    "2026-06-11 - Waves 5/6/6.5 shipped: XLSX export (PR #109), thin permissions (PR #110), action-enabled HITL assistant (PR #111). Audit remediation closed: CORE-1/2/3, LIB-13, SCHED-1/2/3, ASST-1/3. 3 Dependabot bumps merged.",
-    "2026-06-10 - Waves 10-17 discipline schedules close-out: 11 render modes live-smoked PASS. Wave 4.8 CLOSED. Audit B1-B6 + GA wave executed (8 PRs). S-1 + sessions.json encryption live.",
-    "2026-06-09 - Perf fixes wave 4.6.5 + full-project audit (GA-C1)",
-    "2026-06-07 - Schedules quick-access bar merged; assistant markdown + pill chrome",
-    "2026-06-05 - ALL 7 Tier-1 electrical schedules shipped; federated viewer Wave 1; assistant help library"
-  ],
-  "audit": {
-    "lastRun": "2026-06-10",
-    "runType": "Full top-to-bottom (7 adversarial review agents)",
-    "cadence": "weekly Mon 6am + on-demand",
-    "counts": {
-      "critical": 0,
-      "high": 0,
-      "medium": 0,
-      "low": 0,
-      "info": 0
-    },
-    "closedLastRun": 64,
-    "trend": "improving",
-    "reportPath": "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-06-10__audit-report-full.md",
-    "ledgerPath": "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
-    "open": []
-  },
-  "waves": {
-    "updated": "2026-06-12",
-    "source": "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-    "summary": {
-      "done": 26,
-      "built": 3,
-      "inFlight": 0,
-      "ahead": 5
-    },
-    "current": [
-      {
-        "id": "1",
-        "title": "Foundation consolidation",
-        "status": "PARTIAL",
-        "note": "Open: Alembic baseline (HIGH-8), Phase 3.5 migration to live DB, confirm audit branches merged"
-      },
-      {
-        "id": "10-14,17",
-        "title": "Discipline schedule shapers (Arch/Mech/Plumb/Struct/FP/ICT)",
-        "status": "SHIPPED",
-        "date": "2026-06-11/12",
-        "note": "All 6 smokes PASSED: Arch(4 windows), Mech(169+60), Plumb(1510), Struct(Framing/Found/Col), FP(268 pendents), ICT(180 devices)"
-      },
-      {
-        "id": "16",
-        "title": "Interiors schedule bar config",
-        "status": "BUILT",
-        "date": "2026-06-12",
-        "note": "23/23 vitest green; dedicated shapers for Ceilings/Flooring still pending; live smoke owed"
-      },
-      {
-        "id": "4.9",
-        "title": "Classification Enrichment (OmniClass + CSI)",
-        "status": "SHIPPED",
-        "date": "2026-06-12",
-        "note": "17 schedule endpoints + ScheduleClassificationBar + ✦ badge; live smoke owed at prod deploy"
-      },
-      {
-        "id": "4.10",
-        "title": "Spec Draft Generation",
-        "status": "BUILT",
-        "date": "2026-06-12",
-        "note": "22 clause libraries (30 FE categories); rule engine + Markdown/Word/PDF renderers; SpecDraftLauncher/Modal UI; live UI smoke owed"
-      },
-      {
-        "id": "8",
-        "title": "Revit Link Phase 1 multi-user pass",
-        "status": "PLANNED",
-        "note": "Next code wave after prod deploy stabilizes; gates Phase 8 (Product Data Ingestion)"
-      }
-    ],
-    "lastCompleted": {
-      "id": "4.10",
-      "title": "Spec Draft Generation",
-      "date": "2026-06-12"
-    },
-    "drift": [
-      "No wave-*-complete git tags exist — Complete-Wave.ps1 tagging isn't in use; ledger is the sole completion signal (FYI)",
-      "WAVE-STATUS.md ledger missing rows for waves 10-21 — summary counts estimated from GitHub PRs + STATE doc; add ledger rows to make counts authoritative"
-    ]
-  }
-},
     /* PROJECT:bimpossible:END */
     /* PROJECT:addins:START */
     {
