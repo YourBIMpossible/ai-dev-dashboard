@@ -501,6 +501,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <script src="data.js"></script>
 <script src="graph-metrics.js" onerror="void 0"></script>
 <script src="strategy.js" onerror="void 0"></script>
+<script src="usage.js" onerror="void 0"></script>
 <script>
 const D=window.DASHBOARD_DATA;
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
@@ -521,7 +522,8 @@ const ICO={
   cube:'<svg viewBox="0 0 24 24"><path d="M12 2 4 6.5v9L12 20l8-4.5v-9L12 2z"/><path d="M4 6.5 12 11l8-4.5M12 11v9"/></svg>',
   shield:'<svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6l-7-3z"/><path d="m9 12 2 2 4-4"/></svg>',
   graph:'<svg viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><line x1="5" y1="7" x2="12" y2="17"/><line x1="19" y1="7" x2="12" y2="17"/><line x1="5" y1="5" x2="19" y2="5"/></svg>',
-  idea:'<svg viewBox="0 0 24 24"><path d="M9 21h6m-3-18a6 6 0 0 1 3.75 10.67C15 15 15 16 15 17H9c0-1 0-2-.75-2.33A6 6 0 0 1 12 3z"/></svg>'
+  idea:'<svg viewBox="0 0 24 24"><path d="M9 21h6m-3-18a6 6 0 0 1 3.75 10.67C15 15 15 16 15 17H9c0-1 0-2-.75-2.33A6 6 0 0 1 12 3z"/></svg>',
+  usage:'<svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>'
 };
 window._PR={};
 
@@ -740,6 +742,8 @@ function buildSide(){
   h+=navI('graph',ICO.graph,'Codebase',gmL?gmL+'':'');
   const _si=getStrategyItems(),_sp=_si.filter(i=>i.status==='pending').length,_sa=_si.filter(i=>i.status==='approved').length;
   h+=navI('strategy',ICO.idea,'Strategy',_sp?_sp+'?':'');
+  const _u=window.DASHBOARD_USAGE;
+  h+=navI('usage',ICO.usage,'Usage',_u?('$'+(_u.allTime.cost>=1000?(_u.allTime.cost/1000).toFixed(_u.allTime.cost>=10000?0:1)+'K':Math.round(_u.allTime.cost))):'');
   h+='<div class="grp-sep"></div><div class="grp-lbl">BIMpossible Work</div>';
   WORK.forEach(id=>{const p=D.projects.find(q=>q.id===id);if(p)h+=navI(p.id,ICO[p.icon]||ICO.cube,p.name,pctStr(p),null,p.status,false);});
   h+='<div class="grp-sep"></div><div class="grp-lbl personal">Personal</div>';
@@ -1301,6 +1305,48 @@ function strategyView(){
 }
 
 // ── Router ────────────────────────────────────────────────────────────────
+// ── Usage (Claude Code spend via ccusage) ──────────────────────────────────
+function _usd(n){n=+n||0;return n>=1000?'$'+(n/1000).toFixed(n>=10000?0:1)+'K':'$'+(n>=100?Math.round(n):n.toFixed(2));}
+function _tok(n){n=+n||0;return n>=1e9?(n/1e9).toFixed(1)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':''+n;}
+function usageView(){
+  const U=window.DASHBOARD_USAGE;
+  if(!U)return '<div class="crumbs">Usage</div><h2 class="page">Claude Code Usage</h2><p class="sub">No usage data yet — run <code>node usage_sync.mjs</code> in F:\\AI-Dev\\Dashboard to populate this view.</p>';
+  const a=U.allTime;
+  let h='<div class="crumbs">Usage</div><h2 class="page">Claude Code Usage</h2>';
+  h+='<p class="sub">API-equivalent value of local Claude Code usage (via <b>ccusage</b>). You\'re on a subscription — this is what the same token usage would cost at pay-as-you-go API rates: value extracted, not money paid.</p>';
+  h+=`<div class="stat-row fade">
+    <div class="stat info"><div class="v num">${_usd(a.cost)}</div><div class="l">All-time value</div></div>
+    <div class="stat info"><div class="v num">${_tok(a.totalTokens)}</div><div class="l">Total tokens</div></div>
+    <div class="stat ok"><div class="v num">${_usd(U.today.cost)}</div><div class="l">Today</div></div>
+    <div class="stat info"><div class="v num">${_usd(U.thisMonth.cost)}</div><div class="l">This month</div></div>
+    <div class="stat"><div class="v num">${a.days}</div><div class="l">Active days</div></div>
+  </div>`;
+  const rows=U.last14||[],mx=Math.max(1,...rows.map(r=>r.cost));
+  const bars=rows.map(r=>{
+    const hp=Math.max(3,Math.round(r.cost/mx*120)),isT=r.date===U.today.date;
+    return`<div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px">
+      <div style="font-size:9px;color:var(--muted)">${r.cost>=1000?(r.cost/1000).toFixed(1)+'k':Math.round(r.cost)}</div>
+      <div title="${r.date}: $${r.cost} · ${_tok(r.tokens)} tokens" style="width:64%;max-width:20px;height:${hp}px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,${isT?'var(--w2)':'var(--w)'},rgba(110,168,255,.22))"></div>
+      <div style="font-size:8.5px;color:var(--dim);white-space:nowrap">${(r.date||'').slice(5)}</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.06s;margin-bottom:20px"><h3>Daily value — last ${rows.length} days</h3>
+    <div style="display:flex;align-items:flex-end;gap:5px;height:150px;padding-top:8px">${bars}</div></div>`;
+  const bm=U.byModel||[],tot=bm.reduce((s,m)=>s+m.cost,0)||1;
+  const rowsM=bm.map(m=>{
+    const pct=Math.round(m.cost/tot*100);
+    return`<div style="display:flex;align-items:center;gap:10px;margin:7px 0">
+      <div style="width:150px;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(m.model)}">${esc(m.model)}</div>
+      <div style="flex:1;height:8px;background:rgba(110,168,255,.08);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;background:var(--w)"></div></div>
+      <div style="width:64px;text-align:right;font-size:12px;color:var(--text)" class="num">${_usd(m.cost)}</div>
+      <div style="width:40px;text-align:right;font-size:11px;color:var(--dim)" class="num">${pct}%</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.1s"><h3>By model</h3>${rowsM||'<p class="sub">No model breakdown.</p>'}</div>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(U.source)} · refreshed ${new Date(U.generated).toLocaleString()}</p>`;
+  return h;
+}
+
 function show(id){
   closePP();
   try{localStorage.setItem('dash.tab',id);}catch(e){}
@@ -1310,6 +1356,7 @@ function show(id){
   else if(id==='audit')m.innerHTML=auditView();
   else if(id==='graph')m.innerHTML=graphView();
   else if(id==='strategy')m.innerHTML=strategyView();
+  else if(id==='usage')m.innerHTML=usageView();
   else{const p=D.projects.find(q=>q.id===id);m.innerHTML=project(p);}
   m.querySelectorAll('[data-id]').forEach(el=>{if(!el.classList.contains('nav'))el.onclick=()=>show(el.dataset.id);});
   m.querySelectorAll('.ph-click').forEach(el=>{el.onclick=e=>{e.stopPropagation();openPP(el.dataset.pk,el);};});
@@ -1320,7 +1367,7 @@ function show(id){
 buildSide();
 let init='overview';
 try{const s=localStorage.getItem('dash.tab');
-  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||D.projects.some(p=>p.id===s)))init=s;}catch(e){}
+  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||s==='usage'||D.projects.some(p=>p.id===s)))init=s;}catch(e){}
 show(init);
 </script>
 </body>
