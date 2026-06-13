@@ -374,7 +374,7 @@ window.DASHBOARD_DATA = {
         open: []
       },
       git: {
-        latestCommit: "e970b6a"
+        latestCommit: "0fe9566"
       }
     },
     /* PROJECT:site:END */
