@@ -506,6 +506,25 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .cap-promote:hover{background:rgba(52,211,153,.14);border-color:rgba(52,211,153,.45);}
 .cap-del{background:transparent;border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:4px 8px;font-size:10.5px;color:var(--dim);cursor:pointer;font-family:inherit;transition:all .15s;}
 .cap-del:hover{border-color:rgba(248,113,113,.35);color:var(--red);}
+/* ── Toolkit view ───────────────────────────── */
+.tk-search{width:100%;padding:9px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:13px;outline:none;margin-bottom:20px;display:block;}
+.tk-search::placeholder{color:var(--dim);}
+.tk-search:focus{border-color:rgba(110,168,255,.5);background:rgba(255,255,255,.06);}
+.tk-grp{margin-bottom:26px;}
+.tk-grp-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.tk-grp-lbl{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);}
+.tk-grp-ctx{font-size:10px;color:var(--dim);background:rgba(255,255,255,.05);padding:2px 7px;border-radius:4px;white-space:nowrap;}
+.tk-row{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.02);margin-bottom:5px;transition:background .12s,border-color .12s;}
+.tk-row:hover{background:rgba(110,168,255,.05);border-color:rgba(110,168,255,.16);}
+.tk-cmd{font-family:'Courier New',monospace;font-size:12px;color:var(--w);background:rgba(110,168,255,.1);padding:3px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;margin-top:1px;}
+.tk-info{flex:1;min-width:0;}
+.tk-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.tk-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.tk-trigger{font-size:11px;color:var(--dim);margin-top:3px;}
+.tk-copy{background:none;border:1px solid rgba(255,255,255,.08);border-radius:5px;color:var(--dim);font-size:10px;padding:3px 7px;cursor:pointer;font-family:inherit;flex-shrink:0;align-self:flex-start;transition:all .12s;white-space:nowrap;}
+.tk-copy:hover{color:var(--w);border-color:rgba(110,168,255,.4);background:rgba(110,168,255,.08);}
+.tk-copy.done{color:var(--green);border-color:rgba(52,211,153,.4);}
+.tk-hidden{display:none!important;}
 </style>
 </head>
 <body>
@@ -546,7 +565,8 @@ const ICO={
   idea:'<svg viewBox="0 0 24 24"><path d="M9 21h6m-3-18a6 6 0 0 1 3.75 10.67C15 15 15 16 15 17H9c0-1 0-2-.75-2.33A6 6 0 0 1 12 3z"/></svg>',
   usage:'<svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>',
   agents:'<svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M12 4v4M2 13v3M22 13v3"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg>',
-  health:'<svg viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>'
+  health:'<svg viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg>',
+  toolkit:'<svg viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>'
 };
 window._PR={};
 
@@ -767,6 +787,7 @@ function buildSide(){
   h+=navI('strategy',ICO.idea,'Strategy',_sp?_sp+'?':'');
   const _u=window.DASHBOARD_USAGE;
   h+=navI('usage',ICO.usage,'Usage',_u?('$'+(_u.allTime.cost>=1000?(_u.allTime.cost/1000).toFixed(_u.allTime.cost>=10000?0:1)+'K':Math.round(_u.allTime.cost))):'');
+  h+=navI('toolkit',ICO.toolkit,'Toolkit');
   h+='<div class="grp-sep"></div><div class="grp-lbl">BIMpossible Work</div>';
   WORK.forEach(id=>{const p=D.projects.find(q=>q.id===id);if(p)h+=navI(p.id,ICO[p.icon]||ICO.cube,p.name,pctStr(p),null,p.status,false);});
   h+='<div class="grp-sep"></div><div class="grp-lbl personal">Personal</div>';
@@ -1835,6 +1856,92 @@ function codebaseView(){
   return h;
 }
 
+// ── Toolkit Reference View ────────────────────────────────────────────────
+function toolkitView(){
+  const TK=[
+    {label:'Claude Code — Global Skills',ctx:'Any Claude Code session',items:[
+      {cmd:'/audit',name:'Incremental Audit',desc:'Reviews only files modified since the last report. Writes dated report to 02_Reference/Audit Reports/.',trigger:'Run in BIMpossible or Workspace session'},
+      {cmd:'/audit complete',name:'Full Audit',desc:'Top-to-bottom codebase review — full sweep version of /audit.',trigger:'Run in BIMpossible or Workspace session'},
+      {cmd:'/graphify',name:'Knowledge Graph',desc:'Turns code, docs, papers, or URLs into a persistent knowledge graph. Supports --update, --html, --neo4j, query/path/explain subcommands.',trigger:'/graphify query "<question>" · /graphify <path> --update · /graphify <path> --html'},
+    ]},
+    {label:'Claude Code — Built-in Commands',ctx:'Any Claude Code session',items:[
+      {cmd:'/review',name:'PR Review',desc:'Reviews the current branch / pending PR changes for correctness, security, and conventions.'},
+      {cmd:'/security-review',name:'Branch Security Scan',desc:'Scans only pending branch changes. For a full codebase sweep use /project:security-review-full.'},
+      {cmd:'/code-review ultra',name:'Ultra Review',desc:'Deep multi-agent cloud review of the current branch or a specific PR. /code-review ultra <PR#> for GitHub PRs.'},
+      {cmd:'/init',name:'Init CLAUDE.md',desc:'Generates a CLAUDE.md for a new project from the current codebase.'},
+    ]},
+    {label:'Claude Code — BIMpossible Project',ctx:'Open Claude Code in F:\\AI-Dev\\BIMpossible',items:[
+      {cmd:'/project:audit-resolution',name:'Audit Resolution',desc:'Implements fixes from the latest weekly audit. Pass finding IDs, severity sweeps ("all Critical"), or point to a .md review file. Backs up every file, outputs audit-resolution_YYYY-MM-DD.md, drafts email.',trigger:'/project:audit-resolution [comments or file path]'},
+      {cmd:'/project:security-review-full',name:'Full Security Scan',desc:'Full-app security scan (backend Python + frontend TS/TSX). Writes dated report to 02_Reference/Audit and Scan Info/, updates Verification Checklist.'},
+    ]},
+    {label:'Claude Code — Workspace Project',ctx:'Open Claude Code in F:\\AI-Dev\\BIMpossible_Workspace',items:[
+      {cmd:'/project:revit-project-audit',name:'Revit Project Audit',desc:'13-step guided Revit model audit wizard (ARCH Mode). Scans a live model step-by-step via Revit MCP, requires confirmation before advancing each step.'},
+    ]},
+    {label:'Sub-Agents',ctx:'Auto-invoked by Claude Code — no direct call needed',items:[
+      {cmd:'code-reviewer',name:'Code Reviewer',desc:'Reviews code changes for correctness, security, performance, and project conventions. Read-only. Outputs per-file PASS/FAIL with line references across 8 dimensions.'},
+      {cmd:'explorer',name:'Explorer',desc:'Fast read-only codebase navigation and Q&A. Finds implementations and answers structural questions without making changes.'},
+      {cmd:'investigator',name:'Investigator',desc:'Traces bugs to root causes through code and logs. Reads git history, checks data flow from entry to failure, outputs a fix recommendation without making changes.'},
+    ]},
+    {label:'Cowork — Document Skills',ctx:'Claude Cowork chat — just describe what you need',items:[
+      {cmd:'docx',name:'Word Documents',desc:'Creates, reads, edits .docx. TOC, headings, page numbers, letterhead, tracked changes, image insertion, find-and-replace.',trigger:'"Word doc" · "letter" · "memo" · "report as .docx"'},
+      {cmd:'pdf',name:'PDF Toolkit',desc:'Read/extract text and tables, merge, split, rotate, watermark, create, fill forms, encrypt/decrypt, OCR.',trigger:'".pdf" · "merge" · "split" · "extract"'},
+      {cmd:'pptx',name:'PowerPoint',desc:'Create, read, edit, combine .pptx files. Templates, layouts, speaker notes, comments.',trigger:'"deck" · "slides" · "presentation" · ".pptx"'},
+      {cmd:'xlsx',name:'Excel / Spreadsheets',desc:'Create/edit Excel files. Formulas, formatting, charts, CSV/TSV conversion, data cleanup.',trigger:'"spreadsheet" · ".xlsx" · "Excel" · "tabular data"'},
+    ]},
+    {label:'Cowork — Utility Skills',ctx:'Claude Cowork chat — just describe what you need',items:[
+      {cmd:'schedule',name:'Schedule Tasks',desc:'Creates or updates a Cowork scheduled task with a cron or one-time fire time.',trigger:'"every day" · "remind me at" · "run this each Monday"'},
+      {cmd:'skill-creator',name:'Skill Creator',desc:'Builds new skills from scratch, edits existing ones, runs evals, optimizes trigger descriptions.',trigger:'"create a skill" · "edit this skill" · "improve skill"'},
+      {cmd:'consolidate-memory',name:'Consolidate Memory',desc:'Merges duplicate memory files, fixes stale facts, prunes the memory index.',trigger:'"consolidate memory" · "clean up memory"'},
+      {cmd:'setup-cowork',name:'Setup Cowork',desc:'Guided walkthrough: role selection, plugin install, connector setup.',trigger:'"set up cowork" · "connect my tools"'},
+    ]},
+    {label:'Cowork — Design & UI',ctx:'Claude Cowork chat — just describe what you need',items:[
+      {cmd:'ui-ux-pro-max',name:'UI/UX Design',desc:'50+ styles, 161 color palettes, 57 font pairings, 10 stacks (React, Next.js, Vue, Svelte, SwiftUI, Flutter, Tailwind, shadcn/ui, HTML/CSS). Plans, builds, reviews, optimizes.',trigger:'"design this UI" · "build a component" · "review UX" · "improve this interface"'},
+      {cmd:'design',name:'Logo & Brand Assets',desc:'Logo (55 styles), corporate identity (50 deliverables), banners, icons (SVG), social photos, HTML presentations.',trigger:'"design a logo" · "brand identity" · "generate icon" · "social media image"'},
+      {cmd:'banner-design',name:'Banner Design',desc:'Banners for Facebook, Twitter/X, LinkedIn, YouTube, Instagram, Google Display, print. Multiple art direction styles.',trigger:'"design a banner" · "social media banner" · "ad banner" · "website hero"'},
+      {cmd:'brand',name:'Brand Voice & Style',desc:'Brand voice, visual identity, messaging frameworks, asset management, brand consistency.',trigger:'"brand voice" · "style guide" · "brand compliance" · "marketing assets"'},
+      {cmd:'design-system',name:'Design System / Tokens',desc:'Three-layer token architecture (primitive → semantic → component), CSS variables, spacing/typography scales, component specs.',trigger:'"design tokens" · "component specs" · "token architecture"'},
+      {cmd:'slides',name:'HTML Presentations',desc:'HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas.',trigger:'"HTML presentation" · "strategic slides" · "Chart.js slides"'},
+      {cmd:'ui-styling',name:'shadcn / Tailwind Styling',desc:'shadcn/ui components (Radix UI + Tailwind), canvas-based visual designs, theme customization, dark mode, responsive layouts.',trigger:'"shadcn component" · "Tailwind styling" · "dark mode" · "accessible UI"'},
+    ]},
+    {label:'Scheduled Tasks',ctx:'Fully automated — manage via Cowork to change schedule or prompt',items:[
+      {cmd:'bimpossible-weekly-full-audit',name:'Weekly Full Audit',desc:'Full read-only audit — Security, Reliability, Architecture, Code Quality, Frontend/UX. Writes weekly-full-audit_YYYY-MM-DD.md, updates Verification Checklist, drafts email to z@yourbimpossible.com.',trigger:'Mondays 1:02 AM Pacific'},
+      {cmd:'revit-log-weekly-processor',name:'Revit Log Processor',desc:'Processes Revit log files from the week and generates a summary report.',trigger:'Saturdays 1:05 AM Pacific'},
+    ]},
+  ];
+  let h=`<div class="crumbs">Mission Control</div>
+<h2 class="page">Toolkit Reference</h2>
+<p class="sub">All installed skills, commands, sub-agents, and scheduled tasks. Click <strong>copy</strong> on any row to copy the command.</p>
+<input class="tk-search" id="tkSearch" placeholder="Filter by name, command, or description…" oninput="tkFilter(this.value)">`;
+  TK.forEach((g,gi)=>{
+    h+=`<div class="tk-grp" data-grp="${gi}">
+<div class="tk-grp-head"><span class="tk-grp-lbl">${esc(g.label)}</span><span class="tk-grp-ctx">${esc(g.ctx)}</span></div>`;
+    g.items.forEach(item=>{
+      const searchStr=(item.cmd+' '+item.name+' '+item.desc+' '+(item.trigger||'')).toLowerCase();
+      h+=`<div class="tk-row" data-grp="${gi}" data-search="${esc(searchStr)}">
+<span class="tk-cmd">${esc(item.cmd)}</span>
+<div class="tk-info">
+  <div class="tk-name">${esc(item.name)}</div>
+  <div class="tk-desc">${esc(item.desc)}</div>
+  ${item.trigger?`<div class="tk-trigger">→ ${esc(item.trigger)}</div>`:''}
+</div>
+<button class="tk-copy" onclick="tkCopy(this,${JSON.stringify(item.cmd)})">copy</button>
+</div>`;
+    });
+    h+=`</div>`;
+  });
+  return h;
+}
+function tkCopy(btn,cmd){
+  navigator.clipboard.writeText(cmd).catch(()=>{});
+  btn.textContent='✓';btn.classList.add('done');
+  setTimeout(()=>{btn.textContent='copy';btn.classList.remove('done');},1500);
+}
+function tkFilter(val){
+  const q=val.toLowerCase().trim();
+  document.querySelectorAll('.tk-row').forEach(r=>r.classList.toggle('tk-hidden',!!(q&&!r.dataset.search.includes(q))));
+  document.querySelectorAll('.tk-grp').forEach(g=>g.classList.toggle('tk-hidden',!![...g.querySelectorAll('.tk-row')].every(r=>r.classList.contains('tk-hidden'))));
+}
+
 function show(id){
   closePP();
   try{localStorage.setItem('dash.tab',id);}catch(e){}
@@ -1845,6 +1952,7 @@ function show(id){
   else if(id==='graph')m.innerHTML=codebaseView();
   else if(id==='strategy')m.innerHTML=strategyView();
   else if(id==='usage')m.innerHTML=monitorView();
+  else if(id==='toolkit')m.innerHTML=toolkitView();
   else{const p=D.projects.find(q=>q.id===id);m.innerHTML=project(p);}
   m.querySelectorAll('[data-id]').forEach(el=>{if(!el.classList.contains('nav'))el.onclick=()=>show(el.dataset.id);});
   m.querySelectorAll('.ph-click').forEach(el=>{el.onclick=e=>{e.stopPropagation();openPP(el.dataset.pk,el);};});
@@ -1861,7 +1969,7 @@ try{
   window._mtab=localStorage.getItem('dash.mtab')||'usage';
   window._ctab=localStorage.getItem('dash.ctab')||'metrics';
   if(s==='agents'||s==='health'){window._mtab=s;s='usage';}
-  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||s==='usage'||D.projects.some(p=>p.id===s)))init=s;
+  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||s==='usage'||s==='toolkit'||D.projects.some(p=>p.id===s)))init=s;
 }catch(e){}
 show(init);
 </script>
