@@ -2,10 +2,13 @@
 /**
  * strategy_cowork_sync.mjs
  *
- * Merges strategy_decisions.json (exported from the dashboard Strategy tab via the
- * "→ Cowork" button) into a durable decisions ledger in the workspace:
+ * FALLBACK CLI only. The dashboard's "→ Cowork" button now merges the ledger
+ * directly in the browser (one click, no node) on Chromium browsers. This script
+ * exists for browsers without the File System Access API (Firefox/Safari): there
+ * the button downloads strategy_decisions.json, and you run this to merge it into
+ * the same durable decisions ledger in the workspace:
  *
- *     F:\AI-Dev\BIMpossible_Workspace\00_Strategy\strategy_decisions_ledger.md
+ *     F:\AI-Dev\BIMpossible_Workspace\00_Strategy\Dashboard\strategy_decisions_ledger.md
  *
  * The merge is BY ID — new decisions are appended, existing ones are updated in place,
  * and the per-row "Promoted" flag plus any rows not present in the export are preserved.
@@ -20,7 +23,7 @@
  *
  * Overrides (optional env vars):
  *   STRATEGY_DECISIONS=<path to json>        # default: ./strategy_decisions.json
- *   STRATEGY_LEDGER=<path to ledger.md>      # default: ../BIMpossible_Workspace/00_Strategy/strategy_decisions_ledger.md
+ *   STRATEGY_LEDGER=<path to ledger.md>      # default: ../BIMpossible_Workspace/00_Strategy/Dashboard/strategy_decisions_ledger.md
  */
 
 import fs from 'fs';
@@ -30,7 +33,7 @@ import { fileURLToPath } from 'url';
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const DECISIONS = process.env.STRATEGY_DECISIONS || path.join(DIR, 'strategy_decisions.json');
 const LEDGER = process.env.STRATEGY_LEDGER ||
-  path.join(DIR, '..', 'BIMpossible_Workspace', '00_Strategy', 'strategy_decisions_ledger.md');
+  path.join(DIR, '..', 'BIMpossible_Workspace', '00_Strategy', 'Dashboard', 'strategy_decisions_ledger.md');
 
 const COLS = ['ID', 'Title', 'Category', 'Status', 'Priority', 'Decided', 'Promoted', 'Notes'];
 const HEADER = '| ' + COLS.join(' | ') + ' |';

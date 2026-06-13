@@ -1145,46 +1145,127 @@ function stratAct(id,next){
   show('strategy');
 }
 
-// ── Cowork export ───────────────────────────────────────────────────────────
-function stratExportDecisions(){
-  const decided=getStrategyItems().filter(i=>i.status!=='pending');
-  if(!decided.length){_scFlash('Nothing decided yet — approve, research, or deny some items first');return;}
-  const payload={
-    generated:new Date().toISOString(),project:'BIMpossible Platform',
-    summary:{approved:decided.filter(d=>d.status==='approved').length,researching:decided.filter(d=>d.status==='researching').length,denied:decided.filter(d=>d.status==='denied').length,total:decided.length},
-    decisions:decided.map(d=>({id:d.id,cat:d.cat,title:d.title,body:d.body||'',status:d.status,priority:d.priority||'',decided_at:(()=>{try{return localStorage.getItem('strat.ts.'+d.id)||null;}catch(e){return null;}})()}))
-  };
-  const json=JSON.stringify(payload,null,2);
-  if(window.showSaveFilePicker){
-    _scGetHandle().then(async stored=>{
-      let h=stored;
-      if(h){const perm=await h.queryPermission({mode:'readwrite'}).catch(()=>'denied');if(perm!=='granted')h=null;}
-      if(!h){
-        try{h=await window.showSaveFilePicker({suggestedName:'strategy_decisions.json',types:[{description:'JSON',accept:{'application/json':['.json']}}]});}
-        catch(e){if(e.name!=='AbortError')_scDownload(json);return;}
-        _scStoreHandle(h);
-      }
-      try{const w=await h.createWritable();await w.write(json);await w.close();_scFlash('✅ Saved — run: node strategy_cowork_sync.mjs (→ 00_Strategy ledger)',true);}
-      catch(e){_scDownload(json);}
-    });
-  } else {
-    _scDownload(json);
+// ── Cowork ledger sync — browser-side merge, writes straight to 00_Strategy\Dashboard ──
+// One click: read the existing ledger, merge this tab's decisions BY ID (preserving each
+// row's Promoted flag + any rows already there), write it back. No JSON, no .bat, no node.
+const _SC_COLS=['ID','Title','Category','Status','Priority','Decided','Promoted','Notes'];
+const _SC_HEADER='| '+_SC_COLS.join(' | ')+' |';
+const _SC_SEP='|'+_SC_COLS.map(()=>'---').join('|')+'|';
+const _SC_LEDGER='strategy_decisions_ledger.md';
+const _scCell=s=>String(s==null?'':s).replace(/\r?\n+/g,' ').replace(/\|/g,'\\|').replace(/\s+/g,' ').trim();
+const _scPriDisp=p=>{p=(p||'').toLowerCase();return p?p.toUpperCase():'—';};
+const _scSplit=line=>line.split(/(?<!\\)\|/).slice(1,-1).map(c=>c.trim());
+const _scToday=()=>new Date().toISOString().slice(0,10);
+
+function _scTemplate(tableBlock,updatedLine){
+  return '<!-- BIMpossible strategy decisions ledger — durable record of decisions made on the\n'
+    +'     dashboard Strategy tab, written directly (one click) by the "→ Cowork" button.\n'
+    +'     Rows are appended/updated BY ID, never overwritten — history and the Promoted flag\n'
+    +'     persist. Claude Cowork READS this as the source of truth. Promotion of approved items\n'
+    +'     into BIMpossible_ProgramPlan_*.md is a SEPARATE, human-reviewed step. -->\n\n'
+    +'# BIMpossible — Strategy Decisions Ledger\n\n'
+    +updatedLine+'\n'
+    +'**Source:** dashboard Strategy tab (one-click write), merged by ID (append/update, never overwrite).\n'
+    +'One row per decision. **Promoted** tracks whether an approved item has been folded into the ProgramPlan — set by hand during a deliberate promotion pass; the dashboard never changes it once set.\n\n'
+    +'## Status legend\n'
+    +'- `approved` — ratified; eligible for promotion into the ProgramPlan.\n'
+    +'- `researching` — needs investigation before deciding.\n'
+    +'- `denied` — rejected; kept for the audit trail, never promoted.\n\n'
+    +'## Decisions\n\n'
+    +tableBlock+'\n';
+}
+
+// Pure merge: existing ledger text + decided items → new full text + stats.
+function _scMerge(existingText,decided){
+  let existingRows=[];
+  if(existingText){
+    const lines=existingText.split(/\r?\n/);
+    const s=lines.findIndex(l=>/^\|\s*ID\s*\|/i.test(l));
+    if(s>=0)for(let i=s+2;i<lines.length&&/^\s*\|/.test(lines[i]);i++){const c=_scSplit(lines[i]);if(c.length>=7&&c[0])existingRows.push(c);}
   }
+  const order=existingRows.map(r=>r[0]);
+  const rowById=new Map(existingRows.map(r=>[r[0],r]));
+  const today=_scToday();
+  let added=0,updated=0,unchanged=0;
+  decided.forEach(d=>{
+    const prev=rowById.get(d.id);
+    const dec=d.decided_at?String(d.decided_at).slice(0,10):(prev?prev[5]:today);
+    const promoted=prev?(prev[6]||'no'):'no';   // never reset a Promoted flag
+    const row=[d.id,_scCell(d.title),_scCell(d.cat),_scCell(d.status),_scPriDisp(d.priority),dec,promoted,_scCell(d.body)];
+    if(!prev){added++;order.push(d.id);}
+    else if(JSON.stringify(prev)===JSON.stringify(row)){unchanged++;}
+    else{updated++;}
+    rowById.set(d.id,row);
+  });
+  const rows=order.map(id=>rowById.get(id));
+  const cnt={approved:0,researching:0,denied:0};
+  rows.forEach(r=>{const st=(r[3]||'').toLowerCase();if(st in cnt)cnt[st]++;});
+  const tableBlock=[_SC_HEADER,_SC_SEP,...rows.map(r=>'| '+r.join(' | ')+' |')].join('\n');
+  const updatedLine='**Updated:** '+today+' ('+rows.length+' decisions: '+cnt.approved+' approved · '+cnt.researching+' research · '+cnt.denied+' denied)';
+  let out;
+  if(!existingText){out=_scTemplate(tableBlock,updatedLine);}
+  else{
+    const lines=existingText.split(/\r?\n/);
+    const s=lines.findIndex(l=>/^\|\s*ID\s*\|/i.test(l));
+    if(s>=0){let e=s+1;while(e+1<lines.length&&/^\s*\|/.test(lines[e+1]))e++;out=[...lines.slice(0,s),...tableBlock.split('\n'),...lines.slice(e+1)].join('\n');}
+    else if(/^##\s+Decisions/m.test(existingText)){out=existingText.replace(/(^##\s+Decisions.*$)/m,'$1\n\n'+tableBlock);}
+    else{out=existingText.replace(/\s*$/,'')+'\n\n## Decisions\n\n'+tableBlock+'\n';}
+    if(/^\*\*Updated:\*\*.*$/m.test(out))out=out.replace(/^\*\*Updated:\*\*.*$/m,updatedLine);
+    else out=out.replace(/^(#\s+.*$)/m,'$1\n\n'+updatedLine);
+  }
+  return {out,added,updated,unchanged,total:rows.length,cnt};
+}
+
+function _scCollect(){
+  return getStrategyItems().filter(i=>i.status!=='pending').map(d=>({
+    id:d.id,cat:d.cat,title:d.title,body:d.body||'',status:d.status,priority:d.priority||'',
+    decided_at:(()=>{try{return localStorage.getItem('strat.ts.'+d.id)||null;}catch(e){return null;}})()
+  }));
+}
+
+function stratExportDecisions(){
+  const decided=_scCollect();
+  if(!decided.length){_scFlash('Nothing decided yet — approve, research, or deny some items first');return;}
+  if(!window.showDirectoryPicker){   // non-Chromium fallback: download JSON, merge via strategy_cowork_sync.mjs
+    _scDownload(JSON.stringify({generated:new Date().toISOString(),decisions:decided},null,2));return;
+  }
+  (async()=>{
+    let dir=await _scGetHandle();
+    if(dir&&dir.kind!=='directory')dir=null;
+    if(dir){let p=await dir.queryPermission({mode:'readwrite'}).catch(()=>'denied');if(p!=='granted')p=await dir.requestPermission({mode:'readwrite'}).catch(()=>'denied');if(p!=='granted')dir=null;}
+    if(!dir){
+      _scToast('One-time setup: pick the folder  00_Strategy \\ Dashboard  — the dashboard remembers it after this.');
+      try{dir=await window.showDirectoryPicker({mode:'readwrite',id:'scledger'});}
+      catch(e){if(e.name!=='AbortError')_scFlash('Folder pick cancelled');return;}
+      await _scStoreHandle(dir);
+    }
+    try{
+      const fh=await dir.getFileHandle(_SC_LEDGER,{create:true});
+      let existing='';try{existing=await (await fh.getFile()).text();}catch(e){}
+      const r=_scMerge(existing,decided);
+      const w=await fh.createWritable();await w.write(r.out);await w.close();
+      _scFlash('✅ Ledger updated in "'+dir.name+'" — '+r.total+' decisions (+'+r.added+' new, ~'+r.updated+' changed)',true);
+    }catch(e){_scFlash('Write failed: '+(e.message||e.name||'error'));}
+  })();
 }
 function _scDownload(json){
-  const a=document.createElement('a');a.href='data:application/json,'+encodeURIComponent(json);a.download='strategy_decisions.json';document.body.appendChild(a);a.click();document.body.removeChild(a);
-  _scFlash('📥 Downloaded — move to Dashboard dir then run strategy_cowork_sync.mjs');
+  const a=document.createElement('a');a.href='data:application/json,'+encodeURIComponent(json);a.download=_SC_LEDGER.replace('.md','.json');document.body.appendChild(a);a.click();document.body.removeChild(a);
+  _scFlash('📥 Downloaded JSON — this browser cannot write files directly; use Chrome/Edge for one-click, or run strategy_cowork_sync.mjs');
 }
 function _scFlash(msg,ok){
   const b=document.getElementById('strat-cowork-btn');if(!b)return;
-  const orig=b.textContent;b.textContent=msg;if(ok)b.style.color='var(--green)';
-  setTimeout(()=>{b.textContent=orig;b.style.color='';},3500);
+  const orig=b.dataset.orig||b.textContent;b.dataset.orig=orig;b.textContent=msg;if(ok)b.style.color='var(--green)';
+  clearTimeout(b._t);b._t=setTimeout(()=>{b.textContent=orig;b.style.color='';},4000);
+}
+function _scToast(msg){
+  const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');
+  clearTimeout(_toastTimer);_toastTimer=setTimeout(()=>t.classList.remove('show'),4200);
 }
 function _scGetHandle(){
-  return new Promise(r=>{try{const q=indexedDB.open('sc1',1);q.onupgradeneeded=()=>q.result.createObjectStore('h');q.onsuccess=()=>{const t=q.result.transaction('h','readonly'),g=t.objectStore('h').get('f');g.onsuccess=()=>r(g.result||null);g.onerror=()=>r(null);};q.onerror=()=>r(null);}catch(e){r(null);}});
+  return new Promise(r=>{try{const q=indexedDB.open('sc1',1);q.onupgradeneeded=()=>q.result.createObjectStore('h');q.onsuccess=()=>{const t=q.result.transaction('h','readonly'),g=t.objectStore('h').get('dir');g.onsuccess=()=>r(g.result||null);g.onerror=()=>r(null);};q.onerror=()=>r(null);}catch(e){r(null);}});
 }
 function _scStoreHandle(h){
-  return new Promise(r=>{try{const q=indexedDB.open('sc1',1);q.onsuccess=()=>{const t=q.result.transaction('h','readwrite');t.objectStore('h').put(h,'f');t.oncomplete=()=>r();t.onerror=()=>r();};q.onerror=()=>r();}catch(e){r();}});
+  return new Promise(r=>{try{const q=indexedDB.open('sc1',1);q.onupgradeneeded=()=>q.result.createObjectStore('h');q.onsuccess=()=>{const t=q.result.transaction('h','readwrite');t.objectStore('h').put(h,'dir');t.oncomplete=()=>r();t.onerror=()=>r();};q.onerror=()=>r();}catch(e){r();}});
 }
 function stratPri(id){
   let cur='';try{cur=localStorage.getItem('strat.p.'+id)||'';}catch(e){}
@@ -1333,7 +1414,7 @@ function strategyView(){
       <option value="alpha"${sortF==='alpha'?' selected':''}>A→Z</option>
       <option value="default"${sortF==='default'?' selected':''}>Default</option>
     </select>
-    <button id="strat-cowork-btn" onclick="stratExportDecisions()" title="Export decisions → strategy_decisions.json for Claude Cowork" style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:var(--p);padding:5px 13px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s">→ Cowork${(()=>{const n=items.filter(i=>i.status!=='pending').length;return n?` (${n})`:'';})()} </button>
+    <button id="strat-cowork-btn" onclick="stratExportDecisions()" title="One click → updates strategy_decisions_ledger.md in 00_Strategy\Dashboard (tracks every decision + Promoted flag). First time: pick that folder once." style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:var(--p);padding:5px 13px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s">→ Cowork${(()=>{const n=items.filter(i=>i.status!=='pending').length;return n?` (${n})`:'';})()} </button>
     <button class="strat-add-btn" onclick="stratShowForm(true)">+ New Idea</button>
   </div></div>`;
 
