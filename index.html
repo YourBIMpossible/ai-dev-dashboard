@@ -521,6 +521,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <script src="strategy.js" onerror="void 0"></script>
 <script src="usage.js" onerror="void 0"></script>
 <script src="agents.js" onerror="void 0"></script>
+<script src="github_actions.js" onerror="void 0"></script>
 <script src="codebase/codebase-meta.js" onerror="void 0"></script>
 <script>
 const D=window.DASHBOARD_DATA;
@@ -937,22 +938,23 @@ function project(p){
   if(p.git&&p.git.warn)h+=`<div class="gwarn">${esc(p.git.warn)}</div>`;
   h+=`</div></div></div></div>`; // close: flex-1, flex-wrap, card, fade-wrapper
 
-  // Phase bars + activity chart
+  // Phase bars + decisions/blockers/reminders
   h+=`<div class="g g2 fade" style="animation-delay:.05s;margin-bottom:14px">`;
   h+=`<div class="card ca-blue${isP?' pers-bars':''}"><h3>${esc((p.progress&&p.progress.label)||'Phases')} <span style="font-size:9.5px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">— click a phase for tasks</span></h3>${phaseBars(p.progress,p.id)}</div>`;
-  h+=`<div class="card ca-grey"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`;
-  h+=`</div>`;
-
-  // Next actions + decisions/blockers/reminders
-  h+=`<div class="g g2 fade" style="animation-delay:.09s;margin-bottom:14px">`;
-  h+=`<div class="card ca-blue"><h3>Next actions</h3>`;
-  if((p.nextActions||[]).length)h+=`<ul class="alist">${p.nextActions.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>`;
-  else h+=`<p class="empty">none</p>`;
-  h+=`</div><div style="display:flex;flex-direction:column;gap:13px">`;
+  h+=`<div style="display:flex;flex-direction:column;gap:13px">`;
   if((p.blockers||[]).length)h+=`<div class="card ca-red"><h3>Blockers</h3><ul class="alist">${p.blockers.map(b=>`<li class="blk">${esc(b)}</li>`).join('')}</ul></div>`;
   if((p.pendingDecisions||[]).length)h+=`<div class="card ca-amber"><h3>Decisions waiting on you</h3><ul class="alist">${p.pendingDecisions.map(d=>`<li class="dec">${esc(d)}</li>`).join('')}</ul></div>`;
   if((p.reminders||[]).length)h+=`<div class="card ca-grey"><h3>Watch items</h3><ul class="alist">${p.reminders.map(r=>`<li class="rem">${esc(r)}</li>`).join('')}</ul></div>`;
   h+=`</div></div>`;
+
+  // Next actions + commit activity
+  h+=`<div class="g g2 fade" style="animation-delay:.09s;margin-bottom:14px">`;
+  h+=`<div class="card ca-blue"><h3>Next actions</h3>`;
+  if((p.nextActions||[]).length)h+=`<ul class="alist">${p.nextActions.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>`;
+  else h+=`<p class="empty">none</p>`;
+  h+=`</div>`;
+  h+=`<div class="card ca-grey"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`;
+  h+=`</div>`;
 
   // Audit
   if(p.audit){
@@ -1624,8 +1626,89 @@ function activityBody(){
   return h;
 }
 
+// ── GitHub Actions billing ──────────────────────────────────────────────────
+function githubActionsBody(){
+  const G=window.DASHBOARD_GH_ACTIONS;
+  if(!G)return '<p class="sub">No GitHub Actions data — drop a billing CSV export in <code>~/Downloads</code> and run <code style="color:var(--w)">node github_actions_sync.mjs</code>.</p>';
+  const rows=G.rows||[];
+  const totalMin=rows.reduce((s,r)=>s+r.qty,0);
+  const linuxMin=rows.filter(r=>r.sku==='actions_linux').reduce((s,r)=>s+r.qty,0);
+  const winMin=rows.filter(r=>r.sku==='actions_windows').reduce((s,r)=>s+r.qty,0);
+  const grossCost=rows.reduce((s,r)=>s+r.gross,0);
+  const repos=new Set(rows.map(r=>r.repo)).size;
+  let h='<p class="sub">GitHub Actions compute minutes across all repos — <b>net cost $0</b> (fully included in plan). Gross shows the pay-as-you-go equivalent.</p>';
+  h+=`<div class="stat-row fade">
+    <div class="stat info"><div class="v num">${totalMin.toLocaleString()}</div><div class="l">Total minutes</div></div>
+    <div class="stat"><div class="v num">${linuxMin.toLocaleString()}</div><div class="l">Linux (×1)</div></div>
+    <div class="stat"><div class="v num">${winMin}</div><div class="l">Windows (×2)</div></div>
+    <div class="stat ok"><div class="v num">$0</div><div class="l">Net cost</div></div>
+    <div class="stat info"><div class="v num">${_usd(grossCost)}</div><div class="l">Gross (free)</div></div>
+    <div class="stat"><div class="v num">${repos}</div><div class="l">Repos</div></div>
+  </div>`;
+  const byDate={};rows.forEach(r=>{byDate[r.date]=(byDate[r.date]||0)+r.qty;});
+  const dates=Object.keys(byDate).sort();
+  const mx=Math.max(1,...dates.map(d=>byDate[d]));
+  const bars=dates.map(d=>{
+    const hp=Math.max(3,Math.round(byDate[d]/mx*120)),spike=byDate[d]===mx;
+    return`<div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px">
+      <div style="font-size:9px;color:var(--muted)">${byDate[d]}</div>
+      <div title="${d}: ${byDate[d]} min" style="width:64%;max-width:20px;height:${hp}px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,${spike?'var(--amber)':'var(--w)'},rgba(110,168,255,.22))"></div>
+      <div style="font-size:8.5px;color:var(--dim);white-space:nowrap">${d.slice(5)}</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.06s;margin-bottom:20px"><h3>Daily minutes — ${esc(G.period.start)} → ${esc(G.period.end)} <span style="color:var(--dim);font-weight:400;font-size:11px">(amber = peak)</span></h3>
+    <div style="display:flex;align-items:flex-end;gap:5px;height:150px;padding-top:8px">${bars}</div></div>`;
+  const byRepo={};rows.forEach(r=>{byRepo[r.repo]=(byRepo[r.repo]||0)+r.qty;});
+  const sRepos=Object.entries(byRepo).sort((a,b)=>b[1]-a[1]);
+  const repoRows=sRepos.map(([repo,min],i)=>{
+    const pct=Math.round(min/totalMin*100);
+    return`<div style="display:flex;align-items:center;gap:10px;margin:7px 0">
+      <div style="width:170px;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(repo)}">${esc(repo)}</div>
+      <div style="flex:1;height:8px;background:rgba(110,168,255,.08);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;background:${CPAL[i%CPAL.length]}"></div></div>
+      <div style="width:60px;text-align:right;font-size:12px;color:var(--text)" class="num">${min} min</div>
+      <div style="width:36px;text-align:right;font-size:11px;color:var(--dim)" class="num">${pct}%</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.09s;margin-bottom:20px"><h3>By repository</h3>${repoRows}</div>`;
+  const byWf={};rows.forEach(r=>{byWf[r.wf]=(byWf[r.wf]||0)+r.qty;});
+  const sWf=Object.entries(byWf).sort((a,b)=>b[1]-a[1]);
+  const wfMx=Math.max(1,sWf[0]?.[1]||1);
+  const wfRows=sWf.map(([wf,min])=>{
+    const pct=Math.round(min/totalMin*100),bar=Math.round(min/wfMx*100);
+    return`<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+      <code style="width:185px;font-size:11px;color:var(--w);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${esc(wf)}">${esc(wf)}</code>
+      <div style="flex:1;height:6px;background:rgba(110,168,255,.08);border-radius:3px;overflow:hidden"><div style="width:${bar}%;height:100%;background:var(--w);opacity:.65"></div></div>
+      <div style="width:60px;text-align:right;font-size:12px;color:var(--text)" class="num">${min} min</div>
+      <div style="width:36px;text-align:right;font-size:11px;color:var(--dim)" class="num">${pct}%</div>
+    </div>`;
+  }).join('');
+  h+=`<div class="card fade" style="animation-delay:.12s;margin-bottom:20px"><h3>By workflow</h3>${wfRows}</div>`;
+  const humanMin=rows.filter(r=>r.user==='YourBIMpossible').reduce((s,r)=>s+r.qty,0);
+  const botMin=totalMin-humanMin,hPct=Math.round(humanMin/totalMin*100);
+  h+=`<div class="card fade" style="animation-delay:.15s;margin-bottom:20px"><h3>Trigger breakdown</h3>
+    <div style="display:flex;gap:28px;flex-wrap:wrap;margin-bottom:10px">
+      <div><div class="v num" style="font-size:20px">${humanMin}</div><div class="l">Human pushes (${hPct}%)</div></div>
+      <div><div class="v num" style="font-size:20px;color:var(--dim)">${botMin}</div><div class="l">dependabot (${100-hPct}%)</div></div>
+    </div>
+    <div style="height:8px;border-radius:4px;overflow:hidden;background:rgba(110,168,255,.08)"><div style="width:${hPct}%;height:100%;background:var(--w)"></div></div>
+  </div>`;
+  if(G.liveBilling){
+    const lb=G.liveBilling;
+    h+=`<div class="card fade" style="animation-delay:.18s;margin-bottom:20px"><h3>Live billing <span style="color:var(--green);font-size:11px;font-weight:400">● GitHub API</span></h3>
+      <div class="stat-row" style="margin-top:8px">
+        <div class="stat"><div class="v num">${lb.total_minutes_used||0}</div><div class="l">Minutes used</div></div>
+        <div class="stat ok"><div class="v num">${lb.total_paid_minutes_used||0}</div><div class="l">Paid minutes</div></div>
+        <div class="stat info"><div class="v num">${(lb.included_minutes||0).toLocaleString()}</div><div class="l">Included in plan</div></div>
+      </div>
+      ${lb.minutes_used_breakdown?`<p class="sub" style="margin-top:6px">${Object.entries(lb.minutes_used_breakdown).filter(([,v])=>v>0).map(([k,v])=>`<b>${k}</b>: ${v}`).join(' · ')}</p>`:''}
+    </div>`;
+  }
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(G.source)} · refreshed ${new Date(G.generated).toLocaleString()}</p>`;
+  return h;
+}
+
 // ── Monitor hub (tabbed) ────────────────────────────────────────────────────
-const MTABS=[['usage','Usage'],['agents','Agents'],['workflows','Workflows'],['analytics','Analytics'],['config','Config'],['activity','Activity'],['health','Health']];
+const MTABS=[['usage','Usage'],['agents','Agents'],['workflows','Workflows'],['analytics','Analytics'],['config','Config'],['activity','Activity'],['health','Health'],['github','GitHub Actions']];
 function monitorView(){
   let mt=window._mtab||'usage';
   if(!MTABS.some(t=>t[0]===mt))mt='usage';
@@ -1638,9 +1721,11 @@ function monitorView(){
   else if(mt==='config')h+=configBody();
   else if(mt==='activity')h+=activityBody();
   else if(mt==='health')h+=healthBody();
+  else if(mt==='github')h+=githubActionsBody();
   h+=`<div style="margin-top:20px;padding:11px 14px;background:rgba(110,168,255,.05);border:1px solid rgba(110,168,255,.14);border-radius:9px;font-size:11.5px;color:var(--muted);line-height:1.7">
     <b style="color:var(--text)">↻ Refresh locally</b> (PowerShell on your PC) — these regenerate the data from <code>~/.claude</code> and auto-deploy in ~30s:<br>
     <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\usage_sync.mjs</code> &nbsp;·&nbsp; <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\agents_sync.mjs</code><br>
+    <b style="color:var(--text)">GitHub Actions:</b> drop a new billing CSV in <code>~/Downloads</code> then run <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\github_actions_sync.mjs</code> (also fetches live summary via <code>gh api</code>).<br>
     <span style="color:var(--dim)">The "Reload data" button only re-pulls what's already published — it doesn't run these.</span></div>`;
   return h;
 }
