@@ -49,7 +49,7 @@ window.DASHBOARD_DATA = {
             { label: "CSP hardened - viewer fonts 55→0 violations", status: "done", note: "PR #79 06-10" },
             { label: "Wave 5 XLSX export", status: "done", note: "06-11 PR #109 — GET /data/elements/xlsx + Sheet button" },
             { label: "Wave 4.9 Classification Enrichment (OmniClass + CSI schedule columns)", status: "done", note: "SHIPPED 06-12; 17 schedule endpoints; ScheduleClassificationBar; live smoke owed at prod deploy" },
-            { label: "Wave 4.10 Spec Draft Generation", status: "done", note: "SHIPPED 06-12 (9c70eb9) — 22 clause libraries (batches 1-8), rule engine + Markdown/Word/PDF renderers, SpecDraftLauncher/Modal; live UI smoke owed" },
+            { label: "Wave 4.10 Spec Draft Generation", status: "BUILT", note: "SHIPPED 06-12 (9c70eb9) — 22 clause libraries (batches 1-8), rule engine + Markdown/Word/PDF renderers, SpecDraftLauncher/Modal; live UI smoke owed" },
             { label: "Viewer-wave package scoping", status: "pending", note: "Ownership question logged 06-04" },
             { label: "Further viewer waves", status: "pending" }
           ]
