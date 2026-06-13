@@ -2,3 +2,8 @@ _backups/
 .claude/
 .wrangler/
 repo-workflows/
+
+# Transient Strategy→Cowork export (merged into the workspace ledger, not committed here)
+strategy_decisions.json
+strategy_cowork_brief.md
+.tmp_ledgertest*/

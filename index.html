@@ -1143,7 +1143,7 @@ function stratExportDecisions(){
         catch(e){if(e.name!=='AbortError')_scDownload(json);return;}
         _scStoreHandle(h);
       }
-      try{const w=await h.createWritable();await w.write(json);await w.close();_scFlash('✅ Saved — run: node strategy_cowork_sync.mjs --trigger',true);}
+      try{const w=await h.createWritable();await w.write(json);await w.close();_scFlash('✅ Saved — run: node strategy_cowork_sync.mjs (→ 00_Strategy ledger)',true);}
       catch(e){_scDownload(json);}
     });
   } else {
