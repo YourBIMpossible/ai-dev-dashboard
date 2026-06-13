@@ -46,12 +46,17 @@ PER_FILE_CHARS = 4000  # cap any single doc so one big file can't eat the budget
 SYSTEM_INSTRUCTION = (
     "You maintain a JavaScript dashboard data file. You are given ONE project's "
     "object literal (a JS object, no surrounding array) and the latest project "
-    "status docs. Return the SAME object with only the fields that the docs show "
-    "have changed, updated. Preserve every other field, key order, and the exact "
-    "schema. Rules: output ONLY the JS object literal starting with '{' and ending "
-    "with '}', no trailing comma, no markdown fences, no commentary. Keep string "
-    "escaping valid (Windows paths use double backslashes). Do not invent data — "
-    "if the docs don't mention something, leave it as-is."
+    "status docs. Return the SAME object with ONLY the values that the docs show "
+    "have changed, updated. This is a minimal edit, not a rewrite.\n"
+    "Hard formatting rules — match the input byte-for-byte except for changed values:\n"
+    "- Use UNQUOTED JavaScript identifier keys (write  id:  not  \"id\":).\n"
+    "- Keep the exact same indentation, line breaks, and number of properties per "
+    "line as the input. Do NOT expand a compact line into multiple lines.\n"
+    "- Preserve key order and every field you are not changing, verbatim.\n"
+    "Output ONLY the JS object literal, starting with '{' and ending with '}', no "
+    "trailing comma, no markdown fences, no commentary. Keep string escaping valid "
+    "(Windows paths use double backslashes). Do not invent data — if the docs don't "
+    "mention something, leave it exactly as-is."
 )
 
 
