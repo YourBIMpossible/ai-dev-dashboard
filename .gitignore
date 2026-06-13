@@ -1,1 +1,4 @@
 _backups/
+.claude/
+.wrangler/
+repo-workflows/
