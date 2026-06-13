@@ -1,0 +1,29 @@
+name: Deploy to Cloudflare Pages
+
+# Deploys the dashboard to Cloudflare Pages on every push to main — covers manual
+# commits, the cross-repo bot auto-syncs, and local usage_sync pushes. Bypasses the
+# Cloudflare↔GitHub webhook (which silently broke), so deploys are reliable.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 93935ceacb9b794dd034df02c223a3d3
+          command: pages deploy . --project-name=ai-dev-dashboard --branch=main --commit-dirty=true

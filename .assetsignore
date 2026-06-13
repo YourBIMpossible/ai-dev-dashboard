@@ -1,0 +1,8 @@
+.github
+repo-workflows
+*.py
+*.mjs
+*.md
+.gitignore
+.assetsignore
+_*
