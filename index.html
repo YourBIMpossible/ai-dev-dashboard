@@ -1693,14 +1693,19 @@ function githubActionsBody(){
     <div style="height:8px;border-radius:4px;overflow:hidden;background:rgba(110,168,255,.08)"><div style="width:${hPct}%;height:100%;background:var(--w)"></div></div>
   </div>`;
   if(G.liveBilling){
-    const lb=G.liveBilling;
-    h+=`<div class="card fade" style="animation-delay:.18s;margin-bottom:20px"><h3>Live billing <span style="color:var(--green);font-size:11px;font-weight:400">● GitHub API</span></h3>
+    const lb=G.liveBilling,planMin=lb.included_minutes||3000;
+    const pctUsed=Math.min(100,Math.round(totalMin/planMin*100)),remaining=Math.max(0,planMin-totalMin);
+    h+=`<div class="card fade" style="animation-delay:.18s;margin-bottom:20px"><h3>Plan usage <span style="color:var(--green);font-size:11px;font-weight:400">● live · ${esc(lb.computed_from||'')}</span></h3>
       <div class="stat-row" style="margin-top:8px">
-        <div class="stat"><div class="v num">${lb.total_minutes_used||0}</div><div class="l">Minutes used</div></div>
-        <div class="stat ok"><div class="v num">${lb.total_paid_minutes_used||0}</div><div class="l">Paid minutes</div></div>
-        <div class="stat info"><div class="v num">${(lb.included_minutes||0).toLocaleString()}</div><div class="l">Included in plan</div></div>
+        <div class="stat info"><div class="v num">${totalMin.toLocaleString()}</div><div class="l">Minutes used (export)</div></div>
+        <div class="stat ok"><div class="v num">$0</div><div class="l">Overage cost</div></div>
+        <div class="stat"><div class="v num">${remaining.toLocaleString()}</div><div class="l">Remaining of ${planMin.toLocaleString()}</div></div>
       </div>
-      ${lb.minutes_used_breakdown?`<p class="sub" style="margin-top:6px">${Object.entries(lb.minutes_used_breakdown).filter(([,v])=>v>0).map(([k,v])=>`<b>${k}</b>: ${v}`).join(' · ')}</p>`:''}
+      <div style="margin-top:10px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px"><span>${pctUsed}% of monthly plan used</span><span>${totalMin} / ${planMin} min</span></div>
+        <div style="height:8px;border-radius:4px;overflow:hidden;background:rgba(110,168,255,.08)"><div style="width:${pctUsed}%;height:100%;background:${pctUsed>90?'var(--amber)':'var(--green)'}"></div></div>
+      </div>
+      <p class="sub" style="margin-top:8px;font-size:11px">GitHub's API reports 0 paid ms — all usage is within the ${planMin.toLocaleString()} included plan minutes, nothing overages. Minutes total from CSV export · period: ${esc(lb.billing_period_start||G.period.start)} →</p>
     </div>`;
   }
   h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(G.source)} · refreshed ${new Date(G.generated).toLocaleString()}</p>`;

@@ -1,0 +1,47 @@
+# Scheduled live sync of GitHub Actions billing data.
+#
+# Fetches the current billing period summary from the GitHub API and updates
+# github_actions.js, which deploys.yml then redeploys to Cloudflare Pages.
+#
+# Requires one repo secret:
+#   GH_BILLING_TOKEN — a classic PAT for the YourBIMpossible account with:
+#     scope: user  (needed for /users/.../settings/billing/actions)
+#   Create at: github.com → Settings → Developer settings → Personal access tokens → Classic
+#   Add at:    github.com/YourBIMpossible/ai-dev-dashboard → Settings → Secrets → Actions
+#
+# The Cloudflare deploy is handled by deploy.yml which fires on the resulting push.
+
+name: Sync GitHub Actions billing
+
+on:
+  schedule:
+    - cron: '0 7 * * *'   # daily at 07:00 UTC
+  workflow_dispatch:        # also runnable manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Update live billing data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch billing + update github_actions.js
+        env:
+          GH_TOKEN: ${{ secrets.GH_BILLING_TOKEN }}
+        run: node github_actions_sync.mjs --live-only
+
+      - name: Commit if changed
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add github_actions.js
+          git diff --staged --quiet && echo "No billing change." || \
+            git commit -m "chore: live billing sync $(date -u +%Y-%m-%d)"
+          git push
