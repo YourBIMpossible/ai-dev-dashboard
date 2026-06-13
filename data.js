@@ -69,12 +69,21 @@ window.DASHBOARD_DATA = {
             { label: "Remaining discipline waves (15/18/19)", status: "pending" }
           ]
         },
-        { name: "P6 Platform / Billing", pct: 75, note: "Access tiers + billing guardrails shipped; prod deploy pending",
+        { name: "P6 Platform / Billing", pct: 85, note: "Access tiers + billing + usage metering shipped; prod deploy pending",
           tasks: [
             { label: "Wave 6 thin permissions (SEC-M4 + identity coverage)", status: "done", note: "PR #110 06-11" },
             { label: "Phase 6 access tiers + billing guardrails", status: "done", note: "PR #112 06-12; client_keys Fernet-encrypted" },
-            { label: "Prod deploy (5 Alembic migrations + env vars)", status: "active", note: "PR #112 on main; deploy + alembic upgrade head + prewarm cleanup required" },
-            { label: "Wire usage_logger.py into SSE chat path", status: "pending" }
+            { label: "usage_logger.py wired into assistant SSE path", status: "done", note: "06-12 — UsageEvent row per model call (tokens/tools/latency), non-blocking, tested" },
+            { label: "Prod deploy (5 Alembic migrations + env vars)", status: "active", note: "PR #112 on main; deploy + alembic upgrade head + prewarm cleanup required" }
+          ]
+        },
+        { name: "P7 Project Setup Wizard", pct: 0, note: "Onboarding automation (BusinessCase). High standalone value — pull-forward candidate; doesn't depend on the data platform being complete.",
+          tasks: [
+            { label: "Web form: project name / number / client / scope", status: "pending" },
+            { label: "Provision ACC project + folder structure + permissions", status: "pending" },
+            { label: "Create central file from template + apply view templates", status: "pending" },
+            { label: "Generate initial sheet set with title blocks", status: "pending" },
+            { label: "Email PM a fully-set-up project", status: "pending", note: "Saves a weekend of BIM-manager time/project; enforces standards by default" }
           ]
         },
         { name: "P8 Product Data Ingestion", pct: 0, note: "Conditional — gated on Wave 8 (Revit Link write-back). Scoped 2026-06-12.",
