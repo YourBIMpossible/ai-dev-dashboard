@@ -486,6 +486,11 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .sa-no.on{background:rgba(248,113,113,.15);border-color:rgba(248,113,113,.55);color:var(--red);font-weight:700;}
 .sa-del{background:transparent;border-color:rgba(255,255,255,.08);color:var(--dim);max-width:34px;}
 .sa-del:hover{border-color:rgba(248,113,113,.35);color:var(--red);}
+.sa-done{background:rgba(167,139,250,.07);border-color:rgba(167,139,250,.28);color:rgba(167,139,250,.8);max-width:82px;}
+.sa-done:hover{background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.55);color:var(--w2);}
+.sa-done.on{background:rgba(167,139,250,.16);border-color:rgba(167,139,250,.55);color:var(--w2);font-weight:700;max-width:none;}
+.strat-card.archived{opacity:.62;}
+.strat-card.archived:hover{opacity:.85;}
 /* ── Quick Capture & Priority ─────────────────────────────────────────── */
 .strat-capture{background:rgba(14,20,42,.97);border:1px solid rgba(255,255,255,.09);border-radius:14px;margin-bottom:18px;overflow:hidden;}
 .strat-cap-hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;cursor:pointer;user-select:none;transition:background .15s;}
@@ -1125,13 +1130,15 @@ function getStrategyItems(){
   const base=(window.STRATEGY_DATA?.items||[]).map(it=>({
     ...it,
     status:(()=>{try{return localStorage.getItem('strat.s.'+it.id)||it.status||'pending';}catch(e){return it.status||'pending';}})(),
-    priority:(()=>{try{return localStorage.getItem('strat.p.'+it.id)||'';}catch(e){return '';}})()
+    priority:(()=>{try{return localStorage.getItem('strat.p.'+it.id)||'';}catch(e){return '';}})(),
+    done:(()=>{try{return localStorage.getItem('strat.done.'+it.id)==='1';}catch(e){return false;}})()
   }));
   let custom=[];
   try{
     custom=JSON.parse(localStorage.getItem('strat.custom')||'[]').map(it=>({
       ...it,
-      priority:localStorage.getItem('strat.p.'+it.id)||it.priority||''
+      priority:localStorage.getItem('strat.p.'+it.id)||it.priority||'',
+      done:(()=>{try{return localStorage.getItem('strat.done.'+it.id)==='1';}catch(e){return false;}})()
     }));
   }catch(e){}
   return [...base,...custom];
@@ -1166,7 +1173,7 @@ function _scTemplate(tableBlock,updatedLine){
     +'# BIMpossible — Strategy Decisions Ledger\n\n'
     +updatedLine+'\n'
     +'**Source:** dashboard Strategy tab (one-click write), merged by ID (append/update, never overwrite).\n'
-    +'One row per decision. **Promoted** tracks whether an approved item has been folded into the ProgramPlan — set by hand during a deliberate promotion pass; the dashboard never changes it once set.\n\n'
+    +'One row per decision. **Promoted = yes** means the item has been marked ✓ Done (handled / folded into the ProgramPlan) via the dashboard and archived off the active board; Restore sets it back to no.\n\n'
     +'## Status legend\n'
     +'- `approved` — ratified; eligible for promotion into the ProgramPlan.\n'
     +'- `researching` — needs investigation before deciding.\n'
@@ -1190,7 +1197,7 @@ function _scMerge(existingText,decided){
   decided.forEach(d=>{
     const prev=rowById.get(d.id);
     const dec=d.decided_at?String(d.decided_at).slice(0,10):(prev?prev[5]:today);
-    const promoted=prev?(prev[6]||'no'):'no';   // never reset a Promoted flag
+    const promoted=d.done?'yes':'no';   // the dashboard's ✓ Done flag owns Promoted (Done = yes, Restore = no)
     const row=[d.id,_scCell(d.title),_scCell(d.cat),_scCell(d.status),_scPriDisp(d.priority),dec,promoted,_scCell(d.body)];
     if(!prev){added++;order.push(d.id);}
     else if(JSON.stringify(prev)===JSON.stringify(row)){unchanged++;}
@@ -1218,7 +1225,7 @@ function _scMerge(existingText,decided){
 
 function _scCollect(){
   return getStrategyItems().filter(i=>i.status!=='pending').map(d=>({
-    id:d.id,cat:d.cat,title:d.title,body:d.body||'',status:d.status,priority:d.priority||'',
+    id:d.id,cat:d.cat,title:d.title,body:d.body||'',status:d.status,priority:d.priority||'',done:!!d.done,
     decided_at:(()=>{try{return localStorage.getItem('strat.ts.'+d.id)||null;}catch(e){return null;}})()
   }));
 }
@@ -1270,6 +1277,11 @@ function _scStoreHandle(h){
 function stratPri(id){
   let cur='';try{cur=localStorage.getItem('strat.p.'+id)||'';}catch(e){}
   try{localStorage.setItem('strat.p.'+id,SPRI_NEXT[cur]||'');}catch(e){}
+  show('strategy');
+}
+function stratDone(id){
+  let cur=false;try{cur=localStorage.getItem('strat.done.'+id)==='1';}catch(e){}
+  try{if(cur)localStorage.removeItem('strat.done.'+id);else localStorage.setItem('strat.done.'+id,'1');}catch(e){}
   show('strategy');
 }
 function stratFilter(type,val){try{localStorage.setItem('strat.'+type,val);}catch(e){}show('strategy');}
@@ -1337,10 +1349,13 @@ function strategyView(){
     statF=localStorage.getItem('strat.status')||'all';
     sortF=localStorage.getItem('strat.sort')||'pri';
   }catch(e){}
-  const counts={all:items.length,blindspot:0,idea:0,outlook:0,watchlist:0,custom:0};
+  const active=items.filter(i=>!i.done);
+  const archived=items.filter(i=>i.done);
+  const counts={all:active.length,blindspot:0,idea:0,outlook:0,watchlist:0,custom:0};
   const sCounts={pending:0,approved:0,researching:0,denied:0};
-  items.forEach(i=>{if(i.cat in counts)counts[i.cat]++;sCounts[i.status]=(sCounts[i.status]||0)+1;});
-  let filtered=items.filter(i=>(catF==='all'||i.cat===catF)&&(statF==='all'||i.status===statF));
+  active.forEach(i=>{if(i.cat in counts)counts[i.cat]++;sCounts[i.status]=(sCounts[i.status]||0)+1;});
+  const viewingArchived=statF==='archived';
+  let filtered=(viewingArchived?archived:active).filter(i=>(catF==='all'||i.cat===catF)&&(viewingArchived||statF==='all'||i.status===statF));
   const PRIORD={p1:0,p2:1,p3:2,'':3};
   if(sortF==='pri')filtered=[...filtered].sort((a,b)=>PRIORD[a.priority||'']-(PRIORD[b.priority||'']));
   else if(sortF==='alpha')filtered=[...filtered].sort((a,b)=>a.title.localeCompare(b.title));
@@ -1386,11 +1401,12 @@ function strategyView(){
 
   // Stat strip
   h+=`<div class="stat-row">
-    <div class="stat info"><div class="v num">${items.length}</div><div class="l">Total</div></div>
+    <div class="stat info"><div class="v num">${active.length}</div><div class="l">Active</div></div>
     <div class="stat warn"><div class="v num">${sCounts.pending||0}</div><div class="l">Pending</div></div>
     <div class="stat ok"><div class="v num">${sCounts.approved||0}</div><div class="l">Approved</div></div>
     <div class="stat info"><div class="v num">${sCounts.researching||0}</div><div class="l">Researching</div></div>
     <div class="stat bad"><div class="v num">${sCounts.denied||0}</div><div class="l">Denied</div></div>
+    <div class="stat"><div class="v num">${archived.length}</div><div class="l">Archived</div></div>
   </div>`;
 
   // Category tabs
@@ -1405,9 +1421,10 @@ function strategyView(){
   // Status pills + sort + add
   h+=`<div class="strat-sr">`;
   ['all','pending','approved','researching','denied'].forEach(s=>{
-    const n=s==='all'?items.length:sCounts[s]||0;
+    const n=s==='all'?active.length:sCounts[s]||0;
     h+=`<button class="strat-sp${statF===s?' active':''}" onclick="stratFilter('status','${s}')">${s} ${n}</button>`;
   });
+  if(archived.length||viewingArchived)h+=`<button class="strat-sp${viewingArchived?' active':''}" onclick="stratFilter('status','archived')" title="Items you marked Done">✓ archived ${archived.length}</button>`;
   h+=`<div style="margin-left:auto;display:flex;gap:6px;align-items:center">
     <select onchange="stratFilter('sort',this.value)" style="background:rgba(22,30,54,.9);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:5px 10px;font-size:12px;color:var(--muted);cursor:pointer;font-family:inherit;outline:none;">
       <option value="pri"${sortF==='pri'?' selected':''}>↑ Priority</option>
@@ -1450,7 +1467,7 @@ function strategyView(){
       const priStyle=pri
         ?`background:rgba(255,255,255,.06);border-color:${SPRI[pri].c};color:${SPRI[pri].c};`
         :`border-color:rgba(255,255,255,.08);color:var(--dim);`;
-      h+=`<div class="strat-card${st==='denied'?' denied':''}">
+      h+=`<div class="strat-card${st==='denied'?' denied':''}${it.done?' archived':''}">
         <div class="strat-ct">
           <span class="strat-cat-lbl" style="color:${SCAT_COLOR[it.cat]||'var(--dim)'}">${SCAT_LABEL[it.cat]||it.cat}</span>
           <div style="display:flex;align-items:center;gap:6px">
@@ -1461,10 +1478,13 @@ function strategyView(){
         <div class="strat-title">${esc(it.title)}</div>
         <div class="strat-body">${esc(it.body)}</div>
         <div class="strat-acts">
-          <button class="sa sa-ok${st==='approved'?' on':''}" onclick="stratAct('${safe}','approved')">✓ Approve</button>
+          ${it.done
+            ?`<button class="sa sa-done on" onclick="stratDone('${safe}')" title="Move back to the active board">↩ Restore</button>${isCustom?`<button class="sa sa-del" onclick="deleteIdea('${safe}')" title="Delete">🗑</button>`:''}`
+            :`<button class="sa sa-ok${st==='approved'?' on':''}" onclick="stratAct('${safe}','approved')">✓ Approve</button>
           <button class="sa sa-rs${st==='researching'?' on':''}" onclick="stratAct('${safe}','researching')">⊙ Research</button>
           <button class="sa sa-no${st==='denied'?' on':''}" onclick="stratAct('${safe}','denied')">✕ Deny</button>
-          ${isCustom?`<button class="sa sa-del" onclick="deleteIdea('${safe}')" title="Delete">🗑</button>`:''}
+          ${st!=='pending'?`<button class="sa sa-done" onclick="stratDone('${safe}')" title="Mark handled — moves to Archived">✓ Done</button>`:''}
+          ${isCustom?`<button class="sa sa-del" onclick="deleteIdea('${safe}')" title="Delete">🗑</button>`:''}`}
         </div>
       </div>`;
     });
