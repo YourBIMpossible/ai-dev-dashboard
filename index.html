@@ -938,23 +938,22 @@ function project(p){
   if(p.git&&p.git.warn)h+=`<div class="gwarn">${esc(p.git.warn)}</div>`;
   h+=`</div></div></div></div>`; // close: flex-1, flex-wrap, card, fade-wrapper
 
-  // Phase bars + decisions/blockers/reminders
+  // Phase bars (left) + decisions/watch/commit activity stacked (right column)
   h+=`<div class="g g2 fade" style="animation-delay:.05s;margin-bottom:14px">`;
   h+=`<div class="card ca-blue${isP?' pers-bars':''}"><h3>${esc((p.progress&&p.progress.label)||'Phases')} <span style="font-size:9.5px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">— click a phase for tasks</span></h3>${phaseBars(p.progress,p.id)}</div>`;
   h+=`<div style="display:flex;flex-direction:column;gap:13px">`;
   if((p.blockers||[]).length)h+=`<div class="card ca-red"><h3>Blockers</h3><ul class="alist">${p.blockers.map(b=>`<li class="blk">${esc(b)}</li>`).join('')}</ul></div>`;
   if((p.pendingDecisions||[]).length)h+=`<div class="card ca-amber"><h3>Decisions waiting on you</h3><ul class="alist">${p.pendingDecisions.map(d=>`<li class="dec">${esc(d)}</li>`).join('')}</ul></div>`;
   if((p.reminders||[]).length)h+=`<div class="card ca-grey"><h3>Watch items</h3><ul class="alist">${p.reminders.map(r=>`<li class="rem">${esc(r)}</li>`).join('')}</ul></div>`;
+  h+=`<div class="card ca-grey"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`;
   h+=`</div></div>`;
 
-  // Next actions + commit activity
-  h+=`<div class="g g2 fade" style="animation-delay:.09s;margin-bottom:14px">`;
+  // Next actions (full width)
+  h+=`<div class="fade" style="animation-delay:.09s;margin-bottom:14px">`;
   h+=`<div class="card ca-blue"><h3>Next actions</h3>`;
   if((p.nextActions||[]).length)h+=`<ul class="alist">${p.nextActions.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>`;
   else h+=`<p class="empty">none</p>`;
-  h+=`</div>`;
-  h+=`<div class="card ca-grey"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`;
-  h+=`</div>`;
+  h+=`</div></div>`;
 
   // Audit
   if(p.audit){
@@ -1119,8 +1118,52 @@ function getStrategyItems(){
 
 function stratAct(id,next){
   let cur='pending';try{cur=localStorage.getItem('strat.s.'+id)||'pending';}catch(e){}
-  try{localStorage.setItem('strat.s.'+id,cur===next?'pending':next);}catch(e){}
+  const ns=cur===next?'pending':next;
+  try{localStorage.setItem('strat.s.'+id,ns);}catch(e){}
+  if(ns!=='pending')try{localStorage.setItem('strat.ts.'+id,new Date().toISOString());}catch(e){}
   show('strategy');
+}
+
+// ── Cowork export ───────────────────────────────────────────────────────────
+function stratExportDecisions(){
+  const decided=getStrategyItems().filter(i=>i.status!=='pending');
+  if(!decided.length){_scFlash('Nothing decided yet — approve, research, or deny some items first');return;}
+  const payload={
+    generated:new Date().toISOString(),project:'BIMpossible Platform',
+    summary:{approved:decided.filter(d=>d.status==='approved').length,researching:decided.filter(d=>d.status==='researching').length,denied:decided.filter(d=>d.status==='denied').length,total:decided.length},
+    decisions:decided.map(d=>({id:d.id,cat:d.cat,title:d.title,body:d.body||'',status:d.status,priority:d.priority||'',decided_at:(()=>{try{return localStorage.getItem('strat.ts.'+d.id)||null;}catch(e){return null;}})()}))
+  };
+  const json=JSON.stringify(payload,null,2);
+  if(window.showSaveFilePicker){
+    _scGetHandle().then(async stored=>{
+      let h=stored;
+      if(h){const perm=await h.queryPermission({mode:'readwrite'}).catch(()=>'denied');if(perm!=='granted')h=null;}
+      if(!h){
+        try{h=await window.showSaveFilePicker({suggestedName:'strategy_decisions.json',types:[{description:'JSON',accept:{'application/json':['.json']}}]});}
+        catch(e){if(e.name!=='AbortError')_scDownload(json);return;}
+        _scStoreHandle(h);
+      }
+      try{const w=await h.createWritable();await w.write(json);await w.close();_scFlash('✅ Saved — run: node strategy_cowork_sync.mjs --trigger',true);}
+      catch(e){_scDownload(json);}
+    });
+  } else {
+    _scDownload(json);
+  }
+}
+function _scDownload(json){
+  const a=document.createElement('a');a.href='data:application/json,'+encodeURIComponent(json);a.download='strategy_decisions.json';document.body.appendChild(a);a.click();document.body.removeChild(a);
+  _scFlash('📥 Downloaded — move to Dashboard dir then run strategy_cowork_sync.mjs');
+}
+function _scFlash(msg,ok){
+  const b=document.getElementById('strat-cowork-btn');if(!b)return;
+  const orig=b.textContent;b.textContent=msg;if(ok)b.style.color='var(--green)';
+  setTimeout(()=>{b.textContent=orig;b.style.color='';},3500);
+}
+function _scGetHandle(){
+  return new Promise(r=>{try{const q=indexedDB.open('sc1',1);q.onupgradeneeded=()=>q.result.createObjectStore('h');q.onsuccess=()=>{const t=q.result.transaction('h','readonly'),g=t.objectStore('h').get('f');g.onsuccess=()=>r(g.result||null);g.onerror=()=>r(null);};q.onerror=()=>r(null);}catch(e){r(null);}});
+}
+function _scStoreHandle(h){
+  return new Promise(r=>{try{const q=indexedDB.open('sc1',1);q.onsuccess=()=>{const t=q.result.transaction('h','readwrite');t.objectStore('h').put(h,'f');t.oncomplete=()=>r();t.onerror=()=>r();};q.onerror=()=>r();}catch(e){r();}});
 }
 function stratPri(id){
   let cur='';try{cur=localStorage.getItem('strat.p.'+id)||'';}catch(e){}
@@ -1269,6 +1312,7 @@ function strategyView(){
       <option value="alpha"${sortF==='alpha'?' selected':''}>A→Z</option>
       <option value="default"${sortF==='default'?' selected':''}>Default</option>
     </select>
+    <button id="strat-cowork-btn" onclick="stratExportDecisions()" title="Export decisions → strategy_decisions.json for Claude Cowork" style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.3);color:var(--p);padding:5px 13px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s">→ Cowork${(()=>{const n=items.filter(i=>i.status!=='pending').length;return n?` (${n})`:'';})()} </button>
     <button class="strat-add-btn" onclick="stratShowForm(true)">+ New Idea</button>
   </div></div>`;
 
