@@ -1085,9 +1085,9 @@ function graphMetricsBody(){
   const gn=L.godNodes||[];
   if(gn.length)h+=`<div class="card fade" style="animation-delay:.09s;margin-top:13px"><h3>Top god nodes — highest blast radius</h3>${gnBar(gn)}</div>`;
   h+=`<div class="card fade" style="animation-delay:.11s;margin-top:13px"><h3>Quick links</h3><div class="links">`
-    +pathLink('F:\\AI-Dev\\BIMpossible\\backend\\graphify-out\\graph.html','Interactive node graph')
-    +pathLink('F:\\AI-Dev\\BIMpossible\\backend\\graphify-out\\dashboard.html','Standalone dashboard')
-    +pathLink('F:\\AI-Dev\\BIMpossible\\backend\\graphify-out\\GRAPH_REPORT.md','Graph report')
+    +`<a class="path-chip" href="#" onclick="window._ctab='network';show('graph');return false;">Interactive node graph</a>`
+    +`<a class="path-chip" href="#" onclick="window._ctab='dashboard';show('graph');return false;">Standalone dashboard</a>`
+    +`<a class="path-chip" href="#" onclick="window._ctab='report';show('graph');return false;">Graph report</a>`
     +`</div></div>`;
   return h;
 }
