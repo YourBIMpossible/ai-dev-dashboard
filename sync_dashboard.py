@@ -38,7 +38,10 @@ from openai import OpenAI
 
 BASE_URL = os.environ.get("GITHUB_MODELS_BASE_URL", "https://models.github.ai/inference")
 MODEL = os.environ.get("GITHUB_MODEL", "openai/gpt-4o-mini")
-MAX_DOC_CHARS = 16000
+# GitHub Models free tier caps gpt-4o-mini requests at ~8000 input tokens. The
+# project block itself can be ~3000 tokens, so keep the docs well under budget.
+MAX_DOC_CHARS = 6000   # total chars across all docs (~2000 tokens)
+PER_FILE_CHARS = 4000  # cap any single doc so one big file can't eat the budget
 
 SYSTEM_INSTRUCTION = (
     "You maintain a JavaScript dashboard data file. You are given ONE project's "
@@ -52,13 +55,17 @@ SYSTEM_INSTRUCTION = (
 )
 
 
-def newest_first(paths: list[str]) -> list[str]:
-    """STATE_YYYY-MM-DD docs: keep only the newest. Others: keep all."""
+def order_docs(paths: list[str]) -> list[str]:
+    """Compact ledgers/READMEs first, then the single newest STATE doc.
+
+    The wave ledger is short and authoritative, so it must survive the budget;
+    the STATE doc is narrative and only its head (latest status) is needed.
+    """
     state = sorted(p for p in paths if "STATE_" in os.path.basename(p))
     others = [p for p in paths if "STATE_" not in os.path.basename(p)]
-    keep = others
+    keep = list(dict.fromkeys(others))  # de-dupe, preserve order
     if state:
-        keep = [state[-1]] + others
+        keep.append(state[-1])  # newest STATE doc, last
     return keep
 
 
@@ -66,7 +73,7 @@ def read_docs(globs: list[str]) -> str:
     found: list[str] = []
     for g in globs:
         found.extend(sorted(glob.glob(g, recursive=True)))
-    found = newest_first(found)
+    found = order_docs(found)
 
     sections, budget = [], MAX_DOC_CHARS
     seen = set()
@@ -78,7 +85,7 @@ def read_docs(globs: list[str]) -> str:
             text = Path(path).read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
-        chunk = text[:budget]
+        chunk = text[:min(PER_FILE_CHARS, budget)]
         sections.append(f"=== {path} ===\n{chunk}")
         budget -= len(chunk)
     return "\n\n".join(sections) if sections else "(no docs found)"
@@ -176,7 +183,7 @@ def main() -> int:
     resp = client.chat.completions.create(
         model=MODEL,
         temperature=0,
-        max_tokens=8000,
+        max_tokens=5000,
         messages=[
             {"role": "system", "content": SYSTEM_INSTRUCTION},
             {"role": "user", "content": user_msg},
