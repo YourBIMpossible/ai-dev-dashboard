@@ -24,12 +24,16 @@ window.DASHBOARD_DATA = {
             { label: "Docker/compose dev setup", status: "done" }
           ]
         },
-        { name: "P3 Data core", pct: 97, note: "Wave 7 (Phase 3.9 automation) shipped with all 3 live smokes PASSED",
+        { name: "P3 Data core", pct: 99, note: "Wave 7 + Wave 5 XLSX + Wave 4.9 Classification + Wave 4.10 Spec Draft all shipped",
           tasks: [
             { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
             { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
             { label: "Federated viewer Wave 1", status: "done", note: "06-05" },
-            { label: "3.9 architecture tail (Wave 7)", status: "done", note: "06-12 — calc-field 5k gate, share-by-link, stale-cache banner; all 3 smokes PASSED" }
+            { label: "3.9 architecture tail (Wave 7)", status: "done", note: "06-12 — calc-field 5k gate, share-by-link, stale-cache banner; all 3 smokes PASSED" },
+            { label: "Wave 5 XLSX export", status: "done", note: "PR #109 06-11 — GET /data/elements/xlsx + Sheet button; 50k row cap" },
+            { label: "Wave 4.9 Classification Enrichment (OmniClass + CSI)", status: "done", note: "f207d41 06-12 — 17 schedule endpoints; ScheduleClassificationBar + ✦ badge; live smoke owed at prod deploy" },
+            { label: "Wave 4.10 Spec Draft Generation", status: "done", note: "3cf91a0 06-12 — spec library (32 JSONs, 277 tests); rule engine + Markdown/Word/PDF renderers + SpecDraftLauncher/Modal; live smoke owed at prod deploy" },
+            { label: "CSP hardened (viewer fonts 55→0 violations)", status: "done", note: "PR #79 06-10" }
           ]
         },
         { name: "P4 Assistant", pct: 93, note: "Phase 4b HITL action-enabled assistant shipped + smoke PASSED; schedule-push outline only",
@@ -43,15 +47,16 @@ window.DASHBOARD_DATA = {
             { label: "Schedule-push: staleness cadence, classifier rules, SPF ship location", status: "pending" }
           ]
         },
-        { name: "P5 Surfaces / Viewer", pct: 86, note: "Wave 4.9 + Wave 4.10 (spec lib complete) shipped; XLSX live; viewer waves pending",
+        { name: "P5 Views / Sheets / 3D / Workspace", pct: 15, note: "On hold pending re-scan. Early wiring done. Wave 9 / Forma embed eval affects 5.1 + 5.3 scope — re-scan before activating.",
           tasks: [
-            { label: "Federated-viewer Wave 1 smoke (GA-H12)", status: "done" },
-            { label: "CSP hardened - viewer fonts 55→0 violations", status: "done", note: "PR #79 06-10" },
-            { label: "Wave 5 XLSX export", status: "done", note: "06-11 PR #109 — GET /data/elements/xlsx + Sheet button" },
-            { label: "Wave 4.9 Classification Enrichment (OmniClass + CSI schedule columns)", status: "done", note: "SHIPPED 06-12 (f207d41); 17 schedule endpoints; ScheduleClassificationBar; live smoke owed at prod deploy" },
-            { label: "Wave 4.10 Spec Draft Generation", status: "done", note: "COMPLETE 06-12 (3cf91a0) — spec library now covers all CSI-mapped Revit categories (32 new JSONs, 277 tests); rule engine + Markdown/Word/PDF renderers + SpecDraftLauncher/Modal; live UI smoke owed" },
-            { label: "Viewer-wave package scoping", status: "pending", note: "Ownership question logged 06-04" },
-            { label: "Further viewer waves", status: "pending" }
+            { label: "5.1/5.2 early wiring: ViewPresetSidebar + MarkupsList", status: "done", note: "Shipped 39c326b" },
+            { label: "5.2 PDF-first sheet rendering decision locked", status: "done", note: "06-04 — PDF as canonical artifact; PyMuPDF/AGPL removed; SVF2/APS Viewer deferred to later wave" },
+            { label: "Federated viewer Wave 1 smoke (GA-H12)", status: "done" },
+            { label: "Phase 5 re-scan (required before full activation)", status: "pending", note: "Re-evaluate all 4 slices against product state; Wave 9 / Forma decision gates 5.1 + 5.3 scope" },
+            { label: "5.1 View Management (view presets, multi-view layout, state persistence)", status: "pending" },
+            { label: "5.2 Sheets & Document Assembly (markup, RFI flagging, permit-set annotation, PDF compose)", status: "pending" },
+            { label: "5.3 3D Navigation (viewport controls, camera presets, clipping planes)", status: "pending" },
+            { label: "5.4 Workspace Coherence (unified sidebar/toolbar, persistent layout, quick switcher)", status: "pending" }
           ]
         },
         { name: "Waves 10-21 Rollout", pct: 78, note: "Waves 10-14/16/17 fully smoked. Waves 20/21 shipped. Waves 15/18/19 specced (scope-lock drafts 06-13), not built.",
