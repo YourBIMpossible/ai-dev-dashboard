@@ -2094,9 +2094,10 @@ function unifiedSpendCard(){
   const mlbl=new Date().toLocaleDateString(undefined,{month:'long',year:'numeric'});
   return `<div class="card fade" style="margin-bottom:14px">
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
-      <div>
-        <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)">Total spend · this month</div>
+      <div style="min-width:0">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)">Total usage value · this month</div>
         <div class="num" style="font-size:34px;font-weight:700;color:#fff;line-height:1.05;margin-top:3px">${_spF(t)}</div>
+        <div style="font-size:10.5px;color:var(--dim);margin-top:5px;line-height:1.5;max-width:62ch">Blended estimate, not an invoice — Claude Code = API-equivalent usage value (may be subscription-covered) · Claude API = manual snapshot · GitHub Actions = ${s.ghFree?'within free minutes':'billed net'}</div>
       </div>
       <div style="font-size:11px;color:var(--dim);text-align:right">${esc(mlbl)}<br>all-time Claude Code ${_spF(s.ccAll)}</div>
     </div>
@@ -2107,7 +2108,6 @@ function unifiedSpendCard(){
       ${chip('Claude Code',s.cc,'var(--w2)')}
       ${chip('Claude API',s.api,'var(--w)')}
       ${chip('GitHub Actions',s.gh,'var(--green)')}
-      <span style="font-size:10px;color:var(--dim);margin-left:auto">local telemetry · manual snapshot · Actions net${s.ghFree?' (within 3,000 free min)':''}</span>
     </div>
   </div>`;
 }
