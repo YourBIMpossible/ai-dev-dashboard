@@ -12,7 +12,7 @@ window.DASHBOARD_DATA = {
       icon: "layers",
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
-      phase: "Client Management Phase A SHIPPED (admin-portal backend + UIs): 8 new tables/4 migrations, firm identity + membership-gated /account, DB-backed cost, alerts/enrichment, admin CRUD; Admin Portal v2 + My Account dashboards live in dev. Wave 4.10 spec library now COMPLETE — all CSI-mapped Revit categories (32 new JSONs, 3cf91a0). main at 8013206; 1510 DB + 1008 pure BE / 1103 FE tests. Next: true-prod deploy (alembic upgrade head incl. Phase A migrations) → live smokes.",
+      phase: "Client Management Phase A SHIPPED (admin-portal backend + UIs): 8 new tables/4 migrations, firm identity + membership-gated /account, DB-backed cost, alerts/enrichment, admin CRUD; Admin Portal v2 + My Account dashboards live in dev. Wave 4.10 spec library now COMPLETE — all CSI-mapped Revit categories (32 new JSONs, 3cf91a0). main at 4c52f78; 1510 DB + 1008 pure BE / 1103 FE tests. Next: true-prod deploy (alembic upgrade head incl. Phase A migrations) → live smokes.",
       focus: "True-prod deploy per 2026-06-12 runbook: alembic upgrade head (Phase A's 4 migrations on top of prior batch → head p8q9r0s1t2u3), BIMPOSSIBLE_ADMIN_ENABLED/SECRET, prewarm DB cleanup; then smoke Wave 4.10 spec draft + 4.9 classification bar + admin/My-Account",
       progress: { label: "Program phases", phases: [
         { name: "P0-2 Foundation", pct: 100,
@@ -112,7 +112,7 @@ window.DASHBOARD_DATA = {
       ]},
       activity: [11,44,44,35,45,46,16,13,0,49,120,29,25,4],
       lastActivity: { date: "2026-06-13", summary: "Client-Management UIs shipped (0e0242f): Admin Portal v2 (alert bar, KPI strip, firm list, triage panel, onboard wizard) + My Account dashboard (budget, BYO-key, cost-by-model); next.config proxy fix un-broke /admin + /account. CI green; 1510 DB + 1008 pure BE / 1103 FE tests." },
-      branch: "main at 8013206; 0 open PRs; 0 ahead of origin",
+      branch: "main at 4c52f78; 0 open PRs; 0 ahead of origin",
       git: { warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)." },
       nextActions: [
         "True-prod deploy (runbook 06-12): alembic upgrade head (Phase A's 4 migrations m5n6o7p8q9r0→p8q9r0s1t2u3 + prior batch), set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, then DELETE stale done-rows in relationship_prewarm_jobs per model",
