@@ -81,8 +81,8 @@ window.DASHBOARD_DATA = {
             { label: "usage_logger.py wired into assistant SSE path", status: "done", note: "06-12 — verified already-wired; UsageEvent row per model call (tokens/tools/latency), non-blocking" },
             { label: "Client-Mgmt Phase A backend (firms, memberships, DB-backed cost, alerts, enrichment, admin CRUD)", status: "done", note: "06-12 e749918 — 8 tables/4 migrations; /account membership-gated; cost.py raises on unmatched model" },
             { label: "Admin Portal v2 + My Account dashboards", status: "done", note: "06-12/13 (0e0242f) — alert bar/KPI strip/firm list/triage/onboard wizard; My Account budget+BYO-key; next.config proxy fix" },
-            { label: "Tests for /account/budget + /account/api-key + admin-portal UI", status: "pending", note: "Owed — shared membership gate already tested" },
-            { label: "True-prod deploy (alembic upgrade head incl. Phase A 4 migrations + env vars + prewarm cleanup)", status: "active", note: "Runbook 2026-06-12 true-prod-deploy; not auto-applied from dev stack" }
+            { label: "Tests for /account/budget + /account/api-key + admin-portal UI", status: "active", note: "Partial — backend /account tests done & green (uncommitted branch); FE admin/account UI tests missing: AdminShell, FirmEditDrawer, ConfirmDialog, signin, AdminSessionProvider, My Account." },
+            { label: "True-prod deploy: upgrade to head s1t2u3v4w5x6 via #131 decoupled path", status: "blocked", note: "Gated on #131 migration crash-loop decouple (hard prerequisite). Old one-shot Phase-A-only upgrade path deprecated/unsupported at this head. Runbook 2026-06-12 true-prod-deploy." }
           ]
         },
         { name: "P7 Project Setup Wizard", pct: 0, note: "Onboarding automation (BusinessCase). High standalone value — pull-forward candidate; doesn't depend on the data platform being complete.",
