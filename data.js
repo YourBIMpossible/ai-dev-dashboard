@@ -85,33 +85,53 @@ window.DASHBOARD_DATA = {
             { label: "True-prod deploy: upgrade to head s1t2u3v4w5x6 via #131 decoupled path", status: "blocked", note: "Gated on #131 migration crash-loop decouple (hard prerequisite). Old one-shot Phase-A-only upgrade path deprecated/unsupported at this head. Runbook 2026-06-12 true-prod-deploy." }
           ]
         },
-        { name: "P7 Project Setup Wizard", pct: 0, note: "Onboarding automation (BusinessCase). High standalone value — pull-forward candidate; doesn't depend on the data platform being complete.",
+        { name: "P7 Model QA & Health (read-only)", pct: 30, note: "Read-only QA-rules engine that scores a model's data quality. Discipline-neutral, no write paths. Built + verified overnight 06-14, UNCOMMITTED. Grounded in buildingSMART IDS + Speckle Automate + Solibri severity + Autodesk Model Checker.",
           tasks: [
-            { label: "Web form: project name / number / client / scope", status: "pending" },
-            { label: "Provision ACC project + folder structure + permissions", status: "pending" },
-            { label: "Create central file from template + apply view templates", status: "pending" },
-            { label: "Generate initial sheet set with title blocks", status: "pending" },
-            { label: "Email PM a fully-set-up project", status: "pending", note: "Saves a weekend of BIM-manager time/project; enforces standards by default" }
+            { label: "Rules engine (declarative Rule: applicability + requirement + IDS cardinality over a predicate library)", status: "done", note: "06-14 — backend/aec/qa/engine.py; pure, dependency-free" },
+            { label: "4 starter rules (completeness / identity / correctness / classification families)", status: "done", note: "06-14 — adding a rule = a registry entry, no engine code" },
+            { label: "Endpoints: GET /data/qa/rules + GET /data/qa/model-health (severity-weighted score, per-rule compliance, findings)", status: "done", note: "06-14 — reuses non-blocking warm-pool path; 20 pure + 3 router tests; full suite 1756/1223 green" },
+            { label: "Commit + deploy the starter slice", status: "pending", note: "Built but uncommitted — push via Push-And-Verify.ps1" },
+            { label: "Frontend health panel + check_model_health assistant tool", status: "pending" },
+            { label: "More rules (config-only), per-project overrides, .ids import, disposition workflow, run persistence/trends", status: "pending", note: "Roadmap increments from the build spec" }
           ]
         },
-        { name: "P8 Product Data Ingestion", pct: 0, note: "Conditional — gated on Wave 8 (Revit Link write-back). Scoped 2026-06-12.",
+        { name: "P8 Project Setup Wizard", pct: 25, note: "Onboarding automation — ACC provisioning, folders, central file from template, sheet set, in one click. First BIMpossible feature that WRITES to Autodesk → carries the hard human write-gate. No-write PLANNING slice built + verified 06-14; write path GATED on owner approval. Pull-forward candidate — doesn't depend on the data platform being complete.",
           tasks: [
-            { label: "Wave 8 (Revit Link multi-user write-back) shipped + hardened", status: "blocked", note: "Hard gate — P8 does not activate before write-back is live" },
-            { label: "Multi-format ingest pipeline (PDF/Excel/CSV/DOCX/XML/web)", status: "pending" },
-            { label: "Product type library (model number, manufacturer, series, pricing tier)", status: "pending" },
-            { label: "Schedule field population from product library", status: "pending" },
-            { label: "Revit type parameter write-back via RevitLink", status: "pending" },
-            { label: "Human-review queue for low-confidence extractions", status: "pending", note: "Required before any prod writeback — no silent writes to model" }
+            { label: "No-write planning core (planner + reverse-order rollback walker + default-closed gate)", status: "done", note: "06-14 — pure stdlib, not wired into main.py; 18 tests green" },
+            { label: "ProvisioningJob DB model + Alembic migration (t2u3v4w5x6y7)", status: "done", note: "06-14 — verified via isolated local-CI lane; alembic check clean" },
+            { label: "Router: POST /wizard/plan + GET /wizard/templates (planning only, flag-gated)", status: "done", note: "06-14 — behind BIMPOSSIBLE_WIZARD_ENABLED (off by default); 23 wizard tests green" },
+            { label: "Frontend /wizard (Details → Template → Review → Provision; provision step inert)", status: "done", note: "06-14 — local CI green; /wizard route 3.24kB; honest 'dry run, nothing created' contract" },
+            { label: "APS write executor + provision-time elevated consent (data:write / data:create)", status: "blocked", note: "Gated on founder write-approval. Consent decided: least-privilege, provision-time-only, discarded after run" },
+            { label: "Template baseline (firm RVT template + real view-template / sheet list)", status: "pending", note: "Owner input — until then the planner flags every defaulted value" }
           ]
         },
-        { name: "P9 Cost Intelligence / Estimating", pct: 0, note: "Conditional — gated on Phase 8 (product library with pricing data). Scoped 2026-06-12.",
+        { name: "P9 Product Data Ingestion", pct: 10, note: "Conditional — gated on Phase 11 (Revit Link write-back). Multi-format doc → BIMpossible product type library → schedule enrichment (read half) → Revit type-param write-back on sync (gated half). SCOPED, not activated; read-half spec + parser spike built 06-14 (no backend wiring). Scoped 2026-06-12.",
           tasks: [
-            { label: "Phase 8 active with pricing fields in scope", status: "blocked", note: "Hard gate — P9 is blocked if P8 ships spec-only without pricing" },
+            { label: "Build spec: full-product foundation (SourceParser + ExtractionProfile registries; 5-table schema)", status: "done", note: "06-14 — Phase9_BuildSpec.md; discipline-neutral, write-back first-class (no MVP framing)" },
+            { label: "Parser spike: pdfplumber extractor w/ per-field provenance + confidence + eval harness", status: "done", note: "06-14 — isolated venv, 17 tests green; pdfplumber (MIT) chosen over PyMuPDF (AGPL)" },
+            { label: "GoldenSet v1.0: collect + label 25–50 real cutsheets", status: "pending", note: "The one real blocker; labeling runbook written (delegable). SHIP-GATE: read-path may not enter backend until gates met" },
+            { label: "Read-path backend build (ingest + schema + review queue + schedule enrichment)", status: "pending", note: "Behind PRODUCT_INGESTION_ENABLED (off); blocked on golden-set gates" },
+            { label: "Revit type-parameter write-back on sync via RevitLink", status: "blocked", note: "Gated on Phase 11 (Revit Link write-back) live + hardened" },
+            { label: "Human-review queue for low-confidence extractions", status: "pending", note: "Mandatory before any prod writeback — no auto-discard; low-confidence → review only" }
+          ]
+        },
+        { name: "P10 Cost Intelligence / Estimating", pct: 0, note: "Conditional — gated on Phase 9 (Product Data Ingestion — product library with pricing data). Scoped 2026-06-12.",
+          tasks: [
+            { label: "Phase 9 active with pricing fields in scope", status: "blocked", note: "Hard gate — P10 is blocked if Phase 9 ships spec-only without pricing" },
             { label: "Cost rollup engine (quantities × product pricing)", status: "pending" },
             { label: "Budget tracking (designed vs. actual per category/discipline)", status: "pending" },
             { label: "Submittal validation (proposed vs. specified product, spec diff)", status: "pending" },
             { label: "Discontinued/obsolete product alerts", status: "pending" },
             { label: "Design-milestone cost views (SD/DD/CD/CA)", status: "pending" }
+          ]
+        },
+        { name: "P11 Revit Link Write-back (Data link: BIMpossible → Revit)", pct: 0, note: "PLANNED. = Wave 8 in the wave ledger. The data link from BIMpossible back into Revit: multi-user bidirectional write-back. Resolves the PipeServer single-instance + shared RELAY_SECRET tripwire blocking Phase 1 re-enable. Gates Phase 9 (Product Data Ingestion).",
+          tasks: [
+            { label: "Resolve multi-user tripwire (PipeServer.maxNumberOfServerInstances=1 + single shared RELAY_SECRET)", status: "pending", note: "Hard blocker for Phase 1 re-enable" },
+            { label: "Re-enable sync_with_central (currently 2-layer disabled: HTTP 501 + C# force=true guard, audit P1-3)", status: "pending", note: "Gated on designed confirmation UX + short-lived token + frontend modal" },
+            { label: "Bidirectional write-back: push param changes to Revit type params via RevitLink add-in", status: "pending" },
+            { label: "Auth/session refactor stable for multi-user (Authlib + starsessions)", status: "pending" },
+            { label: "Exercise against a real two-user scenario", status: "pending", note: "Gate before Phase 9: write-back shipped + exercised; sync re-enable UX approved" }
           ]
         }
       ]},
@@ -179,7 +199,7 @@ window.DASHBOARD_DATA = {
           { id: "1", title: "Foundation consolidation", status: "PARTIAL", note: "Open: Alembic baseline (HIGH-8), Phase 3.5 migration to live DB, confirm audit branches merged" },
           { id: "4.9", title: "Classification Enrichment (OmniClass + CSI)", status: "SHIPPED", date: "2026-06-12", note: "OFF-LEDGER — shipped f207d41 but no WAVE-STATUS row; live smoke owed at prod deploy" },
           { id: "4.10", title: "Spec Draft Generation", status: "SHIPPED", date: "2026-06-12", note: "OFF-LEDGER — complete spec library for all CSI categories (32 JSONs, 3cf91a0); live UI smoke owed" },
-          { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED", note: "Next code wave after prod deploy stabilizes; gates Phase 8 (Product Data Ingestion)" },
+          { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED", note: "= Program Phase 11 (Data link: BIMpossible → Revit). Next code wave after prod deploy stabilizes; gates Phase 9 (Product Data Ingestion)" },
           { id: "15", title: "Civil schedules", status: "PENDING", note: "Scope-lock + BuildSpec drafts written 06-13" }
         ],
         lastCompleted: { id: "21", title: "Schedule column sort", date: "2026-06-12" },
@@ -509,7 +529,89 @@ window.DASHBOARD_DATA = {
         "2026-06-12 - session postmortem + approach decision (Approach B locked); dashboard auto-sync workflow",
         "2026-06-11 - git repo scaffolded (code-only, no .rfa binaries); 23 commits; Developmental/One Line Symbols folder updated"
       ]
-    }
+    },
     /* PROJECT:families:END */
+    /* PROJECT:aiserver:START */
+    {
+      id: "aiserver",
+      name: "AI-Server",
+      icon: "cube",
+      oneLiner: "Portable, fully-local LLM inference + automation platform. Dev on the RTX 5080 now; relocates to a dedicated RTX 3090 box by one .env line (OLLAMA_HOST).",
+      status: "active",
+      phase: "Repo live + private (YourBIMpossible/AI-Server), CI green (pytest 3.10-3.12), branch-protected (PR + CI gate). Scaffold + Ollama setup + daily-digest automation shipped; WP-A core `aiserver` library landed (smoke-test + daily_digest refactored onto it). Next: finish WP-A via PR, then WP-B (RAG) + WP-C (automation suite) in parallel.",
+      focus: "Run the Wave-1 Claude Code session: land WP-A via PR, then WP-B (RAG over AI-Brain-Data) + WP-C (automation suite) on parallel branches.",
+      progress: { label: "Work packages", phases: [
+        { name: "Foundation", pct: 100, note: "Repo + CI (pytest 3.10-3.12 green) + branch protection (PR+CI gate) + portable scaffold + smoke + first automation",
+          tasks: [
+            { label: "Repo + .gitignore/.gitattributes", status: "done", note: "06-16" },
+            { label: "Ollama setup (Windows + Linux) + smoke test", status: "done" },
+            { label: "daily_digest automation + Windows scheduler", status: "done" },
+            { label: "GitHub Actions CI (pytest matrix)", status: "done" },
+            { label: "Branch protection (PR + CI gate)", status: "done" }
+          ]
+        },
+        { name: "WP-A Core library (aiserver)", pct: 80, note: "config + OpenAI-compatible client (chat+embed) + prompts + log + tests (5/5); scripts refactored onto it; PR-merge + final acceptance owed",
+          tasks: [
+            { label: "aiserver package + pyproject + tests", status: "done" },
+            { label: "Refactor smoke-test + daily_digest onto aiserver", status: "done", note: "06-16" },
+            { label: "Land via PR + final acceptance", status: "active" }
+          ]
+        },
+        { name: "WP-B RAG / knowledge", pct: 0, note: "sqlite-vec index over AI-Brain-Data + BIMpossible docs; query CLI with citations; doc-drift detector",
+          tasks: [
+            { label: "Ingest + embed + incremental index", status: "pending" },
+            { label: "Query CLI + drift report", status: "pending" }
+          ]
+        },
+        { name: "WP-C Automation suite", pct: 10, note: "Job framework + weekly rollup + decision-drift; productionize digest",
+          tasks: [
+            { label: "daily_digest prototype", status: "done" },
+            { label: "Job framework + weekly rollup + drift", status: "pending" }
+          ]
+        },
+        { name: "WP-D Dashboard + integration", pct: 20, note: "This dashboard tab (D1) added 06-16; PC-Monitor GPU profile (D2) + offload weekly Revit-log task (D3) pending",
+          tasks: [
+            { label: "Dashboard AI-Server tab (D1)", status: "active", note: "added 06-16" },
+            { label: "PC-Monitor GPU/inference profile (D2)", status: "pending" },
+            { label: "Offload revit-log weekly task to local (D3)", status: "pending" }
+          ]
+        },
+        { name: "WP-E/F/G Ops, eval, advanced", pct: 0, note: "Serving/ops hardening; eval-vs-Claude harness; advanced (Whisper meeting-notes, local coding-agent, QLoRA fine-tune)",
+          tasks: [
+            { label: "WP-E serving/ops hardening", status: "pending" },
+            { label: "WP-F eval harness", status: "pending" },
+            { label: "WP-G advanced (Whisper / coder / QLoRA)", status: "pending" }
+          ]
+        }
+      ]},
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      lastActivity: { date: "2026-06-16", summary: "Repo created; scaffold + CI + branch protection; WP-A core aiserver library + script refactor" },
+      branch: "main", git: null,
+      nextActions: [
+        "Run Wave-1 Claude Code session (handoffs/WAVE-1_kickoff.md): finish WP-A, then WP-B + WP-C in parallel PRs",
+        "Merge WP-A via a CI-gated PR"
+      ],
+      pendingDecisions: [
+        "3090 box OS (Ubuntu Server vs Windows) + runtime (Ollama now vs vLLM later) - see build plan"
+      ],
+      blockers: [],
+      reminders: [
+        "Added 2026-06-16; activity series populates at next refresh (repo created after the current 05-31->06-13 window)",
+        "WP-A refactor present in working tree - ensure it lands via a PR (main is PR-gated)",
+        "3090 box not assembled yet - dev on the 5080; relocate via one .env line (OLLAMA_HOST)"
+      ],
+      links: [
+        { label: "Program plan", path: "F:\\AI-Dev\\AI-Server\\PROGRAM_PLAN.md" },
+        { label: "Handoffs (WP-A..G)", path: "F:\\AI-Dev\\AI-Server\\handoffs" },
+        { label: "Build/hardware plan", path: "F:\\AI-Dev\\AI-Brain-Data\\_status\\AI-Server_Build_and_Integration_Plan.md" },
+        { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
+      ],
+      recent: [
+        "2026-06-16 - WP-A core aiserver library; smoke-test + daily_digest refactored onto it",
+        "2026-06-16 - GitHub Actions CI (pytest 3.10-3.12) + branch protection (PR+CI gate)",
+        "2026-06-16 - repo created; scaffold + Ollama setup + daily-digest automation"
+      ]
+    }
+    /* PROJECT:aiserver:END */
   ]
 };

@@ -18,7 +18,7 @@ import { fileURLToPath } from 'url';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const USERNAME = 'YourBIMpossible';
-const REPOS = ['BIMpossible', 'bimpossible-site', 'ai-dev-dashboard', 'Families-by-BIMpossible', 'BIMpossible_Workspace', 'BIMpossible-AddIns'];
+const REPOS = ['BIMpossible', 'bimpossible-site', 'ai-dev-dashboard', 'Families-by-BIMpossible', 'BIMpossible_Workspace', 'BIMpossible-AddIns', 'AI-Server'];
 const LIVE_ONLY = process.argv.includes('--live-only');
 
 // GitHub minutes multiplier per OS (how they count against plan inclusion)

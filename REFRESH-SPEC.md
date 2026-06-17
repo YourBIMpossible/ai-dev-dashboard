@@ -56,6 +56,14 @@ Instructions for any Claude session (scheduled or on-demand "refresh dashboard")
 ### families - Families by AI
 - `F:\AI-Dev\Families by AI\tool\README.md` + folder mtimes
 
+### aiserver - AI-Server (local LLM + automation)
+- `git -C F:\AI-Dev\AI-Server log --oneline --all --since="7 days ago"` + branches + unpushed check (rule 9). Repo: `YourBIMpossible/AI-Server` (private, branch-protected: PR + CI gate).
+- `F:\AI-Dev\AI-Server\PROGRAM_PLAN.md` - the work-package map (Foundation + WP-A..G); drives `progress.phases`. `handoffs\WP-*.md` - one per work package; when a WP's PR merges (CI green), flip its phase tasks to `done` and raise the phase pct.
+- Build/hardware plan: `F:\AI-Dev\AI-Brain-Data\_status\AI-Server_Build_and_Integration_Plan.md` (the dedicated 3090 box). Keep its open OS/runtime choices in `pendingDecisions` until locked.
+- CI: GitHub Actions `ci.yml` (pytest matrix 3.10-3.12). If the newest run is failing, add a `reminders` line. Minutes show in the Actions panel (AI-Server is in `github_actions_sync.mjs` REPOS).
+- Latest automation output: newest `F:\AI-Dev\AI-Server\out\digest-*.md` (and future `out\<job>\*`) -> `recent` / `lastActivity`.
+- Relocation flag: while `.env` `OLLAMA_HOST` still targets localhost (the 5080), keep a `reminders` note that inference hasn't moved to the 3090 box yet.
+
 ## Audit ingestion (every refresh - daily, Monday, and on-demand)
 
 Each project may carry an `audit` block. BIMpossible is audited weekly (the report is written Monday
