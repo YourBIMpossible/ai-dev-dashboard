@@ -13,20 +13,26 @@ How it works
 1. Reads the source repo's key docs (newest STATE doc, wave ledger, READMEs, ...).
 2. Pulls the CURRENT project block out of data.js using the managed markers
        /* PROJECT:<id>:START */  ...  /* PROJECT:<id>:END */
-3. Asks the model to return the SAME block with only the state-derived fields
-   refreshed (commit hash, test counts, phase %s, recent[], waves, etc.).
-4. Splices the new block back between the markers and validates the whole file
-   with `node --check`. If the result is not valid JS, it exits non-zero WITHOUT
-   writing — a bad model response can never ship a broken dashboard.
+3. Asks the model for a **JSON patch**: only the TOP-LEVEL fields the docs show
+   have changed, each with its complete new value. Returning just the delta (not
+   the whole object) keeps the response far under GitHub Models' 4000-output-token
+   free-tier cap — the old "echo the entire block" contract broke the moment a card
+   grew past ~4000 tokens, which is exactly how the bimpossible card started failing.
+4. Applies that patch deterministically in Python: each changed top-level field's
+   value-span is replaced in place; every untouched field stays byte-for-byte. The
+   spliced file is then validated with `node --check`. If the result is not valid
+   JS, it exits non-zero WITHOUT writing — a bad model response can never ship a
+   broken dashboard.
 
-Only the block for --project is ever touched, so a push to one repo can never
-clobber another project's card.
+Only the block for --project is ever touched, and within it only the fields the
+model reports as changed, so a push to one repo can never clobber another card.
 """
 
 from __future__ import annotations
 
 import argparse
 import glob
+import json
 import os
 import re
 import subprocess
@@ -34,29 +40,33 @@ import sys
 import tempfile
 from pathlib import Path
 
-from openai import OpenAI
-
 BASE_URL = os.environ.get("GITHUB_MODELS_BASE_URL", "https://models.github.ai/inference")
 MODEL = os.environ.get("GITHUB_MODEL", "openai/gpt-4o-mini")
-# GitHub Models free tier caps gpt-4o-mini requests at ~8000 input tokens. The
-# project block itself can be ~3000 tokens, so keep the docs well under budget.
+# GitHub Models free tier caps gpt-4o-mini at ~8000 input tokens and 4000 OUTPUT
+# tokens per request. The patch we ask for is small (only changed fields), so it
+# fits comfortably; OUTPUT_TOKEN_CAP guards the response with a clear error if a
+# huge set of changes ever pushes it over.
 MAX_DOC_CHARS = 6000   # total chars across all docs (~2000 tokens)
 PER_FILE_CHARS = 4000  # cap any single doc so one big file can't eat the budget
+OUTPUT_TOKEN_CAP = 4000
 
 SYSTEM_INSTRUCTION = (
-    "You maintain a JavaScript dashboard data file. You are given ONE project's "
-    "object literal (a JS object, no surrounding array) and the latest project "
-    "status docs. Return the SAME object with ONLY the values that the docs show "
-    "have changed, updated. This is a minimal edit, not a rewrite.\n"
-    "Hard formatting rules — match the input byte-for-byte except for changed values:\n"
-    "- Use UNQUOTED JavaScript identifier keys (write  id:  not  \"id\":).\n"
-    "- Keep the exact same indentation, line breaks, and number of properties per "
-    "line as the input. Do NOT expand a compact line into multiple lines.\n"
-    "- Preserve key order and every field you are not changing, verbatim.\n"
-    "Output ONLY the JS object literal, starting with '{' and ending with '}', no "
-    "trailing comma, no markdown fences, no commentary. Keep string escaping valid "
-    "(Windows paths use double backslashes). Do not invent data — if the docs don't "
-    "mention something, leave it exactly as-is."
+    "You maintain one project's card on a status dashboard. You are given that "
+    "project's CURRENT object (as a JS object literal) and the latest status docs. "
+    "Decide which TOP-LEVEL fields the docs show have changed, and return a JSON "
+    "object containing ONLY those changed top-level fields, each mapped to its "
+    "COMPLETE new value (a full replacement of that field, never a fragment). Omit "
+    "every field that has not changed.\n"
+    "Hard rules:\n"
+    "- Output exactly one JSON object and nothing else (no prose, no markdown fences).\n"
+    "- Never include id, name, or icon.\n"
+    "- Each returned value MUST match the existing schema and nesting of that field "
+    "exactly (same structure, same types). Inside a returned field, copy any "
+    "sub-values you are not changing verbatim.\n"
+    "- Do NOT return the large 'progress' phases tree unless a phase percentage, a "
+    "task status, or a task note has actually changed.\n"
+    "- Be conservative: if the docs do not clearly show a field changed, omit it. "
+    "Do not invent data."
 )
 
 
@@ -126,7 +136,10 @@ def extract_block(data_js: str, project_id: str) -> tuple[int, int, str]:
     return i, j, data_js[i:j].strip().rstrip(",").strip()
 
 
-def build_client() -> OpenAI:
+def build_client():
+    # Imported lazily so the patch/apply logic can be unit-tested without the SDK.
+    from openai import OpenAI
+
     token = os.environ.get("GH_MODELS_TOKEN") or os.environ.get("GITHUB_TOKEN")
     if not token:
         sys.exit(
@@ -136,15 +149,112 @@ def build_client() -> OpenAI:
     return OpenAI(base_url=BASE_URL, api_key=token)
 
 
-def clean_object(text: str) -> str:
+def call_model(client, messages: list[dict]):
+    """Call GitHub Models, preferring JSON mode but degrading gracefully if the
+    gateway rejects response_format (older proxies / models)."""
+    kwargs = dict(model=MODEL, temperature=0, max_tokens=OUTPUT_TOKEN_CAP, messages=messages)
+    try:
+        return client.chat.completions.create(
+            response_format={"type": "json_object"}, **kwargs
+        )
+    except Exception as exc:  # noqa: BLE001 - any gateway rejection, fall back
+        print(
+            f"  (note) JSON mode unavailable ({exc.__class__.__name__}); retrying without it",
+            file=sys.stderr,
+        )
+        return client.chat.completions.create(**kwargs)
+
+
+def parse_patch(text: str) -> dict:
+    """Parse the model's reply into a {field: new_value} dict. Tolerates stray
+    markdown fences even though we ask for raw JSON."""
     text = text.strip()
     text = re.sub(r"^```[a-zA-Z]*\n?", "", text)
     text = re.sub(r"\n?```$", "", text.rstrip())
-    # Trim anything before the first { and after the last }
     first, last = text.find("{"), text.rfind("}")
     if first == -1 or last == -1:
-        sys.exit("ERROR: model response contained no JS object literal")
-    return text[first:last + 1].strip()
+        sys.exit("ERROR: model response contained no JSON object")
+    try:
+        obj = json.loads(text[first:last + 1])
+    except json.JSONDecodeError as exc:
+        sys.exit(f"ERROR: model response was not valid JSON: {exc}")
+    if not isinstance(obj, dict):
+        sys.exit("ERROR: model response JSON was not an object")
+    return obj
+
+
+def _is_ident(key: str) -> bool:
+    return bool(re.match(r"^[A-Za-z_]\w*$", key))
+
+
+def to_js(value, indent: int) -> str:
+    """Serialize a JSON value to a JS literal with UNQUOTED identifier keys, matching
+    data.js style closely enough to pass `node --check`. `indent` is the column the
+    value's closing bracket sits at; children indent two further."""
+    pad = " " * indent
+    child = " " * (indent + 2)
+    if isinstance(value, str):
+        return json.dumps(value, ensure_ascii=False)
+    if isinstance(value, bool) or value is None:
+        return json.dumps(value)
+    if isinstance(value, (int, float)):
+        return json.dumps(value)
+    if isinstance(value, list):
+        if not value:
+            return "[]"
+        # Inline pure-number arrays (e.g. activity: [31,45,...]); everything else
+        # goes multi-line to match the curated string/object arrays.
+        if all(isinstance(x, (int, float)) and not isinstance(x, bool) for x in value):
+            return "[" + ",".join(json.dumps(x) for x in value) + "]"
+        items = [child + to_js(x, indent + 2) for x in value]
+        return "[\n" + ",\n".join(items) + "\n" + pad + "]"
+    if isinstance(value, dict):
+        if not value:
+            return "{}"
+        parts = []
+        for key, val in value.items():
+            jskey = key if _is_ident(key) else json.dumps(key)
+            parts.append(f"{child}{jskey}: {to_js(val, indent + 2)}")
+        return "{\n" + ",\n".join(parts) + "\n" + pad + "}"
+    return json.dumps(value, ensure_ascii=False)
+
+
+_TOPKEY_RE = re.compile(r"(?m)^( {6})(\w+):")
+_VALUE_RE = re.compile(r"(?s)^(\s*)(.*?)(,?)(\s*)$")
+
+
+def apply_patch(block: str, patch: dict) -> str:
+    """Replace the values of changed top-level fields in `block` (a JS object literal
+    `{ ... }`) with serialized values from `patch`. Untouched fields are preserved
+    byte-for-byte. Keys the model invents (not already in the block) are skipped."""
+    open_i = block.index("{")
+    close_i = block.rfind("}")
+    body = block[open_i + 1:close_i]
+
+    matches = list(_TOPKEY_RE.finditer(body))
+    if not matches:
+        sys.exit("ERROR: no top-level fields found in project block")
+    known = {m.group(2) for m in matches}
+    for key in patch:
+        if key not in known:
+            print(f"  (skip) model returned unknown top-level field: {key}", file=sys.stderr)
+
+    out, cursor = [], 0
+    for idx, m in enumerate(matches):
+        key = m.group(2)
+        val_start = m.end()
+        val_end = matches[idx + 1].start() if idx + 1 < len(matches) else len(body)
+        out.append(body[cursor:val_start])        # leading ws + "key:"
+        raw = body[val_start:val_end]             # " value,\n      " (incl. comma/ws)
+        if key in patch:
+            vm = _VALUE_RE.match(raw)
+            lead, _old, comma, trail = vm.group(1), vm.group(2), vm.group(3), vm.group(4)
+            out.append(lead + to_js(patch[key], 6) + comma + trail)
+        else:
+            out.append(raw)
+        cursor = val_end
+
+    return block[:open_i + 1] + "".join(out) + block[close_i:]
 
 
 def node_check(data_js: str) -> bool:
@@ -180,22 +290,36 @@ def main() -> int:
         f"LATEST COMMIT (short sha): {sha}\n"
         f"RECENT COMMITS:\n{log}\n\n"
         f"LATEST STATUS DOCS:\n{docs}\n\n"
-        f"CURRENT PROJECT OBJECT (update in place, same schema):\n{current_block}"
+        f"CURRENT PROJECT OBJECT (return a JSON patch of changed top-level fields only):\n"
+        f"{current_block}"
     )
 
     client = build_client()
     print(f"Calling GitHub Models ({MODEL}) for project '{args.project}'...")
-    resp = client.chat.completions.create(
-        model=MODEL,
-        temperature=0,
-        max_tokens=5000,
+    resp = call_model(
+        client,
         messages=[
             {"role": "system", "content": SYSTEM_INSTRUCTION},
             {"role": "user", "content": user_msg},
         ],
     )
-    new_block = clean_object(resp.choices[0].message.content or "")
 
+    choice = resp.choices[0]
+    if getattr(choice, "finish_reason", None) == "length":
+        sys.exit(
+            f"ERROR: model output hit the token cap (finish_reason=length) — the patch "
+            f"was truncated. The set of changed fields is too large for one request "
+            f"(GitHub Models free tier caps output at {OUTPUT_TOKEN_CAP} tokens). "
+            f"Narrow the docs window or update fewer fields per run."
+        )
+
+    patch = parse_patch(choice.message.content or "")
+    if not patch:
+        print("No changed fields reported — data.js already current.")
+        return 0
+    print(f"Patch fields: {', '.join(patch)}")
+
+    new_block = apply_patch(current_block, patch)
     spliced = data_js[:i] + "\n    " + new_block + ",\n    " + data_js[j:]
 
     if not node_check(spliced):
