@@ -68,7 +68,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P5 Views / Sheets / 3D / Workspace Coherence",
             pct: 15,
-            note: "SHIPPED — 5.5 Navisworks swap planned; Sheets gated OFF",
+            note: "ON HOLD — On hold pending re-scan; early wiring only (5.1/5.2 ViewPreset/Markups). 5.5 Navisworks swap planned; Sheets gated OFF",
             tasks: [
               { label: "5.1/5.2 early wiring: ViewPresetSidebar + MarkupsList", status: "done", note: "Shipped 39c326b" },
               { label: "5.2 PDF-first sheet rendering decision locked", status: "done", note: "06-04 — PDF as canonical artifact; PyMuPDF/AGPL removed; SVF2/APS Viewer deferred to later wave" },
