@@ -40,6 +40,14 @@ import sys
 import tempfile
 from pathlib import Path
 
+# Fields the LLM bot is NEVER allowed to write. `progress` (the phase tree) and
+# `waves` are owned exclusively by the deterministic ledger sync (sync_ledgers.py),
+# which renders them straight from BIMpossible_PHASE-STATUS.md / WAVE-STATUS.md with
+# no model in the loop. A weak free-tier model re-deriving phase numbering from prose
+# is exactly what produced the historical "P7 = Model QA" drift, so it is hard-blocked
+# here — not merely discouraged in the prompt. See REFRESH-SPEC.md "Phase status ingestion".
+PROTECTED_FIELDS = {"progress", "waves"}
+
 BASE_URL = os.environ.get("GITHUB_MODELS_BASE_URL", "https://models.github.ai/inference")
 MODEL = os.environ.get("GITHUB_MODEL", "openai/gpt-4o-mini")
 # GitHub Models free tier caps gpt-4o-mini at ~8000 input tokens and 4000 OUTPUT
@@ -63,8 +71,9 @@ SYSTEM_INSTRUCTION = (
     "- Each returned value MUST match the existing schema and nesting of that field "
     "exactly (same structure, same types). Inside a returned field, copy any "
     "sub-values you are not changing verbatim.\n"
-    "- Do NOT return the large 'progress' phases tree unless a phase percentage, a "
-    "task status, or a task note has actually changed.\n"
+    "- NEVER return 'progress' or 'waves'. Those two fields are owned by a separate "
+    "deterministic ledger sync and are stripped from your output if present. Do not "
+    "touch phase names, phase numbering, phase percentages, tasks, or wave status.\n"
     "- Be conservative: if the docs do not clearly show a field changed, omit it. "
     "Do not invent data."
 )
@@ -223,10 +232,13 @@ _TOPKEY_RE = re.compile(r"(?m)^( {6})(\w+):")
 _VALUE_RE = re.compile(r"(?s)^(\s*)(.*?)(,?)(\s*)$")
 
 
-def apply_patch(block: str, patch: dict) -> str:
+def apply_patch(block: str, patch: dict, serialize=to_js) -> str:
     """Replace the values of changed top-level fields in `block` (a JS object literal
     `{ ... }`) with serialized values from `patch`. Untouched fields are preserved
-    byte-for-byte. Keys the model invents (not already in the block) are skipped."""
+    byte-for-byte. Keys the model invents (not already in the block) are skipped.
+
+    `serialize(value, indent)` controls JS rendering; defaults to the verbose `to_js`.
+    The deterministic ledger sync passes a compact serializer to keep diffs small."""
     open_i = block.index("{")
     close_i = block.rfind("}")
     body = block[open_i + 1:close_i]
@@ -249,7 +261,7 @@ def apply_patch(block: str, patch: dict) -> str:
         if key in patch:
             vm = _VALUE_RE.match(raw)
             lead, _old, comma, trail = vm.group(1), vm.group(2), vm.group(3), vm.group(4)
-            out.append(lead + to_js(patch[key], 6) + comma + trail)
+            out.append(lead + serialize(patch[key], 6) + comma + trail)
         else:
             out.append(raw)
         cursor = val_end
@@ -314,6 +326,16 @@ def main() -> int:
         )
 
     patch = parse_patch(choice.message.content or "")
+
+    # Hard fence (the actual guarantee, independent of the prompt): drop any protected
+    # field the model returned. `progress` and `waves` are owned by sync_ledgers.py;
+    # a stray one here can never reach data.js. This lives in the bot's flow, not in
+    # apply_patch, so the deterministic ledger sync can still write those fields.
+    for key in sorted(PROTECTED_FIELDS & patch.keys()):
+        print(f"  (BLOCKED) refusing model write to protected field '{key}' "
+              f"(owned by sync_ledgers.py)", file=sys.stderr)
+        patch.pop(key)
+
     if not patch:
         print("No changed fields reported — data.js already current.")
         return 0

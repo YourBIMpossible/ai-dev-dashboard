@@ -3,6 +3,30 @@
 Instructions for any Claude session (scheduled or on-demand "refresh dashboard") that updates
 `F:\AI-Dev\Dashboard\data.js`. The HTML shell (`index.html`) never needs touching on a refresh.
 
+## Automation architecture (read first — 2026-06-23)
+
+`data.js` has THREE writers, split by field so they cannot fight:
+
+1. **`sync_ledgers.py` — phases + waves (deterministic, NO model).** Renders
+   `progress.phases[]` (name + status note) and the `waves` block straight from the
+   owner-maintained ledgers (`BIMpossible_PHASE-STATUS.md`, `BIMpossible_WAVE-STATUS.md`).
+   Preserves curated `pct` + `tasks`. This is the anti-drift core: phase numbering can
+   only come from the ledger. Idempotent; run it any time.
+2. **`sync_dashboard.py` — soft prose only (GitHub Models, on source-repo push).** Updates
+   `oneLiner` / `focus` / `recent` / `reminders` etc. **Hard-blocked from `progress` and
+   `waves`** (`PROTECTED_FIELDS`) — a weak model re-deriving phase numbers from prose is
+   what caused the historical "P7 = Model QA" drift, so it physically cannot touch them.
+3. **A human / Claude on-demand refresh** — the fuller scan (activity arrays, git state,
+   audit, links) per the per-project sources below.
+
+**Guard:** `validate_dashboard.py` runs inside `push-dashboard.ps1` before EVERY commit.
+It blocks the push if any phase number contradicts the ledger (e.g. P7 named "Model QA",
+P6 named "content authoring"). Wrong phase numbering can no longer reach the live site.
+
+**Schedule:** Windows Task "BIMpossible Dashboard Daily Refresh" runs `Refresh-Dashboard.ps1`
+daily at 06:00 — ledger render → date stamp → guard → push. No model calls. To change names
+on the dashboard, edit the **ledger** (single source of truth), not `data.js`.
+
 ## Rules
 
 1. **Only rewrite `data.js`.** Do not modify `index.html` or this file during a routine refresh.
@@ -61,7 +85,21 @@ Instructions for any Claude session (scheduled or on-demand "refresh dashboard")
 - `F:\AI-Dev\AI-Server\PROGRAM_PLAN.md` - the work-package map (Foundation + WP-A..G); drives `progress.phases`. `handoffs\WP-*.md` - one per work package; when a WP's PR merges (CI green), flip its phase tasks to `done` and raise the phase pct.
 - Build/hardware plan: `F:\AI-Dev\AI-Brain-Data\_status\AI-Server_Build_and_Integration_Plan.md` (the dedicated 3090 box). Keep its open OS/runtime choices in `pendingDecisions` until locked.
 - CI: GitHub Actions `ci.yml` (pytest matrix 3.10-3.12). If the newest run is failing, add a `reminders` line. Minutes show in the Actions panel (AI-Server is in `github_actions_sync.mjs` REPOS).
-- Latest automation output: newest `F:\AI-Dev\AI-Server\out\digest-*.md` (and future `out\<job>\*`) -> `recent` / `lastActivity`.
+- **Live status snapshot (WP-D1) — run the helper, read-only LAN poll:**
+  `python F:\AI-Dev\AI-Server\scripts\aiserver_status.py` prints JSON with `endpoint`
+  (`up`, `host`, `models_available` from `/api/tags`, `models_loaded` from `/api/ps`) and
+  `jobs` (newest **digest / weekly-rollup / decision-drift**, each `{file, modified, summary}`
+  or `null`). The dashboard is a static site, so this is a point-in-time snapshot captured at
+  refresh, not browser-live. Surface it on the aiserver card **via `data.js` only — never edit
+  `index.html`** (rule 1):
+  - `recent`: one terse line per non-null job (e.g. `Digest 2026-06-16 — <summary>`,
+    `Rollup …`, `Drift …`), plus a line
+    `Endpoint up · models: qwen2.5-coder:14b, nomic-embed-text (snapshot HH:MM)` —
+    or `Endpoint down (snapshot HH:MM)` when `endpoint.up` is false.
+  - `lastActivity`: the newest job's `{date from modified, summary}`.
+  - Helper unavailable / endpoint unreachable at refresh: add a `reminders` line
+    `inference endpoint unreachable at refresh (HH:MM)` and keep previous data (rule 6) —
+    do NOT fail the refresh.
 - Relocation flag: while `.env` `OLLAMA_HOST` still targets localhost (the 5080), keep a `reminders` note that inference hasn't moved to the 3090 box yet.
 
 ## Audit ingestion (every refresh - daily, Monday, and on-demand)
@@ -109,6 +147,20 @@ This is what stops wave completions slipping when builds land without a fresh bu
    - newest `01_BuildLog\*closeout*.md` for a wave the ledger doesn't show CLOSED -> flag it.
    - NEVER run `Complete-Wave.ps1` or create tags - read only.
 6. Ledger missing -> keep the previous `waves` block, add a reminder.
+
+## Phase status ingestion (bimpossible only)
+
+Phases (the product arc) are a BIMpossible concept; this applies to the `bimpossible` project only. The
+single source of truth is the ledger `F:\AI-Dev\BIMpossible_Workspace\00_Strategy\BIMpossible_PHASE-STATUS.md`
+(one row per PRODUCT phase). Like the wave ledger it is **push-independent** — read it EVERY refresh and
+populate `progress.phases[]`; NEVER write it. This is what stops phase definitions drifting when an owner
+renumber lands without a fresh hand-edit (the historical cause of dashboard phase rot).
+
+1. **Phase ≠ Wave.** "Phase" = product arc; "Wave" = execution ledger — different axes (Phase 7 Write-back = Wave 8). Do NOT put a Wave bucket inside `progress.phases[]`; wave status comes only from the wave ledger (previous section).
+2. Parse the ledger table `Phase | Name | Status | Gate/depends on | Note`. Use **Name** verbatim for `progress.phases[].name`, and **Status**/**Note** for the phase `note`. Canonical numbering (never renumber a phase to match a wave): 6 = Platform/Billing + Client-Mgmt; 7 = Revit Link Write-back; 11 = Model QA & Health; 12 = Content Authoring. "Phase 6 = content authoring" and "Phase 7 = Model QA" are DEPRECATED/VOID — never emit them.
+3. `pct` per phase follows the Progress rules below (100 only on evidence; BUILT/not-hardened = 60–90).
+4. Full definitions, history, and the old→new mapping live in `00_Strategy\2026-06-23__Phase_Canonical_Guide_and_HardRules_v2-Reviewed.md` — consult it if a row is ambiguous; never re-derive phase meanings from prose docs (that is what caused the drift).
+5. Ledger missing -> keep the previous `progress.phases` block, add a reminder.
 
 ## data.js schema (v4)
 
