@@ -1,5 +1,5 @@
 # ============================================================
-# Dashboard auto-push — called after every refresh (manual or scheduled).
+# Dashboard auto-push - called after every refresh (manual or scheduled).
 # Runs the pre-push GUARD first: data.js phase numbering must match the
 # owner-maintained PHASE-STATUS.md ledger. A failing guard ABORTS the push,
 # so a card with wrong phase numbering (the historical "P7 = Model QA" drift)
@@ -18,7 +18,7 @@ if (-not $python) { $python = (Get-Command py -ErrorAction SilentlyContinue).Sou
 if ($python) {
     & $python "$PSScriptRoot\validate_dashboard.py"
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "Pre-push validation FAILED — refusing to push. Fix the errors above (data.js phase numbering vs the ledger)." -ForegroundColor Red
+        Write-Host "Pre-push validation FAILED - refusing to push. Fix the errors above (data.js phase numbering vs the ledger)." -ForegroundColor Red
         exit 1
     }
 } else {

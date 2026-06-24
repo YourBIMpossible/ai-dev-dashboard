@@ -23,14 +23,14 @@ $ts  = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $python = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $python) { $python = (Get-Command py -ErrorAction SilentlyContinue).Source }
 if (-not $python) {
-    "ERROR: python not found on PATH — cannot refresh." | Add-Content -Path $log -Encoding utf8
+    "ERROR: python not found on PATH - cannot refresh." | Add-Content -Path $log -Encoding utf8
     exit 1
 }
 
 # 1. Render phases + waves from the ledgers.
 & $python "$PSScriptRoot\sync_ledgers.py" 2>&1 | Add-Content -Path $log -Encoding utf8
 if ($LASTEXITCODE -ne 0) {
-    "ERROR: sync_ledgers.py failed — aborting (nothing pushed)." | Add-Content -Path $log -Encoding utf8
+    "ERROR: sync_ledgers.py failed - aborting (nothing pushed)." | Add-Content -Path $log -Encoding utf8
     exit 1
 }
 
