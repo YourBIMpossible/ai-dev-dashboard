@@ -24,7 +24,7 @@ window.DASHBOARD_DATA = {
             { label: "Docker/compose dev setup", status: "done" }
           ]
         },
-        { name: "P3 Data core", pct: 99, note: "Wave 7 + Wave 5 XLSX + Wave 4.9 Classification + Wave 4.10 Spec Draft all shipped",
+        { name: "P3 Data core", pct: 93, note: "Wave 7 + Wave 5 XLSX + Wave 4.9 Classification + Wave 4.10 Spec Draft + Waves 10-17 discipline schedule rollout all shipped; Waves 15/18/19 (Civil/Landscape/Commissioning) specced, not built",
           tasks: [
             { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
             { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
@@ -33,7 +33,12 @@ window.DASHBOARD_DATA = {
             { label: "Wave 5 XLSX export", status: "done", note: "PR #109 06-11 — GET /data/elements/xlsx + Sheet button; 50k row cap" },
             { label: "Wave 4.9 Classification Enrichment (OmniClass + CSI)", status: "done", note: "f207d41 06-12 — 17 schedule endpoints; ScheduleClassificationBar + ✦ badge; live smoke owed at prod deploy" },
             { label: "Wave 4.10 Spec Draft Generation", status: "done", note: "3cf91a0 06-12 — spec library (32 JSONs, 277 tests); rule engine + Markdown/Word/PDF renderers + SpecDraftLauncher/Modal; live smoke owed at prod deploy" },
-            { label: "CSP hardened (viewer fonts 55→0 violations)", status: "done", note: "PR #79 06-10" }
+            { label: "CSP hardened (viewer fonts 55→0 violations)", status: "done", note: "PR #79 06-10" },
+            { label: "Waves 10/11/12/13/14/17 discipline-schedule shapers (Elec/Mech/Plumbing/Structural/FP/ICT)", status: "done", note: "All 6 waves: code shipped + live smokes PASSED 06-11/12 — 169 Air Terminals, 1510 Plumbing fixtures, Framing/Foundation/Column, 268 FP pendents, 180 ICT devices (TIA-606)" },
+            { label: "Wave 16 Interiors schedule bar config", status: "done", note: "PR #114; 23/23 vitest green; dedicated Ceilings/Flooring shapers still pending; live smoke owed" },
+            { label: "Wave 20 billing cost view + multi-provider BYO keys", status: "done", note: "PR #116; admin smokes PASSED; cost-view UI smoke owed" },
+            { label: "Wave 21 click-to-sort all schedule tables", status: "done", note: "PR #115; 8 tests green" },
+            { label: "Remaining discipline waves: 15 Civil / 18 Landscape / 19 Commissioning", status: "pending", note: "Scope-lock + BuildSpec drafts written 06-13; not built" }
           ]
         },
         { name: "P4 Assistant", pct: 93, note: "Phase 4b HITL action-enabled assistant shipped + smoke PASSED; schedule-push outline only",
@@ -57,21 +62,6 @@ window.DASHBOARD_DATA = {
             { label: "5.2 Sheets & Document Assembly (markup, RFI flagging, permit-set annotation, PDF compose)", status: "pending" },
             { label: "5.3 3D Navigation (viewport controls, camera presets, clipping planes)", status: "pending" },
             { label: "5.4 Workspace Coherence (unified sidebar/toolbar, persistent layout, quick switcher)", status: "pending" }
-          ]
-        },
-        { name: "Waves 10-21 Rollout", pct: 78, note: "Waves 10-14/16/17 fully smoked. Waves 20/21 shipped. Waves 15/18/19 specced (scope-lock drafts 06-13), not built.",
-          tasks: [
-            { label: "Wave specs drafted", status: "done", note: "15/18/19 scope-lock + BuildSpec drafts added 06-13" },
-            { label: "Waves 10/11/12/13/14/17 discipline-schedule shapers", status: "done", note: "All 6 waves: code shipped + live smokes PASSED 06-11/12" },
-            { label: "Wave 11 Mech smoke PASSED", status: "done", note: "06-11 — 169 Air Terminals + 60 units confirmed" },
-            { label: "Wave 12 Plumbing smoke PASSED", status: "done", note: "06-11 — 1510 fixtures confirmed" },
-            { label: "Wave 13 Structural smoke PASSED", status: "done", note: "06-11 — Framing/Foundation/Column confirmed" },
-            { label: "Wave 14 Fire Protection smoke PASSED", status: "done", note: "06-11 — 268 pendents confirmed" },
-            { label: "Wave 17 ICT smoke PASSED", status: "done", note: "06-11 — 180 devices w/ TIA-606 params confirmed" },
-            { label: "Wave 16 Interiors (bar config)", status: "done", note: "SHIPPED PR #114; 23/23 vitest green; dedicated Ceilings/Flooring shapers still pending; live smoke owed" },
-            { label: "Wave 20 billing cost view + multi-provider BYO keys", status: "done", note: "PR #116; admin smokes PASSED; cost-view UI smoke owed" },
-            { label: "Wave 21 click-to-sort all schedule tables", status: "done", note: "PR #115; 8 tests green" },
-            { label: "Remaining discipline waves (15 Civil/18 Landscape/19 Commissioning)", status: "pending", note: "Scope-lock + BuildSpec drafts written 06-13; not built" }
           ]
         },
         { name: "P6 Platform / Billing + Client Mgmt", pct: 88, note: "Access tiers + billing + usage metering + Client-Mgmt Phase A (firms/admin/account) shipped in dev; true-prod deploy pending",
