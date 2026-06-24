@@ -3,8 +3,8 @@
 // prose fields: updated on source-repo push by sync_dashboard.py (fenced off phases/waves).
 // daily 06:00 scheduled refresh + pre-push phase-numbering guard. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-06-23",
-  generatedBy: "on-demand refresh",
+  generated: "2026-06-24",
+  generatedBy: "scheduled refresh",
   activitySince: "2026-06-10",
   projects: [
     /* PROJECT:bimpossible:START */
@@ -97,7 +97,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P7 Model Write-back — DA4R + Revit Link (two engines)",
             pct: 35,
-            note: "ON HOLD — Co-equal engines, ship together. Revit Link live-except-sync; DA4R backend scaffolded (off). Owner gates: (1) add BIMpossible-AddIns repo, (2) \"go\" to re-enable sync. See proposal 2026-06-23 (§2 DoD) for exact acceptance criteria.",
+            note: "ON HOLD — Co-equal engines, ship together. Revit Link live-except-sync; DA4R backend scaffolded (off). Owner gates: (1) add BIMpossible-AddIns repo, (2) \"go\" to re-enable sync. See proposal 2026-06-23 (§2 DoD) for exact acceptance criteria. Audit gate (hard — from `2026-06-21__AuditAndHistory_Pattern.md`): `edit_log` + `revit_link_request_log` migrations applied AND adapter writes to both tables on every call before Phase 7 can ship.",
             tasks: [
               { label: "write_instance_parameter endpoint live (single-user, flag=ON in prod)", status: "done", note: "revit_link/native_adapter.py lines 261-412; relay live; BIMPOSSIBLE_REVIT_LINK_ENABLED=1 in pilot" },
               { label: "Frontend UX: useRevitLink hook + EditParameterDialog + SyncConflictModal", status: "done", note: "Shipped in prior build" },
@@ -112,7 +112,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P8 Project Setup Wizard",
             pct: 60,
-            note: "BUILT (gated OFF) — First Autodesk-write feature; `aps_write.py` stubs",
+            note: "BUILT (gated OFF) — First Autodesk-write feature; `aps_write.py` stubs. Audit gate: `provisioning_jobs_status_history` table present (per Audit & History Pattern §4) before going live.",
             tasks: [
               { label: "No-write planning core (planner + reverse-order rollback walker + default-closed gate)", status: "done", note: "06-14 — pure stdlib, not wired into main.py; 18 tests green" },
               { label: "ProvisioningJob DB model + Alembic migration (t2u3v4w5x6y7)", status: "done", note: "06-14 — verified via isolated local-CI lane; alembic check clean" },
@@ -125,7 +125,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P9 Product Data Ingestion",
             pct: 10,
-            note: "CONDITIONAL — Supersedes Phase 3.X Manufacturer Data Ingestion",
+            note: "CONDITIONAL — Supersedes Phase 3.X Manufacturer Data Ingestion. Audit gate: all 5 new tables have `created_at`/`updated_at`; `product_type_binding_status_history` + `extraction_review_queue_status_history` tables present (per Audit & History Pattern §4).",
             tasks: [
               { label: "Build spec: full-product foundation (SourceParser + ExtractionProfile registries; 5-table schema)", status: "done", note: "06-14 — Phase9_BuildSpec.md; discipline-neutral, write-back first-class (no MVP framing)" },
               { label: "Parser spike: pdfplumber extractor w/ per-field provenance + confidence + eval harness", status: "done", note: "06-14 — isolated venv, 17 tests green; pdfplumber (MIT) chosen over PyMuPDF (AGPL)" },
@@ -237,7 +237,7 @@ window.DASHBOARD_DATA = {
       waves: {
         updated: "2026-06-18",
         source: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 25, built: 0, inFlight: 2, ahead: 4 },
+        summary: { done: 25, built: 0, inFlight: 2, ahead: 5 },
         current: [
           { id: "1", title: "Foundation consolidation", status: "PARTIAL", date: "2026-05-28", note: "Open: confirm audit branches merged, apply Phase 3.5 migration to live DB, generate Alembic baseline (HIGH-8)" },
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
