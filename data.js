@@ -136,9 +136,14 @@ window.DASHBOARD_DATA = {
         }
       ]},
       activity: [11,44,44,35,45,46,16,13,0,49,120,29,25,4],
-      lastActivity: { date: "2026-06-13", summary: "Client-Management UIs shipped (0e0242f): Admin Portal v2 (alert bar, KPI strip, firm list, triage panel, onboard wizard) + My Account dashboard (budget, BYO-key, cost-by-model); next.config proxy fix un-broke /admin + /account. CI green; 1510 DB + 1008 pure BE / 1103 FE tests." },
+      lastActivity: {
+        date: "2026-06-13",
+        summary: "Client-Management UIs shipped (0e0242f): Admin Portal v2 (alert bar, KPI strip, firm list, triage panel, onboard wizard) + My Account dashboard (budget, BYO-key, cost-by-model); next.config proxy fix un-broke /admin + /account. CI green; 1510 DB + 1008 pure BE / 1103 FE tests."
+      },
       branch: "main at 4c52f78; 0 open PRs; 0 ahead of origin",
-      git: { warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)." },
+      git: {
+        warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)."
+      },
       nextActions: [
         "True-prod deploy (runbook 06-12): alembic upgrade head (Phase A's 4 migrations m5n6o7p8q9r0→p8q9r0s1t2u3 + prior batch), set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, then DELETE stale done-rows in relationship_prewarm_jobs per model",
         "Post-deploy smoke Wave 4.10: open any schedule → Spec Draft launcher → modal opens + Markdown/Word/PDF downloads work",
@@ -194,15 +199,51 @@ window.DASHBOARD_DATA = {
       waves: {
         updated: "2026-06-12",
         source: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 25, built: 0, inFlight: 1, ahead: 5 },
+        summary: {
+          done: 25,
+          built: 0,
+          inFlight: 1,
+          ahead: 5
+        },
         current: [
-          { id: "1", title: "Foundation consolidation", status: "PARTIAL", note: "Open: Alembic baseline (HIGH-8), Phase 3.5 migration to live DB, confirm audit branches merged" },
-          { id: "4.9", title: "Classification Enrichment (OmniClass + CSI)", status: "SHIPPED", date: "2026-06-12", note: "OFF-LEDGER — shipped f207d41 but no WAVE-STATUS row; live smoke owed at prod deploy" },
-          { id: "4.10", title: "Spec Draft Generation", status: "SHIPPED", date: "2026-06-12", note: "OFF-LEDGER — complete spec library for all CSI categories (32 JSONs, 3cf91a0); live UI smoke owed" },
-          { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED", note: "= Program Phase 11 (Data link: BIMpossible → Revit). Next code wave after prod deploy stabilizes; gates Phase 9 (Product Data Ingestion)" },
-          { id: "15", title: "Civil schedules", status: "PENDING", note: "Scope-lock + BuildSpec drafts written 06-13" }
+          {
+            id: "1",
+            title: "Foundation consolidation",
+            status: "PARTIAL",
+            note: "Open: Alembic baseline (HIGH-8), Phase 3.5 migration to live DB, confirm audit branches merged"
+          },
+          {
+            id: "4.9",
+            title: "Classification Enrichment (OmniClass + CSI)",
+            status: "SHIPPED",
+            date: "2026-06-12",
+            note: "OFF-LEDGER — shipped f207d41 but no WAVE-STATUS row; live smoke owed at prod deploy"
+          },
+          {
+            id: "4.10",
+            title: "Spec Draft Generation",
+            status: "SHIPPED",
+            date: "2026-06-12",
+            note: "OFF-LEDGER — complete spec library for all CSI categories (32 JSONs, 3cf91a0); live UI smoke owed"
+          },
+          {
+            id: "8",
+            title: "Revit Link Phase 1 multi-user pass",
+            status: "PLANNED",
+            note: "= Program Phase 11 (Data link: BIMpossible → Revit). Next code wave after prod deploy stabilizes; gates Phase 9 (Product Data Ingestion)"
+          },
+          {
+            id: "15",
+            title: "Civil schedules",
+            status: "PENDING",
+            note: "Scope-lock + BuildSpec drafts written 06-13"
+          }
         ],
-        lastCompleted: { id: "21", title: "Schedule column sort", date: "2026-06-12" },
+        lastCompleted: {
+          id: "21",
+          title: "Schedule column sort",
+          date: "2026-06-12"
+        },
         drift: [
           "Wave tags now exist (wave-7/16/20/21-complete) — all 4 match SHIPPED ledger rows (consistent). Tagging ritual only partially adopted; most done waves untagged (FYI, not a mismatch)",
           "Waves 4.9 + 4.10 shipped in git (f207d41; 3cf91a0 'complete spec library, 32 JSONs') but absent from WAVE-STATUS.md ledger — add rows so summary counts are authoritative"
