@@ -3,7 +3,7 @@
 // prose fields: updated on source-repo push by sync_dashboard.py (fenced off phases/waves).
 // daily 06:00 scheduled refresh + pre-push phase-numbering guard. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-06-24",
+  generated: "2026-06-25",
   generatedBy: "scheduled refresh",
   activitySince: "2026-06-10",
   projects: [
@@ -68,7 +68,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P5 Views / Sheets / 3D / Workspace Coherence",
             pct: 15,
-            note: "ON HOLD — On hold pending re-scan; early wiring only (5.1/5.2 ViewPreset/Markups). 5.5 Navisworks swap planned; Sheets gated OFF",
+            note: "ON HOLD — Bonus, not a need (owner 2026-06-24). Pre-pilot/early wiring only (5.1/5.2 ViewPreset/Markups); 5.3/5.4 unconfirmed pending re-scan. Wave 9 (Forma) only affects how 5.1/5.3/5.5 viewer slices are hosted at resume. 5.5 Navisworks planned; Sheets gated OFF",
             tasks: [
               { label: "5.1/5.2 early wiring: ViewPresetSidebar + MarkupsList", status: "done", note: "Shipped 39c326b" },
               { label: "5.2 PDF-first sheet rendering decision locked", status: "done", note: "06-04 — PDF as canonical artifact; PyMuPDF/AGPL removed; SVF2/APS Viewer deferred to later wave" },
@@ -91,7 +91,7 @@ window.DASHBOARD_DATA = {
               { label: "Client-Mgmt Phase A backend (firms, memberships, DB-backed cost, alerts, enrichment, admin CRUD)", status: "done", note: "06-12 e749918 — 8 tables/4 migrations; /account membership-gated; cost.py raises on unmatched model" },
               { label: "Admin Portal v2 + My Account dashboards", status: "done", note: "06-12/13 (0e0242f) — alert bar/KPI strip/firm list/triage/onboard wizard; My Account budget+BYO-key; next.config proxy fix" },
               { label: "Tests for /account/budget + /account/api-key + admin-portal UI", status: "active", note: "Partial — backend /account tests done & green (uncommitted branch); FE admin/account UI tests missing: AdminShell, FirmEditDrawer, ConfirmDialog, signin, AdminSessionProvider, My Account." },
-              { label: "True-prod deploy: upgrade to head s1t2u3v4w5x6 via #131 decoupled path", status: "blocked", note: "Gated on #131 migration crash-loop decouple (hard prerequisite). Old one-shot Phase-A-only upgrade path deprecated/unsupported at this head. Runbook 2026-06-12 true-prod-deploy." }
+              { label: "True-prod deploy: upgrade to head s1t2u3v4w5x6 via #131 decoupled path", status: "pending", note: "Unblocked 06-23 — #131 migration-decouple MERGED to main (code tip 0b3a680). Decoupled path now live: one-shot backend-migrate service applies migrations, backend then verifies head via ensure_schema_ready() (db/migrate.py). Remaining: run the true-prod deploy itself per Runbook 2026-06-12 true-prod-deploy. Old one-shot Phase-A-only path still deprecated at this head." }
             ]
           },
           {
@@ -164,7 +164,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P12 Content Authoring",
             pct: 0,
-            note: "PLACEHOLDER (unbuilt) — Specs → placed model content; was Phase 6",
+            note: "PLACEHOLDER (unbuilt) — Specs → placed model content; was Phase 6. Phase 5 removed as a gate (owner 2026-06-24)",
             tasks: [
               { label: "Phase 4 (Embedded Assistant) substantially complete", status: "done", note: "Phase 4a + 4b merged to main" },
               { label: "Phase 5.2 (Sheets & Document Assembly) shipped", status: "pending", note: "Gate — needed for permit-set / handover deliverable support" },
@@ -237,7 +237,7 @@ window.DASHBOARD_DATA = {
       waves: {
         updated: "2026-06-18",
         source: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 25, built: 0, inFlight: 2, ahead: 5 },
+        summary: { done: 25, built: 0, inFlight: 2, ahead: 4 },
         current: [
           { id: "1", title: "Foundation consolidation", status: "PARTIAL", date: "2026-05-28", note: "Open: confirm audit branches merged, apply Phase 3.5 migration to live DB, generate Alembic baseline (HIGH-8)" },
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
