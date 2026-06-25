@@ -300,9 +300,14 @@ window.DASHBOARD_DATA = {
         }
       ]},
       activity: [34,17,9,3,14,0,39,0,0,0,0,0,0,1],
-      lastActivity: { date: "2026-06-23", summary: "refactor(revitlink): remove Anti-Worksets auto-stamp updater; bundle Duplicate Collection revisions (fddcaaf)" },
+      lastActivity: {
+        date: "2026-06-23",
+        summary: "refactor(revitlink): remove Anti-Worksets auto-stamp updater; bundle Duplicate Collection revisions (fddcaaf)"
+      },
       branch: "overnight/tool-revisions-2026-06-16 (57 ahead of main)",
-      git: { warn: "Branch overnight/tool-revisions-2026-06-16 is 57 commits ahead of main — large unmerged batch. Review before merging." },
+      git: {
+        warn: "Branch overnight/tool-revisions-2026-06-16 is 57 commits ahead of main — large unmerged batch. Review before merging."
+      },
       nextActions: [
         "Tool 7 Phase 1 (sheets) smoke test; Phase 2 = view placement",
         "Definition of Done sweep: icons + How-To guides + tooltip/F1 wiring for Tools 10-21",
@@ -311,7 +316,9 @@ window.DASHBOARD_DATA = {
         "Update TOOL_BACKLOG.md: add Tools 14-21 to numbered backlog table with status",
         "Merge/close feat/model-audit-consolidation-2026-06-12 when consolidation lands"
       ],
-      pendingDecisions: [ "Civil Shared-Coordinate Audit scanner - scope unanswered (PARKED)" ],
+      pendingDecisions: [
+        "Civil Shared-Coordinate Audit scanner - scope unanswered (PARKED)"
+      ],
       blockers: [],
       reminders: [
         "Core.dll co-loads in one Revit process: redeploy ALL add-ins together when Core changes",
