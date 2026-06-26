@@ -3,7 +3,7 @@
 // prose fields: updated on source-repo push by sync_dashboard.py (fenced off phases/waves).
 // daily 06:00 scheduled refresh + pre-push phase-numbering guard. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-06-25",
+  generated: "2026-06-26",
   generatedBy: "scheduled refresh",
   activitySince: "2026-06-10",
   projects: [
@@ -235,16 +235,16 @@ window.DASHBOARD_DATA = {
         open: []
       },
       waves: {
-        updated: "2026-06-18",
+        updated: "2026-06-25",
         source: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 25, built: 0, inFlight: 2, ahead: 4 },
+        summary: { done: 26, built: 0, inFlight: 2, ahead: 4 },
         current: [
           { id: "1", title: "Foundation consolidation", status: "PARTIAL", date: "2026-05-28", note: "Open: confirm audit branches merged, apply Phase 3.5 migration to live DB, generate Alembic baseline (HIGH-8)" },
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
           { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED" },
           { id: "9", title: "APS Forma embed evaluation", status: "PLANNED" }
         ],
-        lastCompleted: { id: "21", title: "Schedule column sort", date: "2026-06-12" },
+        lastCompleted: { id: "22", title: "Panel workflow — per-circuit phase + load-type columns", date: "2026-06-25" },
         drift: []
       }
     },
