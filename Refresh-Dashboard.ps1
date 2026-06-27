@@ -22,9 +22,33 @@
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
-$log = Join-Path $PSScriptRoot "_backups\refresh-log.txt"
-$ts  = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$log      = Join-Path $PSScriptRoot "_backups\refresh-log.txt"
+$failFlag = Join-Path $PSScriptRoot "_backups\REFRESH-FAILED.flag"
+$ts       = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 "=== $ts  daily refresh start ===" | Add-Content -Path $log -Encoding utf8
+
+# Ping the desktop (interactive task) AND drop a durable flag when the refresh
+# fails, so a backend failure surfaces the same morning instead of waiting for the
+# 3-day staleness banner. Both the popup and the flag are best-effort: guarded so
+# the alert mechanism itself can never crash or abort the run.
+function Alert-Failure {
+    param([string]$Reason)
+    $stamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "ALERT: $Reason" | Add-Content -Path $log -Encoding utf8
+    try {
+        "Dashboard daily refresh FAILED at $stamp`r`n$Reason`r`nLive board may be stale. See _backups\refresh-log.txt" |
+            Set-Content -Path $failFlag -Encoding utf8
+    } catch {}
+    try {
+        $eap = $ErrorActionPreference; $ErrorActionPreference = 'Continue'
+        & msg.exe '*' "Dashboard refresh FAILED ($stamp): $Reason - live board may be stale. See refresh-log.txt" 2>$null
+        $ErrorActionPreference = $eap
+    } catch {}
+}
+
+function Clear-Alert {
+    if (Test-Path $failFlag) { Remove-Item $failFlag -Force -ErrorAction SilentlyContinue }
+}
 
 # Run a native command (python / powershell child) without letting its benign
 # stderr become a terminating error. Logs combined output; returns the exit code.
@@ -42,13 +66,13 @@ function Invoke-Logged {
 $python = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $python) { $python = (Get-Command py -ErrorAction SilentlyContinue).Source }
 if (-not $python) {
-    "ERROR: python not found on PATH - cannot refresh." | Add-Content -Path $log -Encoding utf8
+    Alert-Failure "python not found on PATH - cannot refresh."
     exit 1
 }
 
 # 1. Render phases + waves from the ledgers.
 if ((Invoke-Logged $python @("$PSScriptRoot\sync_ledgers.py")) -ne 0) {
-    "ERROR: sync_ledgers.py failed - aborting (nothing pushed)." | Add-Content -Path $log -Encoding utf8
+    Alert-Failure "sync_ledgers.py failed - aborting (nothing pushed)."
     exit 1
 }
 
@@ -64,7 +88,9 @@ $text  = [regex]::Replace($text, 'generatedBy: "[^"]*"', 'generatedBy: "schedule
 #    stderr cannot trip this script; exit code tells us if the push landed).
 $pushCode = Invoke-Logged "powershell.exe" @("-NoProfile","-ExecutionPolicy","Bypass","-File","$PSScriptRoot\push-dashboard.ps1")
 if ($pushCode -ne 0) {
-    "ERROR: push-dashboard.ps1 exited $pushCode - live dashboard may be STALE. Check above." | Add-Content -Path $log -Encoding utf8
+    Alert-Failure "push-dashboard.ps1 exited $pushCode - live dashboard may be STALE."
+} else {
+    Clear-Alert
 }
 
 "=== $ts  daily refresh done (push exit $pushCode) ===" | Add-Content -Path $log -Encoding utf8
