@@ -3,7 +3,7 @@
 // prose fields: updated on source-repo push by sync_dashboard.py (fenced off phases/waves).
 // daily 06:00 scheduled refresh + pre-push phase-numbering guard. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-06-26",
+  generated: "2026-06-27",
   generatedBy: "scheduled refresh",
   activitySince: "2026-06-10",
   projects: [
