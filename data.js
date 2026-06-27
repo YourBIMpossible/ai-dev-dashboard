@@ -97,7 +97,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P7 Model Write-back — DA4R + Revit Link (two engines)",
             pct: 35,
-            note: "ON HOLD — Co-equal engines, ship together. Revit Link live-except-sync; DA4R backend scaffolded (off). Owner gates: (1) add BIMpossible-AddIns repo, (2) \"go\" to re-enable sync. See proposal 2026-06-23 (§2 DoD) for exact acceptance criteria. Audit gate (hard — from `2026-06-21__AuditAndHistory_Pattern.md`): `edit_log` + `revit_link_request_log` migrations applied AND adapter writes to both tables on every call before Phase 7 can ship.",
+            note: "ON HOLD — Co-equal engines, ship together. Revit Link live-except-sync; DA4R backend scaffolded (off). Owner gates: (1) add BIMpossible-AddIns repo, (2) \"go\" to re-enable sync. See proposal 2026-06-23 (§2 DoD) for exact acceptance criteria. Audit gate (hard — from `2026-06-21__AuditAndHistory_Pattern.md`): `edit_log` + `revit_link_request_log` migrations applied AND adapter writes to both tables on every call; `GET /admin/audit/edits` endpoint + XLSX export live; `query_edit_log` assistant tool registered — all three required before Phase 7 can ship.",
             tasks: [
               { label: "write_instance_parameter endpoint live (single-user, flag=ON in prod)", status: "done", note: "revit_link/native_adapter.py lines 261-412; relay live; BIMPOSSIBLE_REVIT_LINK_ENABLED=1 in pilot" },
               { label: "Frontend UX: useRevitLink hook + EditParameterDialog + SyncConflictModal", status: "done", note: "Shipped in prior build" },
@@ -235,16 +235,16 @@ window.DASHBOARD_DATA = {
         open: []
       },
       waves: {
-        updated: "2026-06-25",
+        updated: "2026-06-26",
         source: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 26, built: 0, inFlight: 2, ahead: 4 },
+        summary: { done: 27, built: 0, inFlight: 2, ahead: 4 },
         current: [
           { id: "1", title: "Foundation consolidation", status: "PARTIAL", date: "2026-05-28", note: "Open: confirm audit branches merged, apply Phase 3.5 migration to live DB, generate Alembic baseline (HIGH-8)" },
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
           { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED" },
           { id: "9", title: "APS Forma embed evaluation", status: "PLANNED" }
         ],
-        lastCompleted: { id: "22", title: "Panel workflow — per-circuit phase + load-type columns", date: "2026-06-25" },
+        lastCompleted: { id: "C-1", title: "Shared-state on Redis (multi-worker foundation)", date: "2026-06-26" },
         drift: []
       }
     },
