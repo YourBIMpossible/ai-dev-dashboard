@@ -76,6 +76,13 @@ if ((Invoke-Logged $python @("$PSScriptRoot\sync_ledgers.py")) -ne 0) {
     exit 1
 }
 
+# 1b. Refresh per-project activity + lastActivity from REAL git history (gh api).
+#     Non-fatal: if GitHub is unreachable this run, phases/waves/date still ship and
+#     the dates simply catch up next run (no false-zeroing - see sync_activity.py).
+if ((Invoke-Logged $python @("$PSScriptRoot\sync_activity.py")) -ne 0) {
+    "WARN: sync_activity.py failed - activity/dates not refreshed this run." | Add-Content -Path $log -Encoding utf8
+}
+
 # 2. Stamp the generated date (UTF-8, no BOM via .NET; only two lines change).
 $today = Get-Date -Format "yyyy-MM-dd"
 $path  = Join-Path $PSScriptRoot "data.js"

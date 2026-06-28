@@ -40,13 +40,19 @@ import sys
 import tempfile
 from pathlib import Path
 
-# Fields the LLM bot is NEVER allowed to write. `progress` (the phase tree) and
-# `waves` are owned exclusively by the deterministic ledger sync (sync_ledgers.py),
-# which renders them straight from BIMpossible_PHASE-STATUS.md / WAVE-STATUS.md with
-# no model in the loop. A weak free-tier model re-deriving phase numbering from prose
-# is exactly what produced the historical "P7 = Model QA" drift, so it is hard-blocked
-# here — not merely discouraged in the prompt. See REFRESH-SPEC.md "Phase status ingestion".
-PROTECTED_FIELDS = {"progress", "waves"}
+# Fields the LLM bot is NEVER allowed to write, because a deterministic source owns
+# each one (one writer per field => nothing fights):
+#   - progress / waves      : sync_ledgers.py renders these from the PHASE-STATUS /
+#                             WAVE-STATUS ledgers. A weak free-tier model re-deriving
+#                             phase numbering from prose produced the historical
+#                             "P7 = Model QA" drift, so it is hard-blocked, not merely
+#                             discouraged in the prompt.
+#   - activity / lastActivity: sync_activity.py fills these from real git history
+#                             (gh api). The model must not invent or stale-overwrite
+#                             the freshness signal. (Added 2026-06-27 with the activity
+#                             scan, which fixed cards sitting ~2 weeks stale.)
+# See REFRESH-SPEC.md "Phase status ingestion".
+PROTECTED_FIELDS = {"progress", "waves", "activity", "lastActivity"}
 
 BASE_URL = os.environ.get("GITHUB_MODELS_BASE_URL", "https://models.github.ai/inference")
 MODEL = os.environ.get("GITHUB_MODEL", "openai/gpt-4o-mini")
