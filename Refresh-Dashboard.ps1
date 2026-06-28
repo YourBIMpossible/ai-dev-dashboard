@@ -92,6 +92,13 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
         "WARN: sync_activity.py failed - activity/dates not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
     }
 
+    # 1c. Build the phase-dependency DAG from the ledger's gate column (non-fatal:
+    #     needs networkx; a parse/import hiccup must not block the data refresh, and
+    #     the committed phase_dag.js stays valid until the next successful run).
+    if ((Invoke-Logged $python @("$PSScriptRoot\phase_dag.py")) -ne 0) {
+        "WARN: phase_dag.py failed - phase DAG not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+    }
+
     # 2. Stamp the generated date (UTF-8 no BOM via .NET; only two lines change).
     $path = Join-Path $PSScriptRoot "data.js"
     $text = [System.IO.File]::ReadAllText($path)
@@ -103,7 +110,7 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     if ((Invoke-Logged $python @("$PSScriptRoot\validate_dashboard.py")) -ne 0) { Alert-Failure "validate_dashboard.py failed - phase numbering vs ledger."; $result = 1; break }
 
     # 4. Stage only the dashboard data + metrics. Nothing staged => already current.
-    Invoke-Logged "git" @("add","data.js","graph-metrics.js") | Out-Null
+    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js") | Out-Null
     $staged = (& git diff --cached --name-only) -join "`n"
     if (-not $staged.Trim()) { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
 

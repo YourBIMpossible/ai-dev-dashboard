@@ -566,6 +566,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <script src="github_actions.js" onerror="void 0"></script>
 <script src="claude_api.js" onerror="void 0"></script>
 <script src="codebase/codebase-meta.js" onerror="void 0"></script>
+<script src="phase_dag.js" onerror="void 0"></script>
 <script>
 const D=window.DASHBOARD_DATA;
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
@@ -807,6 +808,7 @@ function buildSide(){
   h+=navI('overview',ICO.grid,'Overview');
   h+=navI('audit',ICO.shield,'Audit',totO?(totO+''):'✓',totH?'color:var(--red)':'color:var(--green)');
   h+=navI('graph',ICO.graph,'Codebase',gmL?gmL+'':'');
+  h+=navI('roadmap',ICO.layers,'Roadmap');
   const _si=getStrategyItems(),_sp=_si.filter(i=>i.status==='pending').length,_sa=_si.filter(i=>i.status==='approved').length;
   h+=navI('strategy',ICO.idea,'Strategy',_sp?_sp+'?':'');
   const _u=window.DASHBOARD_USAGE;
@@ -2193,6 +2195,41 @@ function codebaseView(){
   return h;
 }
 
+// ── Roadmap (phase dependency DAG) ──────────────────────────────────────────
+const PSTATC={CLOSED:'var(--green)',SHIPPED:'var(--green)',BUILT:'var(--w)',ACTIVE:'var(--w)',PARTIAL:'var(--w)','ON HOLD':'var(--amber)',CONDITIONAL:'var(--amber)',PLANNED:'var(--dim)',PENDING:'var(--dim)',PLACEHOLDER:'var(--dim)'};
+function _pstatc(s){const k=(s||'').toUpperCase();for(const key in PSTATC){if(k.indexOf(key)===0)return PSTATC[key];}return 'var(--grey)';}
+function _pchip(n){return `<span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:var(--track);font-size:12px;font-family:Sora;white-space:nowrap"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:${_pstatc(n.status)}"></span>P${esc(n.id)} ${esc(n.name)}</span>`;}
+function roadmapView(){
+  const G=window.PHASE_DAG;
+  let h='<div class="crumbs">BIMpossible</div><h2 class="page">Roadmap — Phase Dependencies</h2>';
+  if(!G||!G.nodes){return h+'<p class="sub">No phase DAG yet — run <code>python phase_dag.py</code> in F:\\AI-Dev\\Dashboard to generate it.</p>';}
+  h+=`<p class="sub">Derived from the PHASE-STATUS ledger's “Gate / depends on” column — real dependencies, no guesses. Generated ${esc(G.generated||'—')}.</p>`;
+  const cp=G.criticalPath||[];
+  h+=`<div class="card fade"><h3>Critical path — longest dependency chain</h3>`;
+  h+=cp.length?`<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">`+cp.map((n,i)=>(i?`<span style="color:var(--dim)">→</span>`:'')+_pchip(n)).join('')+`</div>`:`<p class="empty">No phase-to-phase dependencies in the ledger.</p>`;
+  h+=`</div>`;
+  const lp=G.lynchpins||[];
+  if(lp.length){
+    const mx=Math.max.apply(null,lp.map(l=>l.gatesCount));
+    h+=`<div class="card fade" style="animation-delay:.05s;margin-top:13px"><h3>Lynchpins — gate the most downstream phases</h3><div style="display:flex;flex-direction:column;gap:7px;padding:2px 0">`
+      +lp.map(l=>`<div style="display:flex;align-items:center;gap:9px"><span style="min-width:210px;font-size:12px;font-family:Sora;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">P${esc(l.id)} ${esc(l.name)}</span><div style="flex:1;height:6px;border-radius:4px;background:var(--track);overflow:hidden"><div style="height:100%;width:${Math.round(l.gatesCount/mx*100)}%;background:linear-gradient(90deg,var(--w),var(--w2))"></div></div><span class="num" style="min-width:78px;font-size:11px;color:var(--dim);text-align:right">gates ${l.gatesCount}</span></div>`).join('')
+      +`</div></div>`;
+  }
+  const gens=G.generations||[];
+  if(gens.length){
+    h+=`<div class="card fade" style="animation-delay:.08s;margin-top:13px"><h3>Build order — dependency-legal generations</h3><div style="display:flex;gap:10px;overflow-x:auto;padding:4px 0">`
+      +gens.map((gen,i)=>`<div style="flex:0 0 auto;min-width:200px"><div style="font-size:11px;color:var(--dim);margin-bottom:6px;font-family:Sora">Generation ${i+1}</div><div style="display:flex;flex-direction:column;gap:6px">`+gen.map(_pchip).join('')+`</div></div>`).join('')
+      +`</div></div>`;
+  }
+  const eg=G.externalGates||[];
+  if(eg.length){
+    h+=`<div class="card fade" style="animation-delay:.11s;margin-top:13px"><h3>External (non-phase) gates</h3><ul style="margin:0;padding-left:18px;font-size:12.5px;color:var(--muted)">`
+      +eg.map(e=>`<li><b>P${esc(e.phase)}</b> — ${esc(e.gate)}</li>`).join('')
+      +`</ul></div>`;
+  }
+  return h;
+}
+
 // ── Toolkit Reference View ────────────────────────────────────────────────
 function toolkitView(){
   const TK=[
@@ -2287,6 +2324,7 @@ function show(id){
   if(id==='overview')m.innerHTML=overview();
   else if(id==='audit')m.innerHTML=auditView();
   else if(id==='graph')m.innerHTML=codebaseView();
+  else if(id==='roadmap')m.innerHTML=roadmapView();
   else if(id==='strategy')m.innerHTML=strategyView();
   else if(id==='usage')m.innerHTML=monitorView();
   else if(id==='toolkit')m.innerHTML=toolkitView();
@@ -2306,7 +2344,7 @@ try{
   window._mtab=localStorage.getItem('dash.mtab')||'usage';
   window._ctab=localStorage.getItem('dash.ctab')||'metrics';
   if(s==='agents'||s==='health'){window._mtab=s;s='usage';}
-  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='strategy'||s==='usage'||s==='toolkit'||D.projects.some(p=>p.id===s)))init=s;
+  if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='roadmap'||s==='strategy'||s==='usage'||s==='toolkit'||D.projects.some(p=>p.id===s)))init=s;
 }catch(e){}
 show(init);
 </script>
