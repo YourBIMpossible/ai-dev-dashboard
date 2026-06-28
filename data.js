@@ -539,7 +539,7 @@ window.DASHBOARD_DATA = {
       id: "families",
       name: "Families by BIMpossible",
       icon: "cube",
-      oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Folder renamed from 'Families by AI'.",
+      oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Folder renamed from 'Families by AI' to 'Families by BIMpossible'.",
       status: "paused",
       phase: "Now a git repo on GitHub (Families-by-BIMpossible). Active build 06-11/12/13. 06-12: 'Approach B locked' postmortem decision. 06-13: per-type equipment profiles + display-recipe framework added, XFMR standardized. main 1 commit ahead of origin (unpushed).",
       focus: "Run the auditor against a real .rfa repo to validate output; push the unpushed main commit",
