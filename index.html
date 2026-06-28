@@ -1184,43 +1184,116 @@ function gnBar(nodes){
 function networkxImpactBody(){
   const ni=window.NETWORKX_IMPACT;
   if(!ni)return'<p style="color:var(--muted);padding:1rem">No impact data — run networkx_impact.py to generate.</p>';
-  const s=ni.stats;
-  const heroCards=[
-    {label:'Repos Touched', value:s.repos??'—'},
-    {label:'Prod Tools',    value:s.tools??'—'},
-    {label:'Algorithms',    value:s.algorithms??'—'},
-    {label:'Graph Nodes',   value:s.totalNodes!=null?s.totalNodes.toLocaleString():'—'},
-  ];
-  let h='<div style="padding:0.75rem 1rem">';
-  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-bottom:1rem">';
-  heroCards.forEach(c=>{
-    h+=`<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:0.75rem;text-align:center">
-      <div style="font-size:1.5rem;font-weight:700;color:var(--accent)">${c.value}</div>
-      <div style="font-size:0.7rem;color:var(--muted);margin-top:2px">${c.label}</div>
+  const surfaces=ni.surfaces||[];
+  const risk   =surfaces.filter(r=>r.category==='risk');
+  const active =surfaces.filter(r=>r.category==='active');
+  const staticS=surfaces.filter(r=>r.category==='static');
+  const missing=surfaces.filter(r=>r.category==='missing');
+
+  // ── palette ────────────────────────────────────────────────────────────────
+  const RISK_BG   ='rgba(255,150,0,0.08)';
+  const RISK_BORD ='rgba(255,150,0,0.35)';
+  const RISK_COL  ='#ffaa33';
+  const ACT_BG    ='rgba(80,160,255,0.07)';
+  const ACT_BORD  ='rgba(80,160,255,0.25)';
+  const ACT_COL   ='#5fa8ff';
+  const STAT_BG   ='rgba(255,255,255,0.04)';
+  const STAT_BORD ='rgba(255,255,255,0.08)';
+  const STAT_COL  ='rgba(255,255,255,0.5)';
+  const MISS_BG   ='rgba(255,255,255,0.02)';
+  const MISS_BORD ='rgba(255,255,255,0.05)';
+
+  function pill(label,bg,col){
+    return`<span style="font-size:0.6rem;font-weight:700;letter-spacing:.07em;padding:2px 8px;border-radius:10px;background:${bg};color:${col}">${label}</span>`;
+  }
+  function chip(t){
+    return`<code style="font-size:0.6rem;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:3px;color:rgba(255,255,255,0.3)">${esc(t)}</code>`;
+  }
+  function repoTag(r){
+    return`<span style="font-size:0.6rem;color:rgba(255,255,255,0.25);background:rgba(255,255,255,.04);padding:1px 6px;border-radius:8px">${esc(r)}</span>`;
+  }
+  function sectionHead(label){
+    return`<div style="display:flex;align-items:center;gap:0.5rem;margin:1.1rem 0 0.55rem">
+      <span style="font-size:0.6rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,0.25)">${label}</span>
+      <div style="flex:1;height:1px;background:rgba(255,255,255,.06)"></div>
     </div>`;
-  });
-  h+='</div>';
-  h+='<div style="font-size:0.72rem;font-weight:600;color:var(--muted);letter-spacing:.05em;margin-bottom:0.4rem">SURFACES</div>';
-  h+='<table style="width:100%;border-collapse:collapse;font-size:0.78rem">';
-  h+='<thead><tr style="color:var(--muted);text-align:left">';
-  ['Surface','Repo','Tool','Algorithm','Nodes','Finding'].forEach(col=>{
-    h+=`<th style="padding:0.3rem 0.5rem;border-bottom:1px solid rgba(255,255,255,.08)">${col}</th>`;
-  });
-  h+='</tr></thead><tbody>';
-  (ni.surfaces||[]).forEach((row,i)=>{
-    const bg=i%2===0?'transparent':'rgba(255,255,255,0.02)';
-    h+=`<tr style="background:${bg}">
-      <td style="padding:0.3rem 0.5rem;font-weight:600">${esc(row.label)}</td>
-      <td style="padding:0.3rem 0.5rem;color:var(--muted)">${esc(row.repo)}</td>
-      <td style="padding:0.3rem 0.5rem"><code style="font-size:0.72rem;background:rgba(255,255,255,.07);padding:1px 4px;border-radius:3px">${esc(row.tool)}</code></td>
-      <td style="padding:0.3rem 0.5rem"><code style="font-size:0.72rem;background:rgba(255,255,255,.07);padding:1px 4px;border-radius:3px">${esc(row.algo)}</code></td>
-      <td style="padding:0.3rem 0.5rem;text-align:right;color:var(--accent)">${row.nodes!=null?row.nodes:'—'}</td>
-      <td style="padding:0.3rem 0.5rem;color:var(--muted)">${esc(row.finding)}</td>
-    </tr>`;
-  });
-  h+='</tbody></table>';
-  if(ni.generated)h+=`<div style="font-size:0.65rem;color:var(--muted);margin-top:0.75rem;text-align:right">Generated: ${esc(ni.generated)}</div>`;
-  h+='</div>';
+  }
+
+  // ── surface card ───────────────────────────────────────────────────────────
+  function card(row){
+    const isR=row.category==='risk', isA=row.category==='active',
+          isS=row.category==='static', isM=row.category==='missing';
+    const bg   =isR?RISK_BG  :isA?ACT_BG  :isS?STAT_BG  :MISS_BG;
+    const bord =isR?RISK_BORD:isA?ACT_BORD:isS?STAT_BORD:MISS_BORD;
+    const numC =isR?RISK_COL :isA?ACT_COL :STAT_COL;
+    const pillH=isR?pill('⚠ RISK',RISK_BG,RISK_COL)
+               :isA?pill('● ACTIVE',ACT_BG,ACT_COL)
+               :isS?pill('─ MAPPED',STAT_BG,STAT_COL)
+                   :pill('○ NO DATA',MISS_BG,'rgba(255,255,255,0.2)');
+    const opacity=isM?'0.45':'1';
+    const numStr=row.nodes!=null?Number(row.nodes).toLocaleString():null;
+
+    return`<div style="background:${bg};border:1px solid ${bord};border-radius:8px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:0.3rem;opacity:${opacity}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.4rem;margin-bottom:0.15rem">
+        ${pillH}${repoTag(row.repo)}
+      </div>
+      ${numStr!=null
+        ?`<div style="font-size:2rem;font-weight:800;line-height:1;color:${numC};letter-spacing:-.02em">${numStr}</div>`
+        :isM?`<div style="font-size:1.1rem;font-weight:700;color:rgba(255,255,255,0.1);line-height:1">—</div>`
+            :`<div style="font-size:0.8rem;font-weight:600;color:rgba(255,255,255,0.35);line-height:1.35;margin-top:0.1rem">${esc(row.finding)}</div>`
+      }
+      <div style="font-size:0.85rem;font-weight:600;color:${isM?'rgba(255,255,255,0.3)':'rgba(255,255,255,0.8)'};line-height:1.2">${esc(row.label)}</div>
+      ${numStr!=null&&!isM?`<div style="font-size:0.7rem;color:rgba(255,255,255,0.35);line-height:1.35">${esc(row.finding)}</div>`:''}
+      <div style="display:flex;gap:0.25rem;flex-wrap:wrap;margin-top:0.2rem">${chip(row.tool)} ${chip(row.algo)}</div>
+    </div>`;
+  }
+
+  // ── summary bar ────────────────────────────────────────────────────────────
+  const riskPills=risk.map(r=>`<span style="background:${RISK_BG};color:${RISK_COL};padding:3px 10px;border-radius:12px;font-size:0.7rem;font-weight:600;white-space:nowrap">⚠ ${r.nodes} ${esc(r.label.toLowerCase())}</span>`).join('');
+  const missPill =missing.length?`<span style="background:rgba(255,255,255,.05);color:rgba(255,255,255,0.3);padding:3px 10px;border-radius:12px;font-size:0.7rem;font-weight:600">○ ${missing.length} source${missing.length!==1?'s':''} missing</span>`:'';
+  const actPill  =(active.length+staticS.length)?`<span style="background:${ACT_BG};color:${ACT_COL};padding:3px 10px;border-radius:12px;font-size:0.7rem;font-weight:600">● ${active.length+staticS.length} mapped</span>`:'';
+  const totalStr =ni.stats.totalNodes!=null?ni.stats.totalNodes.toLocaleString()+' nodes':'';
+
+  let h=`<div style="padding:0.75rem 1rem 1.25rem">`;
+
+  // summary bar
+  h+=`<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;padding:0.6rem 0.75rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:8px;margin-bottom:0.25rem">
+    <div style="display:flex;gap:0.35rem;flex-wrap:wrap">${riskPills}${actPill}${missPill}</div>
+    <div style="font-size:0.65rem;color:rgba(255,255,255,0.2);white-space:nowrap">${totalStr}${totalStr&&ni.generated?' · ':''}${ni.generated?esc(ni.generated.slice(0,10)):''}</div>
+  </div>`;
+
+  // risk section
+  if(risk.length){
+    h+=sectionHead('RISK SIGNALS');
+    h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.55rem">`;
+    risk.forEach(r=>{h+=card(r);});
+    h+=`</div>`;
+  }
+
+  // working surfaces (active + static)
+  const working=[...active,...staticS];
+  if(working.length){
+    h+=sectionHead('WORKING SURFACES');
+    h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:0.55rem">`;
+    working.forEach(r=>{h+=card(r);});
+    h+=`</div>`;
+  }
+
+  // missing — compact tiles, not full cards
+  if(missing.length){
+    h+=sectionHead('SOURCES NOT YET WIRED');
+    h+=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.35rem">`;
+    missing.forEach(row=>{
+      h+=`<div style="background:${MISS_BG};border:1px solid ${MISS_BORD};border-radius:6px;padding:0.55rem 0.7rem;opacity:0.45">
+        <div style="font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.35)">${esc(row.label)}</div>
+        <div style="font-size:0.6rem;color:rgba(255,255,255,0.18);margin-top:2px">${esc(row.repo)}</div>
+        <div style="margin-top:5px">${chip(row.tool)}</div>
+      </div>`;
+    });
+    h+=`</div>`;
+  }
+
+  h+=`</div>`;
   return h;
 }
 function graphMetricsBody(){

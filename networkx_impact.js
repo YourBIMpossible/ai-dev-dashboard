@@ -1,10 +1,11 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-06-28T19:50:24Z",
+  "generated": "2026-06-28T20:09:25Z",
   "stats": {
     "repos": 4,
     "tools": 3,
     "algorithms": 6,
-    "totalNodes": 8630
+    "totalNodes": 8630,
+    "missingCount": 3
   },
   "surfaces": [
     {
@@ -14,7 +15,8 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 20,
-      "finding": "Detected circular import chains"
+      "finding": "Circular imports detected \u2014 technical debt to resolve",
+      "category": "risk"
     },
     {
       "id": "god_nodes",
@@ -23,7 +25,8 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "betweenness_centrality",
       "nodes": 10,
-      "finding": "High-blast-radius hubs identified"
+      "finding": "High blast-radius hubs \u2014 single points of failure",
+      "category": "risk"
     },
     {
       "id": "security_graph",
@@ -32,7 +35,8 @@ window.NETWORKX_IMPACT = {
       "tool": "security_scan",
       "algo": "betweenness_centrality",
       "nodes": null,
-      "finding": "Auth-gate and permission edges mapped"
+      "finding": "Auth-gate and permission edges mapped",
+      "category": "missing"
     },
     {
       "id": "route_graph",
@@ -40,8 +44,9 @@ window.NETWORKX_IMPACT = {
       "repo": "BIMpossible",
       "tool": "graphify",
       "algo": "pagerank",
-      "nodes": null,
-      "finding": "74 routes w/ assert_project_allowed() coverage"
+      "nodes": 74,
+      "finding": "All 74 routes covered by assert_project_allowed()",
+      "category": "static"
     },
     {
       "id": "doc_drift",
@@ -50,7 +55,8 @@ window.NETWORKX_IMPACT = {
       "tool": "doc_drift",
       "algo": "cosine_similarity",
       "nodes": null,
-      "finding": "Stale doc nodes detected vs code graph"
+      "finding": "Stale doc nodes detected vs code graph",
+      "category": "missing"
     },
     {
       "id": "family_dag",
@@ -59,7 +65,8 @@ window.NETWORKX_IMPACT = {
       "tool": "family_dag",
       "algo": "topological_sort",
       "nodes": null,
-      "finding": "Family dependency order resolved"
+      "finding": "Family dependency order resolved",
+      "category": "missing"
     },
     {
       "id": "phase_dag",
@@ -67,8 +74,9 @@ window.NETWORKX_IMPACT = {
       "repo": "Dashboard",
       "tool": "phase_dag.py",
       "algo": "topological_sort",
-      "nodes": null,
-      "finding": "Build-order for P6-P12 phases derived"
+      "nodes": 7,
+      "finding": "Build-order for P6\u2013P12 phases derived",
+      "category": "static"
     },
     {
       "id": "knowledge_graph",
@@ -77,7 +85,8 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "community_detection",
       "nodes": 198,
-      "finding": "Persistent cross-session memory graph"
+      "finding": "Persistent cross-session memory graph",
+      "category": "active"
     }
   ]
 };

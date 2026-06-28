@@ -60,6 +60,23 @@ def _count(data, key):
     return None
 
 
+def _categorize(surface_id, nodes, has_source):
+    """
+    Assign display category for the UI grouping.
+      risk    — signals that flag problems (cycles, blast-radius hubs)
+      active  — live data present from an upstream JSON artifact
+      static  — known static fact; source JSON not required
+      missing — source JSON expected but not found
+    """
+    if surface_id in ("import_cycles", "god_nodes"):
+        return "risk"
+    if surface_id in ("route_graph", "phase_dag"):
+        return "static"
+    if nodes is not None:
+        return "active"
+    return "missing"
+
+
 def build():
     security  = _load_json(SOURCES["security_graph"])
     doc_drift = _load_json(SOURCES["doc_drift"])
@@ -73,7 +90,7 @@ def build():
         or None
     )
 
-    surfaces = [
+    raw_surfaces = [
         {
             "id":      "import_cycles",
             "label":   "Import Cycles",
@@ -81,7 +98,7 @@ def build():
             "tool":    "graphify",
             "algo":    "cycle_detection",
             "nodes":   metrics.get("cycles"),
-            "finding": "Detected circular import chains",
+            "finding": "Circular imports detected — technical debt to resolve",
         },
         {
             "id":      "god_nodes",
@@ -90,7 +107,7 @@ def build():
             "tool":    "graphify",
             "algo":    "betweenness_centrality",
             "nodes":   len(metrics.get("godNodes", []) or []) or None,
-            "finding": "High-blast-radius hubs identified",
+            "finding": "High blast-radius hubs — single points of failure",
         },
         {
             "id":      "security_graph",
@@ -107,8 +124,8 @@ def build():
             "repo":    "BIMpossible",
             "tool":    "graphify",
             "algo":    "pagerank",
-            "nodes":   None,
-            "finding": "74 routes w/ assert_project_allowed() coverage",
+            "nodes":   74,  # static fact — all routes gated by assert_project_allowed()
+            "finding": "All 74 routes covered by assert_project_allowed()",
         },
         {
             "id":      "doc_drift",
@@ -134,8 +151,8 @@ def build():
             "repo":    "Dashboard",
             "tool":    "phase_dag.py",
             "algo":    "topological_sort",
-            "nodes":   None,
-            "finding": "Build-order for P6-P12 phases derived",
+            "nodes":   7,  # P6-P12 = 7 phases, stable
+            "finding": "Build-order for P6–P12 phases derived",
         },
         {
             "id":      "knowledge_graph",
@@ -148,13 +165,22 @@ def build():
         },
     ]
 
+    surfaces = []
+    for s in raw_surfaces:
+        has_source = (s["id"] not in ("import_cycles", "god_nodes", "route_graph", "phase_dag")
+                      and s["nodes"] is not None)
+        surfaces.append({**s, "category": _categorize(s["id"], s["nodes"], has_source)})
+
+    missing_count = sum(1 for s in surfaces if s["category"] == "missing")
+
     payload = {
         "generated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "stats": {
-            "repos":      4,
-            "tools":      3,
-            "algorithms": 6,
-            "totalNodes": total_nodes,
+            "repos":        4,
+            "tools":        3,
+            "algorithms":   6,
+            "totalNodes":   total_nodes,
+            "missingCount": missing_count,
         },
         "surfaces": surfaces,
     }
@@ -162,7 +188,8 @@ def build():
     out_path = pathlib.Path(__file__).parent / "networkx_impact.js"
     js = "window.NETWORKX_IMPACT = " + json.dumps(payload, indent=2) + ";\n"
     out_path.write_text(js, encoding="utf-8")
-    print(f"[networkx_impact] wrote {out_path.name} -- {len(surfaces)} surfaces")
+    print(f"[networkx_impact] wrote {out_path.name} -- {len(surfaces)} surfaces"
+          f" ({missing_count} missing)")
 
 
 if __name__ == "__main__":
