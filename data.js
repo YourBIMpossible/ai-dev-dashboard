@@ -5,7 +5,7 @@
 window.DASHBOARD_DATA = {
   generated: "2026-06-27",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-06-10",
+  activitySince: "2026-06-14",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -174,10 +174,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [4,29,22,26,8,0,4,3,0,0,0,0,0,5],
+      activity: [13,0,0,2,0,0,0,0,0,15,8,42,27,24],
       lastActivity: {
-        date: "2026-06-23",
-        summary: "PR #142 merged (9f6f55c): P11 Model QA rules engine + P8 Wizard + expr-eval CVE removal + audit remediation (relay frame guard, multi-tenant project_id scoping, auth logged warnings, aec edge cases)"
+        date: "2026-06-27",
+        summary: "Merge pull request #156 from YourBIMpossible/fix/prompt-cache-comment (99c8674)"
       },
       branch: "main at 9f6f55c; 0 ahead of origin",
       git: {
@@ -299,7 +299,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [34,17,9,3,14,0,39,0,0,0,0,0,0,1],
+      activity: [14,0,39,0,0,0,0,0,0,1,0,0,0,0],
       lastActivity: {
         date: "2026-06-23",
         summary: "refactor(revitlink): remove Anti-Worksets auto-stamp updater; bundle Duplicate Collection revisions (fddcaaf)"
@@ -403,8 +403,11 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [1,1,0,0,0,0,0,0,0,0,0,0,0,0],
-      lastActivity: { date: "2026-06-11", summary: "LinkedIn Company Page published (linkedin.com/company/bimpossible); launch post live with link preview" },
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      lastActivity: {
+        date: "2026-06-27",
+        summary: "fix: header logo visibility + collapse theme toggle to single cycling button (709f352)"
+      },
       branch: null, git: null,
       nextActions: [
         "M4: Add JSON-LD schema.org structured data (Organization + WebPage types) to all 6 pages",
@@ -559,7 +562,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,23,7,2,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: { date: "2026-06-13", summary: "per-type equipment profiles + display-recipe framework (a9fb7f0); device-class param profiles (CB/MTR/DISC) + 1:1 device param map (4a52fc2)" },
       branch: "main", git: { warn: "main 2 commits ahead of origin/main (unpushed) - repo is Families-by-BIMpossible on GitHub" },
       nextActions: [ "Run the auditor against a real family repo to validate output; push the unpushed main commit; green-light Path B only after validation" ],
@@ -630,8 +633,11 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,8,4,0,0,0,0,0,1],
-      lastActivity: { date: "2026-06-23", summary: "docs: add 2026-06-18 full code-audit report (#9) (6b057ac)" },
+      activity: [0,0,8,4,0,0,0,0,0,1,0,0,0,0],
+      lastActivity: {
+        date: "2026-06-23",
+        summary: "docs: add 2026-06-18 full code-audit report (#9) (6b057ac)"
+      },
       branch: "main at 6b057ac", git: null,
       nextActions: [
         "Run Wave-1 Claude Code session (handoffs/WAVE-1_kickoff.md): finish WP-A, then WP-B + WP-C in parallel PRs",
@@ -657,7 +663,7 @@ window.DASHBOARD_DATA = {
         "2026-06-17 - 4 commits: WP-D scope adjustments (D3 local-LLM revert + aim docs + owed-task list)",
         "2026-06-16 - WP-A core aiserver library; smoke-test + daily_digest refactored onto it; CI + branch protection; repo created"
       ]
-    }
+    },
     /* PROJECT:aiserver:END */
   ]
 };
