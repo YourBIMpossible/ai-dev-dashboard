@@ -8,10 +8,11 @@
 # cloud prose bot touched the same card our activity scan did (2026-06-27).
 #
 # NON-DESTRUCTIVE: uses `git reset origin/main` (MIXED) to base our commit on the live
-# tip - mixed reset moves only HEAD + index and LEAVES every working file untouched, so
-# unrelated WIP (strategy.js, edited scripts, anything) is never harmed. Only data.js is
-# deliberately refreshed from origin (it is regenerated anyway). An earlier version used
-# `reset --hard` and wiped uncommitted files - never do that here.
+# tip - mixed reset moves only HEAD + index and LEAVES every working file untouched. This
+# script runs in the DEDICATED automation clone (Dashboard-auto), not the editing clone, so
+# there is no human WIP to protect; data.js and the CI-owned files (github_actions.js,
+# graph-metrics.js) are refreshed from origin (all regenerated anyway). An earlier version
+# used `reset --hard` and wiped uncommitted files - never do that here.
 #
 # Each attempt:  fetch -> reset (mixed) origin/main -> checkout origin's data.js
 #                -> render (ledgers, activity, date) -> validate -> commit -> push.
@@ -29,8 +30,12 @@
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
-$log      = Join-Path $PSScriptRoot "_backups\refresh-log.txt"
-$failFlag = Join-Path $PSScriptRoot "_backups\REFRESH-FAILED.flag"
+$backups  = Join-Path $PSScriptRoot "_backups"
+# _backups is runtime-only (not tracked), so a fresh clone won't have it. Create it
+# before the first log write, or Add-Content throws DirectoryNotFound and aborts the run.
+if (-not (Test-Path $backups)) { New-Item -ItemType Directory -Path $backups -Force | Out-Null }
+$log      = Join-Path $backups "refresh-log.txt"
+$failFlag = Join-Path $backups "REFRESH-FAILED.flag"
 $ts       = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $stampTs  = Get-Date -Format "yyyy-MM-dd HH:mm"
 $today    = Get-Date -Format "yyyy-MM-dd"
@@ -78,10 +83,12 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     "--- attempt $attempt/$MAX_ATTEMPTS ---" | Add-Content -Path $log -Encoding utf8
 
     # 0. Base our work on the live tip WITHOUT touching the working tree (mixed reset),
-    #    then refresh ONLY data.js from origin so the render starts from the bot's latest.
+    #    then refresh data.js + the CI-owned files from origin so the render starts fresh.
     if ((Invoke-Logged "git" @("fetch","origin","main")) -ne 0) { Alert-Failure "git fetch failed."; $result = 1; break }
     if ((Invoke-Logged "git" @("reset","origin/main")) -ne 0)   { Alert-Failure "git reset origin/main failed."; $result = 1; break }
-    if ((Invoke-Logged "git" @("checkout","origin/main","--","data.js")) -ne 0) { Alert-Failure "git checkout data.js failed."; $result = 1; break }
+    # Sync CI-owned working-tree files from origin so this automation clone never drifts
+    # from the CI bot's latest (mixed reset leaves working tree untouched).
+    if ((Invoke-Logged "git" @("checkout","origin/main","--","data.js","github_actions.js","graph-metrics.js")) -ne 0) { Alert-Failure "git checkout data.js failed."; $result = 1; break }
 
     # 1. Render phases + waves from the ledgers (fatal on failure).
     if ((Invoke-Logged $python @("$PSScriptRoot\sync_ledgers.py")) -ne 0) { Alert-Failure "sync_ledgers.py failed."; $result = 1; break }
