@@ -564,15 +564,22 @@ window.DASHBOARD_DATA = {
       ]},
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: { date: "2026-06-13", summary: "per-type equipment profiles + display-recipe framework (a9fb7f0); device-class param profiles (CB/MTR/DISC) + 1:1 device param map (4a52fc2)" },
-      branch: "main", git: { warn: "main 2 commits ahead of origin/main (unpushed) - repo is Families-by-BIMpossible on GitHub" },
-      nextActions: [ "Run the auditor against a real family repo to validate output; push the unpushed main commit; green-light Path B only after validation" ],
+      branch: "main",
+      nextActions: [
+        "Run the auditor against a real family repo to validate output; push the unpushed main commit; green-light Path B only after validation"
+      ],
       pendingDecisions: [],
       blockers: [],
       reminders: [
         "Folder renamed 'Families by AI' to 'Families by BIMpossible' - update stale links/specs (REFRESH-SPEC still references 'Families by AI')",
         "Heavy activity 06-11/12/13 (31 commits) but status held 'paused' per no-auto-promote rule - confirm promotion to active"
       ],
-      links: [ { label: "Tool README", path: "F:\\AI-Dev\\Families by BIMpossible\\README.md" } ],
+      links: [
+        {
+          label: "Tool README",
+          path: "F:\\AI-Dev\\Families by BIMpossible\\README.md"
+        }
+      ],
       recent: [
         "2026-06-13 - device-class param profiles (CB/MTR/DISC) + 1:1 device param map (4a52fc2); per-type equipment profiles + display-recipe framework (a9fb7f0); XFMR standardized",
         "2026-06-12 - session postmortem + approach decision (Approach B locked); dashboard auto-sync workflow",
