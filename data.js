@@ -1,7 +1,9 @@
 // F:\AI-Dev project dashboard data (schema v4 - tasks added to phases)
-// phases + waves: rendered from the BIMpossible ledgers by sync_ledgers.py (no LLM).
-// prose fields: updated on source-repo push by sync_dashboard.py (fenced off phases/waves).
-// daily 06:00 scheduled refresh + pre-push phase-numbering guard. See REFRESH-SPEC.md.
+// AUTO (daily 06:00 refresh from the Dashboard-auto clone): phases+waves from the BIMpossible
+//   ledgers (sync_ledgers.py, no LLM); activity+lastActivity from git (sync_activity.py).
+// MANUAL / on-demand: prose fields (phase, focus, oneLiner, recent, nextActions, branch, audit).
+//   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
+//   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
   generated: "2026-06-28",
   generatedBy: "scheduled refresh",
@@ -52,9 +54,9 @@ window.DASHBOARD_DATA = {
             ]
           },
           {
-            name: "P4 Embedded Intelligent Assistant (4a/4b)",
-            pct: 93,
-            note: "SHIPPED — 4a read-only + 4b HITL action assistant",
+            name: "P4 Embedded Intelligent Assistant (4a–4d)",
+            pct: 96,
+            note: "SHIPPED — 4a read-only + 4b HITL + 4c persistence/stop-edit + 4d project-context grounding",
             tasks: [
               { label: "B2 rate-limit hardening", status: "done" },
               { label: "B2 byte-cap + deadline handling", status: "done" },
@@ -62,6 +64,9 @@ window.DASHBOARD_DATA = {
               { label: "Assistant markdown + pill chrome", status: "done", note: "06-07" },
               { label: "Wave 4.8 close-out: D1-D7 ratification", status: "done", note: "Ratified 06-10" },
               { label: "Phase 4b action-enabled assistant (HITL)", status: "done", note: "06-11/12 — HITL approval SSE + /assistant/resume; smoke PASSED" },
+              { label: "Phase 4c conversation persistence + in-panel history", status: "done", note: "06-28 PR #153" },
+              { label: "Phase 4c stop-and-edit", status: "done", note: "06-28 PR #154" },
+              { label: "Phase 4d project-context grounding (auto-derived briefing)", status: "done", note: "06-28 PR #155 — runtime-wired project context into chat" },
               { label: "Schedule-push: staleness cadence, classifier rules, SPF ship location", status: "pending" }
             ]
           },
@@ -150,14 +155,15 @@ window.DASHBOARD_DATA = {
           },
           {
             name: "P11 Model QA & Health",
-            pct: 60,
-            note: "BUILT — flag-gated OFF — `qa_router` gated by `BIMPOSSIBLE_QA_ENABLED` (default OFF). Read-only QA rules + `.ids` import; was unnumbered (\"Phase 7-ish\")",
+            pct: 64,
+            note: "BUILT — flag-gated OFF — `qa_router` gated by `BIMPOSSIBLE_QA_ENABLED` (default OFF). Read-only QA rules + `.ids` import + Model Health graph checks (06-28); was unnumbered (\"Phase 7-ish\")",
             tasks: [
               { label: "Rules engine (declarative Rule: applicability + requirement + IDS cardinality over a predicate library)", status: "done", note: "06-14 — backend/aec/qa/engine.py; pure, dependency-free" },
               { label: "4 starter rules (completeness / identity / correctness / classification families)", status: "done", note: "06-14 — adding a rule = a registry entry, no engine code" },
               { label: "Endpoints: GET /data/qa/rules + GET /data/qa/model-health (severity-weighted score, per-rule compliance, findings)", status: "done", note: "06-14 — 20 pure + 3 router tests; full suite green" },
               { label: "Commit + deploy the starter slice", status: "done", note: "PR #142 2026-06-23 — merged to main (9f6f55c)" },
               { label: "Frontend health panel + check_model_health assistant tool", status: "done", note: "PR #142 2026-06-23 — ModelHealth launcher/panel + client" },
+              { label: "NetworkX graph-topology tools + Model Health graph checks", status: "done", note: "06-28 PR #157 — permission-flow graph + topology checks" },
               { label: "More rules (config-only), per-project overrides, .ids import, disposition workflow, run persistence/trends", status: "pending", note: "Roadmap increments from the build spec" }
             ]
           },
@@ -256,8 +262,8 @@ window.DASHBOARD_DATA = {
       icon: "wrench",
       oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (9/13 shipped + 8 BIM manager tools built) + Trade QA Scanner suite (6 trades deployed).",
       status: "active",
-      phase: "06-12/13: setup-scaffold pass (zLink casing, LinkWorksetService, Tool 2 window rewrite, PR #3), SPF location consolidated to a single Project Info param, dashboard auto-sync workflow added; Tool 18 Batch Rename Views hardened 06-13 (strict preflight preview, atomic commit, case toggle, manifest). Current work on branch feat/model-audit-consolidation-2026-06-12. Earlier: Tools 10-13 shipped + Tools 14-21 built via TDD; all merged to main.",
-      focus: "Tool 7 Phase 1 smoke test in Revit; then Definition of Done sweep (icons/guides/tooltips) for Tools 10-21",
+      phase: "06-27: Duplicate Collection refine on branch feat/dupcollection-refine (3 ahead of origin, unpushed) — template remap store + view-family name minter + UI overhaul (c34f022); Model Health per-view workset breakdown + plain-English metric descriptions (070b4be); working specs committed (26f1e1f). Earlier: 3D section-box tightening + Reference Callout collapsible section (06-16); Tool 18 hardened (06-13); Tools 10-13 shipped + 14-21 built via TDD on main. RevitLink 9/13 shipped + 8 BIM-manager tools.",
+      focus: "Push the feat/dupcollection-refine branch (3 unpushed); Tool 7 Phase 1 smoke in Revit; then Definition of Done sweep (icons/guides/tooltips) for Tools 10-21",
       progress: { label: "Tracks", phases: [
         { name: "RevitLink tools (9/13 shipped)", pct: 72,
           tasks: [
@@ -304,9 +310,9 @@ window.DASHBOARD_DATA = {
         date: "2026-06-27",
         summary: "chore(docs): commit working specs for dupcollection view-template remap (f3fa62b)"
       },
-      branch: "overnight/tool-revisions-2026-06-16 (57 ahead of main)",
+      branch: "feat/dupcollection-refine (3 ahead of origin, unpushed)",
       git: {
-        warn: "Branch overnight/tool-revisions-2026-06-16 is 57 commits ahead of main — large unmerged batch. Review before merging."
+        warn: "On feat/dupcollection-refine, 3 commits ahead of origin (06-27 dupcollection/model-health work, unpushed). Push or merge before it drifts."
       },
       nextActions: [
         "Tool 7 Phase 1 (sheets) smoke test; Phase 2 = view placement",
@@ -333,10 +339,10 @@ window.DASHBOARD_DATA = {
         { label: "Dev notes", path: "F:\\AI-Dev\\Add-Ins\\BIMpossible.RevitLink\\DEV-NOTES.md" }
       ],
       recent: [
+        "2026-06-27 - Duplicate Collection refine (feat/dupcollection-refine, 3 ahead of origin): template remap store + view-family name minter + UI overhaul (c34f022); Model Health per-view workset breakdown + plain-English metric descriptions (070b4be)",
         "2026-06-23 - refactor(revitlink): remove Anti-Worksets auto-stamp updater; bundle Duplicate Collection revisions (fddcaaf)",
-        "2026-06-16 - overnight/tool-revisions batch shipped (39 commits): major tool-revisions wave on branch",
+        "2026-06-16 - 3D section-box tightening + datum clutter hidden; Reference Callout Views collapsible section (716f9e8/85932bd)",
         "2026-06-13 - Tool 18 Batch Rename Views hardened (032b877): strict preflight preview, atomic commit, case toggle, manifest",
-        "2026-06-12 - setup-scaffold pass (PR #3): zLink casing, LinkWorksetService, Tool 2 window rewrite; SPF param consolidated; dashboard auto-sync workflow added",
         "2026-06-11 - Tools 14-21 built + ribbon-wired (Warning Scanner, In-Place Families, Workset Audit, Element ID Finder, Batch Rename Views, VT Audit, Scope Box Manager, Batch PDF Export)"
       ],
       audit: {
@@ -408,7 +414,7 @@ window.DASHBOARD_DATA = {
         date: "2026-06-27",
         summary: "fix: header logo visibility + collapse theme toggle to single cycling button (709f352)"
       },
-      branch: null, git: null,
+      branch: null, git: { latestCommit: "709f352" },
       nextActions: [
         "M4: Add JSON-LD schema.org structured data (Organization + WebPage types) to all 6 pages",
         "M4: Broken-link sweep across all pages",
@@ -432,6 +438,7 @@ window.DASHBOARD_DATA = {
         { label: "Site code", path: "F:\\AI-Dev\\BIMpossible Site\\site" }
       ],
       recent: [
+        "2026-06-27 - Header logo visibility fix + theme toggle collapsed to single cycling button (709f352)",
         "2026-06-11 - LinkedIn Company Page published (linkedin.com/company/bimpossible); launch post live",
         "2026-06-10 - WAF rate rule deployed; re-verified live: 5-hash CSP, 405 Allow, Turnstile on /contact, dead font 404 fixed, 13.7KB font subset",
         "2026-06-09/10 - All audit findings cleared + deployed; Lighthouse 100/100/100/100 across all 6 pages",
@@ -446,9 +453,6 @@ window.DASHBOARD_DATA = {
         trend: "stable",
         reportPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\_site-audit-runs.md",
         open: []
-      },
-      git: {
-        latestCommit: "709f352"
       }
     },
     /* PROJECT:site:END */
@@ -497,7 +501,7 @@ window.DASHBOARD_DATA = {
       pendingDecisions: [],
       blockers: [],
       reminders: [
-        "Idle since 2026-06-01 (12 days) - confirm dormant status; NFL preseason deadline approaching (August)",
+        "Idle since 2026-06-01 (27 days) - confirm dormant status; NFL preseason deadline approaching (August)",
         "Hard real-world deadline: NFL preseason (August)"
       ],
       links: [
@@ -515,23 +519,26 @@ window.DASHBOARD_DATA = {
       id: "laundry",
       name: "Laundry Gig",
       icon: "box",
-      oneLiner: "Next.js demo app (Lazy Demo) with docker-compose + start/stop scripts.",
+      oneLiner: "Next.js demo app 'Lazy' (laundry-finder): Leaflet WasherMap (OSM pins + route), commute-corridor matching, one-click demo launcher.",
       status: "dormant",
-      phase: "Unknown - no state doc exists",
-      focus: "Capture a status note so this becomes trackable",
+      phase: "Lazy laundry-finder demo: WasherMap (Leaflet/OSM) + matchAlongRoute commute-corridor + map-aware /dashboard/washers + one-click launcher scripts. Name locked 'Lazy' (FreshSpin scrubbed) 06-03. Local git (master), in sync with origin. Idle since 06-03.",
+      focus: "Decide: resume the Lazy demo or park it explicitly. No state doc yet — git + folder only.",
       progress: null,
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: { date: "2026-06-04", summary: "CLAUDE-CODE-PROMPT.md added (06-04); app scaffold (package/prisma/scripts) touched 06-01" },
       branch: null, git: null,
-      nextActions: [ "Write a status note - dashboard can't track this project until one exists" ],
+      nextActions: [ "Write a status note for Lazy (laundry-finder); decide resume vs explicit park" ],
       pendingDecisions: [],
       blockers: [],
-      reminders: ["No state doc - tracking is folder-mtime only"],
+      reminders: ["No state doc yet — tracked via git (master) + folder mtime. Real app exists (Lazy laundry-finder); write a status note to track it properly."],
       links: [
         { label: "README", path: "F:\\AI-Dev\\Laundry Gig\\README.md" },
         { label: "Docs", path: "F:\\AI-Dev\\Laundry Gig\\docs" }
       ],
-      recent: []
+      recent: [
+        "2026-06-03 - Locked 'Lazy' as the real name (FreshSpin placeholder scrubbed); one-click demo launcher scripts (9a8defd)",
+        "2026-06-01 - Map-aware /dashboard/washers with commute filter; Leaflet WasherMap (OSM pins + route line); matchAlongRoute corridor matching"
+      ]
     },
     /* PROJECT:laundry:END */
     /* PROJECT:families:START */
@@ -540,14 +547,14 @@ window.DASHBOARD_DATA = {
       name: "Families by BIMpossible",
       icon: "cube",
       oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Folder renamed from 'Families by AI' to 'Families by BIMpossible'.",
-      status: "paused",
-      phase: "Now a git repo on GitHub (Families-by-BIMpossible). Active build 06-11/12/13. 06-12: 'Approach B locked' postmortem decision. 06-13: per-type equipment profiles + display-recipe framework added, XFMR standardized. main 1 commit ahead of origin (unpushed).",
-      focus: "Run the auditor against a real .rfa repo to validate output; push the unpushed main commit",
+      status: "active",
+      phase: "Git repo on GitHub (Families-by-BIMpossible), main in sync with origin. Continuous build through 06-28: per-type equipment profiles + display-recipe framework + XFMR standardized (06-13); XFMR_PROFILE expanded 5→12 params + 4 new shared params (06-27); device verifier + phase-1 handoff checklist (06-27); NetworkX remediation-order DAG — blast-radius + clusters + topo sort (06-28, 7fd2e48).",
+      focus: "Run the auditor against a real .rfa repo to validate output; green-light Path B (live automation) only after validation passes.",
       progress: { label: "Two-path plan", phases: [
-        { name: "Path A auditor build", pct: 70, note: "Actively built 06-11/12/13; per-type equipment profiles + display-recipe framework + tests",
+        { name: "Path A auditor build", pct: 78, note: "Actively built through 06-28; per-type equipment profiles, XFMR 5→12 params, device verifier, remediation-order DAG",
           tasks: [
             { label: "Tool scaffold + README", status: "done", note: "05-28" },
-            { label: "Core auditor logic", status: "active", note: "Per-type equipment profiles + display-recipe framework added 06-13; XFMR standardized" }
+            { label: "Core auditor logic", status: "active", note: "Per-type profiles + display-recipe (06-13); XFMR 5→12 params (06-27); remediation-order DAG (06-28)" }
           ]
         },
         { name: "Path A validation", pct: 0,
@@ -569,13 +576,13 @@ window.DASHBOARD_DATA = {
       },
       branch: "main",
       nextActions: [
-        "Run the auditor against a real family repo to validate output; push the unpushed main commit; green-light Path B only after validation"
+        "Run the auditor against a real family repo to validate output; green-light Path B only after validation"
       ],
       pendingDecisions: [],
       blockers: [],
       reminders: [
-        "Folder renamed 'Families by AI' to 'Families by BIMpossible' - update stale links/specs (REFRESH-SPEC still references 'Families by AI')",
-        "Heavy activity 06-11/12/13 (31 commits) but status held 'paused' per no-auto-promote rule - confirm promotion to active"
+        "Folder renamed 'Families by AI' to 'Families by BIMpossible' - REFRESH-SPEC families section updated 06-28; check any other stale links/specs",
+        "Promoted paused→active 06-28: continuous build through 06-28 (NetworkX DAG, XFMR expansion, device verifier)"
       ],
       links: [
         {
@@ -584,9 +591,11 @@ window.DASHBOARD_DATA = {
         }
       ],
       recent: [
-        "2026-06-13 - device-class param profiles (CB/MTR/DISC) + 1:1 device param map (4a52fc2); per-type equipment profiles + display-recipe framework (a9fb7f0); XFMR standardized",
-        "2026-06-12 - session postmortem + approach decision (Approach B locked); dashboard auto-sync workflow",
-        "2026-06-11 - git repo scaffolded (code-only, no .rfa binaries); 23 commits; Developmental/One Line Symbols folder updated"
+        "2026-06-28 - NetworkX remediation-order DAG: blast-radius + clusters + topo sort (7fd2e48)",
+        "2026-06-27 - Device verifier + phase-1 handoff checklist + ideas backlog (7891090); XFMR_PROFILE expanded 5→12 params + 4 new shared params (b0d5f0b)",
+        "2026-06-13 - device-class param profiles (CB/MTR/DISC) + 1:1 device param map (4a52fc2); per-type equipment profiles + display-recipe framework (a9fb7f0)",
+        "2026-06-12 - session postmortem + approach decision (Approach B locked)",
+        "2026-06-11 - git repo scaffolded (code-only, no .rfa binaries); 23 commits"
       ]
     },
     /* PROJECT:families:END */

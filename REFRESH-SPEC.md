@@ -24,8 +24,10 @@ It blocks the push if any phase number contradicts the ledger (e.g. P7 named "Mo
 P6 named "content authoring"). Wrong phase numbering can no longer reach the live site.
 
 **Schedule:** Windows Task "BIMpossible Dashboard Daily Refresh" runs `Refresh-Dashboard.ps1`
-daily at 06:00 — ledger render → date stamp → guard → push. No model calls. To change names
-on the dashboard, edit the **ledger** (single source of truth), not `data.js`.
+from the dedicated automation clone `F:\AI-Dev\Dashboard-auto` (NOT the editing clone) daily at
+06:00 — ledger render → activity → date stamp → guard → push. No model calls. To change names on
+the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE: the prose bot
+(sync_dashboard.py) has no trigger on the code repos, so prose fields are refreshed on-demand only.
 
 ## Rules
 
@@ -77,8 +79,8 @@ on the dashboard, edit the **ledger** (single source of truth), not `data.js`.
 ### laundry - Laundry Gig
 - No state doc yet (flagged). Folder mtimes; check `docs\`.
 
-### families - Families by AI
-- `F:\AI-Dev\Families by AI\tool\README.md` + folder mtimes
+### families - Families by BIMpossible
+- `F:\AI-Dev\Families by BIMpossible\README.md` + folder mtimes (repo: YourBIMpossible/Families-by-BIMpossible)
 
 ### aiserver - AI-Server (local LLM + automation)
 - `git -C F:\AI-Dev\AI-Server log --oneline --all --since="7 days ago"` + branches + unpushed check (rule 9). Repo: `YourBIMpossible/AI-Server` (private, branch-protected: PR + CI gate).
