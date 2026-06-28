@@ -562,8 +562,11 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      lastActivity: { date: "2026-06-13", summary: "per-type equipment profiles + display-recipe framework (a9fb7f0); device-class param profiles (CB/MTR/DISC) + 1:1 device param map (4a52fc2)" },
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,2],
+      lastActivity: {
+        date: "2026-06-27",
+        summary: "docs(tool): device verifier + phase-1 handoff checklist + ideas backlog (7891090)"
+      },
       branch: "main",
       nextActions: [
         "Run the auditor against a real family repo to validate output; push the unpushed main commit; green-light Path B only after validation"
