@@ -612,6 +612,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <script src="claude_api.js" onerror="void 0"></script>
 <script src="codebase/codebase-meta.js" onerror="void 0"></script>
 <script src="phase_dag.js" onerror="void 0"></script>
+<script src="networkx_impact.js" onerror="void 0"></script>
 <script>
 const D=window.DASHBOARD_DATA;
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
@@ -1179,6 +1180,48 @@ function gnBar(nodes){
       <div style="flex:1;height:6px;border-radius:4px;background:var(--track);overflow:hidden"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--w),var(--w2));transition:width .9s cubic-bezier(.22,1,.36,1)"></div></div>
       <span class="num" style="min-width:26px;font-size:11px;color:var(--dim);text-align:right">${n.edges}</span></div>`;
   }).join('')+'</div>';
+}
+function networkxImpactBody(){
+  const ni=window.NETWORKX_IMPACT;
+  if(!ni)return'<p style="color:var(--muted);padding:1rem">No impact data — run networkx_impact.py to generate.</p>';
+  const s=ni.stats;
+  const heroCards=[
+    {label:'Repos Touched', value:s.repos??'—'},
+    {label:'Prod Tools',    value:s.tools??'—'},
+    {label:'Algorithms',    value:s.algorithms??'—'},
+    {label:'Graph Nodes',   value:s.totalNodes!=null?s.totalNodes.toLocaleString():'—'},
+  ];
+  let h='<div style="padding:0.75rem 1rem">';
+  h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-bottom:1rem">';
+  heroCards.forEach(c=>{
+    h+=`<div style="background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:0.75rem;text-align:center">
+      <div style="font-size:1.5rem;font-weight:700;color:var(--accent)">${c.value}</div>
+      <div style="font-size:0.7rem;color:var(--muted);margin-top:2px">${c.label}</div>
+    </div>`;
+  });
+  h+='</div>';
+  h+='<div style="font-size:0.72rem;font-weight:600;color:var(--muted);letter-spacing:.05em;margin-bottom:0.4rem">SURFACES</div>';
+  h+='<table style="width:100%;border-collapse:collapse;font-size:0.78rem">';
+  h+='<thead><tr style="color:var(--muted);text-align:left">';
+  ['Surface','Repo','Tool','Algorithm','Nodes','Finding'].forEach(col=>{
+    h+=`<th style="padding:0.3rem 0.5rem;border-bottom:1px solid rgba(255,255,255,.08)">${col}</th>`;
+  });
+  h+='</tr></thead><tbody>';
+  (ni.surfaces||[]).forEach((row,i)=>{
+    const bg=i%2===0?'transparent':'rgba(255,255,255,0.02)';
+    h+=`<tr style="background:${bg}">
+      <td style="padding:0.3rem 0.5rem;font-weight:600">${esc(row.label)}</td>
+      <td style="padding:0.3rem 0.5rem;color:var(--muted)">${esc(row.repo)}</td>
+      <td style="padding:0.3rem 0.5rem"><code style="font-size:0.72rem;background:rgba(255,255,255,.07);padding:1px 4px;border-radius:3px">${esc(row.tool)}</code></td>
+      <td style="padding:0.3rem 0.5rem"><code style="font-size:0.72rem;background:rgba(255,255,255,.07);padding:1px 4px;border-radius:3px">${esc(row.algo)}</code></td>
+      <td style="padding:0.3rem 0.5rem;text-align:right;color:var(--accent)">${row.nodes!=null?row.nodes:'—'}</td>
+      <td style="padding:0.3rem 0.5rem;color:var(--muted)">${esc(row.finding)}</td>
+    </tr>`;
+  });
+  h+='</tbody></table>';
+  if(ni.generated)h+=`<div style="font-size:0.65rem;color:var(--muted);margin-top:0.75rem;text-align:right">Generated: ${esc(ni.generated)}</div>`;
+  h+='</div>';
+  return h;
 }
 function graphMetricsBody(){
   const gm=window.GRAPH_METRICS;
@@ -2217,7 +2260,7 @@ function monitorView(){
 }
 
 // ── Codebase hub (graphify artifacts) ───────────────────────────────────────
-const CTABS=[['metrics','Metrics'],['network','Graph'],['dashboard','Dashboard'],['report','Report']];
+const CTABS=[['impact','Impact'],['metrics','Metrics'],['network','Graph'],['dashboard','Dashboard'],['report','Report']];
 function codeFrame(src,label,vscode){
   const cm=window.DASHBOARD_CODEBASE;
   return`<div class="card fade" style="padding:0;overflow:hidden;margin-top:2px">
@@ -2265,7 +2308,8 @@ function codebaseView(){
   let h='<div class="crumbs">Codebase</div><h2 class="page">Backend Knowledge Graph</h2>';
   h+='<div class="mtabs">'+CTABS.map(([id,lbl])=>`<button class="mtab${ct===id?' on':''}" data-ct="${id}">${lbl}</button>`).join('')+'</div>';
   const GO='vscode://file/F:/AI-Dev/BIMpossible/backend/graphify-out/';
-  if(ct==='metrics')h+=graphMetricsBody();
+  if(ct==='impact')h+=networkxImpactBody();
+  else if(ct==='metrics')h+=graphMetricsBody();
   else if(ct==='network')h+=`<p class="sub">Interactive map of the most-connected backend modules${window.DASHBOARD_CODEBASE?` (top ${window.DASHBOARD_CODEBASE.shownNodes} of ${window.DASHBOARD_CODEBASE.nodes.toLocaleString()})`:''} — drag to explore, scroll to zoom, color = community.</p>`+codeFrame('codebase/graph-network','Interactive node graph',GO+'graph.json');
   else if(ct==='dashboard')h+='<p class="sub">The graphify dashboard for the BIMpossible backend.</p>'+codeFrame('codebase/graph-dashboard','Graphify dashboard',GO+'dashboard.html');
   else if(ct==='report')h+=reportBody();
