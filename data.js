@@ -3,9 +3,9 @@
 // prose fields: updated on source-repo push by sync_dashboard.py (fenced off phases/waves).
 // daily 06:00 scheduled refresh + pre-push phase-numbering guard. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-06-27",
+  generated: "2026-06-28",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-06-14",
+  activitySince: "2026-06-15",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -174,10 +174,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [13,0,0,2,0,0,0,0,0,15,8,42,27,24],
+      activity: [0,0,2,0,0,0,0,0,15,8,42,27,24,2],
       lastActivity: {
-        date: "2026-06-27",
-        summary: "Merge pull request #156 from YourBIMpossible/fix/prompt-cache-comment (99c8674)"
+        date: "2026-06-28",
+        summary: "feat(tools): doc->code drift + provenance graph (NetworkX + git dates) (d5e9d62)"
       },
       branch: "main at 9f6f55c; 0 ahead of origin",
       git: {
@@ -299,10 +299,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [14,0,39,0,0,0,0,0,0,1,0,0,0,0],
+      activity: [0,39,0,0,0,0,0,0,1,0,0,0,3,0],
       lastActivity: {
-        date: "2026-06-23",
-        summary: "refactor(revitlink): remove Anti-Worksets auto-stamp updater; bundle Duplicate Collection revisions (fddcaaf)"
+        date: "2026-06-27",
+        summary: "chore(docs): commit working specs for dupcollection view-template remap (f3fa62b)"
       },
       branch: "overnight/tool-revisions-2026-06-16 (57 ahead of main)",
       git: {
@@ -403,7 +403,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,1,0],
       lastActivity: {
         date: "2026-06-27",
         summary: "fix: header logo visibility + collapse theme toggle to single cycling button (709f352)"
@@ -562,7 +562,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,2],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,2,0],
       lastActivity: {
         date: "2026-06-27",
         summary: "docs(tool): device verifier + phase-1 handoff checklist + ideas backlog (7891090)"
@@ -643,7 +643,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,8,4,0,0,0,0,0,1,0,0,0,0],
+      activity: [0,8,4,0,0,0,0,0,1,0,0,0,0,0],
       lastActivity: {
         date: "2026-06-23",
         summary: "docs: add 2026-06-18 full code-audit report (#9) (6b057ac)"
