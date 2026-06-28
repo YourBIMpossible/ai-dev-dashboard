@@ -238,7 +238,15 @@ window.DASHBOARD_DATA = {
         trend: "improving",
         reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-06-16__code-audit.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
-        open: []
+        open: [],
+        history: [
+          { date: "2026-06-22", type: "Weekly full", scope: "Whole tree", result: "All clear — 0 open · 5 closed (expr-eval CVE removed, relay frame guard, multi-tenant auth scoping via #142)", report: "2026-06-16__code-audit.md" },
+          { date: "2026-06-16", type: "Weekly full + verification", scope: "Whole tree @ 04b5d8d", result: "0 Critical / 0 live-exploitable · new SEC-9 backend CSV formula-injection (Medium); SEC-8 PUT /ref 500s", report: "weekly-full-audit_2026-06-16.md" },
+          { date: "2026-06-15", type: "Weekly full", scope: "Whole tree + QA/wizard WIP", result: "0 Critical · OPS-1 (High, process): new QA/wizard surface CI-unverified while Actions billing-blocked", report: "weekly-full-audit_2026-06-15.md" },
+          { date: "2026-06-14", type: "Full (backend + frontend)", scope: "Phase 3 F-1…F-28, Phase 4a/5, expr-eval removal", result: "NM-1 (Medium): list_views checks project allowlist before auth — probe via differing error codes", report: "2026-06-14__audit-report-full.md" },
+          { date: "2026-06-13", type: "Full", scope: "Whole tree @ 58fd53c (W10-17 merges)", result: "FEA-4 (Medium): 15 new Wave 10-17 schedule views ship with zero unit tests", report: "2026-06-13__audit-report-full.md" },
+          { date: "2026-06-10", type: "Full (7 agents)", scope: "Whole tree @ 277e6d2 · re-verified 68 perp-audit fixes", result: "CORE-1 (High): refresh never invalidates the durable category cache → stale sidebar on republish", report: "2026-06-10__audit-report-full.md" }
+        ]
       },
       waves: {
         updated: "2026-06-26",
@@ -346,14 +354,22 @@ window.DASHBOARD_DATA = {
         "2026-06-11 - Tools 14-21 built + ribbon-wired (Warning Scanner, In-Place Families, Workset Audit, Element ID Finder, Batch Rename Views, VT Audit, Scope Box Manager, Batch PDF Export)"
       ],
       audit: {
-        lastRun: "2026-06-09",
-        runType: "google / perp / perf (on-demand)",
+        lastRun: "2026-06-14",
+        runType: "Full (Add-Ins repo, 3 agents)",
         cadence: "on-demand",
-        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
-        closedLastRun: 9,
-        trend: "improving",
-        reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-06-09__perp-audit.md",
-        open: []
+        counts: { critical: 1, high: 0, medium: 0, low: 0, info: 0 },
+        closedLastRun: 0,
+        trend: "flat",
+        reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-06-14__audit-report-full.md",
+        ledgerPath: "F:\\AI-Dev\\Add-Ins\\audits",
+        open: [
+          { id: "C-01", sev: "critical", title: "No AssemblyVersion in Core.csproj — every build is 1.0.0.0; a stale co-loaded Core DLL silently corrupts ratings (confirm resolved)", where: "ModelQA.Core.csproj" }
+        ],
+        history: [
+          { date: "2026-06-14", type: "Full (3 agents)", scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests", result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption", report: "2026-06-14__audit-report-full.md" },
+          { date: "2026-06-13", type: "Tools 8-33 sweep", scope: "Tools 8-33 + punchlist", result: "Punchlist sweep across the tool suite", report: "2026-06-13__tools-8-33-audit-sweep.md" },
+          { date: "2026-06-09", type: "Triple audit (google / perf / perp)", scope: "Add-Ins repo", result: "9 findings closed in remediation — CSV-injection guards ×7, culture-invariant formatting, rolling log", report: "2026-06-09__perp-audit.md" }
+        ]
       }
     },
     /* PROJECT:addins:END */
@@ -445,14 +461,21 @@ window.DASHBOARD_DATA = {
         "2026-06-09 - Triple audit (perf/architecture/code-review); contact form Turnstile + Web3Forms live; 13 e2e tests"
       ],
       audit: {
-        lastRun: "2026-06-10",
-        runType: "Full triple audit (perf + architecture + code-review) + re-verify 06-10",
+        lastRun: "2026-06-13",
+        runType: "Full code audit",
         cadence: "on-demand",
-        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
-        closedLastRun: 30,
-        trend: "stable",
-        reportPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\_site-audit-runs.md",
-        open: []
+        counts: { critical: 0, high: 1, medium: 0, low: 0, info: 0 },
+        closedLastRun: 4,
+        trend: "flat",
+        reportPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\2026-06-13__audit-report-full.md",
+        ledgerPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\_site-audit-runs.md",
+        open: [
+          { id: "CSP-1", sev: "high", title: "CSP hash drift is unguarded in CI — a style/script hash change can ship a broken policy. Latent, not prod-breaking (confirm resolved)", where: "CI" }
+        ],
+        history: [
+          { date: "2026-06-13", type: "Full code audit", scope: "Whole site (perf baseline unchanged)", result: "0 prod-breaking · 1 high-latent (CSP hash drift unguarded in CI) + 4 medium + 8 low; no 06-09 regressions", report: "2026-06-13__audit-report-full.md" },
+          { date: "2026-06-09", type: "Triple audit (perf / architecture / code)", scope: "6 pages", result: "Lighthouse 100×4 · 4 bugs confirmed + fixed (wheel focus desync, resize clip, contact 500, theme tri-state)", report: "2026-06-09__audit-1-performance.md" }
+        ]
       }
     },
     /* PROJECT:site:END */
