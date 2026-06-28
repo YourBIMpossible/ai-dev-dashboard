@@ -313,6 +313,8 @@ h2.page{font-size:21px;font-weight:700;letter-spacing:-.01em;margin-bottom:3px;}
   .ah-when{flex-direction:row;align-items:baseline;gap:8px;}
   .ah-ref{display:none;}
 }
+.au-latest{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.au-latest b{color:var(--text);font-family:Sora,sans-serif;font-weight:600;}
 
 /* ── Git warn ──────────────────────────────── */
 .gwarn{
@@ -1065,14 +1067,15 @@ function project(p){
   // Audit
   if(p.audit){
     const a=p.audit;const tot=SEVS.reduce((s,k)=>s+(a.counts[k]||0),0);
-    h+=`<div class="card fade ca-green" style="animation-delay:.13s;margin-bottom:14px"><h3>Audit · ${esc(a.lastRun)} (${esc(a.runType)})</h3>`;
-    h+=`<div class="sevcounts" style="margin-bottom:${tot?'14px':'4px'}">`;
+    h+=`<div class="card fade ca-green" style="animation-delay:.13s;margin-bottom:14px"><h3>Audit</h3>`;
+    h+=`<div class="au-latest">Latest run · <b>${esc(a.lastRun)}</b> · ${esc(a.runType)}</div>`;
+    h+=`<div class="sevcounts" style="margin:13px 0 ${tot?'13px':'4px'}">`;
     SEVS.forEach(k=>{
       const n=a.counts[k]||0;
       h+=`<div class="sevpip${(k==='critical'||k==='high')&&n?' hot':''}"><span class="n" style="color:${n?(k==='critical'?'var(--red)':k==='high'?'var(--amber)':'var(--text)'):'var(--dim)'}">${n}</span><span class="k">${SEVLBL[k]}</span></div>`;
     });
     h+=`</div>`;
-    if(tot)h+=a.open.map(f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`).join('');
+    if(tot)h+=`<div class="ah-h">Open findings · ${tot}</div>`+a.open.map(f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`).join('');
     else h+=`<p class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of the last run.</p>`;
     h+=`<p style="font-size:11.5px;color:var(--dim);margin-top:10px"><span class="trend ${a.trend||'flat'}">${a.trend||'flat'}</span> · ${a.closedLastRun||0} closed last run${a.cadence?' · '+esc(a.cadence):''}</p>`;
     h+=auditHistory(p);
@@ -1136,9 +1139,10 @@ function auditView(){
   wa.filter(p=>p.audit&&((p.audit.open&&p.audit.open.length)||(p.audit.history&&p.audit.history.length))).forEach((p,i)=>{
     const hasOpen=p.audit.open&&p.audit.open.length;
     h+=`<div class="card fade" style="animation-delay:${0.08+i*.04}s;margin-top:13px"><h3>${esc(p.name)} — audit</h3>`
+      +`<div class="au-latest">Latest run · <b>${esc(p.audit.lastRun||'')}</b> · ${esc(p.audit.runType||'')}</div>`
       +(hasOpen
-        ? p.audit.open.map(f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`).join('')
-        : `<p class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of ${esc(p.audit.lastRun||'')}.</p>`)
+        ? `<div class="ah-h" style="margin-top:13px">Open findings · ${p.audit.open.length}</div>`+p.audit.open.map(f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`).join('')
+        : `<p class="clean" style="margin-top:12px">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of ${esc(p.audit.lastRun||'')}.</p>`)
       +auditHistory(p)
       +`<div class="links" style="margin-top:11px">${pathLink(p.audit.reportPath,'Latest report')}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Run ledger'):''}</div></div>`;
   });
