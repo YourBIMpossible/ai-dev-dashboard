@@ -14,8 +14,8 @@ window.DASHBOARD_DATA = {
       icon: "layers",
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
-      phase: "PR #142 merged 2026-06-23 (9f6f55c): P11 Model QA rules engine + P8 Wizard committed to main; expr-eval CVE removed; audit remediation wave (relay frame guard, multi-tenant auth scoping). P6 true-prod deploy pending (4 Phase A migrations → head s1t2u3v4w5x6). P7 Revit Link write_instance_parameter live (single-user, flag=ON in pilot); DA4R co-equal engine proposed 2026-06-23. P11 QA engine live; P8 Wizard flag-gated. main at 9f6f55c; 1756 DB + 1223 pure BE tests.",
-      focus: "True-prod deploy (runbook 06-12): alembic upgrade head (Phase A migrations → head s1t2u3v4w5x6), BIMPOSSIBLE_ADMIN_ENABLED/SECRET, prewarm DB cleanup → smoke Wave 4.10 + 4.9 + admin/My-Account. Then: DA4R vs Revit Link sequencing decision for P7.",
+      phase: "main at 80d3407 (2026-06-28), 0 ahead of origin. Since #142 (06-23) the Embedded Assistant advanced hard: Phase 4c conversation persistence (#153) + stop-and-edit (#154), Phase 4d project-context grounding (#155), NetworkX graph-topology tools + Model Health graph checks (#157), permission-flow graph tool. Infra/hardening: Wave C-1 Redis shared-state multi-worker foundation (#152); QA predicate-normalization refactors (#150/#151); report-only security-scan + BIM semgrep rules + prose-flag hook + trivy CI pin. Program gates unchanged: P11 Model QA + P8 Wizard built but flag-gated OFF; P6 true-prod deploy still owed (alembic → head s1t2u3v4w5x6); P7 write-back ON HOLD (Revit Link single-user live, DA4R parked); P5 ON HOLD.",
+      focus: "True-prod deploy still owed (runbook 06-12): alembic upgrade → head s1t2u3v4w5x6, set BIMPOSSIBLE_ADMIN_ENABLED/SECRET, prewarm DB cleanup → then smoke Wave 4.10 + 4.9 + admin/My-Account. The 06-25→28 assistant Phase 4c/4d + Model Health graph work (#150–157) is merged but unsmoked on prod. Then: P7 DA4R-vs-Revit Link sequencing decision.",
       progress: {
         label: "Program phases",
         phases: [
@@ -179,18 +179,18 @@ window.DASHBOARD_DATA = {
         date: "2026-06-28",
         summary: "chore(security): commit unattended scanner, ignore _triage-logs, retire headless wrapper (f67c42b)"
       },
-      branch: "main at 9f6f55c; 0 ahead of origin",
+      branch: "main at 80d3407; 0 ahead of origin",
       git: {
         warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)."
       },
       nextActions: [
-        "True-prod deploy (runbook 06-12): alembic upgrade head (Phase A migrations → head s1t2u3v4w5x6), set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, DELETE stale done-rows in relationship_prewarm_jobs per model",
+        "True-prod deploy (runbook 06-12): alembic upgrade head (→ s1t2u3v4w5x6), set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, DELETE stale done-rows in relationship_prewarm_jobs per model",
         "Post-deploy smokes: Wave 4.10 (Spec Draft launcher → modal + downloads); Wave 4.9 (ScheduleClassificationBar + ✦ badge); admin/My-Account KPI strip + firm onboard",
+        "Smoke the 06-25→28 assistant work on prod: Phase 4c conversation persistence + stop-and-edit, Phase 4d project-context grounding, Model Health graph checks (#150–157)",
         "P7 DA4R + Revit Link sequencing: review 2026-06-23 Phase7_Writeback_TwoOptions_PROPOSAL.md, decide which engine to build first",
-        "Drop _saved_views_snapshot_2026_05_24 — deadline TODAY 2026-06-23",
         "Add WAVE-STATUS.md rows for Waves 4.9 + 4.10 (shipped in git, missing from ledger)",
-        "Commit + push P6 /account test branch: FE admin/account UI tests missing (AdminShell, FirmEditDrawer, ConfirmDialog, My Account)",
-        "Install reportlab (requirements.txt) — PDF exports inert until added (CSV works)"
+        "Commit + push P6 /account FE test branch: AdminShell, FirmEditDrawer, ConfirmDialog, My Account UI tests missing",
+        "Drop _saved_views_snapshot_2026_05_24 (OVERDUE since 06-23); install reportlab so PDF exports work (CSV-only until added)"
       ],
       pendingDecisions: [
         "Schedule-push: staleness cadence, classifier rules, fidelity degradation list, SPF ship location",
@@ -215,17 +215,17 @@ window.DASHBOARD_DATA = {
         { label: "Code", path: "F:\\AI-Dev\\BIMpossible" }
       ],
       recent: [
+        "2026-06-28 - PRs #153–#157 merged: Embedded Assistant Phase 4c (conversation persistence + stop-and-edit) + Phase 4d project-context grounding; NetworkX graph-topology tools + Model Health graph checks (#157) + permission-flow graph tool; report-only security-scan + BIM semgrep + prose-flag hook; trivy CI pin (main 80d3407)",
+        "2026-06-27 - Wave C-1 (#152): shared-state on Redis — multi-worker foundation",
+        "2026-06-25 - QA refactors (#150/#151): extract _norm/_blank helpers + fold non_empty into not _blank (DRY predicate normalization)",
         "2026-06-23 - PR #142 merged (9f6f55c): P11 Model QA rules engine + P8 Wizard committed to main; expr-eval prototype-pollution CVE removed; relay frame guard + multi-tenant auth scoping + aec edge cases (audit remediation)",
         "2026-06-17 - Audit remediation batch: conftest pure-lane collect_ignore fix; FederatedViewer + annotations/viewPresets hardening (3 commits)",
-        "2026-06-16 - Weekly audit batch (4 commits): relay hardening, auth_router/account_router silent-except fix, assistant multi-tenant firm-default race fix",
-        "2026-06-13 - Client-Management UIs shipped (0e0242f): Admin Portal v2 (alert bar, KPI strip, firm list, triage panel, onboard wizard) + My Account dashboard (budget, BYO-key, cost-by-model); CI green.",
-        "2026-06-12 - Client-Management Phase A backend (e749918): 8 tables / 4 migrations; Wave 4.10 spec library COMPLETE (32 JSONs, 3cf91a0); Wave 4.9 classification enrichment shipped (f207d41).",
-        "2026-06-12 - Wave 7 all 3 smokes PASSED. Waves 16/20/21 shipped. Waves 11-14/17 discipline-schedule smokes all PASSED.",
-        "2026-06-11 - Waves 5/6/6.5 shipped: XLSX export (PR #109), thin permissions (PR #110), HITL assistant (PR #111). Post-audit prod smokes: CORE-1 + SCHED-2 live PASS."
+        "2026-06-13 - Client-Management UIs shipped (0e0242f): Admin Portal v2 + My Account dashboard (budget, BYO-key, cost-by-model); CI green",
+        "2026-06-12 - Client-Management Phase A backend (e749918): 8 tables / 4 migrations; Wave 4.10 spec library COMPLETE (3cf91a0); Wave 4.9 classification enrichment (f207d41)"
       ],
       audit: {
         lastRun: "2026-06-22",
-        runType: "Weekly automated (Mon 6am); PR #142 2026-06-23 addressed findings (expr-eval CVE removed, relay hardened, auth scoped)",
+        runType: "Weekly automated (Mon 6am); 06-22 run clean — expr-eval CVE removed, relay hardened, auth scoped (via #142). Next: 06-29",
         cadence: "weekly Mon 6am + on-demand",
         counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
         closedLastRun: 5,
