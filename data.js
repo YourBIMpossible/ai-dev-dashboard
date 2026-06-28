@@ -68,7 +68,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P5 Views / Sheets / 3D / Workspace Coherence",
             pct: 15,
-            note: "ON HOLD — Bonus, not a need (owner 2026-06-24). Pre-pilot/early wiring only (5.1/5.2 ViewPreset/Markups); 5.3/5.4 unconfirmed pending re-scan. Wave 9 (Forma) only affects how 5.1/5.3/5.5 viewer slices are hosted at resume. 5.5 Navisworks planned; Sheets gated OFF",
+            note: "ON HOLD — Bonus, not a need (owner 2026-06-24). Pre-pilot/early wiring only (5.1/5.2 ViewPreset/Markups); 5.3/5.4 unconfirmed pending re-scan. Wave 9 (Forma) only affects how 5.1/5.3/5.5 viewer slices are hosted at resume. 5.5 Navisworks planned; Sheets gated OFF. 5.6 Visual Model Graph — read-only node-link view (select element → trace/load-tree highlight); frontend-only on the live `get_relationships_graph` endpoint; PARKED, ready-to-build (see `design-docs/visual-model-graph_design-doc_2026-06-28.md`)",
             tasks: [
               { label: "5.1/5.2 early wiring: ViewPresetSidebar + MarkupsList", status: "done", note: "Shipped 39c326b" },
               { label: "5.2 PDF-first sheet rendering decision locked", status: "done", note: "06-04 — PDF as canonical artifact; PyMuPDF/AGPL removed; SVF2/APS Viewer deferred to later wave" },
@@ -174,10 +174,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,0,2,0,0,0,0,0,15,8,42,27,24,2],
+      activity: [0,0,2,0,0,0,0,0,15,8,42,27,24,8],
       lastActivity: {
         date: "2026-06-28",
-        summary: "feat(tools): doc->code drift + provenance graph (NetworkX + git dates) (d5e9d62)"
+        summary: "chore(security): commit unattended scanner, ignore _triage-logs, retire headless wrapper (f67c42b)"
       },
       branch: "main at 9f6f55c; 0 ahead of origin",
       git: {
@@ -562,10 +562,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,2,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,2,1],
       lastActivity: {
-        date: "2026-06-27",
-        summary: "docs(tool): device verifier + phase-1 handoff checklist + ideas backlog (7891090)"
+        date: "2026-06-28",
+        summary: "feat(tool): NetworkX remediation-order DAG (blast-radius + clusters + topo) (7fd2e48)"
       },
       branch: "main",
       nextActions: [
