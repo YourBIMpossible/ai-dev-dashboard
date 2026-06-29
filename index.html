@@ -707,8 +707,8 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <script>
 const D=window.DASHBOARD_DATA;
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
-const WORK=['bimpossible','addins','site','families'];
-const PERS=['pickem','laundry'];
+const WORK=['bimpossible','addins','site','families','aiserver','ai-brain-data','bimpossible-workspace','dashboard-auto','bimpossible-tests'];
+const PERS=['pickem','laundry','pc-monitor'];
 const PILL={active:'st-ok',gated:'st-warn',paused:'st-info',dormant:'st-dim'};
 const DOTC={active:'var(--status-ok)',gated:'var(--status-warn)',paused:'var(--status-info)',dormant:'var(--status-dim)'};
 const SC={CLOSED:'var(--status-ok)',SHIPPED:'var(--status-ok)',BUILT:'var(--status-warn)',PARTIAL:'var(--status-info)',ACTIVE:'var(--status-info)','SCOPE-LOCK':'var(--w2)',PLANNED:'var(--status-dim)',PENDING:'var(--status-dim)'};
@@ -724,6 +724,11 @@ const ICO={
   cube:'<svg viewBox="0 0 24 24"><path d="M12 2 4 6.5v9L12 20l8-4.5v-9L12 2z"/><path d="M4 6.5 12 11l8-4.5M12 11v9"/></svg>',
   shield:'<svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.2 2.9 7.9 7 9 4.1-1.1 7-4.8 7-9V6l-7-3z"/><path d="m9 12 2 2 4-4"/></svg>',
   graph:'<svg viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><line x1="5" y1="7" x2="12" y2="17"/><line x1="19" y1="7" x2="12" y2="17"/><line x1="5" y1="5" x2="19" y2="5"/></svg>',
+  brain:'<svg viewBox="0 0 24 24"><path d="M9.5 2A5.5 5.5 0 0 0 4 7.5a5.5 5.5 0 0 0 1 3.18V17a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-6.32A5.5 5.5 0 0 0 20 7.5 5.5 5.5 0 0 0 14.5 2"/><path d="M9.5 2a5.5 5.5 0 0 1 5 5M12 7v4M9 12h6"/></svg>',
+  folder:'<svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5z"/></svg>',
+  refresh:'<svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3.6-7.2L3 8"/><path d="M3 3v5h5"/></svg>',
+  monitor:'<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+  check:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="16" height="17" rx="2"/><path d="m9 12 2 2 4-4"/><path d="M9 8h6M9 16h4"/></svg>',
   idea:'<svg viewBox="0 0 24 24"><path d="M9 21h6m-3-18a6 6 0 0 1 3.75 10.67C15 15 15 16 15 17H9c0-1 0-2-.75-2.33A6 6 0 0 1 12 3z"/></svg>',
   usage:'<svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg>',
   agents:'<svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M12 4v4M2 13v3M22 13v3"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg>',
@@ -1065,7 +1070,7 @@ function overview(){
   }
 
   // 3. Satellite work projects — compact 3-up (no phase bars)
-  const satIds=['addins','site','families'];
+  const satIds=['addins','site','families','aiserver','ai-brain-data','bimpossible-workspace','dashboard-auto','bimpossible-tests'];
   const sats=satIds.map(id=>D.projects.find(p=>p.id===id)).filter(Boolean);
   if(sats.length){
     h+=`<div class="ov-group fade" style="animation-delay:.08s">Satellite</div>`;

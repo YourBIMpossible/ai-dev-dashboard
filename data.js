@@ -707,5 +707,285 @@ window.DASHBOARD_DATA = {
       ]
     },
     /* PROJECT:aiserver:END */
+
+    /* PROJECT:ai-brain-data:START */
+    {
+      id: "ai-brain-data",
+      name: "AI Brain Data",
+      icon: "brain",
+      oneLiner: "Personal knowledge base and context store for AI/BIM work — Obsidian vault, Revit-AI context logs, decision records, and the source corpus for AI-Server's RAG pipeline.",
+      status: "active",
+      phase: "Local-only git repo (no GitHub remote). Active daily — context logs + Revit-AI copy state committed on 2026-06-28. Post-graphify baseline shipped: 70 notes enriched, 12 MOCs created. Currently has 3 uncommitted files (copy-log.txt, copy-state.json, and a raw-logs folder for 2026-06-28). The vault feeds AI-Server WP-B (RAG over AI-Brain-Data docs).",
+      focus: "Keep Revit-AI context current; feed AI-Server WP-B (sqlite-vec RAG index) when that work package starts.",
+      progress: { label: "Workstreams", phases: [
+        { name: "Vault foundation", pct: 100, note: "Obsidian vault live; MOCs, decision-log, standards-and-refs, revit-snippets all structured",
+          tasks: [
+            { label: "Initial vault structure + gitignore", status: "done" },
+            { label: "Post-graphify enrichment (70 notes, 12 MOCs)", status: "done", note: "2026-06-28" }
+          ]
+        },
+        { name: "Revit-AI context pipeline", pct: 60, note: "Copy-log + copy-state in place; raw-log capture running; ingestion into AI-Server not yet built",
+          tasks: [
+            { label: "copy-log.txt + copy-state.json pipeline", status: "active", note: "Updating daily" },
+            { label: "Feed into AI-Server WP-B RAG index", status: "pending", note: "Blocked on AI-Server WP-B" }
+          ]
+        }
+      ]},
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      lastActivity: {
+        date: "2026-06-28",
+        summary: "normalize line endings; remove Zai-brain embedded repo; post-graphify baseline (8e8b564)"
+      },
+      branch: "master (local-only, no remote)",
+      git: { warn: "No GitHub remote — local-only git. Confirm whether this should stay private or get a private remote for backup." },
+      nextActions: [
+        "Commit 3 pending files: Revit-AI/context/copy-log.txt, copy-state.json, Revit-AI/raw-logs/2026-06-28/",
+        "Start AI-Server WP-B RAG index build when WP-B work package begins"
+      ],
+      pendingDecisions: [
+        "Should AI-Brain-Data get a private GitHub remote for offsite backup?"
+      ],
+      blockers: [],
+      reminders: [
+        "3 uncommitted files as of 2026-06-28: copy-log.txt, copy-state.json, raw-logs/2026-06-28/"
+      ],
+      links: [
+        { label: "Local vault", path: "F:\\AI-Dev\\AI-Brain-Data" },
+        { label: "Revit-AI context", path: "F:\\AI-Dev\\AI-Brain-Data\\Revit-AI\\context" }
+      ],
+      recent: [
+        "2026-06-28 — normalize line endings (8e8b564)",
+        "2026-06-28 — remove Zai-brain embedded repo, add to gitignore (1129bd6)",
+        "2026-06-28 — post-graphify baseline — 70 notes enriched, 12 MOCs created (be1cdae)"
+      ]
+    },
+    /* PROJECT:ai-brain-data:END */
+
+    /* PROJECT:bimpossible-workspace:START */
+    {
+      id: "bimpossible-workspace",
+      name: "BIMpossible Workspace",
+      icon: "folder",
+      oneLiner: "Strategy docs, build logs, prompts, and diagrams that support the BIMpossible platform repo. Phase status ledgers, wave logs, Claude startup prompts, and design proposals all live here.",
+      status: "active",
+      phase: "main branch, synced with origin (YourBIMpossible/BIMpossible_Workspace). Last commit 2026-06-28. 73 uncommitted files — primarily _gstack-activation scratch, archived backups, and security-review queue digests. Key sources of truth: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
+      focus: "Keep strategy ledgers (PHASE-STATUS, WAVE-STATUS, STATE-LIVE) current after each BIMpossible merge. Commit pending _gstack-activation + security-review digest files.",
+      progress: { label: "Content areas", phases: [
+        { name: "Strategy + ledgers", pct: 90, note: "PHASE-STATUS, WAVE-STATUS, STATE-LIVE live and updated regularly; Canonical Guide v2 reviewed 2026-06-23",
+          tasks: [
+            { label: "Phase status ledger (PHASE-STATUS.md)", status: "active" },
+            { label: "Wave status ledger (WAVE-STATUS.md)", status: "active" },
+            { label: "Auto-generated state (STATE-LIVE.md)", status: "active" },
+            { label: "Commit pending security-review + gstack-activation files", status: "active", note: "73 files uncommitted as of 2026-06-28" }
+          ]
+        },
+        { name: "Prompts + skills", pct: 80, note: "CLAUDE_CODE_STARTUP_PROMPT.md + PROJECT_CONTEXT.md + DEBUG_3_STAGE skill in place",
+          tasks: [
+            { label: "Claude Code startup prompt", status: "done" },
+            { label: "Project context doc", status: "done" },
+            { label: "DEBUG_3_STAGE skill", status: "done" }
+          ]
+        },
+        { name: "Design proposals + architecture", pct: 70, note: "Phase 7 writeback proposal, Phase 5 visual-model-graph design doc in 00_Strategy/",
+          tasks: [
+            { label: "Phase 7 writeback two-options proposal", status: "done", note: "2026-06-23" },
+            { label: "Visual model graph design doc", status: "done", note: "2026-06-28" }
+          ]
+        }
+      ]},
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
+      lastActivity: {
+        date: "2026-06-28",
+        summary: "chore(memory): commit security-review-queue digest (scan 2026-06-28-093508) (51ef857)"
+      },
+      branch: "main at 51ef857; synced with origin",
+      git: null,
+      nextActions: [
+        "Commit the 73 pending files (security-review queue digests, _gstack-activation scratch)",
+        "Update PHASE-STATUS + WAVE-STATUS after next BIMpossible merge"
+      ],
+      pendingDecisions: [],
+      blockers: [],
+      reminders: [
+        "73 uncommitted files as of 2026-06-28 — mostly _gstack-activation and security-review artifacts"
+      ],
+      links: [
+        { label: "Local workspace", path: "F:\\AI-Dev\\BIMpossible_Workspace" },
+        { label: "Phase status", path: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_PHASE-STATUS.md" },
+        { label: "Wave status", path: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md" },
+        { label: "GitHub", path: "https://github.com/YourBIMpossible/BIMpossible_Workspace" }
+      ],
+      recent: [
+        "2026-06-28 — chore(memory): commit security-review-queue digest (51ef857)",
+        "2026-06-28 — chore: gitignore gstack activation scratch + archive tracked backups (2282a8e)",
+        "2026-06-28 — chore(security): commit unattended scanner, ignore _triage-logs (f67c42b)"
+      ]
+    },
+    /* PROJECT:bimpossible-workspace:END */
+
+    /* PROJECT:dashboard-auto:START */
+    {
+      id: "dashboard-auto",
+      name: "Dashboard (Auto Clone)",
+      icon: "refresh",
+      oneLiner: "Automation-dedicated clone of the ai-dev-dashboard repo. The scheduled refresh pipeline (sync_*.py scripts, GitHub Actions sync) commits directly here; F:\\AI-Dev\\Dashboard is the human-edit copy.",
+      status: "active",
+      phase: "main branch, same remote as Dashboard (YourBIMpossible/ai-dev-dashboard). Last commit 2026-06-28. 34 uncommitted files — drift between auto-clone and working copy (expected — they diverge between merges). The working Dashboard is ahead by 6+ commits (Waves 1–6 design system) as of 2026-06-28.",
+      focus: "CI/CD write target for automated data refreshes. Do not hand-edit — manual changes go in F:\\AI-Dev\\Dashboard instead. Resolve divergence from working copy by pushing Waves 1–6 to origin, then fast-forwarding the auto clone.",
+      progress: { label: "Automation pipeline", phases: [
+        { name: "Sync scripts", pct: 85, note: "sync_activity.py, sync_ledgers.py, sync_dashboard.py, usage_sync.mjs, codebase_sync.mjs, agents_sync.mjs, github_actions_sync.mjs all present",
+          tasks: [
+            { label: "Activity sync (git log → data.js)", status: "done" },
+            { label: "Ledger sync (PHASE-STATUS + WAVE-STATUS → data.js)", status: "done" },
+            { label: "Usage sync", status: "active" },
+            { label: "Hardened automation-clone refresh logic", status: "done", note: "2026-06-28 (e575b63)" }
+          ]
+        },
+        { name: "GitHub Actions deploy", pct: 80, note: "deploy.yml + github-actions-live.yml present; Cloudflare Pages deploy pipeline",
+          tasks: [
+            { label: "Automated deploy on push", status: "done" },
+            { label: "Live GitHub Actions sync", status: "active" }
+          ]
+        }
+      ]},
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
+      lastActivity: {
+        date: "2026-06-28",
+        summary: "fix(refresh): harden automation-clone refresh (e575b63)"
+      },
+      branch: "main at e575b63; working copy 6+ commits ahead (Waves 1–6 design system)",
+      git: { warn: "Same remote as working Dashboard. 34 files uncommitted. Do not hand-edit this clone. Working copy is 6+ commits ahead — push design system waves to origin then fast-forward auto clone." },
+      nextActions: [
+        "Push Waves 1–6 design system WIP commits from working Dashboard to origin (when wave finalization is ready)",
+        "Fast-forward auto clone to origin after push to resolve 6-commit divergence"
+      ],
+      pendingDecisions: [],
+      blockers: [],
+      reminders: [
+        "34 uncommitted files in auto clone as of 2026-06-28",
+        "Working Dashboard is 6+ commits ahead of origin — Waves 1–6 design system not yet pushed"
+      ],
+      links: [
+        { label: "Auto clone folder", path: "F:\\AI-Dev\\Dashboard-auto" },
+        { label: "GitHub repo", path: "https://github.com/YourBIMpossible/ai-dev-dashboard" }
+      ],
+      recent: [
+        "2026-06-28 — fix(refresh): harden automation-clone refresh (e575b63)",
+        "2026-06-28 — dashboard refresh 2026-06-28 09:56 (0707957)",
+        "2026-06-28 — auto-sync: families card (0fcc1cc)"
+      ]
+    },
+    /* PROJECT:dashboard-auto:END */
+
+    /* PROJECT:pc-monitor:START */
+    {
+      id: "pc-monitor",
+      name: "PC Monitor",
+      icon: "monitor",
+      oneLiner: "Fully-local workstation monitoring stack for the Ryzen 9 9950X3D + RTX 5080 rig. Python collector → SQLite; zero-dependency web dashboard with live view + historical scrubbing. No cloud, no telemetry.",
+      status: "active",
+      phase: "No git — local-only (~404 files). Python collector (collector.py) + Flask web app (app.py) + SQLite (db.py). Last modified 2026-06-25. Packaged as a Windows-native install (install-task.ps1 → Task Scheduler; desktop shortcut at http://127.0.0.1:8787). Deep-capture mode (deepcapture.py) available.",
+      focus: "Tool is operational. Integration with AI-Server WP-D (GPU/inference profile) is a pending work item.",
+      progress: { label: "Features", phases: [
+        { name: "Core monitoring", pct: 90, note: "Collector + SQLite + web dashboard + Windows auto-start installer all present and operational",
+          tasks: [
+            { label: "Python collector (~10s sample rate)", status: "done" },
+            { label: "SQLite persistence (db.py)", status: "done" },
+            { label: "Live + historical web dashboard (port 8787)", status: "done" },
+            { label: "Windows Task Scheduler install (install-task.ps1)", status: "done" },
+            { label: "Deep-capture mode (deepcapture.py)", status: "done" }
+          ]
+        },
+        { name: "Packaging", pct: 50, note: "PyInstaller spec present; packaged zip exists; full portable install not confirmed working",
+          tasks: [
+            { label: "PyInstaller build (PC-Monitor.spec)", status: "active", note: "Spec + dist/ present; confirm build is current" },
+            { label: "PC-Monitor-app portable package", status: "active", note: "Folder exists with 299 files" }
+          ]
+        },
+        { name: "AI-Server integration", pct: 0, note: "GPU/inference profiling for AI-Server WP-D planned but not built",
+          tasks: [
+            { label: "GPU + inference profile for AI-Server WP-D", status: "pending", note: "Depends on AI-Server WP-D" }
+          ]
+        }
+      ]},
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      lastActivity: {
+        date: "2026-06-25",
+        summary: "Local file modification (no git history)"
+      },
+      branch: "N/A — local only, no git",
+      git: null,
+      nextActions: [
+        "Confirm PyInstaller build is current and PC-Monitor-app.zip is up to date",
+        "Wire GPU/inference profile into AI-Server WP-D when that work package starts"
+      ],
+      pendingDecisions: [
+        "Should PC-Monitor be git-initialized and pushed to a private repo for version history?"
+      ],
+      blockers: [],
+      reminders: [
+        "No git — changes are not version-controlled; consider initializing a local repo",
+        "PC-Monitor-app/ (299 files) may be a stale build artifact — confirm it's current before sharing"
+      ],
+      links: [
+        { label: "Local app", path: "F:\\AI-Dev\\PC-Monitor" },
+        { label: "Live dashboard", path: "http://127.0.0.1:8787" },
+        { label: "README", path: "F:\\AI-Dev\\PC-Monitor\\README.md" }
+      ],
+      recent: [
+        "2026-06-25 — last local modification (no git log available)"
+      ]
+    },
+    /* PROJECT:pc-monitor:END */
+
+    /* PROJECT:bimpossible-tests:START */
+    {
+      id: "bimpossible-tests",
+      name: "BIMpossible Tests",
+      icon: "check",
+      oneLiner: "Personal testing vault (Obsidian) for manually walking through BIMpossible phase/wave smoke tests. Human-executed verification checklist organized per project and phase.",
+      status: "active",
+      phase: "No git — local Obsidian vault (~12 files). One note per project under Projects/, each with ## Phase headings and checkbox steps. Dashboard view (_Dashboard.md) surfaces only unchecked next steps. Last modified 2026-06-24.",
+      focus: "Run manual smoke tests after each BIMpossible deployment. Refresh vault by re-reading per-repo runbooks after any major merge.",
+      progress: { label: "Coverage", phases: [
+        { name: "Vault setup", pct: 100, note: "Obsidian vault live; Tasks plugin; _Dashboard view; _Phase-Test-Template ready",
+          tasks: [
+            { label: "Obsidian vault + Tasks plugin", status: "done" },
+            { label: "Dashboard + template", status: "done" }
+          ]
+        },
+        { name: "Active test coverage", pct: 50, note: "Manually maintained; needs refresh after each BIMpossible deploy",
+          tasks: [
+            { label: "Refresh tests post true-prod deploy", status: "pending", note: "P6 true-prod deploy owed" },
+            { label: "Add Phase 4c/4d smoke steps (conversation persistence, project-context grounding)", status: "pending" },
+            { label: "Add Wave 4.9 / 4.10 smoke steps", status: "pending" }
+          ]
+        }
+      ]},
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      lastActivity: {
+        date: "2026-06-24",
+        summary: "Local modification (no git)"
+      },
+      branch: "N/A — local only, no git",
+      git: null,
+      nextActions: [
+        "Refresh test notes after true-prod deploy for P6 + smokes for Wave 4.9/4.10 + Phase 4c/4d"
+      ],
+      pendingDecisions: [],
+      blockers: [],
+      reminders: [
+        "Open vault in Obsidian with Tasks plugin enabled for _Dashboard to work",
+        "refresh-tests.py is superseded — re-read per-repo runbooks manually instead"
+      ],
+      links: [
+        { label: "Test vault", path: "F:\\AI-Dev\\BIMpossible-Tests" },
+        { label: "Dashboard view", path: "F:\\AI-Dev\\BIMpossible-Tests\\_Dashboard.md" }
+      ],
+      recent: [
+        "2026-06-24 — last local modification"
+      ]
+    }
+    /* PROJECT:bimpossible-tests:END */
   ]
 };
