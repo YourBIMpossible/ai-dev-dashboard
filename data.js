@@ -830,8 +830,8 @@ window.DASHBOARD_DATA = {
       icon: "refresh",
       oneLiner: "Automation-dedicated clone of the ai-dev-dashboard repo. The scheduled refresh pipeline (sync_*.py scripts, GitHub Actions sync) commits directly here; F:\\AI-Dev\\Dashboard is the human-edit copy.",
       status: "active",
-      phase: "main branch, same remote as Dashboard (YourBIMpossible/ai-dev-dashboard). Last commit 2026-06-28. 34 uncommitted files — drift between auto-clone and working copy (expected — they diverge between merges). The working Dashboard is ahead by 6+ commits (Waves 1–6 design system) as of 2026-06-28.",
-      focus: "CI/CD write target for automated data refreshes. Do not hand-edit — manual changes go in F:\\AI-Dev\\Dashboard instead. Resolve divergence from working copy by pushing Waves 1–6 to origin, then fast-forwarding the auto clone.",
+      phase: "main branch, same remote as Dashboard (YourBIMpossible/ai-dev-dashboard). Waves 1–6 design system + strategy priority pass pushed to origin on 2026-06-28 (8dffb54). Auto clone needs fast-forward to pick up those 10 commits. 34 uncommitted files in auto-clone (expected between syncs).",
+      focus: "CI/CD write target for automated data refreshes. Do not hand-edit — manual changes go in F:\\AI-Dev\\Dashboard instead. Fast-forward auto clone to origin/main to resolve the 10-commit lag from Waves 1–6 push.",
       progress: { label: "Automation pipeline", phases: [
         { name: "Sync scripts", pct: 85, note: "sync_activity.py, sync_ledgers.py, sync_dashboard.py, usage_sync.mjs, codebase_sync.mjs, agents_sync.mjs, github_actions_sync.mjs all present",
           tasks: [
@@ -853,17 +853,16 @@ window.DASHBOARD_DATA = {
         date: "2026-06-28",
         summary: "fix(refresh): harden automation-clone refresh (e575b63)"
       },
-      branch: "main at e575b63; working copy 6+ commits ahead (Waves 1–6 design system)",
-      git: { warn: "Same remote as working Dashboard. 34 files uncommitted. Do not hand-edit this clone. Working copy is 6+ commits ahead — push design system waves to origin then fast-forward auto clone." },
+      branch: "main at e575b63; origin/main at 8dffb54 (10 commits ahead — fast-forward needed)",
+      git: { warn: "Same remote as working Dashboard. 34 files uncommitted in auto clone. Do not hand-edit. Fast-forward to origin/main (8dffb54) to pick up Waves 1–6 + priority pass." },
       nextActions: [
-        "Push Waves 1–6 design system WIP commits from working Dashboard to origin (when wave finalization is ready)",
-        "Fast-forward auto clone to origin after push to resolve 6-commit divergence"
+        "Fast-forward auto clone: git -C F:\\AI-Dev\\Dashboard-auto pull --ff-only origin main",
+        "Confirm scheduler still points to Dashboard-auto after fast-forward"
       ],
       pendingDecisions: [],
       blockers: [],
       reminders: [
-        "34 uncommitted files in auto clone as of 2026-06-28",
-        "Working Dashboard is 6+ commits ahead of origin — Waves 1–6 design system not yet pushed"
+        "Auto clone is 10 commits behind origin — fast-forward before next scheduled refresh or it will push stale data.js"
       ],
       links: [
         { label: "Auto clone folder", path: "F:\\AI-Dev\\Dashboard-auto" },

@@ -173,10 +173,10 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
 }
 .stat .v{font-family:Sora;font-size:var(--ts-xl);font-weight:700;line-height:1;}
 .stat .l{font-size:var(--ts-xs);color:var(--dim);text-transform:uppercase;letter-spacing:.07em;margin-top:3px;}
-.stat.ok .v,.stat.st-ok .v    {color:var(--status-ok);}
-.stat.warn .v,.stat.st-warn .v {color:var(--status-warn);}
-.stat.bad .v,.stat.st-danger .v{color:var(--status-danger);}
-.stat.info .v,.stat.st-info .v {color:var(--status-info);}
+.stat.st-ok .v    {color:var(--status-ok);}
+.stat.st-warn .v  {color:var(--status-warn);}
+.stat.st-danger .v{color:var(--status-danger);}
+.stat.st-info .v  {color:var(--status-info);}
 .stat[data-id]{cursor:pointer;transition:border-color .15s;}
 .stat[data-id]:hover{border-color:var(--border-hi);}
 
@@ -244,10 +244,10 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
   padding:2px 8px;border-radius:6px;font-size:var(--ts-xs);font-weight:600;
   background:var(--panel2);border:1px solid var(--border);color:var(--dim);
 }
-.badge.ok,.badge.st-ok      {color:var(--status-ok);    border-color:rgba(52,211,153,.28); background:rgba(52,211,153,.06);}
-.badge.warn,.badge.st-warn  {color:var(--status-warn);  border-color:rgba(251,191,36,.28); background:rgba(251,191,36,.05);}
-.badge.bad,.badge.st-danger {color:var(--status-danger);border-color:rgba(248,113,113,.28);background:rgba(248,113,113,.05);}
-.badge.info,.badge.st-info  {color:var(--status-info);  border-color:rgba(110,168,255,.28);background:rgba(110,168,255,.06);}
+.badge.st-ok     {color:var(--status-ok);    border-color:rgba(52,211,153,.28); background:rgba(52,211,153,.06);}
+.badge.st-warn   {color:var(--status-warn);  border-color:rgba(251,191,36,.28); background:rgba(251,191,36,.05);}
+.badge.st-danger {color:var(--status-danger);border-color:rgba(248,113,113,.28);background:rgba(248,113,113,.05);}
+.badge.st-info   {color:var(--status-info);  border-color:rgba(110,168,255,.28);background:rgba(110,168,255,.06);}
 .badge.info{color:var(--w);    border-color:rgba(110,168,255,.22); background:rgba(110,168,255,.06);}
 
 /* ── Focus chip ────────────────────────────── */
@@ -429,10 +429,10 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .h3-purple.card h3,.card.h3-purple h3{color:rgba(167,139,250,.7);}
 
 /* ── Stat tile colored accents ─────────────── */
-.stat.ok,.stat.st-ok      {border-left:3px solid var(--status-ok);    background:rgba(52,211,153,.05);}
-.stat.warn,.stat.st-warn  {border-left:3px solid var(--status-warn);  background:rgba(251,191,36,.04);}
-.stat.bad,.stat.st-danger {border-left:3px solid var(--status-danger);background:rgba(248,113,113,.05);}
-.stat.info,.stat.st-info  {border-left:3px solid var(--status-info);  background:rgba(110,168,255,.05);}
+.stat.st-ok     {border-left:3px solid var(--status-ok);    background:rgba(52,211,153,.05);}
+.stat.st-warn   {border-left:3px solid var(--status-warn);  background:rgba(251,191,36,.04);}
+.stat.st-danger {border-left:3px solid var(--status-danger);background:rgba(248,113,113,.05);}
+.stat.st-info   {border-left:3px solid var(--status-info);  background:rgba(110,168,255,.05);}
 
 /* ── Overview hero card ────────────────────── */
 .ov-hero{
@@ -1488,7 +1488,7 @@ function graphMetricsBody(){
     +`<div class="stat st-info"><div class="v num">${L.nodes.toLocaleString()}</div><div class="l">Nodes</div><div style="margin-top:4px">${delta(L.nodes,P?P.nodes:0,false)}</div></div>`
     +`<div class="stat st-info"><div class="v num">${L.edges.toLocaleString()}</div><div class="l">Edges</div><div style="margin-top:4px">${delta(L.edges,P?P.edges:0,false)}</div></div>`
     +`<div class="stat st-info"><div class="v num">${L.communities}</div><div class="l">Communities</div><div style="margin-top:4px">${delta(L.communities,P?P.communities:0,false)}</div></div>`
-    +`<div class="stat${L.cycles>15?' warn':''}"><div class="v num">${L.cycles}</div><div class="l">Import Cycles</div><div style="margin-top:4px">${delta(L.cycles,P?P.cycles:0,true)}</div></div>`
+    +`<div class="stat${L.cycles>15?' st-warn':''}"><div class="v num">${L.cycles}</div><div class="l">Import Cycles</div><div style="margin-top:4px">${delta(L.cycles,P?P.cycles:0,true)}</div></div>`
     +`</div>`;
   h+=`<p style="font-size:var(--ts-sm);color:var(--dim);margin:12px 0 14px">Snapshot: ${esc(L.ts.slice(0,10))} · commit <code>${esc(L.sha)}</code> · ${gm.length} push${gm.length!==1?'es':''} tracked</p>`;
   h+=`<div class="g g2 fade" style="animation-delay:.06s">`;
