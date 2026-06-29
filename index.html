@@ -672,6 +672,17 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .au-hist-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
 .au-hist-date{font-size:var(--ts-xs);color:var(--dim);white-space:nowrap;min-width:72px;font-family:Sora,sans-serif;}
 .au-hist-result{font-size:var(--ts-xs);color:var(--muted);line-height:1.45;}
+
+/* ── Wave 5: Codebase redesign ──────────────────────────────────── */
+.cb-risk-row{display:flex;gap:14px;align-items:flex-start;}
+.cb-risk-num{font-size:var(--ts-xl);font-weight:800;line-height:1;color:var(--status-danger);flex-shrink:0;min-width:34px;padding-top:2px;text-align:right;}
+.cb-risk-body{flex:1;min-width:0;}
+.cb-risk-title{font-size:var(--ts-base);font-weight:700;font-family:Sora,sans-serif;margin-bottom:5px;}
+.cb-risk-finding{font-size:var(--ts-sm);color:var(--muted);line-height:1.5;margin-bottom:8px;}
+.cb-risk-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:var(--ts-xs);color:var(--dim);}
+.cb-gap-name{font-size:var(--ts-sm);font-weight:700;font-family:Sora,sans-serif;margin-bottom:3px;}
+.cb-gap-sub{font-size:var(--ts-xs);color:var(--dim);margin-bottom:2px;}
+.cb-gap-why{font-size:var(--ts-xs);color:var(--status-warn);margin-top:6px;}
 </style>
 </head>
 <body>
@@ -2536,16 +2547,137 @@ function mdToHtml(md){
   return out.join('');
 }
 function codebaseView(){
-  let ct=window._ctab||'metrics';
-  if(!CTABS.some(t=>t[0]===ct))ct='metrics';
-  let h='<div class="crumbs">Codebase</div><h2 class="page">Backend Knowledge Graph</h2>';
-  h+='<div class="mtabs">'+CTABS.map(([id,lbl])=>`<button class="mtab${ct===id?' on':''}" data-ct="${id}">${lbl}</button>`).join('')+'</div>';
   const GO='vscode://file/F:/AI-Dev/BIMpossible/backend/graphify-out/';
-  if(ct==='impact')h+=networkxImpactBody();
-  else if(ct==='metrics')h+=graphMetricsBody();
-  else if(ct==='network')h+=`<p class="sub">Interactive map of the most-connected backend modules${window.DASHBOARD_CODEBASE?` (top ${window.DASHBOARD_CODEBASE.shownNodes} of ${window.DASHBOARD_CODEBASE.nodes.toLocaleString()})`:''} — drag to explore, scroll to zoom, color = community.</p>`+codeFrame('codebase/graph-network','Interactive node graph',GO+'graph.json');
-  else if(ct==='dashboard')h+='<p class="sub">The graphify dashboard for the BIMpossible backend.</p>'+codeFrame('codebase/graph-dashboard','Graphify dashboard',GO+'dashboard.html');
-  else if(ct==='report')h+=reportBody();
+  // Sub-views: iframes and report are still accessible via _ctab
+  const ct=window._ctab||null;
+  if(ct==='network'||ct==='dashboard'||ct==='report'){
+    const back=`<p style="margin-bottom:14px"><a class="path-chip" href="#" onclick="window._ctab=null;try{localStorage.setItem('dash.ctab','')}catch(e){}show('graph');return false;">← Back to overview</a></p>`;
+    if(ct==='network')return'<div class="crumbs">Codebase</div><h2 class="page">Interactive Node Graph</h2>'+back
+      +`<p class="sub">Most-connected backend modules${window.DASHBOARD_CODEBASE?` (top ${window.DASHBOARD_CODEBASE.shownNodes} of ${window.DASHBOARD_CODEBASE.nodes.toLocaleString()})`:''} — drag to explore, scroll to zoom, color = community.</p>`
+      +codeFrame('codebase/graph-network','Interactive node graph',GO+'graph.json');
+    if(ct==='dashboard')return'<div class="crumbs">Codebase</div><h2 class="page">Graphify Dashboard</h2>'+back
+      +codeFrame('codebase/graph-dashboard','Graphify dashboard',GO+'dashboard.html');
+    if(ct==='report')return'<div class="crumbs">Codebase</div><h2 class="page">Graph Report</h2>'+back+reportBody();
+  }
+
+  // ── Overview (default) ────────────────────────────────────────────────────
+  let h='<div class="crumbs">Codebase</div><h2 class="page">Backend Architecture</h2>';
+  const ni=window.NETWORKX_IMPACT;
+  const gm=window.GRAPH_METRICS;
+  const L=gm&&gm.length?gm[gm.length-1]:null;
+  const P=gm&&gm.length>1?gm[gm.length-2]:null;
+  if(!ni&&!L){
+    h+='<p class="sub">No codebase data yet — run <code>graphify</code> and <code>Push-And-Verify.ps1</code> to generate the knowledge graph.</p>';
+    return h;
+  }
+  const surfaces=ni?ni.surfaces||[]:[];
+  const riskSurf  =surfaces.filter(s=>s.category==='risk');
+  const missingSurf=surfaces.filter(s=>s.category==='missing');
+  const mappedSurf =surfaces.filter(s=>s.category==='active'||s.category==='static');
+  const godNodes  =L?(L.godNodes||[]):[];
+
+  // ── Command bar ───────────────────────────────────────────────────────────
+  const cmdClass=riskSurf.length?'danger':missingSurf.length?'warn':'clear';
+  let cmdItems=[];
+  if(riskSurf.length)cmdItems.push(`<span class="badge st-danger">${riskSurf.length} risk signal${riskSurf.length!==1?'s':''}</span>`);
+  if(godNodes.length)cmdItems.push(`<span class="badge st-warn">${godNodes.length} high blast-radius node${godNodes.length!==1?'s':''}</span>`);
+  if(missingSurf.length)cmdItems.push(`<span class="badge st-warn">${missingSurf.length} blind spot${missingSurf.length!==1?'s':''}</span>`);
+  if(!cmdItems.length)cmdItems.push(`<span style="font-size:var(--ts-sm);color:var(--status-ok)">Architecture clean — no active risk signals</span>`);
+  const totalStr=ni&&ni.stats?`${ni.stats.totalNodes.toLocaleString()} nodes`:L?`${L.nodes.toLocaleString()} nodes`:'';
+  const dateStr=ni&&ni.generated?ni.generated.slice(0,10):L?L.ts.slice(0,10):'';
+  h+=`<div class="ov-cmd ${cmdClass}">
+    <div class="ov-cmd-dot"></div>
+    <div class="ov-cmd-items">${cmdItems.join('')}</div>
+    <span class="ov-cmd-meta">${totalStr}${totalStr&&dateStr?' · ':''}${dateStr}</span>
+  </div>`;
+
+  // ── Risk signals ──────────────────────────────────────────────────────────
+  if(riskSurf.length){
+    h+=`<div class="ov-group">Risk signals</div>`;
+    riskSurf.forEach(s=>{
+      h+=`<div class="card ca-red" style="margin-bottom:10px"><div class="cb-risk-row">
+        <div class="cb-risk-num">${s.nodes!=null?s.nodes:''}</div>
+        <div class="cb-risk-body">
+          <div class="cb-risk-title">${esc(s.label)}</div>
+          <div class="cb-risk-finding">${esc(s.finding)}</div>
+          <div class="cb-risk-meta"><span class="au-where">${esc(s.repo)}</span><span>${esc(s.tool)} · ${esc(s.algo)}</span></div>
+        </div>
+      </div></div>`;
+    });
+  }
+
+  // ── High blast-radius nodes ───────────────────────────────────────────────
+  if(godNodes.length){
+    h+=`<div class="ov-group">High blast-radius — change these carefully</div>`;
+    h+=`<div class="card ca-amber" style="margin-bottom:10px">
+      <div style="font-size:var(--ts-xs);color:var(--muted);margin-bottom:12px">Bar length = modules that directly import this node. Changes here ripple across the widest code surface.</div>
+      ${gnBar(godNodes)}
+    </div>`;
+  }
+
+  // ── Blind spots ───────────────────────────────────────────────────────────
+  if(missingSurf.length){
+    h+=`<div class="ov-group">Blind spots — not yet mapped</div>`;
+    h+=`<div class="g g${Math.min(missingSurf.length,3)}" style="margin-bottom:10px">`;
+    missingSurf.forEach(s=>{
+      h+=`<div class="card ca-amber">
+        <div class="cb-gap-name">${esc(s.label)}</div>
+        <div class="cb-gap-sub">${esc(s.repo)}</div>
+        <div class="cb-gap-why">Unmapped · run <code>${esc(s.tool)}</code> to wire in</div>
+      </div>`;
+    });
+    h+=`</div>`;
+  }
+
+  // ── Mapped surfaces ───────────────────────────────────────────────────────
+  if(mappedSurf.length){
+    h+=`<div class="ov-group">Mapped surfaces</div>`;
+    h+=`<div class="g g${Math.min(mappedSurf.length,3)}" style="margin-bottom:10px">`;
+    mappedSurf.forEach(s=>{
+      h+=`<div class="card ca-green">
+        <div style="font-size:var(--ts-sm);font-weight:700;font-family:Sora;margin-bottom:4px">${esc(s.label)}</div>
+        ${s.nodes!=null?`<div style="font-size:var(--ts-xl);font-weight:800;color:var(--status-ok);line-height:1.1;margin-bottom:4px">${s.nodes.toLocaleString()}</div>`:''}
+        <div style="font-size:var(--ts-xs);color:var(--dim)">${esc(s.repo)}</div>
+        ${s.finding?`<div style="font-size:var(--ts-xs);color:var(--muted);margin-top:5px;line-height:1.45">${esc(s.finding)}</div>`:''}
+      </div>`;
+    });
+    h+=`</div>`;
+  }
+
+  // ── Architecture health ───────────────────────────────────────────────────
+  if(L){
+    h+=`<div class="ov-group">Architecture health</div>`;
+    function cbDelta(cur,prev,lb){
+      if(!P)return'';const d=cur-prev;if(!d)return'';
+      const good=lb?d<0:d>0;
+      return`<div style="margin-top:4px"><span style="font-size:11px;font-weight:600;color:${good?'var(--status-ok)':'var(--status-danger)'}">${d>0?'+':''}${d}</span></div>`;
+    }
+    const cycSt=L.cycles>15?'st-danger':L.cycles>5?'st-warn':'st-ok';
+    h+=`<div class="g gmg" style="margin-bottom:10px">
+      <div class="stat st-info"><div class="v num">${L.nodes.toLocaleString()}</div><div class="l">Nodes</div>${cbDelta(L.nodes,P?P.nodes:0,false)}</div>
+      <div class="stat st-info"><div class="v num">${L.edges.toLocaleString()}</div><div class="l">Edges</div>${cbDelta(L.edges,P?P.edges:0,false)}</div>
+      <div class="stat st-info"><div class="v num">${L.communities}</div><div class="l">Communities</div>${cbDelta(L.communities,P?P.communities:0,false)}</div>
+      <div class="stat ${cycSt}"><div class="v num">${L.cycles}</div><div class="l">Import cycles</div>${cbDelta(L.cycles,P?P.cycles:0,true)}</div>
+    </div>`;
+    if(gm.length>1){
+      h+=`<div class="g g2" style="margin-bottom:10px">
+        <div class="card"><h3>Nodes over time</h3>${glChart(gm.map(m=>m.nodes),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gn')}</div>
+        <div class="card"><h3>Import cycles over time</h3>${glChart(gm.map(m=>m.cycles),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gc')}</div>
+      </div>`;
+    }
+    h+=`<p style="font-size:var(--ts-xs);color:var(--dim);margin:0 0 16px">Snapshot: ${esc(L.ts.slice(0,10))} · commit <code>${esc(L.sha)}</code> · ${gm.length} push${gm.length!==1?'es':''} tracked</p>`;
+  }
+
+  // ── Tools ─────────────────────────────────────────────────────────────────
+  h+=`<div class="ov-group">Tools</div>`;
+  h+=`<div class="card" style="margin-bottom:10px">
+    <div style="font-size:var(--ts-xs);color:var(--muted);margin-bottom:10px">Open when the summary above surfaces something worth investigating in depth.</div>
+    <div class="links">
+      <a class="path-chip" href="#" onclick="window._ctab='network';try{localStorage.setItem('dash.ctab','network')}catch(e){}show('graph');return false;">Interactive node graph</a>
+      <a class="path-chip" href="#" onclick="window._ctab='dashboard';try{localStorage.setItem('dash.ctab','dashboard')}catch(e){}show('graph');return false;">Standalone dashboard</a>
+      <a class="path-chip" href="#" onclick="window._ctab='report';try{localStorage.setItem('dash.ctab','report')}catch(e){}show('graph');return false;">Full graph report</a>
+    </div>
+  </div>`;
   return h;
 }
 
@@ -2735,7 +2867,8 @@ let init='overview';
 try{
   let s=localStorage.getItem('dash.tab');
   window._mtab=localStorage.getItem('dash.mtab')||'usage';
-  window._ctab=localStorage.getItem('dash.ctab')||'metrics';
+  const _savedCtab=localStorage.getItem('dash.ctab');
+  window._ctab=(_savedCtab==='network'||_savedCtab==='dashboard'||_savedCtab==='report')?_savedCtab:null;
   if(s==='agents'||s==='health'){window._mtab=s;s='usage';}
   if(s&&(s==='overview'||s==='audit'||s==='graph'||s==='roadmap'||s==='strategy'||s==='usage'||s==='toolkit'||D.projects.some(p=>p.id===s)))init=s;
 }catch(e){}
