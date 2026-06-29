@@ -654,6 +654,24 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .ov-group::after{content:'';flex:1;height:1px;background:var(--border);}
 .ov-group.pers{color:rgba(251,146,60,.55);}
 .ov-group.pers::after{background:rgba(251,146,60,.14);}
+
+/* ── Wave 4: Audit redesign ──────────────────────────────────────── */
+/* Open finding cards — severity-led, project-attributed */
+.au-finding-row{display:flex;gap:14px;align-items:flex-start;}
+.au-sev-col{flex-shrink:0;padding-top:2px;}
+.au-finding-body{flex:1;min-width:0;}
+.au-finding-title{font-size:var(--ts-sm);font-weight:600;font-family:Sora,sans-serif;line-height:1.5;margin-bottom:6px;}
+.au-finding-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:var(--ts-xs);color:var(--muted);}
+.au-where{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-family:'Fira Code',monospace;font-size:10px;}
+.au-confirmed{color:var(--dim);font-style:italic;}
+
+/* Clean project cards — compact */
+.au-clean{cursor:pointer;}
+.au-clean-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:var(--ts-xs);color:var(--dim);margin-top:8px;}
+.au-compact-hist{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+.au-hist-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
+.au-hist-date{font-size:var(--ts-xs);color:var(--dim);white-space:nowrap;min-width:72px;font-family:Sora,sans-serif;}
+.au-hist-result{font-size:var(--ts-xs);color:var(--muted);line-height:1.45;}
 </style>
 </head>
 <body>
@@ -1178,37 +1196,117 @@ function auditView(){
   wa.forEach(p=>SEVS.forEach(k=>agg[k]+=(p.audit.counts[k]||0)));
   const totO=SEVS.reduce((s,k)=>s+agg[k],0);
   const closed=wa.reduce((s,p)=>s+(p.audit.closedLastRun||0),0);
-  const runs=wa.reduce((s,p)=>s+((p.audit.history||[]).length),0);
-  let h='<div class="crumbs">Audit</div><h2 class="page">Audit Findings</h2>'
-    +'<p class="sub">Open findings across every audited project. BIMpossible: weekly (Mon 6 AM). Any project: on-demand. Each run writes a report; the next dashboard refresh ingests it.</p>';
-  h+=`<div class="card fade"><h3>Open findings by severity</h3><div class="sevcounts">`;
-  SEVS.forEach(k=>{
-    h+=`<div class="sevpip${(k==='critical'||k==='high')&&agg[k]?' hot':''}"><span class="n" style="color:${agg[k]?(k==='critical'?'var(--red)':k==='high'?'var(--amber)':'var(--text)'):'var(--dim)'}">${agg[k]}</span><span class="k">${SEVLBL[k]}</span></div>`;
-  });
-  h+=`</div><p style="font-size:12px;color:var(--dim);margin-top:12px">${totO} open · <span class="trend improving">${closed} closed in the latest runs</span> · ${runs} runs logged</p></div>`;
-  h+=`<div class="card fade" style="animation-delay:.05s;margin-top:13px"><h3>By project</h3>`;
-  wa.forEach(p=>{
-    const as=auditSummary(p);
-    const right=as.total?SEVS.filter(k=>p.audit.counts[k]).map(k=>sevBadge(k)+' '+p.audit.counts[k]).join(' &nbsp; ')
-      :`<span class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} all clear</span>`;
-    h+=`<div class="auditrow" data-id="${p.id}">`
-      +(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="17" height="17" style="stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0"`)
-      +`<div class="anm">${esc(p.name)}<div style="font-size:11px;color:var(--dim);font-weight:400">last run ${esc(p.audit.lastRun)} · ${esc(p.audit.runType)} · <span class="trend ${p.audit.trend||'flat'}">${p.audit.trend||'flat'}</span>${p.audit.history&&p.audit.history.length?` · ${p.audit.history.length} runs`:''}</div></div>`
-      +`<div style="text-align:right;font-size:12px">${right}</div></div>`;
-  });
-  const noAudit=D.projects.filter(p=>!p.audit);
-  if(noAudit.length)h+=`<p style="font-size:12px;color:var(--dim);padding:12px 4px 0">${noAudit.map(p=>esc(p.name)).join(', ')} — not yet audited</p>`;
+
+  // Split: hot (has unresolved open findings) vs clean vs unaudited
+  const hotProjs  =wa.filter(p=>(p.audit.open||[]).length>0);
+  const cleanProjs=wa.filter(p=>(p.audit.open||[]).length===0);
+  const noAudit   =D.projects.filter(p=>!p.audit);
+
+  let h='<div class="crumbs">Audit</div><h2 class="page">Audit Findings</h2>';
+
+  // 1. Command bar — portfolio health at a glance
+  const hCls=totO>0?(agg.critical>0?'danger':'warn'):'clear';
+  h+=`<div class="ov-cmd ${hCls} fade">`;
+  h+=`<div class="ov-cmd-dot"></div>`;
+  h+=`<div class="ov-cmd-items">`;
+  if(totO===0){
+    h+=`<span style="color:var(--status-ok);font-weight:600">All clear — no open findings across ${wa.length} audited projects</span>`;
+  } else {
+    SEVS.filter(k=>agg[k]).forEach(k=>{
+      const cls=(k==='critical'||k==='high')?'st-danger':k==='medium'?'st-warn':'st-dim';
+      h+=`<span class="badge ${cls}">${agg[k]} ${SEVLBL[k].toLowerCase()}</span>`;
+    });
+  }
   h+=`</div>`;
-  wa.filter(p=>p.audit&&((p.audit.open&&p.audit.open.length)||(p.audit.history&&p.audit.history.length))).forEach((p,i)=>{
-    const hasOpen=p.audit.open&&p.audit.open.length;
-    h+=`<div class="card fade" style="animation-delay:${0.08+i*.04}s;margin-top:13px"><h3>${esc(p.name)} — audit</h3>`
-      +`<div class="au-latest">Latest run · <b>${esc(p.audit.lastRun||'')}</b> · ${esc(p.audit.runType||'')}</div>`
-      +(hasOpen
-        ? `<div class="ah-h" style="margin-top:13px">Open findings · ${p.audit.open.length}</div>`+p.audit.open.map(f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`).join('')
-        : `<p class="clean" style="margin-top:12px">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of ${esc(p.audit.lastRun||'')}.</p>`)
-      +auditHistory(p)
-      +`<div class="links" style="margin-top:11px">${pathLink(p.audit.reportPath,'Latest report')}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Run ledger'):''}</div></div>`;
+  if(closed>0)h+=`<span class="ov-cmd-meta">${closed} closed in last runs</span>`;
+  h+=`</div>`;
+
+  // 2. Open findings — severity-led, project-attributed
+  //    These are CURRENTLY UNRESOLVED items, NOT findings from the latest run.
+  if(hotProjs.length){
+    h+=`<div class="sh fade" style="animation-delay:.04s">Currently unresolved <small>${totO} finding${totO!==1?'s':''}</small></div>`;
+    hotProjs.forEach((p,pi)=>{
+      (p.audit.open||[]).forEach((f,fi)=>{
+        const isCrit=(f.sev==='critical'||f.sev==='high');
+        h+=`<div class="card ${isCrit?'ca-red':'ca-amber'} au-finding fade" style="animation-delay:${.06+pi*.04+fi*.02}s">`;
+        h+=`<div class="au-finding-row">`;
+        h+=`<div class="au-sev-col">${sevBadge(f.sev)}</div>`;
+        h+=`<div class="au-finding-body">`;
+        h+=`<div class="au-finding-title">${esc(f.id)} — ${esc(f.title)}</div>`;
+        h+=`<div class="au-finding-meta">`;
+        h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="12" height="12" style="stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0"`);
+        h+=`<span style="font-weight:600">${esc(p.name)}</span>`;
+        if(f.where)h+=`<span class="au-where">${esc(f.where)}</span>`;
+        h+=`<span class="au-confirmed">unresolved as of ${esc(p.audit.lastRun)}</span>`;
+        const tCls=p.audit.trend==='improving'?'st-ok':p.audit.trend==='worsening'?'st-danger':'st-dim';
+        h+=`<span class="badge ${tCls}">${p.audit.trend||'flat'}</span>`;
+        h+=`</div></div></div></div>`;
+      });
+    });
+  } else if(!totO){
+    h+=`<div class="card ca-green fade" style="animation-delay:.04s;padding:18px 22px">`;
+    h+=`<div class="clean" style="font-size:var(--ts-base)">${ICO.shield.replace('<svg',`<svg width="18" height="18" style="stroke:var(--status-ok)">`)} No open findings across ${wa.length} audited project${wa.length!==1?'s':''}</div>`;
+    if(closed>0)h+=`<div style="font-size:var(--ts-sm);color:var(--muted);margin-top:6px">${closed} findings closed in the most recent runs</div>`;
+    h+=`</div>`;
+  }
+
+  // 3. Clean projects — compact, with inline recent history
+  if(cleanProjs.length){
+    h+=`<div class="sh fade" style="animation-delay:.12s">Clean <small>${cleanProjs.length} project${cleanProjs.length!==1?'s':''}</small></div>`;
+    h+=`<div class="g g${cleanProjs.length>1?'2':'1'} fade" style="animation-delay:.14s;margin-bottom:4px">`;
+    cleanProjs.forEach(p=>{
+      const age=daysAgo(p.audit.lastRun);
+      const stale=age!==null&&age>14;
+      h+=`<div class="card au-clean" data-id="${p.id}">`;
+      h+=`<div style="display:flex;align-items:center;gap:10px">`;
+      h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="14" height="14" style="stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0"`);
+      h+=`<span style="font-family:Sora,sans-serif;font-weight:600;flex:1">${esc(p.name)}</span>`;
+      h+=`<span style="color:var(--status-ok);font-size:var(--ts-sm)">✓ All clear</span>`;
+      h+=`</div>`;
+      h+=`<div class="au-clean-meta">`;
+      h+=`<span>Last run ${esc(p.audit.lastRun)}${stale?` <span style="color:var(--status-warn)">(stale — ${age}d)</span>`:''}</span>`;
+      if(p.audit.closedLastRun)h+=`<span style="color:var(--status-ok)">${p.audit.closedLastRun} closed last run</span>`;
+      const tCls2=p.audit.trend==='improving'?'st-ok':p.audit.trend==='worsening'?'st-danger':'st-dim';
+      h+=`<span class="badge ${tCls2}">${p.audit.trend||'flat'}</span>`;
+      h+=`</div>`;
+      if((p.audit.history||[]).length){
+        h+=`<div class="au-compact-hist">`;
+        p.audit.history.slice(0,2).forEach(r=>{
+          h+=`<div class="au-hist-row"><span class="au-hist-date">${esc(r.date)}</span><span class="au-hist-result">${esc(r.result.slice(0,110))}${r.result.length>110?'…':''}</span></div>`;
+        });
+        if(p.audit.history.length>2)h+=`<div style="font-size:var(--ts-xs);color:var(--dim);padding-top:4px">+${p.audit.history.length-2} earlier runs — see project detail</div>`;
+        h+=`</div>`;
+      }
+      h+=`<div class="links" style="margin-top:10px">${pathLink(p.audit.reportPath,'Latest report')}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Run ledger'):''}</div>`;
+      h+=`</div>`;
+    });
+    h+=`</div>`;
+  }
+
+  // 4. Unaudited projects — tertiary, compact chips
+  if(noAudit.length){
+    h+=`<div class="sh fade" style="animation-delay:.20s">Not yet audited <small>${noAudit.length}</small></div>`;
+    h+=`<div class="card fade" style="animation-delay:.22s;padding:12px 16px">`;
+    h+=`<div style="display:flex;flex-wrap:wrap;gap:8px">`;
+    noAudit.forEach(p=>{
+      h+=`<div style="display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;border:1px solid var(--border);font-size:var(--ts-sm);color:var(--dim)">`;
+      h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="12" height="12" style="stroke:var(--dim);stroke-width:2;fill:none;flex-shrink:0"`);
+      h+=`<span>${esc(p.name)}</span>`;
+      h+=`</div>`;
+    });
+    h+=`</div></div>`;
+  }
+
+  // 5. Full run history for hot projects — secondary, positioned last
+  hotProjs.filter(p=>(p.audit.history||[]).length).forEach((p,i)=>{
+    h+=`<div class="card fade" style="animation-delay:${.26+i*.04}s;margin-top:13px">`;
+    h+=`<h3>${esc(p.name)} — run history</h3>`;
+    h+=`<div class="au-latest" style="margin-bottom:10px">Last run <b>${esc(p.audit.lastRun)}</b> · ${esc(p.audit.runType||'')}</div>`;
+    h+=auditHistory(p);
+    h+=`<div class="links" style="margin-top:11px">${pathLink(p.audit.reportPath,'Latest report')}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Run ledger'):''}</div>`;
+    h+=`</div>`;
   });
+
   return h;
 }
 
