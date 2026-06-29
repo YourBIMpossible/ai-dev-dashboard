@@ -620,6 +620,40 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .state-empty  {color:var(--muted);font-size:var(--ts-sm);font-style:italic;padding:var(--sp-4) 0;}
 .state-unavail{color:var(--status-dim);font-size:var(--ts-xs);text-transform:uppercase;letter-spacing:.04em;padding:var(--sp-3) 0;}
 @media(prefers-reduced-motion:reduce){.skel{animation:none;background:rgba(255,255,255,.05);}}
+
+/* ── Wave 3: Overview hierarchy redesign ─────────────────────────── */
+/* Command bar — health + counters */
+.ov-cmd{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;margin-bottom:20px;flex-wrap:wrap;}
+.ov-cmd.clear {border:1px solid rgba(52,211,153,.20); background:rgba(52,211,153,.05);}
+.ov-cmd.warn  {border:1px solid rgba(251,191,36,.25);  background:rgba(251,191,36,.05);}
+.ov-cmd.danger{border:1px solid rgba(248,113,113,.25); background:rgba(248,113,113,.05);}
+.ov-cmd-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.ov-cmd.clear  .ov-cmd-dot{background:var(--status-ok);}
+.ov-cmd.warn   .ov-cmd-dot{background:var(--status-warn);}
+.ov-cmd.danger .ov-cmd-dot{background:var(--status-danger);}
+.ov-cmd-items{display:flex;align-items:center;gap:8px;flex:1;flex-wrap:wrap;}
+.ov-cmd-meta{font-size:var(--ts-xs);color:var(--dim);white-space:nowrap;}
+
+/* Focus block — primary content slot in hero card */
+.ov-focus{font-size:var(--ts-sm);line-height:1.6;color:var(--text);padding:10px 14px;
+  background:rgba(110,168,255,.05);border-left:3px solid var(--status-info);
+  border-radius:0 6px 6px 0;margin-bottom:16px;}
+.ov-focus-lbl{display:block;font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;
+  letter-spacing:.10em;color:var(--status-info);margin-bottom:5px;}
+
+/* Compact cards — satellite + personal */
+.ov-compact{cursor:pointer;}
+.ov-compact .ov-nm{font-family:Sora;font-size:var(--ts-base);font-weight:700;
+  display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.ov-compact .ov-sub{font-size:var(--ts-sm);color:var(--dim);line-height:1.45;margin-bottom:3px;}
+.ov-compact .ov-foot{display:flex;align-items:center;gap:8px;margin-top:8px;}
+
+/* Group labels (replaces .sec-hd for overview) */
+.ov-group{font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--dim);margin:20px 0 10px;display:flex;align-items:center;gap:10px;}
+.ov-group::after{content:'';flex:1;height:1px;background:var(--border);}
+.ov-group.pers{color:rgba(251,146,60,.55);}
+.ov-group.pers::after{background:rgba(251,146,60,.14);}
 </style>
 </head>
 <body>
@@ -926,130 +960,131 @@ function navI(id,ico,name,extra,extraStyle,status,isP){
 // ── Overview ──────────────────────────────────────────────────────────────
 function overview(){
   const act=D.projects.filter(p=>p.status==='active').length;
-  const dec=D.projects.reduce((s,p)=>s+(p.pendingDecisions||[]).length,0);
-  const blk=D.projects.reduce((s,p)=>s+(p.blockers||[]).length,0);
+  const allDec=D.projects.reduce((s,p)=>s+(p.pendingDecisions||[]).length,0);
+  const allBlk=D.projects.reduce((s,p)=>s+(p.blockers||[]).length,0);
   const auHot=D.projects.reduce((s,p)=>{const a=auditSummary(p);return s+(a?a.hot:0);},0);
-  const totalActs=D.projects[0].activity.map((_,i)=>D.projects.reduce((s,p)=>s+((p.activity||[])[i]||0),0));
-  const totalC=totalActs.reduce((a,b)=>a+b,0);
-  let h='<div class="crumbs">Overview</div><h2 class="page">Mission Control</h2>'
-    +'<p class="sub">Every project at a glance. Click any card to drill in. Heat grid = 14-day commit activity.</p>';
+  const totalC=D.projects[0].activity.map((_,i)=>D.projects.reduce((s,p)=>s+((p.activity||[])[i]||0),0)).reduce((a,b)=>a+b,0);
 
-  // Stat strip
-  h+=`<div class="stat-row fade">
-    <div class="stat st-ok"><div class="v num">${act}</div><div class="l">Active Projects</div></div>
-    <div class="stat${dec?' st-warn':''}"><div class="v num">${dec}</div><div class="l">Decisions Waiting</div></div>
-    <div class="stat${blk?' st-danger':''}"><div class="v num">${blk}</div><div class="l">Blockers</div></div>
-    <div class="stat${auHot?' st-danger':' st-ok'}" data-id="audit"><div class="v num">${auHot||'✓'}</div><div class="l">Audit Crit/High Open</div></div>
-    <div class="stat st-info"><div class="v num">${totalC}</div><div class="l">Commits (14 days)</div></div>
-  </div>`;
+  // health level for command bar
+  const hCls=allBlk||auHot?'danger':allDec?'warn':'clear';
+  const hItems=[];
+  if(allBlk)hItems.push(`<span class="badge st-danger">⬥ ${allBlk} blocker${allBlk>1?'s':''}</span>`);
+  if(auHot) hItems.push(`<span class="badge st-danger">⚑ ${auHot} audit crit/high</span>`);
+  if(allDec)hItems.push(`<span class="badge st-warn">◆ ${allDec} decision${allDec>1?'s':''}</span>`);
+  const hLine=hItems.length?hItems.join(' '):`<span style="color:var(--status-ok);font-weight:600">✓ Portfolio clear</span>`;
 
-  // ── BIMpossible work section ──
-  h+='<div class="sec-hd fade" style="animation-delay:.04s"><div class="t">BIMpossible Work</div><div class="ln"></div></div>';
-  h+='<div class="g g4 fade" style="animation-delay:.06s;margin-bottom:28px;">';
+  let h='<div class="crumbs">Overview</div><h2 class="page">Mission Control</h2>';
 
-  // Hero card — BIMpossible Platform (spans all 4 cols)
+  // 1. Command bar — health + counters (replaces abstract stat strip)
+  h+=`<div class="ov-cmd ${hCls} fade">`;
+  h+=`<div class="ov-cmd-dot"></div>`;
+  h+=`<div class="ov-cmd-items">${hLine}</div>`;
+  h+=`<span class="ov-cmd-meta">${act} active · ${totalC} commits (14d)</span>`;
+  h+=`</div>`;
+
+  // 2. BIMpossible — primary card, focus leads
   const bp=D.projects.find(p=>p.id==='bimpossible');
   if(bp){
     const pct=overallPct(bp);
-    h+=`<div class="card glow span4 ov-hero" style="padding:22px 24px">`;
+    h+=`<div class="card glow fade" style="margin-bottom:18px;cursor:pointer;animation-delay:.04s" data-id="${bp.id}">`;
+    // Header: icon + name + status + %
+    h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">`;
+    h+=(ICO[bp.icon]||ICO.cube).replace('<svg',`<svg width="16" height="16" style="stroke:var(--w);stroke-width:2;fill:none;flex-shrink:0"`);
+    h+=`<span style="font-family:Sora;font-size:var(--ts-md);font-weight:700;flex:1">${esc(bp.name)}</span>`;
+    h+=`<span class="pill ${PILL[bp.status]}">${bp.status}</span>`;
+    if(pct!==null)h+=`<span style="font-family:Sora;font-size:var(--ts-base);font-weight:700;color:var(--w)">${pct}%</span>`;
+    h+=`</div>`;
+    // Focus block — PRIMARY content slot
+    if(bp.focus){
+      const ft=bp.focus.length>220?bp.focus.slice(0,220)+'…':bp.focus;
+      h+=`<div class="ov-focus"><span class="ov-focus-lbl">Focus now</span>${esc(ft)}</div>`;
+    }
+    // Body: phases (left) + waves/audit/decisions (right)
     h+=`<div style="display:flex;gap:20px;flex-wrap:wrap">`;
-    // Left column
-    h+=`<div style="flex:1;min-width:280px">`;
-    h+=`<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:14px">`;
-    h+=pct!==null?donut(pct,90,''):'';
-    h+=`<div style="flex:1"><div style="font-family:Sora;font-size:var(--ts-md);font-weight:700">${esc(bp.name)}</div>`
-      +`<div style="font-size:var(--ts-sm);color:var(--muted);margin:3px 0 8px">${esc(bp.oneLiner||'')}</div>`
-      +`<span class="pill ${PILL[bp.status]}">${bp.status}</span></div>`;
+    h+=`<div style="flex:2;min-width:260px">${phaseBars(bp.progress,bp.id)}`;
+    if(bp.git&&bp.git.warn)h+=`<div class="gwarn" style="margin-top:10px">⚠ ${esc(bp.git.warn.split('.')[0])}</div>`;
     h+=`</div>`;
-    if(bp.focus)h+=`<div class="focus"><b>Focus now</b>${esc(bp.focus)}</div>`;
-    h+=`<div style="margin-top:16px">${phaseBars(bp.progress,bp.id)}</div>`;
-    if(bp.git&&bp.git.warn)h+=`<div class="gwarn" style="margin-top:12px">⚠ ${esc(bp.git.warn.split('.')[0])}</div>`;
-    h+=`</div>`;
-    // Right column
-    h+=`<div style="width:300px;flex-shrink:0;display:flex;flex-direction:column;gap:14px">`;
+    h+=`<div style="flex:1;min-width:180px;display:flex;flex-direction:column;gap:11px">`;
     if(bp.waves){
-      h+=`<div><div style="font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:10px">Waves</div>`;
-      h+=wavePanel(bp.waves);
-      h+=`</div>`;
+      h+=`<div><div style="font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:8px">Waves</div>`;
+      h+=wavePanel(bp.waves);h+=`</div>`;
     }
     if(bp.audit){
       const as=auditSummary(bp);
-      h+=`<div style="padding-top:12px;border-top:1px solid var(--border)">`;
-      h+=`<div style="font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:8px">Audit · ${esc(bp.audit.lastRun)}</div>`;
-      if(as.total===0)h+=`<div class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} All clear — ${esc(bp.audit.closedLastRun||0)} closed last run</div>`;
-      else h+=`<div style="font-size:var(--ts-sm);color:var(--amber)">${as.total} open findings (${as.hot} crit/high)</div>`;
-      h+=`<div class="trend ${bp.audit.trend||'flat'}" style="font-size:11px;margin-top:3px">${bp.audit.trend||'flat'}</div></div>`;
-    }
-    if((bp.pendingDecisions||[]).length){
-      h+=`<div style="padding-top:12px;border-top:1px solid var(--border)">`;
-      h+=`<div style="font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:7px">◆ Decisions (${bp.pendingDecisions.length})</div>`;
-      h+=bp.pendingDecisions.map(d=>`<div style="font-size:var(--ts-sm);color:var(--muted);margin-bottom:4px">${esc(d)}</div>`).join('');
+      h+=`<div style="padding-top:10px;border-top:1px solid var(--border)">`;
+      h+=`<div style="font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:5px">Audit</div>`;
+      if(as.total===0)h+=`<div style="font-size:var(--ts-sm);color:var(--status-ok)">✓ All clear</div>`;
+      else h+=`<div style="font-size:var(--ts-sm);color:var(--status-warn)">${as.total} open · ${as.hot} crit/high</div>`;
       h+=`</div>`;
     }
-    h+=`</div>`; // end right col
-    h+=`</div>`; // end flex row
-    // Activity heat grid full-width footer
-    h+=`<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;align-items:center;gap:14px">`;
-    h+=`<span style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap">14-day activity</span>`;
+    if((bp.pendingDecisions||[]).length){
+      h+=`<div style="padding-top:10px;border-top:1px solid var(--border)">`;
+      h+=`<div style="font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--status-warn);margin-bottom:5px">◆ Decisions</div>`;
+      h+=bp.pendingDecisions.slice(0,2).map(d=>`<div style="font-size:var(--ts-sm);color:var(--muted);margin-bottom:3px">${esc(d)}</div>`).join('');
+      if(bp.pendingDecisions.length>2)h+=`<div style="font-size:var(--ts-xs);color:var(--dim)">+${bp.pendingDecisions.length-2} more</div>`;
+      h+=`</div>`;
+    }
+    h+=`</div></div>`; // end sidebar + body flex
+    // Activity footer
+    h+=`<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px">`;
+    h+=`<span style="font-size:var(--ts-xs);color:var(--dim);text-transform:uppercase;letter-spacing:.07em;white-space:nowrap">14d</span>`;
     h+=heat(bp.activity||[],false);
-    h+=`<span style="font-size:11px;margin-left:auto">${ageHtml(bp.lastActivity&&bp.lastActivity.date)}</span>`;
+    h+=`<span style="font-size:var(--ts-sm);margin-left:auto">${ageHtml(bp.lastActivity&&bp.lastActivity.date)}</span>`;
     h+=`</div>`;
     h+=`</div>`; // end card
   }
 
-  // Sub-work cards — addins, site, families
-  ['addins','site','families'].forEach((id,i)=>{
-    const p=D.projects.find(q=>q.id===id);if(!p)return;
-    const pct=overallPct(p);
-    h+=`<div class="card${p.status==='active'?' glow':''}" style="cursor:pointer" data-id="${p.id}">`;
-    h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">`;
-    h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="18" height="18" style="stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0"`);
-    h+=`<span style="font-family:Sora;font-size:var(--ts-base);font-weight:700;flex:1">${esc(p.name)}</span>`;
-    h+=`<span class="pill ${PILL[p.status]}">${p.status}</span>`;
-    if(pct!==null)h+=`<span style="font-family:Sora;font-size:var(--ts-base);font-weight:700;color:var(--w)">${pct}%</span>`;
+  // 3. Satellite work projects — compact 3-up (no phase bars)
+  const satIds=['addins','site','families'];
+  const sats=satIds.map(id=>D.projects.find(p=>p.id===id)).filter(Boolean);
+  if(sats.length){
+    h+=`<div class="ov-group fade" style="animation-delay:.08s">Satellite</div>`;
+    h+=`<div class="g g3 fade" style="animation-delay:.10s;margin-bottom:18px">`;
+    sats.forEach(p=>{
+      const pct=overallPct(p);
+      h+=`<div class="card ov-compact" data-id="${p.id}">`;
+      h+=`<div class="ov-nm">`;
+      h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="14" height="14" style="stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0"`);
+      h+=`<span style="flex:1">${esc(p.name)}</span>`;
+      h+=`<span class="pill ${PILL[p.status]}">${p.status}</span>`;
+      h+=`</div>`;
+      h+=`<div class="ov-sub">${esc(p.oneLiner||'')}</div>`;
+      if(p.focus)h+=`<div class="ov-sub" style="color:var(--text)">${esc(p.focus.slice(0,90))}${p.focus.length>90?'…':''}</div>`;
+      h+=`<div class="ov-foot">`;
+      if(pct!==null)h+=`<span style="font-size:var(--ts-xs);font-weight:700;color:var(--w)">${pct}%</span>`;
+      h+=`<span style="margin-left:auto">${ageHtml(p.lastActivity&&p.lastActivity.date)}</span>`;
+      h+=`</div>`;
+      h+=badges(p,false);
+      h+=`</div>`;
+    });
     h+=`</div>`;
-    h+=`<div style="font-size:var(--ts-sm);color:var(--dim);margin-bottom:8px">${esc(p.oneLiner||'')}</div>`;
-    if(p.focus)h+=`<div class="focus"><b>Focus</b>${esc(p.focus)}</div>`;
-    h+=miniPhases(p.progress&&p.progress.phases,false);
-    if((p.recent||[]).length){
-      const r=p.recent[0];const m=r.match(/^(\d{4}-\d{2}-\d{2})\s*[-–]\s*/);
-      const txt=m?r.slice(m[0].length):r;
-      h+=`<div style="font-size:11px;color:var(--dim);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">`
-        +`<span style="color:var(--dim);font-family:Sora">${m?m[1]:''}</span> ${esc(txt.slice(0,90))}${txt.length>90?'…':''}</div>`;
-    }
-    h+=`<div style="margin-top:10px">${heat(p.activity||[],false)}</div>`;
-    h+=badges(p,false);
-    h+=`</div>`;
-  });
-  h+=`</div>`; // end g4
+  }
 
-  // ── Personal section ──
-  h+='<div class="sec-hd fade" style="animation-delay:.18s"><div class="t pers">Personal Projects</div><div class="ln pers"></div></div>';
-  h+='<div class="g g2 fade" style="animation-delay:.2s;margin-bottom:28px;">';
-  PERS.forEach(id=>{
-    const p=D.projects.find(q=>q.id===id);if(!p)return;
-    const pct=overallPct(p);
-    h+=`<div class="card pglow pers-bars" style="cursor:pointer;border-color:rgba(251,146,60,.14)" data-id="${p.id}">`;
-    h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">`;
-    h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="18" height="18" style="stroke:var(--p);stroke-width:2;fill:none;flex-shrink:0"`);
-    h+=`<span style="font-family:Sora;font-size:var(--ts-base);font-weight:700;flex:1">${esc(p.name)}</span>`;
-    h+=`<span class="pill ${PILL[p.status]}">${p.status}</span>`;
-    if(pct!==null)h+=`<span style="font-family:Sora;font-size:var(--ts-base);font-weight:700;color:var(--p)">${pct}%</span>`;
+  // 4. Personal projects — compact 2-up
+  const pers=PERS.map(id=>D.projects.find(p=>p.id===id)).filter(Boolean);
+  if(pers.length){
+    h+=`<div class="ov-group pers fade" style="animation-delay:.14s">Personal</div>`;
+    h+=`<div class="g g2 fade" style="animation-delay:.16s">`;
+    pers.forEach(p=>{
+      const pct=overallPct(p);
+      h+=`<div class="card pglow ov-compact" style="border-color:rgba(251,146,60,.14)" data-id="${p.id}">`;
+      h+=`<div class="ov-nm">`;
+      h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="14" height="14" style="stroke:var(--p);stroke-width:2;fill:none;flex-shrink:0"`);
+      h+=`<span style="flex:1">${esc(p.name)}</span>`;
+      h+=`<span class="pill ${PILL[p.status]}">${p.status}</span>`;
+      h+=`</div>`;
+      h+=`<div class="ov-sub">${esc(p.oneLiner||'')}</div>`;
+      if(p.focus)h+=`<div class="ov-sub" style="color:rgba(251,146,60,.9)">${esc(p.focus.slice(0,90))}${p.focus.length>90?'…':''}</div>`;
+      if((p.nextActions||[]).length)h+=`<div style="font-size:var(--ts-sm);color:var(--p);font-weight:600;margin-top:4px">→ ${esc(p.nextActions[0])}</div>`;
+      h+=`<div class="ov-foot">`;
+      if(pct!==null)h+=`<span style="font-size:var(--ts-xs);font-weight:700;color:var(--p)">${pct}%</span>`;
+      h+=`<span style="margin-left:auto">${ageHtml(p.lastActivity&&p.lastActivity.date)}</span>`;
+      h+=`</div>`;
+      h+=badges(p,true);
+      h+=`</div>`;
+    });
     h+=`</div>`;
-    h+=`<div style="font-size:var(--ts-sm);color:var(--dim);margin-bottom:8px">${esc(p.oneLiner||'')}</div>`;
-    if(p.focus)h+=`<div class="focus focus-p"><b>Focus</b>${esc(p.focus)}</div>`;
-    h+=miniPhases(p.progress&&p.progress.phases,true);
-    if((p.nextActions||[]).length){
-      h+=`<div style="margin-top:10px;font-size:var(--ts-sm);color:var(--p);font-weight:600">→ ${esc(p.nextActions[0])}</div>`;
-    }
-    if((p.reminders||[]).length){
-      h+=`<div style="margin-top:6px;font-size:11px;color:var(--dim)">○ ${esc(p.reminders[0])}</div>`;
-    }
-    h+=`<div style="margin-top:10px" class="pers">${heat(p.activity||[],true)}</div>`;
-    h+=badges(p,true);
-    h+=`</div>`;
-  });
-  h+=`</div>`; // end g2
+  }
 
   return h;
 }
