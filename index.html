@@ -968,10 +968,10 @@ function overview(){
   // health level for command bar
   const hCls=allBlk||auHot?'danger':allDec?'warn':'clear';
   const hItems=[];
-  if(allBlk)hItems.push(`<span class="badge st-danger">⬥ ${allBlk} blocker${allBlk>1?'s':''}</span>`);
-  if(auHot) hItems.push(`<span class="badge st-danger">⚑ ${auHot} audit crit/high</span>`);
-  if(allDec)hItems.push(`<span class="badge st-warn">◆ ${allDec} decision${allDec>1?'s':''}</span>`);
-  const hLine=hItems.length?hItems.join(' '):`<span style="color:var(--status-ok);font-weight:600">✓ Portfolio clear</span>`;
+  if(allBlk)hItems.push(`<span class="badge st-danger">${allBlk} blocker${allBlk>1?'s':''}</span>`);
+  if(auHot) hItems.push(`<span class="badge st-danger">${auHot} urgent audit issue${auHot>1?'s':''}</span>`);
+  if(allDec)hItems.push(`<span class="badge st-warn">${allDec} pending decision${allDec>1?'s':''}</span>`);
+  const hLine=hItems.length?hItems.join(' '):`<span style="color:var(--status-ok);font-weight:600">Portfolio clear</span>`;
 
   let h='<div class="crumbs">Overview</div><h2 class="page">Mission Control</h2>';
 
