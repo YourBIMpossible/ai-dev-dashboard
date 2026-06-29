@@ -566,10 +566,11 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .tk-chip:hover{color:var(--text);border-color:var(--border-hi);}
 .tk-chip.on{color:var(--bg);background:var(--text);border-color:var(--text);font-weight:600;}
 .tk-section{margin-bottom:30px;}
-.tk-sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid var(--border);}
+.tk-sec-head{display:flex;flex-direction:column;gap:3px;margin-bottom:14px;padding-bottom:9px;border-bottom:1px solid var(--border);}
+.tk-sec-top{display:flex;align-items:baseline;gap:8px;}
 .tk-sec-head h3{font-family:Sora,sans-serif;font-size:var(--ts-md);font-weight:600;color:var(--text);letter-spacing:-.01em;}
 .tk-sec-count{font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums;}
-.tk-sec-ctx{margin-left:auto;font-size:var(--ts-sm);color:var(--dim);}
+.tk-sec-ctx{font-size:var(--ts-sm);color:var(--dim);}
 .tk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px;}
 .tk-card{background:var(--panel3);border:1px solid var(--border);border-radius:14px;padding:15px 16px 13px;display:flex;flex-direction:column;gap:7px;transition:border-color .14s,transform .14s;}
 .tk-card:hover{border-color:var(--border-hi);transform:translateY(-1px);}
@@ -1797,8 +1798,24 @@ function strategyView(){
   const PRIORD={p1:0,p2:1,p3:2,'':3};
   const sortItems=arr=>{const a=[...arr];if(sortF==='pri')a.sort((x,y)=>PRIORD[x.priority||'']-PRIORD[y.priority||'']);else if(sortF==='alpha')a.sort((x,y)=>x.title.localeCompare(y.title));return a;};
 
-  let h=`<div class="crumbs">Strategy</div><h2 class="page">Strategy &amp; Ideas</h2>
-    <p class="sub">Decide → hand off with → Cowork → work moves to In Progress → Completed once the ledger marks it promoted. Resolved items stay stacked under their group; denied items collapse into one bucket. State saved locally.</p>`;
+  // Command bar — shows what needs attention, not workflow instructions
+  const p1Count=activeItems.filter(i=>i.priority==='p1').length;
+  const cmdClass=p1Count?'danger':byLane.inprogress.length?'clear':catCount.blindspot?'warn':'clear';
+  let cmdItems=[];
+  if(p1Count)cmdItems.push(`<span class="badge st-danger">${p1Count} P1 item${p1Count!==1?'s':''}</span>`);
+  if(byLane.inprogress.length)cmdItems.push(`<span class="badge st-ok">${byLane.inprogress.length} in progress</span>`);
+  if(byLane.decided.length)cmdItems.push(`<span class="badge st-info">${byLane.decided.length} decided</span>`);
+  if(catCount.blindspot)cmdItems.push(`<span class="badge st-warn">${catCount.blindspot} blind spot${catCount.blindspot!==1?'s':''}</span>`);
+  if(!cmdItems.length){
+    if(activeItems.length)cmdItems.push(`<span style="font-size:var(--ts-sm);color:var(--muted)">${activeItems.length} items — no priorities or decisions yet</span>`);
+    else cmdItems.push(`<span style="font-size:var(--ts-sm);color:var(--status-ok)">Strategy clear — add ideas to track them here</span>`);
+  }
+  let h=`<div class="crumbs">Strategy</div><h2 class="page">Strategy &amp; Ideas</h2>`;
+  h+=`<div class="ov-cmd ${cmdClass}">
+    <div class="ov-cmd-dot"></div>
+    <div class="ov-cmd-items">${cmdItems.join('')}</div>
+    <span class="ov-cmd-meta">${activeItems.length} active · ${byLane.completed.length} completed</span>
+  </div>`;
 
   // Quick Capture panel
   let capOpen=false;try{capOpen=localStorage.getItem('strat.capture')==='1';}catch(e){}
@@ -1835,16 +1852,6 @@ function strategyView(){
     h+=`</div>`;
   }
   h+=`</div>`;
-
-  // Stat strip — Active total excludes Completed + Denied
-  h+=`<div class="stat-row">
-    <div class="stat st-info"><div class="v num">${activeItems.length}</div><div class="l">Active</div></div>
-    <div class="stat st-warn"><div class="v num">${byLane.pending.length}</div><div class="l">Pending</div></div>
-    <div class="stat st-ok"><div class="v num">${byLane.decided.length}</div><div class="l">Decided</div></div>
-    <div class="stat st-info"><div class="v num">${byLane.inprogress.length}</div><div class="l">In Progress</div></div>
-    <div class="stat"><div class="v num">${byLane.completed.length}</div><div class="l">Completed</div></div>
-    <div class="stat st-danger"><div class="v num">${byLane.denied.length}</div><div class="l">Denied</div></div>
-  </div>`;
 
   // Category tabs
   const CATS=[['all','All'],['blindspot','Blind Spots'],['idea','Ideas'],['outlook','Outlook'],['watchlist','Watchlist'],['custom','Custom']];
@@ -2797,14 +2804,13 @@ function toolkitView(){
   const CHIPS=[['all','All'],['command','Commands'],['skill','Skills'],['agent','Agents'],['cowork','Cowork'],['connector','Connectors'],['scheduled','Scheduled']];
   let h=`<div class="crumbs">Mission Control</div>
 <h2 class="page">Toolkit</h2>
-<p class="tk-intro">Every skill, command, sub-agent, connector, and scheduled task you can reach, grouped by where you use it. Filter by type, search by name, or click any command to copy it.</p>
 <div class="tk-controls">
   <input class="tk-search" id="tkSearch" placeholder="Search tools by name, command, or description…" oninput="tkApply()">
   <div class="tk-chips">${CHIPS.map((c,i)=>`<button class="tk-chip${i===0?' on':''}" onclick="tkSetCat(this,'${c[0]}')">${esc(c[1])}</button>`).join('')}</div>
 </div>`;
   SECT.forEach(s=>{
     h+=`<section class="tk-section" data-cat="${s.cat}">
-<div class="tk-sec-head"><h3>${esc(s.title)}</h3><span class="tk-sec-count">${s.items.length}</span><span class="tk-sec-ctx">${esc(s.ctx)}</span></div>
+<div class="tk-sec-head"><div class="tk-sec-top"><h3>${esc(s.title)}</h3><span class="tk-sec-count">${s.items.length}</span></div><div class="tk-sec-ctx">${esc(s.ctx)}</div></div>
 <div class="tk-grid">`;
     s.items.forEach(it=>{
       const search=(it.cmd+' '+it.name+' '+it.desc+' '+(it.where||'')+' '+(it.trigger||'')).toLowerCase();
