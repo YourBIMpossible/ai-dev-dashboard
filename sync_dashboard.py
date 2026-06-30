@@ -55,11 +55,10 @@ from pathlib import Path
 PROTECTED_FIELDS = {"progress", "waves", "activity", "lastActivity"}
 
 BASE_URL = os.environ.get("GITHUB_MODELS_BASE_URL", "https://models.github.ai/inference")
-MODEL = os.environ.get("GITHUB_MODEL", "openai/gpt-4o-mini")
-# GitHub Models free tier caps gpt-4o-mini at ~8000 input tokens and 4000 OUTPUT
-# tokens per request. The patch we ask for is small (only changed fields), so it
-# fits comfortably; OUTPUT_TOKEN_CAP guards the response with a clear error if a
-# huge set of changes ever pushes it over.
+MODEL = os.environ.get("GITHUB_MODEL", "openai/gpt-4o")
+# gpt-4o has a 128k input context window on GitHub Models; gpt-4o-mini's 8k cap
+# was exceeded once the bimpossible card + docs + git log grew past ~8000 tokens.
+# OUTPUT_TOKEN_CAP guards the response side (patches are small, but belt+suspenders).
 MAX_DOC_CHARS = 6000   # total chars across all docs (~2000 tokens)
 PER_FILE_CHARS = 4000  # cap any single doc so one big file can't eat the budget
 OUTPUT_TOKEN_CAP = 4000
