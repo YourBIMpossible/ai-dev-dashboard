@@ -237,6 +237,22 @@ _TOPKEY_RE = re.compile(r"(?m)^( {6})(\w+):")
 _VALUE_RE = re.compile(r"(?s)^(\s*)(.*?)(,?)(\s*)$")
 
 
+def slim_block_for_prompt(block: str) -> str:
+    """Replace protected-field values with short stubs before sending to the model.
+
+    The model is blocked from updating progress/waves/activity/lastActivity anyway
+    (hard fence in main()). Sending their full values wastes tokens and can exceed
+    GitHub Models' 8k free-tier input cap as the card grows. We stub them out here
+    so the model still knows the fields exist but doesn't see their bulk content.
+    The real current_block (unmodified) is still used for apply_patch() at write time.
+    """
+    stub = {f: f"[{f.upper()}_MANAGED_BY_SYNC_LEDGERS]" for f in PROTECTED_FIELDS}
+    try:
+        return apply_patch(block, stub, serialize=lambda v, _: json.dumps(v))
+    except Exception:
+        return block  # fall back to full block if slimming fails
+
+
 def apply_patch(block: str, patch: dict, serialize=to_js) -> str:
     """Replace the values of changed top-level fields in `block` (a JS object literal
     `{ ... }`) with serialized values from `patch`. Untouched fields are preserved
@@ -302,13 +318,14 @@ def main() -> int:
     sha = git_short_sha()
     log = git_recent_log()
 
+    prompt_block = slim_block_for_prompt(current_block)
     user_msg = (
         f"PROJECT ID: {args.project}\n"
         f"LATEST COMMIT (short sha): {sha}\n"
         f"RECENT COMMITS:\n{log}\n\n"
         f"LATEST STATUS DOCS:\n{docs}\n\n"
         f"CURRENT PROJECT OBJECT (return a JSON patch of changed top-level fields only):\n"
-        f"{current_block}"
+        f"{prompt_block}"
     )
 
     client = build_client()
