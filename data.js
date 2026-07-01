@@ -233,19 +233,61 @@ window.DASHBOARD_DATA = {
         lastRun: "2026-06-22",
         runType: "Weekly automated (Mon 6am); 06-22 run clean — expr-eval CVE removed, relay hardened, auth scoped (via #142). Next: 06-29",
         cadence: "weekly Mon 6am + on-demand",
-        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
+        counts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
         closedLastRun: 5,
         trend: "improving",
         reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-06-16__code-audit.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
         open: [],
         history: [
-          { date: "2026-06-22", type: "Weekly full", scope: "Whole tree", result: "All clear — 0 open · 5 closed (expr-eval CVE removed, relay frame guard, multi-tenant auth scoping via #142)", report: "2026-06-16__code-audit.md" },
-          { date: "2026-06-16", type: "Weekly full + verification", scope: "Whole tree @ 04b5d8d", result: "0 Critical / 0 live-exploitable · new SEC-9 backend CSV formula-injection (Medium); SEC-8 PUT /ref 500s", report: "weekly-full-audit_2026-06-16.md" },
-          { date: "2026-06-15", type: "Weekly full", scope: "Whole tree + QA/wizard WIP", result: "0 Critical · OPS-1 (High, process): new QA/wizard surface CI-unverified while Actions billing-blocked", report: "weekly-full-audit_2026-06-15.md" },
-          { date: "2026-06-14", type: "Full (backend + frontend)", scope: "Phase 3 F-1…F-28, Phase 4a/5, expr-eval removal", result: "NM-1 (Medium): list_views checks project allowlist before auth — probe via differing error codes", report: "2026-06-14__audit-report-full.md" },
-          { date: "2026-06-13", type: "Full", scope: "Whole tree @ 58fd53c (W10-17 merges)", result: "FEA-4 (Medium): 15 new Wave 10-17 schedule views ship with zero unit tests", report: "2026-06-13__audit-report-full.md" },
-          { date: "2026-06-10", type: "Full (7 agents)", scope: "Whole tree @ 277e6d2 · re-verified 68 perp-audit fixes", result: "CORE-1 (High): refresh never invalidates the durable category cache → stale sidebar on republish", report: "2026-06-10__audit-report-full.md" }
+          {
+            date: "2026-06-22",
+            type: "Weekly full",
+            scope: "Whole tree",
+            result: "All clear — 0 open · 5 closed (expr-eval CVE removed, relay frame guard, multi-tenant auth scoping via #142)",
+            report: "2026-06-16__code-audit.md"
+          },
+          {
+            date: "2026-06-16",
+            type: "Weekly full + verification",
+            scope: "Whole tree @ 04b5d8d",
+            result: "0 Critical / 0 live-exploitable · new SEC-9 backend CSV formula-injection (Medium); SEC-8 PUT /ref 500s",
+            report: "weekly-full-audit_2026-06-16.md"
+          },
+          {
+            date: "2026-06-15",
+            type: "Weekly full",
+            scope: "Whole tree + QA/wizard WIP",
+            result: "0 Critical · OPS-1 (High, process): new QA/wizard surface CI-unverified while Actions billing-blocked",
+            report: "weekly-full-audit_2026-06-15.md"
+          },
+          {
+            date: "2026-06-14",
+            type: "Full (backend + frontend)",
+            scope: "Phase 3 F-1…F-28, Phase 4a/5, expr-eval removal",
+            result: "NM-1 (Medium): list_views checks project allowlist before auth — probe via differing error codes",
+            report: "2026-06-14__audit-report-full.md"
+          },
+          {
+            date: "2026-06-13",
+            type: "Full",
+            scope: "Whole tree @ 58fd53c (W10-17 merges)",
+            result: "FEA-4 (Medium): 15 new Wave 10-17 schedule views ship with zero unit tests",
+            report: "2026-06-13__audit-report-full.md"
+          },
+          {
+            date: "2026-06-10",
+            type: "Full (7 agents)",
+            scope: "Whole tree @ 277e6d2 · re-verified 68 perp-audit fixes",
+            result: "CORE-1 (High): refresh never invalidates the durable category cache → stale sidebar on republish",
+            report: "2026-06-10__audit-report-full.md"
+          }
         ]
       },
       waves: {
