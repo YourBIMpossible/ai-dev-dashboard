@@ -497,26 +497,37 @@ window.DASHBOARD_DATA = {
       ],
       recent: [
         "2026-06-27 - Header logo visibility fix + theme toggle collapsed to single cycling button (709f352)",
+        "2026-06-13 - M1/M2/M3 + L2/L3/L6/L8 closed from the 2026-06-13 full audit (404f9a0)",
         "2026-06-11 - LinkedIn Company Page published (linkedin.com/company/bimpossible); launch post live",
         "2026-06-10 - WAF rate rule deployed; re-verified live: 5-hash CSP, 405 Allow, Turnstile on /contact, dead font 404 fixed, 13.7KB font subset",
         "2026-06-09/10 - All audit findings cleared + deployed; Lighthouse 100/100/100/100 across all 6 pages",
         "2026-06-09 - Triple audit (perf/architecture/code-review); contact form Turnstile + Web3Forms live; 13 e2e tests"
       ],
       audit: {
-        lastRun: "2026-06-13",
-        runType: "Full code audit",
-        cadence: "on-demand",
-        counts: { critical: 0, high: 1, medium: 0, low: 0, info: 0 },
-        closedLastRun: 4,
-        trend: "flat",
-        reportPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\2026-06-13__audit-report-full.md",
-        ledgerPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\_site-audit-runs.md",
+        closedLastRun: 7,
         open: [
-          { id: "CSP-1", sev: "high", title: "CSP hash drift is unguarded in CI — a style/script hash change can ship a broken policy. Latent, not prod-breaking (confirm resolved)", where: "CI" }
+          {
+            id: "CSP-1",
+            sev: "high",
+            title: "CSP hash drift is unguarded in CI — a style/script hash change can ship a broken policy. Latent, not prod-breaking (confirm resolved)",
+            where: "CI"
+          }
         ],
         history: [
-          { date: "2026-06-13", type: "Full code audit", scope: "Whole site (perf baseline unchanged)", result: "0 prod-breaking · 1 high-latent (CSP hash drift unguarded in CI) + 4 medium + 8 low; no 06-09 regressions", report: "2026-06-13__audit-report-full.md" },
-          { date: "2026-06-09", type: "Triple audit (perf / architecture / code)", scope: "6 pages", result: "Lighthouse 100×4 · 4 bugs confirmed + fixed (wheel focus desync, resize clip, contact 500, theme tri-state)", report: "2026-06-09__audit-1-performance.md" }
+          {
+            date: "2026-06-13",
+            type: "Full code audit",
+            scope: "Whole site (perf baseline unchanged)",
+            result: "0 prod-breaking · 1 high-latent (CSP hash drift unguarded in CI) + 4 medium + 8 low; no 06-09 regressions",
+            report: "2026-06-13__audit-report-full.md"
+          },
+          {
+            date: "2026-06-09",
+            type: "Triple audit (perf / architecture / code)",
+            scope: "6 pages",
+            result: "Lighthouse 100×4 · 4 bugs confirmed + fixed (wheel focus desync, resize clip, contact 500, theme tri-state)",
+            report: "2026-06-09__audit-1-performance.md"
+          }
         ]
       }
     },
