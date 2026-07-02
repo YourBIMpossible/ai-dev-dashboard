@@ -16,8 +16,8 @@ window.DASHBOARD_DATA = {
       icon: "layers",
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
-      phase: "main at 80d3407 (2026-06-28), 0 ahead of origin. Since #142 (06-23) the Embedded Assistant advanced hard: Phase 4c conversation persistence (#153) + stop-and-edit (#154), Phase 4d project-context grounding (#155), NetworkX graph-topology tools + Model Health graph checks (#157), permission-flow graph tool. Infra/hardening: Wave C-1 Redis shared-state multi-worker foundation (#152); QA predicate-normalization refactors (#150/#151); report-only security-scan + BIM semgrep rules + prose-flag hook + trivy CI pin. Program gates unchanged: P11 Model QA + P8 Wizard built but flag-gated OFF; P6 true-prod deploy still owed (alembic → head s1t2u3v4w5x6); P7 write-back ON HOLD (Revit Link single-user live, DA4R parked); P5 ON HOLD.",
-      focus: "True-prod deploy still owed (runbook 06-12): alembic upgrade → head s1t2u3v4w5x6, set BIMPOSSIBLE_ADMIN_ENABLED/SECRET, prewarm DB cleanup → then smoke Wave 4.10 + 4.9 + admin/My-Account. The 06-25→28 assistant Phase 4c/4d + Model Health graph work (#150–157) is merged but unsmoked on prod. Then: P7 DA4R-vs-Revit Link sequencing decision.",
+      phase: "main at bd472b0 (2026-07-01), 0 ahead of origin. Since #170 (07-01) the Embedded Assistant advanced hard: Phase 4c conversation persistence (#153) + stop-and-edit (#154), Phase 4d project-context grounding (#155), NetworkX graph-topology tools + Model Health graph checks (#157), permission-flow graph tool. Infra/hardening: Wave C-1 Redis shared-state multi-worker foundation (#152); QA predicate-normalization refactors (#150/#151); report-only security-scan + BIM semgrep rules + prose-flag hook + trivy CI pin. Program gates unchanged: P11 Model QA + P8 Wizard built but flag-gated OFF; P6 true-prod deploy still owed (alembic → head s1t2u3v4w5x6); P7 write-back ON HOLD (Revit Link single-user live, DA4R parked); P5 ON HOLD.",
+      focus: "True-prod deploy still owed (runbook 06-12): alembic upgrade → head s1t2u3v4w5x6, set BIMPOSSIBLE_ADMIN_ENABLED/SECRET, prewarm DB cleanup → then smoke Wave 4.10 + 4.9 + admin/My-Account. The 06-25→28 assistant Phase 4c/4d + Model Health graph work (#150–157) is merged but unsmoked on prod. The 06-30 full-audit remediation (#150–157) is merged but unsmoked on prod. Then: P7 DA4R-vs-Revit Link sequencing decision.",
       progress: {
         label: "Program phases",
         phases: [
@@ -185,7 +185,7 @@ window.DASHBOARD_DATA = {
         date: "2026-06-28",
         summary: "chore(security): commit unattended scanner, ignore _triage-logs, retire headless wrapper (f67c42b)"
       },
-      branch: "main at 80d3407; 0 ahead of origin",
+      branch: "main at bd472b0; 0 ahead of origin",
       git: {
         warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)."
       },
@@ -193,6 +193,7 @@ window.DASHBOARD_DATA = {
         "True-prod deploy (runbook 06-12): alembic upgrade head (→ s1t2u3v4w5x6), set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, DELETE stale done-rows in relationship_prewarm_jobs per model",
         "Post-deploy smokes: Wave 4.10 (Spec Draft launcher → modal + downloads); Wave 4.9 (ScheduleClassificationBar + ✦ badge); admin/My-Account KPI strip + firm onboard",
         "Smoke the 06-25→28 assistant work on prod: Phase 4c conversation persistence + stop-and-edit, Phase 4d project-context grounding, Model Health graph checks (#150–157)",
+        "Smoke the 06-30 full-audit remediation on prod: GRAPH-1 diamond-DAG `_load_served`, GS-1, OWN-1, DIGEST-3, PREWARM-1",
         "P7 DA4R + Revit Link sequencing: review 2026-06-23 Phase7_Writeback_TwoOptions_PROPOSAL.md, decide which engine to build first",
         "Add WAVE-STATUS.md rows for Waves 4.9 + 4.10 (shipped in git, missing from ledger)",
         "Commit + push P6 /account FE test branch: AdminShell, FirmEditDrawer, ConfirmDialog, My Account UI tests missing",
