@@ -311,10 +311,10 @@ window.DASHBOARD_DATA = {
       id: "addins",
       name: "Add-Ins / RevitLink",
       icon: "wrench",
-      oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (9/13 shipped + 8 BIM manager tools built) + Trade QA Scanner suite (6 trades deployed).",
+      oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (10/15 shipped + 8 BIM manager tools built) + Trade QA Scanner suite (6 trades deployed).",
       status: "active",
       phase: "06-27: Duplicate Collection refine on branch feat/dupcollection-refine (3 ahead of origin, unpushed) — template remap store + view-family name minter + UI overhaul (c34f022); Model Health per-view workset breakdown + plain-English metric descriptions (070b4be); working specs committed (26f1e1f). Earlier: 3D section-box tightening + Reference Callout collapsible section (06-16); Tool 18 hardened (06-13); Tools 10-13 shipped + 14-21 built via TDD on main. RevitLink 9/13 shipped + 8 BIM-manager tools.",
-      focus: "Push the feat/dupcollection-refine branch (3 unpushed); Tool 7 Phase 1 smoke in Revit; then Definition of Done sweep (icons/guides/tooltips) for Tools 10-21",
+      focus: "Push the feat/dupcollection-refine branch (3 unpushed); Tool 7 Phase 1 smoke in Revit; update TOOL_BACKLOG.md with Tools 14-21; then Definition of Done sweep (icons/guides/tooltips) for Tools 10-21",
       progress: { label: "Tracks", phases: [
         { name: "RevitLink tools (9/13 shipped)", pct: 72,
           tasks: [
@@ -369,7 +369,6 @@ window.DASHBOARD_DATA = {
         "Tool 7 Phase 1 (sheets) smoke test; Phase 2 = view placement",
         "Definition of Done sweep: icons + How-To guides + tooltip/F1 wiring for Tools 10-21",
         "QA Scanners: live smoke Architectural (4 tools, 21 tests); live spikes for E/M/P/FP/S collectors",
-        "git init BIMpossible.RevitLink",
         "Update TOOL_BACKLOG.md: add Tools 14-21 to numbered backlog table with status",
         "Merge/close feat/model-audit-consolidation-2026-06-12 when consolidation lands"
       ],
@@ -384,10 +383,22 @@ window.DASHBOARD_DATA = {
         "Deferred: Deploy-Local.ps1 PS 5.1-safe; Revit dev-mode hot-reload"
       ],
       links: [
-        { label: "Tool backlog", path: "F:\\AI-Dev\\Add-Ins\\TOOL_BACKLOG.md" },
-        { label: "ModelQA consolidation decision (06-10)", path: "F:\\AI-Dev\\Add-Ins\\decision-log\\2026-06-10__modelqa-consolidation.md" },
-        { label: "Audit fix pass (06-09)", path: "F:\\AI-Dev\\Add-Ins\\decision-log\\2026-06-09__audit-fix-pass.md" },
-        { label: "Dev notes", path: "F:\\AI-Dev\\Add-Ins\\BIMpossible.RevitLink\\DEV-NOTES.md" }
+        {
+          label: "Tool backlog",
+          path: "F:\\AI-Dev\\Add-Ins\\TOOL_BACKLOG.md"
+        },
+        {
+          label: "ModelQA consolidation decision (06-10)",
+          path: "F:\\AI-Dev\\Add-Ins\\decision-log\\2026-06-10__modelqa-consolidation.md"
+        },
+        {
+          label: "Audit fix pass (06-09)",
+          path: "F:\\AI-Dev\\Add-Ins\\decision-log\\2026-06-09__audit-fix-pass.md"
+        },
+        {
+          label: "Dev notes",
+          path: "F:\\AI-Dev\\Add-Ins\\BIMpossible.RevitLink\\DEV-NOTES.md"
+        }
       ],
       recent: [
         "2026-06-27 - Duplicate Collection refine (feat/dupcollection-refine, 3 ahead of origin): template remap store + view-family name minter + UI overhaul (c34f022); Model Health per-view workset breakdown + plain-English metric descriptions (070b4be)",
