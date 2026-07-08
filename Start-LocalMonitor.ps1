@@ -73,8 +73,16 @@ Write-Host "Press Ctrl+C to stop."
 try {
     while ($true) {
         Invoke-RefreshCycle -PythonExe $python | Out-Null
+
+        if (-not (Get-Process -Id $liveServerProc.Id -ErrorAction SilentlyContinue)) {
+            "ERROR: live-server (PID $($liveServerProc.Id)) is no longer running - stopping monitor. Re-run Start-LocalMonitor.ps1 to restart." | Add-Content -Path $log -Encoding utf8
+            break
+        }
+
         Start-Sleep -Seconds $INTERVAL_SECONDS
     }
+} catch {
+    "ERROR: monitor loop crashed - $($_.Exception.Message)" | Add-Content -Path $log -Encoding utf8
 } finally {
     "=== monitor stopping - cleaning up live-server (PID $($liveServerProc.Id)) ===" | Add-Content -Path $log -Encoding utf8
     try { & taskkill /PID $liveServerProc.Id /T /F 2>$null | Out-Null } catch {}
