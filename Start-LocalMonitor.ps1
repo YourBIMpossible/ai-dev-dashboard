@@ -27,13 +27,23 @@ $INTERVAL_SECONDS = 120
 
 # --- Lock check: refuse to double-launch. ---
 if (Test-Path $lockPath) {
-    $existing = Get-Content $lockPath -Raw | ConvertFrom-Json
-    $stillRunning = Get-Process -Id $existing.monitorPid -ErrorAction SilentlyContinue
-    if ($stillRunning) {
-        Write-Host "Local monitor already running (PID $($existing.monitorPid)). Use Stop-LocalMonitor.ps1 to stop it first."
-        exit 1
+    $existing = $null
+    $parseOk = $true
+    try {
+        $existing = Get-Content $lockPath -Raw | ConvertFrom-Json
+    } catch {
+        $parseOk = $false
+    }
+    if ($parseOk -and $existing -and $existing.monitorPid) {
+        $stillRunning = Get-Process -Id $existing.monitorPid -ErrorAction SilentlyContinue
+        if ($stillRunning) {
+            Write-Host "Local monitor already running (PID $($existing.monitorPid)). Use Stop-LocalMonitor.ps1 to stop it first."
+            exit 1
+        } else {
+            "Stale lock file found (PID $($existing.monitorPid) not running) - overwriting." | Add-Content -Path $log -Encoding utf8
+        }
     } else {
-        "Stale lock file found (PID $($existing.monitorPid) not running) - overwriting." | Add-Content -Path $log -Encoding utf8
+        "Corrupt/unreadable lock file - treating as stale and overwriting." | Add-Content -Path $log -Encoding utf8
     }
 }
 

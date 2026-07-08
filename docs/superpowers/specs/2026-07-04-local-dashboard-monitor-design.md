@@ -144,3 +144,8 @@ and any `git add`/`commit`/`push` (none, ever, in this script).
   files when a cycle fires. `graph-metrics.js` itself is never written by this loop (per
   `REFRESH-SPEC.md` rule 11, it's produced only by `Update-Graph.ps1` on BIMpossible pushes), so today's
   uncommitted change to it is safe from this loop specifically.
+- Each 120s cycle makes live external calls — `gh api` per project repo (`sync_activity.py`) and
+  `npx -y ccusage@latest` twice (`agents_sync`, `usage_sync`) — roughly 720x/day versus the daily
+  pipeline's 1x. All of these are lenient/WARN so failures self-heal, but this consumes GitHub API quota
+  on a loop, and a cold/slow network stretches the effective cycle beyond ~2min (single-flight means
+  cycles lengthen, never overlap). Revisit with every-Nth-cycle gating only if it becomes a real problem.

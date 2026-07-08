@@ -17,7 +17,13 @@ if (-not (Test-Path $lockPath)) {
     exit 0
 }
 
-$existing = Get-Content $lockPath -Raw | ConvertFrom-Json
+try {
+    $existing = Get-Content $lockPath -Raw | ConvertFrom-Json
+} catch {
+    Remove-Item $lockPath -Force -ErrorAction SilentlyContinue
+    Write-Host "Lock file was corrupt/unreadable - removed stale lock."
+    exit 0
+}
 $stopped = $false
 
 foreach ($procId in @($existing.monitorPid, $existing.liveServerPid)) {

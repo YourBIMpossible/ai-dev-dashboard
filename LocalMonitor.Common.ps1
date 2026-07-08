@@ -29,11 +29,11 @@ function Get-PythonExe {
     return $py
 }
 
-# Runs the six local/deterministic refresh scripts once, in the same order
-# and strictness Refresh-Dashboard.ps1 uses for the daily pipeline, minus
-# anything that touches git. Returns $true if the strict stage
-# (sync_ledgers.py) succeeded, $false if the whole cycle should be
-# considered failed.
+# Runs the local refresh scripts once: the daily pipeline's deterministic
+# renderers (same order and strictness), minus git and minus the push-time
+# validate_dashboard.py gate (irrelevant with no push), plus the local-only
+# agents/usage renders. Returns $true if the strict stage (sync_ledgers.py)
+# succeeded, $false if the whole cycle should be considered failed.
 function Invoke-RefreshCycle {
     param([Parameter(Mandatory)][string]$PythonExe)
 
@@ -54,6 +54,7 @@ function Invoke-RefreshCycle {
     if ((Invoke-Logged $PythonExe @("$PSScriptRoot\networkx_impact.py")) -ne 0) {
         "WARN: networkx_impact.py failed - impact data not refreshed this cycle." | Add-Content -Path $log -Encoding utf8
     }
+    # "--no-push" is load-bearing fail-open in both .mjs (PUSH = !argv.includes("--no-push")) - a typo here would silently re-enable git push/pull.
     if ((Invoke-Logged "node" @("$PSScriptRoot\agents_sync.mjs","--no-push")) -ne 0) {
         "WARN: agents_sync.mjs failed - agents/health tabs not refreshed this cycle." | Add-Content -Path $log -Encoding utf8
     }
