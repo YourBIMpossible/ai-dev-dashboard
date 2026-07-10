@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-06-28",
+  generated: "2026-07-10",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-06-26",
+  activitySince: "2026-06-27",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -181,10 +181,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [27,24,30,17,13,18,19,0,0,0,5,8,0,0],
+      activity: [24,30,17,13,18,19,0,0,0,5,8,0,3,9],
       lastActivity: {
-        date: "2026-07-07",
-        summary: "docs(audit): 2026-07-07 follow-up resolution - every 2026-07-06 finding closed (16458cc)"
+        date: "2026-07-10",
+        summary: "chore: gitleaksignore two vetted false-positive aws-access-token matches (cf86c17)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
@@ -430,10 +430,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,3,0,0,0,0,0,0,0,0,2,15,2,13],
+      activity: [3,0,0,0,0,0,0,0,0,2,15,2,18,1],
       lastActivity: {
-        date: "2026-07-09",
-        summary: "fix(dupcollection): editable combo can't render/accept typed text; Source Collection combo showed raw type name (c9cd1db)"
+        date: "2026-07-10",
+        summary: "fix(sectionclip): restore the origin-independent crop; my level-datum broke the real workflow (b817065)"
       },
       branch: "feat/dupcollection-refine (3 ahead of origin, unpushed)",
       git: {
@@ -555,7 +555,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,1,0,0,0,1,0,0,0,0,0,0,0,0],
+      activity: [1,0,0,0,1,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-01",
         summary: "fix(audit): close M1/M2/M3 + L2/L3/L6/L8 from the 2026-06-13 full audit (404f9a0)"
@@ -741,7 +741,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,2,1,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [2,1,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-06-28",
         summary: "feat(tool): NetworkX remediation-order DAG (blast-radius + clusters + topo) (7fd2e48)"

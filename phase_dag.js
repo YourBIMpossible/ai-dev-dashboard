@@ -19,7 +19,7 @@ window.PHASE_DAG = {
 {
 "id": "4",
 "name": "Embedded Intelligent Assistant (4a/4b)",
-"status": "SHIPPED",
+"status": "CLOSED",
 "dependsOn": [],
 "gates": [
 "12"
@@ -39,7 +39,7 @@ window.PHASE_DAG = {
 {
 "id": "6",
 "name": "Platform / Billing + Client-Management",
-"status": "SHIPPED",
+"status": "CLOSED",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -90,7 +90,15 @@ window.PHASE_DAG = {
 {
 "id": "11",
 "name": "Model QA & Health",
-"status": "BUILT — flag-gated OFF",
+"status": "SHIPPED — LIVE in prod",
+"dependsOn": [],
+"gates": [],
+"gatesCount": 0
+},
+{
+"id": "11.1",
+"name": "Coordination & Health Report",
+"status": "SHIPPED — LIVE in prod",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -122,12 +130,12 @@ window.PHASE_DAG = {
 {
 "id": "4",
 "name": "Embedded Intelligent Assistant (4a/4b)",
-"status": "SHIPPED"
+"status": "CLOSED"
 },
 {
 "id": "6",
 "name": "Platform / Billing + Client-Management",
-"status": "SHIPPED"
+"status": "CLOSED"
 },
 {
 "id": "7",
@@ -142,7 +150,12 @@ window.PHASE_DAG = {
 {
 "id": "11",
 "name": "Model QA & Health",
-"status": "BUILT — flag-gated OFF"
+"status": "SHIPPED — LIVE in prod"
+},
+{
+"id": "11.1",
+"name": "Coordination & Health Report",
+"status": "SHIPPED — LIVE in prod"
 }
 ],
 [
@@ -227,7 +240,11 @@ window.PHASE_DAG = {
 },
 {
 "phase": "11",
-"gate": "Go-live gate ↓"
+"gate": "2026-07-01"
+},
+{
+"phase": "11.1",
+"gate": "2026-07-02"
 }
 ],
 "edges": [
@@ -252,5 +269,5 @@ window.PHASE_DAG = {
 "to": "10"
 }
 ],
-"generated": "2026-06-28"
+"generated": "2026-07-10"
 };
