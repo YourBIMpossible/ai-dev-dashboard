@@ -1,6 +1,9 @@
 # ============================================================
 # Local dashboard monitor: live-reload static server + disk-only refresh
 # loop. For watching the dashboard update in near-real-time while working.
+# Also serves a loopback-only GET /refresh endpoint (port $REFRESH_PORT)
+# that the site's "Refresh now" button calls to force an immediate cycle
+# on demand, instead of waiting for the next 2-minute tick.
 #
 # LOCAL-ONLY CONTRACT: this script must NEVER git add/commit/push. It only
 # reruns the deterministic renderers and writes their output to disk.
@@ -21,6 +24,7 @@ if (-not (Test-Path $backups)) { New-Item -ItemType Directory -Path $backups -Fo
 $log              = Join-Path $backups "monitor-log.txt"
 $lockPath         = Join-Path $backups "monitor.lock"
 $PORT             = 8081
+$REFRESH_PORT     = 8082
 $INTERVAL_SECONDS = 120
 
 . "$PSScriptRoot\LocalMonitor.Common.ps1"
@@ -73,28 +77,75 @@ if (-not (Get-Process -Id $liveServerProc.Id -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-$lockData = @{ monitorPid = $PID; liveServerPid = $liveServerProc.Id } | ConvertTo-Json
+$lockData = @{ monitorPid = $PID; liveServerPid = $liveServerProc.Id; refreshPort = $REFRESH_PORT } | ConvertTo-Json
 Set-Content -Path $lockPath -Value $lockData -Encoding utf8
 
+# --- On-demand refresh listener: loopback-only (no netsh/admin needed since
+#     the prefix is "localhost", not "+"/"*"). If it fails to bind, the
+#     2-minute loop still runs - only the button's instant refresh is lost. ---
+$listener = New-Object System.Net.HttpListener
+$listener.Prefixes.Add("http://localhost:$REFRESH_PORT/")
+try {
+    $listener.Start()
+} catch {
+    "WARN: could not bind refresh listener on port $REFRESH_PORT - $($_.Exception.Message). On-demand refresh disabled; the $INTERVAL_SECONDS-second loop still runs." | Add-Content -Path $log -Encoding utf8
+    $listener = $null
+}
+
+function Send-RefreshResponse {
+    param([Parameter(Mandatory)]$Context, [Parameter(Mandatory)][int]$StatusCode, [Parameter(Mandatory)][string]$Json)
+    $resp = $Context.Response
+    $resp.StatusCode = $StatusCode
+    $resp.ContentType = "application/json"
+    $resp.Headers.Add("Access-Control-Allow-Origin", "*")
+    $buffer = [System.Text.Encoding]::UTF8.GetBytes($Json)
+    $resp.ContentLength64 = $buffer.Length
+    $resp.OutputStream.Write($buffer, 0, $buffer.Length)
+    $resp.OutputStream.Close()
+}
+
 Write-Host "Local dashboard monitor running: http://localhost:$PORT"
-Write-Host "Refreshing every $INTERVAL_SECONDS seconds. Log: $log"
+if ($listener) { Write-Host "On-demand refresh: http://localhost:$REFRESH_PORT/refresh" }
+Write-Host "Background cycle every $INTERVAL_SECONDS seconds. Log: $log"
 Write-Host "Press Ctrl+C to stop."
+
+$pendingCtx = if ($listener) { $listener.BeginGetContext($null, $null) } else { $null }
+$nextCycleAt = Get-Date
 
 try {
     while ($true) {
-        Invoke-RefreshCycle -PythonExe $python | Out-Null
-
         if (-not (Get-Process -Id $liveServerProc.Id -ErrorAction SilentlyContinue)) {
             "ERROR: live-server (PID $($liveServerProc.Id)) is no longer running - stopping monitor. Re-run Start-LocalMonitor.ps1 to restart." | Add-Content -Path $log -Encoding utf8
             break
         }
 
-        Start-Sleep -Seconds $INTERVAL_SECONDS
+        if ((Get-Date) -ge $nextCycleAt) {
+            Invoke-RefreshCycle -PythonExe $python | Out-Null
+            $nextCycleAt = (Get-Date).AddSeconds($INTERVAL_SECONDS)
+        }
+
+        if ($pendingCtx) {
+            if ($pendingCtx.AsyncWaitHandle.WaitOne(1000)) {
+                $context = $listener.EndGetContext($pendingCtx)
+                if ($context.Request.HttpMethod -eq "GET" -and $context.Request.Url.AbsolutePath -eq "/refresh") {
+                    "--- on-demand refresh requested ---" | Add-Content -Path $log -Encoding utf8
+                    Invoke-RefreshCycle -PythonExe $python | Out-Null
+                    $nextCycleAt = (Get-Date).AddSeconds($INTERVAL_SECONDS)
+                    Send-RefreshResponse -Context $context -StatusCode 200 -Json (@{ ok = $true; generated = (Get-Date -Format "yyyy-MM-dd HH:mm:ss") } | ConvertTo-Json -Compress)
+                } else {
+                    Send-RefreshResponse -Context $context -StatusCode 404 -Json '{"ok":false,"error":"not found"}'
+                }
+                $pendingCtx = $listener.BeginGetContext($null, $null)
+            }
+        } else {
+            Start-Sleep -Seconds 1
+        }
     }
 } catch {
     "ERROR: monitor loop crashed - $($_.Exception.Message)" | Add-Content -Path $log -Encoding utf8
 } finally {
     "=== monitor stopping - cleaning up live-server (PID $($liveServerProc.Id)) ===" | Add-Content -Path $log -Encoding utf8
     try { & taskkill /PID $liveServerProc.Id /T /F 2>$null | Out-Null } catch {}
+    if ($listener) { try { $listener.Stop(); $listener.Close() } catch {} }
     Remove-Item $lockPath -Force -ErrorAction SilentlyContinue
 }

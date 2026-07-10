@@ -54,6 +54,9 @@ function Invoke-RefreshCycle {
     if ((Invoke-Logged $PythonExe @("$PSScriptRoot\networkx_impact.py")) -ne 0) {
         "WARN: networkx_impact.py failed - impact data not refreshed this cycle." | Add-Content -Path $log -Encoding utf8
     }
+    if ((Invoke-Logged $PythonExe @("$PSScriptRoot\check_audit_freshness.py")) -ne 0) {
+        "WARN: check_audit_freshness.py failed - audit staleness badge not refreshed this cycle." | Add-Content -Path $log -Encoding utf8
+    }
     # "--no-push" is load-bearing fail-open in both .mjs (PUSH = !argv.includes("--no-push")) - a typo here would silently re-enable git push/pull.
     if ((Invoke-Logged "node" @("$PSScriptRoot\agents_sync.mjs","--no-push")) -ne 0) {
         "WARN: agents_sync.mjs failed - agents/health tabs not refreshed this cycle." | Add-Content -Path $log -Encoding utf8

@@ -82,6 +82,20 @@ and any `git add`/`commit`/`push` (none, ever, in this script).
 - **`Stop-LocalMonitor.ps1`** (new) — reads the lock file's PID(s), stops the loop and the `live-server`
   process, removes the lock. No auto-restart of anything — stopping/restarting is always an explicit
   user action.
+- **On-demand refresh listener** (added 2026-07-10) — `Start-LocalMonitor.ps1` also binds a loopback-only
+  `System.Net.HttpListener` on port 8082 (`http://localhost:8082/refresh`, GET). The sidebar's reload
+  button, when the page is loaded from `localhost`/`127.0.0.1`, calls this instead of just reloading:
+  it runs the same `Invoke-RefreshCycle` used by the 120s loop (resetting that loop's timer so it
+  doesn't immediately double-fire), waits for it to finish, then reloads the page. Off localhost (the
+  public deploy) the button still just does `location.reload()` — there's no local backend to call.
+  Deliberately **not** a Scheduled Task / auto-start-at-login: the owner explicitly wants an on-demand
+  trigger, not standing OS-level scheduling, for this local-only tool.
+  - Button label switches to "Refresh now" (local) vs "Reload data" (remote) so the two behaviors
+    aren't presented identically.
+  - **On failure** (listener unreachable - e.g. the loop process died but a `live-server` orphan is
+    still serving, see incident below) the button does **not** silently reload with stale data: it
+    shows a visible inline warning in the sidebar and leaves the button re-enabled. Silent success on
+    failure was the actual bug being fixed here, not just "add a refresh button."
 - **`Run-LocalRefreshOnce.ps1`** (new) — runs the same six-script cycle a single time, no server, no
   loop, for a manual "refresh now" without starting the whole monitor. Does not check the lock file —
   running it while the monitor loop is also active is harmless (both are idempotent renders over the
@@ -149,3 +163,19 @@ and any `git add`/`commit`/`push` (none, ever, in this script).
   pipeline's 1x. All of these are lenient/WARN so failures self-heal, but this consumes GitHub API quota
   on a loop, and a cold/slow network stretches the effective cycle beyond ~2min (single-flight means
   cycles lengthen, never overlap). Revisit with every-Nth-cycle gating only if it becomes a real problem.
+
+## Incident 2026-07-09/10 — silent 14-hour staleness
+
+The monitor loop process was killed (almost certainly a Claude Code/terminal session tearing down its
+process tree - the machine's actual last boot was 9:26pm, well before the loop died around 10:20pm) but
+its `live-server` child, spawned via `Start-Process cmd.exe /c npx ...`, survived as an orphan. Port 8081
+kept serving fine, so the dashboard *looked* live, but nothing had rewritten `data.js`/`agents.js`/
+`usage.js` in 14 hours and the day-granularity stale badge (`n>=3`) never tripped. The owner was actively
+relying on it being current and had no way to know it wasn't.
+
+Fix: the on-demand refresh listener above. A dead-loop-but-alive-server orphan (the exact failure mode
+here) now makes the refresh button fail visibly - `net::ERR_CONNECTION_REFUSED` on port 8082, caught and
+surfaced inline - instead of silently reloading stale data. Verified by reproducing the orphan on purpose
+(kill only the loop PID, no `/T`) and confirming the button shows the warning while `live-server` is still
+up. This does not prevent the loop from dying again; it makes the failure honest instead of silent, per
+the owner's explicit preference for an on-demand trigger over Scheduled-Task auto-restart.

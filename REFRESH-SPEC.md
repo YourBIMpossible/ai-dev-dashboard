@@ -19,7 +19,8 @@ Instructions for any Claude session (scheduled or on-demand "refresh dashboard")
 3. **A human / Claude on-demand refresh** — the fuller scan (activity arrays, git state,
    audit, links) per the per-project sources below.
 
-**Guard:** `validate_dashboard.py` runs inside `push-dashboard.ps1` before EVERY commit.
+**Guard:** `validate_dashboard.py` runs inside `Refresh-Dashboard.ps1` before EVERY commit
+(`push-dashboard.ps1` is now just a thin delegate to that script, not a separate caller).
 It blocks the push if any phase number contradicts the ledger (e.g. P7 named "Model QA",
 P6 named "content authoring"). Wrong phase numbering can no longer reach the live site.
 
@@ -54,6 +55,12 @@ the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE
     `Codebase graph stale - newest graphify snapshot <YYYY-MM-DD> (<N>d old); push or run a wave to refresh`.
     If <=7 days, add no reminder. Surfaces a lagging graph as a normal `reminders[]` entry without ever
     writing `graph-metrics.js`.
+    **Implementation status (2026-07-10):** this comparison is not yet coded into
+    `Refresh-Dashboard.ps1` — confirmed by reading it end to end, it only checks out and stages
+    `graph-metrics.js`, no age check. Today the Codebase tab's own command bar carries a
+    `freshTag()` staleness badge instead (`index.html`, `FRESH.live` threshold). This rule
+    remains the spec for a human/Claude on-demand pass (§ rule 3) until/unless someone wires
+    the reminder-generation behavior into the scripted pipeline too.
 
 ## Per-project sources
 

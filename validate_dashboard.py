@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Pre-push guard for the dashboard. Run by push-dashboard.ps1 BEFORE every commit:
+Pre-push guard for the dashboard. Run by Refresh-Dashboard.ps1 BEFORE every commit
+(push-dashboard.ps1 is now just a thin delegate to that script):
 if it exits non-zero, the push is aborted, so a data.js with wrong phase numbering
 can never reach the live site again.
 

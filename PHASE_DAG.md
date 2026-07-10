@@ -8,7 +8,7 @@ Source: `BIMpossible_PHASE-STATUS.md` (Gate/depends-on column). Auto-generated b
 
 ## Build order (topological generations)
 
-1. P0-2 Foundation — Env Setup / Skeleton / Auth (CLOSED), P3 Read-Only Data Dashboard (+ 3.x family) (ACTIVE), P4 Embedded Intelligent Assistant (4a/4b) (SHIPPED), P6 Platform / Billing + Client-Management (SHIPPED), P7 Model Write-back — DA4R + Revit Link (two engines) (ON HOLD), P8 Project Setup Wizard (BUILT (gated OFF)), P11 Model QA & Health (BUILT — flag-gated OFF)
+1. P0-2 Foundation — Env Setup / Skeleton / Auth (CLOSED), P3 Read-Only Data Dashboard (+ 3.x family) (ACTIVE), P4 Embedded Intelligent Assistant (4a/4b) (CLOSED), P6 Platform / Billing + Client-Management (CLOSED), P7 Model Write-back — DA4R + Revit Link (two engines) (ON HOLD), P8 Project Setup Wizard (BUILT (gated OFF)), P11 Model QA & Health (SHIPPED — LIVE in prod), P11.1 Coordination & Health Report (SHIPPED — LIVE in prod)
 2. P5 Views / Sheets / 3D / Workspace Coherence (ON HOLD), P9 Product Data Ingestion (CONDITIONAL), P12 Content Authoring (PLACEHOLDER (unbuilt))
 3. P10 Cost Intelligence / Estimating (CONDITIONAL)
 
@@ -16,4 +16,5 @@ Source: `BIMpossible_PHASE-STATUS.md` (Gate/depends-on column). Auto-generated b
 
 - **P7** — = Wave 8
 - **P8** — APS write-permission approval
-- **P11** — Go-live gate ↓
+- **P11** — 2026-07-01
+- **P11.1** — 2026-07-02

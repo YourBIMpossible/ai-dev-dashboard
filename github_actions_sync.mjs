@@ -20,6 +20,12 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const USERNAME = 'YourBIMpossible';
 const REPOS = ['BIMpossible', 'bimpossible-site', 'ai-dev-dashboard', 'Families-by-BIMpossible', 'BIMpossible_Workspace', 'BIMpossible-AddIns', 'AI-Server'];
 const LIVE_ONLY = process.argv.includes('--live-only');
+// Self-push only for a local full run. --live-only (CI) is already pushed by separate
+// git steps in .github/workflows/github-actions-live.yml — self-pushing here too would
+// double-commit. A local CSV-import run previously had no push at all, so its output
+// sat uncommitted until the next Refresh-Dashboard.ps1 run silently discarded it via
+// `git checkout origin/main -- ... github_actions.js`.
+const PUSH = !LIVE_ONLY && !process.argv.includes('--no-push');
 
 // GitHub minutes multiplier per OS (how they count against plan inclusion)
 const MULTIPLIER = { UBUNTU: 1, WINDOWS: 2, MACOS: 10 };
@@ -214,4 +220,31 @@ ${rowsJson},
 
 writeFileSync(join(__dir, 'github_actions.js'), out, 'utf8');
 console.log(`  Written → github_actions.js`);
-console.log('Done.');
+
+if (!PUSH) {
+  console.log(LIVE_ONLY ? 'Done (--live-only: pushed by the CI workflow, not this script).' : 'Done (--no-push set, skipping git).');
+  process.exit(0);
+}
+
+function git(args) {
+  return execSync(`git -C "${__dir}" ${args}`, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+}
+try {
+  git('pull --rebase --autostash origin main');
+  git('add github_actions.js');
+  const status = git('status --porcelain github_actions.js').trim();
+  if (!status) {
+    console.log('github_actions.js unchanged — nothing to push.');
+    process.exit(0);
+  }
+  // period.start/end come from parsed CSV rows (external input) - strip to bare
+  // date characters before it ever reaches a shell-interpolated command string.
+  const safeDate = (s) => (/^[0-9-]{1,20}$/.test(s || '') ? s : null);
+  const rangeLabel = `${safeDate(period.start) || 'no CSV'} to ${safeDate(period.end) || 'n/a'}`;
+  git(`commit -m "github-actions: refresh billing data (${rangeLabel})" -- github_actions.js`);
+  git('push origin main');
+  console.log('Pushed github_actions.js to dashboard.');
+} catch (e) {
+  console.error('git step failed:', e.message);
+  process.exit(1);
+}

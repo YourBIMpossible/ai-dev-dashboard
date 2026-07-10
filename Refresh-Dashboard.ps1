@@ -108,6 +108,9 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     if ((Invoke-Logged $python @("$PSScriptRoot\networkx_impact.py")) -ne 0) {
         "WARN: networkx_impact.py failed - impact data not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
     }
+    if ((Invoke-Logged $python @("$PSScriptRoot\check_audit_freshness.py")) -ne 0) {
+        "WARN: check_audit_freshness.py failed - audit staleness badge not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+    }
 
     # 2. Stamp the generated date (UTF-8 no BOM via .NET; only two lines change).
     $path = Join-Path $PSScriptRoot "data.js"
@@ -120,7 +123,7 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     if ((Invoke-Logged $python @("$PSScriptRoot\validate_dashboard.py")) -ne 0) { Alert-Failure "validate_dashboard.py failed - phase numbering vs ledger."; $result = 1; break }
 
     # 4. Stage only the dashboard data + metrics. Nothing staged => already current.
-    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","networkx_impact.js") | Out-Null
+    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","networkx_impact.js","audit-freshness.js") | Out-Null
     $staged = (& git diff --cached --name-only) -join "`n"
     if (-not $staged.Trim()) { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
 

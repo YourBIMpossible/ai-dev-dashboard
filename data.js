@@ -592,24 +592,43 @@ window.DASHBOARD_DATA = {
         "2026-06-09 - Triple audit (perf/architecture/code-review); contact form Turnstile + Web3Forms live; 13 e2e tests"
       ],
       audit: {
-        lastRun: "2026-06-13",
-        runType: "Full code audit (no runs since — staleness badge is accurate)",
+        lastRun: "2026-07-10",
+        runType: "Full code audit (marketing site, /audit complete) — top-to-bottom re-read of site/ + live Lighthouse across all 6 pages; verified all 13 findings from 2026-06-13 closed, then caught and same-day-fixed an a11y regression (100→95/96) from the 709f352 theme-toggle/logo change",
         cadence: "on-demand",
-        counts: { critical: 0, high: 1, medium: 0, low: 0, info: 0 },
-        trend: "flat",
-        reportPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\2026-06-13__audit-report-full.md",
-        reportFile: "site/2026-06-13__audit-report-full.md",
+        counts: { critical: 0, high: 0, medium: 1, low: 2, info: 0 },
+        trend: "regressed then fixed",
+        reportPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\2026-07-10__audit-report-full.md",
+        reportFile: "site/2026-07-10__audit-report-full.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog",
-        closedLastRun: 7,
+        closedLastRun: 13,
         open: [
           {
-            id: "CSP-1",
-            sev: "high",
-            title: "CSP hash drift is unguarded in CI — a style/script hash change can ship a broken policy. Latent, not prod-breaking (confirm resolved)",
-            where: "CI"
+            id: "CONTACT-RL",
+            sev: "medium",
+            title: "Contact-form abuse protection is a bypassable honeypot plus optional Turnstile (inactive unless TURNSTILE_SECRET_KEY is set) — the real flood cap is a manual WAF dashboard rule with no code/CI enforcement, latent until CONTACT_FORWARD_URL goes live",
+            where: "functions/api/contact.ts:86-153"
+          },
+          {
+            id: "CSP-STYLE",
+            sev: "low",
+            title: "CSP allows style-src 'unsafe-inline' — the one soft spot in an otherwise strict, script-hash-locked policy (standard Tailwind v4 build tradeoff; acceptable but needs a documented rationale)",
+            where: "public/_headers:19"
+          },
+          {
+            id: "TURNSTILE-HOST",
+            sev: "low",
+            title: "Contact endpoint trusts the Turnstile verdict on 'success' alone without checking hostname/action, so a token minted for the sitekey elsewhere would pass (low risk — sitekey scoped to one domain/form)",
+            where: "functions/api/contact.ts:118-121"
           }
         ],
         history: [
+          {
+            date: "2026-07-10",
+            type: "Full code audit",
+            scope: "Whole site/ tree + live Lighthouse (6 pages, prod-like wrangler serve)",
+            result: "0 prod-breaking · 4 medium + 2 low + 2 info, all one root cause (inverted header bar not theme-token-driven): A11Y-1 nav-link AA-contrast fail (100→95/96 a11y drop) + TOGGLE-ICON 1.4.11 fail + LOGO-NOJS no-JS/OS-dark logo-blind; CONTACT-RL + CSP-STYLE + TURNSTILE-HOST latent/low. All 13 findings from 2026-06-13 verified CLOSED, zero regressions. A11Y-1/TOGGLE-ICON/LOGO-NOJS fixed same-day — Lighthouse a11y back to 100 on all 6 pages (uncommitted)",
+            report: "2026-07-10__audit-report-full.md"
+          },
           {
             date: "2026-06-13",
             type: "Full code audit",
@@ -853,7 +872,59 @@ window.DASHBOARD_DATA = {
         "2026-06-23 - docs: add 2026-06-18 full code-audit report (#9) (6b057ac)",
         "2026-06-17 - 4 commits: WP-D scope adjustments (D3 local-LLM revert + aim docs + owed-task list)",
         "2026-06-16 - WP-A core aiserver library; smoke-test + daily_digest refactored onto it; CI + branch protection; repo created"
-      ]
+      ],
+      audit: {
+        lastRun: "2026-06-18",
+        runType: "Full (11 reviewers + adversarial verification, 105 agents) — AI-Server full codebase + PC-Monitor/AI-Brain-Data WP-D touchpoints",
+        cadence: "on-demand",
+        counts: { critical: 0, high: 5, medium: 24, low: 51, info: 11 },
+        closedLastRun: 0,
+        trend: "new",
+        reportPath: "F:\\AI-Dev\\AI-Server\\audits\\2026-06-18__audit-report-full.md",
+        reportFile: "aiserver/2026-06-18__audit-report-full.md",
+        ledgerPath: "F:\\AI-Dev\\AI-Server\\audits",
+        open: [
+          {
+            id: "XC-1",
+            sev: "high",
+            title: "README's onboarding step runs register-task-windows.ps1, but its task target daily_digest.py has no __main__ block — the scheduled task fires daily under pythonw and silently produces no digest",
+            where: "README.md:22 + automation/register-task-windows.ps1:16"
+          },
+          {
+            id: "CLIENT-1",
+            sev: "high",
+            title: "_post() catches HTTPError only via its URLError superclass, so 4xx/5xx responses are retried then collapsed into a misleading endpoint-unreachable error, discarding the server's real JSON error body",
+            where: "aiserver/client.py:43-59"
+          },
+          {
+            id: "PCMON-1",
+            sev: "high",
+            title: "topproc()'s comparison/assignment is dedented out of its for-loop, so it reports the last process instead of the top consumer, and raises UnboundLocalError on empty proc_rows — silently skipping every later threshold check (e.g. GPU-VRAM) for that tick",
+            where: "PC-Monitor/collector.py:192-198"
+          },
+          {
+            id: "EVAL-3",
+            sev: "high",
+            title: "score() does raw case-insensitive substring matching with no word boundary or negation handling, so e.g. \"This is NOT spam\" scores 1.0 against contains_any:['spam'] and silently drives the local-OK-vs-route-to-Claude decision",
+            where: "eval/scoring.py:17,23"
+          },
+          {
+            id: "RAG-1",
+            sev: "high",
+            title: "ingest.py zips chunks to embeddings purely by list position, trusting response order and length, so an out-of-order or short embeddings response silently corrupts or truncates the vector index",
+            where: "rag/ingest.py:92-95"
+          }
+        ],
+        history: [
+          {
+            date: "2026-06-18",
+            type: "Full (11 reviewers + adversarial verification, 105 agents)",
+            scope: "AI-Server full codebase + PC-Monitor/AI-Brain-Data WP-D touchpoints — ~45 source/test files + 8 strategy/handoff docs across 3 repos",
+            result: "Silent-wrong-output on error/misconfig edges (0 critical / 5 high): PCMON-1 topproc() reports the wrong process and can suppress GPU-VRAM alerts; XC-1 README's primary onboarding step installs a scheduled task that produces no digest; CLIENT-1 HTTP client masks real server errors behind a misleading endpoint-unreachable message",
+            report: "2026-06-18__audit-report-full.md"
+          }
+        ]
+      }
     },
     /* PROJECT:aiserver:END */
 
@@ -1082,7 +1153,89 @@ window.DASHBOARD_DATA = {
       ],
       recent: [
         "2026-06-25 — last local modification (no git log available)"
-      ]
+      ],
+      audit: {
+        lastRun: "2026-06-17",
+        runType: "Full (whole codebase, single reviewer — /audit skill, senior reviewer persona)",
+        cadence: "on-demand",
+        counts: { critical: 4, high: 6, medium: 8, low: 4, info: 0 },
+        closedLastRun: 0,
+        trend: "new",
+        reportPath: "F:\\AI-Dev\\PC-Monitor\\audit\\2026-06-17__audit-report-full.md",
+        reportFile: "pc-monitor/2026-06-17__audit-report-full.md",
+        ledgerPath: "F:\\AI-Dev\\PC-Monitor\\audit",
+        open: [
+          {
+            id: "C-01",
+            sev: "critical",
+            title: "Fan/voltage sensor data (fans_json, volts_json, cpu_vcore, fan_max_rpm) is collected in sensors.py but SAMPLE_COLS in db.py excludes those keys — every write silently drops them and the fans panel never renders",
+            where: "sensors.py / collector.py / db.py:179-188"
+          },
+          {
+            id: "C-02",
+            sev: "critical",
+            title: "_get_settings/_save_settings write config.json next to HERE, which resolves into the PyInstaller temp dir (sys._MEIPASS) when frozen instead of _data_root — saved settings silently vanish on next restart",
+            where: "server.py:146,161"
+          },
+          {
+            id: "C-03",
+            sev: "critical",
+            title: "build_summary() calls Handler._latest_disks(None, c) and Handler._latest_smart(None, c), passing None as self — works only by accident today and will throw AttributeError the moment either method references self",
+            where: "server.py:291-292"
+          },
+          {
+            id: "C-04",
+            sev: "critical",
+            title: "Unconditional `from sources.ollama import Ollama` at module load crashes the entire collector with ModuleNotFoundError if sources/ollama.py is missing, even though ollama is disabled in config.json",
+            where: "collector.py:35"
+          },
+          {
+            id: "H-01",
+            sev: "high",
+            title: "Static file handler's path-traversal guard is broken on Windows, allowing arbitrary local file reads — unpatched; fix before any non-localhost exposure (exact mechanism in the local report, kept out of the public block on purpose)",
+            where: "server.py:122-123"
+          },
+          {
+            id: "H-02",
+            sev: "high",
+            title: "Settings POST has a read-modify-write race under ThreadingHTTPServer — two concurrent POST /api/settings requests can each read/modify/write config.json with no lock, so one write silently loses",
+            where: "server.py:155-176"
+          },
+          {
+            id: "H-03",
+            sev: "high",
+            title: "DB connections opened in handler methods like alerts() and captures() are never closed, leaking connections/file handles as concurrent requests accumulate",
+            where: "server.py"
+          },
+          {
+            id: "H-04",
+            sev: "high",
+            title: "_seen_event_keys retains every (log, record_id) pair ever seen since collector start with no cap, leaking memory indefinitely on long-running machines",
+            where: "collector.py:81"
+          },
+          {
+            id: "H-05",
+            sev: "high",
+            title: "topproc()'s `(best.get(key) if best else -1 or -1)` evaluates to None whenever best.get(key) is None, so `0 > None` raises TypeError — crashes check_thresholds and silently swallows all threshold checks for that tick",
+            where: "collector.py:182"
+          },
+          {
+            id: "H-06",
+            sev: "high",
+            title: "Hardcoded `_URL = \"http://127.0.0.1:8787\"` ignores the configurable port in config.json, so a toast notification's 'Open Dashboard' button silently opens the wrong address once the user changes the port",
+            where: "notifier.py:11"
+          }
+        ],
+        history: [
+          {
+            date: "2026-06-17",
+            type: "Full (/audit skill, senior reviewer persona)",
+            scope: "Whole codebase — sensors.py, collector.py, db.py, server.py, notifier.py, app.js; no test suite exists",
+            result: "Three Criticals silently discard data — fan/voltage readings never reach the DB (C-01), settings writes land in the PyInstaller temp dir and vanish on restart when frozen (C-02), and build_summary() passes None as self (C-03) — plus a 4th where an unconditional ollama import can crash the collector (C-04) and a HIGH path-traversal hole in the static file handler (H-01)",
+            report: "2026-06-17__audit-report-full.md"
+          }
+        ]
+      }
     },
     /* PROJECT:pc-monitor:END */
 

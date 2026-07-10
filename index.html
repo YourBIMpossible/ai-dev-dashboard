@@ -750,6 +750,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <script src="codebase/codebase-meta.js" onerror="void 0"></script>
 <script src="phase_dag.js" onerror="void 0"></script>
 <script src="networkx_impact.js" onerror="void 0"></script>
+<script src="audit-freshness.js" onerror="void 0"></script>
 <script>
 const D=window.DASHBOARD_DATA;
 const TODAY=new Date();TODAY.setHours(0,0,0,0);
@@ -794,6 +795,29 @@ function copyPath(el,path){
   clearTimeout(_toastTimer);_toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
 }
 function daysAgo(iso){if(!iso)return null;return Math.round((TODAY-new Date(iso+'T00:00:00'))/86400000);}
+// Named, shared staleness thresholds (was 3 unrelated magic numbers scattered across
+// the sidebar badge, the audit "clean" list, and nothing at all for 8 other data
+// files). Deliberately NOT one universal number: the local loop / daily pipeline files
+// genuinely refresh on a ~day cadence, on-demand audit/graphify artifacts genuinely
+// don't. ageHtml()'s 7/14d activity-recency color cue is a separate concern (how long
+// since a PROJECT was worked on, not how old a data FILE's own render is) and
+// intentionally isn't folded in here.
+const FRESH={live:3,periodic:14,ci:3};
+// Like daysAgo(), but accepts any Date-parseable value (bare "YYYY-MM-DD" from
+// data.js/phase_dag.js, or full ISO timestamps like usage.js/agents.js/networkx_impact.js/
+// codebase-meta.js/github_actions.js use) instead of assuming a bare date string.
+function daysAgoAny(v){
+  if(!v)return null;
+  // A bare "YYYY-MM-DD" parses as UTC midnight per spec, but TODAY is local midnight -
+  // reading it back with local getters below would silently misread it as the PREVIOUS
+  // local day in any timezone behind UTC. Force local-time parsing here, same trick
+  // daysAgo() already uses, before falling through to a direct parse for full timestamps
+  // (which already carry an explicit Z/offset and parse unambiguously).
+  const d=/^\d{4}-\d{2}-\d{2}$/.test(v)?new Date(v+'T00:00:00'):new Date(v);
+  if(isNaN(d))return null;
+  return Math.round((TODAY-new Date(d.getFullYear(),d.getMonth(),d.getDate()))/86400000);
+}
+function freshTag(v,limitDays){const n=daysAgoAny(v);return(n!==null&&n>limitDays)?` <span class="warn">⚠ stale — ${n}d</span>`:'';}
 function ageHtml(iso){
   const n=daysAgo(iso);if(n===null)return'';
   const t=n<=0?'today':n===1?'yesterday':n+'d ago';
@@ -1023,7 +1047,24 @@ function openPP(key,el){
 function closePP(){document.getElementById('pp').style.display='none';document.getElementById('ppb').style.display='none';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closePP();});
 
-function doReload(btn){btn.classList.add('spinning');btn.disabled=true;setTimeout(()=>location.reload(),300);}
+function doReload(btn){
+  btn.classList.add('spinning');btn.disabled=true;
+  const sf=document.getElementById('sidefoot');
+  if(sf){const w=sf.querySelector('.refresh-err');if(w)w.remove();}
+  if(!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)){setTimeout(()=>location.reload(),300);return;}
+  fetch('http://localhost:8082/refresh',{cache:'no-store'})
+    .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);location.reload();})
+    .catch(()=>{
+      btn.classList.remove('spinning');btn.disabled=false;
+      if(sf){
+        const w=document.createElement('span');
+        w.className='warn refresh-err';
+        w.textContent='⚠ local refresh service unreachable — ask Claude to restart the monitor';
+        sf.insertBefore(document.createElement('br'),sf.firstChild);
+        sf.insertBefore(w,sf.firstChild);
+      }
+    });
+}
 
 function animate(){
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
@@ -1055,8 +1096,8 @@ function buildSide(){
   const n=daysAgo(D.generated);
   const _liveLocal=/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   const _cadence=_liveLocal?'Local monitor: facts refresh ~2 min · prose on demand':'Facts refresh daily 6am · prose on demand';
-  h+=`<div class="side-foot">Data: ${D.generated} (${n<=0?'today':n+'d ago'})${n>=3?'<br><span class="warn">⚠ stale — say "refresh dashboard"</span>':''}<br>${_cadence}</div>`;
-  h+=`<button class="reload-btn" onclick="doReload(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 6.3 2.55L21 9"/><path d="M21 3v6h-6"/><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-6.3-2.55L3 15"/><path d="M3 21v-6h6"/></svg>Reload data</button>`;
+  h+=`<div class="side-foot" id="sidefoot">Data: ${D.generated} (${n<=0?'today':n+'d ago'})${n>=FRESH.live?'<br><span class="warn">⚠ stale — click refresh</span>':''}<br>${_cadence}</div>`;
+  h+=`<button class="reload-btn" onclick="doReload(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 6.3 2.55L21 9"/><path d="M21 3v6h-6"/><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-6.3-2.55L3 15"/><path d="M3 21v-6h6"/></svg>${_liveLocal?'Refresh now':'Reload data'}</button>`;
   side.innerHTML=h;
   side.querySelectorAll('.nav').forEach(el=>{el.onclick=()=>show(el.dataset.id);});
 }
@@ -1338,6 +1379,16 @@ function auditView(){
   }
   h+=`</div>`;
 
+  // Mechanical freshness check (check_audit_freshness.py): flags when a newer report
+  // sits on disk than what this project's audit block reflects. Date comparison only —
+  // never parses finding counts out of report prose. See project_local-dashboard-monitor.
+  const AF=window.AUDIT_FRESHNESS&&window.AUDIT_FRESHNESS.projects;
+  const staleOnDisk=AF?wa.filter(p=>AF[p.id]&&AF[p.id].stale):[];
+  if(staleOnDisk.length){
+    const list=staleOnDisk.map(p=>`${esc(p.name)} — newer report on disk (${esc(AF[p.id].newestOnDisk)}) not yet reflected here (shown: ${esc(p.audit.lastRun)})`).join(' · ');
+    h+=`<div class="ov-cmd warn fade" style="margin-top:8px"><div class="ov-cmd-dot"></div><div class="ov-cmd-items"><span style="color:var(--status-warn);font-weight:600">⚠ ${staleOnDisk.length} project${staleOnDisk.length!==1?'s':''} out of sync with disk — ${list}</span></div></div>`;
+  }
+
   // Per-severity breakdown panels (toggled by the pills above).
   // With local/audit-findings.js loaded (local monitor), each panel lists every finding inline;
   // without it (public deploy), it falls back to per-project rollups — reports never ship publicly.
@@ -1405,7 +1456,7 @@ function auditView(){
     h+=`<div class="g g${cleanProjs.length>1?'2':'1'} fade" style="animation-delay:.14s;margin-bottom:4px">`;
     cleanProjs.forEach(p=>{
       const age=daysAgo(p.audit.lastRun);
-      const stale=age!==null&&age>14;
+      const stale=age!==null&&age>FRESH.periodic;
       h+=`<div class="card au-clean" data-id="${p.id}">`;
       h+=`<div style="display:flex;align-items:center;gap:10px">`;
       h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="14" height="14" style="stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0"`);
@@ -1490,158 +1541,6 @@ function gnBar(nodes){
       <span class="num" style="min-width:26px;font-size:11px;color:var(--dim);text-align:right">${n.edges}</span></div>`;
   }).join('')+'</div>';
 }
-function networkxImpactBody(){
-  const ni=window.NETWORKX_IMPACT;
-  if(!ni)return'<p style="color:var(--muted);padding:1rem">No impact data — run networkx_impact.py to generate.</p>';
-  const surfaces=ni.surfaces||[];
-  const risk   =surfaces.filter(r=>r.category==='risk');
-  const active =surfaces.filter(r=>r.category==='active');
-  const staticS=surfaces.filter(r=>r.category==='static');
-  const missing=surfaces.filter(r=>r.category==='missing');
-
-  // ── palette ────────────────────────────────────────────────────────────────
-  const RISK_BG   ='rgba(255,150,0,0.08)';
-  const RISK_BORD ='rgba(255,150,0,0.35)';
-  const RISK_COL  ='#ffaa33';
-  const ACT_BG    ='rgba(80,160,255,0.07)';
-  const ACT_BORD  ='rgba(80,160,255,0.25)';
-  const ACT_COL   ='#5fa8ff';
-  const STAT_BG   ='rgba(255,255,255,0.04)';
-  const STAT_BORD ='rgba(255,255,255,0.08)';
-  const STAT_COL  ='rgba(255,255,255,0.5)';
-  const MISS_BG   ='rgba(255,255,255,0.02)';
-  const MISS_BORD ='rgba(255,255,255,0.05)';
-
-  function pill(label,bg,col){
-    return`<span style="font-size:0.6rem;font-weight:700;letter-spacing:.07em;padding:2px 8px;border-radius:10px;background:${bg};color:${col}">${label}</span>`;
-  }
-  function chip(t){
-    return`<code style="font-size:0.6rem;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:3px;color:rgba(255,255,255,0.3)">${esc(t)}</code>`;
-  }
-  function repoTag(r){
-    return`<span style="font-size:0.6rem;color:rgba(255,255,255,0.25);background:rgba(255,255,255,.04);padding:1px 6px;border-radius:8px">${esc(r)}</span>`;
-  }
-  function sectionHead(label){
-    return`<div style="display:flex;align-items:center;gap:0.5rem;margin:1.1rem 0 0.55rem">
-      <span style="font-size:0.6rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,0.25)">${label}</span>
-      <div style="flex:1;height:1px;background:rgba(255,255,255,.06)"></div>
-    </div>`;
-  }
-
-  // ── surface card ───────────────────────────────────────────────────────────
-  function card(row){
-    const isR=row.category==='risk', isA=row.category==='active',
-          isS=row.category==='static', isM=row.category==='missing';
-    const bg   =isR?RISK_BG  :isA?ACT_BG  :isS?STAT_BG  :MISS_BG;
-    const bord =isR?RISK_BORD:isA?ACT_BORD:isS?STAT_BORD:MISS_BORD;
-    const numC =isR?RISK_COL :isA?ACT_COL :STAT_COL;
-    const pillH=isR?pill('⚠ RISK',RISK_BG,RISK_COL)
-               :isA?pill('● ACTIVE',ACT_BG,ACT_COL)
-               :isS?pill('─ MAPPED',STAT_BG,STAT_COL)
-                   :pill('○ NO DATA',MISS_BG,'rgba(255,255,255,0.2)');
-    const opacity=isM?'0.45':'1';
-    const numStr=row.nodes!=null?Number(row.nodes).toLocaleString():null;
-
-    return`<div style="background:${bg};border:1px solid ${bord};border-radius:8px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:0.3rem;opacity:${opacity}">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.4rem;margin-bottom:0.15rem">
-        ${pillH}${repoTag(row.repo)}
-      </div>
-      ${numStr!=null
-        ?`<div style="font-size:2rem;font-weight:800;line-height:1;color:${numC};letter-spacing:-.02em">${numStr}</div>`
-        :isM?`<div style="font-size:1.1rem;font-weight:700;color:rgba(255,255,255,0.1);line-height:1">—</div>`
-            :`<div style="font-size:0.8rem;font-weight:600;color:rgba(255,255,255,0.35);line-height:1.35;margin-top:0.1rem">${esc(row.finding)}</div>`
-      }
-      <div style="font-size:0.85rem;font-weight:600;color:${isM?'rgba(255,255,255,0.3)':'rgba(255,255,255,0.8)'};line-height:1.2">${esc(row.label)}</div>
-      ${numStr!=null&&!isM?`<div style="font-size:0.7rem;color:rgba(255,255,255,0.35);line-height:1.35">${esc(row.finding)}</div>`:''}
-      <div style="display:flex;gap:0.25rem;flex-wrap:wrap;margin-top:0.2rem">${chip(row.tool)} ${chip(row.algo)}</div>
-    </div>`;
-  }
-
-  // ── summary bar ────────────────────────────────────────────────────────────
-  const riskPills=risk.map(r=>`<span style="background:${RISK_BG};color:${RISK_COL};padding:3px 10px;border-radius:12px;font-size:0.7rem;font-weight:600;white-space:nowrap">⚠ ${r.nodes} ${esc(r.label.toLowerCase())}</span>`).join('');
-  const missPill =missing.length?`<span style="background:rgba(255,255,255,.05);color:rgba(255,255,255,0.3);padding:3px 10px;border-radius:12px;font-size:0.7rem;font-weight:600">○ ${missing.length} source${missing.length!==1?'s':''} missing</span>`:'';
-  const actPill  =(active.length+staticS.length)?`<span style="background:${ACT_BG};color:${ACT_COL};padding:3px 10px;border-radius:12px;font-size:0.7rem;font-weight:600">● ${active.length+staticS.length} mapped</span>`:'';
-  const totalStr =ni.stats.totalNodes!=null?ni.stats.totalNodes.toLocaleString()+' nodes':'';
-
-  let h=`<div style="padding:0.75rem 1rem 1.25rem">`;
-
-  // summary bar
-  h+=`<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;padding:0.6rem 0.75rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:8px;margin-bottom:0.25rem">
-    <div style="display:flex;gap:0.35rem;flex-wrap:wrap">${riskPills}${actPill}${missPill}</div>
-    <div style="font-size:0.65rem;color:rgba(255,255,255,0.2);white-space:nowrap">${totalStr}${totalStr&&ni.generated?' · ':''}${ni.generated?esc(ni.generated.slice(0,10)):''}</div>
-  </div>`;
-
-  // risk section
-  if(risk.length){
-    h+=sectionHead('RISK SIGNALS');
-    h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0.55rem">`;
-    risk.forEach(r=>{h+=card(r);});
-    h+=`</div>`;
-  }
-
-  // working surfaces (active + static)
-  const working=[...active,...staticS];
-  if(working.length){
-    h+=sectionHead('WORKING SURFACES');
-    h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:0.55rem">`;
-    working.forEach(r=>{h+=card(r);});
-    h+=`</div>`;
-  }
-
-  // missing — compact tiles, not full cards
-  if(missing.length){
-    h+=sectionHead('SOURCES NOT YET WIRED');
-    h+=`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.35rem">`;
-    missing.forEach(row=>{
-      h+=`<div style="background:${MISS_BG};border:1px solid ${MISS_BORD};border-radius:6px;padding:0.55rem 0.7rem;opacity:0.45">
-        <div style="font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.35)">${esc(row.label)}</div>
-        <div style="font-size:0.6rem;color:rgba(255,255,255,0.18);margin-top:2px">${esc(row.repo)}</div>
-        <div style="margin-top:5px">${chip(row.tool)}</div>
-      </div>`;
-    });
-    h+=`</div>`;
-  }
-
-  h+=`</div>`;
-  return h;
-}
-function graphMetricsBody(){
-  const gm=window.GRAPH_METRICS;
-  if(!gm||!gm.length)return'<p class="sub">No metrics yet — run Push-And-Verify.ps1 to capture the first snapshot.</p>';
-  const L=gm[gm.length-1],P=gm.length>1?gm[gm.length-2]:null;
-  function delta(cur,prev,lb){
-    if(!P)return'<span style="color:var(--dim);font-size:11px">first push</span>';
-    const d=cur-prev;if(d===0)return'<span style="color:var(--dim);font-size:11px">—</span>';
-    const good=lb?d<0:d>0;
-    return`<span style="color:${good?'var(--green)':'var(--red)'};font-size:11px;font-weight:600">${d>0?'+':''}${d}</span>`;
-  }
-  let h='<p class="sub">AST-extracted from BIMpossible backend. Tracks codebase structure over time.</p>';
-  h+=`<div class="g gmg fade">`
-    +`<div class="stat st-info"><div class="v num">${L.nodes.toLocaleString()}</div><div class="l">Nodes</div><div style="margin-top:4px">${delta(L.nodes,P?P.nodes:0,false)}</div></div>`
-    +`<div class="stat st-info"><div class="v num">${L.edges.toLocaleString()}</div><div class="l">Edges</div><div style="margin-top:4px">${delta(L.edges,P?P.edges:0,false)}</div></div>`
-    +`<div class="stat st-info"><div class="v num">${L.communities}</div><div class="l">Communities</div><div style="margin-top:4px">${delta(L.communities,P?P.communities:0,false)}</div></div>`
-    +`<div class="stat${L.cycles>15?' st-warn':''}"><div class="v num">${L.cycles}</div><div class="l">Import Cycles</div><div style="margin-top:4px">${delta(L.cycles,P?P.cycles:0,true)}</div></div>`
-    +`</div>`;
-  h+=`<p style="font-size:var(--ts-sm);color:var(--dim);margin:12px 0 14px">Snapshot: ${esc(L.ts.slice(0,10))} · commit <code>${esc(L.sha)}</code> · ${gm.length} push${gm.length!==1?'es':''} tracked</p>`;
-  h+=`<div class="g g2 fade" style="animation-delay:.06s">`;
-  if(gm.length>1){
-    h+=`<div class="card"><h3>Nodes over time</h3>${glChart(gm.map(m=>m.nodes),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gn')}</div>`;
-    h+=`<div class="card"><h3>Import cycles over time</h3>${glChart(gm.map(m=>m.cycles),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gc')}</div>`;
-  }else{
-    h+=`<div class="card"><h3>Nodes over time</h3><p class="empty" style="padding:20px 0">Trends appear after the next push.</p></div>`;
-    h+=`<div class="card"><h3>Import cycles over time</h3><p class="empty" style="padding:20px 0">Trends appear after the next push.</p></div>`;
-  }
-  h+=`</div>`;
-  const gn=L.godNodes||[];
-  if(gn.length)h+=`<div class="card fade" style="animation-delay:.09s;margin-top:13px"><h3>Top god nodes — highest blast radius</h3>${gnBar(gn)}</div>`;
-  h+=`<div class="card fade" style="animation-delay:.11s;margin-top:13px"><h3>Quick links</h3><div class="links">`
-    +`<a class="path-chip" href="#" onclick="window._ctab='network';show('graph');return false;">Interactive node graph</a>`
-    +`<a class="path-chip" href="#" onclick="window._ctab='dashboard';show('graph');return false;">Standalone dashboard</a>`
-    +`<a class="path-chip" href="#" onclick="window._ctab='report';show('graph');return false;">Graph report</a>`
-    +`</div></div>`;
-  return h;
-}
-
 // ── Strategy ──────────────────────────────────────────────────────────────
 const SCAT_COLOR={blindspot:'var(--amber)',idea:'var(--w)',outlook:'var(--w2)',custom:'var(--green)',watchlist:'var(--p)'};
 const SCAT_LABEL={blindspot:'Blind Spot',idea:'Idea',outlook:'Outlook',custom:'Custom',watchlist:'Watchlist'};
@@ -2214,7 +2113,7 @@ function usageBody(){
   }).join('');
   const bseg=bm.slice(0,7).map((m,i)=>({label:m.model,value:m.cost,color:CPAL[i%CPAL.length],right:_usd(m.cost)}));
   h+=`<div class="card fade" style="animation-delay:.1s"><h3>By model</h3><div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-bottom:6px">${ringChart(bseg,150,_usd(a.cost),'all-time')}<div style="flex:1;min-width:200px">${legend(bseg)}</div></div>${rowsM||'<p class="sub">No model breakdown.</p>'}</div>`;
-  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(U.source)} · refreshed ${new Date(U.generated).toLocaleString()}</p>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(U.source)} · refreshed ${new Date(U.generated).toLocaleString()}${freshTag(U.generated,FRESH.live)}</p>`;
   return h;
 }
 
@@ -2295,7 +2194,7 @@ function agentsBody(){
     </div>`;
   }).join('');
   h+=`<div class="card fade" style="animation-delay:.1s"><h3>Recent sessions</h3>${rowsR||'<p class="sub">None.</p>'}</div>`;
-  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(A.source)} · refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(A.source)} · refreshed ${new Date(A.generated).toLocaleString()}${freshTag(A.generated,FRESH.live)}</p>`;
   return h;
 }
 
@@ -2324,7 +2223,7 @@ function healthBody(){
       <b style="color:${hh.errorRate>10?'var(--amber)':'var(--green)'}">Tool error ${hh.errorRate}%</b> — tool calls that returned an error (failed command, missing file, denied permission) out of ${(hh.toolCalls||0).toLocaleString()} calls across ${hh.scannedSessions} recent sessions. Some is normal — retries and probes count.<br>
       <b>Avg ${_usd(hh.avgCostPerSession)} · ${_tok(hh.avgTokensPerSession)} tokens / session</b> — typical session weight across all ${A.totals.sessions} sessions.
     </div></div>`;
-  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(A.source)} · refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(A.source)} · refreshed ${new Date(A.generated).toLocaleString()}${freshTag(A.generated,FRESH.live)}</p>`;
   return h;
 }
 
@@ -2344,7 +2243,7 @@ function workflowsBody(){
   const segs=st.slice(0,7).map((x,i)=>({label:x.type,value:x.count,color:CPAL[i%CPAL.length],right:x.count+''}));
   h+=`<div class="card fade" style="animation-delay:.1s;margin-top:20px"><h3>Subagent type breakdown</h3>
     <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">${ringChart(segs,150,A.subagents.total,'spawns')}<div style="flex:1;min-width:180px">${legend(segs)}</div></div></div>`;
-  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Most-delegated: <b>${esc(w.topSubagentType)}</b> · from ${A.subagents.scannedSessions} recent sessions · refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Most-delegated: <b>${esc(w.topSubagentType)}</b> · from ${A.subagents.scannedSessions} recent sessions · refreshed ${new Date(A.generated).toLocaleString()}${freshTag(A.generated,FRESH.live)}</p>`;
   return h;
 }
 
@@ -2375,7 +2274,7 @@ function analyticsBody(){
   h+=`<div class="card" style="margin:0"><h3>Cost by model</h3><div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">${ringChart(segs,150,_usd(an.totalCost),'total')}<div style="flex:1;min-width:150px">${legend(segs)}</div></div></div>`;
   h+=`</div>`;
   h+=`<div class="card fade" style="animation-delay:.12s"><h3>Activity heatmap <span style="color:var(--dim);font-weight:400;font-size:11px">— daily spend intensity</span></h3>${heatGrid(A.timeline)}</div>`;
-  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">refreshed ${new Date(A.generated).toLocaleString()}${freshTag(A.generated,FRESH.live)}</p>`;
   return h;
 }
 
@@ -2389,7 +2288,7 @@ function configBody(){
   for(const [lbl,n] of items)
     h+=`<div class="card" style="padding:16px 18px"><div style="font-size:var(--ts-xs);color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">${lbl}</div><div class="num" style="font-family:Sora;font-size:26px;font-weight:700;color:${n>0?'var(--text)':'var(--dim)'}">${n}</div></div>`;
   h+='</div>';
-  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">From ~/.claude config files. MCP servers connected via claude.ai connectors live outside local config, so may read 0 even while their tools are in use. Refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">From ~/.claude config files. MCP servers connected via claude.ai connectors live outside local config, so may read 0 even while their tools are in use. Refreshed ${new Date(A.generated).toLocaleString()}${freshTag(A.generated,FRESH.live)}</p>`;
   return h;
 }
 
@@ -2408,7 +2307,7 @@ function activityBody(){
     </div>`;
   }).join('');
   h+=`<div class="card fade"><h3>Recent tool calls</h3>${rows||'<p class="sub" style="margin:0">No recent activity.</p>'}</div>`;
-  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">refreshed ${new Date(A.generated).toLocaleString()}</p>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">refreshed ${new Date(A.generated).toLocaleString()}${freshTag(A.generated,FRESH.live)}</p>`;
   return h;
 }
 
@@ -2494,7 +2393,7 @@ function githubActionsBody(){
       <p class="sub" style="margin-top:8px;font-size:11px">GitHub's API reports 0 paid ms — all usage is within the ${planMin.toLocaleString()} included plan minutes, nothing overages. Minutes total from CSV export · period: ${esc(lb.billing_period_start||G.period.start)} →</p>
     </div>`;
   }
-  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(G.source)} · refreshed ${new Date(G.generated).toLocaleString()}</p>`;
+  h+=`<p class="sub" style="margin-top:16px;font-size:11px;color:var(--dim)">Source: ${esc(G.source)} · refreshed ${new Date(G.generated).toLocaleString()}${freshTag(G.generated,FRESH.ci)}</p>`;
   return h;
 }
 
@@ -2533,7 +2432,7 @@ function claudeApiCard(){
         ${low?`<span style="font-size:10px;font-weight:700;color:var(--amber);background:rgba(251,191,36,.13);border:1px solid rgba(251,191,36,.4);border-radius:5px;padding:2px 7px">⚠ CREDITS LOW</span>`:''}
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:var(--ts-xs);color:var(--dim)">manual snapshot${d.updated?' · updated '+esc(d.updated):''}</span>
+        <span style="font-size:var(--ts-xs);color:var(--dim)">manual snapshot${d.updated?' · updated '+esc(d.updated)+freshTag(d.updated,FRESH.periodic):''}</span>
         <button onclick="caEdit()" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:var(--muted);font-size:11px;padding:4px 11px;cursor:pointer;font-family:inherit">Edit</button>
       </div>
     </div>
@@ -2624,6 +2523,7 @@ function unifiedSpendCard(){
 
 const MTABS=[['usage','Usage'],['agents','Agents'],['workflows','Workflows'],['analytics','Analytics'],['config','Config'],['activity','Activity'],['health','Health'],['github','GitHub Actions']];
 function monitorView(){
+  const _liveLocal=/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   let mt=window._mtab||'usage';
   if(!MTABS.some(t=>t[0]===mt))mt='usage';
   let h='<div class="crumbs">Usage</div><h2 class="page">Usage &amp; Spend</h2>';
@@ -2643,12 +2543,14 @@ function monitorView(){
     <b style="color:var(--text)">↻ Refresh locally</b> (PowerShell on your PC) — these regenerate the data from <code>~/.claude</code> and auto-deploy in ~30s:<br>
     <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\usage_sync.mjs</code> &nbsp;·&nbsp; <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\agents_sync.mjs</code><br>
     <b style="color:var(--text)">GitHub Actions:</b> drop a new billing CSV in <code>~/Downloads</code> then run <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\github_actions_sync.mjs</code> (also fetches live summary via <code>gh api</code>).<br>
-    <span style="color:var(--dim)">The "Reload data" button only re-pulls what's already published — it doesn't run these.</span></div>`;
+    <span style="color:var(--dim)">${_liveLocal?'"Refresh now" in the sidebar triggers ledgers/activity/phases/agents/usage immediately — GitHub Actions still needs the manual run above.':'The "Reload data" button only re-pulls what\'s already published — it doesn\'t run these.'}</span></div>`;
   return h;
 }
 
 // ── Codebase hub (graphify artifacts) ───────────────────────────────────────
-const CTABS=[['impact','Impact'],['metrics','Metrics'],['network','Graph'],['dashboard','Dashboard'],['report','Report']];
+// Sub-views are network/dashboard/report only, reached via the hardcoded links in
+// codebaseView()'s Tools section (no tab bar) — impact/metrics were retired
+// 2026-07-10, their content long superseded by codebaseView()'s own default body.
 function codeFrame(src,label,vscode){
   const cm=window.DASHBOARD_CODEBASE;
   return`<div class="card fade" style="padding:0;overflow:hidden;margin-top:2px">
@@ -2730,11 +2632,12 @@ function codebaseView(){
   if(missingSurf.length)cmdItems.push(`<span class="badge st-warn clickable" role="button" tabindex="0" title="${missingSurf.length} blind spot${missingSurf.length!==1?'s':''} — click to jump to detail below" onclick="jumpFlash('#cb-sec-blind .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-blind .card');}">${missingSurf.length} blind spot${missingSurf.length!==1?'s':''}</span>`);
   if(!cmdItems.length)cmdItems.push(`<span style="font-size:var(--ts-sm);color:var(--status-ok)">Architecture clean — no active risk signals</span>`);
   const totalStr=ni&&ni.stats?`${ni.stats.totalNodes.toLocaleString()} nodes`:L?`${L.nodes.toLocaleString()} nodes`:'';
-  const dateStr=ni&&ni.generated?ni.generated.slice(0,10):L?L.ts.slice(0,10):'';
+  const rawGenerated=ni&&ni.generated?ni.generated:(L?L.ts:null);
+  const dateStr=rawGenerated?rawGenerated.slice(0,10):'';
   h+=`<div class="ov-cmd ${cmdClass}">
     <div class="ov-cmd-dot"></div>
     <div class="ov-cmd-items">${cmdItems.join('')}</div>
-    <span class="ov-cmd-meta">${totalStr}${totalStr&&dateStr?' · ':''}${dateStr}</span>
+    <span class="ov-cmd-meta">${totalStr}${totalStr&&dateStr?' · ':''}${dateStr}${freshTag(rawGenerated,FRESH.live)}</span>
   </div>`;
 
   // ── Risk signals ──────────────────────────────────────────────────────────
