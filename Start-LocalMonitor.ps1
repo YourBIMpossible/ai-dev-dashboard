@@ -20,7 +20,7 @@ $backups          = Join-Path $PSScriptRoot "_backups"
 if (-not (Test-Path $backups)) { New-Item -ItemType Directory -Path $backups -Force | Out-Null }
 $log              = Join-Path $backups "monitor-log.txt"
 $lockPath         = Join-Path $backups "monitor.lock"
-$PORT             = 8080
+$PORT             = 8081
 $INTERVAL_SECONDS = 120
 
 . "$PSScriptRoot\LocalMonitor.Common.ps1"

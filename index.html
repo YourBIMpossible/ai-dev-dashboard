@@ -325,6 +325,37 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
 }
 .au-latest{font-size:var(--ts-sm);color:var(--muted);margin-top:2px;}
 .au-latest b{color:var(--text);font-family:Sora,sans-serif;font-weight:600;}
+/* interactive severity pills + per-project breakdown */
+.sevpill{cursor:pointer;user-select:none;transition:filter .15s,border-color .15s;}
+.sevpill:hover,.sevpill:focus-visible{filter:brightness(1.3);outline:none;}
+.sevpill[aria-expanded="true"]{border-color:var(--muted);}
+.sevpill .caret{margin-left:5px;opacity:.55;font-size:9px;}
+.au-break{display:none;margin:10px 0 4px;padding:6px 18px 12px;}
+.au-break.open{display:block;}
+.au-break-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:var(--ts-sm);flex-wrap:wrap;}
+.au-break-row:last-child{border-bottom:none;}
+.au-break-n{font-family:Sora,sans-serif;font-weight:700;min-width:26px;text-align:right;}
+.au-break-nm{font-weight:600;flex:1;min-width:140px;}
+.au-break-meta{color:var(--dim);font-size:var(--ts-xs);}
+.au-jump{color:var(--muted);font-size:var(--ts-xs);cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+.au-jump:hover{color:var(--text);}
+.au-flash{animation:auFlash 1.4s ease;}
+@keyframes auFlash{0%{background:rgba(248,113,113,.14);}100%{background:transparent;}}
+@media(prefers-reduced-motion:reduce){.au-flash{animation:none;}}
+.badge.clickable{cursor:pointer;}
+.badge.clickable:hover{filter:brightness(1.3);}
+.au-break-head{border-bottom:1px solid var(--border);}
+.au-break-list{max-height:340px;overflow-y:auto;padding:2px 0 4px;}
+.au-carry{color:var(--dim);font-size:10px;border:1px solid var(--border);border-radius:4px;padding:0 5px;margin-left:6px;white-space:nowrap;}
+/* in-app report viewer */
+.au-modal-bg{position:fixed;inset:0;background:rgba(6,8,12,.72);backdrop-filter:blur(3px);z-index:90;display:flex;align-items:center;justify-content:center;padding:26px;}
+.au-modal{background:var(--panel);border:1px solid var(--border);border-radius:14px;max-width:920px;width:100%;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 18px 60px rgba(0,0,0,.5);}
+.au-modal-h{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border);font-family:Sora,sans-serif;font-weight:600;}
+.au-modal-h span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.au-modal-x{background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:15px;line-height:1;padding:4px 9px;cursor:pointer;}
+.au-modal-x:hover{color:var(--text);border-color:var(--muted);}
+.au-modal-body{overflow-y:auto;padding:16px 22px 22px;font-size:var(--ts-sm);line-height:1.6;}
+.au-modal-body.mdbody table.mdtable{font-size:11.5px;}
 
 /* ── Git warn ──────────────────────────────── */
 .gwarn{
@@ -684,6 +715,20 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .cb-gap-name{font-size:var(--ts-sm);font-weight:700;font-family:Sora,sans-serif;margin-bottom:3px;}
 .cb-gap-sub{font-size:var(--ts-xs);color:var(--dim);margin-bottom:2px;}
 .cb-gap-why{font-size:var(--ts-xs);color:var(--status-warn);margin-top:6px;}
+
+/* ── Cross-tab pill/card interactivity (Overview/Roadmap/Codebase/Strategy/Usage/Toolkit) ── */
+.dag-chip{cursor:pointer;transition:filter .15s;}
+.dag-chip:hover,.dag-chip:focus-visible{filter:brightness(1.35);outline:none;}
+.lp-chip{cursor:pointer;transition:color .15s;border-radius:4px;}
+.lp-chip:hover,.lp-chip:focus-visible{color:var(--w)!important;outline:none;}
+.spend-chip{cursor:pointer;transition:opacity .15s;border-radius:6px;}
+.spend-chip:hover,.spend-chip:focus-visible{opacity:.7;outline:none;}
+.ca-tile{cursor:pointer;transition:filter .15s;}
+.ca-tile:hover,.ca-tile:focus-visible{filter:brightness(1.18);outline:none;}
+.stat.jumpable{cursor:pointer;transition:filter .15s;}
+.stat.jumpable:hover,.stat.jumpable:focus-visible{filter:brightness(1.2);outline:none;}
+.tk-sec-count.clickable{cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px;}
+.tk-sec-count.clickable:hover{color:var(--muted);}
 </style>
 </head>
 <body>
@@ -695,6 +740,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <div id="toast"></div>
 <div id="pp" class="pp" style="display:none;"></div>
 <script src="data.js"></script>
+<script src="local/audit-findings.js" onerror="void 0"></script><!-- local-only, gitignored: full audit findings detail -->
 <script src="graph-metrics.js" onerror="void 0"></script>
 <script src="strategy.js" onerror="void 0"></script>
 <script src="usage.js" onerror="void 0"></script>
@@ -920,6 +966,35 @@ function tlItem(raw){
 }
 
 function sevBadge(k){return`<span class="sev sev-${k}">${SEVLBL[k]}</span>`;}
+function auPill(k){
+  const el=document.getElementById('au-break-'+k);if(!el)return;
+  const open=el.classList.toggle('open');
+  document.querySelectorAll('.au-break').forEach(b=>{if(b!==el)b.classList.remove('open');});
+  document.querySelectorAll('.sevpill').forEach(p=>p.setAttribute('aria-expanded',(p.dataset.sev===k&&open)?'true':'false'));
+}
+function auPillKey(e,k){if(e.key==='Enter'||e.key===' '){e.preventDefault();auPill(k);}}
+function auJump(k){
+  const t=document.querySelector(`.au-finding[data-sev="${k}"]`);if(!t)return;
+  t.scrollIntoView({behavior:'smooth',block:'center'});
+  document.querySelectorAll(`.au-finding[data-sev="${k}"]`).forEach(c=>{c.classList.remove('au-flash');void c.offsetWidth;c.classList.add('au-flash');});
+}
+// In-app report viewer: renders local/reports/<file> in a modal — nothing leaves the window.
+let _auModalEsc=null;
+function auViewReport(file,title){
+  auCloseReport();
+  const bg=document.createElement('div');bg.className='au-modal-bg';
+  bg.innerHTML=`<div class="au-modal" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="au-modal-h"><span>${esc(title)}</span><button class="au-modal-x" onclick="auCloseReport()" aria-label="Close">✕</button></div><div class="au-modal-body mdbody">Loading…</div></div>`;
+  bg.onclick=e=>{if(e.target===bg)auCloseReport();};
+  document.body.appendChild(bg);
+  _auModalEsc=e=>{if(e.key==='Escape')auCloseReport();};
+  document.addEventListener('keydown',_auModalEsc);
+  fetch('local/reports/'+file).then(r=>{if(!r.ok)throw 0;return r.text();})
+    .then(md=>{const b=bg.querySelector('.au-modal-body');if(b)b.innerHTML=mdToHtml(md);})
+    .catch(()=>{const b=bg.querySelector('.au-modal-body');if(b)b.innerHTML=`<div style="color:var(--dim);padding:14px 0">This report isn't mirrored at <code>local/reports/${esc(file)}</code> on this machine. The public deploy never mirrors reports (they stay local by design); on the local monitor, re-run the audit sync or copy the file in.</div>`;});
+}
+function auCloseReport(){const bg=document.querySelector('.au-modal-bg');if(bg)bg.remove();if(_auModalEsc){document.removeEventListener('keydown',_auModalEsc);_auModalEsc=null;}}
+// Report markdown renders via the house mdToHtml (defined with the Codebase view below) —
+// do NOT declare another mdToHtml here; duplicate function declarations silently shadow each other.
 
 // ── Phase popup ────────────────────────────────────────────────────────────
 function openPP(key,el){
@@ -1004,10 +1079,12 @@ function overview(){
 
   // health level for command bar
   const hCls=allBlk||auHot?'danger':allDec?'warn':'clear';
+  const blkProjs=D.projects.filter(p=>(p.blockers||[]).length>0);
+  const decProjs=D.projects.filter(p=>(p.pendingDecisions||[]).length>0);
   const hItems=[];
-  if(allBlk)hItems.push(`<span class="badge st-danger">${allBlk} blocker${allBlk>1?'s':''}</span>`);
-  if(auHot) hItems.push(`<span class="badge st-danger">${auHot} urgent audit issue${auHot>1?'s':''}</span>`);
-  if(allDec)hItems.push(`<span class="badge st-warn">${allDec} pending decision${allDec>1?'s':''}</span>`);
+  if(allBlk)hItems.push(`<span class="badge st-danger sevpill" role="button" tabindex="0" aria-expanded="false" data-kind="blockers" title="${allBlk} open blocker${allBlk>1?'s':''} across ${blkProjs.length} project${blkProjs.length!==1?'s':''} — click for a breakdown" onclick="ovBreak('blockers')" onkeydown="ovBreakKey(event,'blockers')">${allBlk} blocker${allBlk>1?'s':''}<span class="caret">▾</span></span>`);
+  if(auHot) hItems.push(`<span class="badge st-danger clickable" role="button" tabindex="0" title="Critical + high findings across audited projects — click to open the Audit view" onclick="show('audit')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();show('audit');}">${auHot} urgent audit issue${auHot>1?'s':''}</span>`);
+  if(allDec)hItems.push(`<span class="badge st-warn sevpill" role="button" tabindex="0" aria-expanded="false" data-kind="decisions" title="${allDec} pending decision${allDec>1?'s':''} across ${decProjs.length} project${decProjs.length!==1?'s':''} — click for a breakdown" onclick="ovBreak('decisions')" onkeydown="ovBreakKey(event,'decisions')">${allDec} pending decision${allDec>1?'s':''}<span class="caret">▾</span></span>`);
   const hLine=hItems.length?hItems.join(' '):`<span style="color:var(--status-ok);font-weight:600">Portfolio clear</span>`;
 
   let h='<div class="crumbs">Overview</div><h2 class="page">Mission Control</h2>';
@@ -1018,6 +1095,23 @@ function overview(){
   h+=`<div class="ov-cmd-items">${hLine}</div>`;
   h+=`<span class="ov-cmd-meta">${act} active · ${totalC} commits (14d)</span>`;
   h+=`</div>`;
+
+  // Per-severity breakdown panels (toggled by the pills above) — same pattern as Audit.
+  const ovBreakPanel=(kind,projs,color,getLine)=>{
+    let b=`<div class="card au-break" id="ov-break-${kind}">`;
+    projs.forEach(p=>{
+      b+=`<div class="au-break-row" data-id="${esc(p.id)}" role="button" tabindex="0" style="cursor:pointer" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();show('${esc(p.id)}');}">`;
+      b+=`<span class="au-break-n" style="color:${color}">${getLine(p).n}</span>`;
+      b+=`<span class="au-break-nm">${esc(p.name)}</span>`;
+      b+=`<span class="au-break-meta">${esc(getLine(p).text)}</span>`;
+      b+=`<span class="au-jump">open project →</span>`;
+      b+=`</div>`;
+    });
+    b+=`<div style="font-size:var(--ts-xs);color:var(--dim);padding-top:8px">Click a project to open its full list.</div></div>`;
+    return b;
+  };
+  if(allBlk)h+=ovBreakPanel('blockers',blkProjs,'var(--status-danger)',p=>({n:p.blockers.length,text:(p.blockers[0]||'').slice(0,80)+(p.blockers[0]&&p.blockers[0].length>80?'…':'')}));
+  if(allDec)h+=ovBreakPanel('decisions',decProjs,'var(--status-warn)',p=>({n:p.pendingDecisions.length,text:(p.pendingDecisions[0]||'').slice(0,80)+(p.pendingDecisions[0]&&p.pendingDecisions[0].length>80?'…':'')}));
 
   // 2. BIMpossible — primary card, focus leads
   const bp=D.projects.find(p=>p.id==='bimpossible');
@@ -1206,7 +1300,7 @@ function auditHistory(p){
   const hist=p.audit&&p.audit.history;
   if(!hist||!hist.length)return'';
   return`<div class="ah"><div class="ah-h">Run history · ${hist.length} run${hist.length!==1?'s':''}</div>`
-    +hist.map(r=>`<div class="ah-row"><div class="ah-when"><span class="ah-date">${esc(r.date||'')}</span><span class="ah-type">${esc(r.type||'')}</span></div><div class="ah-body"><div class="ah-result">${esc(r.result||'')}</div>${r.scope?`<div class="ah-scope">${esc(r.scope)}</div>`:''}</div>${r.report?`<span class="ah-ref" title="report reference">${esc(r.report)}</span>`:''}</div>`).join('')
+    +hist.map(r=>`<div class="ah-row"><div class="ah-when"><span class="ah-date">${esc(r.date||'')}</span><span class="ah-type">${esc(r.type||'')}</span></div><div class="ah-body"><div class="ah-result">${esc(r.result||'')}</div>${r.scope?`<div class="ah-scope">${esc(r.scope)}</div>`:''}</div>${r.report?`<span class="ah-ref au-jump" title="read this report here" onclick="auViewReport('${esc(p.id)}/${esc(r.report)}','${esc(p.name)} — ${esc(r.date||'')} report')">${esc(r.report)}</span>`:''}</div>`).join('')
     +`</div>`;
 }
 function auditView(){
@@ -1233,12 +1327,48 @@ function auditView(){
   } else {
     SEVS.filter(k=>agg[k]).forEach(k=>{
       const cls=(k==='critical'||k==='high')?'st-danger':k==='medium'?'st-warn':'st-dim';
-      h+=`<span class="badge ${cls}">${agg[k]} ${SEVLBL[k].toLowerCase()}</span>`;
+      const nP=wa.filter(p=>(p.audit.counts[k]||0)>0).length;
+      h+=`<span class="badge ${cls} sevpill" role="button" tabindex="0" aria-expanded="false" data-sev="${k}" title="${agg[k]} open ${SEVLBL[k].toLowerCase()} finding${agg[k]!==1?'s':''} across ${nP} project${nP!==1?'s':''} — click for per-project breakdown" onclick="auPill('${k}')" onkeydown="auPillKey(event,'${k}')">${agg[k]} ${SEVLBL[k].toLowerCase()}<span class="caret">▾</span></span>`;
     });
   }
   h+=`</div>`;
-  if(closed>0)h+=`<span class="ov-cmd-meta">${closed} findings closed across recent audits</span>`;
+  if(closed>0){
+    const parts=wa.filter(p=>p.audit.closedLastRun).map(p=>`${p.name}: ${p.audit.closedLastRun}`).join(' · ');
+    h+=`<span class="ov-cmd-meta" title="Closed in each project's most recent run — ${esc(parts)}">${closed} findings closed across recent audits</span>`;
+  }
   h+=`</div>`;
+
+  // Per-severity breakdown panels (toggled by the pills above).
+  // With local/audit-findings.js loaded (local monitor), each panel lists every finding inline;
+  // without it (public deploy), it falls back to per-project rollups — reports never ship publicly.
+  const FIND=window.AUDIT_FINDINGS_LOCAL||null;
+  SEVS.filter(k=>agg[k]).forEach(k=>{
+    const nCol=k==='critical'||k==='high'?'var(--status-danger)':k==='medium'?'var(--status-warn)':'var(--status-dim)';
+    h+=`<div class="card au-break" id="au-break-${k}">`;
+    wa.filter(p=>(p.audit.counts[k]||0)>0).forEach(p=>{
+      const rows=FIND&&FIND[p.id]?FIND[p.id].filter(f=>f.sev===k):null;
+      const openRows=(p.audit.open||[]).filter(f=>f.sev===k).length;
+      h+=`<div class="au-break-row au-break-head">`;
+      h+=`<span class="au-break-n" style="color:${nCol}">${p.audit.counts[k]}</span>`;
+      h+=`<span class="au-break-nm">${esc(p.name)}</span>`;
+      h+=`<span class="au-break-meta">unresolved as of ${esc(p.audit.lastRun||'?')}</span>`;
+      if(openRows)h+=`<span class="au-jump" onclick="auJump('${k}')">flash ${openRows} below ↓</span>`;
+      if(p.audit.reportFile)h+=`<span class="au-jump" onclick="auViewReport('${esc(p.audit.reportFile)}','${esc(p.name)} — latest audit report')">read report here</span>`;
+      if(p.audit.reportPath)h+=pathLink(p.audit.reportPath,'editor');
+      h+=`</div>`;
+      if(rows&&rows.length){
+        h+=`<div class="au-break-list">`;
+        rows.forEach(f=>{
+          h+=`<div class="find"><span class="fid">${esc(f.id)}</span><span class="ft">${esc(f.t)}${f.s==='carry'?'<span class="au-carry" title="carried open from the 2026-07-01 deep audit">carry</span>':''}</span>${f.w?`<span class="fw">${esc(f.w)}</span>`:''}</div>`;
+        });
+        h+=`</div>`;
+        if(rows.length!==(p.audit.counts[k]||0))h+=`<div class="au-break-meta" style="padding:6px 0">listing ${rows.length} of ${p.audit.counts[k]} — counts and local detail have drifted; re-run the audit refresh</div>`;
+      }else{
+        h+=`<div class="au-break-meta" style="padding:4px 0 8px">Item-level detail isn't bundled in this deployment (findings stay local by design) — read the report above on the local monitor.</div>`;
+      }
+    });
+    h+=`</div>`;
+  });
 
   // 2. Open findings — severity-led, project-attributed
   //    These are CURRENTLY UNRESOLVED items, NOT findings from the latest run.
@@ -1247,7 +1377,7 @@ function auditView(){
     hotProjs.forEach((p,pi)=>{
       (p.audit.open||[]).forEach((f,fi)=>{
         const isCrit=(f.sev==='critical'||f.sev==='high');
-        h+=`<div class="card ${isCrit?'ca-red':'ca-amber'} au-finding fade" style="animation-delay:${.06+pi*.04+fi*.02}s">`;
+        h+=`<div class="card ${isCrit?'ca-red':'ca-amber'} au-finding fade" data-sev="${esc(f.sev)}" style="animation-delay:${.06+pi*.04+fi*.02}s">`;
         h+=`<div class="au-finding-row">`;
         h+=`<div class="au-sev-col">${sevBadge(f.sev)}</div>`;
         h+=`<div class="au-finding-body">`;
@@ -1809,10 +1939,10 @@ function strategyView(){
   const p1Count=activeItems.filter(i=>i.priority==='p1').length;
   const cmdClass=p1Count?'danger':byLane.inprogress.length?'clear':catCount.blindspot?'warn':'clear';
   let cmdItems=[];
-  if(p1Count)cmdItems.push(`<span class="badge st-danger">${p1Count} P1 item${p1Count!==1?'s':''}</span>`);
-  if(byLane.inprogress.length)cmdItems.push(`<span class="badge st-ok">${byLane.inprogress.length} in progress</span>`);
-  if(byLane.decided.length)cmdItems.push(`<span class="badge st-info">${byLane.decided.length} decided</span>`);
-  if(catCount.blindspot)cmdItems.push(`<span class="badge st-warn">${catCount.blindspot} blind spot${catCount.blindspot!==1?'s':''}</span>`);
+  if(p1Count)cmdItems.push(`<span class="badge st-danger clickable" role="button" tabindex="0" title="${p1Count} P1 item${p1Count!==1?'s':''} — click to sort by priority (P1 first)" onclick="stratFilter('sort','pri')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();stratFilter('sort','pri');}">${p1Count} P1 item${p1Count!==1?'s':''}</span>`);
+  if(byLane.inprogress.length)cmdItems.push(`<span class="badge st-ok clickable" role="button" tabindex="0" title="${byLane.inprogress.length} item${byLane.inprogress.length!==1?'s':''} in progress — click to filter to In Progress" onclick="stratFilter('status','inprogress')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();stratFilter('status','inprogress');}">${byLane.inprogress.length} in progress</span>`);
+  if(byLane.decided.length)cmdItems.push(`<span class="badge st-info clickable" role="button" tabindex="0" title="${byLane.decided.length} decided item${byLane.decided.length!==1?'s':''} — click to filter to Decided" onclick="stratFilter('status','decided')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();stratFilter('status','decided');}">${byLane.decided.length} decided</span>`);
+  if(catCount.blindspot)cmdItems.push(`<span class="badge st-warn clickable" role="button" tabindex="0" title="${catCount.blindspot} blind spot${catCount.blindspot!==1?'s':''} — click to filter to Blind Spots" onclick="stratFilter('cat','blindspot')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();stratFilter('cat','blindspot');}">${catCount.blindspot} blind spot${catCount.blindspot!==1?'s':''}</span>`);
   if(!cmdItems.length){
     if(activeItems.length)cmdItems.push(`<span style="font-size:var(--ts-sm);color:var(--muted)">${activeItems.length} items — no priorities or decisions yet</span>`);
     else cmdItems.push(`<span style="font-size:var(--ts-sm);color:var(--status-ok)">Strategy clear — add ideas to track them here</span>`);
@@ -2390,7 +2520,7 @@ function claudeApiCard(){
   const now=new Date(),dom=now.getDate(),dim=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
   const projected=dom>0?spend/dom*dim:spend;
   const resetTxt=d.resetDate?('resets '+_caResetLbl(d.resetDate)):'';
-  const tile=(lbl,val,sub,col)=>`<div style="flex:1;min-width:132px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:11px;padding:12px 14px">
+  const tile=(lbl,val,sub,col)=>`<div class="ca-tile" role="button" tabindex="0" title="${esc(lbl)} — click to edit this snapshot" onclick="caScrollEdit()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();caScrollEdit();}" style="flex:1;min-width:132px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:11px;padding:12px 14px">
       <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:5px">${lbl}</div>
       <div class="num" style="font-size:var(--ts-xl);font-weight:700;color:${col||'var(--text)'};line-height:1.05">${val}</div>
       ${sub?`<div style="font-size:var(--ts-xs);color:var(--dim);margin-top:4px">${sub}</div>`:''}
@@ -2470,7 +2600,7 @@ function unifiedSpendCard(){
   const s=_spendMTD(),t=s.total||0;
   const pct=v=>t>0?(v>0?Math.max(2,v/t*100):0):0;
   const seg=(v,c)=>v>0?`<div style="width:${pct(v)}%;background:${c}"></div>`:'';
-  const chip=(lbl,v,c)=>`<span style="display:inline-flex;align-items:center;gap:5px;font-size:var(--ts-sm);color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:${c}"></span>${lbl} <b style="color:var(--text)">${_spF(v)}</b></span>`;
+  const chip=(lbl,v,c,onclick,title)=>`<span class="spend-chip" role="button" tabindex="0" title="${esc(title||lbl)}" onclick="${onclick}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();${onclick}}" style="display:inline-flex;align-items:center;gap:5px;font-size:var(--ts-sm);color:var(--muted)"><span style="width:8px;height:8px;border-radius:2px;background:${c}"></span>${lbl} <b style="color:var(--text)">${_spF(v)}</b></span>`;
   const mlbl=new Date().toLocaleDateString(undefined,{month:'long',year:'numeric'});
   return `<div class="card fade" style="margin-bottom:14px">
     <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap">
@@ -2485,9 +2615,9 @@ function unifiedSpendCard(){
       ${seg(s.cc,'var(--w2)')}${seg(s.api,'var(--w)')}${seg(s.gh,'var(--green)')}
     </div>
     <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
-      ${chip('Claude Code',s.cc,'var(--w2)')}
-      ${chip('Claude API',s.api,'var(--w)')}
-      ${chip('GitHub Actions',s.gh,'var(--green)')}
+      ${chip('Claude Code',s.cc,'var(--w2)',"window._mtab='usage';try{localStorage.setItem('dash.mtab','usage')}catch(e){} show('usage');",'Claude Code usage this month — click to open the Usage tab below')}
+      ${chip('Claude API',s.api,'var(--w)',"caScrollEdit();",'Claude API platform spend (manual snapshot) — click to edit')}
+      ${chip('GitHub Actions',s.gh,'var(--green)',"window._mtab='github';try{localStorage.setItem('dash.mtab','github')}catch(e){} show('usage');",'GitHub Actions compute this month — click to open the GitHub Actions tab below')}
     </div>
   </div>`;
 }
@@ -2542,7 +2672,9 @@ function reportBody(){
 function mdToHtml(md){
   md=md.replace(/\r/g,'');
   const e=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const inl=s=>e(s).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  // Link hrefs are content-derived: quote-escape them and allow only http(s)/vscode/#/relative
+  // targets, else `[x](" onclick=...)` or javascript: URLs become live attributes (found 2026-07-09).
+  const inl=s=>e(s).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\[([^\]]+)\]\(([^)]+)\)/g,(m,t,u)=>{u=u.trim();return/^(https?:|vscode:|#|\.?\/)/i.test(u)?`<a href="${u.replace(/"/g,'&quot;')}" target="_blank" rel="noopener">${t}</a>`:`${t} (${u})`;});
   const lines=md.split('\n'),out=[];let i=0;
   while(i<lines.length){
     const ln=lines[i];
@@ -2593,9 +2725,9 @@ function codebaseView(){
   // ── Command bar ───────────────────────────────────────────────────────────
   const cmdClass=riskSurf.length?'danger':missingSurf.length?'warn':'clear';
   let cmdItems=[];
-  if(riskSurf.length)cmdItems.push(`<span class="badge st-danger">${riskSurf.length} risk signal${riskSurf.length!==1?'s':''}</span>`);
-  if(godNodes.length)cmdItems.push(`<span class="badge st-warn">${godNodes.length} high blast-radius node${godNodes.length!==1?'s':''}</span>`);
-  if(missingSurf.length)cmdItems.push(`<span class="badge st-warn">${missingSurf.length} blind spot${missingSurf.length!==1?'s':''}</span>`);
+  if(riskSurf.length)cmdItems.push(`<span class="badge st-danger clickable" role="button" tabindex="0" title="${riskSurf.length} active risk signal${riskSurf.length!==1?'s':''} — click to jump to detail below" onclick="jumpFlash('#cb-sec-risk .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-risk .card');}">${riskSurf.length} risk signal${riskSurf.length!==1?'s':''}</span>`);
+  if(godNodes.length)cmdItems.push(`<span class="badge st-warn clickable" role="button" tabindex="0" title="${godNodes.length} high blast-radius node${godNodes.length!==1?'s':''} — click to jump to detail below" onclick="jumpFlash('#cb-sec-blast .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-blast .card');}">${godNodes.length} high blast-radius node${godNodes.length!==1?'s':''}</span>`);
+  if(missingSurf.length)cmdItems.push(`<span class="badge st-warn clickable" role="button" tabindex="0" title="${missingSurf.length} blind spot${missingSurf.length!==1?'s':''} — click to jump to detail below" onclick="jumpFlash('#cb-sec-blind .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-blind .card');}">${missingSurf.length} blind spot${missingSurf.length!==1?'s':''}</span>`);
   if(!cmdItems.length)cmdItems.push(`<span style="font-size:var(--ts-sm);color:var(--status-ok)">Architecture clean — no active risk signals</span>`);
   const totalStr=ni&&ni.stats?`${ni.stats.totalNodes.toLocaleString()} nodes`:L?`${L.nodes.toLocaleString()} nodes`:'';
   const dateStr=ni&&ni.generated?ni.generated.slice(0,10):L?L.ts.slice(0,10):'';
@@ -2607,7 +2739,7 @@ function codebaseView(){
 
   // ── Risk signals ──────────────────────────────────────────────────────────
   if(riskSurf.length){
-    h+=`<div class="ov-group">Risk signals</div>`;
+    h+=`<div class="ov-group">Risk signals</div><div id="cb-sec-risk">`;
     riskSurf.forEach(s=>{
       h+=`<div class="card ca-red" style="margin-bottom:10px"><div class="cb-risk-row">
         <div class="cb-risk-num">${s.nodes!=null?s.nodes:''}</div>
@@ -2618,20 +2750,21 @@ function codebaseView(){
         </div>
       </div></div>`;
     });
+    h+=`</div>`;
   }
 
   // ── High blast-radius nodes ───────────────────────────────────────────────
   if(godNodes.length){
-    h+=`<div class="ov-group">High blast-radius — change these carefully</div>`;
+    h+=`<div class="ov-group">High blast-radius — change these carefully</div><div id="cb-sec-blast">`;
     h+=`<div class="card ca-amber" style="margin-bottom:10px">
       <div style="font-size:var(--ts-xs);color:var(--muted);margin-bottom:12px">Bar length = modules that directly import this node. Changes here ripple across the widest code surface.</div>
       ${gnBar(godNodes)}
-    </div>`;
+    </div></div>`;
   }
 
   // ── Blind spots ───────────────────────────────────────────────────────────
   if(missingSurf.length){
-    h+=`<div class="ov-group">Blind spots — not yet mapped</div>`;
+    h+=`<div class="ov-group">Blind spots — not yet mapped</div><div id="cb-sec-blind">`;
     h+=`<div class="g g${Math.min(missingSurf.length,3)}" style="margin-bottom:10px">`;
     missingSurf.forEach(s=>{
       h+=`<div class="card ca-amber">
@@ -2640,7 +2773,7 @@ function codebaseView(){
         <div class="cb-gap-why">Unmapped · run <code>${esc(s.tool)}</code> to wire in</div>
       </div>`;
     });
-    h+=`</div>`;
+    h+=`</div></div>`;
   }
 
   // ── Mapped surfaces ───────────────────────────────────────────────────────
@@ -2667,16 +2800,18 @@ function codebaseView(){
       return`<div style="margin-top:4px"><span style="font-size:11px;font-weight:600;color:${good?'var(--status-ok)':'var(--status-danger)'}">${d>0?'+':''}${d}</span></div>`;
     }
     const cycSt=L.cycles>15?'st-danger':L.cycles>5?'st-warn':'st-ok';
+    const hasCharts=gm.length>1;
+    const jumpAttr=(id,label)=>hasCharts?` role="button" tabindex="0" title="${esc(label)} — click to see the trend below" onclick="jumpFlash('#${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#${id}');}"`:` title="${esc(label)}"`;
     h+=`<div class="g gmg" style="margin-bottom:10px">
-      <div class="stat st-info"><div class="v num">${L.nodes.toLocaleString()}</div><div class="l">Nodes</div>${cbDelta(L.nodes,P?P.nodes:0,false)}</div>
-      <div class="stat st-info"><div class="v num">${L.edges.toLocaleString()}</div><div class="l">Edges</div>${cbDelta(L.edges,P?P.edges:0,false)}</div>
-      <div class="stat st-info"><div class="v num">${L.communities}</div><div class="l">Communities</div>${cbDelta(L.communities,P?P.communities:0,false)}</div>
-      <div class="stat ${cycSt}"><div class="v num">${L.cycles}</div><div class="l">Import cycles</div>${cbDelta(L.cycles,P?P.cycles:0,true)}</div>
+      <div class="stat st-info${hasCharts?' jumpable':''}"${jumpAttr('cb-chart-nodes','Total modules in the graph')}><div class="v num">${L.nodes.toLocaleString()}</div><div class="l">Nodes</div>${cbDelta(L.nodes,P?P.nodes:0,false)}</div>
+      <div class="stat st-info" title="Cross-module import edges — higher means denser coupling"><div class="v num">${L.edges.toLocaleString()}</div><div class="l">Edges</div>${cbDelta(L.edges,P?P.edges:0,false)}</div>
+      <div class="stat st-info" title="Clusters detected by graph community detection — a rough proxy for how modular the codebase is"><div class="v num">${L.communities}</div><div class="l">Communities</div>${cbDelta(L.communities,P?P.communities:0,false)}</div>
+      <div class="stat ${cycSt}${hasCharts?' jumpable':''}"${jumpAttr('cb-chart-cycles','Circular import chains')}><div class="v num">${L.cycles}</div><div class="l">Import cycles</div>${cbDelta(L.cycles,P?P.cycles:0,true)}</div>
     </div>`;
-    if(gm.length>1){
+    if(hasCharts){
       h+=`<div class="g g2" style="margin-bottom:10px">
-        <div class="card"><h3>Nodes over time</h3>${glChart(gm.map(m=>m.nodes),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gn')}</div>
-        <div class="card"><h3>Import cycles over time</h3>${glChart(gm.map(m=>m.cycles),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gc')}</div>
+        <div class="card" id="cb-chart-nodes"><h3>Nodes over time</h3>${glChart(gm.map(m=>m.nodes),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gn')}</div>
+        <div class="card" id="cb-chart-cycles"><h3>Import cycles over time</h3>${glChart(gm.map(m=>m.cycles),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gc')}</div>
       </div>`;
     }
     h+=`<p style="font-size:var(--ts-xs);color:var(--dim);margin:0 0 16px">Snapshot: ${esc(L.ts.slice(0,10))} · commit <code>${esc(L.sha)}</code> · ${gm.length} push${gm.length!==1?'es':''} tracked</p>`;
@@ -2698,7 +2833,7 @@ function codebaseView(){
 // ── Roadmap (phase dependency DAG) ──────────────────────────────────────────
 const PSTATC={CLOSED:'var(--green)',SHIPPED:'var(--green)',BUILT:'var(--w)',ACTIVE:'var(--w)',PARTIAL:'var(--w)','ON HOLD':'var(--amber)',CONDITIONAL:'var(--amber)',PLANNED:'var(--dim)',PENDING:'var(--dim)',PLACEHOLDER:'var(--dim)'};
 function _pstatc(s){const k=(s||'').toUpperCase();for(const key in PSTATC){if(k.indexOf(key)===0)return PSTATC[key];}return 'var(--grey)';}
-function _pchip(n){return `<span style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:var(--track);font-size:12px;font-family:Sora;white-space:nowrap"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:${_pstatc(n.status)}"></span>P${esc(n.id)} ${esc(n.name)}</span>`;}
+function _pchip(n){return `<span class="dag-chip" role="button" tabindex="0" title="P${esc(n.id)} ${esc(n.name)}${n.status?' — '+esc(n.status):''} · open BIMpossible for phase detail" onclick="show('bimpossible')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();show('bimpossible');}" style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:8px;background:var(--track);font-size:12px;font-family:Sora;white-space:nowrap"><span class="dot" style="width:7px;height:7px;border-radius:50%;background:${_pstatc(n.status)}"></span>P${esc(n.id)} ${esc(n.name)}</span>`;}
 function roadmapView(){
   const G=window.PHASE_DAG;
   let h='<div class="crumbs">BIMpossible</div><h2 class="page">Roadmap — Phase Dependencies</h2>';
@@ -2712,7 +2847,7 @@ function roadmapView(){
   if(lp.length){
     const mx=Math.max.apply(null,lp.map(l=>l.gatesCount));
     h+=`<div class="card fade" style="animation-delay:.05s;margin-top:13px"><h3>Lynchpins — gate the most downstream phases</h3><div style="display:flex;flex-direction:column;gap:7px;padding:2px 0">`
-      +lp.map(l=>`<div style="display:flex;align-items:center;gap:9px"><span style="min-width:210px;font-size:12px;font-family:Sora;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">P${esc(l.id)} ${esc(l.name)}</span><div style="flex:1;height:6px;border-radius:4px;background:var(--track);overflow:hidden"><div style="height:100%;width:${Math.round(l.gatesCount/mx*100)}%;background:linear-gradient(90deg,var(--w),var(--w2))"></div></div><span class="num" style="min-width:78px;font-size:11px;color:var(--dim);text-align:right">gates ${l.gatesCount}</span></div>`).join('')
+      +lp.map(l=>`<div style="display:flex;align-items:center;gap:9px"><span class="lp-chip" role="button" tabindex="0" title="P${esc(l.id)} ${esc(l.name)} — gates ${l.gatesCount} downstream phase${l.gatesCount!==1?'s':''} · open BIMpossible for phase detail" onclick="show('bimpossible')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();show('bimpossible');}" style="min-width:210px;font-size:12px;font-family:Sora;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:inline-block">P${esc(l.id)} ${esc(l.name)}</span><div style="flex:1;height:6px;border-radius:4px;background:var(--track);overflow:hidden"><div style="height:100%;width:${Math.round(l.gatesCount/mx*100)}%;background:linear-gradient(90deg,var(--w),var(--w2))"></div></div><span class="num" style="min-width:78px;font-size:11px;color:var(--dim);text-align:right">gates ${l.gatesCount}</span></div>`).join('')
       +`</div></div>`;
   }
   const gens=G.generations||[];
@@ -2813,11 +2948,11 @@ function toolkitView(){
 <h2 class="page">Toolkit</h2>
 <div class="tk-controls">
   <input class="tk-search" id="tkSearch" placeholder="Search tools by name, command, or description…" oninput="tkApply()">
-  <div class="tk-chips">${CHIPS.map((c,i)=>`<button class="tk-chip${i===0?' on':''}" onclick="tkSetCat(this,'${c[0]}')">${esc(c[1])}</button>`).join('')}</div>
+  <div class="tk-chips">${CHIPS.map((c,i)=>`<button class="tk-chip${i===0?' on':''}" data-cat="${c[0]}" onclick="tkSetCat(this,'${c[0]}')">${esc(c[1])}</button>`).join('')}</div>
 </div>`;
   SECT.forEach(s=>{
     h+=`<section class="tk-section" data-cat="${s.cat}">
-<div class="tk-sec-head"><div class="tk-sec-top"><h3>${esc(s.title)}</h3><span class="tk-sec-count">${s.items.length}</span></div><div class="tk-sec-ctx">${esc(s.ctx)}</div></div>
+<div class="tk-sec-head"><div class="tk-sec-top"><h3>${esc(s.title)}</h3><span class="tk-sec-count clickable" role="button" tabindex="0" title="Show only ${esc(s.title)} — click to filter" onclick="tkSecClick('${s.cat}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();tkSecClick('${s.cat}');}">${s.items.length}</span></div><div class="tk-sec-ctx">${esc(s.ctx)}</div></div>
 <div class="tk-grid">`;
     s.items.forEach(it=>{
       const search=(it.cmd+' '+it.name+' '+it.desc+' '+(it.where||'')+' '+(it.trigger||'')).toLowerCase();
@@ -2852,6 +2987,31 @@ function tkCopy(btn,cmd){
   navigator.clipboard.writeText(cmd).catch(()=>{});
   btn.classList.add('done');const sp=btn.querySelector('span');if(!sp)return;const o=sp.textContent;sp.textContent='copied';
   setTimeout(()=>{sp.textContent=o;btn.classList.remove('done');},1300);
+}
+
+// ── Cross-tab pill/card interactivity (Overview/Roadmap/Codebase/Strategy/Usage/Toolkit) ──
+// Same two moves as the Audit view's severity pills: toggle an inline breakdown when the
+// detail lives nowhere else on the page, or jump-and-flash to it when it's already rendered below.
+function ovBreak(kind){
+  const el=document.getElementById('ov-break-'+kind);if(!el)return;
+  const open=el.classList.toggle('open');
+  document.querySelectorAll('.au-break').forEach(b=>{if(b!==el)b.classList.remove('open');});
+  document.querySelectorAll('.sevpill[data-kind]').forEach(p=>p.setAttribute('aria-expanded',(p.dataset.kind===kind&&open)?'true':'false'));
+}
+function ovBreakKey(e,kind){if(e.key==='Enter'||e.key===' '){e.preventDefault();ovBreak(kind);}}
+function jumpFlash(sel){
+  const els=[...document.querySelectorAll(sel)];if(!els.length)return;
+  els[0].scrollIntoView({behavior:'smooth',block:'center'});
+  els.forEach(c=>{c.classList.remove('au-flash');void c.offsetWidth;c.classList.add('au-flash');});
+}
+function caScrollEdit(){
+  const f=document.getElementById('ca-form');
+  if(f&&(f.style.display==='none'||!f.style.display))caEdit();
+  if(f)f.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function tkSecClick(cat){
+  const btn=document.querySelector(`.tk-chip[data-cat="${cat}"]`);
+  if(btn)tkSetCat(btn,cat);
 }
 
 function show(id){

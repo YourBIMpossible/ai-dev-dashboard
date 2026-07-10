@@ -7,7 +7,7 @@
 window.DASHBOARD_DATA = {
   generated: "2026-06-28",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-06-15",
+  activitySince: "2026-06-26",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -36,7 +36,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P3 Read-Only Data Dashboard (+ 3.x family)",
             pct: 93,
-            note: "ACTIVE — Permanent, never-closing data substrate",
+            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: PLANNED (post-Phase 11 QA; see NEXT.md P1 + §Phase 3 sub-phase notes below).",
             tasks: [
               { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
               { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
@@ -54,9 +54,9 @@ window.DASHBOARD_DATA = {
             ]
           },
           {
-            name: "P4 Embedded Intelligent Assistant (4a–4d)",
+            name: "P4 Embedded Intelligent Assistant (4a/4b)",
             pct: 96,
-            note: "SHIPPED — 4a read-only + 4b HITL + 4c persistence/stop-edit + 4d project-context grounding",
+            note: "CLOSED — 4a read-only + 4b HITL action assistant; live-smoked 2026-07-01 (4a: EL+STR, 4b: confirm+cancel verified, audit rows ok+denied/cancelled)",
             tasks: [
               { label: "B2 rate-limit hardening", status: "done" },
               { label: "B2 byte-cap + deadline handling", status: "done" },
@@ -88,7 +88,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P6 Platform / Billing + Client-Management",
             pct: 88,
-            note: "SHIPPED — Access tiers, usage metering, BYO keys; Client-Mgmt A/B/C/D; shipped via Wave 20 / PR #112",
+            note: "CLOSED — Access tiers, usage metering, BYO keys; Client-Mgmt A/B/C/D; shipped via Wave 20 / PR #112; live-smoked 2026-07-01 (usage_logger wired e97fa1f, admin dashboard: 241 queries / $4.04 MTD / 58.3k output tokens confirmed)",
             tasks: [
               { label: "Wave 6 thin permissions (SEC-M4 + identity coverage)", status: "done", note: "PR #110 06-11" },
               { label: "Phase 6 access tiers + billing guardrails", status: "done", note: "PR #112 06-12; client_keys Fernet-encrypted" },
@@ -156,7 +156,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P11 Model QA & Health",
             pct: 64,
-            note: "BUILT — flag-gated OFF — `qa_router` gated by `BIMPOSSIBLE_QA_ENABLED` (default OFF). Read-only QA rules + `.ids` import + Model Health graph checks (06-28); was unnumbered (\"Phase 7-ish\")",
+            note: "SHIPPED — LIVE in prod — `BIMPOSSIBLE_QA_ENABLED=1` set by owner; Q1 live smokes ALL PASS on pilot `ISI-SB-SL-EL.rvt` via prod path (health 89/100 on 47k elements, `.ids` import evaluated 10053/10053, panel renders, 401/403 leak checks hold, Q2 fixes live-verified incl. 422 on broken imported-rule override). Full log: GitHubWorkflow §11 2026-07-01. Read-only QA rules + `.ids` import; was unnumbered (\"Phase 7-ish\")",
             tasks: [
               { label: "Rules engine (declarative Rule: applicability + requirement + IDS cardinality over a predicate library)", status: "done", note: "06-14 — backend/aec/qa/engine.py; pure, dependency-free" },
               { label: "4 starter rules (completeness / identity / correctness / classification families)", status: "done", note: "06-14 — adding a rule = a registry entry, no engine code" },
@@ -167,6 +167,7 @@ window.DASHBOARD_DATA = {
               { label: "More rules (config-only), per-project overrides, .ids import, disposition workflow, run persistence/trends", status: "pending", note: "Roadmap increments from the build spec" }
             ]
           },
+          { name: "P11.1 Coordination & Health Report", pct: 95, note: "SHIPPED — LIVE in prod — Merged via [PR #172](https://github.com/YourBIMpossible/BIMpossible/pull/172) (squash, CI-green); deployed + live-smoked same day on pilot `ISI-SB-SL-EL.rvt` (JSON 200/1.7s warm; .doc download 172KB, branded+dated, severity-ranked, 5 plain-language critical hubs, island+unconnected traces; preparing→warm cycle exercised post-restart; unauth 401 ×4 + non-allowlisted 403 ×2 hold). Both smoke findings FIXED same evening (`83384da`, CI green ×3, live re-verified): (1) report now runs the resolved project rule set (shipped + imported `.ids` + overrides) — panel↔report parity proven live (90.2 == 90.2 with an imported rule; 89.11 == 89.11 after cleanup); (2) `model_name` threaded UI→API — the .doc header shows the model's filename, zero URN occurrences. AC1–AC6 verified live; AC7 (report history) deferred. Read-only, no new QA rules. See §Phase 11.1 below." },
           {
             name: "P12 Content Authoring",
             pct: 0,
@@ -180,10 +181,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,0,2,0,0,0,0,0,15,8,42,27,24,8],
+      activity: [27,24,30,17,13,18,19,0,0,0,5,8,0,0],
       lastActivity: {
-        date: "2026-06-28",
-        summary: "chore(security): commit unattended scanner, ignore _triage-logs, retire headless wrapper (f67c42b)"
+        date: "2026-07-07",
+        summary: "docs(audit): 2026-07-07 follow-up resolution - every 2026-07-06 finding closed (16458cc)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
@@ -231,22 +232,96 @@ window.DASHBOARD_DATA = {
         "2026-06-12 - Client-Management Phase A backend (e749918): 8 tables / 4 migrations; Wave 4.10 spec library COMPLETE (3cf91a0); Wave 4.9 classification enrichment (f207d41)"
       ],
       audit: {
-        lastRun: "2026-06-22",
-        runType: "Weekly automated (Mon 6am); 06-22 run clean — expr-eval CVE removed, relay hardened, auth scoped (via #142). Next: 06-29",
+        lastRun: "2026-07-08",
+        runType: "Incremental (5 lens agents + orchestrator verification of every Critical/High) — 22 commits / 117 files since the 07-01 deep audit. All 30 prior claimed closures VERIFIED genuine; 1 new Critical (live ops) + 4 new High on the write-back perimeter; 07-01 MEDIUM/LOW backlog (~23 M) still open.",
         cadence: "weekly Mon 6am + on-demand",
         counts: {
-          critical: 0,
-          high: 0,
-          medium: 0,
-          low: 0,
-          info: 0
+          critical: 1,
+          high: 4,
+          medium: 44,
+          low: 28,
+          info: 14
         },
-        closedLastRun: 5,
-        trend: "improving",
-        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-06-16__code-audit.md",
+        closedLastRun: 30,
+        trend: "flat",
+        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-07-08__audit-report.md",
+        reportFile: "bimpossible/2026-07-08__audit-report.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
-        open: [],
+        open: [
+          {
+            id: "OPS-1",
+            sev: "critical",
+            title: "Nightly DB backup silently failing since the 07-06 repoint — task Last Result 1, newest dump 07-02, output discarded (no log). Run Backup-Db.ps1 interactively to capture the error; add transcript + dump-staleness check",
+            where: "Task Scheduler / Backup-Db.ps1"
+          },
+          {
+            id: "WIZ-6",
+            sev: "high",
+            title: "Phase 7 write_instance_parameter is live with authentication but zero authorization — writes ride the read flag (BIMPOSSIBLE_REVIT_LINK_ENABLED). Split a default-off write flag + role-gate",
+            where: "revit_link/router.py:112"
+          },
+          {
+            id: "AST-1",
+            sev: "high",
+            title: "query_edit_log assistant tool exposes the deployment-wide edit audit unscoped (REST twin is admin-gated); found by two lenses independently. Stamp firm_id on edit_log + filter by ctx.firm_id",
+            where: "aec/assistant_tools.py:542"
+          },
+          {
+            id: "WIZ-1",
+            sev: "high",
+            title: "Wizard finalize is last-writer-wins vs the reclaim sweeper — audit trail can fork/self-contradict (latent: wizard writes gated off behind 4 fail-closed layers)",
+            where: "wizard/router.py:291"
+          },
+          {
+            id: "WIZ-2",
+            sev: "high",
+            title: "APS create timeout after server-side commit leaves an unledgered orphan; job can land 'rolled_back' clean while an orphan project sits in the hub (latent: gated off)",
+            where: "wizard/aps_write.py:171"
+          }
+        ],
         history: [
+          {
+            date: "2026-07-08",
+            type: "Incremental (5 agents)",
+            scope: "22 commits / 117 files since bd472b0: remediation batches 07-01→07-07 + wizard APS write client + Coordination Report 11.1 + shared-parameters registry",
+            result: "OPS-1 (Critical, live): nightly DB backup silently failing since 07-06 repoint; +4 HIGH on the write-back perimeter (WIZ-6 live write endpoint no authz, AST-1 unscoped edit-log tool, WIZ-1/2 latent audit-trail integrity). All 30 prior closures verified genuine",
+            report: "2026-07-08__audit-report.md"
+          },
+          {
+            date: "2026-07-06",
+            type: "Weekly full (3 agents)",
+            scope: "Whole tree @ 83384da — 39 commits since 06-29",
+            result: "OPS-CRIT-1 (Critical): main in unresolved uncommitted merge (~856 files) — resolved same-day. 0 High; SEC-10/11/12, OPS-2, FE-16/18 verified closed; wizard write surface judged best-gated in codebase. 11 findings resolved via fe7720c + 07-07 follow-up closed the remainder",
+            report: "weekly-full-audit_2026-07-06.md"
+          },
+          {
+            date: "2026-07-01",
+            type: "Full (run 2, deep — 7 agents)",
+            scope: "Whole tree @ bd472b0 — adversarial bug-hunt",
+            result: "9 HIGH the same-day survey missed: SCH-H1 empty schedule endpoints, SCH-H2 missing auth gate, AST-H1 fail-open crypto, AST-H2 denial-of-wallet, FE-H1/H2, OPS-H1 backup-verify-can't-fail, OPS-H2 lying CI watcher, OPS-H3 dead automerge — 8 fixed same-day + wave-2 (#173)",
+            report: "2026-07-01__audit-report-full-2.md"
+          },
+          {
+            date: "2026-07-01",
+            type: "Full (run 1, survey — 5 agents)",
+            scope: "Completeness survey @ bd472b0; carry-forward re-verify (all 6 confirmed fixed)",
+            result: "'Clean sprint' verdict SUPERSEDED — the same-day deep re-run found 9 HIGH this survey missed",
+            report: "2026-07-01__audit-report-full.md"
+          },
+          {
+            date: "2026-06-30",
+            type: "Full",
+            scope: "Assistant subsystem, prewarm worker, Sheets OAuth, FieldCombobox, graph topology, CI, semgrep",
+            result: "GRAPH-1 (High, carry-forward): O(n²) _load_served still unaddressed — fixed 07-01 with O(V+E) rewrite + regression test",
+            report: "2026-06-30__audit-report-full.md"
+          },
+          {
+            date: "2026-06-29",
+            type: "Incremental",
+            scope: "~50 files / 30 commits: Phase 4d Levers 1–4, NetworkX topology, security CI hardening, backup fix",
+            result: "DIGEST-1 (High): useDigest never re-fetches after 'preparing' — digest spinner never resolves during model warming",
+            report: "2026-06-29__audit-report.md"
+          },
           {
             date: "2026-06-22",
             type: "Weekly full",
@@ -292,16 +367,15 @@ window.DASHBOARD_DATA = {
         ]
       },
       waves: {
-        updated: "2026-06-26",
+        updated: "2026-07-01",
         source: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 27, built: 0, inFlight: 2, ahead: 4 },
+        summary: { done: 28, built: 0, inFlight: 1, ahead: 4 },
         current: [
-          { id: "1", title: "Foundation consolidation", status: "PARTIAL", date: "2026-05-28", note: "Open: confirm audit branches merged, apply Phase 3.5 migration to live DB, generate Alembic baseline (HIGH-8)" },
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
           { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED" },
           { id: "9", title: "APS Forma embed evaluation", status: "PLANNED" }
         ],
-        lastCompleted: { id: "C-1", title: "Shared-state on Redis (multi-worker foundation)", date: "2026-06-26" },
+        lastCompleted: { id: "20", title: "Access control, usage metering & admin", date: "2026-07-01" },
         drift: []
       }
     },
@@ -356,10 +430,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,39,0,0,0,0,0,0,1,0,0,0,3,0],
+      activity: [0,3,0,0,0,0,0,0,0,0,2,15,2,13],
       lastActivity: {
-        date: "2026-06-27",
-        summary: "chore(docs): commit working specs for dupcollection view-template remap (f3fa62b)"
+        date: "2026-07-09",
+        summary: "fix(dupcollection): editable combo can't render/accept typed text; Source Collection combo showed raw type name (c9cd1db)"
       },
       branch: "feat/dupcollection-refine (3 ahead of origin, unpushed)",
       git: {
@@ -416,6 +490,7 @@ window.DASHBOARD_DATA = {
         closedLastRun: 0,
         trend: "flat",
         reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-06-14__audit-report-full.md",
+        reportFile: "addins/2026-06-14__audit-report-full.md",
         ledgerPath: "F:\\AI-Dev\\Add-Ins\\audits",
         open: [
           { id: "C-01", sev: "critical", title: "No AssemblyVersion in Core.csproj — every build is 1.0.0.0; a stale co-loaded Core DLL silently corrupts ratings (confirm resolved)", where: "ModelQA.Core.csproj" }
@@ -480,10 +555,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,1,0],
+      activity: [0,1,0,0,0,1,0,0,0,0,0,0,0,0],
       lastActivity: {
-        date: "2026-06-27",
-        summary: "fix: header logo visibility + collapse theme toggle to single cycling button (709f352)"
+        date: "2026-07-01",
+        summary: "fix(audit): close M1/M2/M3 + L2/L3/L6/L8 from the 2026-06-13 full audit (404f9a0)"
       },
       branch: null, git: { latestCommit: "709f352" },
       nextActions: [
@@ -517,6 +592,14 @@ window.DASHBOARD_DATA = {
         "2026-06-09 - Triple audit (perf/architecture/code-review); contact form Turnstile + Web3Forms live; 13 e2e tests"
       ],
       audit: {
+        lastRun: "2026-06-13",
+        runType: "Full code audit (no runs since — staleness badge is accurate)",
+        cadence: "on-demand",
+        counts: { critical: 0, high: 1, medium: 0, low: 0, info: 0 },
+        trend: "flat",
+        reportPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\2026-06-13__audit-report-full.md",
+        reportFile: "site/2026-06-13__audit-report-full.md",
+        ledgerPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog",
         closedLastRun: 7,
         open: [
           {
@@ -658,7 +741,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,2,1],
+      activity: [0,2,1,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-06-28",
         summary: "feat(tool): NetworkX remediation-order DAG (blast-radius + clusters + topo) (7fd2e48)"
@@ -741,7 +824,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,8,4,0,0,0,0,0,1,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-06-23",
         summary: "docs: add 2026-06-18 full code-audit report (#9) (6b057ac)"

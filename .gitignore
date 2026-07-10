@@ -1,5 +1,8 @@
 _backups/
 .claude/
+# Local-only audit enrichment (full findings + mirrored reports). NEVER commit:
+# the pages deploy is PUBLIC and reports detail unfixed security findings.
+local/
 .wrangler/
 repo-workflows/
 __pycache__/
