@@ -595,55 +595,19 @@ window.DASHBOARD_DATA = {
         lastRun: "2026-07-10",
         runType: "Full code audit (marketing site, /audit complete) — top-to-bottom re-read of site/ + live Lighthouse across all 6 pages; verified all 13 findings from 2026-06-13 closed, then caught and same-day-fixed an a11y regression (100→95/96) from the 709f352 theme-toggle/logo change",
         cadence: "on-demand",
-        counts: { critical: 0, high: 0, medium: 1, low: 2, info: 0 },
-        trend: "regressed then fixed",
+        counts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        trend: "stable",
         reportPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog\\2026-07-10__audit-report-full.md",
         reportFile: "site/2026-07-10__audit-report-full.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible Site\\01_BuildLog",
         closedLastRun: 13,
-        open: [
-          {
-            id: "CONTACT-RL",
-            sev: "medium",
-            title: "Contact-form abuse protection is a bypassable honeypot plus optional Turnstile (inactive unless TURNSTILE_SECRET_KEY is set) — the real flood cap is a manual WAF dashboard rule with no code/CI enforcement, latent until CONTACT_FORWARD_URL goes live",
-            where: "functions/api/contact.ts:86-153"
-          },
-          {
-            id: "CSP-STYLE",
-            sev: "low",
-            title: "CSP allows style-src 'unsafe-inline' — the one soft spot in an otherwise strict, script-hash-locked policy (standard Tailwind v4 build tradeoff; acceptable but needs a documented rationale)",
-            where: "public/_headers:19"
-          },
-          {
-            id: "TURNSTILE-HOST",
-            sev: "low",
-            title: "Contact endpoint trusts the Turnstile verdict on 'success' alone without checking hostname/action, so a token minted for the sitekey elsewhere would pass (low risk — sitekey scoped to one domain/form)",
-            where: "functions/api/contact.ts:118-121"
-          }
-        ],
-        history: [
-          {
-            date: "2026-07-10",
-            type: "Full code audit",
-            scope: "Whole site/ tree + live Lighthouse (6 pages, prod-like wrangler serve)",
-            result: "0 prod-breaking · 4 medium + 2 low + 2 info, all one root cause (inverted header bar not theme-token-driven): A11Y-1 nav-link AA-contrast fail (100→95/96 a11y drop) + TOGGLE-ICON 1.4.11 fail + LOGO-NOJS no-JS/OS-dark logo-blind; CONTACT-RL + CSP-STYLE + TURNSTILE-HOST latent/low. All 13 findings from 2026-06-13 verified CLOSED, zero regressions. A11Y-1/TOGGLE-ICON/LOGO-NOJS fixed same-day — Lighthouse a11y back to 100 on all 6 pages (uncommitted)",
-            report: "2026-07-10__audit-report-full.md"
-          },
-          {
-            date: "2026-06-13",
-            type: "Full code audit",
-            scope: "Whole site (perf baseline unchanged)",
-            result: "0 prod-breaking · 1 high-latent (CSP hash drift unguarded in CI) + 4 medium + 8 low; no 06-09 regressions",
-            report: "2026-06-13__audit-report-full.md"
-          },
-          {
-            date: "2026-06-09",
-            type: "Triple audit (perf / architecture / code)",
-            scope: "6 pages",
-            result: "Lighthouse 100×4 · 4 bugs confirmed + fixed (wheel focus desync, resize clip, contact 500, theme tri-state)",
-            report: "2026-06-09__audit-1-performance.md"
-          }
-        ]
+        open: []
       }
     },
     /* PROJECT:site:END */
