@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-10",
+  generated: "2026-07-11",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-06-27",
+  activitySince: "2026-06-28",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -102,7 +102,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P7 Model Write-back — DA4R + Revit Link (two engines)",
             pct: 35,
-            note: "ON HOLD — Co-equal engines, ship together. Revit Link live-except-sync; DA4R backend scaffolded (off). Owner gates: (1) add BIMpossible-AddIns repo, (2) \"go\" to re-enable sync. See proposal 2026-06-23 (§2 DoD) for exact acceptance criteria. Audit gate (hard — from `2026-06-21__AuditAndHistory_Pattern.md`): `edit_log` + `revit_link_request_log` migrations applied AND adapter writes to both tables on every call; `GET /admin/audit/edits` endpoint + XLSX export live; `query_edit_log` assistant tool registered — all three required before Phase 7 can ship.",
+            note: "ON HOLD — Co-equal engines, ship together. Revit Link live-except-sync; DA4R backend scaffolded (off). Owner gates: (1) add BIMpossible-AddIns repo, (2) \"go\" to re-enable sync — still ON HOLD by owner-gate policy, independent of the audit-gate item below. See proposal 2026-06-23 (§2 DoD) for exact acceptance criteria. Audit gate (hard — from `2026-06-21__AuditAndHistory_Pattern.md`): ✅ SATISFIED 2026-07-02 (`0055dd1`) — `edit_log` + `revit_link_request_log` migrations applied and the adapter writes to both on every call (write-ahead as of the 2026-07-10 WIZ-7 fix); `GET /admin/audit/edits` endpoint + XLSX export live; `query_edit_log` assistant tool registered (firm-scoped as of AST-1, `376e180`). This row described the gate as still-pending through 2026-07-08's audit — stale, fixed today (DOC-2).",
             tasks: [
               { label: "write_instance_parameter endpoint live (single-user, flag=ON in prod)", status: "done", note: "revit_link/native_adapter.py lines 261-412; relay live; BIMPOSSIBLE_REVIT_LINK_ENABLED=1 in pilot" },
               { label: "Frontend UX: useRevitLink hook + EditParameterDialog + SyncConflictModal", status: "done", note: "Shipped in prior build" },
@@ -117,7 +117,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P8 Project Setup Wizard",
             pct: 60,
-            note: "BUILT (gated OFF) — First Autodesk-write feature; `aps_write.py` stubs. Audit gate: `provisioning_jobs_status_history` table present (per Audit & History Pattern §4) before going live.",
+            note: "BUILT (gated OFF) — First Autodesk-write feature; `wizard/aps_write.py` is a real, implemented ~500-line client (⚠️ owed live verification against real Autodesk creds — untestable without a supervised run) — this row called it \"stubs\" through 2026-07-08's audit, fixed today (DOC-2). Audit gate: `provisioning_jobs_status_history` table present (per Audit & History Pattern §4) before going live — ✅ present since `0055dd1`.",
             tasks: [
               { label: "No-write planning core (planner + reverse-order rollback walker + default-closed gate)", status: "done", note: "06-14 — pure stdlib, not wired into main.py; 18 tests green" },
               { label: "ProvisioningJob DB model + Alembic migration (t2u3v4w5x6y7)", status: "done", note: "06-14 — verified via isolated local-CI lane; alembic check clean" },
@@ -181,10 +181,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [24,30,17,13,18,19,0,0,0,5,8,0,3,9],
+      activity: [30,17,13,18,19,0,0,0,5,8,0,3,10,0],
       lastActivity: {
         date: "2026-07-10",
-        summary: "chore: gitleaksignore two vetted false-positive aws-access-token matches (cf86c17)"
+        summary: "docs(audit): close out the 2026-07-08 audit resolution (6211521)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
@@ -430,7 +430,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [3,0,0,0,0,0,0,0,0,2,15,2,18,1],
+      activity: [0,0,0,0,0,0,0,0,2,15,2,18,1,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(sectionclip): restore the origin-independent crop; my level-datum broke the real workflow (b817065)"
@@ -555,10 +555,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [1,0,0,0,1,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,1,0,0,0,0,0,0,0,0,2,0],
       lastActivity: {
-        date: "2026-07-01",
-        summary: "fix(audit): close M1/M2/M3 + L2/L3/L6/L8 from the 2026-06-13 full audit (404f9a0)"
+        date: "2026-07-10",
+        summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
       },
       branch: null, git: { latestCommit: "709f352" },
       nextActions: [
@@ -724,7 +724,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [2,1,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [1,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-06-28",
         summary: "feat(tool): NetworkX remediation-order DAG (blast-radius + clusters + topo) (7fd2e48)"
@@ -807,10 +807,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,2,0],
       lastActivity: {
-        date: "2026-06-23",
-        summary: "docs: add 2026-06-18 full code-audit report (#9) (6b057ac)"
+        date: "2026-07-10",
+        summary: "feat: add OpenWhispr dictation-cleanup reliability proxy (3c4d4e6)"
       },
       branch: "main at 6b057ac", git: null,
       nextActions: [
