@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-11",
+  generated: "2026-07-12",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-06-28",
+  activitySince: "2026-06-29",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -181,10 +181,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [30,17,13,18,19,0,0,0,5,8,0,3,10,0],
+      activity: [17,13,18,19,0,0,0,5,8,0,3,20,16,0],
       lastActivity: {
-        date: "2026-07-10",
-        summary: "docs(audit): close out the 2026-07-08 audit resolution (6211521)"
+        date: "2026-07-11",
+        summary: "Merge branch 'fix/fire-pump-rated-pressure-pa' (e0c10ed)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
@@ -430,10 +430,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,2,15,2,18,1,0],
+      activity: [0,0,0,0,0,0,0,2,15,2,18,12,15,0],
       lastActivity: {
-        date: "2026-07-10",
-        summary: "fix(sectionclip): restore the origin-independent crop; my level-datum broke the real workflow (b817065)"
+        date: "2026-07-11",
+        summary: "Merge branch 'worktree-dupcollection-execution-wrapping' (6389484)"
       },
       branch: "feat/dupcollection-refine (3 ahead of origin, unpushed)",
       git: {
@@ -555,7 +555,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,1,0,0,0,0,0,0,0,0,2,0],
+      activity: [0,0,1,0,0,0,0,0,0,0,0,2,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
@@ -724,7 +724,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [1,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-06-28",
         summary: "feat(tool): NetworkX remediation-order DAG (blast-radius + clusters + topo) (7fd2e48)"
@@ -807,7 +807,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,2,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,2,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "feat: add OpenWhispr dictation-cleanup reliability proxy (3c4d4e6)"
