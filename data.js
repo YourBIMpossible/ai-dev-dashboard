@@ -36,7 +36,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P3 Read-Only Data Dashboard (+ 3.x family)",
             pct: 93,
-            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: PLANNED (post-Phase 11 QA; see NEXT.md P1 + §Phase 3 sub-phase notes below).",
+            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — Phase 11 QA gate cleared 2026-07-01; first increment 3.10a (Cross-Model Room Join) SHIPPED 2026-07-12 (`dd5adb1`); general join framework (3.10b) not yet built. See §Phase 3 sub-phase notes below.",
             tasks: [
               { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
               { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
@@ -232,54 +232,37 @@ window.DASHBOARD_DATA = {
         "2026-06-12 - Client-Management Phase A backend (e749918): 8 tables / 4 migrations; Wave 4.10 spec library COMPLETE (3cf91a0); Wave 4.9 classification enrichment (f207d41)"
       ],
       audit: {
-        lastRun: "2026-07-08",
-        runType: "Incremental (5 lens agents + orchestrator verification of every Critical/High) — 22 commits / 117 files since the 07-01 deep audit. All 30 prior claimed closures VERIFIED genuine; 1 new Critical (live ops) + 4 new High on the write-back perimeter; 07-01 MEDIUM/LOW backlog (~23 M) still open.",
+        lastRun: "2026-07-11",
+        runType: "Incremental verification-of-claimed-fixes (6 agents) followed by same-day TDD resolution (7 agents) of everything it found still open, then a full green Verify-Local-CI.ps1 run — 17 app-repo + 11 workspace-repo commits since 07-08.",
         cadence: "weekly Mon 6am + on-demand",
         counts: {
-          critical: 1,
-          high: 4,
-          medium: 44,
-          low: 28,
-          info: 14
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 8
         },
-        closedLastRun: 30,
-        trend: "flat",
-        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-07-08__audit-report.md",
-        reportFile: "bimpossible/2026-07-08__audit-report.md",
+        closedLastRun: 51,
+        trend: "improving",
+        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-07-11__audit-report.md",
+        reportFile: "bimpossible/2026-07-11__audit-report.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
-        open: [
-          {
-            id: "OPS-1",
-            sev: "critical",
-            title: "Nightly DB backup silently failing since the 07-06 repoint — task Last Result 1, newest dump 07-02, output discarded (no log). Run Backup-Db.ps1 interactively to capture the error; add transcript + dump-staleness check",
-            where: "Task Scheduler / Backup-Db.ps1"
-          },
-          {
-            id: "WIZ-6",
-            sev: "high",
-            title: "Phase 7 write_instance_parameter is live with authentication but zero authorization — writes ride the read flag (BIMPOSSIBLE_REVIT_LINK_ENABLED). Split a default-off write flag + role-gate",
-            where: "revit_link/router.py:112"
-          },
-          {
-            id: "AST-1",
-            sev: "high",
-            title: "query_edit_log assistant tool exposes the deployment-wide edit audit unscoped (REST twin is admin-gated); found by two lenses independently. Stamp firm_id on edit_log + filter by ctx.firm_id",
-            where: "aec/assistant_tools.py:542"
-          },
-          {
-            id: "WIZ-1",
-            sev: "high",
-            title: "Wizard finalize is last-writer-wins vs the reclaim sweeper — audit trail can fork/self-contradict (latent: wizard writes gated off behind 4 fail-closed layers)",
-            where: "wizard/router.py:291"
-          },
-          {
-            id: "WIZ-2",
-            sev: "high",
-            title: "APS create timeout after server-side commit leaves an unledgered orphan; job can land 'rolled_back' clean while an orphan project sits in the hub (latent: gated off)",
-            where: "wizard/aps_write.py:171"
-          }
-        ],
+        open: [],
         history: [
+          {
+            date: "2026-07-11",
+            type: "Incremental verification (6 agents) + same-day TDD resolution (7 agents) + 1 follow-up fix",
+            scope: "53 findings carried in from 07-08 (6 Critical/High + 47 Medium/backlog), independently re-derived from live code/tests/gh api/semgrep rather than trusted; everything still open after that was then fixed same-day, including the one item tracked outside the batch",
+            result: "Verification pass: 41 of 47 confirmed genuinely fixed; 4 medium open (1 new bug introduced by the WIZ-5 fix, 2 reclassified from 'fixed' to partial after live semgrep/code-path checks, 1 known live gap needing a GitHub settings change) + 5 low partials, each with a real narrow open half. Resolution pass, same day: all 9 fixed via strict TDD (failing test first, minimal fix, full-suite regression) by 7 agents on disjoint files, caught and fixed one incidental cross-test logging-isolation bug along the way, finished with backend 2784+1933+4 passed / frontend 1648/1648+build clean — LOCAL CI GREEN. CI-2's settings half (dependabot-automerge past a red security scan) closed same day too: code-side GitHub-issue notification added and verified (12/12 mocked assertions), then the owner wired security-scan-summary into branch-protection required checks, confirmed live via gh api. Final item, task_645d4dde (the rated_pressure_pa unit-conversion bug adjacent to SCH-M5, deliberately tracked outside this batch): fixed same day too (f07fb3e) — added an exact PSI→Pa constant mirroring the existing flow-rate pattern, test asserts against an independently hand-computed literal so a wrong constant would still fail, full pure-lane suite verified (1903 passed, 0 failed). Zero Critical/High/Medium/Low open — only the pre-existing 8 info/cosmetic residuals remain. Operational note: 2 unpushed-but-verified-correct commits (711b8a5 + merge bdfba8a) found on local main earlier — unrelated maintenance, not an audit item",
+            report: "2026-07-11__audit-report.md"
+          },
+          {
+            date: "2026-07-10",
+            type: "Code-level re-verification (not a full audit re-run)",
+            scope: "All 5 open Critical/High from the 07-08 report, checked against current source + live system state (Task Scheduler, Docker container restart times, live Postgres migration)",
+            result: "All 5 confirmed FIXED with live verification, not just source: OPS-1 (efbbbea, LastTaskResult 0 + fresh dump today), WIZ-6 (21013bb, running in restarted container), AST-1 (376e180, migration d3e4f5a6b7c8 applied to live DB), WIZ-1/WIZ-2 (2d36353, fix for WIZ-2 actually lives in wizard/executor.py not aps_write.py as originally logged). Medium/Low/Info backlog (44/28/14) not re-checked this pass.",
+            report: "2026-07-08__audit-report.md"
+          },
           {
             date: "2026-07-08",
             type: "Incremental (5 agents)",
@@ -486,16 +469,15 @@ window.DASHBOARD_DATA = {
         lastRun: "2026-06-14",
         runType: "Full (Add-Ins repo, 3 agents)",
         cadence: "on-demand",
-        counts: { critical: 1, high: 0, medium: 0, low: 0, info: 0 },
-        closedLastRun: 0,
-        trend: "flat",
+        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
+        closedLastRun: 1,
+        trend: "improving",
         reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-06-14__audit-report-full.md",
         reportFile: "addins/2026-06-14__audit-report-full.md",
         ledgerPath: "F:\\AI-Dev\\Add-Ins\\audits",
-        open: [
-          { id: "C-01", sev: "critical", title: "No AssemblyVersion in Core.csproj — every build is 1.0.0.0; a stale co-loaded Core DLL silently corrupts ratings (confirm resolved)", where: "ModelQA.Core.csproj" }
-        ],
+        open: [],
         history: [
+          { date: "2026-07-10", type: "Code-level re-verification (not a full audit re-run)", scope: "C-01, checked against current source + build output", result: "FIXED — was actually fixed same-day back on 2026-06-14 (commit aa9e65e, Directory.Build.props sets AssemblyVersion 1.1.0.0, confirmed in build output), but the dashboard never got updated to reflect it until now. Caveat carried from the fix itself: diagnostic only (assembly isn't strong-named, so a stale DLL still isn't load-time BLOCKED, just detectable) — real mitigation is coordinated add-in redeploy, tracked separately as M-19, still open", report: "2026-06-14__audit-report-full.md" },
           { date: "2026-06-14", type: "Full (3 agents)", scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests", result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption", report: "2026-06-14__audit-report-full.md" },
           { date: "2026-06-13", type: "Tools 8-33 sweep", scope: "Tools 8-33 + punchlist", result: "Punchlist sweep across the tool suite", report: "2026-06-13__tools-8-33-audit-sweep.md" },
           { date: "2026-06-09", type: "Triple audit (google / perf / perp)", scope: "Add-Ins repo", result: "9 findings closed in remediation — CSV-injection guards ×7, culture-invariant formatting, rolling log", report: "2026-06-09__perp-audit.md" }
@@ -838,48 +820,24 @@ window.DASHBOARD_DATA = {
         "2026-06-16 - WP-A core aiserver library; smoke-test + daily_digest refactored onto it; CI + branch protection; repo created"
       ],
       audit: {
-        lastRun: "2026-06-18",
-        runType: "Full (11 reviewers + adversarial verification, 105 agents) — AI-Server full codebase + PC-Monitor/AI-Brain-Data WP-D touchpoints",
+        lastRun: "2026-07-12",
+        runType: "Incremental (regression-check on the four claimed high fixes + fresh review of the new OpenWhispr dictation-cleanup proxy) then same-day remediation — the 11 findings it raised were all fixed in f37d165; pytest 131 passed post-fix",
         cadence: "on-demand",
-        counts: { critical: 0, high: 5, medium: 24, low: 51, info: 11 },
-        closedLastRun: 0,
-        trend: "new",
-        reportPath: "F:\\AI-Dev\\AI-Server\\audits\\2026-06-18__audit-report-full.md",
-        reportFile: "aiserver/2026-06-18__audit-report-full.md",
+        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
+        closedLastRun: 11,
+        trend: "improving",
+        reportPath: "F:\\AI-Dev\\AI-Server\\audits\\2026-07-12__audit-report.md",
+        reportFile: "aiserver/2026-07-12__audit-report.md",
         ledgerPath: "F:\\AI-Dev\\AI-Server\\audits",
-        open: [
-          {
-            id: "XC-1",
-            sev: "high",
-            title: "README's onboarding step runs register-task-windows.ps1, but its task target daily_digest.py has no __main__ block — the scheduled task fires daily under pythonw and silently produces no digest",
-            where: "README.md:22 + automation/register-task-windows.ps1:16"
-          },
-          {
-            id: "CLIENT-1",
-            sev: "high",
-            title: "_post() catches HTTPError only via its URLError superclass, so 4xx/5xx responses are retried then collapsed into a misleading endpoint-unreachable error, discarding the server's real JSON error body",
-            where: "aiserver/client.py:43-59"
-          },
-          {
-            id: "PCMON-1",
-            sev: "high",
-            title: "topproc()'s comparison/assignment is dedented out of its for-loop, so it reports the last process instead of the top consumer, and raises UnboundLocalError on empty proc_rows — silently skipping every later threshold check (e.g. GPU-VRAM) for that tick",
-            where: "PC-Monitor/collector.py:192-198"
-          },
-          {
-            id: "EVAL-3",
-            sev: "high",
-            title: "score() does raw case-insensitive substring matching with no word boundary or negation handling, so e.g. \"This is NOT spam\" scores 1.0 against contains_any:['spam'] and silently drives the local-OK-vs-route-to-Claude decision",
-            where: "eval/scoring.py:17,23"
-          },
-          {
-            id: "RAG-1",
-            sev: "high",
-            title: "ingest.py zips chunks to embeddings purely by list position, trusting response order and length, so an out-of-order or short embeddings response silently corrupts or truncates the vector index",
-            where: "rag/ingest.py:92-95"
-          }
-        ],
+        open: [],
         history: [
+          {
+            date: "2026-07-12",
+            type: "Incremental (regression-check on the 4 claimed high fixes + fresh review of the new dictation-proxy subsystem) + same-day remediation",
+            scope: "2 commits since the 2026-06-18 cutoff — c82c674 (high-fix) + 3c4d4e6 (new OpenWhispr dictation-cleanup proxy); the report was committed as 7c8a09c, then all 11 findings it raised were fixed in f37d165 the same session",
+            result: "Raised 11 (0 crit / 0 high / 5 medium / 4 low / 2 nit), all remediated same-day in f37d165 — now HEAD, pushed, tree clean; suite green at 131 passed (up from 83). Regression check first confirmed CLIENT-1/RAG-1/XC-1 genuinely fixed (PCMON-1 fixed in the separate PC-Monitor repo). Then the fix pass closed everything this run raised: EVAL-3-REG (rubric term → the full 'ZeroDivisionError'), DP-1 (answer-detection now requires the text to have shed the input's own vocabulary, not a bare substring), DP-2 (except OSError → _fallback_response, + _forward_raw), DP-TESTS (proxy tests 17→33), CLIENT-2 (json.load wrapped ValueError→LLMError), plus the low/nit tail — EVAL-EMPTY empty-term guard, DP-3 port-bind probe, DP-4 Authorization forwarded, DP-6 DICTATION_PROXY_PORT in .env, DP-7 daemon_threads.",
+            report: "2026-07-12__audit-report.md"
+          },
           {
             date: "2026-06-18",
             type: "Full (11 reviewers + adversarial verification, 105 agents)",
@@ -1119,78 +1077,31 @@ window.DASHBOARD_DATA = {
         "2026-06-25 — last local modification (no git log available)"
       ],
       audit: {
-        lastRun: "2026-06-17",
-        runType: "Full (whole codebase, single reviewer — /audit skill, senior reviewer persona)",
+        lastRun: "2026-07-12",
+        runType: "Incremental (mtime-scoped since 2026-06-17; /audit skill, senior reviewer persona) + same-day remediation",
         cadence: "on-demand",
-        counts: { critical: 4, high: 6, medium: 8, low: 4, info: 0 },
-        closedLastRun: 0,
-        trend: "new",
-        reportPath: "F:\\AI-Dev\\PC-Monitor\\audit\\2026-06-17__audit-report-full.md",
-        reportFile: "pc-monitor/2026-06-17__audit-report-full.md",
+        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
+        closedLastRun: 6,
+        trend: "improving",
+        reportPath: "F:\\AI-Dev\\PC-Monitor\\audit\\2026-07-12__audit-report.md",
+        reportFile: "pc-monitor/2026-07-12__audit-report.md",
         ledgerPath: "F:\\AI-Dev\\PC-Monitor\\audit",
-        open: [
-          {
-            id: "C-01",
-            sev: "critical",
-            title: "Fan/voltage sensor data (fans_json, volts_json, cpu_vcore, fan_max_rpm) is collected in sensors.py but SAMPLE_COLS in db.py excludes those keys — every write silently drops them and the fans panel never renders",
-            where: "sensors.py / collector.py / db.py:179-188"
-          },
-          {
-            id: "C-02",
-            sev: "critical",
-            title: "_get_settings/_save_settings write config.json next to HERE, which resolves into the PyInstaller temp dir (sys._MEIPASS) when frozen instead of _data_root — saved settings silently vanish on next restart",
-            where: "server.py:146,161"
-          },
-          {
-            id: "C-03",
-            sev: "critical",
-            title: "build_summary() calls Handler._latest_disks(None, c) and Handler._latest_smart(None, c), passing None as self — works only by accident today and will throw AttributeError the moment either method references self",
-            where: "server.py:291-292"
-          },
-          {
-            id: "C-04",
-            sev: "critical",
-            title: "Unconditional `from sources.ollama import Ollama` at module load crashes the entire collector with ModuleNotFoundError if sources/ollama.py is missing, even though ollama is disabled in config.json",
-            where: "collector.py:35"
-          },
-          {
-            id: "H-01",
-            sev: "high",
-            title: "Static file handler's path-traversal guard is broken on Windows, allowing arbitrary local file reads — unpatched; fix before any non-localhost exposure (exact mechanism in the local report, kept out of the public block on purpose)",
-            where: "server.py:122-123"
-          },
-          {
-            id: "H-02",
-            sev: "high",
-            title: "Settings POST has a read-modify-write race under ThreadingHTTPServer — two concurrent POST /api/settings requests can each read/modify/write config.json with no lock, so one write silently loses",
-            where: "server.py:155-176"
-          },
-          {
-            id: "H-03",
-            sev: "high",
-            title: "DB connections opened in handler methods like alerts() and captures() are never closed, leaking connections/file handles as concurrent requests accumulate",
-            where: "server.py"
-          },
-          {
-            id: "H-04",
-            sev: "high",
-            title: "_seen_event_keys retains every (log, record_id) pair ever seen since collector start with no cap, leaking memory indefinitely on long-running machines",
-            where: "collector.py:81"
-          },
-          {
-            id: "H-05",
-            sev: "high",
-            title: "topproc()'s `(best.get(key) if best else -1 or -1)` evaluates to None whenever best.get(key) is None, so `0 > None` raises TypeError — crashes check_thresholds and silently swallows all threshold checks for that tick",
-            where: "collector.py:182"
-          },
-          {
-            id: "H-06",
-            sev: "high",
-            title: "Hardcoded `_URL = \"http://127.0.0.1:8787\"` ignores the configurable port in config.json, so a toast notification's 'Open Dashboard' button silently opens the wrong address once the user changes the port",
-            where: "notifier.py:11"
-          }
-        ],
+        open: [],
         history: [
+          {
+            date: "2026-07-12",
+            type: "Incremental (mtime-scoped; senior reviewer persona) + same-day remediation",
+            scope: "Files changed since 2026-06-17 by mtime (repo had no git history; a dd1bb9d baseline was committed first as a rollback point). Reviewed app.py/collector.py/server.py/notifier.py + the new Ollama & OpenWhispr telemetry sources and their first-ever tests; cross-checked unchanged db.py/sensors.py/events.py",
+            result: "Raised 3 high / 2 medium / 2 low, then remediated all of them same-day in d3938b9: a proven ConnectionAbortedError crash on client disconnect (server.py — an in-repo crash dump was the evidence), duplicate hot-hardware alerts after the seen-set clears (now a FIFO-capped OrderedDict), and the series() DB-connection leak on the 6s-polled /api/series. 29 tests pass (11 new); server live-smoke-tested including the path-traversal guard via curl --path-as-is. MED-5 (OpenWhispr '!= completed' error assumption) was investigated and dismissed — the real transcriptions.db holds only completed/failed with no in-flight status, so the original code was already correct. Zero open after this cycle.",
+            report: "2026-07-12__audit-report.md"
+          },
+          {
+            date: "2026-07-10",
+            type: "Code-level re-verification (not a full audit re-run)",
+            scope: "All 10 open findings, checked against current source; H-01 additionally verified empirically against real path-traversal attack strings",
+            result: "8 of 10 FIXED: all 4 Criticals (C-01 routes sensor data through the existing extra JSON column; C-02 now uses persistent _data_root; C-03's methods are now @staticmethod; C-04 has an import guard), plus H-01 (path traversal — confirmed fixed via realpath+prefix-check, tested against 7 attack strings including drive-absolute and encoded traversal, all correctly rejected), H-02 (settings race — module-level lock added), H-04 (unbounded set — capped at 5000). H-05 fixed too, but the SAME refactor that fixed it introduced a NEW bug in the same function (see AI-Server's PCMON-1 finding — topproc()'s comparison got dedented out of the loop, so it now reports the wrong process and can UnboundLocalError on an empty sample). H-03 and H-06 are genuinely partial, not closed — downgraded from Critical/6-High to reflect only what's actually still open",
+            report: "2026-06-17__audit-report-full.md"
+          },
           {
             date: "2026-06-17",
             type: "Full (/audit skill, senior reviewer persona)",

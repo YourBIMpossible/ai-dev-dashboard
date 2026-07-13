@@ -1,10 +1,10 @@
 window.AUDIT_FRESHNESS = {
-  "checked": "2026-07-10 14:23:05",
+  "checked": "2026-07-12 17:39:01",
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
-      "lastRun": "2026-07-08",
-      "newestOnDisk": "2026-07-08",
+      "lastRun": "2026-07-11",
+      "newestOnDisk": "2026-07-11",
       "stale": false
     },
     "addins": {
@@ -21,14 +21,14 @@ window.AUDIT_FRESHNESS = {
     },
     "aiserver": {
       "name": "AI-Server",
-      "lastRun": "2026-06-18",
-      "newestOnDisk": "2026-06-18",
+      "lastRun": "2026-07-12",
+      "newestOnDisk": "2026-07-12",
       "stale": false
     },
     "pc-monitor": {
       "name": "PC Monitor",
-      "lastRun": "2026-06-17",
-      "newestOnDisk": "2026-06-17",
+      "lastRun": "2026-07-12",
+      "newestOnDisk": "2026-07-12",
       "stale": false
     }
   }
