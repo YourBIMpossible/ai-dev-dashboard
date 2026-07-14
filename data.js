@@ -232,23 +232,30 @@ window.DASHBOARD_DATA = {
         "2026-06-12 - Client-Management Phase A backend (e749918): 8 tables / 4 migrations; Wave 4.10 spec library COMPLETE (3cf91a0); Wave 4.9 classification enrichment (f207d41)"
       ],
       audit: {
-        lastRun: "2026-07-11",
-        runType: "Incremental verification-of-claimed-fixes (6 agents) followed by same-day TDD resolution (7 agents) of everything it found still open, then a full green Verify-Local-CI.ps1 run — 17 app-repo + 11 workspace-repo commits since 07-08.",
+        lastRun: "2026-07-13",
+        runType: "Weekly full audit (3 parallel lens sub-agents: backend/data/ops, frontend, relay/CI + ops/tests) followed by same-day closeout — every finding shipped as a code/config fix or an accepted, documented owner decision.",
         cadence: "weekly Mon 6am + on-demand",
         counts: {
           critical: 0,
           high: 0,
           medium: 0,
           low: 0,
-          info: 8
+          info: 0
         },
-        closedLastRun: 51,
+        closedLastRun: 17,
         trend: "improving",
-        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-07-11__audit-report.md",
-        reportFile: "bimpossible/2026-07-11__audit-report.md",
+        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-07-13.md",
+        reportFile: "bimpossible/weekly-full-audit_2026-07-13.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
         open: [],
         history: [
+          {
+            date: "2026-07-13",
+            type: "Weekly full audit (3 parallel lens sub-agents) + same-day closeout",
+            scope: "HEAD 85f27e2, 47 commits since the 07-06 run; largest new surface is the assistant live Revit-parameter-write execution primitive (9891132). Every Medium+ carryover re-verified by direct code read, not commit-message trust.",
+            result: "0 crit / 1 high / ~7 medium / ~14 low / ~4 info — then EVERY finding closed (11 shipped in code/config + 6 accepted, documented owner decisions), zero dangling. Headline WSR8 (High): the new assistant Revit-write primitive bypassed revit_link/router's flag+role gate stack — re-routed through a single-source assert_write_authorized() (c4194c5, on main + pushed, remote CI green); it stays dormant/unwired. Remaining fixes (RE-NEW-4/5/6 CAS + reclaim sweep + batching, FE a11y/types, ARCH-NEW-1 365-day retention, docker resource caps, RE-NEW-3 backup-failure webhook, SEC-NEW-1 fails-closed tripwire) landed in b6bb96f, now merged to main + pushed. Accepted-deferred (tracked, not dangling): SEC-3 + SEC-NEW-1 open-mode fallback close at multi-user; ARCH-NEW-2 router god-file split at next major touch. Prior run's Critical (07-06 uncommitted git merge) confirmed resolved.",
+            report: "weekly-full-audit_2026-07-13.md"
+          },
           {
             date: "2026-07-11",
             type: "Incremental verification (6 agents) + same-day TDD resolution (7 agents) + 1 follow-up fix",
@@ -466,17 +473,30 @@ window.DASHBOARD_DATA = {
         "2026-06-11 - Tools 14-21 built + ribbon-wired (Warning Scanner, In-Place Families, Workset Audit, Element ID Finder, Batch Rename Views, VT Audit, Scope Box Manager, Batch PDF Export)"
       ],
       audit: {
-        lastRun: "2026-06-14",
-        runType: "Full (Add-Ins repo, 3 agents)",
+        lastRun: "2026-07-12",
+        runType: "Full (complete top-to-bottom, 7 parallel review agents — RevitLink + ModelQA.Core + 6 discipline add-ins + all 7 test suites + docs/CI). Static review; C-01 and other build/live items flagged 'could not verify' still need a real net48 build + Revit session to confirm.",
         cadence: "on-demand",
-        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
-        closedLastRun: 1,
-        trend: "improving",
-        reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-06-14__audit-report-full.md",
-        reportFile: "addins/2026-06-14__audit-report-full.md",
+        counts: { critical: 1, high: 10, medium: 53, low: 24, info: 18 },
+        closedLastRun: 13,
+        trend: "worsening",
+        reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-07-12__audit-report-full.md",
+        reportFile: "addins/2026-07-12__audit-report-full.md",
         ledgerPath: "F:\\AI-Dev\\Add-Ins\\audits",
-        open: [],
+        open: [
+          { id: "C-01", sev: "critical", title: "net48 (Revit 2024 production) build almost certainly fails to compile — ReloadLinksCommand.cs uses net8-only ElementId APIs (.Value, new ElementId(long)) at 4 sites with no #if NET8_0_OR_GREATER guard, and CI never builds the shipping RevitLink add-in for either TFM, so nothing would catch it.", where: "Commands/ReloadLinksCommand.cs:125,211,273,307 · ci.yml:29-35" },
+          { id: "H-01", sev: "high", title: "Section Clip's PendingPlacement flag has no expiry — cancel (Escape) after Apply leaves it true; the next section anyone draws in any document gets silently cropped with stale Above/Below/Depth (empty catch, no log).", where: "Commands/SectionClipCommand.cs:129,166,171,196,225" },
+          { id: "H-02", sev: "high", title: "Room Data 'adopt existing parameter' can silently convert a client's TYPE-bound parameter to INSTANCE binding — EnsureBinding builds a new InstanceBinding regardless of the original kind, with no warning.", where: "RoomData/SharedParameterReconciler.cs:292-323" },
+          { id: "H-03", sev: "high", title: "WriteInstanceParameterCommand (the repo's own 'core write engine, do not modify lightly') has zero test coverage — flagged 2026-06-09, never remediated; a future edit could ship silent optimistic-lock corruption.", where: "Commands/WriteInstanceParameterCommand.cs:115-161 (no test)" },
+          { id: "H-04", sev: "high", title: "SetUniqueViewName silently gives up after 59 failed renames with no error signal (an illegal char in Find/Replace) — the view keeps its auto name while the run reports success; duplicated in two copies.", where: "Scaffold/CollectionDuplicator.cs:703-712 · LevelReplicator.cs:317-322" },
+          { id: "H-05", sev: "high", title: "ScopeBoxNameNormalizer strips all non-alphanumerics, so 'Zone A-1' and 'Zone A1' both normalize to 'ZONEA1' and silently map to the same key-plan parameter.", where: "Shared/TitleBlock/ScopeBoxNameNormalizer.cs:12 · ScopeBoxToParamMapper.cs:28" },
+          { id: "H-06", sev: "high", title: "ScopeBoxToParamMapper's substring fallback has no min-length or best-match ranking — a single-letter zone 'A'/'N' spuriously matches 'ALPHA'/'NORTH WING', wiring the sheet's key-plan highlight to an unrelated parameter.", where: "Shared/TitleBlock/ScopeBoxToParamMapper.cs:31-36" },
+          { id: "H-07", sev: "high", title: "ViewRenamePreview.Apply leaks Regex.Replace substitution syntax into literal (non-regex) Batch Rename mode — '$$' drops to '$', '$&' becomes the matched text, '${name}' throws; ReplaceText is never validated.", where: "Shared/Views/ViewRenamePreview.cs:26-27" },
+          { id: "H-08", sev: "high", title: "PdfPageCounter.FromText silently returns 1 for object-stream-compressed PDFs (PDF 1.5+), indistinguishable from a real 1-page file — only page 1 gets placed and it's misread as user error.", where: "Shared/Sheets/PdfPageCounter.cs:36 · LinkPdfToSheetsCommand.cs:271" },
+          { id: "H-09", sev: "high", title: "Duplicate Collection's rollback/atomicity gate (this sprint's headline feature) has zero regression test — verified only by a one-time manual Revit session; a future operator/RollBack() change ships green.", where: "Scaffold/CollectionDuplicator.cs:156-171,188-202,255-270,314-329" },
+          { id: "H-10", sev: "high", title: "Tests certify code paths that no longer run in production (3 confirmed): DuplicateCollection orphans, WorksetAuditor (dead since 2026-06-13), RetagAllRoomsPlanner — edit the tested-but-dead copy, tests stay green, nothing ships.", where: "Shared/DuplicateCollection/* · Shared/Worksets/WorksetAuditor.cs · Shared/Rooms/RetagAllRoomsPlanner.cs" }
+        ],
         history: [
+          { date: "2026-07-12", type: "Full (7 parallel review agents)", scope: "Complete top-to-bottom re-read of all active projects — RevitLink (Commands + ModelHealth + Scaffold + Shared) + ModelQA.Core + 6 discipline add-ins + 7 test suites + docs/CI; 114 commits since the 2026-06-14 baseline, ~90% of them in RevitLink.", result: "1 CRITICAL + 10 HIGH + 53 MEDIUM + 24 LOW + 18 INFO. Headline C-01: the net48 (Revit 2024) build is very likely broken (net8-only ElementId APIs unguarded in ReloadLinksCommand) and CI never builds the shipping add-in for either TFM. Recurring themes: silent-failure-reported-as-success, tested-but-dead code (3 files still certified green while unreachable in production), spec/doc-vs-code drift. Prior audit: 13 of the 2026-06-14 findings verified genuinely fixed (H-02/H-04/M-11/M-12/M-17/M-18/M-20-23 et al.). NOTE: the dashboard's earlier '2026-06-14 all-clear' was itself wrong — those findings were open then too and never ingested. Audit tab surfaces C-01 + the 10 highs as cards; the 53 medium / 24 low / 18 info are in the full report (local monitor expands them per-severity).", report: "2026-07-12__audit-report-full.md" },
           { date: "2026-07-10", type: "Code-level re-verification (not a full audit re-run)", scope: "C-01, checked against current source + build output", result: "FIXED — was actually fixed same-day back on 2026-06-14 (commit aa9e65e, Directory.Build.props sets AssemblyVersion 1.1.0.0, confirmed in build output), but the dashboard never got updated to reflect it until now. Caveat carried from the fix itself: diagnostic only (assembly isn't strong-named, so a stale DLL still isn't load-time BLOCKED, just detectable) — real mitigation is coordinated add-in redeploy, tracked separately as M-19, still open", report: "2026-06-14__audit-report-full.md" },
           { date: "2026-06-14", type: "Full (3 agents)", scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests", result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption", report: "2026-06-14__audit-report-full.md" },
           { date: "2026-06-13", type: "Tools 8-33 sweep", scope: "Tools 8-33 + punchlist", result: "Punchlist sweep across the tool suite", report: "2026-06-13__tools-8-33-audit-sweep.md" },
