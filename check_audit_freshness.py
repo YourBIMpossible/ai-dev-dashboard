@@ -19,6 +19,19 @@ OUT = HERE / "audit-freshness.js"
 
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 
+# Some projects file periodic audits in MORE than the single directory their
+# data.js `reportPath` points at. BIMpossible's *weekly* full audits land in
+# "Audit and Scan Info/" (e.g. weekly-full-audit_2026-07-13.md), NOT the
+# "Audit Reports/" archive its reportPath references - so a fresh weekly audit
+# went undetected on the dashboard until 2026-07-13. List every extra
+# audit-report root here, keyed by project id; each is scanned alongside
+# reportPath.parent so the newest report across ALL of them drives staleness.
+EXTRA_SCAN_ROOTS = {
+    "bimpossible": [
+        pathlib.Path(r"F:\AI-Dev\BIMpossible_Workspace\02_Reference\Audit and Scan Info"),
+    ],
+}
+
 _DUMP_JS = (
     "global.window={};"
     f"require({json.dumps(str(DATA_JS))});"
@@ -35,22 +48,26 @@ def load_projects():
     return json.loads(result.stdout)
 
 
-def newest_report_date(report_path):
+def newest_report_date(directories):
     # Report directories are not audit-exclusive - e.g. BIMpossible Site's
     # 01_BuildLog/ also holds dated non-audit entries like "2026-05-28__design-
-    # wishlist-parked.md". Every real report filename across all 5 tracked
+    # wishlist-parked.md". Every real report filename across the tracked
     # directories contains "audit" (verified 2026-07-10); require it so an
-    # unrelated dated file can never masquerade as a newer report.
-    directory = pathlib.Path(report_path).parent
-    if not directory.is_dir():
-        return None
+    # unrelated dated file can never masquerade as a newer report. Scans every
+    # directory given (reportPath.parent + any EXTRA_SCAN_ROOTS for the project)
+    # and returns the single newest date across all of them. Non-recursive by
+    # design, so it won't descend into _backups/ subfolders.
     newest = None
-    for f in directory.iterdir():
-        if not f.is_file() or "audit" not in f.name.lower():
+    for directory in directories:
+        directory = pathlib.Path(directory)
+        if not directory.is_dir():
             continue
-        m = DATE_RE.search(f.name)
-        if m and (newest is None or m.group(1) > newest):
-            newest = m.group(1)
+        for f in directory.iterdir():
+            if not f.is_file() or "audit" not in f.name.lower():
+                continue
+            m = DATE_RE.search(f.name)
+            if m and (newest is None or m.group(1) > newest):
+                newest = m.group(1)
     return newest
 
 
@@ -62,7 +79,8 @@ def main():
         audit = p.get("audit")
         if not audit or not audit.get("reportPath"):
             continue
-        newest = newest_report_date(audit["reportPath"])
+        scan_dirs = [pathlib.Path(audit["reportPath"]).parent] + EXTRA_SCAN_ROOTS.get(p["id"], [])
+        newest = newest_report_date(scan_dirs)
         is_stale = bool(newest and newest > audit["lastRun"])
         results[p["id"]] = {
             "name": p["name"],
