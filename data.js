@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-13",
+  generated: "2026-07-14",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-06-30",
+  activitySince: "2026-07-01",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -181,10 +181,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [13,18,19,0,0,0,5,8,0,3,20,16,15,0],
+      activity: [18,19,0,0,0,5,8,0,3,20,16,15,3,2],
       lastActivity: {
-        date: "2026-07-12",
-        summary: "fix(assistant-revit-write): rechain migration onto a1b2c3d4e5f6, resolve multi-head (85f27e2)"
+        date: "2026-07-14",
+        summary: "chore(deps): bump the frontend-minor-patch group (#182) (c38205f)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
@@ -420,7 +420,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,2,15,2,18,12,15,0,0],
+      activity: [0,0,0,0,0,2,15,2,18,12,15,0,0,0],
       lastActivity: {
         date: "2026-07-11",
         summary: "Merge branch 'worktree-dupcollection-execution-wrapping' (6389484)"
@@ -557,7 +557,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,1,0,0,0,0,0,0,0,0,2,0,0,0],
+      activity: [1,0,0,0,0,0,0,0,0,2,0,0,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
@@ -809,7 +809,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,2,0,2,0],
+      activity: [0,0,0,0,0,0,0,0,0,2,0,2,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
