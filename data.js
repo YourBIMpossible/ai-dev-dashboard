@@ -232,8 +232,8 @@ window.DASHBOARD_DATA = {
         "2026-06-12 - Client-Management Phase A backend (e749918): 8 tables / 4 migrations; Wave 4.10 spec library COMPLETE (3cf91a0); Wave 4.9 classification enrichment (f207d41)"
       ],
       audit: {
-        lastRun: "2026-07-13",
-        runType: "Weekly full audit (3 parallel lens sub-agents: backend/data/ops, frontend, relay/CI + ops/tests) followed by same-day closeout — every finding shipped as a code/config fix or an accepted, documented owner decision.",
+        lastRun: "2026-07-14",
+        runType: "Phase 3 production-readiness audit — this ledger had gone 13 days without an update despite 4 real waves shipping to `main` in that window, against this file's own \"the row IS the deliverable\" rule; backfilled Waves 26-29.",
         cadence: "weekly Mon 6am + on-demand",
         counts: {
           critical: 0,
@@ -242,13 +242,20 @@ window.DASHBOARD_DATA = {
           low: 0,
           info: 0
         },
-        closedLastRun: 17,
+        closedLastRun: 0,
         trend: "improving",
-        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-07-13.md",
-        reportFile: "bimpossible/weekly-full-audit_2026-07-13.md",
+        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-07-14__phase3-production-readiness-audit.md",
+        reportFile: "2026-07-14__phase3-production-readiness-audit.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
         open: [],
         history: [
+          {
+            date: "2026-07-14",
+            type: "Phase 3 production-readiness audit",
+            scope: "Backfilled Waves 26-29. Full audit: `02_Reference/Audit Reports/2026-07-14__phase3-production-readiness-audit.md`.",
+            result: "Ledger updated with Waves 26-29. No new findings.",
+            report: "2026-07-14__phase3-production-readiness-audit.md"
+          },
           {
             date: "2026-07-13",
             type: "Weekly full audit (3 parallel lens sub-agents) + same-day closeout",
