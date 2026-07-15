@@ -6,7 +6,7 @@
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
   generated: "2026-07-14",
-  generatedBy: "scheduled refresh",
+  generatedBy: "on-demand refresh",
   activitySince: "2026-07-01",
   projects: [
     /* PROJECT:bimpossible:START */
@@ -16,8 +16,8 @@ window.DASHBOARD_DATA = {
       icon: "layers",
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
-      phase: "main at bd472b0 (2026-07-01), 0 ahead of origin. Since #170 (07-01) the Embedded Assistant advanced hard: Phase 4c conversation persistence (#153) + stop-and-edit (#154), Phase 4d project-context grounding (#155), NetworkX graph-topology tools + Model Health graph checks (#157), permission-flow graph tool. Infra/hardening: Wave C-1 Redis shared-state multi-worker foundation (#152); QA predicate-normalization refactors (#150/#151); report-only security-scan + BIM semgrep rules + prose-flag hook + trivy CI pin. Program gates unchanged: P11 Model QA + P8 Wizard built but flag-gated OFF; P6 true-prod deploy still owed (alembic → head s1t2u3v4w5x6); P7 write-back ON HOLD (Revit Link single-user live, DA4R parked); P5 ON HOLD.",
-      focus: "True-prod deploy still owed (runbook 06-12): alembic upgrade → head s1t2u3v4w5x6, set BIMPOSSIBLE_ADMIN_ENABLED/SECRET, prewarm DB cleanup → then smoke Wave 4.10 + 4.9 + admin/My-Account. The 06-25→28 assistant Phase 4c/4d + Model Health graph work (#150–157) is merged but unsmoked on prod. The 06-30 full-audit remediation (#150–157) is merged but unsmoked on prod. Then: P7 DA4R-vs-Revit Link sequencing decision.",
+      phase: "main at 1e07550 (2026-07-14), 0 ahead of origin. The 2026-07-13/14 window: a real prod outage (351 backend container restarts — two migrations landed with no backend-migrate run) was root-caused and fixed, then a same-day Phase 3 production-readiness audit found the project's own status ledgers disagreed with each other and the running system on nearly every point that mattered for Phase 3. Same-day fixes: an automated Alembic single-head CI guard (1e07550) so that outage class can't recur silently; the frontend Dockerfile's missing Phase 3.10a flag ARG/ENV (a2a4a23); PHASE-STATUS.md + WAVE-STATUS.md both corrected to reflect reality (Phase 3.10a is code-complete + migrated to prod but its warm-time pipeline has NEVER executed against real data — 0 rows; Phase 3.8 got its first-ever ledger entry). ProgramPlan.md was explicitly left uncorrected — it still gates Commercial Launch on the abandoned Phase 3.8 design. New surface this week: the assistant Revit-parameter-write primitive (WSR8) — merged, migrated, CI-green, zero production callers, safely dark by a real AST-enforced test. Program gates otherwise unchanged: P11 Model QA + P8 Wizard built but flag-gated OFF; P6 true-prod deploy still owed; P7 write-back ON HOLD; P5 ON HOLD.",
+      focus: "Close out Phase 3.10a for real before touching Doors, Ducts/Pipes, Phase 3.8, or WSR8 Step 2 (the audit's own recommendation): (1) add the flag-ON path's missing ErrorBoundary/malformed-row guard — turning the flag on is the literal next step and currently risks a whole-page crash; (2) run the manual warm script against a real cloud-collaborated project — the pipeline has never executed once, against anything; (3) execute the live-test-plan (AC-1/2/3). In parallel, cheap and no dependency on the above: fix ProgramPlan.md — remove/correct the Phase 3.8 commercial-launch gate (L1418) and add real Phase 3.10 content; it's the one status ledger not yet corrected. Separately: true-prod deploy still owed (runbook 06-12).",
       progress: {
         label: "Program phases",
         phases: [
@@ -36,7 +36,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P3 Read-Only Data Dashboard (+ 3.x family)",
             pct: 93,
-            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — Phase 11 QA gate cleared 2026-07-01; first increment 3.10a (Cross-Model Room Join) SHIPPED 2026-07-12 (`dd5adb1`); general join framework (3.10b) not yet built. See §Phase 3 sub-phase notes below.",
+            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — Phase 11 QA gate cleared 2026-07-01; first increment 3.10a (Cross-Model Room Join) code-complete + migrated to prod, but the warm-time pipeline has never executed against real data (0 rows) — see §Phase 3 sub-phase notes; 3.10b Furniture slice SHIPPED (`4bb6497`, reuses 3.10a's algorithm unchanged); general join framework not yet built; Doors design validated, not built; Ducts/Pipes awaits a product decision. Phase 3.8 (Full RBAC + Client Portal): paused mid-scoping, zero code — see §Phase 3 sub-phase notes.",
             tasks: [
               { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
               { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
@@ -181,38 +181,40 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [18,19,0,0,0,5,8,0,3,20,16,15,3,2],
+      activity: [18,19,0,0,0,5,8,0,3,20,16,15,3,7],
       lastActivity: {
         date: "2026-07-14",
-        summary: "chore(deps): bump the frontend-minor-patch group (#182) (c38205f)"
+        summary: "docs(phase3): 2026-07-14 production-readiness audit + PHASE-STATUS/WAVE-STATUS sync (f07ebb9)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
         warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)."
       },
       nextActions: [
-        "True-prod deploy (runbook 06-12): alembic upgrade head (→ s1t2u3v4w5x6), set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, DELETE stale done-rows in relationship_prewarm_jobs per model",
-        "Post-deploy smokes: Wave 4.10 (Spec Draft launcher → modal + downloads); Wave 4.9 (ScheduleClassificationBar + ✦ badge); admin/My-Account KPI strip + firm onboard",
-        "Smoke the 06-25→28 assistant work on prod: Phase 4c conversation persistence + stop-and-edit, Phase 4d project-context grounding, Model Health graph checks (#150–157)",
-        "Smoke the 06-30 full-audit remediation on prod: GRAPH-1 diamond-DAG `_load_served`, GS-1, OWN-1, DIGEST-3, PREWARM-1",
-        "P7 DA4R + Revit Link sequencing: review 2026-06-23 Phase7_Writeback_TwoOptions_PROPOSAL.md, decide which engine to build first",
-        "Add WAVE-STATUS.md rows for Waves 4.9 + 4.10 (shipped in git, missing from ledger)",
+        "Phase 3.10a flag-ON path: add the malformed-row guard + ErrorBoundary around DataTable (mirrors the existing flag-OFF guard) before the flag is ever flipped on for real users",
+        "Run the manual warm script (docs/specs/active/phase-3-10a-pilot-artifacts/warm_room_join_for_project.py) against a real cloud-collaborated project — first-ever execution of the Phase 3.10a pipeline",
+        "Execute the Phase 3.10a live-test-plan (AC-1/AC-2/AC-3) once the warm script has run",
+        "Fix ProgramPlan.md: remove/correct the Phase 3.8 commercial-launch gate (L1418), add real Phase 3.10/3.10a/3.10b/WSR8 content — the one status ledger the 07-14 audit did NOT get corrected same-day",
+        "True-prod deploy (runbook 06-12): alembic upgrade head, set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, DELETE stale done-rows in relationship_prewarm_jobs per model",
         "Commit + push P6 /account FE test branch: AdminShell, FirmEditDrawer, ConfirmDialog, My Account UI tests missing",
-        "Drop _saved_views_snapshot_2026_05_24 (OVERDUE since 06-23); install reportlab so PDF exports work (CSV-only until added)"
+        "Drop _saved_views_snapshot_2026_05_24 (overdue since 2026-06-23 — not re-verified this pass); install reportlab so PDF exports work (CSV-only until added)"
       ],
       pendingDecisions: [
+        "Phase 3.8 direction is DECIDED (sync Autodesk ACC/Forma's own project roles/companies, not a custom role-matrix) but NOT yet scoped: synced-data schema, draft/publish flag shape, sync trigger mechanism all open — needs dedicated owner/design time, don't guess",
+        "WSR8 Step 2 (wiring the assistant-write primitive to a real caller): permission-role decision (new check_firm_model_editor vs. reusing check_firm_view_editor) + a sync/async adapter between WRITE_DISPATCH's sync dispatch and the primitive's async, dataclass-returning signature — lowest urgency, the primitive is safely dark today",
         "Schedule-push: staleness cadence, classifier rules, fidelity degradation list, SPF ship location",
         "Wave 16 Interiors: build dedicated shapers for Ceilings/Flooring now or batch with Wave 15 Civil?",
         "Phase B admin auth: Google OAuth client + env (AUTH_GOOGLE_ID == backend GOOGLE_CLIENT_ID); B0 unify legacy admin routes onto require_admin (Option A chosen)"
       ],
       blockers: [],
       reminders: [
-        "True-prod deploy owed: alembic upgrade head (Phase A 4 migrations → head s1t2u3v4w5x6) + 2 env vars + prewarm DB cleanup — gates Wave 4.9/4.10/admin/My-Account live smokes",
-        "WAVE-STATUS.md ledger missing rows for Waves 4.9 + 4.10 (both shipped in git) — add them so summary counts are authoritative",
+        "ProgramPlan.md (1,574 lines) still gates Commercial Launch on the abandoned Phase 3.8 custom-role-matrix design and has zero mentions of Phase 3.10 anywhere — flagged by the 07-14 audit, not yet corrected (PHASE-STATUS.md + WAVE-STATUS.md both were, same day)",
+        "CI runs after push, not before merge (dc03a98 removed the PR gate) — a bad multi-head migration state (or any other regression) is live on main before CI ever evaluates it once; the new Alembic single-head guard (1e07550) only catches the migration-collision case",
+        "True-prod deploy owed: alembic upgrade head + 2 env vars + prewarm DB cleanup — gates Wave 4.9/4.10/admin/My-Account live smokes",
         "P7 two-engine proposal: 2026-06-23 Phase7_Writeback_TwoOptions_PROPOSAL.md — DA4R (cloud) + Revit Link (app-sync) co-equal Phase 7 engines; DA4R not yet built",
         "reportlab not installed → aec/exports.py PDF routes inert (CSV works); add before Phase C /account/export/*.pdf",
         "My Account shows graceful 'not linked' state until founder's Autodesk user gets an active user_firm_memberships row",
-        "Drop _saved_views_snapshot_2026_05_24 — deadline TODAY 2026-06-23"
+        "Drop _saved_views_snapshot_2026_05_24 — overdue since 2026-06-23, not re-verified this pass"
       ],
       links: [
         { label: "STATE doc (canonical, 06-12)", path: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_STATE_2026-06-12.md" },
@@ -223,37 +225,43 @@ window.DASHBOARD_DATA = {
         { label: "Code", path: "F:\\AI-Dev\\BIMpossible" }
       ],
       recent: [
+        "2026-07-14 - Phase 3 production-readiness audit + same-day fixes: Alembic single-head CI guard (1e07550), Dockerfile Phase 3.10a flag ARG/ENV (a2a4a23), PHASE-STATUS.md + WAVE-STATUS.md corrected (f07ebb9)",
+        "2026-07-13/14 - Prod outage root-caused + fixed: 351 backend container restarts from two migrations landing with no backend-migrate run",
+        "2026-07-13 - Weekly full audit + same-day closeout: WSR8 (assistant Revit-write auth gate) + 16 other findings — 11 shipped in code/config, 6 accepted owner decisions, zero dangling (c4194c5, b6bb96f)",
+        "2026-07-12/13 - Phase 3.10a Cross-Model Room Join merged + migrated to prod (dd5adb1); warm-time writer gap found+fixed next day (c72f647/09cb66b); Phase 3.10b Furniture slice shipped (4bb6497); dynamic firm resolution P3-8-DYN shipped (72e88f8)",
         "2026-06-28 - PRs #153–#157 merged: Embedded Assistant Phase 4c (conversation persistence + stop-and-edit) + Phase 4d project-context grounding; NetworkX graph-topology tools + Model Health graph checks (#157) + permission-flow graph tool; report-only security-scan + BIM semgrep + prose-flag hook; trivy CI pin (main 80d3407)",
-        "2026-06-27 - Wave C-1 (#152): shared-state on Redis — multi-worker foundation",
-        "2026-06-25 - QA refactors (#150/#151): extract _norm/_blank helpers + fold non_empty into not _blank (DRY predicate normalization)",
         "2026-06-23 - PR #142 merged (9f6f55c): P11 Model QA rules engine + P8 Wizard committed to main; expr-eval prototype-pollution CVE removed; relay frame guard + multi-tenant auth scoping + aec edge cases (audit remediation)",
-        "2026-06-17 - Audit remediation batch: conftest pure-lane collect_ignore fix; FederatedViewer + annotations/viewPresets hardening (3 commits)",
-        "2026-06-13 - Client-Management UIs shipped (0e0242f): Admin Portal v2 + My Account dashboard (budget, BYO-key, cost-by-model); CI green",
-        "2026-06-12 - Client-Management Phase A backend (e749918): 8 tables / 4 migrations; Wave 4.10 spec library COMPLETE (3cf91a0); Wave 4.9 classification enrichment (f207d41)"
+        "2026-06-13 - Client-Management UIs shipped (0e0242f): Admin Portal v2 + My Account dashboard (budget, BYO-key, cost-by-model); CI green"
       ],
       audit: {
         lastRun: "2026-07-14",
-        runType: "Phase 3 production-readiness audit — this ledger had gone 13 days without an update despite 4 real waves shipping to `main` in that window, against this file's own \"the row IS the deliverable\" rule; backfilled Waves 26-29.",
+        runType: "Phase 3 production-readiness audit — a different kind of audit than the usual code-security sweep: ground-truth verification (live docker exec into prod DB/backend, real GitHub Actions API, git log against origin/main) of every Phase 3 feature/flag/migration against what the project's own status ledgers claim. Four independent read-only evidence passes (code, frontend, tests/CI, docs), nothing trusted at face value.",
         cadence: "weekly Mon 6am + on-demand",
         counts: {
           critical: 0,
           high: 0,
-          medium: 0,
-          low: 0,
+          medium: 3,
+          low: 2,
           info: 0
         },
-        closedLastRun: 0,
+        closedLastRun: 2,
         trend: "improving",
         reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-07-14__phase3-production-readiness-audit.md",
-        reportFile: "2026-07-14__phase3-production-readiness-audit.md",
+        reportFile: "bimpossible/2026-07-14__phase3-production-readiness-audit.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
-        open: [],
+        open: [
+          { id: "PHASE3-10A-DARK", sev: "medium", title: "Phase 3.10a's warm-time pipeline is merged, migrated to prod, and CI-green — but room_footprint_cache/level_band_cache have 0 rows and element_cache has 0 rows with origin_x populated (verified live). No test, in any lane, exercises the real dispatch path end-to-end.", where: "aec/room_geometry_warm.py:56-164 · aec/prewarm_worker.py" },
+          { id: "PHASE3-10A-CRASH", sev: "medium", title: "Turning the Phase 3.10a flag on — the literal next planned step — reintroduces a whole-page crash risk: the malformed-row guard exists only on the flag-OFF path, no ErrorBoundary wraps the DataTable on flag-ON, and no error.tsx exists anywhere in the app.", where: "useCategoryData.ts (flag-on path) · no error.tsx" },
+          { id: "PROGRAMPLAN-STALE", sev: "medium", title: "ProgramPlan.md (1,574 lines) still gates Commercial Launch (L1418) on the Phase 3.8 custom-role-matrix design abandoned 2026-07-12, and has zero mentions of 3.10/3.10a/3.10b/WSR8 anywhere. PHASE-STATUS.md + WAVE-STATUS.md were both corrected same-day — this one was explicitly left for owner correction.", where: "00_Strategy/BIMpossible_ProgramPlan_2026-05-25.md" },
+          { id: "DATA-SILENT-EMPTY", sev: "low", title: "Any category loading 0 elements silently vanishes from the sidebar with a confidently-worded 'No element data available' message — masked failure and genuine emptiness read identically. Same collapse in Circuits (timeout = clean 404) and ElementPreviewPanel's Related section (thrown fetch = zero relationships, no error state).", where: "useCategoryData.ts:407-424 · page.tsx:2883-2887" },
+          { id: "ROWSTATUS-COLLAPSE", sev: "low", title: "Phase 3.10a's own per-row outcomes (no_room/ambiguous/invalid_level/no_location) all collapse into one blank cell in the frontend — the exact silent-failure-looks-like-empty-data pattern the feature's own query-level banner was built to prevent, one layer down.", where: "frontend Data tab, Phase 3.10a linked-room columns" }
+        ],
         history: [
           {
             date: "2026-07-14",
-            type: "Phase 3 production-readiness audit",
-            scope: "Backfilled Waves 26-29. Full audit: `02_Reference/Audit Reports/2026-07-14__phase3-production-readiness-audit.md`.",
-            result: "Ledger updated with Waves 26-29. No new findings.",
+            type: "Phase 3 production-readiness audit (ground-truth verification, 4 evidence passes) + same-day partial remediation",
+            scope: "Every Phase 3 feature, sub-phase, spec, plan, migration, flag, endpoint, worker, and runbook, cross-checked against live prod DB rows, real CI status, and git history — not the ledgers' own claims.",
+            result: "Headline: the project's own status ledgers disagreed with each other and with the running system on nearly every point that mattered. Found (and same-day fixed): no automated guard against Alembic multi-head migration collisions — this exact risk class caused a real prod outage the night before (351 backend container restarts, two migrations landed with no backend-migrate run); fixed via a new CI guard (1e07550). Also found+fixed: frontend/Dockerfile had no ARG/ENV line for the Phase 3.10a flag at all, silently no-opping the documented 'flip it on locally to test' path (a2a4a23). Corrected same-day, citing this audit: PHASE-STATUS.md (Phase 3.10a's warm-time pipeline is code-complete, migrated to prod, CI-green — but has NEVER executed against real data, 0 rows in room_footprint_cache/level_band_cache/element_cache.origin_x, confirmed live; the prior 'owed a live-test verification' framing was wrong the day it was written; added the missing Phase 3.8 entry) and WAVE-STATUS.md (was 13 days stale despite 4 real waves shipping; backfilled waves 26-29 for 3.10a/3.10b-Furniture/P3-8-DYN/WSR8). Still genuinely open: ProgramPlan.md (1,574 lines) was explicitly NOT corrected — still gates Commercial Launch on the Phase 3.8 custom-role-matrix design abandoned 2026-07-12, and has zero mentions of 3.10/3.10a/3.10b/WSR8 anywhere; Phase 3.10a's flag-ON path has no ErrorBoundary/malformed-row guard (the flag-OFF path does) — turning the flag on, the literal next planned step, risks a whole-page crash; and a broader silent-empty-state sweep found 3 spots where a genuine failure and genuine emptiness render identically (category-vanish-on-0-elements, Circuits timeout-vs-404, ElementPreviewPanel's Related section with no error state at all).",
             report: "2026-07-14__phase3-production-readiness-audit.md"
           },
           {
@@ -364,15 +372,18 @@ window.DASHBOARD_DATA = {
         ]
       },
       waves: {
-        updated: "2026-07-01",
+        updated: "2026-07-14",
         source: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 28, built: 0, inFlight: 1, ahead: 4 },
+        summary: { done: 29, built: 3, inFlight: 1, ahead: 4 },
         current: [
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
+          { id: "26", title: "Phase 3.10a Cross-Model Room Join", status: "BUILT", date: "2026-07-13", note: "Code merged `dd5adb1` (2026-07-12); warm-time writer gap found+fixed `c72f647`/`09cb66b` (2026-07-13); migration genuinely applied to prod (confirmed live). No…" },
+          { id: "28", title: "Phase 3.10b Furniture slice", status: "BUILT", date: "2026-07-12", note: "`4bb6497`, reuses 3.10a's algorithm unchanged. Inherits Wave 26's never-executed-pipeline gap — same caveat applies." },
+          { id: "29", title: "WSR8 write-primitive cluster (assistant-Revit-write auth gate + reliability hardening)", status: "BUILT", date: "2026-07-13", note: "`c4194c5`, real GitHub Actions CI green. `execute_proposal` has zero production callers, enforced by a real AST-based test in the required CI gate — correctly,…" },
           { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED" },
           { id: "9", title: "APS Forma embed evaluation", status: "PLANNED" }
         ],
-        lastCompleted: { id: "20", title: "Access control, usage metering & admin", date: "2026-07-01" },
+        lastCompleted: { id: "27", title: "Dynamic firm resolution (P3-8-DYN)", date: "2026-07-12" },
         drift: []
       }
     },
@@ -382,66 +393,52 @@ window.DASHBOARD_DATA = {
       id: "addins",
       name: "Add-Ins / RevitLink",
       icon: "wrench",
-      oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (13/15 shipped + 21 tools built) + Trade QA Scanner suite (6 trades deployed).",
+      oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (9 tools SHIP, Check Conflicts newly wired, 2 retired) + Trade QA Scanner suite (6 trades deployed).",
       status: "active",
-      phase: "06-27: Duplicate Collection refine on branch feat/dupcollection-refine (3 ahead of origin, unpushed) — template remap store + view-family name minter + UI overhaul (c34f022); Model Health per-view workset breakdown + plain-English metric descriptions (070b4be); working specs committed (26f1e1f). Earlier: 3D section-box tightening + Reference Callout collapsible section (06-16); Tool 18 hardened (06-13); Tools 10-13 shipped + 14-21 built via TDD on main. RevitLink 9/13 shipped + 8 BIM-manager tools.",
-      focus: "Push the feat/dupcollection-refine branch (3 unpushed); Tool 7 Phase 1 smoke in Revit; update TOOL_BACKLOG.md with Tools 14-21; then Definition of Done sweep (icons/guides/tooltips) for Tools 10-21; add Tools 14-21 to backlog table; update Tool 7 Phase 1 status to SHIP; update Tool 16 icon.",
+      phase: "2026-07-14: the 2026-07-12 full audit (1 critical, 10 high, 106 total) is CLOSED — every finding got a real decision. C-01, the sole critical, was DISPROVEN (net48 builds clean; the audit's own claim was wrong). All 10 highs fixed in code (Section Clip one-shot expiry, Room Data binding-kind refuse, WriteInstanceParameterCommand testable extraction, SetUniqueViewName sanitization, ScopeBox collision + substring-match fixes, ViewRenamePreview literal-mode escaping, PdfPageCounter null-on-ambiguous, Duplicate Collection rollback test, 18-file dead-code sweep). Check Conflicts wired to the Sync panel; Batch PDF Export + Build Sheet Set from Arch Link (superseded by Tool 2 Scaffold) retired. Same day: Retag All Rooms' silently-skipped orphan '?' tags fixed (owner-reported), all 16 oversized ribbon tooltip images (5x over Revit's 355px limit) stripped + recipe corrected (owner-reported), 2 remaining theme-blind popups fixed, and a major Duplicate tool feature landed — new Replicate Levels tab, multi-pair view-rename autofill (all disciplines in a mixed selection, not just one), panel-schedule packing/legend fixes.",
+      focus: "Ribbon icon/tooltip polish pass (postponed 07-14): 20/37 buttons missing ToolTipImage, Place Callout Sheets' placeholder icon. M-14 (split-level sheet title marker) needs a signature-level redesign to LevelSheetTitle.Build — deferred, not scheduled. Live-verify the Retag All Rooms orphan-tag fix in Revit (shipped without that confirmation per its own commit message). QA Scanners: live smoke Architectural (4 tools, 21 tests); live spikes for E/M/P/FP/S collectors.",
       progress: { label: "Tracks", phases: [
-        { name: "RevitLink tools (9/13 shipped)", pct: 72,
+        { name: "RevitLink tools (9 SHIP, 2 retired, 1 future)", pct: 78, note: "2026-07-14 audit closeout: Tool 7 (Build Sheet Set from Arch Link) retired — superseded by Tool 2 Scaffold, a strict superset. Check Conflicts wired to Sync panel (was built since 06-02, never given a ribbon face).",
           tasks: [
-            { label: "Tools 1–6 shipped", status: "done" },
-            { label: "Tool 7 (Build Sheet Set from Arch Link)", status: "active", note: "Phase 1 built; smoke test owed in Revit" },
-            { label: "Tools 8–9", status: "pending", note: "IDEA stage" },
-            { label: "Tools 10–13 shipped", status: "done", note: "06-10: Fix Title Blocks, Retag Rooms, Push View Templates, Trim Sheets" }
+            { label: "Sync with Central, ARCH Mode Scan, Fix Title Blocks, Retag Rooms, Push View Templates, Trim Sheets, Create Callout Views, Batch Rename, Place Callout Sheets", status: "done", note: "9 tools SHIP" },
+            { label: "Check Conflicts", status: "done", note: "wired 2026-07-14 — worksharing checkout pre-flight, before Sync with Central" },
+            { label: "Build Sheet Set from Arch Link", status: "done", note: "RETIRED 2026-07-14 — deleted, superseded by Tool 2 Scaffold" },
+            { label: "Batch PDF Export", status: "done", note: "RETIRED 2026-07-14 — deleted, thin Revit-exporter wrapper; Sync Print Sets already does it better" },
+            { label: "Place Panel Schedules + Key Plan / Link Multi-Page PDFs", status: "pending", note: "IDEA stage" }
           ]
         },
-        { name: "BIM Manager Tools (14-21 built)", pct: 42, note: "TDD green; Tool 18 hardened 06-13; not yet in SHIP state; Definition of Done owed",
+        { name: "Duplicate Collection / Replicate Levels", pct: 75, note: "2026-07-14: major feature landing — new Replicate Levels tab (stamp a completed source level onto target levels), multi-pair view-rename autofill (detects every discipline in a mixed selection), rollback/atomicity gate now unit-tested (H-09)",
           tasks: [
-            { label: "Tool 14 Warning Scanner", status: "done", note: "WarningScannerCommand + 6 tests" },
-            { label: "Tool 15 In-Place Family Finder", status: "done", note: "TDD green" },
-            { label: "Tool 16 Workset Audit", status: "done", note: "WorksetAuditEntry + 5 tests" },
-            { label: "Tool 17 Element ID Finder", status: "done", note: "WPF dialog + clipboard copy" },
-            { label: "Tool 18 Batch Rename Views", status: "done", note: "Hardened 06-13: strict preflight preview, atomic commit, case toggle, manifest" },
-            { label: "Tool 19 View Template Audit", status: "done", note: "HTML+CSV report, TDD green" },
-            { label: "Tool 20 Scope Box Manager", status: "done", note: "TDD green" },
-            { label: "Tool 21 Batch PDF Export", status: "done", note: "SheetExportSpec + PdfExportGrouper + 4 tests" },
-            { label: "Definition of Done (icons, guides, tooltips) for 14-21", status: "pending" },
-            { label: "TOOL_BACKLOG.md numbered table updated with 14-21", status: "pending" }
-          ]
-        },
-        { name: "Tool 7 sheet set", pct: 60, note: "Phase 1 built; smoke owed",
-          tasks: [
-            { label: "Phase 1 (sheets) — built", status: "done" },
-            { label: "Phase 1 smoke test in Revit", status: "active", note: "Next action — run it" },
-            { label: "Phase 2 (view placement)", status: "pending" }
+            { label: "Core duplicate/replicate engine + rollback atomicity", status: "done", note: "ExecutionUnitDecision extracted + unit-tested" },
+            { label: "Replicate Levels tab", status: "done", note: "supersedes the buried MultiLevelReplicateSection" },
+            { label: "Multi-pair view-rename autofill (all disciplines)", status: "done" },
+            { label: "Template remap store + smart-match", status: "done" }
           ]
         },
         { name: "QA scanners (6/7 deployed)", pct: 72, note: "Core consolidated + audit-hardened; live smokes owed",
           tasks: [
             { label: "6 trades deployed", status: "done" },
-            { label: "ModelQA.Core consolidated (816 tests green)", status: "done", note: "06-10 — 17 files × ~100 copies → one netstandard2.0 lib" },
-            { label: "Audit-hardened pass", status: "done", note: "06-09 — CSV injection guard x7, culture-invariant, rolling log" },
+            { label: "ModelQA.Core consolidated + dedicated Core.Tests project", status: "done", note: "06-10 consolidation; 07-14 split Core's tests into their own Revit-free project (MI-11)" },
+            { label: "Discipline collector silent-failure fixes", status: "done", note: "07-14 — Electrical CapacityVa + Plumbing CountOpenPipingConnectors no longer read a broken element as healthy" },
             { label: "Architectural live smoke (4 tools, 21 tests)", status: "active" },
             { label: "E / M / P / FP / S live spikes", status: "pending" },
             { label: "Civil scanner (Trade 7)", status: "pending", note: "Scope decision parked — unanswered" }
           ]
         }
       ]},
-      activity: [0,0,0,0,0,2,15,2,18,12,15,0,0,0],
+      activity: [0,0,0,0,0,2,15,2,18,12,16,6,0,15],
       lastActivity: {
-        date: "2026-07-11",
-        summary: "Merge branch 'worktree-dupcollection-execution-wrapping' (6389484)"
+        date: "2026-07-14",
+        summary: "merge: room-tag orphans, audit closeout, tooltip 355px, theme, Lighting/Power (1006831)"
       },
-      branch: "feat/dupcollection-refine (3 ahead of origin, unpushed)",
-      git: {
-        warn: "On feat/dupcollection-refine, 3 commits ahead of origin (06-27 dupcollection/model-health work, unpushed). Push or merge before it drifts."
-      },
+      branch: "main; synced with origin",
+      git: null,
       nextActions: [
-        "Tool 7 Phase 1 (sheets) smoke test; Phase 2 = view placement",
-        "Definition of Done sweep: icons + How-To guides + tooltip/F1 wiring for Tools 10-21",
+        "Ribbon icon/tooltip polish pass: wire ToolTipImage for 20/37 buttons, fix Place Callout Sheets' placeholder icon",
+        "M-14: signature-level redesign for LevelSheetTitle.Build's split-level continuation marker",
+        "Live-verify Retag All Rooms' orphan-tag fix (95c0ba4) in Revit — shipped without that confirmation",
         "QA Scanners: live smoke Architectural (4 tools, 21 tests); live spikes for E/M/P/FP/S collectors",
-        "Update TOOL_BACKLOG.md: add Tools 14-21 to numbered backlog table with status; update Tool 7 Phase 1 to SHIP",
-        "Merge/close feat/model-audit-consolidation-2026-06-12 when consolidation lands"
+        "Git hygiene: remove 3 merged/identical worktrees under .claude/worktrees/; resolve 5 unmerged conformance branches (owner sign-off needed, all fork from an aging main)"
       ],
       pendingDecisions: [
         "Civil Shared-Coordinate Audit scanner - scope unanswered (PARKED)"
@@ -449,11 +446,10 @@ window.DASHBOARD_DATA = {
       blockers: [],
       reminders: [
         "Core.dll co-loads in one Revit process: redeploy ALL add-ins together when Core changes",
-        "Tools 14-21 committed to main but not yet in TOOL_BACKLOG.md numbered table — update table + assign status",
-        "Definition of Done (icons, guides, tooltips) owed for all recently shipped/built tools (10-21)",
-        "Deferred: Deploy-Local.ps1 PS 5.1-safe; Revit dev-mode hot-reload",
-        "Tool 7 Phase 1 status updated to SHIP in TOOL_BACKLOG.md",
-        "Tool 16 ships with a placeholder icon — update icon to avoid duplication with Tool 14"
+        "RoomTagger.TagView:105 still swallows NewRoomTag failures in the fresh-tag pass (flagged, deliberately not fixed 07-14 — changes a shared signature)",
+        "3 stale/missing Trim Out-of-Scope Sheets guide screenshots (M-30, reclassified from a safety finding — the guide's toggle warning text is correct and complete; only images are stale, and they err safe)",
+        "MI-19/MI-20: stale worktrees + 5 unmerged conformance branches — deferred, destructive git ops need explicit sign-off",
+        "Deferred: Deploy-Local.ps1 PS 5.1-safe; Revit dev-mode hot-reload"
       ],
       links: [
         {
@@ -474,36 +470,38 @@ window.DASHBOARD_DATA = {
         }
       ],
       recent: [
-        "2026-06-27 - Duplicate Collection refine (feat/dupcollection-refine, 3 ahead of origin): template remap store + view-family name minter + UI overhaul (c34f022); Model Health per-view workset breakdown + plain-English metric descriptions (070b4be)",
-        "2026-06-23 - refactor(revitlink): remove Anti-Worksets auto-stamp updater; bundle Duplicate Collection revisions (fddcaaf)",
-        "2026-06-16 - 3D section-box tightening + datum clutter hidden; Reference Callout Views collapsible section (716f9e8/85932bd)",
-        "2026-06-13 - Tool 18 Batch Rename Views hardened (032b877): strict preflight preview, atomic commit, case toggle, manifest",
-        "2026-06-11 - Tools 14-21 built + ribbon-wired (Warning Scanner, In-Place Families, Workset Audit, Element ID Finder, Batch Rename Views, VT Audit, Scope Box Manager, Batch PDF Export)"
+        "2026-07-14 - 2026-07-12 audit CLOSED: C-01 disproven (clean net48 build), all 10 highs fixed, Check Conflicts wired, 2 dead tools retired (audits/2026-07-12__audit-resolution.md)",
+        "2026-07-14 - feat(revitlink): Replicate Levels tab, Duplicate UX, panel-schedule packing + legend fixes (98c515b)",
+        "2026-07-14 - fix(retag-rooms): orphaned '?' tags were silently skipped and never reported — owner-caught bug (95c0ba4)",
+        "2026-07-14 - fix(ribbon): tooltip images were 5x over Revit's 355px limit — stripped 16 oversized images + fixed the capture recipe (6a5a48f)",
+        "2026-07-14 - fix(theme): last two theme-blind popups (Room Data, Electrical Param Sync) now follow Revit's Light/Dark (e6e936c)",
+        "2026-07-14 - feat(duplicate): view-rename autofill detects ALL disciplines in a mixed selection, one Find row each (d97339f)"
       ],
       audit: {
-        lastRun: "2026-07-12",
-        runType: "Full (complete top-to-bottom, 7 parallel review agents — RevitLink + ModelQA.Core + 6 discipline add-ins + all 7 test suites + docs/CI). Static review; C-01 and other build/live items flagged 'could not verify' still need a real net48 build + Revit session to confirm.",
+        lastRun: "2026-07-14",
+        runType: "Resolution of the 2026-07-12 full audit (106 findings) — 8 fix commits landed ~85 findings in code, then an explicit owner-decision pass (audits/2026-07-12__audit-resolution.md) closed everything left: 3 findings disproven as false positives (including the sole CRITICAL), the rest fixed, won't-fix (verified safe), deferred-design, or postponed pending owner time.",
         cadence: "on-demand",
-        counts: { critical: 1, high: 10, medium: 53, low: 24, info: 18 },
-        closedLastRun: 13,
-        trend: "worsening",
-        reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-07-12__audit-report-full.md",
-        reportFile: "addins/2026-07-12__audit-report-full.md",
+        counts: { critical: 0, high: 0, medium: 4, low: 6, info: 1 },
+        closedLastRun: 95,
+        trend: "improving",
+        reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-07-12__audit-resolution.md",
+        reportFile: "addins/2026-07-12__audit-resolution.md",
         ledgerPath: "F:\\AI-Dev\\Add-Ins\\audits",
         open: [
-          { id: "C-01", sev: "critical", title: "net48 (Revit 2024 production) build almost certainly fails to compile — ReloadLinksCommand.cs uses net8-only ElementId APIs (.Value, new ElementId(long)) at 4 sites with no #if NET8_0_OR_GREATER guard, and CI never builds the shipping RevitLink add-in for either TFM, so nothing would catch it.", where: "Commands/ReloadLinksCommand.cs:125,211,273,307 · ci.yml:29-35" },
-          { id: "H-01", sev: "high", title: "Section Clip's PendingPlacement flag has no expiry — cancel (Escape) after Apply leaves it true; the next section anyone draws in any document gets silently cropped with stale Above/Below/Depth (empty catch, no log).", where: "Commands/SectionClipCommand.cs:129,166,171,196,225" },
-          { id: "H-02", sev: "high", title: "Room Data 'adopt existing parameter' can silently convert a client's TYPE-bound parameter to INSTANCE binding — EnsureBinding builds a new InstanceBinding regardless of the original kind, with no warning.", where: "RoomData/SharedParameterReconciler.cs:292-323" },
-          { id: "H-03", sev: "high", title: "WriteInstanceParameterCommand (the repo's own 'core write engine, do not modify lightly') has zero test coverage — flagged 2026-06-09, never remediated; a future edit could ship silent optimistic-lock corruption.", where: "Commands/WriteInstanceParameterCommand.cs:115-161 (no test)" },
-          { id: "H-04", sev: "high", title: "SetUniqueViewName silently gives up after 59 failed renames with no error signal (an illegal char in Find/Replace) — the view keeps its auto name while the run reports success; duplicated in two copies.", where: "Scaffold/CollectionDuplicator.cs:703-712 · LevelReplicator.cs:317-322" },
-          { id: "H-05", sev: "high", title: "ScopeBoxNameNormalizer strips all non-alphanumerics, so 'Zone A-1' and 'Zone A1' both normalize to 'ZONEA1' and silently map to the same key-plan parameter.", where: "Shared/TitleBlock/ScopeBoxNameNormalizer.cs:12 · ScopeBoxToParamMapper.cs:28" },
-          { id: "H-06", sev: "high", title: "ScopeBoxToParamMapper's substring fallback has no min-length or best-match ranking — a single-letter zone 'A'/'N' spuriously matches 'ALPHA'/'NORTH WING', wiring the sheet's key-plan highlight to an unrelated parameter.", where: "Shared/TitleBlock/ScopeBoxToParamMapper.cs:31-36" },
-          { id: "H-07", sev: "high", title: "ViewRenamePreview.Apply leaks Regex.Replace substitution syntax into literal (non-regex) Batch Rename mode — '$$' drops to '$', '$&' becomes the matched text, '${name}' throws; ReplaceText is never validated.", where: "Shared/Views/ViewRenamePreview.cs:26-27" },
-          { id: "H-08", sev: "high", title: "PdfPageCounter.FromText silently returns 1 for object-stream-compressed PDFs (PDF 1.5+), indistinguishable from a real 1-page file — only page 1 gets placed and it's misread as user error.", where: "Shared/Sheets/PdfPageCounter.cs:36 · LinkPdfToSheetsCommand.cs:271" },
-          { id: "H-09", sev: "high", title: "Duplicate Collection's rollback/atomicity gate (this sprint's headline feature) has zero regression test — verified only by a one-time manual Revit session; a future operator/RollBack() change ships green.", where: "Scaffold/CollectionDuplicator.cs:156-171,188-202,255-270,314-329" },
-          { id: "H-10", sev: "high", title: "Tests certify code paths that no longer run in production (3 confirmed): DuplicateCollection orphans, WorksetAuditor (dead since 2026-06-13), RetagAllRoomsPlanner — edit the tested-but-dead copy, tests stay green, nothing ships.", where: "Shared/DuplicateCollection/* · Shared/Worksets/WorksetAuditor.cs · Shared/Rooms/RetagAllRoomsPlanner.cs" }
+          { id: "M-14", sev: "medium", title: "LevelSheetTitle.Build's split-level continuation marker needs a signature-level redesign, not a patch — deferred, not scheduled, explicitly not 'fixed'.", where: "Shared/Sheets/LevelSheetAllocator.cs (LevelSheetTitle.Build)" },
+          { id: "MI-17", sev: "medium", title: "SortSheetsCommand's 'fix' is a documented mirror, not a real extraction — the pure sort logic stays private inside a Revit-bound class and the test hand-copies the algorithm. A real fix needs an H-03-style extraction.", where: "Commands/SortSheetsCommand.cs:167-180" },
+          { id: "MI-19", sev: "medium", title: "Stale worktrees under .claude/worktrees/ — 3 fully merged/identical to main (safe to remove), 1 detached orphaned HEAD needing inspection before touching. No behavioral impact; deferred as destructive git hygiene.", where: ".claude/worktrees/*" },
+          { id: "MI-20", sev: "medium", title: "5 branches carry real unmerged work, legitimately gated on explicit owner sign-off, but all fork from an aging main and independently touch files main has since changed repeatedly — merge-conflict cost grows the longer sign-off is deferred.", where: "docs/conformance-*, feat/conformance-* branches" },
+          { id: "M-30", sev: "low", title: "Reclassified from a safety finding to screenshot debt: Trim Out-of-Scope Sheets' guide text and toggle warning are correct and complete, but 3 images are stale/missing (captured before the destructive toggle existed). Errs safe — under-shows the danger, not over.", where: "How to Guides/.../Trim Out-of-Scope Sheets/assets/*" },
+          { id: "M-33", sev: "low", title: "Place Callout Sheets ships with a placeholder icon, reusing Create Callout Views' icon pixel-for-pixel (self-admitted in a code comment). Ribbon icon/tooltip-image polish (also: 20/37 buttons missing ToolTipImage) postponed to a dedicated pass, owner decision 2026-07-14.", where: "App.cs (Place Callout Sheets Icon=)" },
+          { id: "L-03", sev: "low", title: "Zero 16px icon variants exist anywhere in Resources (all 56 icons are 32×32) — corrected severity 2026-07-14: this is a Quick Access Toolbar edge case only (Revit downscales cleanly inside the ribbon panel itself), not the 'affects the majority of the ribbon' issue originally claimed.", where: "Resources/*.png" },
+          { id: "L-13", sev: "low", title: "Set Up Project still shows 4 sequential modal dialogs (Tool1, Tool2, Tool3, then the orchestrator's own) instead of one consolidated report — a UX redesign, needs a human call.", where: "SetupProjectOrchestratorCommand.cs:72,202,206,212" },
+          { id: "L-19", sev: "low", title: "secrets.DASHBOARD_PAT's actual token scope is still unconfirmable from any file visible to static inspection.", where: ".github/workflows/dashboard-sync.yml:37" },
+          { id: "L-21", sev: "low", title: "RevitAPI NuGet still pinned to 2026.*-* across RevitLink and all 6 discipline add-ins for a net8 target CLAUDE.md describes as spanning Revit 2025/26/27 — a cross-version API difference would only surface via manual multi-version testing; needs a human policy call.", where: "e.g. BIMpossible.Structural/BIMpossible.Structural.csproj:24" },
+          { id: "I-08", sev: "info", title: "Dead decision-log citation (decision-log/2026-05-25__revit-link-remediation.md, which doesn't exist) lives in .cs comments — out of scope for the 2026-07-14 docs-only reconciliation pass.", where: "Commands/SyncWithCentralCommand.cs:28,49 · SyncWithCentralRibbonCommand.cs:49" }
         ],
         history: [
+          { date: "2026-07-14", type: "Resolution — 8 fix commits + owner-decision pass", scope: "Every one of the 106 findings from the 2026-07-12 audit got a real decision: fixed in code (~85), disproven as a false positive (3, including the sole CRITICAL), won't-fix as verified-safe (2), deferred design (2), gated on destructive git ops (2), or postponed pending dedicated owner/polish time (~10).", result: "C-01 (the only CRITICAL) was FALSE — Revit 2024's net48 API has both ElementId.Value and ElementId(long); the audit never ran the build that would have disproven it. All 10 HIGHs genuinely fixed and code-verified (not just commit-message-claimed): H-01/H-02 (Section Clip one-shot expiry, Room Data binding refuse), H-03/H-09/H-10 (testable extraction, rollback unit-test, 18-file dead-code sweep), H-04 (SetUniqueViewName sanitizes + reports), H-05/H-06 (ScopeBox collision fix + ranked substring match — both confirmed in code with explicit 'H-05'/'H-06' comments), H-07 (ViewRenamePreview literal-mode $ escaping), H-08 (PdfPageCounter returns null, never a false 1, on ambiguous PDFs). Two false-positive side-findings: M-30 (guide is accurate, only 3 screenshots stale) and MI-12-part (2 of 4 'unwired' commands are wired on the Trades > Electrical panel, which the audit's RevitLink-only search missed). Also fixed same-day, outside the audit: Retag All Rooms orphan-tag bug (owner-caught), oversized ribbon tooltips (owner-caught), 2 theme-blind popups. What the audit did NOT catch: 'reports success, quietly did nothing' surfaced 3 more times the same day (panel-schedule legend cell, Section Clip selection path, Retag All Rooms) — the pattern the audit itself named is still live in the codebase.", report: "2026-07-12__audit-resolution.md" },
           { date: "2026-07-12", type: "Full (7 parallel review agents)", scope: "Complete top-to-bottom re-read of all active projects — RevitLink (Commands + ModelHealth + Scaffold + Shared) + ModelQA.Core + 6 discipline add-ins + 7 test suites + docs/CI; 114 commits since the 2026-06-14 baseline, ~90% of them in RevitLink.", result: "1 CRITICAL + 10 HIGH + 53 MEDIUM + 24 LOW + 18 INFO. Headline C-01: the net48 (Revit 2024) build is very likely broken (net8-only ElementId APIs unguarded in ReloadLinksCommand) and CI never builds the shipping add-in for either TFM. Recurring themes: silent-failure-reported-as-success, tested-but-dead code (3 files still certified green while unreachable in production), spec/doc-vs-code drift. Prior audit: 13 of the 2026-06-14 findings verified genuinely fixed (H-02/H-04/M-11/M-12/M-17/M-18/M-20-23 et al.). NOTE: the dashboard's earlier '2026-06-14 all-clear' was itself wrong — those findings were open then too and never ingested. Audit tab surfaces C-01 + the 10 highs as cards; the 53 medium / 24 low / 18 info are in the full report (local monitor expands them per-severity).", report: "2026-07-12__audit-report-full.md" },
           { date: "2026-07-10", type: "Code-level re-verification (not a full audit re-run)", scope: "C-01, checked against current source + build output", result: "FIXED — was actually fixed same-day back on 2026-06-14 (commit aa9e65e, Directory.Build.props sets AssemblyVersion 1.1.0.0, confirmed in build output), but the dashboard never got updated to reflect it until now. Caveat carried from the fix itself: diagnostic only (assembly isn't strong-named, so a stale DLL still isn't load-time BLOCKED, just detectable) — real mitigation is coordinated add-in redeploy, tracked separately as M-19, still open", report: "2026-06-14__audit-report-full.md" },
           { date: "2026-06-14", type: "Full (3 agents)", scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests", result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption", report: "2026-06-14__audit-report-full.md" },
@@ -885,8 +883,8 @@ window.DASHBOARD_DATA = {
       icon: "brain",
       oneLiner: "Personal knowledge base and context store for AI/BIM work — Obsidian vault, Revit-AI context logs, decision records, and the source corpus for AI-Server's RAG pipeline.",
       status: "active",
-      phase: "Local-only git repo (no GitHub remote). Active daily — context logs + Revit-AI copy state committed on 2026-06-28. Post-graphify baseline shipped: 70 notes enriched, 12 MOCs created. Currently has 3 uncommitted files (copy-log.txt, copy-state.json, and a raw-logs folder for 2026-06-28). The vault feeds AI-Server WP-B (RAG over AI-Brain-Data docs).",
-      focus: "Keep Revit-AI context current; feed AI-Server WP-B (sqlite-vec RAG index) when that work package starts.",
+      phase: "Local-only git repo (no GitHub remote). HEAD still 8e8b564 (2026-06-28), but the vault has kept accumulating daily context-log/copy-state/raw-log churn since — now 84 uncommitted files (up from 3), none committed in over two weeks. Post-graphify baseline shipped: 70 notes enriched, 12 MOCs created. The vault feeds AI-Server WP-B (RAG over AI-Brain-Data docs).",
+      focus: "Commit the accumulated daily context-log churn (84 files, growing) before it's unmanageable to review; keep Revit-AI context current; feed AI-Server WP-B (sqlite-vec RAG index) when that work package starts.",
       progress: { label: "Workstreams", phases: [
         { name: "Vault foundation", pct: 100, note: "Obsidian vault live; MOCs, decision-log, standards-and-refs, revit-snippets all structured",
           tasks: [
@@ -909,7 +907,7 @@ window.DASHBOARD_DATA = {
       branch: "master (local-only, no remote)",
       git: { warn: "No GitHub remote — local-only git. Confirm whether this should stay private or get a private remote for backup." },
       nextActions: [
-        "Commit 3 pending files: Revit-AI/context/copy-log.txt, copy-state.json, Revit-AI/raw-logs/2026-06-28/",
+        "Commit the accumulated context-log/copy-state/raw-log churn (84 uncommitted files as of 2026-07-14, spanning Revit-AI/context, processed/by-day, processed/by-file, daily-summaries, raw-logs/*)",
         "Start AI-Server WP-B RAG index build when WP-B work package begins"
       ],
       pendingDecisions: [
@@ -917,7 +915,7 @@ window.DASHBOARD_DATA = {
       ],
       blockers: [],
       reminders: [
-        "3 uncommitted files as of 2026-06-28: copy-log.txt, copy-state.json, raw-logs/2026-06-28/"
+        "84 uncommitted files as of 2026-07-14 (up from 3 on 06-28) — daily Revit-AI context/copy-state/raw-log churn has gone 2+ weeks without a commit"
       ],
       links: [
         { label: "Local vault", path: "F:\\AI-Dev\\AI-Brain-Data" },
@@ -938,8 +936,8 @@ window.DASHBOARD_DATA = {
       icon: "folder",
       oneLiner: "Strategy docs, build logs, prompts, and diagrams that support the BIMpossible platform repo. Phase status ledgers, wave logs, Claude startup prompts, and design proposals all live here.",
       status: "active",
-      phase: "main branch, synced with origin (YourBIMpossible/BIMpossible_Workspace). Last commit 2026-06-28. 73 uncommitted files — primarily _gstack-activation scratch, archived backups, and security-review queue digests. Key sources of truth: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
-      focus: "Keep strategy ledgers (PHASE-STATUS, WAVE-STATUS, STATE-LIVE) current after each BIMpossible merge. Commit pending _gstack-activation + security-review digest files.",
+      phase: "main branch, synced with origin. Last commit f07ebb9 (2026-07-14): docs(phase3) — the 2026-07-14 Phase 3 production-readiness audit report, plus same-day corrections to PHASE-STATUS.md (Phase 3.10a's real status; added the missing Phase 3.8 entry) and WAVE-STATUS.md (backfilled waves 26-29, was 13 days stale). 4 uncommitted files remain: a daily STATE-LIVE backup rotation (routine) and an updated _audit-runs.md ledger entry not yet committed. Key sources of truth: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
+      focus: "Commit the pending _audit-runs.md ledger update. Keep strategy ledgers (PHASE-STATUS, WAVE-STATUS, STATE-LIVE) current after each BIMpossible merge — ProgramPlan.md is the one ledger the 07-14 audit did NOT get corrected; still needs an owner pass.",
       progress: { label: "Content areas", phases: [
         { name: "Strategy + ledgers", pct: 90, note: "PHASE-STATUS, WAVE-STATUS, STATE-LIVE live and updated regularly; Canonical Guide v2 reviewed 2026-06-23",
           tasks: [
@@ -965,19 +963,19 @@ window.DASHBOARD_DATA = {
       ]},
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
       lastActivity: {
-        date: "2026-06-28",
-        summary: "chore(memory): commit security-review-queue digest (scan 2026-06-28-093508) (51ef857)"
+        date: "2026-07-14",
+        summary: "docs(phase3): 2026-07-14 production-readiness audit + PHASE-STATUS/WAVE-STATUS sync (f07ebb9)"
       },
-      branch: "main at 51ef857; synced with origin",
+      branch: "main at f07ebb9; synced with origin",
       git: null,
       nextActions: [
-        "Commit the 73 pending files (security-review queue digests, _gstack-activation scratch)",
-        "Update PHASE-STATUS + WAVE-STATUS after next BIMpossible merge"
+        "Commit the pending _audit-runs.md ledger update",
+        "Owner pass on ProgramPlan.md: remove/correct the Phase 3.8 commercial-launch gate, add Phase 3.10 content"
       ],
       pendingDecisions: [],
       blockers: [],
       reminders: [
-        "73 uncommitted files as of 2026-06-28 — mostly _gstack-activation and security-review artifacts"
+        "4 uncommitted files as of 2026-07-14: a routine STATE-LIVE backup rotation + an updated _audit-runs.md ledger entry"
       ],
       links: [
         { label: "Local workspace", path: "F:\\AI-Dev\\BIMpossible_Workspace" },
@@ -986,9 +984,9 @@ window.DASHBOARD_DATA = {
         { label: "GitHub", path: "https://github.com/YourBIMpossible/BIMpossible_Workspace" }
       ],
       recent: [
+        "2026-07-14 — docs(phase3): 2026-07-14 production-readiness audit report + PHASE-STATUS/WAVE-STATUS corrections (f07ebb9)",
         "2026-06-28 — chore(memory): commit security-review-queue digest (51ef857)",
-        "2026-06-28 — chore: gitignore gstack activation scratch + archive tracked backups (2282a8e)",
-        "2026-06-28 — chore(security): commit unattended scanner, ignore _triage-logs (f67c42b)"
+        "2026-06-28 — chore: gitignore gstack activation scratch + archive tracked backups (2282a8e)"
       ]
     },
     /* PROJECT:bimpossible-workspace:END */
