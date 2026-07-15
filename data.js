@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-14",
-  generatedBy: "on-demand refresh",
-  activitySince: "2026-07-01",
+  generated: "2026-07-15",
+  generatedBy: "scheduled refresh",
+  activitySince: "2026-07-02",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -181,10 +181,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [18,19,0,0,0,5,8,0,3,20,16,15,3,7],
+      activity: [19,0,0,0,5,8,0,3,20,16,15,3,10,0],
       lastActivity: {
         date: "2026-07-14",
-        summary: "docs(phase3): 2026-07-14 production-readiness audit + PHASE-STATUS/WAVE-STATUS sync (f07ebb9)"
+        summary: "docs(phase3-10a): stage the warm-pipeline run for a single go/no-go (8dd2fef)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
@@ -426,7 +426,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,2,15,2,18,12,16,6,0,15],
+      activity: [0,0,0,0,2,15,2,18,12,16,6,0,15,0],
       lastActivity: {
         date: "2026-07-14",
         summary: "merge: room-tag orphans, audit closeout, tooltip 355px, theme, Lighting/Power (1006831)"
@@ -563,7 +563,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [1,0,0,0,0,0,0,0,0,2,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,2,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
@@ -815,7 +815,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,2,0,2,0,0],
+      activity: [0,0,0,0,0,0,0,0,2,0,2,0,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
