@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-15",
-  generatedBy: "scheduled refresh",
-  activitySince: "2026-07-02",
+  generated: "2026-07-16",
+  generatedBy: "on-demand refresh",
+  activitySince: "2026-07-03",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -16,8 +16,8 @@ window.DASHBOARD_DATA = {
       icon: "layers",
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
-      phase: "main at 1e07550 (2026-07-14), 0 ahead of origin. The 2026-07-13/14 window: a real prod outage (351 backend container restarts — two migrations landed with no backend-migrate run) was root-caused and fixed, then a same-day Phase 3 production-readiness audit found the project's own status ledgers disagreed with each other and the running system on nearly every point that mattered for Phase 3. Same-day fixes: an automated Alembic single-head CI guard (1e07550) so that outage class can't recur silently; the frontend Dockerfile's missing Phase 3.10a flag ARG/ENV (a2a4a23); PHASE-STATUS.md + WAVE-STATUS.md both corrected to reflect reality (Phase 3.10a is code-complete + migrated to prod but its warm-time pipeline has NEVER executed against real data — 0 rows; Phase 3.8 got its first-ever ledger entry). ProgramPlan.md was explicitly left uncorrected — it still gates Commercial Launch on the abandoned Phase 3.8 design. New surface this week: the assistant Revit-parameter-write primitive (WSR8) — merged, migrated, CI-green, zero production callers, safely dark by a real AST-enforced test. Program gates otherwise unchanged: P11 Model QA + P8 Wizard built but flag-gated OFF; P6 true-prod deploy still owed; P7 write-back ON HOLD; P5 ON HOLD.",
-      focus: "Close out Phase 3.10a for real before touching Doors, Ducts/Pipes, Phase 3.8, or WSR8 Step 2 (the audit's own recommendation): (1) add the flag-ON path's missing ErrorBoundary/malformed-row guard — turning the flag on is the literal next step and currently risks a whole-page crash; (2) run the manual warm script against a real cloud-collaborated project — the pipeline has never executed once, against anything; (3) execute the live-test-plan (AC-1/2/3). In parallel, cheap and no dependency on the above: fix ProgramPlan.md — remove/correct the Phase 3.8 commercial-launch gate (L1418) and add real Phase 3.10 content; it's the one status ledger not yet corrected. Separately: true-prod deploy still owed (runbook 06-12).",
+      phase: "main at 9713356 (2026-07-15), 0 ahead of origin. A landmark 48 hours. **Phase 3.10a is finally real**: after two audits flagged that its warm-time pipeline had never executed once against any data (0 rows on every dimension; 0 room_join_geometry jobs ever even enqueued), an externalElementId↔native-id bridge fix (c2d5756) unblocked it and the FIRST-EVER live warm + join proof landed 2026-07-15 19:18 (a4ecece) against a real cloud project. A supervised flag-flip then closed AC-1 via the real endpoint, and AC-3 went FAIL → PASS with p50 215ms → 18ms via a per-(project, arch-version) room-pool cache + bbox pre-filter. **WSR8 step 2 is wired**: the fail-closed check_firm_model_editor role (92738b3) then the gated LLM→live-Revit parameter write (9713356, flag OFF), marked BUILT+SHIPPED. **Phase 3.8 restarted**: owner ratified the minimal-wedge approach and slice 1 (ACC role-sync columns + is_draft, inert) landed, with is_draft since moved to user_firm_memberships for per-user draft mode. Also ratified: the one-spine write convergence target — every model-changing origin (spreadsheet, AI, the Phase 15 in-Revit pane, batch) must produce standard proposals through one contract/gate/audit; 'we'll unify it later' is explicitly rejected. Program gates: P11 Model QA + P8 Wizard built but flag-gated OFF; P6 true-prod deploy still owed; P7 write-back ON HOLD; P5 ON HOLD; P13/P14 newly on the ledger (unratified/propose-only); P15 in-Revit pane ACTIVE.",
+      focus: "Extract the real write-engine contract — convergence plan item 1, and now the top open one: a WriteEngine Protocol/ABC + engine enum (desktop_native now, da4r later) with the permission gate and audit writes hoisted into the shared wrapper, so no concrete engine can skip them. It's the ratified prerequisite for BOTH DA4R and Schedule Push, and today convergence is by-accident (exactly one adapter class, no interface, nothing structurally preventing a bypass). Item 2 (gate unification) is DONE as of 2026-07-16 04:48 (df7add1). Also worth an hour: close the branch-protection gap — enforce_admins=false means the Alembic guard and every other required check is a signal, not a gate, on the direct-to-main path this project actually uses. Separately: true-prod deploy still owed (runbook 06-12); Phase 15a's live pair+chat e2e in Revit is the one owed human step there.",
       progress: {
         label: "Program phases",
         phases: [
@@ -178,43 +178,82 @@ window.DASHBOARD_DATA = {
               { label: "Write-back runtime decision (DA4R cloud / self-hosted Revit worker / hybrid)", status: "pending" },
               { label: "Spec + scoping", status: "pending" }
             ]
+          },
+          {
+            name: "P13 Augmentation & Write-back Layer",
+            pct: 5,
+            note: "PLANNED *(unratified)* — Phase 13 = the augmentation/edit/review/promotion layer on top of the Phase 7 write-back engines (System α drives System β); Phase 7 remains the canonical engine layer — not absorbed. Implements the scope formerly proposed as \"Phase 3.X Augmentation Layer\" (archived Doc 5, `wb-2…wb-7`); the earlier \"no new phase number\" decision is superseded. Subtitle: \"Productized Data Editing, Review, and Revit Pushback.\" Build detail: `2026-06-24__Phase13_ProductizedDataEditing_Review_Pushback_PhaseDefinition_PROPOSAL.md` + package Docs 1–4. Flip to `ACTIVE` on go. Row placed 2026-07-15 verbatim from `2026-06-26__Phase13_Ratification_and_Ledger_PasteReady.md` §1, which had drafted it paste-ready on 2026-06-26 and was never placed; its companion WAVE-STATUS row (Wave 23) is still unplaced.",
+            tasks: [
+              { label: "Owner ratification — flip PLANNED → ACTIVE on go", status: "pending", note: "Row is placed but the phase is still marked unratified; placing a row is not ratifying it" },
+              { label: "Place the companion Wave 23 row in WAVE-STATUS.md", status: "pending", note: "Drafted paste-ready 2026-06-26 §2 alongside the phase row; still unplaced" },
+              { label: "23A data substrate + inspect/edit", status: "pending", note: "bimpossible_metadata + _log + review + registry (wb-3)" },
+              { label: "23B review system", status: "pending" },
+              { label: "23C audit retrofit — *_status_history siblings", status: "pending", note: "wb-7: edit_log + revit_link_request_log ARE migrated; the rest owed" },
+              { label: "23D promotion orchestration (consumes Phase 7 engines)", status: "blocked", note: "Depends on Phase 7 write-back (ON HOLD by owner gate)" },
+              { label: "23E conflict / failure / reconciliation", status: "pending" },
+              { label: "23F operator UX", status: "pending" }
+            ]
+          },
+          {
+            name: "P14 Local AI Inference — On-Device RAG + Revit Context (Optional)",
+            pct: 10,
+            note: "CONDITIONAL — Opt-in capability track: a local LLM with retrieval-augmented generation over BIMpossible docs, plus deterministic read-only Revit context injection, running inside the Revit add-in. Owner ruling 2026-06-25: scope = the full original vision (chosen over the narrower BYO/MCP-only recommendation); the analyst's risk caveats are carried as explicit gates/risks (§8–§9 of the proposal), not dropped. Definition: `2026-06-25__Phase14_LocalAIInference_RAG_RevitContext_PhaseDefinition_PROPOSAL.md` — still PROPOSAL / propose-only; this ledger row is the promotion step that doc called \"the separate human-reviewed step,\" placed 2026-07-15. Related local-inference R&D lives in the AI-Server project.",
+            tasks: [
+              { label: "Owner ratification — still propose-only", status: "pending", note: "Proposed 2026-06-25; the doc explicitly withheld ledger promotion pending a human-reviewed step" },
+              { label: "Retrieval over BIMpossible docs (BM25 first; ONNX embeddings only if quality demands)", status: "pending" },
+              { label: "Read-only Revit context injection (doc, active view, categories, linked-model names)", status: "pending", note: "Never a write; never a full-model serialization" },
+              { label: "Local LLM runtime inside the Revit add-in", status: "pending", note: "Owner chose the full local-inference vision over the narrower BYO/MCP-only option" },
+              { label: "Risk gates §8–§9 carried from the analyst review", status: "pending", note: "Carried as explicit gates rather than dropped" }
+            ]
+          },
+          {
+            name: "P15 In-Revit BIMpossible Assistant Pane",
+            pct: 30,
+            note: "ACTIVE — Native WPF dockable pane inside Revit that pairs to a BIMpossible web session with a single-use code and streams the existing `/assistant/chat` — same assistant + tools, docked in Revit. 15a (pair → pick project → chat): BUILT, not merged — backend `feat/phase15a-pane-pairing` (worktree `BIMpossible-phase15a-pairing`) + add-in `feat/phase15a-revit-pane` (worktree `Add-Ins-phase15a-pane`); 47 Assistant tests green, both TFMs clean, one owed human step = live pair+chat e2e in Revit. Later slices: 15b external-doc ingestion · 15c Revit-context injection · 15d model writes + confirm UI. Per `design-docs/write-spine-convergence_target_2026-07-15.md`, the pane is transport over the existing write spine, never a new write path — 15d must produce standard proposals through the shared adapter. ⚠️ No PhaseDefinition PROPOSAL doc exists for Phase 15 — unlike 13/14 it entered build without the ratification artifact; row placed 2026-07-15 from the built reality (`Add-Ins/BIMpossible.RevitLink/Assistant/README-Phase15a.md`) so the ledger stops under-reporting active work.",
+            tasks: [
+              { label: "15a — pair to web session, pick project, chat", status: "active", note: "BUILT on two unmerged branches; 47 Assistant tests green, both TFMs clean. Owed: live pair+chat e2e in Revit, then merge" },
+              { label: "15a live e2e (human): pair with an 8-char code, pick project, stream a reply, verify token survives a Revit restart", status: "pending", note: "The one remaining step per README-Phase15a.md; needs flags on + a fresh Revit launch" },
+              { label: "Write a Phase 15 definition doc", status: "pending", note: "Phases 13/14 have PhaseDefinition PROPOSALs; Phase 15 entered build with none" },
+              { label: "15b — external-doc ingestion", status: "pending" },
+              { label: "15c — Revit-context injection", status: "pending" },
+              { label: "15d — model writes + confirm UI", status: "blocked", note: "Gated on Phase 7. Must ride the shared write spine (standard proposal → shared adapter), never a new write path; a write approval-request is politely declined in 15a" }
+            ]
           }
         ]
       },
-      activity: [19,0,0,0,5,8,0,3,20,16,15,3,10,0],
+      activity: [0,0,0,5,8,0,3,20,16,15,3,10,16,3],
       lastActivity: {
-        date: "2026-07-14",
-        summary: "docs(phase3-10a): stage the warm-pipeline run for a single go/no-go (8dd2fef)"
+        date: "2026-07-16",
+        summary: "docs(write-spine): convergence plan item 2 (gate unification) DONE -- df7add1 (7960005)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
         warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)."
       },
       nextActions: [
-        "Phase 3.10a flag-ON path: add the malformed-row guard + ErrorBoundary around DataTable (mirrors the existing flag-OFF guard) before the flag is ever flipped on for real users",
-        "Run the manual warm script (docs/specs/active/phase-3-10a-pilot-artifacts/warm_room_join_for_project.py) against a real cloud-collaborated project — first-ever execution of the Phase 3.10a pipeline",
-        "Execute the Phase 3.10a live-test-plan (AC-1/AC-2/AC-3) once the warm script has run",
-        "Fix ProgramPlan.md: remove/correct the Phase 3.8 commercial-launch gate (L1418), add real Phase 3.10/3.10a/3.10b/WSR8 content — the one status ledger the 07-14 audit did NOT get corrected same-day",
+        "Extract the real write-engine contract FIRST (ratified prerequisite for both DA4R and Schedule Push): a WriteEngine Protocol/ABC + engine enum (desktop_native now, da4r later), with the permission gate + audit writes hoisted into the shared wrapper so no concrete engine can skip them",
+        "Close the branch-protection gap: enforce_admins=false + no required-PR-review means the Alembic multi-head guard and every other required check is a signal, not a gate, on the direct-to-main path Push-And-Verify.ps1 actually uses",
+        "Reconcile the two rival unmerged shared-parameters branches (phase9-cloud-ids 'PARKED, do not ship' vs. the newer Revit-2026-verified registry) before a third attempt gets built",
+        "Re-spec Schedule Push as an ORIGIN on the write spine — its probe-first + dual-executor-library ideas survive; the local-API gate-bypass is overturned",
         "True-prod deploy (runbook 06-12): alembic upgrade head, set BIMPOSSIBLE_ADMIN_ENABLED=1 + BIMPOSSIBLE_ADMIN_SECRET, DELETE stale done-rows in relationship_prewarm_jobs per model",
-        "Commit + push P6 /account FE test branch: AdminShell, FirmEditDrawer, ConfirmDialog, My Account UI tests missing",
-        "Drop _saved_views_snapshot_2026_05_24 (overdue since 2026-06-23 — not re-verified this pass); install reportlab so PDF exports work (CSV-only until added)"
+        "Get WSR8's doc trail onto main (decision docs + buildlogs are stranded on a docs-repo branch; decision-log/INDEX.md has nothing newer than 2026-07-07)"
       ],
       pendingDecisions: [
-        "Phase 3.8 direction is DECIDED (sync Autodesk ACC/Forma's own project roles/companies, not a custom role-matrix) but NOT yet scoped: synced-data schema, draft/publish flag shape, sync trigger mechanism all open — needs dedicated owner/design time, don't guess",
-        "WSR8 Step 2 (wiring the assistant-write primitive to a real caller): permission-role decision (new check_firm_model_editor vs. reusing check_firm_view_editor) + a sync/async adapter between WRITE_DISPATCH's sync dispatch and the primitive's async, dataclass-returning signature — lowest urgency, the primitive is safely dark today",
-        "Schedule-push: staleness cadence, classifier rules, fidelity degradation list, SPF ship location",
+        "Phase 3.10b Ducts/Pipes: output shape (list vs. from/to pair) — still undecided; the categories are explicitly excluded in _PHASE3_10_IN_SCOPE_CATEGORIES until it lands",
+        "Schedule-push: staleness cadence, classifier rules, fidelity degradation list, SPF ship location (now scoped as a write-spine ORIGIN, not its own path)",
         "Wave 16 Interiors: build dedicated shapers for Ceilings/Flooring now or batch with Wave 15 Civil?",
-        "Phase B admin auth: Google OAuth client + env (AUTH_GOOGLE_ID == backend GOOGLE_CLIENT_ID); B0 unify legacy admin routes onto require_admin (Option A chosen)"
+        "Phase B admin auth: Google OAuth client + env (AUTH_GOOGLE_ID == backend GOOGLE_CLIENT_ID); B0 unify legacy admin routes onto require_admin (Option A chosen)",
+        "Phase 13 ratification (flip PLANNED → ACTIVE) + Phase 14 promotion — both now on the ledger but neither is ratified; Phase 15 needs a definition doc it never got"
       ],
       blockers: [],
       reminders: [
-        "ProgramPlan.md (1,574 lines) still gates Commercial Launch on the abandoned Phase 3.8 custom-role-matrix design and has zero mentions of Phase 3.10 anywhere — flagged by the 07-14 audit, not yet corrected (PHASE-STATUS.md + WAVE-STATUS.md both were, same day)",
-        "CI runs after push, not before merge (dc03a98 removed the PR gate) — a bad multi-head migration state (or any other regression) is live on main before CI ever evaluates it once; the new Alembic single-head guard (1e07550) only catches the migration-collision case",
+        "Branch protection has enforce_admins=false and no required-PR-review, and Push-And-Verify.ps1 pushes direct to main as admin — required checks (incl. the Alembic single-head guard) are a SIGNAL, not a gate, on the real push path. (Corrects the earlier 'workflows have no PR trigger' note — all 4 do.)",
+        "Write-spine law (ratified 2026-07-15): every model-changing origin produces standard proposals through one contract + one gate + one audit trail. The GATE half is now real (df7add1, 2026-07-16 — unified on the fail-closed check_firm_model_editor); the CONTRACT half is still by-accident — exactly one adapter class, no interface/ABC, nothing structurally preventing a bypass. 'We'll unify it later' is explicitly rejected.",
+        "DA4R is absent, not inert — no code at all; only reserved edit_log.workitem_id/batch_id columns. The docs' 'second engine is an adapter swap' promise has no code behind it.",
+        "Phase 3.10a's _most_common_phase is single-phase-only by design (self-documented); needs real per-element Phase data or an explicit picker before multi-phase projects rely on it",
         "True-prod deploy owed: alembic upgrade head + 2 env vars + prewarm DB cleanup — gates Wave 4.9/4.10/admin/My-Account live smokes",
-        "P7 two-engine proposal: 2026-06-23 Phase7_Writeback_TwoOptions_PROPOSAL.md — DA4R (cloud) + Revit Link (app-sync) co-equal Phase 7 engines; DA4R not yet built",
         "reportlab not installed → aec/exports.py PDF routes inert (CSV works); add before Phase C /account/export/*.pdf",
-        "My Account shows graceful 'not linked' state until founder's Autodesk user gets an active user_firm_memberships row",
-        "Drop _saved_views_snapshot_2026_05_24 — overdue since 2026-06-23, not re-verified this pass"
+        "My Account shows graceful 'not linked' state until founder's Autodesk user gets an active user_firm_memberships row"
       ],
       links: [
         { label: "STATE doc (canonical, 06-12)", path: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_STATE_2026-06-12.md" },
@@ -225,7 +264,13 @@ window.DASHBOARD_DATA = {
         { label: "Code", path: "F:\\AI-Dev\\BIMpossible" }
       ],
       recent: [
-        "2026-07-14 - Phase 3 production-readiness audit + same-day fixes: Alembic single-head CI guard (1e07550), Dockerfile Phase 3.10a flag ARG/ENV (a2a4a23), PHASE-STATUS.md + WAVE-STATUS.md corrected (f07ebb9)",
+        "2026-07-16 - Write-gate unification DONE (df7add1, convergence plan item 2): live-write authorization unified on the fail-closed check_firm_model_editor; the two hand-mirrored gate functions merged. Item 1 (extract the WriteEngine contract) is now the top open convergence step",
+        "2026-07-15 - Phase 3.10a PROVEN LIVE: first-ever warm + join against a real cloud project (a4ecece) after the externalElementId↔native-id bridge fix (c2d5756); AC-1 closed via the real endpoint, AC-3 FAIL→PASS with p50 215ms→18ms via room-pool cache + bbox pre-filter (7f8735f/413adf8) — the blocker two audits called the #1 issue",
+        "2026-07-15 - WSR8 step 2 wired: fail-closed check_firm_model_editor role (92738b3) → gated LLM→live-Revit parameter write (9713356, flag OFF); marked BUILT+SHIPPED (8114f8e)",
+        "2026-07-15 - Phase 3.8 restarted: owner ratified the minimal wedge (b0369de); slice 1 ACC role-sync columns + is_draft landed inert (48c4826); is_draft moved to user_firm_memberships for per-user draft mode (d5cee40)",
+        "2026-07-15 - Write-spine convergence target RATIFIED (9eccdc6): one proposal contract + one permission gate + one audit trail; pluggable origins (spreadsheet, AI, in-Revit pane, batch) and engines (Revit Link, DA4R). Schedule-Push's designed gate-bypass overturned by banner",
+        "2026-07-15 - Day-2 Phase 3 audit (5 evidence agents) — written 18:40, then overtaken by its own findings' fixes the same evening; ProgramPlan Wave-22 cross-refs corrected (7be8f6a)",
+        "2026-07-14 - Phase 3 production-readiness audit + same-day fixes: Alembic single-head CI guard (1e07550), Dockerfile Phase 3.10a flag ARG/ENV (a2a4a23), frontend per-row status + flag-on crash guard (87ca90c), PHASE-STATUS.md + WAVE-STATUS.md corrected (f07ebb9)",
         "2026-07-13/14 - Prod outage root-caused + fixed: 351 backend container restarts from two migrations landing with no backend-migrate run",
         "2026-07-13 - Weekly full audit + same-day closeout: WSR8 (assistant Revit-write auth gate) + 16 other findings — 11 shipped in code/config, 6 accepted owner decisions, zero dangling (c4194c5, b6bb96f)",
         "2026-07-12/13 - Phase 3.10a Cross-Model Room Join merged + migrated to prod (dd5adb1); warm-time writer gap found+fixed next day (c72f647/09cb66b); Phase 3.10b Furniture slice shipped (4bb6497); dynamic firm resolution P3-8-DYN shipped (72e88f8)",
@@ -234,29 +279,35 @@ window.DASHBOARD_DATA = {
         "2026-06-13 - Client-Management UIs shipped (0e0242f): Admin Portal v2 + My Account dashboard (budget, BYO-key, cost-by-model); CI green"
       ],
       audit: {
-        lastRun: "2026-07-14",
-        runType: "Phase 3 production-readiness audit — a different kind of audit than the usual code-security sweep: ground-truth verification (live docker exec into prod DB/backend, real GitHub Actions API, git log against origin/main) of every Phase 3 feature/flag/migration against what the project's own status ledgers claim. Four independent read-only evidence passes (code, frontend, tests/CI, docs), nothing trusted at face value.",
+        lastRun: "2026-07-15",
+        runType: "Phase 3 production-readiness / roadmap-truth audit — day-2 follow-up to 2026-07-14, both repos, 5 parallel evidence agents each independently re-verifying prior claims against live code/git/docker/GitHub-API state rather than doc-trusting. Pure audit, no files modified. ⚠️ Report written 18:40; most of its headline findings were overtaken by work the same evening (19:18–21:30) — see the history entry.",
         cadence: "weekly Mon 6am + on-demand",
         counts: {
           critical: 0,
           high: 0,
           medium: 3,
-          low: 2,
+          low: 1,
           info: 0
         },
-        closedLastRun: 2,
+        closedLastRun: 6,
         trend: "improving",
-        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-07-14__phase3-production-readiness-audit.md",
-        reportFile: "bimpossible/2026-07-14__phase3-production-readiness-audit.md",
+        reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit Reports\\2026-07-15__phase3-production-readiness-audit.md",
+        reportFile: "bimpossible/2026-07-15__phase3-production-readiness-audit.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
         open: [
-          { id: "PHASE3-10A-DARK", sev: "medium", title: "Phase 3.10a's warm-time pipeline is merged, migrated to prod, and CI-green — but room_footprint_cache/level_band_cache have 0 rows and element_cache has 0 rows with origin_x populated (verified live). No test, in any lane, exercises the real dispatch path end-to-end.", where: "aec/room_geometry_warm.py:56-164 · aec/prewarm_worker.py" },
-          { id: "PHASE3-10A-CRASH", sev: "medium", title: "Turning the Phase 3.10a flag on — the literal next planned step — reintroduces a whole-page crash risk: the malformed-row guard exists only on the flag-OFF path, no ErrorBoundary wraps the DataTable on flag-ON, and no error.tsx exists anywhere in the app.", where: "useCategoryData.ts (flag-on path) · no error.tsx" },
-          { id: "PROGRAMPLAN-STALE", sev: "medium", title: "ProgramPlan.md (1,574 lines) still gates Commercial Launch (L1418) on the Phase 3.8 custom-role-matrix design abandoned 2026-07-12, and has zero mentions of 3.10/3.10a/3.10b/WSR8 anywhere. PHASE-STATUS.md + WAVE-STATUS.md were both corrected same-day — this one was explicitly left for owner correction.", where: "00_Strategy/BIMpossible_ProgramPlan_2026-05-25.md" },
-          { id: "DATA-SILENT-EMPTY", sev: "low", title: "Any category loading 0 elements silently vanishes from the sidebar with a confidently-worded 'No element data available' message — masked failure and genuine emptiness read identically. Same collapse in Circuits (timeout = clean 404) and ElementPreviewPanel's Related section (thrown fetch = zero relationships, no error state).", where: "useCategoryData.ts:407-424 · page.tsx:2883-2887" },
-          { id: "ROWSTATUS-COLLAPSE", sev: "low", title: "Phase 3.10a's own per-row outcomes (no_room/ambiguous/invalid_level/no_location) all collapse into one blank cell in the frontend — the exact silent-failure-looks-like-empty-data pattern the feature's own query-level banner was built to prevent, one layer down.", where: "frontend Data tab, Phase 3.10a linked-room columns" }
+          { id: "BRANCH-PROTECT", sev: "medium", title: "Branch protection doesn't gate the path commits actually take: enforce_admins=false and no required-PR-review rule, while Push-And-Verify.ps1 pushes straight to main as the repo admin — so every required check (including the new Alembic multi-head guard) runs as a signal, not a gate, on the real push path. Corrects the prior audit's claim that workflows lack PR triggers (all 4 have them); the practical exposure stands via this mechanism instead.", where: "GitHub branch protection (main) · Push-And-Verify.ps1" },
+          { id: "SHARED-PARAMS-DUP", sev: "medium", title: "Two entirely separate, both-unmerged shared-parameters efforts exist unreconciled: feat/phase9-cloud-ids-shared-params (191 commits stale; its own commit message says 'PARKED, do not ship') and origin/claude/bimpossible-shared-parameters-vcqybv (63 commits stale, newer/more-complete/Revit-2026-verified). Both branches confirmed still present. Real risk: a third attempt gets built by someone who knows about neither.", where: "feat/phase9-cloud-ids-shared-params · origin/claude/bimpossible-shared-parameters-vcqybv" },
+          { id: "WSR8-DOCS-OFF-MAIN", sev: "medium", title: "WSR8's entire documentation paper trail is stranded off main and invisible from the normal discovery path — decision docs and buildlogs for a feature genuinely shipped in code (c4194c5) live only on docs-repo branch feat/assistant-revit-write-primitive, while main's decision-log/INDEX.md has zero entries newer than 2026-07-07 and no mention of WSR8 at all.", where: "docs repo: feat/assistant-revit-write-primitive · main decision-log/INDEX.md" },
+          { id: "REVITLINK-FLAG-UNTESTED", sev: "low", title: "The one write-adjacent flag confirmed live in prod has no default-value regression test: revit_link's READ flag was confirmed ON in the pilot deployment by a 2026-06-09 check (5+ weeks stale, not re-verified) and nothing anywhere would catch its default being silently flipped. By contrast wizard/aps_write.py — the only module making Autodesk write-verb calls — is triple-gated incl. a hardcoded get_elevated_write_token() → None.", where: "revit_link flag default · no test coverage" }
         ],
         history: [
+          {
+            date: "2026-07-15",
+            type: "Phase 3 production-readiness / roadmap-truth audit (day-2, 5 evidence agents) — then overtaken by same-evening work",
+            scope: "Both repos, re-verifying every prior claim against live code/git/docker/GitHub-API state rather than trusting yesterday's audit or this morning's owner decisions. Pure audit — no files modified.",
+            result: "⚠️ POINT-IN-TIME: the report was written 18:40 and most of its headline findings were resolved within 3 hours, by work done the same evening. Its #1 blocker — 'the Phase 3.10a warm pipeline has produced exactly zero rows on every dimension since it was built, 0 room_join_geometry jobs ever even ENQUEUED, re-confirmed live today 2×' — was closed at 19:18 by a4ecece: the FIRST-EVER live warm + join proof against a real cloud project (the id-bridge fix c2d5756 that unblocked it had landed at 18:33, 7 minutes before the report was written). AC-1 then closed via the real endpoint and AC-3 went from FAIL to PASS (p50 215ms → 18ms) via a per-(project, arch-version) room-pool cache + bbox pre-filter (7f8735f/413adf8/c169f61/3b2fa93) during a supervised flag-flip. Finding #4 (ProgramPlan's 3 stale 'Wave 22' cross-refs surviving two correction passes) fixed at 19:22 (7be8f6a). Finding #9 ('two owner decisions landed today with zero code behind them') is obsolete: Phase 3.8's minimal-wedge slice 1 landed 19:14 (48c4826) and WSR8 step 2 went from the check_firm_model_editor role (19:31, 92738b3) to fully wired gated LLM→live-Revit parameter write (21:30, 9713356, flag OFF), marked BUILT+SHIPPED in the docs repo at 04:40 the next morning. Finding #2 (an uncommitted worktree 'BIMpossible-warm-idbridge' with live edits to exactly the files implicated in the 0-rows bug, status unknown, flagged to the owner) resolved itself — the worktree is gone from disk and its fix c2d5756 is on main. Finding #6 was self-corrected inside the report: the 'Phase 15 branch contains no WPF/C# code' alarm was a scoping error — the pane lives in a THIRD repo (Add-Ins), which no agent was pointed at; it is genuinely built (1124/1124 tests, both TFMs). GENUINELY STILL OPEN: branch protection has enforce_admins=false so required checks are a signal not a gate on the direct-to-main push path; two rival unmerged shared-parameters branches (both confirmed still present); WSR8's doc trail stranded off main; and the live revit_link READ flag has no default-value regression test.",
+            report: "2026-07-15__phase3-production-readiness-audit.md"
+          },
           {
             date: "2026-07-14",
             type: "Phase 3 production-readiness audit (ground-truth verification, 4 evidence passes) + same-day partial remediation",
@@ -395,7 +446,7 @@ window.DASHBOARD_DATA = {
       icon: "wrench",
       oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (9 tools SHIP, Check Conflicts newly wired, 2 retired) + Trade QA Scanner suite (6 trades deployed).",
       status: "active",
-      phase: "2026-07-14: the 2026-07-12 full audit (1 critical, 10 high, 106 total) is CLOSED — every finding got a real decision. C-01, the sole critical, was DISPROVEN (net48 builds clean; the audit's own claim was wrong). All 10 highs fixed in code (Section Clip one-shot expiry, Room Data binding-kind refuse, WriteInstanceParameterCommand testable extraction, SetUniqueViewName sanitization, ScopeBox collision + substring-match fixes, ViewRenamePreview literal-mode escaping, PdfPageCounter null-on-ambiguous, Duplicate Collection rollback test, 18-file dead-code sweep). Check Conflicts wired to the Sync panel; Batch PDF Export + Build Sheet Set from Arch Link (superseded by Tool 2 Scaffold) retired. Same day: Retag All Rooms' silently-skipped orphan '?' tags fixed (owner-reported), all 16 oversized ribbon tooltip images (5x over Revit's 355px limit) stripped + recipe corrected (owner-reported), 2 remaining theme-blind popups fixed, and a major Duplicate tool feature landed — new Replicate Levels tab, multi-pair view-rename autofill (all disciplines in a mixed selection, not just one), panel-schedule packing/legend fixes.",
+      phase: "2026-07-15: the CI gap that was the 2026-07-12 audit's *real* lesson is CLOSED — CI now compiles BIMpossible.RevitLink on BOTH TFMs (net48 + net8.0-windows) via msbuild, so the exact class of break C-01 falsely alarmed about (a net8-only construct compiling clean, passing every test, and silently breaking the Revit 2024 build with nothing to catch it) can no longer ship unseen. Compile-only by necessity — no Revit on the runner — so Deploy-Local + a real session remain the only behavioral proof. Same pass closed 3 latent bugs that were TWINS of audit findings the remediation had fixed only at the cited line: Plumbing's BelongsToAnyPipingSystem (M-21's swallowed-exception shape, in the same file, named in M-21's own comment as untouched), Tool2's case-sensitive template dictionaries (undoing M-10 downstream of where M-10 fixed it), and Core's ScanRunner (M-28's IsInformational-loss shape in the loop all 6 disciplines share — latent, since zero disciplines currently have an informational collector). Prior day: the 2026-07-12 audit (1 critical, 10 high, 106 total) was CLOSED — C-01, the sole critical, DISPROVEN (net48 builds clean); all 10 highs fixed in code; Check Conflicts wired; Batch PDF Export + Build Sheet Set from Arch Link retired as superseded.",
       focus: "Ribbon icon/tooltip polish pass (postponed 07-14): 20/37 buttons missing ToolTipImage, Place Callout Sheets' placeholder icon. M-14 (split-level sheet title marker) needs a signature-level redesign to LevelSheetTitle.Build — deferred, not scheduled. Live-verify the Retag All Rooms orphan-tag fix in Revit (shipped without that confirmation per its own commit message). QA Scanners: live smoke Architectural (4 tools, 21 tests); live spikes for E/M/P/FP/S collectors.",
       progress: { label: "Tracks", phases: [
         { name: "RevitLink tools (9 SHIP, 2 retired, 1 future)", pct: 78, note: "2026-07-14 audit closeout: Tool 7 (Build Sheet Set from Arch Link) retired — superseded by Tool 2 Scaffold, a strict superset. Check Conflicts wired to Sync panel (was built since 06-02, never given a ribbon face).",
@@ -426,10 +477,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,2,15,2,18,12,16,6,0,15,0],
+      activity: [0,0,0,2,15,2,18,12,16,6,0,16,19,0],
       lastActivity: {
-        date: "2026-07-14",
-        summary: "merge: room-tag orphans, audit closeout, tooltip 355px, theme, Lighting/Power (1006831)"
+        date: "2026-07-15",
+        summary: "merge: Duplicate-tool naming-collision perf fix + Views-tab shift-click (455af88)"
       },
       branch: "main; synced with origin",
       git: null,
@@ -470,6 +521,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       recent: [
+        "2026-07-15 - CI gap CLOSED (d292a38): CI now compiles RevitLink on both TFMs (net48 + net8.0-windows) — the real lesson C-01 pointed at, even though C-01 itself was a false positive. Same commit fixed 3 latent twins of audit findings M-21/M-10/M-28",
+        "2026-07-15 - Panel schedules: grid-aligned rows across columns, copy ALL start-sheet detail items (not just the legend), clear key-plan/level/north-arrow, propagate Sheet Collection (48dde6f/864a672)",
+        "2026-07-15 - Duplicate tool UX: nothing pre-checked by default + shift-click range-select, Check-all/Uncheck-all act on the full dataset (not just visible filter results), naming-collision perf fix (c40ac1c/9fd4791/65dfa51)",
+        "2026-07-15 - Progress popup for every long-running loop across the suite (cc07730/3368097); Place Callout Sheets popups follow the real Revit theme (23f9d45); Section Clip derives datum from section geometry (3ab69fb)",
         "2026-07-14 - 2026-07-12 audit CLOSED: C-01 disproven (clean net48 build), all 10 highs fixed, Check Conflicts wired, 2 dead tools retired (audits/2026-07-12__audit-resolution.md)",
         "2026-07-14 - feat(revitlink): Replicate Levels tab, Duplicate UX, panel-schedule packing + legend fixes (98c515b)",
         "2026-07-14 - fix(retag-rooms): orphaned '?' tags were silently skipped and never reported — owner-caught bug (95c0ba4)",
@@ -563,7 +618,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,2,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,2,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
@@ -815,7 +870,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,2,0,2,0,0,0],
+      activity: [0,0,0,0,0,0,0,2,0,2,0,0,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
@@ -936,8 +991,8 @@ window.DASHBOARD_DATA = {
       icon: "folder",
       oneLiner: "Strategy docs, build logs, prompts, and diagrams that support the BIMpossible platform repo. Phase status ledgers, wave logs, Claude startup prompts, and design proposals all live here.",
       status: "active",
-      phase: "main branch, synced with origin. Last commit f07ebb9 (2026-07-14): docs(phase3) — the 2026-07-14 Phase 3 production-readiness audit report, plus same-day corrections to PHASE-STATUS.md (Phase 3.10a's real status; added the missing Phase 3.8 entry) and WAVE-STATUS.md (backfilled waves 26-29, was 13 days stale). 4 uncommitted files remain: a daily STATE-LIVE backup rotation (routine) and an updated _audit-runs.md ledger entry not yet committed. Key sources of truth: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
-      focus: "Commit the pending _audit-runs.md ledger update. Keep strategy ledgers (PHASE-STATUS, WAVE-STATUS, STATE-LIVE) current after each BIMpossible merge — ProgramPlan.md is the one ledger the 07-14 audit did NOT get corrected; still needs an owner pass.",
+      phase: "main branch, synced with origin. Last commit 8114f8e (2026-07-16 04:40): docs(wsr8) — marks step-2 write-wiring BUILT+SHIPPED with an as-built record. A heavy documentation window: owner decisions recorded for Phase 3.8 (minimal wedge) and WSR8 step 2 (b0369de), the write-spine convergence target ratified + Schedule-Push's designed gate-bypass overturned (9eccdc6), ProgramPlan.md's 3.6/3.7/3.8/3.9/3.10 staleness corrected (fd01d68) and its Wave-22 cross-refs fixed (7be8f6a), the 2026-07-15 day-2 audit filed, and the Phase 3.10a live-warm proof recorded. **PHASE-STATUS.md gained Phases 13/14/15 on 2026-07-15** — the ledger had been under-reporting the product arc by three phases, which is why the dashboard showed 12. Key sources of truth: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
+      focus: "Place Phase 13's companion Wave 23 row in WAVE-STATUS.md — it was drafted paste-ready alongside the phase row on 2026-06-26 and is still unplaced. Write a Phase 15 definition doc (it entered build with no proposal/ratification artifact, unlike 13/14). Get WSR8's decision docs + buildlogs onto main — they're stranded on a docs-repo branch while main's decision-log/INDEX.md has nothing newer than 2026-07-07.",
       progress: { label: "Content areas", phases: [
         { name: "Strategy + ledgers", pct: 90, note: "PHASE-STATUS, WAVE-STATUS, STATE-LIVE live and updated regularly; Canonical Guide v2 reviewed 2026-06-23",
           tasks: [
@@ -963,19 +1018,24 @@ window.DASHBOARD_DATA = {
       ]},
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
       lastActivity: {
-        date: "2026-07-14",
-        summary: "docs(phase3): 2026-07-14 production-readiness audit + PHASE-STATUS/WAVE-STATUS sync (f07ebb9)"
+        date: "2026-07-16",
+        summary: "docs(wsr8): mark step-2 write-wiring BUILT+SHIPPED (9713356) + as-built record (8114f8e)"
       },
-      branch: "main at f07ebb9; synced with origin",
+      branch: "main at 8114f8e; synced with origin",
       git: null,
       nextActions: [
-        "Commit the pending _audit-runs.md ledger update",
-        "Owner pass on ProgramPlan.md: remove/correct the Phase 3.8 commercial-launch gate, add Phase 3.10 content"
+        "Place Phase 13's companion Wave 23 row in WAVE-STATUS.md — drafted paste-ready 2026-06-26 §2, still unplaced",
+        "Write a Phase 15 definition doc — it entered build with no proposal/ratification artifact (13 and 14 both have one)",
+        "Get WSR8's decision docs + buildlogs onto main; backfill decision-log/INDEX.md (nothing newer than 2026-07-07)",
+        "Commit the pending _audit-runs.md ledger update"
       ],
-      pendingDecisions: [],
+      pendingDecisions: [
+        "Ratify Phase 13 (flip PLANNED → ACTIVE) and promote Phase 14 — both rows are now on the ledger but neither is ratified; placing a row was not ratifying it"
+      ],
       blockers: [],
       reminders: [
-        "4 uncommitted files as of 2026-07-14: a routine STATE-LIVE backup rotation + an updated _audit-runs.md ledger entry"
+        "PHASE-STATUS.md gained Phases 13/14/15 on 2026-07-15 — P13's row had sat paste-ready and unplaced since 2026-06-26; P14 was propose-only; P15 had no doc at all despite being the furthest along. Statuses recorded as their docs define them (13 unratified, 14 propose-only)",
+        "A routine STATE-LIVE backup rotation + an updated _audit-runs.md ledger entry remain uncommitted"
       ],
       links: [
         { label: "Local workspace", path: "F:\\AI-Dev\\BIMpossible_Workspace" },
