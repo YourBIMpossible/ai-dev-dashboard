@@ -6,7 +6,7 @@
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
   generated: "2026-07-16",
-  generatedBy: "on-demand refresh",
+  generatedBy: "scheduled refresh",
   activitySince: "2026-07-03",
   projects: [
     /* PROJECT:bimpossible:START */
@@ -36,7 +36,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P3 Read-Only Data Dashboard (+ 3.x family)",
             pct: 93,
-            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — Phase 11 QA gate cleared 2026-07-01; first increment 3.10a (Cross-Model Room Join) code-complete + migrated to prod, but the warm-time pipeline has never executed against real data (0 rows) — see §Phase 3 sub-phase notes; 3.10b Furniture slice SHIPPED (`4bb6497`, reuses 3.10a's algorithm unchanged); general join framework not yet built; Doors design validated, not built; Ducts/Pipes awaits a product decision. Phase 3.8 (Full RBAC + Client Portal): paused mid-scoping, zero code — see §Phase 3 sub-phase notes.",
+            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — 3.10a FUNCTIONALLY PROVEN 2026-07-15 (warm pipeline ran for real: 1,239 footprints + 14,873 origins from 0; join resolves real rooms through the real endpoint; AC-1/2/3 ALL PASS after the p50 perf fix, 215→18ms; flags still OFF — only the owner go-live flip remains, see §sub-phase notes); 3.10b Furniture slice SHIPPED (`4bb6497`); Doors design validated + now unblocked, not built; Ducts/Pipes awaits a product decision. Phase 3.8: minimal wedge DECIDED 2026-07-15, slice 1 shipped + prod-migrated (is_draft = membership-scoped per owner); slices 2-3 pending — see §sub-phase notes.",
             tasks: [
               { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
               { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
@@ -102,7 +102,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P7 Model Write-back — DA4R + Revit Link (two engines)",
             pct: 35,
-            note: "ON HOLD — Co-equal engines, ship together. Revit Link live-except-sync; DA4R backend scaffolded (off). Owner gates: (1) add BIMpossible-AddIns repo, (2) \"go\" to re-enable sync — still ON HOLD by owner-gate policy, independent of the audit-gate item below. See proposal 2026-06-23 (§2 DoD) for exact acceptance criteria. Audit gate (hard — from `2026-06-21__AuditAndHistory_Pattern.md`): ✅ SATISFIED 2026-07-02 (`0055dd1`) — `edit_log` + `revit_link_request_log` migrations applied and the adapter writes to both on every call (write-ahead as of the 2026-07-10 WIZ-7 fix); `GET /admin/audit/edits` endpoint + XLSX export live; `query_edit_log` assistant tool registered (firm-scoped as of AST-1, `376e180`). This row described the gate as still-pending through 2026-07-08's audit — stale, fixed today (DOC-2).",
+            note: "ON HOLD — Co-equal engines, ship together. Revit Link live-except-sync; DA4R = reserved name, NO code (correction 2026-07-16 — \"scaffolded\" overstated it; only reserved `edit_log.workitem_id`/`batch_id` columns exist). The one-write-spine contract now exists (`revit_link/engines.py` `29e96da`: WriteEngine Protocol + engine enum + gated seam; da4r plugs into THIS when built — see `design-docs/write-spine-convergence_target_2026-07-15.md`). Owner gates: (1) add BIMpossible-AddIns repo, (2) \"go\" to re-enable sync — still ON HOLD by owner-gate policy, independent of the audit-gate item below. See proposal 2026-06-23 (§2 DoD) for exact acceptance criteria. Audit gate (hard — from `2026-06-21__AuditAndHistory_Pattern.md`): ✅ SATISFIED 2026-07-02 (`0055dd1`) — `edit_log` + `revit_link_request_log` migrations applied and the adapter writes to both on every call (write-ahead as of the 2026-07-10 WIZ-7 fix); `GET /admin/audit/edits` endpoint + XLSX export live; `query_edit_log` assistant tool registered (firm-scoped as of AST-1, `376e180`). This row described the gate as still-pending through 2026-07-08's audit — stale, fixed today (DOC-2).",
             tasks: [
               { label: "write_instance_parameter endpoint live (single-user, flag=ON in prod)", status: "done", note: "revit_link/native_adapter.py lines 261-412; relay live; BIMPOSSIBLE_REVIT_LINK_ENABLED=1 in pilot" },
               { label: "Frontend UX: useRevitLink hook + EditParameterDialog + SyncConflictModal", status: "done", note: "Shipped in prior build" },
@@ -221,10 +221,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,0,0,5,8,0,3,20,16,15,3,10,16,3],
+      activity: [0,0,0,5,8,0,3,20,16,15,3,10,16,5],
       lastActivity: {
         date: "2026-07-16",
-        summary: "docs(write-spine): convergence plan item 2 (gate unification) DONE -- df7add1 (7960005)"
+        summary: "docs(write-spine): items 1/3/4/5 recorded -- contract shipped, SP re-spec direction, audit boundary, doc reconciliation (ae4b7af)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {

@@ -22,9 +22,10 @@ window.PHASE_DAG = {
 "status": "CLOSED",
 "dependsOn": [],
 "gates": [
-"12"
+"12",
+"15"
 ],
-"gatesCount": 1
+"gatesCount": 2
 },
 {
 "id": "5",
@@ -53,9 +54,11 @@ window.PHASE_DAG = {
 "5",
 "9",
 "10",
-"12"
+"12",
+"13",
+"15"
 ],
-"gatesCount": 4
+"gatesCount": 6
 },
 {
 "id": "8",
@@ -113,6 +116,35 @@ window.PHASE_DAG = {
 ],
 "gates": [],
 "gatesCount": 0
+},
+{
+"id": "13",
+"name": "Augmentation & Write-back Layer",
+"status": "PLANNED *(unratified)*",
+"dependsOn": [
+"7"
+],
+"gates": [],
+"gatesCount": 0
+},
+{
+"id": "14",
+"name": "Local AI Inference — On-Device RAG + Revit Context (Optional)",
+"status": "CONDITIONAL",
+"dependsOn": [],
+"gates": [],
+"gatesCount": 0
+},
+{
+"id": "15",
+"name": "In-Revit BIMpossible Assistant Pane",
+"status": "ACTIVE",
+"dependsOn": [
+"4",
+"7"
+],
+"gates": [],
+"gatesCount": 0
 }
 ],
 "generations": [
@@ -156,6 +188,11 @@ window.PHASE_DAG = {
 "id": "11.1",
 "name": "Coordination & Health Report",
 "status": "SHIPPED — LIVE in prod"
+},
+{
+"id": "14",
+"name": "Local AI Inference — On-Device RAG + Revit Context (Optional)",
+"status": "CONDITIONAL"
 }
 ],
 [
@@ -173,6 +210,16 @@ window.PHASE_DAG = {
 "id": "12",
 "name": "Content Authoring",
 "status": "PLACEHOLDER (unbuilt)"
+},
+{
+"id": "13",
+"name": "Augmentation & Write-back Layer",
+"status": "PLANNED *(unratified)*"
+},
+{
+"id": "15",
+"name": "In-Revit BIMpossible Assistant Pane",
+"status": "ACTIVE"
 }
 ],
 [
@@ -204,20 +251,23 @@ window.PHASE_DAG = {
 {
 "id": "7",
 "name": "Model Write-back — DA4R + Revit Link (two engines)",
-"gatesCount": 4,
+"gatesCount": 6,
 "gates": [
 "5",
 "9",
 "10",
-"12"
+"12",
+"13",
+"15"
 ]
 },
 {
 "id": "4",
 "name": "Embedded Intelligent Assistant (4a/4b)",
-"gatesCount": 1,
+"gatesCount": 2,
 "gates": [
-"12"
+"12",
+"15"
 ]
 },
 {
@@ -245,12 +295,20 @@ window.PHASE_DAG = {
 {
 "phase": "11.1",
 "gate": "2026-07-02"
+},
+{
+"phase": "14",
+"gate": "Owner ratification — optional track; gates nothing on the main line and must not block Phases 7–13"
 }
 ],
 "edges": [
 {
 "from": "4",
 "to": "12"
+},
+{
+"from": "4",
+"to": "15"
 },
 {
 "from": "7",
@@ -265,9 +323,17 @@ window.PHASE_DAG = {
 "to": "12"
 },
 {
+"from": "7",
+"to": "13"
+},
+{
+"from": "7",
+"to": "15"
+},
+{
 "from": "9",
 "to": "10"
 }
 ],
-"generated": "2026-07-15"
+"generated": "2026-07-16"
 };
