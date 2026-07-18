@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-17",
+  generated: "2026-07-18",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-07-04",
+  activitySince: "2026-07-05",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -221,7 +221,7 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,0,5,8,0,3,20,16,15,3,10,16,5,0],
+      activity: [0,5,8,0,3,20,16,15,3,10,16,5,0,0],
       lastActivity: {
         date: "2026-07-16",
         summary: "docs(write-spine): items 1/3/4/5 recorded -- contract shipped, SP re-spec direction, audit boundary, doc reconciliation (ae4b7af)"
@@ -477,7 +477,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,2,15,2,18,12,16,6,0,16,19,0,0],
+      activity: [0,2,15,2,18,12,16,6,0,16,19,0,0,0],
       lastActivity: {
         date: "2026-07-15",
         summary: "merge: Duplicate-tool naming-collision perf fix + Views-tab shift-click (455af88)"
@@ -618,7 +618,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,2,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,2,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
@@ -870,7 +870,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,2,0,2,0,0,0,0,0],
+      activity: [0,0,0,0,0,2,0,2,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
