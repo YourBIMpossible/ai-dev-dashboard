@@ -2805,6 +2805,11 @@ function toolkitView(){
       {cmd:'skill-creator',name:'Skill Creator',desc:'Build new skills, edit existing ones, run evals, and optimize trigger descriptions.',trigger:'"create a skill"'},
       {cmd:'consolidate-memory',name:'Consolidate Memory',desc:'Merge duplicate memory files, fix stale facts, and prune the memory index.',trigger:'"clean up memory"'},
       {cmd:'hookify',name:'Hookify',desc:'Create hooks that prevent unwanted behaviors, from conversation analysis or explicit rules.',trigger:'"add a hook"'},
+      {cmd:'output-skill',name:'Full Output Enforcement',desc:'Overrides default truncation behavior — enforces complete, unabridged code generation and bans placeholder patterns on exhaustive-output tasks.',trigger:'"give me the full file" · large multi-file output'},
+      {cmd:'revit-viewport-standardization',name:'Revit Viewport Standardization',desc:'Standardize Revit sheet-set plan viewports to per-sector templates via the Revit MCP: box alignment, grid bubbles, annotation crop, titles.',trigger:'"align/standardize Revit viewports" · sector plan sheets'},
+      {cmd:'bim-frontend-design',name:'BIM Frontend Design',desc:'Plan distinctive UI before coding — overlay on frontend-design tuned to BIMpossible\'s Next/Astro/Tailwind/Quicksand stack.',trigger:'"new screen" · "build the UI for" · "redesign"',where:'BIMpossible / Workspace'},
+      {cmd:'bim-investigate',name:'BIM Investigate',desc:'Systematic root-cause debugging for this codebase — iron law: no fix without a confirmed root cause first.',trigger:'"why is this broken" · "fix this bug"',where:'BIMpossible / Workspace'},
+      {cmd:'bim-office-hours',name:'BIM Office Hours',desc:'Interrogates a new feature or Wave before any code is written. Propose-only — produces a design doc, never code.',trigger:'"is this worth building" · "should I add"',where:'BIMpossible / Workspace'},
     ]},
     {cat:'agent',title:'Sub-Agents',ctx:'Delegated automatically, or ask for one',items:[
       {cmd:'Explore',name:'Explore',desc:'Fast read-only code search and navigation: find files, symbols, or where something is defined.'},
@@ -2830,6 +2835,11 @@ function toolkitView(){
       {cmd:'slides',name:'HTML Presentations',desc:'HTML presentations with Chart.js, design tokens, responsive layouts, and copywriting formulas.',trigger:'"HTML presentation" · "Chart.js slides"'},
       {cmd:'ui-styling',name:'shadcn / Tailwind',desc:'shadcn/ui components (Radix plus Tailwind), theme customization, dark mode, and responsive layouts.',trigger:'"shadcn component" · "dark mode"'},
       {cmd:'setup-cowork',name:'Setup Cowork',desc:'Guided walkthrough: role selection, plugin install, and connector setup.',trigger:'"set up cowork"'},
+      {cmd:'brandkit',name:'Brand Kit Generation',desc:'Premium brand-guidelines boards, logo systems, and identity decks. Tuned for minimalist, cinematic, luxury, dev-tool, and gaming brand systems.',trigger:'"brand kit" · "identity deck"'},
+      {cmd:'brutalist-skill',name:'Industrial Brutalist UI',desc:'Raw mechanical interfaces fusing Swiss print typography with military terminal aesthetics — rigid grids, extreme scale contrast, analog degradation.',trigger:'"brutalist" · "declassified blueprint" look'},
+      {cmd:'minimalist-skill',name:'Minimalist Editorial UI',desc:'Clean editorial interfaces — warm monochrome palette, typographic contrast, flat bento grids, muted pastels. No gradients, no heavy shadows.',trigger:'"minimalist" · "editorial style"'},
+      {cmd:'soft-skill',name:'High-End Visual Design',desc:'Design like a high-end agency — the exact fonts, spacing, shadows, card structures, and animations that make a site feel expensive.',trigger:'"premium feel" · "agency-level design"'},
+      {cmd:'taste-skill',name:'Anti-Slop Frontend Taste',desc:'Landing pages, portfolios, and redesigns that don\'t look templated — reads the brief, infers direction, audits first on redesigns.',trigger:'"landing page" · "portfolio" · "redesign"'},
     ]},
     {cat:'connector',title:'Connectors (MCP)',ctx:'Connected tools Claude can call',items:[
       {cmd:'computer-use',name:'Computer Use',desc:'Screenshot and control the desktop with mouse, keyboard, and scroll across native apps.'},
