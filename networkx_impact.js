@@ -1,11 +1,11 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-07-10T21:23:05Z",
+  "generated": "2026-07-21T23:00:43Z",
   "stats": {
     "repos": 4,
     "tools": 3,
     "algorithms": 6,
-    "totalNodes": 9011,
-    "missingCount": 3
+    "totalNodes": 8442,
+    "missingCount": 0
   },
   "surfaces": [
     {
@@ -34,9 +34,9 @@ window.NETWORKX_IMPACT = {
       "repo": "BIMpossible",
       "tool": "security_scan",
       "algo": "betweenness_centrality",
-      "nodes": null,
+      "nodes": 163,
       "finding": "Auth-gate and permission edges mapped",
-      "category": "missing"
+      "category": "active"
     },
     {
       "id": "route_graph",
@@ -54,9 +54,9 @@ window.NETWORKX_IMPACT = {
       "repo": "BIMpossible_Workspace",
       "tool": "doc_drift",
       "algo": "cosine_similarity",
-      "nodes": null,
+      "nodes": 119,
       "finding": "Stale doc nodes detected vs code graph",
-      "category": "missing"
+      "category": "active"
     },
     {
       "id": "family_dag",
@@ -64,9 +64,9 @@ window.NETWORKX_IMPACT = {
       "repo": "Families by BIMpossible",
       "tool": "family_dag",
       "algo": "topological_sort",
-      "nodes": null,
+      "nodes": 8,
       "finding": "Family dependency order resolved",
-      "category": "missing"
+      "category": "active"
     },
     {
       "id": "phase_dag",

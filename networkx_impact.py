@@ -46,17 +46,28 @@ def _latest_metrics():
 
 
 def _count(data, key):
-    """Safely extract an integer count from a loaded JSON blob."""
-    if data is None:
+    """Safely extract an integer count from a loaded JSON blob.
+
+    Looks up `key` first — a scalar is returned directly, a list is counted
+    by length (each upstream tool's own JSON shape, e.g. security_graph's
+    scalar "routes" vs. family_dag's list-shaped "order"). Only falls back
+    to the generic nodes/edges/elements guesses when `key` itself is absent,
+    for callers (graphify) that don't have a fixed schema of their own.
+    """
+    if data is None or not isinstance(data, dict):
         return None
-    if isinstance(data, dict):
-        v = data.get(key) or data.get("nodes") or data.get("node_count") or data.get("count")
-        if isinstance(v, (int, float)):
-            return int(v)
-        for k in ("nodes", "edges", "elements"):
-            val = data.get(k)
-            if isinstance(val, list):
-                return len(val)
+    v = data.get(key)
+    if isinstance(v, (int, float)):
+        return int(v)
+    if isinstance(v, list):
+        return len(v)
+    v = data.get("nodes") or data.get("node_count") or data.get("count")
+    if isinstance(v, (int, float)):
+        return int(v)
+    for k in ("nodes", "edges", "elements"):
+        val = data.get(k)
+        if isinstance(val, list):
+            return len(val)
     return None
 
 
@@ -115,7 +126,7 @@ def build():
             "repo":    "BIMpossible",
             "tool":    "security_scan",
             "algo":    "betweenness_centrality",
-            "nodes":   _count(security, "nodes"),
+            "nodes":   _count(security, "routes"),
             "finding": "Auth-gate and permission edges mapped",
         },
         {
@@ -133,7 +144,7 @@ def build():
             "repo":    "BIMpossible_Workspace",
             "tool":    "doc_drift",
             "algo":    "cosine_similarity",
-            "nodes":   _count(doc_drift, "nodes"),
+            "nodes":   _count(doc_drift, "docs_scanned"),
             "finding": "Stale doc nodes detected vs code graph",
         },
         {
@@ -142,7 +153,7 @@ def build():
             "repo":    "Families by BIMpossible",
             "tool":    "family_dag",
             "algo":    "topological_sort",
-            "nodes":   _count(family, "nodes"),
+            "nodes":   _count(family, "order"),
             "finding": "Family dependency order resolved",
         },
         {
