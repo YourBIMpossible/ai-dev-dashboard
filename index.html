@@ -715,6 +715,22 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .cb-gap-name{font-size:var(--ts-sm);font-weight:700;font-family:Sora,sans-serif;margin-bottom:3px;}
 .cb-gap-sub{font-size:var(--ts-xs);color:var(--dim);margin-bottom:2px;}
 .cb-gap-why{font-size:var(--ts-xs);color:var(--status-warn);margin-top:6px;}
+/* Verified-clean signal: a measured zero, not an absent measurement. */
+.cb-risk-num.ok{color:var(--status-ok);}
+.cb-risk-num.watch{color:var(--status-warn);}
+/* Blast-radius rows: bar = dependents, chip = 90d churn. Churn is what
+   separates a real risk from a merely load-bearing hub. */
+.cb-hub{display:flex;align-items:center;gap:9px;}
+.cb-hub-name{min-width:210px;font-size:var(--ts-sm);font-family:Sora,sans-serif;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cb-hub-file{color:var(--dim);font-size:11px;}
+.cb-hub-bar{flex:1;height:6px;border-radius:4px;background:var(--track);overflow:hidden;}
+.cb-hub-fill{height:100%;transition:width .9s cubic-bezier(.22,1,.36,1);}
+.cb-hub-deg{min-width:30px;font-size:11px;color:var(--dim);text-align:right;}
+.cb-hub-churn{min-width:58px;font-size:10px;text-align:right;white-space:nowrap;}
+.cb-hub-churn.hot{color:var(--status-danger);}
+.cb-hub-churn.warm{color:var(--status-warn);}
+.cb-hub-churn.cold{color:var(--dim);}
+.cb-note{font-size:var(--ts-xs);color:var(--dim);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);}
 
 /* ── Cross-tab pill/card interactivity (Overview/Roadmap/Codebase/Strategy/Usage/Toolkit) ── */
 .dag-chip{cursor:pointer;transition:filter .15s;}
@@ -1529,16 +1545,24 @@ function glChart(series,labels,w,h,id){
     <path d="${area}" fill="url(#gl${id})"/><path d="${d}" fill="none" stroke="var(--w)" stroke-width="1.8"/>
     ${dots}${ticks}${yTicks}</svg></div>`;
 }
-function gnBar(nodes){
-  if(!nodes||!nodes.length)return'';
-  const mx=Math.max(...nodes.map(n=>n.edges));
-  return'<div style="display:flex;flex-direction:column;gap:6px;padding:2px 0">'+nodes.map(n=>{
-    const pct=Math.round(n.edges/mx*100);
-    const lbl=n.name.length>32?n.name.slice(0,30)+'…':n.name;
-    return`<div style="display:flex;align-items:center;gap:9px">
-      <span style="min-width:180px;font-size:var(--ts-sm);font-family:Sora;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(lbl)}</span>
-      <div style="flex:1;height:6px;border-radius:4px;background:var(--track);overflow:hidden"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--w),var(--w2));transition:width .9s cubic-bezier(.22,1,.36,1)"></div></div>
-      <span class="num" style="min-width:26px;font-size:11px;color:var(--dim);text-align:right">${n.edges}</span></div>`;
+// Blast-radius rows. Bar length = dependents; the churn chip is the signal
+// that separates "risky" from merely "load-bearing" — a 255-dependent node
+// nobody has touched in 90 days is stable, a 222-dependent file edited 85
+// times is where changes actually go wrong.
+function hubBar(hubs){
+  if(!hubs||!hubs.length)return'';
+  const mx=Math.max(...hubs.map(h=>h.degree));
+  return'<div style="display:flex;flex-direction:column;gap:7px;padding:2px 0">'+hubs.map(h=>{
+    const pct=Math.round(h.degree/mx*100);
+    const cls=h.churn>=40?'hot':h.churn>=10?'warm':'cold';
+    const col=h.churn>=40?'var(--red)':h.churn>=10?'var(--amber)':'var(--w2)';
+    const lbl=h.label.length>28?h.label.slice(0,26)+'…':h.label;
+    const dir=h.file.includes('/')?h.file.slice(0,h.file.lastIndexOf('/')):'';
+    return`<div class="cb-hub">
+      <span class="cb-hub-name" title="${esc(h.file)}">${esc(lbl)}${dir?` <span class="cb-hub-file">${esc(dir)}/</span>`:''}</span>
+      <div class="cb-hub-bar"><div class="cb-hub-fill" style="width:${pct}%;background:${col}"></div></div>
+      <span class="cb-hub-deg num">${h.degree}</span>
+      <span class="cb-hub-churn ${cls}">${h.churn} commits</span></div>`;
   }).join('')+'</div>';
 }
 // ── Strategy ──────────────────────────────────────────────────────────────
@@ -2620,35 +2644,49 @@ function codebaseView(){
   }
   const surfaces=ni?ni.surfaces||[]:[];
   const riskSurf  =surfaces.filter(s=>s.category==='risk');
+  const clearSurf =surfaces.filter(s=>s.category==='clear');
   const missingSurf=surfaces.filter(s=>s.category==='missing');
   const mappedSurf =surfaces.filter(s=>s.category==='active'||s.category==='static');
-  const godNodes  =L?(L.godNodes||[]):[];
+  const cb=(ni&&ni.codebase)||{};
+  const cbGraph=cb.graph||{};
+  const hubs=cb.hubs||[];
 
   // ── Command bar ───────────────────────────────────────────────────────────
-  const cmdClass=riskSurf.length?'danger':missingSurf.length?'warn':'clear';
+  // Only a measured regression against the frozen baseline turns this red.
+  // Blast radius is a "watch" (amber), never a defect count — high fan-in is
+  // often the design working, e.g. one auth gate covering every route.
+  const cmdClass=riskSurf.length?'danger':(cbGraph.stale||missingSurf.length)?'warn':'clear';
   let cmdItems=[];
-  if(riskSurf.length)cmdItems.push(`<span class="badge st-danger clickable" role="button" tabindex="0" title="${riskSurf.length} active risk signal${riskSurf.length!==1?'s':''} — click to jump to detail below" onclick="jumpFlash('#cb-sec-risk .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-risk .card');}">${riskSurf.length} risk signal${riskSurf.length!==1?'s':''}</span>`);
-  if(godNodes.length)cmdItems.push(`<span class="badge st-warn clickable" role="button" tabindex="0" title="${godNodes.length} high blast-radius node${godNodes.length!==1?'s':''} — click to jump to detail below" onclick="jumpFlash('#cb-sec-blast .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-blast .card');}">${godNodes.length} high blast-radius node${godNodes.length!==1?'s':''}</span>`);
+  if(riskSurf.length)cmdItems.push(`<span class="badge st-danger clickable" role="button" tabindex="0" title="${riskSurf.length} regression${riskSurf.length!==1?'s':''} against baseline — click to jump to detail below" onclick="jumpFlash('#cb-sec-risk .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-risk .card');}">${riskSurf.length} regression${riskSurf.length!==1?'s':''}</span>`);
+  clearSurf.forEach(s=>cmdItems.push(`<span class="badge st-ok clickable" role="button" tabindex="0" title="${esc(s.label)}: measured clean — click to jump to detail below" onclick="jumpFlash('#cb-sec-clear .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-clear .card');}">✓ ${esc(s.label)} clear</span>`));
+  if(hubs.length){
+    const hot=hubs.filter(x=>x.churn>=40).length;
+    cmdItems.push(`<span class="badge ${hot?'st-warn':'st-info'} clickable" role="button" tabindex="0" title="${hubs.length} hub${hubs.length!==1?'s':''} tracked${hot?`, ${hot} edited heavily in the last 90d`:''} — click to jump to detail below" onclick="jumpFlash('#cb-sec-blast .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-blast .card');}">${hot?`${hot} hot hub${hot!==1?'s':''}`:`${hubs.length} hubs tracked`}</span>`);
+  }
+  if(cbGraph.stale)cmdItems.push(`<span class="badge st-warn" title="The knowledge graph was built at ${esc(cbGraph.commit||'?')} and HEAD has moved on. Run Update-Graph.ps1 to re-measure.">graph ${cbGraph.commitsBehind} commits behind</span>`);
   if(missingSurf.length)cmdItems.push(`<span class="badge st-warn clickable" role="button" tabindex="0" title="${missingSurf.length} blind spot${missingSurf.length!==1?'s':''} — click to jump to detail below" onclick="jumpFlash('#cb-sec-blind .card')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#cb-sec-blind .card');}">${missingSurf.length} blind spot${missingSurf.length!==1?'s':''}</span>`);
   if(!cmdItems.length)cmdItems.push(`<span style="font-size:var(--ts-sm);color:var(--status-ok)">Architecture clean — no active risk signals</span>`);
-  const totalStr=ni&&ni.stats?`${ni.stats.totalNodes.toLocaleString()} nodes`:L?`${L.nodes.toLocaleString()} nodes`:'';
-  const rawGenerated=ni&&ni.generated?ni.generated:(L?L.ts:null);
-  const dateStr=rawGenerated?rawGenerated.slice(0,10):'';
+  const totalStr=cbGraph.nodes?`${cbGraph.nodes.toLocaleString()} nodes`:(ni&&ni.stats&&ni.stats.totalNodes?`${ni.stats.totalNodes.toLocaleString()} nodes`:(L?`${L.nodes.toLocaleString()} nodes`:''));
+  // Stamp the date the graph was BUILT, not the date this file was rendered —
+  // the old panel printed today over month-old measurements.
+  const builtAt=cbGraph.builtAt||null;
+  const dateStr=builtAt?`measured ${builtAt}`:'';
   h+=`<div class="ov-cmd ${cmdClass}">
     <div class="ov-cmd-dot"></div>
     <div class="ov-cmd-items">${cmdItems.join('')}</div>
-    <span class="ov-cmd-meta">${totalStr}${totalStr&&dateStr?' · ':''}${dateStr}${freshTag(rawGenerated,FRESH.live)}</span>
+    <span class="ov-cmd-meta">${totalStr}${totalStr&&dateStr?' · ':''}${dateStr}${builtAt?freshTag(builtAt,FRESH.live):''}</span>
   </div>`;
 
   // ── Risk signals ──────────────────────────────────────────────────────────
   if(riskSurf.length){
-    h+=`<div class="ov-group">Risk signals</div><div id="cb-sec-risk">`;
+    h+=`<div class="ov-group">Regressions — worse than baseline</div><div id="cb-sec-risk">`;
     riskSurf.forEach(s=>{
       h+=`<div class="card ca-red" style="margin-bottom:10px"><div class="cb-risk-row">
         <div class="cb-risk-num">${s.nodes!=null?s.nodes:''}</div>
         <div class="cb-risk-body">
           <div class="cb-risk-title">${esc(s.label)}</div>
           <div class="cb-risk-finding">${esc(s.finding)}</div>
+          ${(cb.cycles&&cb.cycles.rootCauses&&cb.cycles.rootCauses.length)?`<div class="cb-risk-finding">Root causes: ${cb.cycles.rootCauses.map(r=>`<code>${esc(r.file)}</code> (${r.cycles})`).join(', ')}</div>`:''}
           <div class="cb-risk-meta"><span class="au-where">${esc(s.repo)}</span><span>${esc(s.tool)} · ${esc(s.algo)}</span></div>
         </div>
       </div></div>`;
@@ -2656,12 +2694,35 @@ function codebaseView(){
     h+=`</div>`;
   }
 
+  // ── Verified clean ────────────────────────────────────────────────────────
+  // A measured zero is worth showing: it is the difference between "we checked
+  // and it's fine" and "we never checked".
+  if(clearSurf.length){
+    h+=`<div class="ov-group">Verified clean</div><div id="cb-sec-clear">`;
+    clearSurf.forEach(s=>{
+      h+=`<div class="card ca-green" style="margin-bottom:10px"><div class="cb-risk-row">
+        <div class="cb-risk-num ok">${s.nodes!=null?s.nodes:'✓'}</div>
+        <div class="cb-risk-body">
+          <div class="cb-risk-title">${esc(s.label)}</div>
+          <div class="cb-risk-finding">${esc(s.finding)}</div>
+          <div class="cb-risk-meta"><span class="au-where">${esc(s.repo)}</span><span>${esc(s.tool)} · ${esc(s.algo)}</span>${cb.baseline?`<span>baseline ${cb.baseline.cycles} · set ${esc(cb.baseline.setAt)}</span>`:''}</div>
+        </div>
+      </div></div>`;
+    });
+    h+=`</div>`;
+  }
+
   // ── High blast-radius nodes ───────────────────────────────────────────────
-  if(godNodes.length){
-    h+=`<div class="ov-group">High blast-radius — change these carefully</div><div id="cb-sec-blast">`;
-    h+=`<div class="card ca-amber" style="margin-bottom:10px">
-      <div style="font-size:var(--ts-xs);color:var(--muted);margin-bottom:12px">Bar length = modules that directly import this node. Changes here ripple across the widest code surface.</div>
-      ${gnBar(godNodes)}
+  if(hubs.length){
+    const hot=hubs.filter(x=>x.churn>=40);
+    h+=`<div class="ov-group">Blast radius — where changes ripple furthest</div><div id="cb-sec-blast">`;
+    h+=`<div class="card ${hot.length?'ca-amber':'ca-blue'}" style="margin-bottom:10px">
+      <div style="font-size:var(--ts-xs);color:var(--muted);margin-bottom:12px">Bar = modules that depend on this node. Red commit counts are the ones actually being edited — that combination is the risk, not fan-in alone.</div>
+      ${hubBar(hubs)}
+      <div class="cb-note">${hot.length
+        ? `<strong>${esc(hot[0].file)}</strong> is the hotspot: ${hot[0].degree} dependents and ${hot[0].churn} commits in 90 days. Splitting it is the single highest-leverage refactor here.`
+        : `Every hub is stable — widely depended on, but rarely edited. Nothing to act on.`}
+        Test helpers and third-party imports are excluded; a fixture with 165 dependents inside one test file is not a production risk.</div>
     </div></div>`;
   }
 
@@ -2702,22 +2763,26 @@ function codebaseView(){
       const good=lb?d<0:d>0;
       return`<div style="margin-top:4px"><span style="font-size:11px;font-weight:600;color:${good?'var(--status-ok)':'var(--status-danger)'}">${d>0?'+':''}${d}</span></div>`;
     }
-    const cycSt=L.cycles>15?'st-danger':L.cycles>5?'st-warn':'st-ok';
+    // Cycle count comes from the live measurement, not the historical snapshot:
+    // graph-metrics.js records graphify's capped top_n=20, so L.cycles was a
+    // constant 20 in every push and rendered permanently red here too.
+    const realCyc=(cb.cycles&&cb.cycles.count!=null)?cb.cycles.count:null;
+    const cycSt=realCyc==null?'st-dim':realCyc>(cb.baseline?cb.baseline.cycles:0)?'st-danger':realCyc?'st-warn':'st-ok';
     const hasCharts=gm.length>1;
     const jumpAttr=(id,label)=>hasCharts?` role="button" tabindex="0" title="${esc(label)} — click to see the trend below" onclick="jumpFlash('#${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();jumpFlash('#${id}');}"`:` title="${esc(label)}"`;
     h+=`<div class="g gmg" style="margin-bottom:10px">
       <div class="stat st-info${hasCharts?' jumpable':''}"${jumpAttr('cb-chart-nodes','Total modules in the graph')}><div class="v num">${L.nodes.toLocaleString()}</div><div class="l">Nodes</div>${cbDelta(L.nodes,P?P.nodes:0,false)}</div>
       <div class="stat st-info" title="Cross-module import edges — higher means denser coupling"><div class="v num">${L.edges.toLocaleString()}</div><div class="l">Edges</div>${cbDelta(L.edges,P?P.edges:0,false)}</div>
       <div class="stat st-info" title="Clusters detected by graph community detection — a rough proxy for how modular the codebase is"><div class="v num">${L.communities}</div><div class="l">Communities</div>${cbDelta(L.communities,P?P.communities:0,false)}</div>
-      <div class="stat ${cycSt}${hasCharts?' jumpable':''}"${jumpAttr('cb-chart-cycles','Circular import chains')}><div class="v num">${L.cycles}</div><div class="l">Import cycles</div>${cbDelta(L.cycles,P?P.cycles:0,true)}</div>
+      <div class="stat ${cycSt}" title="Real cycle count, third-party import artifacts excluded${cb.baseline?` — baseline ${cb.baseline.cycles}`:''}"><div class="v num">${realCyc==null?'—':realCyc}</div><div class="l">Import cycles</div></div>
     </div>`;
     if(hasCharts){
       h+=`<div class="g g2" style="margin-bottom:10px">
         <div class="card" id="cb-chart-nodes"><h3>Nodes over time</h3>${glChart(gm.map(m=>m.nodes),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gn')}</div>
-        <div class="card" id="cb-chart-cycles"><h3>Import cycles over time</h3>${glChart(gm.map(m=>m.cycles),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gc')}</div>
+        <div class="card"><h3>Communities over time</h3>${glChart(gm.map(m=>m.communities),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gc')}</div>
       </div>`;
     }
-    h+=`<p style="font-size:var(--ts-xs);color:var(--dim);margin:0 0 16px">Snapshot: ${esc(L.ts.slice(0,10))} · commit <code>${esc(L.sha)}</code> · ${gm.length} push${gm.length!==1?'es':''} tracked</p>`;
+    h+=`<p style="font-size:var(--ts-xs);color:var(--dim);margin:0 0 16px">Growth snapshot: ${esc(L.ts.slice(0,10))} · commit <code>${esc(L.sha)}</code> · ${gm.length} push${gm.length!==1?'es':''} tracked</p>`;
   }
 
   // ── Tools ─────────────────────────────────────────────────────────────────

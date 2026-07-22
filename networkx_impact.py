@@ -21,6 +21,12 @@ SOURCES = {
     "graphify":        ROOT / "AI-Brain-Data"             / "graphify-out" / "graph.json",
 }
 
+# Backend knowledge graph -- the source for the two codebase risk signals.
+BACKEND_REPO  = ROOT / "BIMpossible"
+BACKEND_ROOT  = BACKEND_REPO / "backend"
+BACKEND_GRAPH = BACKEND_ROOT / "graphify-out" / "graph.json"
+BASELINE_PATH = pathlib.Path(__file__).parent / "codebase_baseline.json"
+
 # -- graph-metrics.js: pull latest snapshot for total-nodes hero stat --------
 METRICS_JS = pathlib.Path(__file__).parent / "graph-metrics.js"
 
@@ -74,18 +80,67 @@ def _count(data, key):
 def _categorize(surface_id, nodes, has_source):
     """
     Assign display category for the UI grouping.
-      risk    — signals that flag problems (cycles, blast-radius hubs)
+      risk    — a measured regression against the frozen baseline
       active  — live data present from an upstream JSON artifact
       static  — known static fact; source JSON not required
       missing — source JSON expected but not found
+
+    NOTE: import_cycles/god_nodes used to be hardcoded "risk" here. They were
+    graphify's display caps (top_n=20, First-10), so they never moved and the
+    panel was permanently red with nothing actionable behind it. They are now
+    categorised by `_codebase_signals()` from a real measurement vs. baseline.
     """
-    if surface_id in ("import_cycles", "god_nodes"):
-        return "risk"
     if surface_id in ("route_graph", "phase_dag"):
         return "static"
     if nodes is not None:
         return "active"
     return "missing"
+
+
+def _codebase_signals():
+    """Measure the backend graph honestly. Returns {} if it can't be read.
+
+    Non-fatal by contract: the refresh pipeline treats a networkx_impact.py
+    failure as a WARN, but a missing graph or an absent networkx should still
+    ship the other six surfaces rather than blank the tab.
+    """
+    try:
+        import graph_signals as gs
+    except ImportError:
+        return {}
+
+    G, commit = gs.load_graph(BACKEND_GRAPH)
+    if G is None:
+        return {}
+
+    defs     = gs.defined_names(BACKEND_ROOT)
+    external = gs.external_nodes(G, defs)
+    cycles   = gs.import_cycles(G, external)
+    churn    = gs.git_churn(BACKEND_REPO, 90)
+    hubs     = gs.blast_radius(G, external, churn, repo_prefix="backend/", top=12)
+    fresh    = gs.freshness(BACKEND_REPO, commit)
+
+    baseline = gs.load_baseline(BASELINE_PATH)
+    if not baseline:
+        baseline = gs.save_baseline(BASELINE_PATH, len(cycles), len(hubs), commit or "")
+
+    return {
+        "graph": {
+            "nodes": G.number_of_nodes(),
+            "edges": G.number_of_edges(),
+            **fresh,
+        },
+        "cycles": {
+            "count":            len(cycles),
+            "baseline":         baseline.get("cycles", 0),
+            "delta":            len(cycles) - baseline.get("cycles", 0),
+            "rootCauses":       gs.cycle_root_causes(cycles)[:5],
+            "excludedExternal": len(external),
+            "examples":         [" → ".join(c["cycle"]) for c in cycles[:5]],
+        },
+        "hubs":     hubs,
+        "baseline": baseline,
+    }
 
 
 def build():
@@ -94,12 +149,36 @@ def build():
     family    = _load_json(SOURCES["family_dag"])
     graphify  = _load_json(SOURCES["graphify"])
     metrics   = _latest_metrics()
+    codebase  = _codebase_signals()
 
+    # Prefer the live backend graph over the (often stale) metrics snapshot.
     total_nodes = (
-        metrics.get("nodes")
+        codebase.get("graph", {}).get("nodes")
+        or metrics.get("nodes")
         or _count(graphify, "nodes")
         or None
     )
+
+    cyc  = codebase.get("cycles", {})
+    hubs = codebase.get("hubs", [])
+
+    # A cycle count only earns "risk" when it exceeds the frozen baseline;
+    # holding the line is a pass, not a permanent alarm.
+    if cyc:
+        n_cyc = cyc["count"]
+        if n_cyc == 0:
+            cyc_finding = (f"No circular imports. {cyc['excludedExternal']} third-party "
+                           "symbols excluded (graphify credits them to the importing file).")
+        elif cyc["delta"] > 0:
+            cyc_finding = (f"{cyc['delta']} new since baseline — "
+                           f"{len(cyc['rootCauses'])} root cause(s) to unpick")
+        else:
+            cyc_finding = f"{n_cyc} cycles, at or under baseline of {cyc['baseline']}"
+        cyc_category = "risk" if cyc["delta"] > 0 else ("active" if n_cyc else "clear")
+    else:
+        n_cyc, cyc_finding, cyc_category = None, "Backend graph unavailable", "missing"
+
+    top_hub = hubs[0] if hubs else None
 
     raw_surfaces = [
         {
@@ -108,17 +187,21 @@ def build():
             "repo":    "BIMpossible",
             "tool":    "graphify",
             "algo":    "cycle_detection",
-            "nodes":   metrics.get("cycles"),
-            "finding": "Circular imports detected — technical debt to resolve",
+            "nodes":   n_cyc,
+            "finding": cyc_finding,
+            "category": cyc_category,
         },
         {
-            "id":      "god_nodes",
-            "label":   "God Nodes",
+            "id":      "blast_radius",
+            "label":   "Blast Radius",
             "repo":    "BIMpossible",
             "tool":    "graphify",
-            "algo":    "betweenness_centrality",
-            "nodes":   len(metrics.get("godNodes", []) or []) or None,
-            "finding": "High blast-radius hubs — single points of failure",
+            "algo":    "degree × 90d churn",
+            "nodes":   len(hubs) or None,
+            "finding": (f"{top_hub['file']} is the hotspot — {top_hub['degree']} dependents, "
+                        f"{top_hub['churn']} commits in 90d" if top_hub
+                        else "No hub data"),
+            "category": "watch" if hubs else "missing",
         },
         {
             "id":      "security_graph",
@@ -178,7 +261,12 @@ def build():
 
     surfaces = []
     for s in raw_surfaces:
-        has_source = (s["id"] not in ("import_cycles", "god_nodes", "route_graph", "phase_dag")
+        # The two codebase signals carry a measured category already; the rest
+        # are classified by whether their upstream JSON showed up.
+        if "category" in s:
+            surfaces.append(s)
+            continue
+        has_source = (s["id"] not in ("route_graph", "phase_dag")
                       and s["nodes"] is not None)
         surfaces.append({**s, "category": _categorize(s["id"], s["nodes"], has_source)})
 
@@ -193,6 +281,7 @@ def build():
             "totalNodes":   total_nodes,
             "missingCount": missing_count,
         },
+        "codebase": codebase,
         "surfaces": surfaces,
     }
 

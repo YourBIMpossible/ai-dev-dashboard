@@ -1,11 +1,133 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-07-21T23:00:43Z",
+  "generated": "2026-07-22T00:09:28Z",
   "stats": {
     "repos": 4,
     "tools": 3,
     "algorithms": 6,
-    "totalNodes": 8442,
+    "totalNodes": 9011,
     "missingCount": 0
+  },
+  "codebase": {
+    "graph": {
+      "nodes": 9011,
+      "edges": 17611,
+      "commit": "83384da8",
+      "commitsBehind": 73,
+      "builtAt": "2026-07-02",
+      "stale": true
+    },
+    "cycles": {
+      "count": 0,
+      "baseline": 0,
+      "delta": 0,
+      "rootCauses": [],
+      "excludedExternal": 140,
+      "examples": []
+    },
+    "hubs": [
+      {
+        "label": "router.py",
+        "file": "aec/router.py",
+        "kind": "file",
+        "degree": 222,
+        "churn": 85,
+        "risk": 2058.7
+      },
+      {
+        "label": "models.py",
+        "file": "db/models.py",
+        "kind": "file",
+        "degree": 80,
+        "churn": 38,
+        "risk": 499.6
+      },
+      {
+        "label": "_serve_pool_schedule()",
+        "file": "aec/router.py",
+        "kind": "symbol",
+        "degree": 52,
+        "churn": 85,
+        "risk": 482.2
+      },
+      {
+        "label": "assistant.py",
+        "file": "aec/assistant.py",
+        "kind": "file",
+        "degree": 80,
+        "churn": 33,
+        "risk": 466.5
+      },
+      {
+        "label": "generate_spec_draft()",
+        "file": "aec/spec_generator.py",
+        "kind": "symbol",
+        "degree": 255,
+        "churn": 2,
+        "risk": 441.7
+      },
+      {
+        "label": "_by_category()",
+        "file": "aec/router.py",
+        "kind": "symbol",
+        "degree": 34,
+        "churn": 85,
+        "risk": 315.3
+      },
+      {
+        "label": "Firm",
+        "file": "db/models.py",
+        "kind": "symbol",
+        "degree": 50,
+        "churn": 38,
+        "risk": 312.2
+      },
+      {
+        "label": "_require_auth()",
+        "file": "aec/router.py",
+        "kind": "symbol",
+        "degree": 32,
+        "churn": 85,
+        "risk": 296.8
+      },
+      {
+        "label": "main.py",
+        "file": "main.py",
+        "kind": "file",
+        "degree": 50,
+        "churn": 29,
+        "risk": 273.9
+      },
+      {
+        "label": "assistant_tools.py",
+        "file": "aec/assistant_tools.py",
+        "kind": "file",
+        "degree": 60,
+        "churn": 18,
+        "risk": 261.5
+      },
+      {
+        "label": "router.py",
+        "file": "aps/router.py",
+        "kind": "file",
+        "degree": 57,
+        "churn": 19,
+        "risk": 254.9
+      },
+      {
+        "label": "Base",
+        "file": "db/models.py",
+        "kind": "symbol",
+        "degree": 40,
+        "churn": 38,
+        "risk": 249.8
+      }
+    ],
+    "baseline": {
+      "setAt": "2026-07-21",
+      "commit": "83384da8",
+      "cycles": 0,
+      "hubs": 12
+    }
   },
   "surfaces": [
     {
@@ -14,19 +136,19 @@ window.NETWORKX_IMPACT = {
       "repo": "BIMpossible",
       "tool": "graphify",
       "algo": "cycle_detection",
-      "nodes": 20,
-      "finding": "Circular imports detected \u2014 technical debt to resolve",
-      "category": "risk"
+      "nodes": 0,
+      "finding": "No circular imports. 140 third-party symbols excluded (graphify credits them to the importing file).",
+      "category": "clear"
     },
     {
-      "id": "god_nodes",
-      "label": "God Nodes",
+      "id": "blast_radius",
+      "label": "Blast Radius",
       "repo": "BIMpossible",
       "tool": "graphify",
-      "algo": "betweenness_centrality",
-      "nodes": 10,
-      "finding": "High blast-radius hubs \u2014 single points of failure",
-      "category": "risk"
+      "algo": "degree \u00d7 90d churn",
+      "nodes": 12,
+      "finding": "aec/router.py is the hotspot \u2014 222 dependents, 85 commits in 90d",
+      "category": "watch"
     },
     {
       "id": "security_graph",
