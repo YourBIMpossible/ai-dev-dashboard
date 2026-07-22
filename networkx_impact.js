@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-07-22T04:21:16Z",
+  "generated": "2026-07-22T05:26:29Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -21,7 +21,7 @@ window.NETWORKX_IMPACT = {
       "baseline": 0,
       "delta": 0,
       "rootCauses": [],
-      "excludedExternal": 176,
+      "excludedExternal": 182,
       "examples": []
     },
     "hubs": [
@@ -137,7 +137,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 0,
-      "finding": "No circular imports. 176 third-party symbols excluded (graphify credits them to the importing file).",
+      "finding": "No circular imports. 182 third-party symbols excluded (graphify credits them to the importing file).",
       "category": "clear"
     },
     {
