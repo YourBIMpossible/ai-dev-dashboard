@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-21",
+  generated: "2026-07-22",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-07-08",
+  activitySince: "2026-07-09",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -223,10 +223,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,3,20,16,15,3,10,16,5,0,0,0,2,31],
+      activity: [3,20,16,15,3,10,16,5,0,0,0,2,36,0],
       lastActivity: {
         date: "2026-07-21",
-        summary: "docs(strategy): land the 2026-07-21 ProjectRecipe set (decision brief v2, direction summary, gap analysis, panel synthesis) (a7a434c)"
+        summary: "docs(strategy): Slice A kickoff prompt -- self-contained new-session handoff for ProjectRecipe prefill build (fbb2b70)"
       },
       branch: "main at a7a434c; 0 ahead of origin",
       git: {
@@ -499,7 +499,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [2,18,12,16,6,0,16,19,4,0,0,0,1,12],
+      activity: [18,12,16,6,0,16,19,4,0,0,0,1,12,0],
       lastActivity: {
         date: "2026-07-21",
         summary: "fix(tool3): key template slots + _TEMP placeholders by stamped effective prefixes (#22) (8e8664a)"
@@ -643,7 +643,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,2,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,2,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
@@ -812,7 +812,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,3,0,0,0,0,1],
+      activity: [0,0,0,0,0,0,0,3,0,0,0,0,1,0],
       lastActivity: {
         date: "2026-07-21",
         summary: "merge: production RevitLink pipe adapter + Phase-1 fixtures, runbook, next-ops scoping (#1) (c72d2a4)"
@@ -896,7 +896,7 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,2,0,2,0,0,0,0,0,0,0,0,0],
+      activity: [0,2,0,2,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
