@@ -83,15 +83,29 @@ const net=new vis.Network(document.getElementById('net'),{nodes:new vis.DataSet(
 </scr`+`ipt></body></html>`;
 writeFileSync(join(OUT, "graph-network.html"), viewer, "utf8");
 
-// 3) meta
-const meta = {
-  generated: g.built_at_commit ? new Date().toISOString() : new Date().toISOString(),
+// 3) meta. `generated` is bumped ONLY when the substance below it changes, so a re-run
+// over an unchanged graph rewrites this file byte-for-byte. That matters because
+// Refresh-Dashboard.ps1 stages codebase/ on every scheduled run and reads "nothing
+// staged" as "already current": a wall-clock stamp here manufactures a diff every time
+// and turns the daily refresh into a perpetual no-op commit+push (caught 2026-07-21,
+// before it ever ran). Nothing reads `generated`; it just must not invent churn.
+const stats = {
   commit: (g.built_at_commit || "").slice(0, 7),
   nodes: nodes.length, links: links.length, communities: new Set(nodes.map((n) => n.community)).size,
   shownNodes: visNodes.length, shownEdges: visEdges.length,
 };
-writeFileSync(join(OUT, "codebase-meta.js"), "window.DASHBOARD_CODEBASE = " + JSON.stringify(meta, null, 2) + ";\n", "utf8");
-console.log(`codebase/: report + dashboard copied; graph-network.html = ${visNodes.length}/${nodes.length} nodes, ${visEdges.length} edges; commit ${meta.commit}.`);
+const metaPath = join(OUT, "codebase-meta.js");
+// Key-order-independent compare, so reordering `stats` can't silently defeat the reuse.
+const canon = (o) => JSON.stringify(Object.keys(o).sort().map((k) => [k, o[k]]));
+let generated = new Date().toISOString();
+try {
+  const { generated: prevGen, ...prevStats } = JSON.parse(
+    readFileSync(metaPath, "utf8").replace(/^[^{]*/, "").replace(/;\s*$/, "")
+  );
+  if (prevGen && canon(prevStats) === canon(stats)) generated = prevGen;
+} catch { /* no prior meta, or unparseable - stamp fresh */ }
+writeFileSync(metaPath, "window.DASHBOARD_CODEBASE = " + JSON.stringify({ generated, ...stats }, null, 2) + ";\n", "utf8");
+console.log(`codebase/: report + dashboard copied; graph-network.html = ${visNodes.length}/${nodes.length} nodes, ${visEdges.length} edges; commit ${stats.commit}.`);
 
 if (!PUSH) { console.log("--no-push set."); process.exit(0); }
 function git(a) { return execSync(`git -C "${REPO}" ${a}`, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }); }
