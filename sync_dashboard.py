@@ -62,6 +62,11 @@ MODEL = os.environ.get("GITHUB_MODEL", "openai/gpt-4o")
 MAX_DOC_CHARS = 6000   # total chars across all docs (~2000 tokens)
 PER_FILE_CHARS = 4000  # cap any single doc so one big file can't eat the budget
 OUTPUT_TOKEN_CAP = 4000
+# HARD ceiling on the assembled user message, enforced by build_prompt(). The
+# gateway rejects ~8000 input tokens per request on the free tier REGARDLESS of
+# model; 26000 chars ≈ 6.5k tokens leaves room for the system prompt and message
+# framing. See build_prompt() for why a total budget, not per-piece caps.
+INPUT_CHAR_BUDGET = 26000
 
 SYSTEM_INSTRUCTION = (
     "You maintain one project's card on a status dashboard. You are given that "
@@ -237,20 +242,106 @@ _TOPKEY_RE = re.compile(r"(?m)^( {6})(\w+):")
 _VALUE_RE = re.compile(r"(?s)^(\s*)(.*?)(,?)(\s*)$")
 
 
-def slim_block_for_prompt(block: str) -> str:
-    """Replace protected-field values with short stubs before sending to the model.
+def _field_spans(block: str) -> list[tuple[str, int, int]]:
+    """(name, start, end) for each top-level field's full `key: value` span inside
+    `block`, using the same _TOPKEY_RE shape apply_patch relies on."""
+    open_i = block.index("{")
+    close_i = block.rfind("}")
+    body = block[open_i + 1:close_i]
+    matches = list(_TOPKEY_RE.finditer(body))
+    spans = []
+    for k, m in enumerate(matches):
+        end = matches[k + 1].start() if k + 1 < len(matches) else len(body)
+        spans.append((m.group(2), open_i + 1 + m.start(), open_i + 1 + end))
+    return spans
 
-    The model is blocked from updating progress/waves/activity/lastActivity anyway
-    (hard fence in main()). Sending their full values wastes tokens and can exceed
-    GitHub Models' 8k free-tier input cap as the card grows. We stub them out here
-    so the model still knows the fields exist but doesn't see their bulk content.
-    The real current_block (unmodified) is still used for apply_patch() at write time.
+
+def build_prompt(block: str, docs: str, sha: str, log: str, project: str) -> tuple[str, set[str]]:
+    """Assemble the model's user message under a HARD total size budget, and return
+    (user_msg, blocked_fields) where blocked_fields must be fenced out of the patch.
+
+    Why a TOTAL budget, not another per-piece cap — the history of this failure:
+    GitHub Models' free tier rejects any request over ~8000 input tokens (413
+    tokens_limit_reached), for gpt-4o exactly as for gpt-4o-mini (the 06-30 model
+    switch did not lift it; the "128k context" applies to paid tiers, not this
+    gateway). Each prior fix capped whichever piece was biggest at the time — docs
+    (06-12), output (06-23), the four protected fields (06-30) — and each held only
+    until a DIFFERENT piece grew: by 07-16 the unprotected `audit` field alone was
+    ~17k chars and the Workspace sync 413'd again. Capping contributors one at a
+    time loses to unbounded growth every time. This builder instead:
+
+      1. always stubs PROTECTED_FIELDS (model writes to them are fenced anyway);
+      2. if the assembled message still exceeds INPUT_CHAR_BUDGET, stubs the
+         LARGEST remaining field, repeating until it fits;
+      3. returns every stubbed field so main() fences it — the model saw only a
+         stub, so a "complete new value" from it would destroy real content;
+      4. prints a per-piece size breakdown, so the next growth spurt shows up as a
+         visible line in a green run instead of a 413 in a red one.
+
+    The original block is untouched — apply_patch() writes against the real card.
     """
-    stub = {f: f"[{f.upper()}_MANAGED_BY_SYNC_LEDGERS]" for f in PROTECTED_FIELDS}
+    def assemble(card: str) -> str:
+        return (
+            f"PROJECT ID: {project}\n"
+            f"LATEST COMMIT (short sha): {sha}\n"
+            f"RECENT COMMITS:\n{log}\n\n"
+            f"LATEST STATUS DOCS:\n{docs}\n\n"
+            f"CURRENT PROJECT OBJECT (return a JSON patch of changed top-level fields only):\n"
+            f"{card}"
+        )
+
+    def stub_fields(card: str, names: set[str], reason: dict[str, str]) -> str:
+        patch = {n: reason[n] for n in names}
+        return apply_patch(card, patch, serialize=lambda v, _: json.dumps(v))
+
+    reasons = {f: f"[{f.upper()}_MANAGED_BY_SYNC_LEDGERS]" for f in PROTECTED_FIELDS}
+    blocked: set[str] = set()
+
     try:
-        return apply_patch(block, stub, serialize=lambda v, _: json.dumps(v))
-    except Exception:
-        return block  # fall back to full block if slimming fails
+        present = {name for name, _, _ in _field_spans(block)}
+        card = stub_fields(block, PROTECTED_FIELDS & present, reasons)
+
+        # Stub largest remaining fields until the whole message fits the budget.
+        while len(assemble(card)) > INPUT_CHAR_BUDGET:
+            spans = [(name, e - s) for name, s, e in _field_spans(card)
+                     if name not in PROTECTED_FIELDS and name not in blocked]
+            spans.sort(key=lambda t: -t[1])
+            if not spans or spans[0][1] < 200:
+                break  # nothing meaningful left to trim; ship what we have
+            name = spans[0][0]
+            blocked.add(name)
+            reasons[name] = (f"[{name.upper()}_OMITTED_FOR_SIZE — do not include "
+                             f"this field in your patch]")
+            card = stub_fields(card, {name}, reasons)
+    except Exception as exc:  # noqa: BLE001 - never let slimming kill the sync
+        print(f"  (warn) prompt slimming failed ({exc.__class__.__name__}: {exc}); "
+              f"sending full card", file=sys.stderr)
+        return assemble(block), set()
+
+    # ASCII-only prints: run locally with output redirected on Windows and a
+    # non-ASCII char here becomes a UnicodeEncodeError that kills the whole sync.
+    user_msg = assemble(card)
+    print(f"  prompt size: {len(user_msg)} chars (~{len(user_msg) // 4} tokens; "
+          f"budget {INPUT_CHAR_BUDGET} chars) -- card {len(card)}, docs {len(docs)}, "
+          f"log {len(log)}"
+          + (f"; stubbed for size: {', '.join(sorted(blocked))}" if blocked else ""))
+    if len(user_msg) > INPUT_CHAR_BUDGET:
+        print("  (warn) prompt still over budget after stubbing every large field -- "
+              "the gateway may reject this request", file=sys.stderr)
+    return user_msg, blocked
+
+
+def fence_patch(patch: dict, extra_blocked: set[str]) -> dict:
+    """Drop protected fields and any field the model saw only as a stub. This is
+    the actual guarantee, independent of the prompt wording."""
+    for key in sorted((PROTECTED_FIELDS | extra_blocked) & patch.keys()):
+        why = ("owned by sync_ledgers.py" if key in PROTECTED_FIELDS
+               else "field was stubbed out of the prompt for size — the model "
+                    "never saw its real content")
+        print(f"  (BLOCKED) refusing model write to field '{key}' ({why})",
+              file=sys.stderr)
+        patch.pop(key)
+    return patch
 
 
 def apply_patch(block: str, patch: dict, serialize=to_js) -> str:
@@ -318,15 +409,7 @@ def main() -> int:
     sha = git_short_sha()
     log = git_recent_log()
 
-    prompt_block = slim_block_for_prompt(current_block)
-    user_msg = (
-        f"PROJECT ID: {args.project}\n"
-        f"LATEST COMMIT (short sha): {sha}\n"
-        f"RECENT COMMITS:\n{log}\n\n"
-        f"LATEST STATUS DOCS:\n{docs}\n\n"
-        f"CURRENT PROJECT OBJECT (return a JSON patch of changed top-level fields only):\n"
-        f"{prompt_block}"
-    )
+    user_msg, size_blocked = build_prompt(current_block, docs, sha, log, args.project)
 
     client = build_client()
     print(f"Calling GitHub Models ({MODEL}) for project '{args.project}'...")
@@ -350,13 +433,11 @@ def main() -> int:
     patch = parse_patch(choice.message.content or "")
 
     # Hard fence (the actual guarantee, independent of the prompt): drop any protected
-    # field the model returned. `progress` and `waves` are owned by sync_ledgers.py;
-    # a stray one here can never reach data.js. This lives in the bot's flow, not in
-    # apply_patch, so the deterministic ledger sync can still write those fields.
-    for key in sorted(PROTECTED_FIELDS & patch.keys()):
-        print(f"  (BLOCKED) refusing model write to protected field '{key}' "
-              f"(owned by sync_ledgers.py)", file=sys.stderr)
-        patch.pop(key)
+    # field the model returned, plus any field build_prompt stubbed out for size —
+    # the model never saw a stubbed field's real content, so a "complete new value"
+    # from it would silently destroy that content. This lives in the bot's flow, not
+    # in apply_patch, so the deterministic ledger sync can still write those fields.
+    patch = fence_patch(patch, size_blocked)
 
     if not patch:
         print("No changed fields reported — data.js already current.")
