@@ -2771,7 +2771,12 @@ function codebaseView(){
         <div class="card"><h3>Communities over time</h3>${glChart(gm.map(m=>m.communities),gm.map(m=>m.ts.slice(5,10)+' '+m.sha),360,120,'gc')}</div>
       </div>`;
     }
-    h+=`<p style="font-size:var(--ts-xs);color:var(--dim);margin:0 0 16px">Growth snapshot: ${esc(L.ts.slice(0,10))} · commit <code>${esc(L.sha)}</code> · ${gm.length} push${gm.length!==1?'es':''} tracked</p>`;
+    // gm.length is chart POINTS, not pushes, since adjacent no-op pushes (a re-run,
+    // a doc-only commit) collapse into one point (see Update-GraphMetricsFromLedger).
+    // `pushes` on each point says how many raw pushes it represents; older entries
+    // predate that field, so they fall back to 1 (they were never collapsed).
+    const totalPushes=gm.reduce((s,m)=>s+(m.pushes||1),0);
+    h+=`<p style="font-size:var(--ts-xs);color:var(--dim);margin:0 0 16px">Growth snapshot: ${esc(L.ts.slice(0,10))} · commit <code>${esc(L.sha)}</code> · ${totalPushes} push${totalPushes!==1?'es':''} tracked (${gm.length} distinct)</p>`;
   }
 
   // ── Tools ─────────────────────────────────────────────────────────────────

@@ -76,17 +76,15 @@ function Invoke-Logged {
 # Render graph-metrics.js from the tracked BIMpossible ledger. This refresh is the
 # file's OWNER (since 2026-07-21): BIMpossible\Update-Graph.ps1 appends snapshots to
 # the ledger and no longer writes the rendering; this function is the only writer.
-# Invariant carried over from the retired Update-Graph guard: never silently replace
-# the series with a shorter one -- a short ledger read (wrong checkout, truncated
-# file) must skip the write, not destroy history. Returns a hashtable, never throws.
-# PS 5.1 traps honoured: ConvertFrom-Json output is assigned before @() counts it,
-# and no native call is piped into Select-Object -First (forces $LASTEXITCODE -1).
+# Returns a hashtable, never throws. PS 5.1 traps honoured: ConvertFrom-Json output
+# is assigned before @() counts it, and no native call is piped into
+# Select-Object -First (forces $LASTEXITCODE -1).
 function Update-GraphMetricsFromLedger {
     param([Parameter(Mandatory)][string]$LedgerPath, [Parameter(Mandatory)][string]$OutPath)
 
     if (-not (Test-Path $LedgerPath)) { return @{ ok = $false; reason = "ledger not found at $LedgerPath" } }
 
-    $entries = @()
+    $raw = @()
     foreach ($line in (Get-Content $LedgerPath -Encoding UTF8)) {
         $t = $line.Trim()
         if ($t -match '^{') {
@@ -96,25 +94,72 @@ function Update-GraphMetricsFromLedger {
                 # (cycles pinned at top_n=20, godNodes a fixed leaderboard); the
                 # ledger keeps them as an append-only record, the rendering drops them.
                 foreach ($dead in 'cycles', 'godNodes') { $obj.PSObject.Properties.Remove($dead) }
-                $entries += $obj
+                $raw += $obj
             } catch {}
         }
     }
-    if (-not $entries.Count) { return @{ ok = $false; reason = "ledger parsed to 0 entries" } }
+    if (-not $raw.Count) { return @{ ok = $false; reason = "ledger parsed to 0 entries" } }
 
-    $existing = -1   # -1 = no prior series to protect (missing/unparseable file)
+    # Collapse a run of consecutive pushes that measured an IDENTICAL graph shape
+    # (a re-run, a doc-only push, several same-day pushes) into one chart point.
+    # This removes exact duplicates only -- any push that actually changed
+    # nodes/edges/communities stays, INCLUDING real jumps from graphify's own
+    # 2026-06 trial period. Deciding after the fact that a genuine measurement
+    # "doesn't count" would misrepresent history, not clean it up; only literal
+    # no-op repeats are noise. Each point keeps `pushes`: how many raw ledger
+    # rows it represents, so the true push count survives (sum of `pushes` across
+    # all points == count of raw ledger rows) even though the array is shorter.
+    # A point's ts/sha are the LAST push in its run -- "as of the most recent
+    # push, the graph still looked like this" -- matching how downstream code
+    # already reads the final array entry as "current state".
+    $entries = @()
+    foreach ($r in $raw) {
+        $last = if ($entries.Count) { $entries[$entries.Count - 1] } else { $null }
+        if ($last -and $last.nodes -eq $r.nodes -and $last.edges -eq $r.edges -and $last.communities -eq $r.communities) {
+            $last.ts    = $r.ts     # PSCustomObject is a reference type: mutates
+            $last.sha   = $r.sha    # the object already sitting in $entries, no
+            $last.pushes = $last.pushes + 1   # need to write it back.
+        } else {
+            $r | Add-Member -NotePropertyName pushes -NotePropertyValue 1 -Force
+            $entries += $r
+        }
+    }
+
+    # Invariant: never silently replace the series with FEWER PUSHES REPRESENTED.
+    # Deliberately not "fewer array entries" -- collapsing duplicates makes the
+    # array shorter on purpose (76 raw rows -> ~45 points is the point of this
+    # function), so array length can no longer be what the guard protects. Sum
+    # `pushes` on both sides instead: that still catches a genuinely short ledger
+    # (wrong checkout, truncated file) without rejecting a legitimate collapse.
+    # An existing file from before this change has no `pushes` field; each of its
+    # entries implicitly represents exactly 1 push (one entry per raw row then).
+    $incomingPushes = ($entries | Measure-Object -Property pushes -Sum).Sum
+
+    $existingPushes = -1   # -1 = no prior series to protect (missing/unparseable file)
     if (Test-Path $OutPath) {
         try {
             $text  = [System.IO.File]::ReadAllText($OutPath)
             $start = $text.IndexOf('['); $end = $text.LastIndexOf(']')
             if ($start -ge 0 -and $end -gt $start) {
-                $arr = ConvertFrom-Json -InputObject $text.Substring($start, $end - $start + 1)
-                $existing = @($arr).Count
+                # Two statements, not one: @(ConvertFrom-Json -InputObject $x) in a
+                # SINGLE statement still returns a 1-element wrapper in PS 5.1 even
+                # without a pipe -- @() must wrap an already-assigned variable, not
+                # fuse with the call itself. Caught by this function's own test suite
+                # (a refusal-should-fire case silently didn't fire): a sharper version
+                # of the "assign before @() counts it" trap this codebase already knew
+                # about, which only covered the piped form.
+                $parsed = ConvertFrom-Json -InputObject $text.Substring($start, $end - $start + 1)
+                $arr = @($parsed)
+                $sum = 0
+                foreach ($e in $arr) {
+                    $sum += if ($e.PSObject.Properties.Name -contains 'pushes') { $e.pushes } else { 1 }
+                }
+                $existingPushes = $sum
             }
         } catch {}
     }
-    if ($existing -ge 0 -and $entries.Count -lt $existing) {
-        return @{ ok = $false; reason = "rendered $($entries.Count) entries < existing $existing - refusing to shrink the series" }
+    if ($existingPushes -ge 0 -and $incomingPushes -lt $existingPushes) {
+        return @{ ok = $false; reason = "rendered $incomingPushes push(es) < existing $existingPushes - refusing to shrink the series" }
     }
 
     # PS 5.1-safe array serialisation: per-element -Compress, joined -- same shape the
@@ -123,7 +168,7 @@ function Update-GraphMetricsFromLedger {
     $parts = foreach ($e in $entries) { ConvertTo-Json -InputObject $e -Depth 4 -Compress }
     $json  = '[' + ($parts -join ',') + ']'
     [System.IO.File]::WriteAllText($OutPath, "window.GRAPH_METRICS = $json;", [System.Text.Encoding]::UTF8)
-    return @{ ok = $true; reason = "rendered $($entries.Count) entries$(if ($existing -ge 0) { " (file had $existing)" })" }
+    return @{ ok = $true; reason = "rendered $($entries.Count) point(s) / $incomingPushes push(es)$(if ($existingPushes -ge 0) { " (existing represented $existingPushes)" })" }
 }
 
 $python = (Get-Command python -ErrorAction SilentlyContinue).Source
