@@ -13,13 +13,25 @@
  *
  *   node codebase_sync.mjs            (bundle + push)
  *   node codebase_sync.mjs --no-push  (bundle only)
+ *
+ * Refresh-Dashboard.ps1 calls the --no-push form on every scheduled refresh, so these
+ * four artifacts track the backend automatically; that script's own commit+push stages
+ * `codebase/` alongside data.js. Before that wiring (2026-07-21) the only caller was a
+ * human running it by hand, and the bundle sat frozen at the 2026-06-13 graph for six
+ * weeks. Run it manually (without --no-push) only to publish a bundle out of band.
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
 import { execSync } from "node:child_process";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const SRC = "F:/AI-Dev/BIMpossible/backend/graphify-out";
-const REPO = "F:/AI-Dev/Dashboard";
+// REPO is this script's own directory, not a hardcoded path: Refresh-Dashboard.ps1 calls
+// us from the DEDICATED automation clone (Dashboard-auto), and a hardcoded
+// "F:/AI-Dev/Dashboard" would bundle into the editing clone instead - the automation
+// clone would then commit a `codebase/` it never refreshed. Both clones keep this script
+// at the repo root, so script-dir is the repo root in either. Env vars override for tests.
+const SRC = process.env.GRAPHIFY_OUT || "F:/AI-Dev/BIMpossible/backend/graphify-out";
+const REPO = process.env.DASHBOARD_REPO || dirname(fileURLToPath(import.meta.url));
 const OUT = join(REPO, "codebase");
 const PUSH = !process.argv.includes("--no-push");
 const TOP_N = 170;

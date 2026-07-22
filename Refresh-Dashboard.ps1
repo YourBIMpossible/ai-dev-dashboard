@@ -77,6 +77,10 @@ $python = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $python) { $python = (Get-Command py -ErrorAction SilentlyContinue).Source }
 if (-not $python) { Alert-Failure "python not found on PATH - cannot refresh."; exit 1 }
 
+# node drives codebase_sync.mjs only (the graphify bundle). Missing node is NOT fatal:
+# the data refresh is the job, the codebase/ bundle is a bonus that keeps last run's copy.
+$node = (Get-Command node -ErrorAction SilentlyContinue).Source
+
 $result = 1   # 0 = pushed, 2 = already current (nothing to push), 1 = failed
 
 for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
@@ -112,6 +116,19 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
         "WARN: check_audit_freshness.py failed - audit staleness badge not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
     }
 
+    # 1e. Re-bundle the graphify artifacts the Codebase tab iframes (GRAPH_REPORT.md,
+    #     graph-dashboard.html, graph-network.html, codebase-meta.js). --no-push so this
+    #     script's fetch->reset->commit->push owns the git side; the sync only writes files.
+    #     Non-fatal by design: it reads graphify-out from the BIMpossible working tree, which
+    #     is a DIFFERENT repo that may be mid-checkout, absent, or on a branch that never ran
+    #     Update-Graph.ps1. None of that should block the dashboard data refresh - the last
+    #     good bundle stays committed and we retry tomorrow.
+    if (-not $node) {
+        "WARN: node not on PATH - codebase/ graphify bundle not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+    } elseif ((Invoke-Logged $node @("$PSScriptRoot\codebase_sync.mjs","--no-push")) -ne 0) {
+        "WARN: codebase_sync.mjs failed - codebase/ graphify bundle not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+    }
+
     # 2. Stamp the generated date (UTF-8 no BOM via .NET; only two lines change).
     $path = Join-Path $PSScriptRoot "data.js"
     $text = [System.IO.File]::ReadAllText($path)
@@ -122,8 +139,10 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     # 3. Guard: phase numbering in data.js must match the ledger, or refuse to ship.
     if ((Invoke-Logged $python @("$PSScriptRoot\validate_dashboard.py")) -ne 0) { Alert-Failure "validate_dashboard.py failed - phase numbering vs ledger."; $result = 1; break }
 
-    # 4. Stage only the dashboard data + metrics. Nothing staged => already current.
-    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","networkx_impact.js","audit-freshness.js") | Out-Null
+    # 4. Stage only the dashboard data + metrics + the graphify bundle from 1e. Nothing
+    #    staged => already current. `codebase` is a directory: git add stages whatever
+    #    codebase_sync.mjs rewrote, and stages nothing when the backend graph is unchanged.
+    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","networkx_impact.js","audit-freshness.js","codebase") | Out-Null
     $staged = (& git diff --cached --name-only) -join "`n"
     if (-not $staged.Trim()) { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
 
