@@ -223,10 +223,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,3,20,16,15,3,10,16,5,0,0,0,2,8],
+      activity: [0,3,20,16,15,3,10,16,5,0,0,0,2,9],
       lastActivity: {
         date: "2026-07-21",
-        summary: "feat(open-in-revit): install prompt for a missing desktop opener (dbe3c8f)"
+        summary: "feat(open-in-revit): gate the install modal on a published package (2caaeac)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
@@ -498,10 +498,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [2,18,12,16,6,0,16,19,4,0,0,0,1,5],
+      activity: [2,18,12,16,6,0,16,19,4,0,0,0,1,9],
       lastActivity: {
         date: "2026-07-21",
-        summary: "chore(ci): enforce Dependabot coverage + cover github-actions; correct alerts claim (b44b247)"
+        summary: "chore(deps): bump actions/checkout from 4 to 7 (#19) (a7ef393)"
       },
       branch: "main; synced with origin",
       git: null,
