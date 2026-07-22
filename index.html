@@ -1063,23 +1063,13 @@ function openPP(key,el){
 function closePP(){document.getElementById('pp').style.display='none';document.getElementById('ppb').style.display='none';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closePP();});
 
+// Re-pulls what is already on disk/published. There is no longer a local
+// refresh service to call: the 120s monitor and its port-8082 endpoint were
+// removed. Regenerating the data is an explicit action now — Refresh-Now.cmd
+// on demand, or the 6am scheduled task.
 function doReload(btn){
   btn.classList.add('spinning');btn.disabled=true;
-  const sf=document.getElementById('sidefoot');
-  if(sf){const w=sf.querySelector('.refresh-err');if(w)w.remove();}
-  if(!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)){setTimeout(()=>location.reload(),300);return;}
-  fetch('http://localhost:8082/refresh',{cache:'no-store'})
-    .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);location.reload();})
-    .catch(()=>{
-      btn.classList.remove('spinning');btn.disabled=false;
-      if(sf){
-        const w=document.createElement('span');
-        w.className='warn refresh-err';
-        w.textContent='⚠ local refresh service unreachable — ask Claude to restart the monitor';
-        sf.insertBefore(document.createElement('br'),sf.firstChild);
-        sf.insertBefore(w,sf.firstChild);
-      }
-    });
+  setTimeout(()=>location.reload(),300);
 }
 
 function animate(){
@@ -1110,10 +1100,10 @@ function buildSide(){
   h+='<div class="grp-sep"></div><div class="grp-lbl personal">Personal</div>';
   PERS.forEach(id=>{const p=D.projects.find(q=>q.id===id);if(p)h+=navI(p.id,ICO[p.icon]||ICO.cube,p.name,pctStr(p),null,p.status,true);});
   const n=daysAgo(D.generated);
-  const _liveLocal=/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-  const _cadence=_liveLocal?'Local monitor: facts refresh ~2 min · prose on demand':'Facts refresh daily 6am · prose on demand';
-  h+=`<div class="side-foot" id="sidefoot">Data: ${D.generated} (${n<=0?'today':n+'d ago'})${n>=FRESH.live?'<br><span class="warn">⚠ stale — click refresh</span>':''}<br>${_cadence}</div>`;
-  h+=`<button class="reload-btn" onclick="doReload(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 6.3 2.55L21 9"/><path d="M21 3v6h-6"/><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-6.3-2.55L3 15"/><path d="M3 21v-6h6"/></svg>${_liveLocal?'Refresh now':'Reload data'}</button>`;
+  // One cadence everywhere now — the 2-minute local monitor is gone, so data
+  // changes only on the 6am task or an explicit Refresh-Now.cmd run.
+  h+=`<div class="side-foot" id="sidefoot">Data: ${D.generated} (${n<=0?'today':n+'d ago'})${n>=FRESH.live?'<br><span class="warn">⚠ stale — run Refresh-Now.cmd</span>':''}<br>Facts refresh daily 6am · prose on demand</div>`;
+  h+=`<button class="reload-btn" onclick="doReload(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 6.3 2.55L21 9"/><path d="M21 3v6h-6"/><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-6.3-2.55L3 15"/><path d="M3 21v-6h6"/></svg>Reload data</button>`;
   side.innerHTML=h;
   side.querySelectorAll('.nav').forEach(el=>{el.onclick=()=>show(el.dataset.id);});
 }
@@ -2547,7 +2537,6 @@ function unifiedSpendCard(){
 
 const MTABS=[['usage','Usage'],['agents','Agents'],['workflows','Workflows'],['analytics','Analytics'],['config','Config'],['activity','Activity'],['health','Health'],['github','GitHub Actions']];
 function monitorView(){
-  const _liveLocal=/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   let mt=window._mtab||'usage';
   if(!MTABS.some(t=>t[0]===mt))mt='usage';
   let h='<div class="crumbs">Usage</div><h2 class="page">Usage &amp; Spend</h2>';
@@ -2567,7 +2556,7 @@ function monitorView(){
     <b style="color:var(--text)">↻ Refresh locally</b> (PowerShell on your PC) — these regenerate the data from <code>~/.claude</code> and auto-deploy in ~30s:<br>
     <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\usage_sync.mjs</code> &nbsp;·&nbsp; <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\agents_sync.mjs</code><br>
     <b style="color:var(--text)">GitHub Actions:</b> drop a new billing CSV in <code>~/Downloads</code> then run <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\github_actions_sync.mjs</code> (also fetches live summary via <code>gh api</code>).<br>
-    <span style="color:var(--dim)">${_liveLocal?'"Refresh now" in the sidebar triggers ledgers/activity/phases/agents/usage immediately — GitHub Actions still needs the manual run above.':'The "Reload data" button only re-pulls what\'s already published — it doesn\'t run these.'}</span></div>`;
+    <span style="color:var(--dim)">The "Reload data" button only re-pulls what's already published — it doesn't run these. Run Refresh-Now.cmd, or wait for the 6am task.</span></div>`;
   return h;
 }
 
