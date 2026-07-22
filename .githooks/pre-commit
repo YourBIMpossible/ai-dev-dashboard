@@ -1,0 +1,54 @@
+#!/bin/sh
+# Pre-commit guard: prevent hand-committing files that an automated writer owns.
+#
+# TRACKED ON PURPOSE. This lived only in .git/hooks/ until 2026-07-21, which meant
+# the guard existed on exactly one machine, was in no backup, and would vanish
+# silently on a re-clone — the same single-point-of-failure the metrics ledger had.
+# Enable it in a clone with:   .\Install-Hooks.ps1     (sets core.hooksPath)
+# core.hooksPath is per-clone config and is NOT carried by git, so a fresh clone
+# has the file but an inert hook until that runs. Deliberate: see below.
+#
+# github_actions.js  — written exclusively by the GitHub Actions billing sync bot.
+# graph-metrics.js   — rendered exclusively by the scheduled refresh
+#                      (Dashboard-auto\Refresh-Dashboard.ps1 step 1f) from the
+#                      tracked BIMpossible ledger metrics-history.jsonl.
+#
+# THE ESCAPE, and why it exists: the automation clone (Dashboard-auto) is the
+# legitimate writer of graph-metrics.js. Now that this hook is tracked, that clone
+# receives the file too — so if hooks are ever enabled there, this guard would
+# block the refresh's own commit and freeze the series exactly the way the
+# 2026-06-28 version of this hook did. Refresh-Dashboard.ps1 therefore sets
+# DASHBOARD_REFRESH=1 around its commit, and the guard stands down for it. The
+# escape is bound to the authorized writer, not to a directory name, so it stays
+# correct if the automation clone is moved or renamed.
+#
+# History, so nobody relitigates the blocklist: graph-metrics.js was listed from
+# 2026-06-28, but the automation writer it assumed did not exist — the refresh only
+# re-checkouted origin's copy, so the series froze at 53 entries. The entry was
+# dropped 2026-07-21 to land a catch-up, the renderer was built the same day
+# (9e6f7e6, invariant: never shrink the series), the BIMpossible-side write retired
+# (BIMpossible ebf47ed), and the entry restored. It is correct NOW because the
+# writer actually exists. Do not re-add an owner to this list before building it.
+
+if [ "$DASHBOARD_REFRESH" = "1" ]; then
+    exit 0   # the scheduled refresh IS the writer for these files
+fi
+
+CI_OWNED_FILES="github_actions.js graph-metrics.js"
+BLOCKED=0
+
+for f in $CI_OWNED_FILES; do
+    if git diff --cached --name-only | grep -qx "$f"; then
+        echo "pre-commit: BLOCKED — '$f' is CI/automation-owned; do not commit from the editing clone." >&2
+        echo "  If you need it refreshed, run Refresh-Now.cmd (it renders, commits and pushes from Dashboard-auto)." >&2
+        BLOCKED=1
+    fi
+done
+
+if [ "$BLOCKED" -eq 1 ]; then
+    echo "" >&2
+    echo "To unstage: git restore --staged $CI_OWNED_FILES" >&2
+    exit 1
+fi
+
+exit 0

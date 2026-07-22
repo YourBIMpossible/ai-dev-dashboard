@@ -214,7 +214,19 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
 
     # 5. Commit (parent = origin/main) + push. Fast-forward unless the bot advanced
     #    origin during our render; on rejection, loop onto the new tip and re-render.
-    if ((Invoke-Logged "git" @("commit","-m","dashboard refresh $stampTs")) -ne 0) { Alert-Failure "git commit failed."; $result = 1; break }
+    #    DASHBOARD_REFRESH declares "this commit IS the authorized writer" to the
+    #    tracked .githooks\pre-commit guard, which otherwise blocks commits of
+    #    graph-metrics.js / github_actions.js. Without it, enabling hooks in this
+    #    clone would block the refresh's own commit and re-freeze the series the way
+    #    the 2026-06-28 hook did. Scoped to the commit and cleared straight after so
+    #    it cannot leak into anything else this process spawns.
+    $env:DASHBOARD_REFRESH = '1'
+    try {
+        $commitRc = Invoke-Logged "git" @("commit","-m","dashboard refresh $stampTs")
+    } finally {
+        Remove-Item Env:\DASHBOARD_REFRESH -ErrorAction SilentlyContinue
+    }
+    if ($commitRc -ne 0) { Alert-Failure "git commit failed."; $result = 1; break }
     if ((Invoke-Logged "git" @("push","origin","main")) -eq 0) {
         "Pushed dashboard data ($stampTs) on attempt $attempt." | Add-Content -Path $log -Encoding utf8
         $result = 0; break
