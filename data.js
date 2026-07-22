@@ -789,7 +789,7 @@ window.DASHBOARD_DATA = {
       id: "families",
       name: "Families by BIMpossible",
       icon: "cube",
-      oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Updated README and CHANGELOG with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model.",
+      oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Updated README and CHANGELOG with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits.",
       status: "active",
       phase: "Git repo on GitHub (Families-by-BIMpossible), main in sync with origin. Continuous build through 06-28: per-type equipment profiles + display-recipe framework + XFMR standardized (06-13); XFMR_PROFILE expanded 5→12 params + 4 new shared params (06-27); device verifier + phase-1 handoff checklist (06-27); NetworkX remediation-order DAG — blast-radius + clusters + topo sort (06-28, 7fd2e48).",
       focus: "Run the auditor against a real .rfa repo to validate output; green-light Path B (live automation) only after validation passes.",
@@ -826,7 +826,7 @@ window.DASHBOARD_DATA = {
       reminders: [
         "Folder renamed 'Families by AI' to 'Families by BIMpossible' - REFRESH-SPEC families section updated 06-28; check any other stale links/specs",
         "Promoted paused→active 06-28: continuous build through 06-28 (NetworkX DAG, XFMR expansion, device verifier)",
-        "README and CHANGELOG updated with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model."
+        "README and CHANGELOG updated with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits."
       ],
       links: [
         {
