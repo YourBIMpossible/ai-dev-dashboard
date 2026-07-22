@@ -73,6 +73,59 @@ function Invoke-Logged {
     return $code
 }
 
+# Render graph-metrics.js from the tracked BIMpossible ledger. This refresh is the
+# file's OWNER (since 2026-07-21): BIMpossible\Update-Graph.ps1 appends snapshots to
+# the ledger and no longer writes the rendering; this function is the only writer.
+# Invariant carried over from the retired Update-Graph guard: never silently replace
+# the series with a shorter one -- a short ledger read (wrong checkout, truncated
+# file) must skip the write, not destroy history. Returns a hashtable, never throws.
+# PS 5.1 traps honoured: ConvertFrom-Json output is assigned before @() counts it,
+# and no native call is piped into Select-Object -First (forces $LASTEXITCODE -1).
+function Update-GraphMetricsFromLedger {
+    param([Parameter(Mandatory)][string]$LedgerPath, [Parameter(Mandatory)][string]$OutPath)
+
+    if (-not (Test-Path $LedgerPath)) { return @{ ok = $false; reason = "ledger not found at $LedgerPath" } }
+
+    $entries = @()
+    foreach ($line in (Get-Content $LedgerPath -Encoding UTF8)) {
+        $t = $line.Trim()
+        if ($t -match '^{') {
+            try {
+                $obj = $t | ConvertFrom-Json
+                # Entries written before 2026-07-21 carry graphify display caps
+                # (cycles pinned at top_n=20, godNodes a fixed leaderboard); the
+                # ledger keeps them as an append-only record, the rendering drops them.
+                foreach ($dead in 'cycles', 'godNodes') { $obj.PSObject.Properties.Remove($dead) }
+                $entries += $obj
+            } catch {}
+        }
+    }
+    if (-not $entries.Count) { return @{ ok = $false; reason = "ledger parsed to 0 entries" } }
+
+    $existing = -1   # -1 = no prior series to protect (missing/unparseable file)
+    if (Test-Path $OutPath) {
+        try {
+            $text  = [System.IO.File]::ReadAllText($OutPath)
+            $start = $text.IndexOf('['); $end = $text.LastIndexOf(']')
+            if ($start -ge 0 -and $end -gt $start) {
+                $arr = ConvertFrom-Json -InputObject $text.Substring($start, $end - $start + 1)
+                $existing = @($arr).Count
+            }
+        } catch {}
+    }
+    if ($existing -ge 0 -and $entries.Count -lt $existing) {
+        return @{ ok = $false; reason = "rendered $($entries.Count) entries < existing $existing - refusing to shrink the series" }
+    }
+
+    # PS 5.1-safe array serialisation: per-element -Compress, joined -- same shape the
+    # retired Update-Graph renderer produced, so re-renders over an unchanged ledger
+    # are byte-stable and step 4 stages nothing.
+    $parts = foreach ($e in $entries) { ConvertTo-Json -InputObject $e -Depth 4 -Compress }
+    $json  = '[' + ($parts -join ',') + ']'
+    [System.IO.File]::WriteAllText($OutPath, "window.GRAPH_METRICS = $json;", [System.Text.Encoding]::UTF8)
+    return @{ ok = $true; reason = "rendered $($entries.Count) entries$(if ($existing -ge 0) { " (file had $existing)" })" }
+}
+
 $python = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $python) { $python = (Get-Command py -ErrorAction SilentlyContinue).Source }
 if (-not $python) { Alert-Failure "python not found on PATH - cannot refresh."; exit 1 }
@@ -127,6 +180,19 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
         "WARN: node not on PATH - codebase/ graphify bundle not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
     } elseif ((Invoke-Logged $node @("$PSScriptRoot\codebase_sync.mjs","--no-push")) -ne 0) {
         "WARN: codebase_sync.mjs failed - codebase/ graphify bundle not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+    }
+
+    # 1f. Render graph-metrics.js from the tracked BIMpossible ledger (see the
+    #     function header for ownership + the no-shrink invariant). Non-fatal like 1e:
+    #     the ledger lives in a DIFFERENT repo's working tree; if it is absent or short,
+    #     origin's copy (restored by step 0's checkout) ships unchanged and we retry
+    #     tomorrow. Runs after 1e so a codebase_sync failure cannot skip it.
+    $ledger = if ($env:BIMPOSSIBLE_LEDGER) { $env:BIMPOSSIBLE_LEDGER } else { "F:\AI-Dev\BIMpossible\backend\graphify-out\metrics-history.jsonl" }
+    $gm = Update-GraphMetricsFromLedger -LedgerPath $ledger -OutPath (Join-Path $PSScriptRoot "graph-metrics.js")
+    if ($gm.ok) {
+        "graph-metrics.js: $($gm.reason)" | Add-Content -Path $log -Encoding utf8
+    } else {
+        "WARN: graph-metrics.js not rendered - $($gm.reason) - keeping origin's copy this attempt." | Add-Content -Path $log -Encoding utf8
     }
 
     # 2. Stamp the generated date (UTF-8 no BOM via .NET; only two lines change).
