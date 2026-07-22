@@ -120,7 +120,7 @@ window.PHASE_DAG = {
 {
 "id": "13",
 "name": "Augmentation & Write-back Layer",
-"status": "PLANNED *(unratified)*",
+"status": "ACTIVE",
 "dependsOn": [
 "7"
 ],
@@ -214,7 +214,7 @@ window.PHASE_DAG = {
 {
 "id": "13",
 "name": "Augmentation & Write-back Layer",
-"status": "PLANNED *(unratified)*"
+"status": "ACTIVE"
 },
 {
 "id": "15",
@@ -335,5 +335,5 @@ window.PHASE_DAG = {
 "to": "10"
 }
 ],
-"generated": "2026-07-21"
+"generated": "2026-07-22"
 };

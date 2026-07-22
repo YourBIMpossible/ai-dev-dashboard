@@ -184,7 +184,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P13 Augmentation & Write-back Layer",
             pct: 18,
-            note: "PLANNED *(unratified)* — Phase 13 = the augmentation/edit/review/promotion layer on top of the Phase 7 write-back engines (System α drives System β); Phase 7 remains the canonical engine layer — not absorbed. Implements the scope formerly proposed as \"Phase 3.X Augmentation Layer\" (archived Doc 5, `wb-2…wb-7`); the earlier \"no new phase number\" decision is superseded. Subtitle: \"Productized Data Editing, Review, and Revit Pushback.\" Build detail: `2026-06-24__Phase13_ProductizedDataEditing_Review_Pushback_PhaseDefinition_PROPOSAL.md` + package Docs 1–4. Flip to `ACTIVE` on go. Row placed 2026-07-15 verbatim from `2026-06-26__Phase13_Ratification_and_Ledger_PasteReady.md` §1, which had drafted it paste-ready on 2026-06-26 and was never placed; its companion WAVE-STATUS row (Wave 23) is still unplaced.",
+            note: "ACTIVE — RATIFIED ACTIVE 2026-07-16 (owner). Frozen direction line: `2026-07-16 — Phase 13 (Domain A + promotion gate) → ACTIVE. Direction: A-first, no overhaul. Preserve existing discipline schedule views, Element Preview, and assistant; introduce Change Sets as the staged-change primitive; add Review + Push Center; and rewire EditParameterDialog/assistant from \"write to Revit now\" to \"stage,\" so engines and the promotion gate meet in the middle once Domain A reaches approved-state.` Build plan: `design-docs/change-set_build-plan_2026-07-16.md` (Domain A Stage 1, A-first, TDD, internal-DB only). Direction docs: `design-docs/UX_Research_ChangeLifecycle_Direction_2026-07-16.md` (owner-reviewed) + `DataInput_Interface_Gap_Analysis_2026-07-16.md`. Phase 13 = the augmentation/edit/review/promotion layer on top of the Phase 7 write-back engines (System α drives System β); Phase 7 remains the canonical engine layer — not absorbed. Build detail: `2026-06-24__Phase13_ProductizedDataEditing_Review_Pushback_PhaseDefinition_PROPOSAL.md` + package Docs 1–4. Companion WAVE-STATUS row (Wave 23) still unplaced.",
             tasks: [
               { label: "Owner ratification — flip PLANNED → ACTIVE on go", status: "pending", note: "Scoping decisions made 2026-07-16 (Q1 narrow-first, Q2 self-approval); the ledger status flip itself has not happened" },
               { label: "Place the companion Wave 23 row in WAVE-STATUS.md", status: "pending", note: "Drafted paste-ready 2026-06-26 §2 alongside the phase row; still unplaced" },
@@ -223,10 +223,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,3,20,16,15,3,10,16,5,0,0,0,2,0],
+      activity: [0,3,20,16,15,3,10,16,5,0,0,0,2,8],
       lastActivity: {
-        date: "2026-07-20",
-        summary: "docs(open-in-revit): architecture re-validation + rebuild record 2026-07-16 (#3) (7407048)"
+        date: "2026-07-21",
+        summary: "feat(open-in-revit): install prompt for a missing desktop opener (dbe3c8f)"
       },
       branch: "main at bd472b0; 0 ahead of origin",
       git: {
@@ -498,10 +498,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [2,18,12,16,6,0,16,19,0,0,0,0,1,0],
+      activity: [2,18,12,16,6,0,16,19,4,0,0,0,1,5],
       lastActivity: {
-        date: "2026-07-20",
-        summary: "feat(open-in-revit): bimpossible:// handler stub + RevitLink PendingOpenWatcher (#13) (a661924)"
+        date: "2026-07-21",
+        summary: "chore(ci): enforce Dependabot coverage + cover github-actions; correct alerts claim (b44b247)"
       },
       branch: "main; synced with origin",
       git: null,
@@ -811,10 +811,10 @@ window.DASHBOARD_DATA = {
           ]
         }
       ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,3,0,0,0,0,1],
       lastActivity: {
-        date: "2026-06-28",
-        summary: "feat(tool): NetworkX remediation-order DAG (blast-radius + clusters + topo) (7fd2e48)"
+        date: "2026-07-21",
+        summary: "merge: production RevitLink pipe adapter + Phase-1 fixtures, runbook, next-ops scoping (#1) (c72d2a4)"
       },
       branch: "main",
       nextActions: [

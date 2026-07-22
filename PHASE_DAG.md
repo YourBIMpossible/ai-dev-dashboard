@@ -4,12 +4,12 @@ Source: `BIMpossible_PHASE-STATUS.md` (Gate/depends-on column). Auto-generated b
 
 **Critical path:** P7 -> P9 -> P10
 
-**Lynchpins (gate the most downstream phases):** P7 (gates 4), P4 (gates 1), P9 (gates 1)
+**Lynchpins (gate the most downstream phases):** P7 (gates 6), P4 (gates 2), P9 (gates 1)
 
 ## Build order (topological generations)
 
-1. P0-2 Foundation — Env Setup / Skeleton / Auth (CLOSED), P3 Read-Only Data Dashboard (+ 3.x family) (ACTIVE), P4 Embedded Intelligent Assistant (4a/4b) (CLOSED), P6 Platform / Billing + Client-Management (CLOSED), P7 Model Write-back — DA4R + Revit Link (two engines) (ON HOLD), P8 Project Setup Wizard (BUILT (gated OFF)), P11 Model QA & Health (SHIPPED — LIVE in prod), P11.1 Coordination & Health Report (SHIPPED — LIVE in prod)
-2. P5 Views / Sheets / 3D / Workspace Coherence (ON HOLD), P9 Product Data Ingestion (CONDITIONAL), P12 Content Authoring (PLACEHOLDER (unbuilt))
+1. P0-2 Foundation — Env Setup / Skeleton / Auth (CLOSED), P3 Read-Only Data Dashboard (+ 3.x family) (ACTIVE), P4 Embedded Intelligent Assistant (4a/4b) (CLOSED), P6 Platform / Billing + Client-Management (CLOSED), P7 Model Write-back — DA4R + Revit Link (two engines) (ON HOLD), P8 Project Setup Wizard (BUILT (gated OFF)), P11 Model QA & Health (SHIPPED — LIVE in prod), P11.1 Coordination & Health Report (SHIPPED — LIVE in prod), P14 Local AI Inference — On-Device RAG + Revit Context (Optional) (CONDITIONAL)
+2. P5 Views / Sheets / 3D / Workspace Coherence (ON HOLD), P9 Product Data Ingestion (CONDITIONAL), P12 Content Authoring (PLACEHOLDER (unbuilt)), P13 Augmentation & Write-back Layer (ACTIVE), P15 In-Revit BIMpossible Assistant Pane (ACTIVE)
 3. P10 Cost Intelligence / Estimating (CONDITIONAL)
 
 ## External (non-phase) gates
@@ -18,3 +18,4 @@ Source: `BIMpossible_PHASE-STATUS.md` (Gate/depends-on column). Auto-generated b
 - **P8** — APS write-permission approval
 - **P11** — 2026-07-01
 - **P11.1** — 2026-07-02
+- **P14** — Owner ratification — optional track; gates nothing on the main line and must not block Phases 7–13
