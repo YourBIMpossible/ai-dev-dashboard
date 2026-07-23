@@ -708,18 +708,18 @@ window.DASHBOARD_DATA = {
       id: "families",
       name: "Families by BIMpossible",
       icon: "cube",
-      oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Updated README and CHANGELOG with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits.",
+      oneLiner: "AI-assisted Revit family workflow (multi-repo: Families-by-BIMpossible \"brain\" + BIMpossible-AddIns \"hands\"). Single source of truth is ROADMAP.md: 3 numbered phases (close the RevitLink gap / family-creation geometry primitives / MCP copilot) + a 4th ribbon-button thread + the independent per-family rollout.",
       status: "active",
-      phase: "Git repo on GitHub (Families-by-BIMpossible), main in sync with origin. Continuous build through 06-28: per-type equipment profiles + display-recipe framework + XFMR standardized (06-13); XFMR_PROFILE expanded 5→12 params + 4 new shared params (06-27); device verifier + phase-1 handoff checklist (06-27); NetworkX remediation-order DAG — blast-radius + clusters + topo sort (06-28, 7fd2e48).",
-      focus: "Phase 1 is live in production rehearsal (revitlink_pipe_adapter driving BIMpossible.RevitLink) — the old \"validate offline first, then green-light Path B\" gate has already been superseded by events. Current focus: keep closing bugs surfaced by the rehearsal run (#1-4 so far) and land the ribbon UI (Add-Ins repo, feat/family-fixer-ribbon).",
+      phase: "Spans two repos per ROADMAP.md: Families-by-BIMpossible (\"brain\" — Python planner/verifier/harness) + BIMpossible-AddIns (\"hands\" — BIMpossible.RevitLink). Roadmap committed 2026-07-23 (d3dd3de) after nearly being lost unwritten — the doc's own words. Both repos in sync with origin. See progress.phases[] for real status; this field intentionally stays short now that ROADMAP.md is the detailed source of truth.",
+      focus: "Phase 1 is ~90% done (only wire_nested_params + one live end-to-end rehearsal remain) and the ribbon button is code-complete pending Gate B. The real gate now is ROADMAP.md's open questions -- sequencing, who writes Phase 2's C#, the Phase 3 safety-model choice -- none formally answered yet, and Phase 2 (geometry) / Phase 3 (copilot) can't start for real until they are.",
       progress: {
-        label: "Roadmap",
+        label: "Roadmap (ROADMAP.md)",
         phases: [
-          { name: "Phase 0 — probe", pct: 100, note: "Nested-annotation + Panel2Offset structure probed (read-only revit-mcp script); confirmed S&L_SYMB_PANEL_ANNO carries both panels, PANEL2 is a clean visibility-gated group. Unlocked Op B's design (FAMILY-FIXER_PLAN_AND_GUARDRAILS_2026-06-11.md)." },
-          { name: "Harness ops (backend pipe operations)", pct: 85, note: "4 of 5 ops in production RevitLink: probe_family/add_shared_params/go_single_panel (Add-Ins #12, 07-21) + add_family_params (Add-Ins #23, 07-22). Last op, wire_nested_params, is scoped but not started (NEXT_OPS_SCOPING.md, 07-21) — prior-art code exists in the rehearsal add-in, porting follows the exact #12 pattern." },
-          { name: "Production rehearsal validation", pct: 70, note: "revitlink_pipe_adapter harness drives the live ops end-to-end (22bb9b3, 557ec67); Phase-1 rehearsal run + runbook (3407f11). 4 merged bugfix PRs from real issues the rehearsal surfaced: deploy sequence (#2 c9841fd), wrong-pipe param selection (#3 e956110), wrong-pipe verify (#4 d61babb, 07-22). Ongoing — no clean/final rehearsal run recorded yet." },
-          { name: "Per-family rollout (52 physical families)", pct: 20, note: "PHASE1_FAMILY_CHECKLIST.md: PANEL is DONE — gold master, labels rewired, promoted to the library, every other family is checked against it. CB/MTR/DISC SW/XFMR+ALT1 have params added and are waiting on the human label-rewire step in Revit. MV CB + MV CB_DRAWOUT are BLOCKED on a scope decision (LV mains vs. true medium-voltage). ~40 annotation-only symbols are queued for a batch SL_ rename, needing only a go-ahead." },
-          { name: "Phase 2 — functional tags / display-field cleanup", pct: 0, note: "Not started. Per the plan doc, expected to be mostly free — the Phase-0 probe found 0 static text notes, so panel text is already label-driven; this is mainly \"params auto-fill from equipment,\" which Phase 1 already covers." }
+          { name: "Phase 1 — close the RevitLink method gap", pct: 90, note: "4 of 5 methods done in production BIMpossible.RevitLink: probe_family/add_shared_params/go_single_panel (Add-Ins #12) + add_family_params (Add-Ins #23). wire_nested_params NOT started (scoped, prior art exists). The harness↔production pipe adapter is done + hardened (Families PR #1, #2/#3/#4). What's actually left to call this closed, per ROADMAP.md: port wire_nested_params, then run the live end-to-end rehearsal (real .rfa writes) — not yet run." },
+          { name: "Phase 2 — family-creation geometry primitives", pct: 0, note: "NOT STARTED. New RevitLink methods to generate families from scratch via an image/spec — create_extrusion, create_reference_plane, create_sweep, create_blend, add_parameter (the FamFab pattern: Claude turns an image into structured JSON, a C# add-in builds the geometry via FamilyItemFactory). Blocked on open questions in ROADMAP.md: who writes the C#, and sequencing against Phase 1/the button thread." },
+          { name: "Phase 3 — wrap RevitLink as an MCP server (live copilot)", pct: 0, note: "NOT STARTED. Exposes whatever method set exists (Phase 1 + 2) over MCP so families become chat-drivable directly (\"add a KVA label to this family\") instead of only script-driven. Two flavors identified: wrap the existing typed methods as MCP tools (RECOMMENDED — same safety model, just a transport swap) vs. extending the separate dev-time TCP-8080 code-execution bridge (more powerful, materially less safe). Decision still open, along with what \"the current assistant\" concretely targets." },
+          { name: "Fourth thread — Revit ribbon button (not one of the 3 phases)", pct: 90, note: "A deterministic, no-AI, one-click way for drafters to run the standard operations — not blocked by anything above, calls the same Phase 1 operations in-process. Code-complete on feat/family-fixer-ribbon (Add-Ins): 14/14 build tasks done, 1276/1276 tests, both TFMs, Gate A (net48 Release) PASS. Gate B (live-Revit rehearsal) + icon approval + owner merge decision still owed — the button has never been clicked in a live Revit yet. ROADMAP.md itself had this marked \"Not started\" until corrected today (c72a2a9) — exactly the kind of drift its own preamble warns about." },
+          { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Doesn't block Phase 1/2/3 — only Family Fixer's own promote-to-library step (PHASE1_FAMILY_CHECKLIST.md). PANEL is DONE (gold master, promoted). CB/MTR/DISC SW/XFMR+ALT1 have params added, waiting on human label-rewires in Revit. MV CB + MV CB_DRAWOUT BLOCKED on a scope decision (LV mains vs. true medium-voltage). ~40 annotation-only symbols queued for a batch SL_ rename, needing only a go-ahead." }
         ]
       },
       activity: [0,0,0,0,0,0,3,0,0,0,0,1,3,0],
@@ -728,19 +728,13 @@ window.DASHBOARD_DATA = {
         summary: "fix(tool): verify leg queried the wrong pipe and turned a success into a failure (#4) (d61babb)"
       },
       branch: "main",
-      nextActions: ["Continue Phase-1 rehearsal bug-fixing (harness-driven production RevitLink runs)","Land the Add-Ins ribbon UI (feat/family-fixer-ribbon, 1276/1276 tests, mid UX-redesign, pending owner sign-off)"],
+      nextActions: ["Run Phase 1's live end-to-end rehearsal (LIVE_TEST_RUNBOOK.md) + port wire_nested_params — closes Phase 1","Schedule Gate B (live-Revit click-through) for the ribbon button — code-complete, waiting on your window","Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing, Phase 3 safety-model flavor) before Phase 2 or 3 can really start"],
       pendingDecisions: [],
       blockers: [],
-      reminders: [
-        "Folder renamed 'Families by AI' to 'Families by BIMpossible' - REFRESH-SPEC families section updated 06-28; check any other stale links/specs",
-        "Promoted paused→active 06-28: continuous build through 06-28 (NetworkX DAG, XFMR expansion, device verifier)",
-        "README and CHANGELOG updated with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits."
-      ],
+      reminders: ["ROADMAP.md (repo root) is the single source of truth for this whole multi-repo effort — update its status lines whenever a phase moves, in whichever repo/session does the moving","Multiple sessions/worktrees can work this roadmap in parallel for source edits, but Deploy-Local.ps1 writes to a SHARED %APPDATA% Revit Addins folder, last-writer-wins — only one session may hold the deploy target (mid-rehearsal/mid-deploy) at a time"],
       links: [
-        {
-          label: "Tool README",
-          path: "F:\\AI-Dev\\Families by BIMpossible\\README.md"
-        }
+        { label: "Roadmap (single source of truth)", path: "F:\\AI-Dev\\Families by BIMpossible\\ROADMAP.md" },
+        { label: "Tool README", path: "F:\\AI-Dev\\Families by BIMpossible\\README.md" }
       ],
       recent: [
         "2026-06-28 - NetworkX remediation-order DAG: blast-radius + clusters + topo sort (7fd2e48)",
