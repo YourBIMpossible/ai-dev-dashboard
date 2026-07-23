@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-07-22T13:00:12Z",
+  "generated": "2026-07-23T13:00:11Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,16 +12,16 @@ window.NETWORKX_IMPACT = {
       "nodes": 10082,
       "edges": 20208,
       "commit": "30e34966",
-      "commitsBehind": 16,
+      "commitsBehind": 27,
       "builtAt": "2026-07-21",
-      "stale": false
+      "stale": true
     },
     "cycles": {
       "count": 0,
       "baseline": 0,
       "delta": 0,
       "rootCauses": [],
-      "excludedExternal": 182,
+      "excludedExternal": 187,
       "examples": []
     },
     "hubs": [
@@ -137,7 +137,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 0,
-      "finding": "No circular imports. 182 third-party symbols excluded (graphify credits them to the importing file).",
+      "finding": "No circular imports. 187 third-party symbols excluded (graphify credits them to the importing file).",
       "category": "clear"
     },
     {
@@ -156,7 +156,7 @@ window.NETWORKX_IMPACT = {
       "repo": "BIMpossible",
       "tool": "security_scan",
       "algo": "betweenness_centrality",
-      "nodes": 163,
+      "nodes": 149,
       "finding": "Auth-gate and permission edges mapped",
       "category": "active"
     },

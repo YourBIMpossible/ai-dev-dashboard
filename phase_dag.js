@@ -63,7 +63,7 @@ window.PHASE_DAG = {
 {
 "id": "8",
 "name": "Project Setup Wizard",
-"status": "BUILT (gated OFF)",
+"status": "LIVE — deployed on main 2026-07-22",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -177,7 +177,7 @@ window.PHASE_DAG = {
 {
 "id": "8",
 "name": "Project Setup Wizard",
-"status": "BUILT (gated OFF)"
+"status": "LIVE — deployed on main 2026-07-22"
 },
 {
 "id": "11",
@@ -286,7 +286,7 @@ window.PHASE_DAG = {
 },
 {
 "phase": "8",
-"gate": "APS write-permission approval"
+"gate": "— (write-permission approval GRANTED 2026-07-21)"
 },
 {
 "phase": "11",
@@ -335,5 +335,5 @@ window.PHASE_DAG = {
 "to": "10"
 }
 ],
-"generated": "2026-07-22"
+"generated": "2026-07-23"
 };
