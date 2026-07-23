@@ -227,7 +227,7 @@ window.DASHBOARD_DATA = {
       activity: [20,16,15,3,10,16,5,0,0,0,2,36,9,0],
       lastActivity: {
         date: "2026-07-22",
-        summary: "docs(phase8): decision-log â€” wizard go-live, drop model-upload step, C4R rename held (#209) (d0bd995)"
+        summary: "docs(phase8): decision-log — wizard go-live, drop model-upload step, C4R rename held (#209) (d0bd995)"
       },
       branch: "main at a7a434c; 0 ahead of origin",
       git: {
@@ -483,7 +483,7 @@ window.DASHBOARD_DATA = {
       activity: [12,16,6,0,16,19,4,0,0,0,1,12,2,0],
       lastActivity: {
         date: "2026-07-22",
-        summary: "fix(open-in-revit): widen the pending-open TTL 120sâ†’300s for cold-start boots (#24) (c188a19)"
+        summary: "fix(open-in-revit): widen the pending-open TTL 120s→300s for cold-start boots (#24) (c188a19)"
       },
       branch: "main; synced with origin",
       git: null,
@@ -841,7 +841,7 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-06-28",
         summary: "normalize line endings; remove Zai-brain embedded repo; post-graphify baseline (8e8b564)"
@@ -888,8 +888,11 @@ window.DASHBOARD_DATA = {
           { name: "Design proposals + architecture", pct: 85, note: "design-docs/ grew 2→13 files, latest 07-21 (c6343c3) — Change-Set build plan, DA4R APS strategy, UX research, write-spine convergence; plus root Phase13/14/16 PhaseDefinition proposals + a 5-doc ProjectRecipe set." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      lastActivity: { date: "2026-07-23", summary: "docs(strategy): roll STATE-LIVE backups 07-22/07-23 + land Slice A build log (7b15cb2)" },
+      activity: [7,3,4,1,3,6,3,0,0,0,1,13,3,0],
+      lastActivity: {
+        date: "2026-07-22",
+        summary: "docs(phase8): PHASE-STATUS row 8 -> LIVE + C4R API-access request (231c309)"
+      },
       branch: "main at ae4b7af; synced with origin",
       git: null,
       nextActions: [
@@ -939,8 +942,11 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      lastActivity: { date: "2026-07-23", summary: "dashboard refresh 2026-07-23 11:42 (a571627) — Phase 16 landed, activity/DAG/graph-metrics refreshed" },
+      activity: [4,2,3,4,5,2,3,2,2,2,2,21,3,6],
+      lastActivity: {
+        date: "2026-07-23",
+        summary: "content: families roadmap was 3-line-summarized from README, not the real docs (c63a7bc)"
+      },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
       nextActions: ["Decide whether the incidental GitHub Pages mirror (yourbimpossible.github.io/ai-dev-dashboard) should be disabled in repo Settings to avoid two divergeable live copies, or left as a free redundant mirror"],
@@ -976,8 +982,11 @@ window.DASHBOARD_DATA = {
           { name: "AI-Server integration", pct: 60, note: "sources/ollama.py (Ollama HTTP-API polling: model+VRAM, endpoint up/down, unload tracking) built, README-documented, unit-tested, and enabled=true in config.json — actively collecting on this rig now. Not yet deployed to a standalone 3090 AI-Server box (hardware not assembled)." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      lastActivity: { date: "2026-07-12", summary: "audit remediation: ConnectionAbortedError crash fix, duplicate-alert dedup, DB-connection leak fix (d3938b9)" },
+      activity: [0,0,3,0,0,0,0,0,0,0,0,0,0,0],
+      lastActivity: {
+        date: "2026-07-12",
+        summary: "Record resolution of the 2026-07-12 audit findings in the report itself (bb97b0c)"
+      },
       branch: "main",
       git: { latestCommit: "bb97b0c" },
       nextActions: [
