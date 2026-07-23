@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """sync_activity.py - deterministic per-project activity refresh (NO model).
 
-Reads each project's REAL commit history from GitHub via the `gh` CLI (using the
-machine's existing gh auth - no tokens to manage) and writes the two FACTUAL fields
-that tell you whether a project is alive:
+Reads each project's REAL commit history - from GitHub via the `gh` CLI (using the
+machine's existing gh auth - no tokens to manage) for repos that have a GitHub
+remote, or straight from `git log` for local-only repos that don't - and writes the
+two FACTUAL fields that tell you whether a project is alive:
 
   - activity      : 14-int array, commits/day over the rolling 14-day window
   - lastActivity  : { date, summary } of the newest commit across the project's repos
@@ -32,6 +33,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import os
 import re
 import subprocess
 import sys
@@ -41,9 +43,18 @@ import sync_dashboard as sd  # reuse extract_block / apply_patch / to_js / node_
 
 WINDOW_DAYS = 14
 
+# Local-only repos (git-initialized, no GitHub remote) that PROJECT_REPOS points at
+# directly instead of an "owner/repo" slug. Env var overrides let another machine
+# relocate a clone without editing source - same pattern as sync_ledgers.py's WS/BIM_REPO.
+AI_BRAIN_DATA_REPO = Path(os.environ.get("AI_BRAIN_DATA_REPO", r"F:\AI-Dev\AI-Brain-Data"))
+PC_MONITOR_REPO = Path(os.environ.get("PC_MONITOR_REPO", r"F:\AI-Dev\PC-Monitor"))
+
 # project id (data.js marker) -> source repo(s). A project may span repos (the
-# platform card counts both the code repo and the strategy workspace). pickem is
-# intentionally absent: no repo under this account (owner decision 2026-06-27).
+# platform card counts both the code repo and the strategy workspace). Each entry is
+# either a GitHub "owner/repo" slug (fetched via `gh api`) or a Path to a local
+# git-initialized repo with no GitHub remote (read straight from `git log` - see
+# fetch_commits/local_commits below). pickem is intentionally absent: no repo under
+# this account (owner decision 2026-06-27).
 PROJECT_REPOS = {
     "bimpossible": ["YourBIMpossible/BIMpossible", "YourBIMpossible/BIMpossible_Workspace"],
     "addins":      ["YourBIMpossible/BIMpossible-AddIns"],
@@ -51,6 +62,10 @@ PROJECT_REPOS = {
     "aiserver":    ["YourBIMpossible/AI-Server"],
     "families":    ["YourBIMpossible/Families-by-BIMpossible"],
     "laundry":     ["YourBIMpossible/lazy-laundry-app"],
+    "bimpossible-workspace": ["YourBIMpossible/BIMpossible_Workspace"],
+    "dashboard-auto":        ["YourBIMpossible/ai-dev-dashboard"],
+    "ai-brain-data": [AI_BRAIN_DATA_REPO],
+    "pc-monitor":    [PC_MONITOR_REPO],
 }
 
 
@@ -63,9 +78,13 @@ def gh_commits(repo: str, since_iso: str):
             ["gh", "api", "--paginate", f"repos/{repo}/commits",
              "-X", "GET", "-f", f"since={since_iso}",
              "--jq", ".[] | {date: .commit.committer.date, msg: .commit.message, sha: .sha}"],
-            capture_output=True, text=True, check=True,
+            # gh always writes UTF-8 to stdout regardless of the Windows console
+            # codepage; without an explicit encoding, text mode falls back to
+            # locale.getpreferredencoding() (cp1252 on this machine) and silently
+            # mangles any non-ASCII commit message (em dashes, curly quotes, ...).
+            capture_output=True, encoding="utf-8", check=True,
         ).stdout
-    except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+    except (subprocess.CalledProcessError, FileNotFoundError, UnicodeDecodeError) as exc:
         detail = getattr(exc, "stderr", "") or str(exc)
         print(f"  (warn) gh api failed for {repo}: {detail.strip()[:200]}", file=sys.stderr)
         return None
@@ -85,6 +104,46 @@ def gh_commits(repo: str, since_iso: str):
     return commits
 
 
+def local_commits(repo_path: Path, since_iso: str):
+    """Commits on HEAD of a local repo with no GitHub remote, since `since_iso` (UTC
+    ISO8601) - read straight from `git log`, no `gh` involved. Same return shape as
+    gh_commits: a list of {date: aware-datetime(local), subject: str, sha: str}, or
+    None if the repo couldn't be read (so one bad local path never false-zeroes a
+    card)."""
+    try:
+        out = subprocess.run(
+            ["git", "-C", str(repo_path), "log", f"--since={since_iso}",
+             "--format=%H%x1f%cI%x1f%s"],
+            # See the matching comment in gh_commits: force UTF-8 explicitly rather
+            # than the locale-dependent text-mode default, or non-ASCII commit
+            # subjects get silently mangled on Windows.
+            capture_output=True, encoding="utf-8", check=True,
+        ).stdout
+    except (subprocess.CalledProcessError, FileNotFoundError, UnicodeDecodeError) as exc:
+        detail = getattr(exc, "stderr", "") or str(exc)
+        print(f"  (warn) git log failed for {repo_path}: {detail.strip()[:200]}", file=sys.stderr)
+        return None
+
+    commits = []
+    for line in out.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        sha, date_iso, subject = line.split("\x1f", 2)
+        when = dt.datetime.fromisoformat(date_iso).astimezone()
+        commits.append({"date": when, "subject": subject.strip(), "sha": sha[:7]})
+    return commits
+
+
+def fetch_commits(source, since_iso: str):
+    """Dispatch one PROJECT_REPOS entry to its fetcher: a "owner/repo" string goes
+    to the GitHub API; a Path (a local git-initialized repo with no GitHub remote)
+    is read directly via `git log`."""
+    if isinstance(source, Path):
+        return local_commits(source, since_iso)
+    return gh_commits(source, since_iso)
+
+
 def build_patch(repos, window_start, today):
     """Return ({activity, lastActivity?}, ncommits) for one project, or (None, 0) if
     every repo's fetch errored (leave the card untouched rather than false-zero it)."""
@@ -96,7 +155,7 @@ def build_patch(repos, window_start, today):
 
     all_commits, any_ok = [], False
     for repo in repos:
-        cs = gh_commits(repo, since_iso)
+        cs = fetch_commits(repo, since_iso)
         if cs is None:
             continue
         any_ok = True
