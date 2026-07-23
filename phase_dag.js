@@ -145,6 +145,14 @@ window.PHASE_DAG = {
 ],
 "gates": [],
 "gatesCount": 0
+},
+{
+"id": "16",
+"name": "Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path",
+"status": "CONDITIONAL",
+"dependsOn": [],
+"gates": [],
+"gatesCount": 0
 }
 ],
 "generations": [
@@ -192,6 +200,11 @@ window.PHASE_DAG = {
 {
 "id": "14",
 "name": "Local AI Inference — On-Device RAG + Revit Context (Optional)",
+"status": "CONDITIONAL"
+},
+{
+"id": "16",
+"name": "Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path",
 "status": "CONDITIONAL"
 }
 ],
@@ -299,6 +312,10 @@ window.PHASE_DAG = {
 {
 "phase": "14",
 "gate": "Owner ratification — optional track; gates nothing on the main line and must not block Phases 7–13"
+},
+{
+"phase": "16",
+"gate": "Owner ratification — gates nothing on the main line; not scheduled until the core product line (Phases 3–13) is complete or far enough along to prove the target workflows (owner instruction 2026-07-23)"
 }
 ],
 "edges": [
