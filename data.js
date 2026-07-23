@@ -471,35 +471,15 @@ window.DASHBOARD_DATA = {
       status: "active",
       phase: "main at a661924 (2026-07-20), synced with origin. New this week: **Open-in-Revit** — a bimpossible:// protocol handler (new BIMpossible.OpenInRevit project: strict URI validation, registry-based Revit locator, exact-version-only launch policy, atomic pending-open.json handoff, HKCU registration via Deploy-Local.ps1 --register, no admin needed) plus RevitLink's PendingOpenWatcher consumer — pairs with the BIMpossible backend's new cloud-ids endpoint + web R-button (#188) so clicking 'Open in Revit' on the web app actually launches the right model. New xunit suite for the pure parts. Two more draft PRs open, unmerged: #11 (Phase 7 step-2, add-in side — remove the SyncWithCentral force-guard in lockstep with the backend's confirmation flow, stacks with BIMpossible PR #187) and #12 (Family Fixer: probe_family/add_shared_params/go_single_panel pipe operations). Prior week: the 2026-07-12 audit CLOSED (C-01 disproven, all 10 highs fixed) and the CI gap that was C-01's real lesson closed same week (CI now compiles RevitLink on both TFMs).",
       focus: "Merge #11 (Phase 7 step-2, add-in side) in lockstep with BIMpossible's #187 — they're two halves of the same re-enable and will drift if one lands without the other. Ribbon icon/tooltip polish pass still postponed: 20/37 buttons missing ToolTipImage, Place Callout Sheets' placeholder icon. M-14 (split-level sheet title marker) needs a signature-level redesign — deferred, not scheduled. Live-verify the Retag All Rooms orphan-tag fix in Revit (shipped without that confirmation). QA Scanners: live smoke Architectural (4 tools, 21 tests); live spikes for E/M/P/FP/S collectors.",
-      progress: { label: "Tracks", phases: [
-        { name: "RevitLink tools (9 SHIP, 2 retired, 1 future)", pct: 78, note: "2026-07-14 audit closeout: Tool 7 (Build Sheet Set from Arch Link) retired — superseded by Tool 2 Scaffold, a strict superset. Check Conflicts wired to Sync panel (was built since 06-02, never given a ribbon face).",
-          tasks: [
-            { label: "Sync with Central, ARCH Mode Scan, Fix Title Blocks, Retag Rooms, Push View Templates, Trim Sheets, Create Callout Views, Batch Rename, Place Callout Sheets", status: "done", note: "9 tools SHIP" },
-            { label: "Check Conflicts", status: "done", note: "wired 2026-07-14 — worksharing checkout pre-flight, before Sync with Central" },
-            { label: "Build Sheet Set from Arch Link", status: "done", note: "RETIRED 2026-07-14 — deleted, superseded by Tool 2 Scaffold" },
-            { label: "Batch PDF Export", status: "done", note: "RETIRED 2026-07-14 — deleted, thin Revit-exporter wrapper; Sync Print Sets already does it better" },
-            { label: "Place Panel Schedules + Key Plan / Link Multi-Page PDFs", status: "pending", note: "IDEA stage" }
-          ]
-        },
-        { name: "Duplicate Collection / Replicate Levels", pct: 75, note: "2026-07-14: major feature landing — new Replicate Levels tab (stamp a completed source level onto target levels), multi-pair view-rename autofill (detects every discipline in a mixed selection), rollback/atomicity gate now unit-tested (H-09)",
-          tasks: [
-            { label: "Core duplicate/replicate engine + rollback atomicity", status: "done", note: "ExecutionUnitDecision extracted + unit-tested" },
-            { label: "Replicate Levels tab", status: "done", note: "supersedes the buried MultiLevelReplicateSection" },
-            { label: "Multi-pair view-rename autofill (all disciplines)", status: "done" },
-            { label: "Template remap store + smart-match", status: "done" }
-          ]
-        },
-        { name: "QA scanners (6/7 deployed)", pct: 72, note: "Core consolidated + audit-hardened; live smokes owed",
-          tasks: [
-            { label: "6 trades deployed", status: "done" },
-            { label: "ModelQA.Core consolidated + dedicated Core.Tests project", status: "done", note: "06-10 consolidation; 07-14 split Core's tests into their own Revit-free project (MI-11)" },
-            { label: "Discipline collector silent-failure fixes", status: "done", note: "07-14 — Electrical CapacityVa + Plumbing CountOpenPipingConnectors no longer read a broken element as healthy" },
-            { label: "Architectural live smoke (4 tools, 21 tests)", status: "active" },
-            { label: "E / M / P / FP / S live spikes", status: "pending" },
-            { label: "Civil scanner (Trade 7)", status: "pending", note: "Scope decision parked — unanswered" }
-          ]
-        }
-      ]},
+      progress: {
+        label: "Tracks",
+        phases: [
+          { name: "RevitLink tools (9 SHIP, 2 retired, 1 future)", pct: 78, note: "Catalog unchanged since the 07-14 closeout (TOOL_BACKLOG.md static). Since then: SyncWithCentral force-guard removed (#11 be4d6a8, 07-21), Tool3 template-slot fix (#22 8e8664a, 07-21), bimpossible:// open-in-revit handler shipped (#13 a661924, 07-20) + pending-open TTL widened 120s→300s (#24 c188a19, 07-22)." },
+          { name: "Family Fixer (backend merged, ribbon UI unmerged)", pct: 55, note: "4 pipe ops on main — probe_family/add_shared_params/go_single_panel (#12 1ccc43c, 07-21) + add_family_params (#23 2ea3657, 07-22). Ribbon UI code-complete on feat/family-fixer-ribbon (1276/1276 tests) but hit an overnight UX redesign after live-test feedback, still landing fixes same day (a5ae8e9, 07-23). Owed: Gate B live-Revit rehearsal + owner icon/merge sign-off." },
+          { name: "Duplicate Collection / Replicate Levels", pct: 80, note: "Post-07-14 hardening wave: check-all/uncheck-all + shift-click range-select (9fd4791/c40ac1c, 07-15), progress popups (3368097, 07-15), naming-collision perf fix (65dfa51, 07-15), filter-scoped bulk toggles + debounced filtering (6510f55, 07-21)." },
+          { name: "QA scanners (6/7 deployed)", pct: 72, note: "Unchanged since 07-14 — no scanner commits after that day's audit-remediation fixes (8a1b82a/aced184/d292a38). Core consolidated + audit-hardened; live smokes still owed." }
+        ]
+      },
       activity: [12,16,6,0,16,19,4,0,0,0,1,12,2,0],
       lastActivity: {
         date: "2026-07-22",
@@ -600,63 +580,24 @@ window.DASHBOARD_DATA = {
       oneLiner: "yourbimpossible.com — LIVE at M3. Astro 4 + Cloudflare Pages + Tailwind. Lighthouse 100/100/100/100 across all 6 pages.",
       status: "active",
       phase: "M3 LIVE: yourbimpossible.com deployed on Cloudflare Pages. All 2026-06-09 audit findings cleared. LinkedIn Company Page live (linkedin.com/company/bimpossible). WAF rate rule, 5-hash CSP, Turnstile on /contact, 13.7KB font subset, 405 Allow, dead font fixed — all deployed 06-09/10. Next milestone: M4 (structured data, broken-link sweep).",
-      focus: "M4 hardening — JSON-LD schema.org structured data, broken-link sweep; email routing aliases; product screenshots on interior pages",
-      progress: { label: "Milestones", phases: [
-        { name: "M0-M3 Foundation + live deploy", pct: 100,
-          tasks: [
-            { label: "Astro site scaffold (6 pages + global.css)", status: "done", note: "06-04" },
-            { label: "Triple audit cleared (perf/architecture/code-review)", status: "done", note: "06-09 — all H/M/L findings fixed" },
-            { label: "Cloudflare Pages deploy + custom domain yourbimpossible.com", status: "done" },
-            { label: "Contact form (Turnstile + Web3Forms + 10s/15s timeouts)", status: "done", note: "13 e2e tests passing" },
-            { label: "WAF rate rule + 5-hash CSP + 405 Allow header", status: "done", note: "06-09/10" },
-            { label: "13.7KB font subset (dead font 404 fixed)", status: "done", note: "06-09" }
-          ]
-        },
-        { name: "Business infra + presence", pct: 55, note: "Domain + Cloudflare live; LinkedIn live; email aliases + handles still open",
-          tasks: [
-            { label: "Domain registered + Cloudflare DNS live", status: "done" },
-            { label: "LinkedIn Company Page live", status: "done", note: "linkedin.com/company/bimpossible (ID 131823928); launch post published" },
-            { label: "Email routing aliases (hello@/support@/legal@/billing@/zeriah@)", status: "pending", note: "Recipe in IP-Lockdown-Checklist.md Phase 1.5 — not started" },
-            { label: "Personal LinkedIn profile share of company page", status: "pending" },
-            { label: "LLC formation", status: "pending" },
-            { label: "Social handles (X, Instagram, GitHub org)", status: "pending" }
-          ]
-        },
-        { name: "Content + product imagery", pct: 30, note: "Copy live; interior page screenshots still text-only placeholders",
-          tasks: [
-            { label: "6-page copy live", status: "done" },
-            { label: "Leaders page — real product screenshots", status: "pending", note: "Needs live app screenshots" },
-            { label: "BIM Managers page — real product screenshots", status: "pending" },
-            { label: "Dashboard private sub-page (dashboard.yourbimpossible.com)", status: "pending", note: "Separate Cloudflare Pages project + Zero Trust Access gated to zeriah.t@gmail.com" }
-          ]
-        },
-        { name: "M4 SEO hardening", pct: 0,
-          tasks: [
-            { label: "JSON-LD schema.org structured data (Organization, WebPage types)", status: "pending" },
-            { label: "Broken-link sweep", status: "pending" },
-            { label: "Open Graph / Twitter card meta per page", status: "pending" }
-          ]
-        },
-        { name: "M5-M6 Pricing + commercial launch", pct: 0,
-          tasks: [
-            { label: "Pricing / waitlist page", status: "pending" },
-            { label: "Commercial launch content", status: "pending" }
-          ]
-        }
-      ]},
+      focus: "Business infra (email aliases, social handles, LLC) and product imagery (real screenshots on Leaders/BIM Managers pages) are the two remaining pre-launch gaps — M4 SEO is done. M5-M6 (pricing + commercial launch) not started.",
+      progress: {
+        label: "Milestones",
+        phases: [
+          { name: "M0-M3 Foundation + live deploy", pct: 100, note: "Unchanged — repo clean, HEAD 0594e6e (2026-07-10), deploy intact." },
+          { name: "Business infra + presence", pct: 55, note: "Domain + Cloudflare live; LinkedIn live; email aliases + social handles still open (IP-Lockdown-Checklist.md unchanged since 05-27)." },
+          { name: "Content + product imagery", pct: 30, note: "Copy live; interior pages still reuse the shared Hero.png backdrop — screenshot-review/*.gif captured 06-11 but never wired into product/bim-managers/leaders pages." },
+          { name: "M4 SEO hardening", pct: 100, note: "Structured data (5ab26cf), OG/Twitter cards + sitemap (08aed1e/94fb4fe/25060d4), CI broken-link check (43c192c); Lighthouse Perf/BP/SEO/A11y 100 across all 6 pages after the 07-10 audit's a11y remediation (4bbe591, 0594e6e)." },
+          { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
+        ]
+      },
       activity: [2,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
       },
       branch: null, git: { latestCommit: "709f352" },
-      nextActions: [
-        "M4: Add JSON-LD schema.org structured data (Organization + WebPage types) to all 6 pages",
-        "M4: Broken-link sweep across all pages",
-        "Email routing aliases: hello@/support@/legal@/billing@/zeriah@ → Gmail (recipe in IP-Lockdown-Checklist.md Phase 1.5)",
-        "Product screenshots: get real app screenshots into Leaders + BIM Managers pages",
-        "Dashboard auth: fix Cloudflare Zero Trust login — add GitHub OAuth IDP (OAuth App at github.com/settings/applications → callback: https://flat-queen-a958.cloudflareaccess.com/cdn-cgi/access/callback)"
-      ],
+      nextActions: ["Email routing aliases: hello@/support@/legal@/billing@/zeriah@ → Gmail (recipe in IP-Lockdown-Checklist.md Phase 1.5)","Product screenshots: get real app screenshots into Leaders + BIM Managers pages","Dashboard auth: fix Cloudflare Zero Trust login — add GitHub OAuth IDP (OAuth App at github.com/settings/applications → callback: https://flat-queen-a958.cloudflareaccess.com/cdn-cgi/access/callback)"],
       pendingDecisions: [
         "Dashboard Zero Trust auth: GitHub OAuth IDP setup in progress — needs OAuth App created in GitHub, client ID + secret added to Zero Trust login methods"
       ],
@@ -705,49 +646,26 @@ window.DASHBOARD_DATA = {
       id: "pickem",
       name: "Preseason Pick'em",
       icon: "trophy",
-      oneLiner: "Next.js pick'em app (PreseasonPickem-app). Stack locked, Phase 1 auth started.",
+      oneLiner: "Next.js pick'em app (PreseasonPickem-app), deployed to www.preseason-pickem.com. Auth (magic-link + passkeys), scoring, and leaderboard all shipped as of 06-01 — dormant since, not \"just started.\"",
       status: "dormant",
-      phase: "Phase 1 auth + scoring/rankings libs added 06-01 (status still flagged dormant pending human call)",
-      focus: "Decide: resume before NFL preseason or park explicitly",
-      progress: { label: "Build", phases: [
-        { name: "P0 Bootstrap + stack", pct: 100,
-          tasks: [
-            { label: "Next.js + stack setup", status: "done" },
-            { label: "Docker compose + scripts", status: "done" }
-          ]
-        },
-        { name: "P1 Auth", pct: 25,
-          tasks: [
-            { label: "Auth lib scaffolded", status: "done" },
-            { label: "User sessions + flows", status: "active", note: "Ref: 03_ChatExports/2026-05-24__phase1-auth.md" }
-          ]
-        },
-        { name: "Picks + scoring MVP", pct: 30, note: "scoring engine/leaderboard + rankings sync libs in (06-01)",
-          tasks: [
-            { label: "Scoring engine lib", status: "done", note: "06-01" },
-            { label: "Leaderboard lib", status: "done", note: "06-01" },
-            { label: "Rankings sync (Sleeper / stats)", status: "done", note: "06-01" },
-            { label: "Wire libs into app", status: "pending" },
-            { label: "Pick submission UI", status: "pending" }
-          ]
-        },
-        { name: "Deploy", pct: 0,
-          tasks: [
-            { label: "Hosting setup", status: "pending" },
-            { label: "Production deploy", status: "pending", note: "Hard deadline: NFL preseason (August)" }
-          ]
-        }
-      ]},
+      phase: "Dormant since 2026-06-01 (confirmed: HEAD 705609b, no commits/branches/reflog activity since; site still responds live). The 06-01 snapshot itself under-described the state — auth, scoring, and deploy were already substantially done by then, not \"in progress.\"",
+      focus: "Owner call: resume before NFL preseason (August) or park explicitly. If resuming, the app is much closer to done than the old card suggested — the main gap is running it through a live event, not building remaining features.",
+      progress: {
+        label: "Build",
+        phases: [
+          { name: "P0 Bootstrap + stack", pct: 100, note: "Unchanged." },
+          { name: "P1 Auth", pct: 100, note: "Magic-link shipped + E2E-tested 05-24 (35e0fde/92edb66); 90-day session + cross-domain cookie fix + passkey/WebAuthn support added 06-01 (269deae, 62ee47e, 70ddeb1)." },
+          { name: "Picks + scoring MVP", pct: 95, note: "Scoring engine, picks UI, leaderboard, draft order, and auto-lock all shipped together 05-24 (c07ed6b); manual-tiebreak, member-choice draft slots, and a bonus Draft Kit (rankings/ADP) added by 06-01. Code-complete; not yet run through a live preseason." },
+          { name: "Deploy", pct: 80, note: "Vercel auto-deploys live; custom domain www.preseason-pickem.com confirmed responding (HTTP 200, re-checked 07-23). One prod build break already hit + fixed (05-31). Prod env vars / cron execution unverifiable from local files alone." }
+        ]
+      },
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: { date: "2026-06-01", summary: "rankings (sleeper/stats/sync) + scoring (engine/leaderboard/manual-tiebreak) libs added" },
       branch: null, git: null,
-      nextActions: [ "Resume Phase 1 auth per 03_ChatExports/2026-05-24__phase1-auth.md; wire the new scoring/rankings libs into the app" ],
+      nextActions: ["Owner call: resume for NFL preseason (August) or park explicitly — most core functionality (auth, scoring, deploy) is already built and live"],
       pendingDecisions: [],
       blockers: [],
-      reminders: [
-        "Idle since 2026-06-01 (27 days) - confirm dormant status; NFL preseason deadline approaching (August)",
-        "Hard real-world deadline: NFL preseason (August)"
-      ],
+      reminders: ["Idle since 2026-06-01 (52 days as of 07-23) — confirm dormant status; NFL preseason deadline approaching (August)","Hard real-world deadline: NFL preseason (August)"],
       links: [
         { label: "PRD", path: "F:\\AI-Dev\\Preseason Pick'em\\PRD.md" },
         { label: "Workspace index", path: "F:\\AI-Dev\\Preseason Pick'em\\WORKSPACE_INDEX.md" },
@@ -793,35 +711,22 @@ window.DASHBOARD_DATA = {
       oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Updated README and CHANGELOG with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits.",
       status: "active",
       phase: "Git repo on GitHub (Families-by-BIMpossible), main in sync with origin. Continuous build through 06-28: per-type equipment profiles + display-recipe framework + XFMR standardized (06-13); XFMR_PROFILE expanded 5→12 params + 4 new shared params (06-27); device verifier + phase-1 handoff checklist (06-27); NetworkX remediation-order DAG — blast-radius + clusters + topo sort (06-28, 7fd2e48).",
-      focus: "Run the auditor against a real .rfa repo to validate output; green-light Path B (live automation) only after validation passes.",
-      progress: { label: "Two-path plan", phases: [
-        { name: "Path A auditor build", pct: 78, note: "Actively built through 06-28; per-type equipment profiles, XFMR 5→12 params, device verifier, remediation-order DAG",
-          tasks: [
-            { label: "Tool scaffold + README", status: "done", note: "05-28" },
-            { label: "Core auditor logic", status: "active", note: "Per-type profiles + display-recipe (06-13); XFMR 5→12 params (06-27); remediation-order DAG (06-28)" }
-          ]
-        },
-        { name: "Path A validation", pct: 0,
-          tasks: [
-            { label: "Run against a real .rfa repo", status: "pending", note: "Must pass before Path B starts" }
-          ]
-        },
-        { name: "Path B live automation", pct: 0,
-          tasks: [
-            { label: "revit-mcp integration design", status: "pending", note: "Not started - blocked on Path A validation" },
-            { label: "Live automation build", status: "pending" }
-          ]
-        }
-      ]},
+      focus: "Phase 1 is live in production rehearsal (revitlink_pipe_adapter driving BIMpossible.RevitLink) — the old \"validate offline first, then green-light Path B\" gate has already been superseded by events. Current focus: keep closing bugs surfaced by the rehearsal run (#1-4 so far) and land the ribbon UI (Add-Ins repo, feat/family-fixer-ribbon).",
+      progress: {
+        label: "Roadmap",
+        phases: [
+          { name: "Phase 0 — probe", pct: 100, note: "Nested-annotation + Panel2Offset structure probed (read-only revit-mcp script); Op A/B planners + structural-diff verifier + shared snapshot model shipped 06-11..06-28." },
+          { name: "Phase 1 — Ops A/B/C via BIMpossible.RevitLink", pct: 65, note: "revitlink_pipe_adapter harness drives production RevitLink (22bb9b3, 557ec67); Phase-1 rehearsal run + runbook (3407f11); merged PRs #1-4 fixing bugs found live — deploy sequence (c9841fd), wrong-pipe param selection (e956110), wrong-pipe verify (d61babb, 07-22). Consumer-side ribbon UI tracked on the Add-Ins card." },
+          { name: "Phase 2 — functional tags / display-field cleanup", pct: 0, note: "Not started per README roadmap." }
+        ]
+      },
       activity: [0,0,0,0,0,0,3,0,0,0,0,1,3,0],
       lastActivity: {
         date: "2026-07-22",
         summary: "fix(tool): verify leg queried the wrong pipe and turned a success into a failure (#4) (d61babb)"
       },
       branch: "main",
-      nextActions: [
-        "Run the auditor against a real family repo to validate output; green-light Path B only after validation"
-      ],
+      nextActions: ["Continue Phase-1 rehearsal bug-fixing (harness-driven production RevitLink runs)","Land the Add-Ins ribbon UI (feat/family-fixer-ribbon, 1276/1276 tests, mid UX-redesign, pending owner sign-off)"],
       pendingDecisions: [],
       blockers: [],
       reminders: [
@@ -851,71 +756,33 @@ window.DASHBOARD_DATA = {
       icon: "cube",
       oneLiner: "Portable, fully-local LLM inference + automation platform. Dev on the RTX 5080 now; relocates to a dedicated RTX 3090 box by one .env line (OLLAMA_HOST).",
       status: "active",
-      phase: "Repo live + private (YourBIMpossible/AI-Server), CI green (pytest 3.10-3.12), branch-protected (PR + CI gate). Scaffold + Ollama setup + daily-digest automation shipped; WP-A core `aiserver` library landed (smoke-test + daily_digest refactored onto it). Next: finish WP-A via PR, then WP-B (RAG) + WP-C (automation suite) in parallel.",
-      focus: "Run the Wave-1 Claude Code session: land WP-A via PR, then WP-B (RAG over AI-Brain-Data) + WP-C (automation suite) on parallel branches.",
-      progress: { label: "Work packages", phases: [
-        { name: "Foundation", pct: 100, note: "Repo + CI (pytest 3.10-3.12 green) + branch protection (PR+CI gate) + portable scaffold + smoke + first automation",
-          tasks: [
-            { label: "Repo + .gitignore/.gitattributes", status: "done", note: "06-16" },
-            { label: "Ollama setup (Windows + Linux) + smoke test", status: "done" },
-            { label: "daily_digest automation + Windows scheduler", status: "done" },
-            { label: "GitHub Actions CI (pytest matrix)", status: "done" },
-            { label: "Branch protection (PR + CI gate)", status: "done" }
-          ]
-        },
-        { name: "WP-A Core library (aiserver)", pct: 80, note: "config + OpenAI-compatible client (chat+embed) + prompts + log + tests (5/5); scripts refactored onto it; PR-merge + final acceptance owed",
-          tasks: [
-            { label: "aiserver package + pyproject + tests", status: "done" },
-            { label: "Refactor smoke-test + daily_digest onto aiserver", status: "done", note: "06-16" },
-            { label: "Land via PR + final acceptance", status: "active" }
-          ]
-        },
-        { name: "WP-B RAG / knowledge", pct: 0, note: "sqlite-vec index over AI-Brain-Data + BIMpossible docs; query CLI with citations; doc-drift detector",
-          tasks: [
-            { label: "Ingest + embed + incremental index", status: "pending" },
-            { label: "Query CLI + drift report", status: "pending" }
-          ]
-        },
-        { name: "WP-C Automation suite", pct: 10, note: "Job framework + weekly rollup + decision-drift; productionize digest",
-          tasks: [
-            { label: "daily_digest prototype", status: "done" },
-            { label: "Job framework + weekly rollup + drift", status: "pending" }
-          ]
-        },
-        { name: "WP-D Dashboard + integration", pct: 20, note: "This dashboard tab (D1) added 06-16; PC-Monitor GPU profile (D2) + offload weekly Revit-log task (D3) pending",
-          tasks: [
-            { label: "Dashboard AI-Server tab (D1)", status: "active", note: "added 06-16" },
-            { label: "PC-Monitor GPU/inference profile (D2)", status: "pending" },
-            { label: "Offload revit-log weekly task to local (D3)", status: "pending" }
-          ]
-        },
-        { name: "WP-E/F/G Ops, eval, advanced", pct: 0, note: "Serving/ops hardening; eval-vs-Claude harness; advanced (Whisper meeting-notes, local coding-agent, QLoRA fine-tune)",
-          tasks: [
-            { label: "WP-E serving/ops hardening", status: "pending" },
-            { label: "WP-F eval harness", status: "pending" },
-            { label: "WP-G advanced (Whisper / coder / QLoRA)", status: "pending" }
-          ]
-        }
-      ]},
+      phase: "Repo live + private (YourBIMpossible/AI-Server), CI green (131 tests pass, up from 83). WP-A/B/C/F all merged via PR #1-4 (06-16/17); WP-D1 merged via PR #5. The 2026-07-12 incremental audit (regression-check + review of the new dictation-cleanup proxy) raised 11 findings, all fixed same session in f37d165 — current HEAD, tree clean. 11 days quiet since.",
+      focus: "WP-E (ops/serving hardening) and WP-G2 (advanced/agentic tooling) are the remaining untouched work packages — a worktree-harness branch has 7/8 WP-G2-adjacent tasks done but unmerged. WP-D3's last piece (owner's G:-hosted SKILL.md cutover) is the only WP-D item still open.",
+      progress: {
+        label: "Work packages",
+        phases: [
+          { name: "Foundation", pct: 100, note: "Repo + CI (pytest 3.10-3.12 green) + branch protection (PR+CI gate) + portable scaffold + smoke + first automation." },
+          { name: "WP-A Core library (aiserver)", pct: 100, note: "Merged PR #1 (06-17); hardened (CLIENT-2, CONFIG-1/2) in f37d165 (07-12); covered by the 131-pass suite." },
+          { name: "WP-B RAG / knowledge", pct: 100, note: "Merged PR #2 (06-17); ingest/query/drift/store/chunk shipped; hardened (RAG-1,2,4,5,6) in f37d165." },
+          { name: "WP-C Automation suite", pct: 100, note: "Merged PR #3 (06-17); framework + daily_digest + weekly_rollup + decision_drift + Windows task registration shipped; hardened (AUTO-2,6) in f37d165." },
+          { name: "WP-D Dashboard + integration", pct: 90, note: "D1 live (this card, merged PR #5, 06-17). D2 built + enabled in PC-Monitor (sources/ollama.py, config.json enabled=true, audited 07-12). D3 --engine deterministic|local flag built in AI-Brain-Data; only the owner's G:-hosted SKILL.md cutover remains." },
+          { name: "WP-F Eval harness", pct: 100, note: "Merged PR #4 (06-16); cases/run/report/baseline/scoring shipped; hardened (EVAL-1..5) in f37d165." },
+          { name: "Dictation-cleanup proxy (new, ungated)", pct: 90, note: "OpenWhispr dictation-cleanup proxy shipped (3c4d4e6) and hardened same-session (DP-1..7 in f37d165) — a real shipped subsystem that wasn't tracked as a work package before." },
+          { name: "WP-E/G Ops, advanced", pct: 5, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A worktree-harness branch (7/8 tool-loop tasks done, aimed at WP-G2) is unmerged as of 07-12." }
+        ]
+      },
       activity: [2,0,2,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
       },
-      branch: "main at 6b057ac", git: null,
-      nextActions: [
-        "Run Wave-1 Claude Code session (handoffs/WAVE-1_kickoff.md): finish WP-A, then WP-B + WP-C in parallel PRs",
-        "Merge WP-A via a CI-gated PR"
-      ],
+      branch: "main at f37d165",
+      nextActions: ["Merge or continue the worktree-harness branch (7/8 tasks done, WP-G2-adjacent tool-loop work)","WP-D3: land the owner's G:-hosted SKILL.md cutover — last open WP-D item","Start WP-E (serving/ops hardening) when ready — currently untouched"],
       pendingDecisions: [
         "3090 box OS (Ubuntu Server vs Windows) + runtime (Ollama now vs vLLM later) - see build plan"
       ],
       blockers: [],
-      reminders: [
-        "WP-A refactor: land via a CI-gated PR (main is PR-gated)",
-        "Full code-audit report added 06-18 via PR #9 — review findings and action items",
-        "3090 box not assembled yet - dev on the 5080; relocate via one .env line (OLLAMA_HOST)"
-      ],
+      reminders: ["3090 box not assembled yet — dev on the 5080; relocates via one .env line (OLLAMA_HOST)","Full code-audit PR #9 (06-18) findings are closed; the 07-12 incremental audit is also fully closed, suite at 131 passed"],
       links: [
         { label: "Program plan", path: "F:\\AI-Dev\\AI-Server\\PROGRAM_PLAN.md" },
         { label: "Handoffs (WP-A..G)", path: "F:\\AI-Dev\\AI-Server\\handoffs" },
@@ -967,20 +834,13 @@ window.DASHBOARD_DATA = {
       status: "active",
       phase: "Local-only git repo (no GitHub remote). HEAD still 8e8b564 (2026-06-28), but the vault has kept accumulating daily context-log/copy-state/raw-log churn since — now 123 uncommitted files (up from 84 on 07-14), none committed in over three weeks. Post-graphify baseline shipped: 70 notes enriched, 12 MOCs created. The vault feeds AI-Server WP-B (RAG over AI-Brain-Data docs).",
       focus: "Commit the accumulated daily context-log churn (123 files, growing) before it's unmanageable to review; keep Revit-AI context current; feed AI-Server WP-B (sqlite-vec RAG index) when that work package starts.",
-      progress: { label: "Workstreams", phases: [
-        { name: "Vault foundation", pct: 100, note: "Obsidian vault live; MOCs, decision-log, standards-and-refs, revit-snippets all structured",
-          tasks: [
-            { label: "Initial vault structure + gitignore", status: "done" },
-            { label: "Post-graphify enrichment (70 notes, 12 MOCs)", status: "done", note: "2026-06-28" }
-          ]
-        },
-        { name: "Revit-AI context pipeline", pct: 60, note: "Copy-log + copy-state in place; raw-log capture running; ingestion into AI-Server not yet built",
-          tasks: [
-            { label: "copy-log.txt + copy-state.json pipeline", status: "active", note: "Updating daily" },
-            { label: "Feed into AI-Server WP-B RAG index", status: "pending", note: "Blocked on AI-Server WP-B" }
-          ]
-        }
-      ]},
+      progress: {
+        label: "Workstreams",
+        phases: [
+          { name: "Vault foundation", pct: 95, note: "Obsidian vault live; 12 MOCs + decision-log + standards-and-refs populated (post-graphify baseline, 8e8b564, 06-28). revit-snippets/ folder exists but is empty — 0 files, never populated despite earlier claims." },
+          { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
+        ]
+      },
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,1],
       lastActivity: {
         date: "2026-06-28",
@@ -1020,34 +880,16 @@ window.DASHBOARD_DATA = {
       status: "active",
       phase: "main branch, synced with origin. Last commit ae4b7af (2026-07-16 05:21): docs(write-spine) — recorded items 1/3/4/5 of the convergence plan (contract shipped, Schedule-Push re-spec direction, the two-lane audit boundary, an Audit & History Pattern doc-reconciliation addendum); also corrected the PHASE-STATUS Phase-7/Phase-3 rows (DA4R = reserved name only, no code — 'scaffolded' overstated it) and updated WAVE-STATUS Wave 29 with that night's four ships. Nothing has landed in this repo since — 5 days quiet while the real activity moved to three unmerged draft PRs in the CODE repo (Phase 7/8/13 work) that this ledger doesn't yet reflect. Key sources of truth: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
       focus: "Place Phase 13's companion Wave 23 row in WAVE-STATUS.md — drafted paste-ready 2026-06-26, still unplaced, and now more urgent since real Phase 13 code exists on a draft PR. Write a Phase 15 definition doc (it entered build with no proposal/ratification artifact, unlike 13/14). Get WSR8's decision docs + buildlogs onto main — stranded on a docs-repo branch while main's decision-log/INDEX.md has nothing newer than 2026-07-07.",
-      progress: { label: "Content areas", phases: [
-        { name: "Strategy + ledgers", pct: 90, note: "PHASE-STATUS, WAVE-STATUS, STATE-LIVE live and updated regularly; Canonical Guide v2 reviewed 2026-06-23",
-          tasks: [
-            { label: "Phase status ledger (PHASE-STATUS.md)", status: "active" },
-            { label: "Wave status ledger (WAVE-STATUS.md)", status: "active" },
-            { label: "Auto-generated state (STATE-LIVE.md)", status: "active" },
-            { label: "Commit pending security-review + gstack-activation files", status: "active", note: "73 files uncommitted as of 2026-06-28" }
-          ]
-        },
-        { name: "Prompts + skills", pct: 80, note: "CLAUDE_CODE_STARTUP_PROMPT.md + PROJECT_CONTEXT.md + DEBUG_3_STAGE skill in place",
-          tasks: [
-            { label: "Claude Code startup prompt", status: "done" },
-            { label: "Project context doc", status: "done" },
-            { label: "DEBUG_3_STAGE skill", status: "done" }
-          ]
-        },
-        { name: "Design proposals + architecture", pct: 70, note: "Phase 7 writeback proposal, Phase 5 visual-model-graph design doc in 00_Strategy/",
-          tasks: [
-            { label: "Phase 7 writeback two-options proposal", status: "done", note: "2026-06-23" },
-            { label: "Visual model graph design doc", status: "done", note: "2026-06-28" }
-          ]
-        }
-      ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      lastActivity: {
-        date: "2026-07-16",
-        summary: "docs(write-spine): items 1/3/4/5 recorded — contract shipped, SP re-spec direction, audit boundary, doc reconciliation (ae4b7af)"
+      progress: {
+        label: "Content areas",
+        phases: [
+          { name: "Strategy + ledgers", pct: 90, note: "PHASE-STATUS, WAVE-STATUS, STATE-LIVE live and updated regularly — STATE-LIVE backups daily through 07-23; WAVE-STATUS last commit ae4b7af (07-16); Phase 16 row added 07-23 (CONDITIONAL/PROPOSAL). Canonical Guide v2 last touched 06-25." },
+          { name: "Prompts + skills", pct: 85, note: "Core 3 files (startup prompt, project context, DEBUG_3_STAGE) stable since 06-01; grown to 6 .claude/skills/, 5 agents, 7 commands (06-28, e9d8af1) + a full bimpossible-audit-skill package, SKILL.md + 6 reference docs (06-26, 95fc936)." },
+          { name: "Design proposals + architecture", pct: 85, note: "design-docs/ grew 2→13 files, latest 07-21 (c6343c3) — Change-Set build plan, DA4R APS strategy, UX research, write-spine convergence; plus root Phase13/14/16 PhaseDefinition proposals + a 5-doc ProjectRecipe set." }
+        ]
       },
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
+      lastActivity: { date: "2026-07-23", summary: "docs(strategy): roll STATE-LIVE backups 07-22/07-23 + land Slice A build log (7b15cb2)" },
       branch: "main at ae4b7af; synced with origin",
       git: null,
       nextActions: [
@@ -1087,40 +929,24 @@ window.DASHBOARD_DATA = {
       icon: "refresh",
       oneLiner: "Automation-dedicated clone of the ai-dev-dashboard repo. The scheduled refresh pipeline (sync_*.py scripts, GitHub Actions sync) commits directly here; F:\\AI-Dev\\Dashboard is the human-edit copy.",
       status: "active",
-      phase: "main branch, same remote as Dashboard (YourBIMpossible/ai-dev-dashboard). Waves 1–6 design system + strategy priority pass pushed to origin on 2026-06-28 (8dffb54). Auto clone needs fast-forward to pick up those 10 commits. 34 uncommitted files in auto-clone (expected between syncs).",
-      focus: "CI/CD write target for automated data refreshes. Do not hand-edit — manual changes go in F:\\AI-Dev\\Dashboard instead. Fast-forward auto clone to origin/main to resolve the 10-commit lag from Waves 1–6 push.",
-      progress: { label: "Automation pipeline", phases: [
-        { name: "Sync scripts", pct: 85, note: "sync_activity.py, sync_ledgers.py, sync_dashboard.py, usage_sync.mjs, codebase_sync.mjs, agents_sync.mjs, github_actions_sync.mjs all present",
-          tasks: [
-            { label: "Activity sync (git log → data.js)", status: "done" },
-            { label: "Ledger sync (PHASE-STATUS + WAVE-STATUS → data.js)", status: "done" },
-            { label: "Usage sync", status: "active" },
-            { label: "Hardened automation-clone refresh logic", status: "done", note: "2026-06-28 (e575b63)" }
-          ]
-        },
-        { name: "GitHub Actions deploy", pct: 80, note: "deploy.yml + github-actions-live.yml present; Cloudflare Pages deploy pipeline",
-          tasks: [
-            { label: "Automated deploy on push", status: "done" },
-            { label: "Live GitHub Actions sync", status: "active" }
-          ]
-        }
-      ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      lastActivity: {
-        date: "2026-06-28",
-        summary: "fix(refresh): harden automation-clone refresh (e575b63)"
+      phase: "main branch, same remote as Dashboard (YourBIMpossible/ai-dev-dashboard) — both clones now in sync with origin (confirmed 2026-07-23, HEAD a571627). The 2026-06-28 10-commit fast-forward lag is long resolved; the scheduler runs the 06:00 daily refresh from THIS clone via Task Scheduler, confirmed landing pushes 07-19 through 07-23. The local dashboard monitor (:8081 live-server + 2min loop) was REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan state — refresh is now scheduled-or-on-demand only (Refresh-Now.cmd).",
+      focus: "CI/CD write target for automated data refreshes; do not hand-edit here — manual changes go in F:\\AI-Dev\\Dashboard. Both known deploy targets are live and independently verified: Cloudflare Pages (deploy.yml → wrangler, the deliberate pipeline) and a parallel, unconfigured default GitHub Pages auto-build (no workflow file drives it — just a side effect of the repo being public). They currently serve identical content; worth deciding which one is canonical if that ever matters.",
+      progress: {
+        label: "Automation pipeline",
+        phases: [
+          { name: "Sync scripts", pct: 90, note: "sync_activity.py, sync_ledgers.py, sync_dashboard.py, usage_sync.mjs, codebase_sync.mjs, agents_sync.mjs, github_actions_sync.mjs, graph-metrics.js all present and running daily. codebase_sync.mjs joined the scheduled run 2026-07-21 (c9ffc30), ending a 6-week-frozen Codebase tab; graph-metrics.js became ledger-self-owned the same day (9e6f7e6)." },
+          { name: "GitHub Actions deploy", pct: 90, note: "deploy.yml → Cloudflare Pages confirmed live (ai-dev-dashboard.pages.dev, HTTP 200, run logs green 2026-07-23) + github-actions-live.yml billing sync. A second, unconfigured GitHub Pages auto-build also serves the same content in parallel (yourbimpossible.github.io/ai-dev-dashboard) — nobody deliberately set this up." },
+          { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
+        ]
       },
-      branch: "main at e575b63; origin/main at 8dffb54 (10 commits ahead — fast-forward needed)",
-      git: { warn: "Same remote as working Dashboard. 34 files uncommitted in auto clone. Do not hand-edit. Fast-forward to origin/main (8dffb54) to pick up Waves 1–6 + priority pass." },
-      nextActions: [
-        "Fast-forward auto clone: git -C F:\\AI-Dev\\Dashboard-auto pull --ff-only origin main",
-        "Confirm scheduler still points to Dashboard-auto after fast-forward"
-      ],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,3],
+      lastActivity: { date: "2026-07-23", summary: "dashboard refresh 2026-07-23 11:42 (a571627) — Phase 16 landed, activity/DAG/graph-metrics refreshed" },
+      branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
+      git: null,
+      nextActions: ["Decide whether the incidental GitHub Pages mirror (yourbimpossible.github.io/ai-dev-dashboard) should be disabled in repo Settings to avoid two divergeable live copies, or left as a free redundant mirror"],
       pendingDecisions: [],
       blockers: [],
-      reminders: [
-        "Auto clone is 10 commits behind origin — fast-forward before next scheduled refresh or it will push stale data.js"
-      ],
+      reminders: ["Two independently-live copies of this dashboard exist: Cloudflare Pages (deliberate, deploy.yml) and GitHub Pages (incidental, unconfigured default for a public repo) — both served identical content as of 2026-07-23"],
       links: [
         { label: "Auto clone folder", path: "F:\\AI-Dev\\Dashboard-auto" },
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/ai-dev-dashboard" }
@@ -1140,37 +966,20 @@ window.DASHBOARD_DATA = {
       icon: "monitor",
       oneLiner: "Fully-local workstation monitoring stack for the Ryzen 9 9950X3D + RTX 5080 rig. Python collector → SQLite; zero-dependency web dashboard with live view + historical scrubbing. No cloud, no telemetry.",
       status: "active",
-      phase: "No git — local-only (~404 files). Python collector (collector.py) + Flask web app (app.py) + SQLite (db.py). Last modified 2026-06-25. Packaged as a Windows-native install (install-task.ps1 → Task Scheduler; desktop shortcut at http://127.0.0.1:8787). Deep-capture mode (deepcapture.py) available.",
-      focus: "Tool is operational. Integration with AI-Server WP-D (GPU/inference profile) is a pending work item.",
-      progress: { label: "Features", phases: [
-        { name: "Core monitoring", pct: 90, note: "Collector + SQLite + web dashboard + Windows auto-start installer all present and operational",
-          tasks: [
-            { label: "Python collector (~10s sample rate)", status: "done" },
-            { label: "SQLite persistence (db.py)", status: "done" },
-            { label: "Live + historical web dashboard (port 8787)", status: "done" },
-            { label: "Windows Task Scheduler install (install-task.ps1)", status: "done" },
-            { label: "Deep-capture mode (deepcapture.py)", status: "done" }
-          ]
-        },
-        { name: "Packaging", pct: 50, note: "PyInstaller spec present; packaged zip exists; full portable install not confirmed working",
-          tasks: [
-            { label: "PyInstaller build (PC-Monitor.spec)", status: "active", note: "Spec + dist/ present; confirm build is current" },
-            { label: "PC-Monitor-app portable package", status: "active", note: "Folder exists with 299 files" }
-          ]
-        },
-        { name: "AI-Server integration", pct: 0, note: "GPU/inference profiling for AI-Server WP-D planned but not built",
-          tasks: [
-            { label: "GPU + inference profile for AI-Server WP-D", status: "pending", note: "Depends on AI-Server WP-D" }
-          ]
-        }
-      ]},
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      lastActivity: {
-        date: "2026-06-25",
-        summary: "Local file modification (no git history)"
+      phase: "Git-initialized as of 2026-07-12 (3 commits, dd1bb9d baseline → bb97b0c) — the \"no git\" era ended. Python collector (collector.py) + Flask web app (app.py) + SQLite (db.py). Actively logging: metrics.db-shm mtime 2026-07-22. Packaged as a Windows-native install (install-task.ps1 → Task Scheduler; desktop shortcut at http://127.0.0.1:8787).",
+      focus: "Tool is operational and actively logging. AI-Server WP-D2 (Ollama GPU/inference profiling) is built and enabled (config.json ollama.enabled=true), not just planned.",
+      progress: {
+        label: "Features",
+        phases: [
+          { name: "Core monitoring", pct: 95, note: "Operational; audited 2026-07-12 (3 proven HIGH bugs fixed + live-smoke-verified, not just mocked); 29 automated tests pass; collector confirmed actively logging through 2026-07-22." },
+          { name: "Packaging", pct: 35, note: "PC-Monitor.spec (PyInstaller config) present, but no dist/build/zip exists anywhere in the repo as of 2026-07-23 — the earlier packaged zip is gone since the 07-12 audit; portable install currently unverifiable." },
+          { name: "AI-Server integration", pct: 60, note: "sources/ollama.py (Ollama HTTP-API polling: model+VRAM, endpoint up/down, unload tracking) built, README-documented, unit-tested, and enabled=true in config.json — actively collecting on this rig now. Not yet deployed to a standalone 3090 AI-Server box (hardware not assembled)." }
+        ]
       },
-      branch: "N/A — local only, no git",
-      git: null,
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      lastActivity: { date: "2026-07-12", summary: "audit remediation: ConnectionAbortedError crash fix, duplicate-alert dedup, DB-connection leak fix (d3938b9)" },
+      branch: "main",
+      git: { latestCommit: "bb97b0c" },
       nextActions: [
         "Confirm PyInstaller build is current and PC-Monitor-app.zip is up to date",
         "Wire GPU/inference profile into AI-Server WP-D when that work package starts"
@@ -1179,10 +988,7 @@ window.DASHBOARD_DATA = {
         "Should PC-Monitor be git-initialized and pushed to a private repo for version history?"
       ],
       blockers: [],
-      reminders: [
-        "No git — changes are not version-controlled; consider initializing a local repo",
-        "PC-Monitor-app/ (299 files) may be a stale build artifact — confirm it's current before sharing"
-      ],
+      reminders: ["Git now exists (since 07-12, 3 commits) — update any doc/dashboard text still saying \"no git\"","No dist/build/zip package currently in the repo despite PC-Monitor.spec being present — confirm before claiming a packaged build exists"],
       links: [
         { label: "Local app", path: "F:\\AI-Dev\\PC-Monitor" },
         { label: "Live dashboard", path: "http://127.0.0.1:8787" },
@@ -1235,24 +1041,16 @@ window.DASHBOARD_DATA = {
       name: "BIMpossible Tests",
       icon: "check",
       oneLiner: "Personal testing vault (Obsidian) for manually walking through BIMpossible phase/wave smoke tests. Human-executed verification checklist organized per project and phase.",
-      status: "active",
+      status: "dormant",
       phase: "No git — local Obsidian vault (~12 files). One note per project under Projects/, each with ## Phase headings and checkbox steps. Dashboard view (_Dashboard.md) surfaces only unchecked next steps. Last modified 2026-06-24.",
       focus: "Run manual smoke tests after each BIMpossible deployment. Refresh vault by re-reading per-repo runbooks after any major merge.",
-      progress: { label: "Coverage", phases: [
-        { name: "Vault setup", pct: 100, note: "Obsidian vault live; Tasks plugin; _Dashboard view; _Phase-Test-Template ready",
-          tasks: [
-            { label: "Obsidian vault + Tasks plugin", status: "done" },
-            { label: "Dashboard + template", status: "done" }
-          ]
-        },
-        { name: "Active test coverage", pct: 50, note: "Manually maintained; needs refresh after each BIMpossible deploy",
-          tasks: [
-            { label: "Refresh tests post true-prod deploy", status: "pending", note: "P6 true-prod deploy owed" },
-            { label: "Add Phase 4c/4d smoke steps (conversation persistence, project-context grounding)", status: "pending" },
-            { label: "Add Wave 4.9 / 4.10 smoke steps", status: "pending" }
-          ]
-        }
-      ]},
+      progress: {
+        label: "Coverage",
+        phases: [
+          { name: "Vault setup", pct: 100, note: "Unchanged — Obsidian vault, Tasks plugin, _Dashboard, _Phase-Test-Template intact." },
+          { name: "Active test coverage", pct: 10, note: "0/51 checkboxes ever checked across all three project notes (Web App 0/25, Families 0/15, Add-Ins 0/11); zero files touched in 29 days (no git). Notes are frozen at a 2026-06-24 snapshot predating P7's 42%, P8 Wizard going LIVE (07-22), and P11/P11.1 shipping LIVE — none of that is reflected here." }
+        ]
+      },
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-06-24",
@@ -1260,9 +1058,7 @@ window.DASHBOARD_DATA = {
       },
       branch: "N/A — local only, no git",
       git: null,
-      nextActions: [
-        "Refresh test notes after true-prod deploy for P6 + smokes for Wave 4.9/4.10 + Phase 4c/4d"
-      ],
+      nextActions: ["Refresh test notes against current shipped work: P8 Wizard (LIVE 07-22), P11 QA (SHIPPED LIVE), P11.1 Coordination Report (SHIPPED LIVE, 95%) — vault has zero coverage of any of these"],
       pendingDecisions: [],
       blockers: [],
       reminders: [
@@ -1276,7 +1072,7 @@ window.DASHBOARD_DATA = {
       recent: [
         "2026-06-24 — last local modification"
       ]
-    }
+    },
     /* PROJECT:bimpossible-tests:END */
   ]
 };
