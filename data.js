@@ -708,7 +708,7 @@ window.DASHBOARD_DATA = {
       id: "families",
       name: "Families by BIMpossible",
       icon: "cube",
-      oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Updated README and CHANGELOG with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits.",
+      oneLiner: "Revit family audit + standardize tool (Family Fixer). Python auditor actively built; focus on S&L One-Line electrical symbol families. Updated README and CHANGELOG with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits. README corrected for button-thread status.",
       status: "active",
       phase: "Git repo on GitHub (Families-by-BIMpossible), main in sync with origin. Continuous build through 06-28: per-type equipment profiles + display-recipe framework + XFMR standardized (06-13); XFMR_PROFILE expanded 5→12 params + 4 new shared params (06-27); device verifier + phase-1 handoff checklist (06-27); NetworkX remediation-order DAG — blast-radius + clusters + topo sort (06-28, 7fd2e48).",
       focus: "Phase 1 is live in production rehearsal (revitlink_pipe_adapter driving BIMpossible.RevitLink) — the old \"validate offline first, then green-light Path B\" gate has already been superseded by events. Current focus: keep closing bugs surfaced by the rehearsal run (#1-4 so far) and land the ribbon UI (Add-Ins repo, feat/family-fixer-ribbon).",
@@ -734,7 +734,7 @@ window.DASHBOARD_DATA = {
       reminders: [
         "Folder renamed 'Families by AI' to 'Families by BIMpossible' - REFRESH-SPEC families section updated 06-28; check any other stale links/specs",
         "Promoted paused→active 06-28: continuous build through 06-28 (NetworkX DAG, XFMR expansion, device verifier)",
-        "README and CHANGELOG updated with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits."
+        "README and CHANGELOG updated with Phase 0 probe, Op B planner, structural-diff verifier, and shared snapshot model. Added offline auditor, live automation scripts, and guardrails for family edits. README corrected for button-thread status."
       ],
       links: [
         {
