@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-23",
+  generated: "2026-07-24",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-07-10",
+  activitySince: "2026-07-11",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -118,7 +118,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P8 Project Setup Wizard",
             pct: 65,
-            note: "LIVE — deployed on main 2026-07-22 — The product's FIRST live write to Autodesk — PROVEN 2026-07-22: a real ACC project was created + cloned from a firm project-template (folders + settings + central Revit model) through the Forma-native create-from-template path (`construction/admin/v1/accounts/{id}/projects`, 202→poll-active). UI: building-type dropdown (Autodesk's list), ACC project-template picker by NAME. 2026-07-22 simplification ([#207](https://github.com/YourBIMpossible/BIMpossible/pull/207), squash-merged): the redundant local-RVT *upload* step + its Model-template/Model-destination pickers were DROPPED once the template clone was confirmed to carry the central model — that upload was the only thing marking otherwise-successful runs `failed` (broken signeds3upload). A provision is now exactly create-from-template → reports clean `complete`. (Superseded PR #204, folder-picker fix, closed — its endpoint was deleted here.) Model-rename to `<number> - <name>` is HELD on an Autodesk C4R app-whitelist grant (the template's central model is a Collaboration-for-Revit cloud model; `PATCH items` → 403 \"client_id not whitelisted for schema items:autodesk.bim360:C4RModel\"); request doc `02_Reference/Phase8_C4R_API_Access_Request.md`; deliberately OUT of the critical path (founder 2026-07-22). Audit gate: ✅ `provisioning_jobs_status_history` present (`0055dd1`). Owed — founder-driven, physical-world only: (1) one supervised run witnessed as `complete` on the main deploy (needs the founder's Autodesk login + write-consent — cannot be automated); (2) archive the ZZZ/Testy/Chrome test projects in the ACC web UI (no public delete API).",
+            note: "LIVE — deployed on main 2026-07-22 — The product's FIRST live write to Autodesk — PROVEN 2026-07-22: a real ACC project was created + cloned from a firm project-template (folders + settings + central Revit model) through the Forma-native create-from-template path (`construction/admin/v1/accounts/{id}/projects`, 202→poll-active). UI: building-type dropdown (Autodesk's list), ACC project-template picker by NAME. 2026-07-22 simplification ([#207](https://github.com/YourBIMpossible/BIMpossible/pull/207), squash-merged): the redundant local-RVT *upload* step + its Model-template/Model-destination pickers were DROPPED once the template clone was confirmed to carry the central model — that upload was the only thing marking otherwise-successful runs `failed` (broken signeds3upload). A provision is now exactly create-from-template → reports clean `complete`. (Superseded PR #204, folder-picker fix, closed — its endpoint was deleted here.) Model-rename to `<number> - <name>` is HELD on an Autodesk C4R app-whitelist grant (the template's central model is a Collaboration-for-Revit cloud model; `PATCH items` → 403 \"client_id not whitelisted for schema items:autodesk.bim360:C4RModel\"); request doc `02_Reference/Phase8_C4R_API_Access_Request.md`; deliberately OUT of the critical path (founder 2026-07-22). Audit gate: ✅ `provisioning_jobs_status_history` present (`0055dd1`). Both founder-driven closeout items done 2026-07-23: (1) supervised run witnessed `complete` — `provisioning_jobs` row `46aff137…`, clean `planning → provisioning → complete` transition, zero error, verified directly against the prod DB; (2) the ZZZ / Testy Testington / Chrome Test / SMOKE 2026-07-23 test projects are archived in the ACC web UI. Phase 8 has nothing outstanding.",
             tasks: [
               { label: "No-write planning core (planner + reverse-order rollback walker + default-closed gate)", status: "done", note: "06-14 — pure stdlib, not wired into main.py; 18 tests green" },
               { label: "ProvisioningJob DB model + Alembic migration (t2u3v4w5x6y7)", status: "done", note: "06-14 — verified via isolated local-CI lane; alembic check clean" },
@@ -224,10 +224,10 @@ window.DASHBOARD_DATA = {
           { name: "P16 Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path", pct: 10, note: "CONDITIONAL — Persistent local orchestration hub for cross-tool workflows (Revit, BIMpossible Site, filesystem/git, reporting) via explicit, scoped MCP servers as the default path; GUI/desktop automation admitted only as a named, allowlisted exception for apps with no workable API — under explicit consent, sandboxing, and audit logging, never a general \"control my desktop\" mode. Full rationale, architecture, and the 3-condition go/no-go ratification test: `2026-07-23__Phase16_DesktopOrchestrationHub_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately." }
         ]
       },
-      activity: [20,16,15,3,10,16,5,0,0,0,2,36,9,0],
+      activity: [16,15,3,10,16,5,0,0,0,2,36,9,2,0],
       lastActivity: {
-        date: "2026-07-22",
-        summary: "docs(phase8): decision-log — wizard go-live, drop model-upload step, C4R rename held (#209) (d0bd995)"
+        date: "2026-07-23",
+        summary: "chore(gitleaks): allowlist checkpoint-commit fingerprint for test_auth_issuer dummy key (#213) (5ef16fd)"
       },
       branch: "main at a7a434c; 0 ahead of origin",
       git: {
@@ -480,10 +480,10 @@ window.DASHBOARD_DATA = {
           { name: "QA scanners (6/7 deployed)", pct: 72, note: "Unchanged since 07-14 — no scanner commits after that day's audit-remediation fixes (8a1b82a/aced184/d292a38). Core consolidated + audit-hardened; live smokes still owed." }
         ]
       },
-      activity: [12,16,6,0,16,19,4,0,0,0,1,12,2,0],
+      activity: [16,6,0,16,19,4,0,0,0,1,12,2,0,0],
       lastActivity: {
         date: "2026-07-22",
-        summary: "fix(open-in-revit): widen the pending-open TTL 120s→300s for cold-start boots (#24) (c188a19)"
+        summary: "fix(open-in-revit): widen the pending-open TTL 120sâ†’300s for cold-start boots (#24) (c188a19)"
       },
       branch: "main; synced with origin",
       git: null,
@@ -591,7 +591,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [2,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-10",
         summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
@@ -722,10 +722,10 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Doesn't block Phase 1/2/3 — only Family Fixer's own promote-to-library step (PHASE1_FAMILY_CHECKLIST.md). PANEL is DONE (gold master, promoted). CB/MTR/DISC SW/XFMR+ALT1 have params added, waiting on human label-rewires in Revit. MV CB + MV CB_DRAWOUT BLOCKED on a scope decision (LV mains vs. true medium-voltage). ~40 annotation-only symbols queued for a batch SL_ rename, needing only a go-ahead." }
         ]
       },
-      activity: [0,0,0,0,0,0,3,0,0,0,0,1,3,0],
+      activity: [0,0,0,0,0,3,0,0,0,0,1,3,2,0],
       lastActivity: {
-        date: "2026-07-22",
-        summary: "fix(tool): verify leg queried the wrong pipe and turned a success into a failure (#4) (d61babb)"
+        date: "2026-07-23",
+        summary: "docs(roadmap): correct the button-thread status the roadmap's own last update missed (c72a2a9)"
       },
       branch: "main",
       nextActions: ["Run Phase 1's live end-to-end rehearsal (LIVE_TEST_RUNBOOK.md) + port wire_nested_params — closes Phase 1","Schedule Gate B (live-Revit click-through) for the ribbon button — code-complete, waiting on your window","Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing, Phase 3 safety-model flavor) before Phase 2 or 3 can really start"],
@@ -767,7 +767,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 5, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A worktree-harness branch (7/8 tool-loop tasks done, aimed at WP-G2) is unmerged as of 07-12." }
         ]
       },
-      activity: [2,0,2,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,2,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
