@@ -1,0 +1,78 @@
+# BIM-Watch: collect Autodesk/BIM sources, triage them, publish to the dashboard.
+#
+# Follows the same shape as github-actions-live.yml -- fetch, write a .js file, commit,
+# and let deploy.yml redeploy to Cloudflare Pages on the resulting push.
+#
+# Requires one repo secret for triage (the run still works without it, leaving items
+# unsorted and saying so on the dashboard):
+#   ANTHROPIC_API_KEY — https://platform.claude.com  →  repo Settings → Secrets → Actions
+#
+# See bimwatch/SETUP.md for the full setup, including the Cloudflare Access policy that
+# protects the chat endpoint.
+
+name: BIM-Watch
+
+on:
+  schedule:
+    - cron: '0 6 * * *'    # daily 06:00 UTC — collect + triage
+    - cron: '0 7 * * 1'    # Monday 07:00 UTC — the weekly briefing render
+  workflow_dispatch:
+    inputs:
+      skip_classify:
+        description: 'Collect only, no API spend'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bimwatch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install --quiet requests anthropic
+
+      - name: Run tests
+        # The pipeline touches a public repo on a schedule; a broken parser should fail
+        # here rather than quietly publish a mangled archive.
+        run: python -m pytest bimwatch/tests -q
+
+      - name: Collect and triage
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ "${{ inputs.skip_classify }}" = "true" ]; then
+            python -m bimwatch.run --no-classify
+          else
+            python -m bimwatch.run
+          fi
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "bimwatch-bot"
+          git config user.email "bimwatch-bot@users.noreply.github.com"
+          git add bimwatch.js bimwatch-archive.json bimwatch/state/
+          if git diff --cached --quiet; then
+            echo "No change — nothing to publish."
+            exit 0
+          fi
+          git commit -m "bimwatch: $(date -u +%Y-%m-%d) collection"
+          # The dashboard has other automated writers; rebase rather than fail the run.
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin main && git push origin main && exit 0
+            echo "push attempt $attempt failed, retrying"
+            sleep 5
+          done
+          echo "Could not push after 3 attempts" >&2
+          exit 1

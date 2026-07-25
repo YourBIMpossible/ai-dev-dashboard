@@ -1,0 +1,152 @@
+{
+  "_comment": [
+    "BIM-Watch source registry. Data, not code -- edit freely, no redeploy logic needed.",
+    "Every url below was verified live on 2026-07-25: HTTP 200, parseable, non-empty.",
+    "",
+    "  enabled       set false to mute a source without losing its history",
+    "  weight        nudges ranking in the weekly briefing (0.5 quiet .. 1.5 loud)",
+    "  expect_days   typical days between posts; 3x this with no items = stale badge",
+    "",
+    "Known-dead, deliberately not listed (checked 2026-07-25, do not re-add blindly):",
+    "  thebuildingcoder.typepad.com  domain parked -- the Revit API blog is gone",
+    "  forums.autodesk.com RSS       now behind sign-in",
+    "  augi.com, buildingsmart.org   403 to non-browser clients",
+    "  bimplus.co.uk, allthingsbim   404",
+    "  speckle.systems/blog          404 (the GitHub releases feed covers it instead)"
+  ],
+
+  "sources": [
+    {
+      "key": "aps-blog",
+      "name": "Autodesk Platform Services",
+      "url": "https://aps.autodesk.com/rss.xml",
+      "home": "https://aps.autodesk.com/blog",
+      "category": "autodesk",
+      "note": "Developer/API feed. The single best alert-tier source.",
+      "enabled": true,
+      "weight": 1.5,
+      "expect_days": 10
+    },
+    {
+      "key": "revit-blog",
+      "name": "Autodesk AEC blog (was the Revit blog)",
+      "url": "https://blogs.autodesk.com/revit/feed/",
+      "home": "https://www.autodesk.com/blogs/aec/",
+      "category": "autodesk",
+      "note": "Product announcements, releases, roadmap. The old Revit-blog URL now 301s to the merged AEC blog; kept as-is because it is the stable public entry point.",
+      "enabled": true,
+      "weight": 1.4,
+      "expect_days": 14
+    },
+    {
+      "key": "adsk-news",
+      "name": "Autodesk News",
+      "url": "https://adsknews.autodesk.com/feed",
+      "home": "https://adsknews.autodesk.com/",
+      "category": "autodesk",
+      "note": "Corporate: acquisitions, licensing, strategy. Lower signal, real impact.",
+      "enabled": true,
+      "weight": 1.0,
+      "expect_days": 7
+    },
+
+    {
+      "key": "pyrevit-releases",
+      "name": "pyRevit releases",
+      "url": "https://github.com/pyrevitlabs/pyRevit/releases.atom",
+      "home": "https://github.com/pyrevitlabs/pyRevit",
+      "category": "revit-dev",
+      "note": "Version-support matrix changes show up here first.",
+      "enabled": true,
+      "weight": 1.3,
+      "expect_days": 30
+    },
+    {
+      "key": "revitlookup-releases",
+      "name": "RevitLookup releases",
+      "url": "https://github.com/jeremytammik/RevitLookup/releases.atom",
+      "home": "https://github.com/jeremytammik/RevitLookup",
+      "category": "revit-dev",
+      "enabled": true,
+      "weight": 1.1,
+      "expect_days": 60
+    },
+    {
+      "key": "revit-templates-releases",
+      "name": "Revit add-in templates",
+      "url": "https://github.com/Nice3point/RevitTemplates/releases.atom",
+      "home": "https://github.com/Nice3point/RevitTemplates",
+      "category": "revit-dev",
+      "note": "Tracks new Revit versions as they gain template/SDK support.",
+      "enabled": true,
+      "weight": 1.1,
+      "expect_days": 60
+    },
+    {
+      "key": "revit-addons",
+      "name": "Revit Add-ons",
+      "url": "https://revitaddons.blogspot.com/feeds/posts/default",
+      "home": "https://revitaddons.blogspot.com/",
+      "category": "revit-dev",
+      "note": "DORMANT as of 2026-07-25: no post in ~288 days, so it will show a stale badge. Left enabled deliberately -- its back catalogue is worth searching, and if it revives we want it. Disable if the badge annoys you.",
+      "enabled": true,
+      "weight": 1.0,
+      "expect_days": 10
+    },
+
+    {
+      "key": "aec-magazine",
+      "name": "AEC Magazine",
+      "url": "https://aecmag.com/feed/",
+      "home": "https://aecmag.com/",
+      "category": "industry",
+      "note": "High volume. The classifier earns its keep here.",
+      "enabled": true,
+      "weight": 0.9,
+      "expect_days": 3
+    },
+    {
+      "key": "bim-corner",
+      "name": "BIM Corner",
+      "url": "https://bimcorner.com/feed/",
+      "home": "https://bimcorner.com/",
+      "category": "industry",
+      "note": "Practitioner-level technique. Good learning-queue material.",
+      "enabled": true,
+      "weight": 1.0,
+      "expect_days": 14
+    },
+    {
+      "key": "revit-pure",
+      "name": "Revit Pure",
+      "url": "https://revitpure.com/blog?format=rss",
+      "home": "https://revitpure.com/blog",
+      "category": "industry",
+      "enabled": true,
+      "weight": 1.0,
+      "expect_days": 21
+    },
+    {
+      "key": "graphisoft",
+      "name": "Graphisoft (Archicad)",
+      "url": "https://www.graphisoft.com/rss",
+      "home": "https://www.graphisoft.com/",
+      "category": "competitor",
+      "note": "Competitor watch -- what the other side of the market is shipping.",
+      "enabled": true,
+      "weight": 0.7,
+      "expect_days": 21
+    },
+    {
+      "key": "speckle-releases",
+      "name": "Speckle releases",
+      "url": "https://github.com/specklesystems/speckle-server/releases.atom",
+      "home": "https://github.com/specklesystems",
+      "category": "interop",
+      "note": "openBIM / interoperability. Was speckle-sharp until 2026-07-25 -- that repo's last release was 2025-07-11 and the stale check caught it; speckle-server is the active one.",
+      "enabled": true,
+      "weight": 0.8,
+      "expect_days": 30
+    }
+  ]
+}
