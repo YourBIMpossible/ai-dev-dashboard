@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-24",
+  generated: "2026-07-25",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-07-11",
+  activitySince: "2026-07-12",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -224,10 +224,10 @@ window.DASHBOARD_DATA = {
           { name: "P16 Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path", pct: 10, note: "CONDITIONAL — Persistent local orchestration hub for cross-tool workflows (Revit, BIMpossible Site, filesystem/git, reporting) via explicit, scoped MCP servers as the default path; GUI/desktop automation admitted only as a named, allowlisted exception for apps with no workable API — under explicit consent, sandboxing, and audit logging, never a general \"control my desktop\" mode. Full rationale, architecture, and the 3-condition go/no-go ratification test: `2026-07-23__Phase16_DesktopOrchestrationHub_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately." }
         ]
       },
-      activity: [16,15,3,10,16,5,0,0,0,2,36,9,3,16],
+      activity: [15,3,10,16,5,0,0,0,2,36,9,3,20,0],
       lastActivity: {
         date: "2026-07-24",
-        summary: "docs: audit SS9 - renumber, record guard false positive + hash fix (#223) + live happy-path pass (cde8c5b)"
+        summary: "feat(change-sets): Save edits to Change Sets, not live Revit (Phase 13 T0-T3 + ADR lock) (#214) (0f17003)"
       },
       branch: "main at a7a434c; 0 ahead of origin",
       git: {
@@ -480,10 +480,10 @@ window.DASHBOARD_DATA = {
           { name: "QA scanners (6/7 deployed)", pct: 72, note: "Unchanged since 07-14 — no scanner commits after that day's audit-remediation fixes (8a1b82a/aced184/d292a38). Core consolidated + audit-hardened; live smokes still owed." }
         ]
       },
-      activity: [16,6,0,16,19,4,0,0,0,1,12,2,0,1],
+      activity: [6,0,16,19,4,0,0,0,1,12,2,0,6,0],
       lastActivity: {
         date: "2026-07-24",
-        summary: "feat: Family Fixer ribbon dialog â€” service core + redesigned WPF UI (#25) (7b94ad2)"
+        summary: "docs(decision-log): preserve the Duplicate Tool Package/Phase parameter decision (#36) (63cca4e)"
       },
       branch: "main; synced with origin",
       git: null,
@@ -726,10 +726,10 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Doesn't block Phase 1/2/3 — only Family Fixer's own promote-to-library step (PHASE1_FAMILY_CHECKLIST.md). PANEL is DONE (gold master, promoted). CB/MTR/DISC SW/XFMR+ALT1 have params added, waiting on human label-rewires in Revit. MV CB + MV CB_DRAWOUT BLOCKED on a scope decision (LV mains vs. true medium-voltage). ~40 annotation-only symbols queued for a batch SL_ rename, needing only a go-ahead." }
         ]
       },
-      activity: [0,0,0,0,0,3,0,0,0,0,1,3,2,0],
+      activity: [0,0,0,0,3,0,0,0,0,1,3,2,2,0],
       lastActivity: {
-        date: "2026-07-23",
-        summary: "docs(roadmap): correct the button-thread status the roadmap's own last update missed (c72a2a9)"
+        date: "2026-07-24",
+        summary: "docs(roadmap): catch status up to 2026-07-25 â€” button merged, rehearsal partially run (#6) (aa41e62)"
       },
       branch: "main",
       nextActions: [
@@ -775,7 +775,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 5, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A worktree-harness branch (7/8 tool-loop tasks done, aimed at WP-G2) is unmerged as of 07-12." }
         ]
       },
-      activity: [0,2,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [2,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
