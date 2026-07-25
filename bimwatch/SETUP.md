@@ -116,9 +116,50 @@ After editing either, re-run `python -m bimwatch.run` to see the effect.
 
 ## Tests
 
+Run from the **worktree root** (`…\worktrees\bim-watch`), not from inside `bimwatch/` —
+the package is imported as `bimwatch.*`, so the parent directory must be the working
+directory. The argument is a path (`bimwatch/tests`), not a module (`bimwatch.tests`).
+
 ```bash
 python -m pytest bimwatch/tests -q
 ```
 
+PowerShell note: this shell is PowerShell 5.1, which has no `&&`. Chain with `;`.
+
 145 tests, no network access required. CI runs them before every collection, so a
 broken parser fails the workflow instead of publishing a mangled archive.
+
+---
+
+## Verification checklist
+
+Local proof and cloud proof are different claims. Do not let one stand in for the
+other — everything above the line has been demonstrated on this machine; everything
+below it cannot be tested until the owner-only secrets exist.
+
+### Proven locally (2026-07-25)
+
+- [x] **Pipeline runs end to end** — `python -m bimwatch.run --no-classify`, all 12
+      sources fetched, 295 items archived across 12 distinct sources.
+- [x] **Tests pass** — 145, no network.
+- [x] **Branch and commit exist** — `feat/bim-watch`, commit `34ecc34`, 31 files.
+- [x] **Dashboard panel renders** — verified in a real browser: all 8 tabs render,
+      search returns hits, no console errors.
+- [x] **Degraded mode is honest** — with no key, items stay `unsorted` and the panel
+      says triage did not run rather than implying a quiet week.
+- [x] **Stale detection works** — flagged Revit Add-ons (dormant 288 days) and
+      speckle-sharp (archived) on the first run.
+
+### NOT yet proven — requires the owner's credentials
+
+- [ ] **GitHub Action succeeds** — needs `ANTHROPIC_API_KEY` in repo secrets.
+      Verify: Actions → BIM-Watch → Run workflow → green, and a `bimwatch:` commit lands.
+- [ ] **Triage produces sensible tiers** — verify the briefing's alert/learn/noise
+      split matches your judgement, then tune `profile.md` if not.
+- [ ] **Cloudflare deploy carries the new files** — verify `bimwatch.js` and
+      `bimwatch-archive.json` are served from the Pages URL.
+- [ ] **Chat endpoint answers** — needs the Cloudflare secret.
+- [ ] **Access policy actually blocks** — the one that matters. Verify by opening
+      `/api/bimwatch-chat` in a private window: it must challenge for login, not answer.
+      Until this is confirmed, the endpoint is a public spend endpoint with guardrails,
+      not a protected one.
