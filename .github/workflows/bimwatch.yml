@@ -41,7 +41,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install dependencies
-        run: pip install --quiet requests anthropic
+        run: pip install --quiet requests anthropic pytest
 
       - name: Run tests
         # The pipeline touches a public repo on a schedule; a broken parser should fail
