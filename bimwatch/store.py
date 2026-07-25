@@ -125,6 +125,22 @@ def ingest(archive: list[dict], incoming: list[dict], *, now: datetime | None = 
             "total": len(archive)}
 
 
+def clear_verdicts(archive: list[dict]) -> int:
+    """Reset every classification to `unsorted`, in place. Returns how many changed.
+
+    Used after editing profile.md: verdicts are sticky by design, so without this a
+    retuned profile would only ever apply to newly-arrived items and the split you
+    are trying to judge would never change. Only the verdict is touched -- URLs,
+    dedupe identity and fetch history are untouched, so nothing is re-downloaded.
+    """
+    cleared = 0
+    for item in archive:
+        if (item.get("classification") or {}).get("tier") not in (None, "", "unsorted"):
+            cleared += 1
+        item["classification"] = {"tier": "unsorted"}
+    return cleared
+
+
 def prune(archive: list[dict], *, now: datetime | None = None) -> list[dict]:
     """Apply retention. Newest first; undated items sort last but are not privileged."""
     now = now or datetime.now(timezone.utc)

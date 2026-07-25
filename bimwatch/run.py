@@ -38,6 +38,9 @@ def main(argv: list[str] | None = None) -> int:
                         help="directory to write bimwatch.js into (default: repo root)")
     parser.add_argument("--window", type=int, default=7,
                         help="briefing window in days (default: 7)")
+    parser.add_argument("--retriage", action="store_true",
+                        help="clear existing verdicts and re-classify everything "
+                             "(use after editing profile.md)")
     args = parser.parse_args(argv)
 
     now = datetime.now(timezone.utc)
@@ -56,6 +59,10 @@ def main(argv: list[str] | None = None) -> int:
           f"updated {summary['updated']}"
           + (f", {expired} too old to keep" if expired else "")
           + f", archive now {len(archive)}")
+
+    if args.retriage:
+        cleared = store.clear_verdicts(archive)
+        print(f"  --retriage: cleared {cleared} verdicts, re-classifying from scratch")
 
     if args.no_classify:
         print("  classification skipped (--no-classify)")

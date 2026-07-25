@@ -63,6 +63,16 @@ Worth an afternoon, no deadline:
 - Generic "AI will transform construction" think-pieces with no specifics.
 - Rendering, visualization, and animation content — not my work.
 
+**The FYI/noise decision rule.** Default to `noise`, not `fyi`, whenever there is
+nothing actionable to do and nothing concrete to learn, even if the topic is adjacent
+to BIM, Autodesk, AEC, or AI.
+
+`fyi` is for developments I would genuinely want to know *happened*: a real competitor
+move, a product or market shift, or a concrete change worth being aware of.
+
+If the one-sentence rationale is effectively "no concrete techniques, technical detail,
+or changes to act on," classify it as noise.
+
 ## Judgment notes
 
 - I would rather see a **false alert than miss a real one**, but noise in the weekly

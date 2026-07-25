@@ -140,6 +140,37 @@ class TestIngest:
         assert result["added"] == 0 and archive == []
 
 
+class TestClearVerdicts:
+    """Verdicts are sticky by design; retuning the profile needs a way to reset them."""
+
+    def test_resets_classified_items_to_unsorted(self):
+        archive = [
+            dict(item("https://e.com/a"), classification={"tier": "alert", "relevance": 90}),
+            dict(item("https://e.com/b"), classification={"tier": "noise", "relevance": 5}),
+        ]
+        cleared = store.clear_verdicts(archive)
+
+        assert cleared == 2
+        assert all(i["classification"] == {"tier": "unsorted"} for i in archive)
+
+    def test_already_unsorted_items_are_not_counted(self):
+        archive = [dict(item("https://e.com/a"), classification={"tier": "unsorted"})]
+        assert store.clear_verdicts(archive) == 0
+
+    def test_preserves_identity_and_content(self):
+        """Only the verdict resets — nothing gets re-downloaded or re-deduped."""
+        archive = [dict(item("https://e.com/a"), id="abc123",
+                        classification={"tier": "alert"}, fetched_at="2026-07-01T00:00:00Z")]
+        store.clear_verdicts(archive)
+
+        assert archive[0]["id"] == "abc123"
+        assert archive[0]["url"] == "https://e.com/a"
+        assert archive[0]["fetched_at"] == "2026-07-01T00:00:00Z"
+
+    def test_empty_archive(self):
+        assert store.clear_verdicts([]) == 0
+
+
 class TestPrune:
     def test_drops_items_older_than_retention(self):
         old = (NOW - timedelta(days=store.MAX_AGE_DAYS + 10)).isoformat().replace("+00:00", "Z")

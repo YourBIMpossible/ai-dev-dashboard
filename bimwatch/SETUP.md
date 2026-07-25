@@ -100,6 +100,19 @@ louder or quieter in the briefing.
 
 After editing either, re-run `python -m bimwatch.run` to see the effect.
 
+**Verdicts are sticky.** An item keeps its classification once judged, so a daily run
+only costs a handful of items. That means editing `profile.md` changes nothing for
+already-judged items until you reset them:
+
+```bash
+python -m bimwatch.run --retriage --window 30
+```
+
+`--retriage` clears every verdict and re-classifies from scratch under the new
+profile. It touches only the verdicts — URLs, dedupe identity and fetch history are
+preserved, so nothing is re-downloaded. Use `--window 30` while tuning: a 7-day
+window is too thin a sample to judge a classifier on.
+
 ---
 
 ## Operational notes
