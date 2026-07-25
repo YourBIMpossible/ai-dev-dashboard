@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-25T19:27:39.918043Z",
+ "generated_at": "2026-07-25T20:06:02.422958Z",
  "count": 295,
  "health": {
   "adsk-news": {
@@ -9,7 +9,7 @@
    "last_item_published": "2026-07-22T16:18:07Z",
    "last_modified": "Thu, 23 Jul 2026 02:56:41 GMT",
    "last_status": 200,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,7 +19,7 @@
    "last_item_published": "2026-07-22T08:44:43Z",
    "last_modified": "Wed, 22 Jul 2026 09:17:13 GMT",
    "last_status": 304,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -28,12 +28,12 @@
    "last_item_count": 10,
    "last_item_published": "2026-07-22T05:49:22Z",
    "last_status": 200,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
-   "consecutive_failures": 0,
+   "consecutive_failures": 1,
    "etag": "\"0fa477406962d24a1f6556e4fd312505\"",
    "last_item_count": 0,
    "last_item_published": "2026-06-16T07:31:25Z",
@@ -41,7 +41,9 @@
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": false,
-   "stale_reason": ""
+   "stale_reason": "",
+   "last_error": "HTTP 403",
+   "last_failure": "2026-07-25T20:06:02.422958Z"
   },
   "graphisoft": {
    "consecutive_failures": 0,
@@ -49,7 +51,7 @@
    "last_item_count": 8,
    "last_modified": "Fri, 24 Jul 2026 13:30:30 GMT",
    "last_status": 200,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -59,7 +61,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-24T19:01:06Z",
    "last_status": 304,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -69,12 +71,12 @@
    "last_item_published": "2025-10-10T01:18:00Z",
    "last_modified": "Sat, 25 Jul 2026 15:47:23 GMT",
    "last_status": 200,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": true,
    "stale_reason": "no new items in 288 days (expects ~10)"
   },
   "revit-blog": {
-   "consecutive_failures": 0,
+   "consecutive_failures": 1,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
@@ -82,7 +84,9 @@
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": false,
-   "stale_reason": ""
+   "stale_reason": "",
+   "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
+   "last_failure": "2026-07-25T20:06:02.422958Z"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -90,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-01T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -100,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-05-12T15:51:47Z",
    "last_status": 304,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"801bb73d348f95cfd432002a04530a63\"",
+   "etag": "W/\"12f7bada2512fa94bb02116c8d29ef34\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -120,7 +124,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-07-25T19:27:39.918043Z",
+   "last_success": "2026-07-25T20:06:02.422958Z",
    "stale": false,
    "stale_reason": ""
   }
@@ -135,7 +139,15 @@
    "id": "d177140bd518793d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 35,
+    "why": "Pre-built binaries reduce friction for pyRevit development; useful if you distribute scripts or maintain a fork.",
+    "topics": [
+     "pyrevit",
+     "tooling"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -147,7 +159,15 @@
    "id": "f4bd608a7c586f12",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Forma feature for coordination workflows; relevant if you plan to integrate Forma into your practice tooling.",
+    "topics": [
+     "forma",
+     "coordination"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -159,7 +179,15 @@
    "id": "830053044cdff8e9",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Animation and VFX production tooling; outside your scope of Revit add-in work and model automation.",
+    "topics": [
+     "maya",
+     "vfx"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -171,7 +199,15 @@
    "id": "dea04c26e05def9a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Event promotion and training course announcement; no technical content or changes affecting your work.",
+    "topics": [
+     "event",
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -183,7 +219,15 @@
    "id": "27200887e5dfcd8a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 92,
+    "why": "New Revit 2027.2 release with core enhancements and API surface changes; affects version targeting and add-in compatibility.",
+    "topics": [
+     "revit-api",
+     "version-release"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -195,7 +239,15 @@
    "id": "70105c3f41c2f9b6",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Graphics and rendering research; tangential to BIM but not actionable for your add-in or audit tooling work.",
+    "topics": [
+     "ai",
+     "graphics"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -207,7 +259,16 @@
    "id": "6b66bf2d60774823",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 78,
+    "why": "MCP Workshop now has C#/.NET track; directly applicable if you plan to build agents or integrate APS APIs into add-ins.",
+    "topics": [
+     "aps",
+     "ai-agents",
+     "dotnet"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -219,7 +280,16 @@
    "id": "db6d072e9002e2d1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 65,
+    "why": "Forma Takeoff API deprecation and migration announcement; affects any integration between Revit and Forma you may be building.",
+    "topics": [
+     "aps-api",
+     "deprecation",
+     "forma"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -231,7 +301,15 @@
    "id": "71091578c28d2f86",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Autodesk's AI strategy overview; useful context on where Revit and platform tooling are headed, but no concrete technique.",
+    "topics": [
+     "ai",
+     "strategy"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -243,7 +321,15 @@
    "id": "57576c4b3b04669f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Conceptual essay on building internal AI stacks in AEC rather than relying on vendor features; relevant to how you might build audit or automation tooling.",
+    "topics": [
+     "ai",
+     "architecture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -255,7 +341,15 @@
    "id": "cda9f1152d1d4683",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Case study of a partner building AI stacks; market context but no concrete technique you can apply directly.",
+    "topics": [
+     "ai",
+     "naviate"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -267,7 +361,15 @@
    "id": "6958daaee367f204",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Competitor cloud BIM platform launch; worth knowing the direction of the market, not actionable for your current work.",
+    "topics": [
+     "competition",
+     "open-source"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -279,7 +381,16 @@
    "id": "48b5a5d7738af732",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 62,
+    "why": "ODA exposing CAD/BIM SDKs via MCP servers in Q3; could enable new agent workflows if you work with DWG or other ODA formats.",
+    "topics": [
+     "oda",
+     "mcp",
+     "interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -291,7 +402,15 @@
    "id": "f13494cce3d0225c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "HighArc funding and partnership news; market movement in homebuilding BIM, but no direct bearing on your practice.",
+    "topics": [
+     "competition",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -303,7 +422,15 @@
    "id": "d9dd2cc898b0fd43",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Opinion piece on AI adoption barriers in AEC; no specific technical or strategic change you can act on.",
+    "topics": [
+     "ai",
+     "opinion"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -315,7 +442,15 @@
    "id": "94a1287521b86449",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Dassault's manufacturing-focused AEC platform strategy; interesting competitive move but outside Revit and Autodesk ecosystems.",
+    "topics": [
+     "competition",
+     "strategy"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -327,7 +462,15 @@
    "id": "4f92286831c3a6f7",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 48,
+    "why": "Semantic clarification of what 'agent' means in AEC; useful if you are designing or building agent-driven tooling.",
+    "topics": [
+     "ai-agents",
+     "architecture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -339,7 +482,15 @@
    "id": "ba4357cf3423d097",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 35,
+    "why": "NXT BLD retrospective on trends (agents, in-house dev, structural tools); good strategic context but no concrete technique.",
+    "topics": [
+     "conference",
+     "trends"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -351,7 +502,14 @@
    "id": "4864ead6ef564c2d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Contractor accounting software; entirely outside BIM authoring, add-in development, or model automation.",
+    "topics": [
+     "construction-software"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -363,7 +521,15 @@
    "id": "88ab648490ad4ae1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 22,
+    "why": "NXT BLD themes on kit-of-parts and DFMA; market context but no API or technical detail you can use.",
+    "topics": [
+     "conference",
+     "manufacturing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -375,7 +541,15 @@
    "id": "5841e6bf1cc3c4ef",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Venture capital interest in AEC tools is shifting, but this is market context, not a technical change affecting your add-in practice.",
+    "topics": [
+     "market",
+     "aec-ecosystem"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -387,7 +561,14 @@
    "id": "44ff322c98fcf775",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Generic manufacturing transformation narrative with no concrete techniques or Revit-specific applicability.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -399,7 +580,15 @@
    "id": "07ae882bc551599a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Fusion-specific AI features; not relevant to Revit add-in development or your tooling practice.",
+    "topics": [
+     "fusion",
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -411,7 +600,16 @@
    "id": "30b4ff994911f008",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Case study showing how to extract and surface BIM model data at scale using APS—directly relevant to your audit and data tooling work.",
+    "topics": [
+     "aps",
+     "bim-data",
+     "model-audit"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -423,7 +621,15 @@
    "id": "ae618ebd5b33f2e1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 40,
+    "why": "TradeTapp API change affecting multi-company data access; useful if you integrate construction platform data into add-ins.",
+    "topics": [
+     "aps-api",
+     "tradetapp"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -435,7 +641,15 @@
    "id": "35eff264e131a5df",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Nemetschek investment in data governance infrastructure signals industry direction but no technical change for your work.",
+    "topics": [
+     "market",
+     "data-governance"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -447,7 +661,16 @@
    "id": "11cd14fac6d269ac",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Magazine cover story about AI in AEC and ODA SDK openness to AI agents—worth knowing the narrative shift, thin on specifics.",
+    "topics": [
+     "oda",
+     "ai",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -459,7 +682,15 @@
    "id": "b5eb13d2c437ed18",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Transportation infrastructure market report; context for where AEC is heading, not actionable for add-in development.",
+    "topics": [
+     "market",
+     "industry-trends"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -471,7 +702,15 @@
    "id": "a70239319b2b747d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Jobs market analysis showing AI skills gaps; relevant to hiring context but not to building or shipping tools.",
+    "topics": [
+     "market",
+     "ai-skills"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -483,7 +722,16 @@
    "id": "15519f3b6e0513f0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "Power BI connector update with faster model loading and Viewer integration—useful if you build dashboards or reporting tooling alongside Revit.",
+    "topics": [
+     "aps",
+     "power-bi",
+     "data-dashboard"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -495,7 +743,15 @@
    "id": "6e40601dada7b891",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Hardware review of AMD Ryzen AI workstations; useful context for what your end users run, not actionable for code.",
+    "topics": [
+     "hardware",
+     "workstation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -507,7 +763,15 @@
    "id": "94835a40f7b8f32b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Professional services automation tool adds conversational AI; market move, not relevant to Revit API or add-in development.",
+    "topics": [
+     "ai",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -519,7 +783,15 @@
    "id": "bb0e9759fbae8954",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Workstation selection guide; useful general reference for hardware choices but not actionable for tooling.",
+    "topics": [
+     "hardware",
+     "workstation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -531,7 +803,15 @@
    "id": "5a10c24f1f6a75e6",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Construction monitoring platform feature release; adjacent to BIM but not relevant to your add-in or audit tooling.",
+    "topics": [
+     "construction-tech",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -543,7 +823,15 @@
    "id": "448b0c39e280e799",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 85,
+    "why": "RevitLookup 2027.0.3 changes evaluation behavior to on-demand—critical update if you use RevitLookup in debugging or add-in development.",
+    "topics": [
+     "revitlookup",
+     "tool-update"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -555,7 +843,15 @@
    "id": "fa8386ed6f124fd4",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Trimble MEP estimating AI features; competitor tool move in estimating, not relevant to Revit add-in practice.",
+    "topics": [
+     "competitor",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -567,7 +863,15 @@
    "id": "d2922f1db175b84f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Infrastructure due-diligence startup funding; market context but no technical insight or Revit connection.",
+    "topics": [
+     "market",
+     "startup"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -579,7 +883,14 @@
    "id": "d491b5bb755ab2b0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Origin story of a consulting/training firm; no technical content or actionable insight for add-in development.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -591,7 +902,16 @@
    "id": "ce93acb5069dcbbe",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "BIM Data Specialist role emerging industry-wide; signals growing demand for the data tooling and audit work you do.",
+    "topics": [
+     "industry-trends",
+     "bim-data",
+     "roles"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -603,7 +923,15 @@
    "id": "4411ff6c4cc41fd5",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 35,
+    "why": "APS Bucket ownership transfer endpoint—useful if your add-ins manage cloud storage or collaborate across team boundaries.",
+    "topics": [
+     "aps-api",
+     "cloud-storage"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -615,7 +943,15 @@
    "id": "6e563cc1e0908b37",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 65,
+    "why": "CLI deployment fix directly affects pyRevit scripting workflows you rely on; CLI clone failures break automation.",
+    "topics": [
+     "pyrevit",
+     "cli"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -627,7 +963,15 @@
    "id": "c31cdb743c9a90f3",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 45,
+    "why": "Autodesk Assistant on APS may unlock new workflows for desktop add-ins; worth exploring what it can do.",
+    "topics": [
+     "aps",
+     "ai-assistant"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -639,7 +983,14 @@
    "id": "857a307020b6b3c2",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Case study with no technical detail or technique; marketing narrative about a completed project.",
+    "topics": [
+     "case-study"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -651,7 +1002,15 @@
    "id": "e3385b021daee61c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 70,
+    "why": "Admin installer unification, WinGet distribution, and get_families() rewrite affect how you deploy and script Revit.",
+    "topics": [
+     "pyrevit",
+     "api-change"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -663,7 +1022,14 @@
    "id": "d5fb42dc2c1ac3cc",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 10,
+    "why": "Corporate social responsibility news; no technical or market shift for your work.",
+    "topics": [
+     "corporate"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -675,7 +1041,15 @@
    "id": "d24f62a11d9deb76",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Design & Make Marketplace replaces App Store; worth knowing where add-ins are listed, but no breaking changes announced.",
+    "topics": [
+     "distribution",
+     "marketplace"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -687,7 +1061,14 @@
    "id": "f67df46c16b8a054",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Progress report on a specific housing project; no technique or BIM process relevant to your work.",
+    "topics": [
+     "case-study"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -699,7 +1080,15 @@
    "id": "8f8571d3dc68e200",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "Autodesk Assistant tech preview on APS may enable new code-free or AI-assisted automation patterns for your workflows.",
+    "topics": [
+     "aps",
+     "ai-assistant"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -711,7 +1100,15 @@
    "id": "837927520f88cf4c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 75,
+    "why": "C# loader maturation, Revit 2027 compatibility, and CI/CD refactor are critical for your add-in builds and deployments.",
+    "topics": [
+     "pyrevit",
+     "revit-2027"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -723,7 +1120,14 @@
    "id": "f55d36fe7e8ab1ea",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "News recap pointing to Autodesk Assistant and quota notifications; individual items may warrant deeper look.",
+    "topics": [
+     "aps"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -735,7 +1139,14 @@
    "id": "b7dd45c85640ea2d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Hardware/printing product announcement with no relevance to Revit development or model authoring.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -747,7 +1158,14 @@
    "id": "443c4812f4bfa1e9",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Education funding initiative; no technical or licensing change affecting your add-in practice.",
+    "topics": [
+     "corporate"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -759,7 +1177,14 @@
    "id": "6c420d84a550304c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Competitor platform launch shows market direction but no direct impact on Revit API or your tooling.",
+    "topics": [
+     "competitor"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -771,7 +1196,16 @@
    "id": "f6e00076f9520e34",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 70,
+    "why": "Revit Public MCP Server tech preview opens official AI-integration patterns; worth exploring for your workflows.",
+    "topics": [
+     "revit-api",
+     "mcp",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -783,7 +1217,15 @@
    "id": "ef05db1af9fa3998",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 35,
+    "why": "Neural CAD foundational models signal long-term direction for generative BIM; technique details sparse.",
+    "topics": [
+     "ai",
+     "generative"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -795,7 +1237,15 @@
    "id": "7d78f21ae4f719ae",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 80,
+    "why": "Revit 2027.1 release with enhancements across architecture, structure, MEP—test compatibility and new capabilities.",
+    "topics": [
+     "revit-api",
+     "revit-2027"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -807,7 +1257,15 @@
    "id": "acc7c09dbf38e75e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 40,
+    "why": "BIM-GIS integration techniques; relevant if your audit tooling touches survey or site-alignment workflows.",
+    "topics": [
+     "interoperability",
+     "gis"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -819,7 +1277,14 @@
    "id": "7bf0f402dd70ee46",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Speckle patch release; track if you use Speckle connectors, otherwise routine maintenance.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -831,7 +1296,14 @@
    "id": "867f6fc43dbb62ea",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Speckle patch; minor CI fix, no user-facing change.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -843,7 +1315,14 @@
    "id": "7ae3089b1c856ae1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Speckle patch; npm publishing fix, routine release.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -855,7 +1334,16 @@
    "id": "886b3b3ac45df4ba",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 75,
+    "why": "Concrete setup for scripting Revit via Claude Code + pyRevit MCP—directly applicable to your automation practice.",
+    "topics": [
+     "pyrevit",
+     "ai-automation",
+     "revit-scripting"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -867,7 +1355,14 @@
    "id": "c480b2b55e228c80",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Corporate marketing content; no technical or market relevance to add-in development or BIM tooling.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -879,7 +1374,15 @@
    "id": "8a5520730fbd0299",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "UK-focused data interoperability initiative; worth knowing the shift from project to operations-led delivery, though no immediate action.",
+    "topics": [
+     "interoperability",
+     "operations"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -891,7 +1394,15 @@
    "id": "155d2fd674f6b1bb",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Viz-focused Revit plugin; not your workflow, but signals competitive rendering integration you may reference.",
+    "topics": [
+     "revit-plugin",
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -903,7 +1414,15 @@
    "id": "674208483e9a14d1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Bluebeam's AI acquisition for construction workflows; competitive move worth tracking, but not your direct work.",
+    "topics": [
+     "ai",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -915,7 +1434,15 @@
    "id": "084432fdc99aea92",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "PDF-centric AI workflows; adjacent to AEC but outside your Revit tooling and model audit scope.",
+    "topics": [
+     "ai",
+     "pdf-collaboration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -927,7 +1454,15 @@
    "id": "6afc569d1a03ae52",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Honest take on CDE adoption failures using Autodesk Forma; useful for understanding operations-side friction.",
+    "topics": [
+     "cde",
+     "autodesk-forma"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -939,7 +1474,14 @@
    "id": "4d7bacb5ff269770",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Template and plugin product release; third-party commercial offering with no API or technique detail.",
+    "topics": [
+     "revit-template"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -951,7 +1493,15 @@
    "id": "4d7cf3846a2d360b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 70,
+    "why": "RevitLookup 2027 updates include new Rebar geometry API support; core diagnostic tool you rely on.",
+    "topics": [
+     "revit-api",
+     "revitlookup"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -963,7 +1513,15 @@
    "id": "ae7b69c4c310570c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Minor Speckle viewer bug fix; only relevant if you actively use Speckle in data pipelines.",
+    "topics": [
+     "speckle",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -975,7 +1533,14 @@
    "id": "44c592d31faf4b6a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 10,
+    "why": "Speckle patch release; routine maintenance, minimal impact unless you are deep in Speckle integration.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -987,7 +1552,14 @@
    "id": "39a0cd8cb315ee01",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 10,
+    "why": "Speckle CI fix; not actionable for your work unless maintaining a Speckle connector.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -999,7 +1571,14 @@
    "id": "2e1d837146fc3014",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 10,
+    "why": "Speckle CI/CD update; release infrastructure noise unless you contribute to Speckle.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1011,7 +1590,14 @@
    "id": "83c6ddaa05fb1b8f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 5,
+    "why": "Speckle release infrastructure fix; not actionable.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1023,7 +1609,14 @@
    "id": "e48d47315875d5c1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 5,
+    "why": "Speckle publishing automation; release infrastructure noise.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1035,7 +1628,15 @@
    "id": "5245ebed9fe9fef4",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Graphisoft–Autodesk Forma connection announced; competitor integration worth tracking for openBIM direction.",
+    "topics": [
+     "interoperability",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1047,7 +1648,15 @@
    "id": "3eeff044477eec71",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Visualization AI embedding; not your workflow, but signals AI normalization in rendering pipelines.",
+    "topics": [
+     "ai",
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1059,7 +1668,15 @@
    "id": "fe0a86a9ba1f736c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Procore CDE + agentic AI for construction lifecycle; competitor to Autodesk Forma, worth understanding the direction.",
+    "topics": [
+     "cde",
+     "ai-agents"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1071,7 +1688,15 @@
    "id": "4e136f264d11f350",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Autodesk's $3.6B MaintainX acquisition signals major bet on operations; shapes future Autodesk stack and licensing.",
+    "topics": [
+     "autodesk-strategy",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1083,7 +1708,14 @@
    "id": "75b3cfadbeac5c8b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 5,
+    "why": "Speckle CI release automation; not actionable.",
+    "topics": [
+     "speckle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1095,7 +1727,15 @@
    "id": "4f33be963a1d1893",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Grasshopper automation for Tekla Structures; not relevant to your Revit add-in and family work.",
+    "topics": [
+     "tekla",
+     "grasshopper"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1107,7 +1747,15 @@
    "id": "cc6ce0d272fa9627",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Conference recap of emerging AEC tech trends; useful awareness of the market direction but no actionable technique.",
+    "topics": [
+     "market",
+     "conference"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1119,7 +1767,15 @@
    "id": "b7473f92c79e4f62",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "EIR best practice; tangential to your model audit work but more about client contracts than your tooling.",
+    "topics": [
+     "bim-process",
+     "data-requirements"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1131,7 +1787,14 @@
    "id": "b5fa6f32f8c09dfe",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Workstation hardware announcement; useful to know if you're speccing machines, but not actionable for your code.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1143,7 +1806,16 @@
    "id": "bdab2197779b5962",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 75,
+    "why": "Revit add-in templates update affecting your build toolchain; check for breaking changes in TUnit, ModularPipelines, or dotnet 10.0.",
+    "topics": [
+     "revit-addins",
+     "toolchain",
+     "dependencies"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1155,7 +1827,14 @@
    "id": "d4231301aefeeca5",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "BEP team structure guidance; organizational rather than technical, no technique to learn.",
+    "topics": [
+     "bim-process"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1167,7 +1846,16 @@
    "id": "7bc3e55b6b750d62",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Converting vague BEP requirements into checkable rules directly mirrors your model audit tooling practice; concrete methodology.",
+    "topics": [
+     "model-audit",
+     "automation",
+     "bim-coordination"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1179,7 +1867,16 @@
    "id": "46def23377d1d16b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 45,
+    "why": "Claude fundamentals for AEC workflows; potentially useful for scripting LLM-based model inspection or metadata generation.",
+    "topics": [
+     "ai",
+     "llm",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1191,7 +1888,16 @@
    "id": "75e20928fc824119",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "IFC data quality and schema problems; relevant to your interoperability work and model-to-model migration automation.",
+    "topics": [
+     "ifc",
+     "data-exchange",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1203,7 +1909,15 @@
    "id": "7386020f642a8496",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 8,
+    "why": "Opinion piece on agentic AI displacing design thinking; no concrete technique or change that affects your work.",
+    "topics": [
+     "ai",
+     "opinion"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1215,7 +1929,15 @@
    "id": "bf85885a28b99067",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 40,
+    "why": "Google research on AI task delegation and authority; theoretical framework potentially useful for understanding future agentic add-in patterns.",
+    "topics": [
+     "ai",
+     "architecture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1227,7 +1949,14 @@
    "id": "5474456207619b6e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Palantir entering AEC market; worth knowing but no immediate impact on Revit add-in development.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1239,7 +1968,15 @@
    "id": "f4296990fde51baa",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Hypar AI platform strategy; competitor landscape awareness but not directly applicable to your desktop tooling.",
+    "topics": [
+     "market",
+     "ai-bim"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1251,7 +1988,14 @@
    "id": "2e374cc21630af45",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Arcol's contractor-focused strategy; market positioning with no technical content relevant to your practice.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1263,7 +2007,14 @@
    "id": "e893efa38590da2a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Magazine table of contents; useful to skim for conference awareness but not a primary source.",
+    "topics": [
+     "publication"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1275,7 +2026,14 @@
    "id": "75b988cacc64e32f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Bathroom fixture family pack release; product announcement with no technique or API relevance to your work.",
+    "topics": [
+     "families"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1287,7 +2045,16 @@
    "id": "bece0220ae737001",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "HVAKR discipline-specific AI agent shipping; concrete example of agentic engineering patterns that could inform future add-in design.",
+    "topics": [
+     "ai",
+     "agentic-design",
+     "mep"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1299,7 +2066,14 @@
    "id": "4b874a695ee3712f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Conference history recap; marketing content with no technical or market-moving information.",
+    "topics": [
+     "conference"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1311,7 +2085,15 @@
    "id": "a91e9783f72f0ad0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "AEC tech stack inflection point and AI-driven architecture shift; confirms direction but no specific changes to act on yet.",
+    "topics": [
+     "market",
+     "ai-bim"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1323,7 +2105,14 @@
    "id": "f336f7a9a91e4fb5",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 8,
+    "why": "Conference theme preview; marketing for NXT BLD with no actionable content or breaking announcements.",
+    "topics": [
+     "conference"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1335,7 +2124,16 @@
    "id": "e48bb18609c4e949",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 45,
+    "why": "Speckle normalizes BIM data from Revit for downstream pipelines; useful to understand interoperability surfaces you might integrate add-ins with.",
+    "topics": [
+     "interoperability",
+     "speckle",
+     "data-normalization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1347,7 +2145,14 @@
    "id": "a3a8a0e931e96fb8",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Tekla/Grasshopper feature release; not your authoring tool or API domain.",
+    "topics": [
+     "tekla"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1359,7 +2164,15 @@
    "id": "e9cc3351525d7fd2",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "McKinsey/Alice alliance on scheduling; market move worth knowing but no technique or Revit integration detail.",
+    "topics": [
+     "scheduling",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1371,7 +2184,16 @@
    "id": "5d7bd7dedf6f13ed",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Revit plug-in automating HVAC acoustic design; concrete example of domain-specific add-in reducing manual work.",
+    "topics": [
+     "revit-plugin",
+     "automation",
+     "mep"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1383,7 +2205,14 @@
    "id": "c1970ca677f6fde1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Digital twin case study using drone data; no BIM authoring or Revit API technique.",
+    "topics": [
+     "digital-twin"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1395,7 +2224,14 @@
    "id": "e8172fa21adb4c17",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Rendering update to V-Ray; visualization is explicitly out of scope for your work.",
+    "topics": [
+     "rendering"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1407,7 +2243,14 @@
    "id": "57a1ce4a9d5ee92a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Nemetschek acquires HCSS; market consolidation worth tracking but no API or technical impact.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1419,7 +2262,15 @@
    "id": "213746effdbb40e1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Graitec File Sync achieves Autodesk partnership; relevant to data migration workflows but a product announcement.",
+    "topics": [
+     "data-integration",
+     "autodesk-partnership"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1431,7 +2282,16 @@
    "id": "9569a2526465681c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 70,
+    "why": "Revit 2027 ships new Autodesk AI Assistant; critical to evaluate for your tooling practice and understand competitive positioning.",
+    "topics": [
+     "revit-2027",
+     "ai-assistant",
+     "new-feature"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1443,7 +2303,16 @@
    "id": "47e2de3d26bb9aa0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 85,
+    "why": "RevitLookup 2027.0.1 fixes threading bugs and CoordinationModelLinkUtils; essential update for add-in debugging.",
+    "topics": [
+     "revitlookup",
+     "revit-2027",
+     "breaking-change"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1455,7 +2324,15 @@
    "id": "06ffd45cf3bd4776",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 75,
+    "why": "pyRevit 6.4.0 adds Match History Clipboard with dockable pane and regex search; directly useful for your scripted automation.",
+    "topics": [
+     "pyrevit",
+     "scripting"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1467,7 +2344,14 @@
    "id": "9f017e30dd1182ef",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 0,
+    "why": "Build publish notification; not actionable content.",
+    "topics": [
+     "release"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1479,7 +2363,14 @@
    "id": "5d14bd7a90cf6a0e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Intel Arc Pro certified for CAD/BIM workstations; useful context for workstation hardware but not your direct work.",
+    "topics": [
+     "workstation-hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1491,7 +2382,16 @@
    "id": "353a469fa8d93b6b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "Qonic native drawing generation from IFC/BIM with auto-dimensions; relevant technique for viewport and sheet automation workflows.",
+    "topics": [
+     "drawing-automation",
+     "ifc",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1503,7 +2403,14 @@
    "id": "a8ffb160b8552588",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "SERA Architects case study on Arcol; customer success story with no technical method.",
+    "topics": [
+     "case-study"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1515,7 +2422,14 @@
    "id": "f8b60d467a83f8cb",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Puget Systems server portfolio expansion; hardware vendor news unrelated to your API/scripting work.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1527,7 +2441,15 @@
    "id": "6b98375f526b9d98",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 80,
+    "why": "Revit add-in templates 6.2.1 updates WiX; toolchain dependency for building and shipping your add-ins.",
+    "topics": [
+     "add-in-templates",
+     "build-toolchain"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1539,7 +2461,16 @@
    "id": "90878212a922013c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 90,
+    "why": "Revit add-in templates 6.2.0 adds Revit 2027 support, removes 2022, adds async commands; critical update to your build pipeline.",
+    "topics": [
+     "revit-2027",
+     "add-in-templates",
+     "breaking-change"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1551,7 +2482,16 @@
    "id": "e2ffb81e4447d087",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 85,
+    "why": "RevitLookup 2027.0.0 ships add-in isolation, async startup, better static Utils discovery; essential for Revit 2027 debugging.",
+    "topics": [
+     "revitlookup",
+     "revit-2027",
+     "add-in-isolation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1563,7 +2503,16 @@
    "id": "c5effe6b4e6e4e08",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Revit-Forma Connected Client Tech Preview enables data flow without file exchange; integration surface to monitor for add-in workflows.",
+    "topics": [
+     "revit-api",
+     "forma",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1575,7 +2524,16 @@
    "id": "5aad4828a9d7c510",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 75,
+    "why": "Revit 2027 is live; critical to know version support, API surface, and breaking changes for your add-in work.",
+    "topics": [
+     "revit-2027",
+     "new-release",
+     "api"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1587,7 +2545,15 @@
    "id": "2932f7b2ac67effb",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "pyRevit patch release; check release notes if you maintain tooling but no actionable detail in summary.",
+    "topics": [
+     "pyrevit",
+     "release"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1599,7 +2565,15 @@
    "id": "4e1cfab9d462e493",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "pyRevit CLI patch; minimal detail available; monitor if you use CLI automation.",
+    "topics": [
+     "pyrevit",
+     "cli"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1611,7 +2585,15 @@
    "id": "71faef5bfecdf564",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "pyRevit patch release; check notes if relevant to your workflow but no substance in summary.",
+    "topics": [
+     "pyrevit",
+     "release"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1623,7 +2605,15 @@
    "id": "38620b32df782884",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "pyRevit patch release; check notes if relevant but no technical detail provided.",
+    "topics": [
+     "pyrevit",
+     "release"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1635,7 +2625,15 @@
    "id": "467b71d401a620c8",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Trimble acquisition of construction AI; competitive awareness but no direct impact on Revit tooling or API.",
+    "topics": [
+     "market",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1647,7 +2645,14 @@
    "id": "23bb16f3d7a81b98",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Webinar/podcast promotion; rendering and landscape content outside your core tooling practice.",
+    "topics": [
+     "events"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1659,7 +2664,15 @@
    "id": "be34c50f5d027969",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Embodied carbon framework for BIM objects; useful for audit tooling and model enrichment but no API technique.",
+    "topics": [
+     "bim-standards",
+     "sustainability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1671,7 +2684,14 @@
    "id": "b44832b7d1b583e5",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Customer success story using reality capture; relevant to interoperability awareness but no technique or API angle.",
+    "topics": [
+     "reality-capture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1683,7 +2703,15 @@
    "id": "7a51de289d06334e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Detailed BIM coordination philosophy and process; directly relevant to your model audit and checking tooling.",
+    "topics": [
+     "coordination",
+     "bim-workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1695,7 +2723,14 @@
    "id": "e914b841e9cecd44",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Modular construction robotics partnership; awareness of industry direction but no Revit API or tooling implication.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1707,7 +2742,16 @@
    "id": "2c98e6e6bba835b3",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 60,
+    "why": "IFC lifecycle applications including 4D and asset management; directly usable for model interoperability and data extension work.",
+    "topics": [
+     "ifc",
+     "interoperability",
+     "data-lifecycle"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1719,7 +2763,14 @@
    "id": "1604294363394834",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Dell workstation hardware shift to integrated graphics; useful context for add-in performance but no API or technical change.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1731,7 +2782,15 @@
    "id": "5a3675f860e8fe05",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Intel Arc Pro GPU release; hardware awareness for rendering/AI workloads but no direct Revit tooling impact.",
+    "topics": [
+     "hardware",
+     "gpu"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1743,7 +2802,14 @@
    "id": "033f611578840751",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "HP Z workstation refresh with new processors and GPU rendering support; hardware context but no API or add-in implication.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1755,7 +2821,15 @@
    "id": "8e9283a309c736c9",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "HP bridging CAD/print/site workflows; interesting for coordinating model-to-site but no concrete Revit API technique.",
+    "topics": [
+     "workflow",
+     "reality-capture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1767,7 +2841,14 @@
    "id": "4c13315ff47c459e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Dell Precision workstation hardware refresh; useful for knowing available compute but no technical change to tooling.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1779,7 +2860,15 @@
    "id": "b8202e25233d271f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Dell desktop AI supercomputers with autonomous agents; early-stage tech potentially relevant for future Revit automation but no concrete technique yet.",
+    "topics": [
+     "ai",
+     "agents"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1791,7 +2880,15 @@
    "id": "28c1cdc1ff891041",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Lenovo workstations for on-device AI; hardware context for potential future add-in AI capabilities but no tooling change.",
+    "topics": [
+     "hardware",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1803,7 +2900,14 @@
    "id": "0c18d997cb9af74e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Maxon RedShift rendering plugin for Revit; archviz tool outside your core add-in and audit tooling scope.",
+    "topics": [
+     "rendering"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1815,7 +2919,14 @@
    "id": "382e39ce8d19f2e0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Spatial computing streaming for visualization; not relevant to your Revit add-in or model tooling work.",
+    "topics": [
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1827,7 +2938,14 @@
    "id": "88cd533a3e20d968",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Firm profile video; no technique or actionable content for your practice.",
+    "topics": [
+     "case-study"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1839,7 +2957,15 @@
    "id": "89387330fb4ff105",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Agentic design workflows and solver-driven tools could reshape how automation compounds expertise; directly relevant to future add-in and tooling strategy.",
+    "topics": [
+     "ai-agents",
+     "design-automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1851,7 +2977,14 @@
    "id": "5781018f293abe4c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "Engineering-to-design knowledge flow shift; tangential to understanding how construction constraints shape BIM models you audit and repair.",
+    "topics": [
+     "design-workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1863,7 +2996,15 @@
    "id": "9117c3391f326c59",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Snaptrude's competitive move into conceptual design AI; worth knowing the landscape, not actionable to your C# add-in work.",
+    "topics": [
+     "competitor",
+     "ai-design"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1875,7 +3016,14 @@
    "id": "ca2262577f81f343",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Desktop vs. browser architectural debate; relevant to platform strategy, but no concrete technique for your tooling.",
+    "topics": [
+     "platform-architecture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1887,7 +3035,16 @@
    "id": "0e08dc295f833265",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 70,
+    "why": "Format lock-in breaking down through physical AI; directly affects how your add-ins and audit tooling will interoperate as monopolies weaken.",
+    "topics": [
+     "format",
+     "interoperability",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1899,7 +3056,14 @@
    "id": "51abf6d396bc916a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "High-level industry transformation speculation; no concrete techniques or API/tooling implications for your practice.",
+    "topics": [
+     "ai-future"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1911,7 +3075,14 @@
    "id": "9e99bd41e40a4106",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Magazine issue announcement; check back if specific API or tooling articles emerge, but metadata alone is not actionable.",
+    "topics": [
+     "publication"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1923,7 +3094,15 @@
    "id": "c6394cced2c27d43",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 60,
+    "why": "Agent-orchestrated workflows around machine-readable building state; directly relevant to how you might structure future audit and automation tooling.",
+    "topics": [
+     "ai-agents",
+     "architecture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1935,7 +3114,15 @@
    "id": "89a8ea68dea38a9b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Data organization as foundation for AI automation and decision-making; applicable to how you structure your audit tooling and model data.",
+    "topics": [
+     "data-strategy",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1947,7 +3134,15 @@
    "id": "35e1140434d8ab90",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "AI scaling specialist expertise rather than replacing it; relevant mental model for designing add-ins that compound user knowledge.",
+    "topics": [
+     "ai-design",
+     "expertise"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1959,7 +3154,15 @@
    "id": "e49e363912459646",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 60,
+    "why": "Decision velocity and cognition compression through AI; applicable to how your audit and automation tooling accelerates workflows.",
+    "topics": [
+     "automation",
+     "decision-making"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1971,7 +3174,15 @@
    "id": "16949e97c537ed79",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 75,
+    "why": "Intelligent model validation and error elimination; directly mirrors your current audit tooling work and future AI-enhanced directions.",
+    "topics": [
+     "model-validation",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1983,7 +3194,14 @@
    "id": "eb1d06bab1d15fee",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "AI clustering at design poles; architectural insight, but no concrete technique or API change relevant to your tooling.",
+    "topics": [
+     "ai-design"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -1995,7 +3213,15 @@
    "id": "b4809a362205609a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Allplan's design-to-build and data-sovereignty strategy; competitive move worth monitoring, not immediately actionable.",
+    "topics": [
+     "competitor",
+     "data-sovereignty"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2007,7 +3233,15 @@
    "id": "052b56314d4dd5a0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Field tracking and punch-list integration; construction-side workflow, not relevant to your Revit add-in or model work.",
+    "topics": [
+     "integration",
+     "field-management"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2019,7 +3253,16 @@
    "id": "d4d564612f2fa974",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 85,
+    "why": "EULA and data ownership shifts in AEC software; critical to understand vendor terms that affect how you distribute and run add-ins.",
+    "topics": [
+     "licensing",
+     "data-sovereignty",
+     "terms"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2031,7 +3274,14 @@
    "id": "8b6d883a53a5b6fb",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Event announcement; only actionable if you attend or watch talks posted afterward.",
+    "topics": [
+     "event"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2043,7 +3293,15 @@
    "id": "f455de0f477c549f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Construction site capture and task management; field-focused, not relevant to your Revit API or model audit work.",
+    "topics": [
+     "field-management",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2055,7 +3313,15 @@
    "id": "c844871fd2564758",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Rendering and visualization product announcement; not your work domain.",
+    "topics": [
+     "visualization",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2067,7 +3333,15 @@
    "id": "e3e7cb4034ef211b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "VDI infrastructure shift at scale; good to know the direction but doesn't affect your add-in work.",
+    "topics": [
+     "infrastructure",
+     "workstations"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2079,7 +3353,15 @@
    "id": "48217999c17d9108",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Reality capture device; peripheral to your add-in practice unless you integrate scan data.",
+    "topics": [
+     "reality-capture",
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2091,7 +3373,16 @@
    "id": "23626fdc3f2d8d1d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Deviation detection piped into BIM collaboration platform; relevant pattern for audit tooling and interop.",
+    "topics": [
+     "integration",
+     "bim-coordination",
+     "api"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2103,7 +3394,15 @@
    "id": "03e11f7bb379a2f1",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 18,
+    "why": "Surveying scanner release; worth knowing but not a direct tool for your Revit practice.",
+    "topics": [
+     "hardware",
+     "reality-capture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2115,7 +3414,16 @@
    "id": "c152223a92a373fe",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 70,
+    "why": "Autodesk's spatial AI investment signals future API and model reasoning capabilities; watch for concrete API surfaces.",
+    "topics": [
+     "autodesk",
+     "ai",
+     "strategic"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2127,7 +3435,15 @@
    "id": "82133c8b43ec034d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Vectorworks acquires mobile sketching app; competitor product move, no immediate impact on Revit tooling.",
+    "topics": [
+     "competitor",
+     "mobile"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2139,7 +3455,15 @@
    "id": "06b9c14290327f01",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Reality capture platform adds 360 support; relevant if you integrate scan data into Revit workflows.",
+    "topics": [
+     "reality-capture",
+     "interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2151,7 +3475,15 @@
    "id": "3058b1e56a9b24d0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Esri and Pix4D reality capture workflow; infrastructure-focused, not directly applicable to your add-ins.",
+    "topics": [
+     "reality-capture",
+     "interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2163,7 +3495,15 @@
    "id": "74f801c6088f7155",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 28,
+    "why": "High-accuracy SLAM scanner; useful to know for site capture integration but not core to your practice.",
+    "topics": [
+     "reality-capture",
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2175,7 +3515,15 @@
    "id": "34cc8e3ce1ccf402",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Rendering and AI visualization tool update; not your work domain.",
+    "topics": [
+     "visualization",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2187,7 +3535,16 @@
    "id": "5fab2b42f296e617",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 65,
+    "why": "GPU memory constraints in CAD/BIM workflows; directly relevant to large-model performance and workstation tuning.",
+    "topics": [
+     "performance",
+     "hardware",
+     "workstations"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2199,7 +3556,16 @@
    "id": "3956ecb3047af365",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "DDR5 memory pricing and workstation buying implications; useful context for your own hardware and client recommendations.",
+    "topics": [
+     "workstations",
+     "hardware",
+     "cost"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2211,7 +3577,15 @@
    "id": "fb9a98f27fe05a96",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Water infrastructure regulation and AI detection; unrelated to BIM authoring or your add-in work.",
+    "topics": [
+     "infrastructure",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2223,7 +3597,15 @@
    "id": "40b2613efd45f213",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Opinion on generative AI in design and professional trust; thoughtful perspective but no technique or API detail.",
+    "topics": [
+     "ai",
+     "design-ethics"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2235,7 +3617,15 @@
    "id": "408fd918cd627933",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "KREODx fabrication-ready design system; case study of design-to-fabrication automation, pattern worth noting.",
+    "topics": [
+     "automation",
+     "workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2247,7 +3637,15 @@
    "id": "b6a308f9e7c1b141",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 45,
+    "why": "Automation in early-phase engineering design and optioneering; relevant pattern for parametric and batch tooling.",
+    "topics": [
+     "automation",
+     "workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2259,7 +3657,14 @@
    "id": "e25a4187d4d7224c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Magazine issue table of contents; meta reference to other articles already listed separately.",
+    "topics": [
+     "editorial"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2271,7 +3676,15 @@
    "id": "b258e86f308e399f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Opinion on AI and creative authorship in architecture; no concrete technique or API change to act on.",
+    "topics": [
+     "ai",
+     "design-ethics"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2283,7 +3696,16 @@
    "id": "ebdc4963c83dd523",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 60,
+    "why": "Autodesk executive on AI in AEC shifting from efficiency to decision-making; signals future product direction.",
+    "topics": [
+     "autodesk",
+     "ai",
+     "strategy"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2295,7 +3717,14 @@
    "id": "fdda5f3d6719aed3",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Marketing piece about Unity's no-code workflow vision; no concrete technique or API detail relevant to your add-in work.",
+    "topics": [
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2307,7 +3736,15 @@
    "id": "d75360283e390824",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 25,
+    "why": "glTF Gaussian Splatting extension broadens interop options for 3D asset delivery; useful if you work with model export or visualization pipelines.",
+    "topics": [
+     "interoperability",
+     "3d-formats"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2319,7 +3756,15 @@
    "id": "7cf18d5e7323294d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 45,
+    "why": "Analyst take on AI disrupting AEC software; worth knowing the market narrative, but no concrete change to your tooling or API surface yet.",
+    "topics": [
+     "ai",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2331,7 +3776,15 @@
    "id": "fb3a9a188f8765dc",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 70,
+    "why": "Add-in template fix—your baseline for shipping add-ins; update to stay current with toolchain.",
+    "topics": [
+     "revit-api",
+     "add-in-templates"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2343,7 +3796,16 @@
    "id": "1649aa1c13da9b66",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 65,
+    "why": "Add-in template build fix (missing await); critical if you scaffold new projects from templates.",
+    "topics": [
+     "revit-api",
+     "add-in-templates",
+     "c-sharp"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2355,7 +3817,14 @@
    "id": "8ccc3f48058d8a29",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Autodesk investment in construction material tracking; corporate news with no direct impact on your add-in or API work.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2367,7 +3836,14 @@
    "id": "fa1578b9499c8c7d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Customer success story about storage and collaboration infrastructure; no technique or API detail to act on.",
+    "topics": [
+     "case-study"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2379,7 +3855,14 @@
    "id": "a44776782a50bdf9",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Workstation hardware review; informative for setup choices but not relevant to add-in development or API changes.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2391,7 +3874,15 @@
    "id": "653a2d295d4ecb84",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Trend analysis on 1:1 remote workstations; context for deployment patterns but not your development work.",
+    "topics": [
+     "hardware",
+     "infrastructure"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2403,7 +3894,14 @@
    "id": "8a56776623eb2cee",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Hardware trade-off article; practical for workstation selection, not for add-in tooling or API.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2415,7 +3913,15 @@
    "id": "f38c34afb2d094dd",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Lenovo remote workstation deployment framework; infrastructure context only, no development impact.",
+    "topics": [
+     "hardware",
+     "infrastructure"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2427,7 +3933,15 @@
    "id": "416bb363e394ae64",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Case study of hybrid VDI setup; market trend but no concrete API or tooling change.",
+    "topics": [
+     "case-study",
+     "infrastructure"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2439,7 +3953,14 @@
    "id": "ad54879d1e097a25",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Hardware buyer's guide; not relevant to your add-in development or API work.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2451,7 +3972,14 @@
    "id": "754cece24d17bc70",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "CPU performance review for rendering and simulation; useful if you optimize for compute-heavy workloads, but not API-level.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2463,7 +3991,14 @@
    "id": "6f94935d1291cd2d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Magazine special report promotional announcement; listicle-style coverage with no new API or tooling insight.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2475,7 +4010,14 @@
    "id": "d90f83a3c9a47f2c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "High-end workstation review; hardware spec article with no relevance to add-in development.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2487,7 +4029,14 @@
    "id": "02bcc18ac675010e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 8,
+    "why": "Workstation survey results; market data only, no technical content or actionable insight for your work.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2499,7 +4048,14 @@
    "id": "5d15a5fa525bbf31",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 18,
+    "why": "Startup rethinking remote workstations as managed service; interesting trend but no API or tooling change.",
+    "topics": [
+     "infrastructure"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2511,7 +4067,14 @@
    "id": "c72a5678b4a9d199",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 8,
+    "why": "Workstation vendor review; hardware buying guidance with no development or API relevance.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2523,7 +4086,14 @@
    "id": "8d9da74d0f11c7fd",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 22,
+    "why": "Intel Arc Pro B50 graphics card review; hardware context if you test against discrete GPU setups, but no API impact.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2535,7 +4105,14 @@
    "id": "c0c75121b8aca8c8",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Workstation GPU evolution matters for rendering/simulation tasks, but rendering is outside your scope.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2547,7 +4124,14 @@
    "id": "13cc1425c617f10e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Workstation CPU announcements are background context, not actionable for add-in development.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2559,7 +4143,16 @@
    "id": "6a3ea112e67669ea",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 85,
+    "why": ".NET 10.0 target, ModularPipelines migration, Revit 2027 install path—direct impact on your add-in template and build toolchain.",
+    "topics": [
+     "revit-api",
+     "dotnet",
+     "revit-2027"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2571,7 +4164,12 @@
    "id": "e59fbd1373e9d818",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Blender development fund news is corporate; Blender is outside your BIM and Revit API work.",
+    "topics": [],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2583,7 +4181,12 @@
    "id": "2fe33d88a6aaca71",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Executive appointments are corporate news with no technical impact on your tools or practice.",
+    "topics": [],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2595,7 +4198,12 @@
    "id": "991aa5dfbfc9cb81",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Community platform rebranding is marketing; visualization-focused and outside your scope.",
+    "topics": [],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2607,7 +4215,15 @@
    "id": "4086c4c4570c654c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Lidar scanning and reality capture workflows can feed Revit models; worth knowing the landscape.",
+    "topics": [
+     "reality-capture",
+     "interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2619,7 +4235,14 @@
    "id": "2cc06856633427da",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Hexagon consolidation matters as a competitor shift, but no technical detail or API changes.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2631,7 +4254,16 @@
    "id": "91bfffe6f126e87b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Revit support coming to Cityweft; worth understanding how to surface building context data into your models via API.",
+    "topics": [
+     "interop",
+     "api",
+     "revit-integration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2643,7 +4275,12 @@
    "id": "13a5d9fe28793a9d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "CMap's embedded AI features are product marketing without concrete technique or API surface.",
+    "topics": [],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2655,7 +4292,12 @@
    "id": "21ac5ea07b68a0df",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Visualization pipeline for SketchUp and rendering; outside your add-in and model automation work.",
+    "topics": [],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2667,7 +4309,15 @@
    "id": "5d5a48b4836285e0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Procore's agentic AI strategy signals construction platform direction; relevant as competitive/ecosystem context.",
+    "topics": [
+     "market",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2679,7 +4329,15 @@
    "id": "4c0ff0a2564570b6",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 80,
+    "why": "Revit 2027 support added; critical for updating your add-in template and ensuring forward compatibility.",
+    "topics": [
+     "revit-2027",
+     "revit-api"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2691,7 +4349,15 @@
    "id": "523618a220ec0d90",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 60,
+    "why": "Minor template updates may affect your build or SDK integration; worth checking changelog.",
+    "topics": [
+     "revit-api",
+     "toolchain"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2703,7 +4369,12 @@
    "id": "f117432a63c3f3b7",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Survey invitation is administrative; no technical content or deliverables for your work.",
+    "topics": [],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2715,7 +4386,16 @@
    "id": "f5d55ceaabae880c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 90,
+    "why": "Major toolchain overhaul: ModularPipelines migration, GitVersion, WIX4, .NET target changes—breaking changes to your build pipeline.",
+    "topics": [
+     "revit-api",
+     "toolchain",
+     "dotnet"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2727,7 +4407,14 @@
    "id": "b71caa7d2d8abffa",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "SketchUp AI is adjacent to BIM but not Revit-focused; no API or interop detail for your work.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2739,7 +4426,15 @@
    "id": "5a6d3eefdff839c8",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Handheld scanner accuracy improvements inform reality-capture workflows that feed Revit models.",
+    "topics": [
+     "reality-capture",
+     "interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2751,7 +4446,14 @@
    "id": "7cb6fbe6eb96e84f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "ACC (Forma) partnership is customer success story; no technical or API change.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2763,7 +4465,14 @@
    "id": "0dfff8228a27dd9e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Infrastructure-focused collaboration platform; relevant as market direction, but outside Revit API scope.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2775,7 +4484,14 @@
    "id": "d5c827fe2a56a826",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Magazine cover roundup; Twinmotion changes noted but visualization is outside your work scope.",
+    "topics": [
+     "market-news"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2787,7 +4503,16 @@
    "id": "cf01062771b92478",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Speckle as interop layer between tools; relevant if you move data between Revit and other AEC systems.",
+    "topics": [
+     "interoperability",
+     "speckle",
+     "data-exchange"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2799,7 +4524,15 @@
    "id": "99c07d10edac14d2",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Rayon targets AutoCAD, not Revit; a competitor move worth knowing but not actionable for your work.",
+    "topics": [
+     "competitor",
+     "cad"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2811,7 +4544,15 @@
    "id": "1a8ae912fa033281",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Bentley embedding AI across its portfolio; useful to track competitor direction but no Revit implication.",
+    "topics": [
+     "competitor",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2823,7 +4564,16 @@
    "id": "6400672f8ce69e65",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 75,
+    "why": "EULA changes around AI training and data use directly affect how you license and distribute add-ins.",
+    "topics": [
+     "licensing",
+     "eula",
+     "legal"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2835,7 +4585,15 @@
    "id": "17d76a4a9edb5ddb",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Archicad roadmap and AI strategy; competitor intelligence only, no Revit relevance.",
+    "topics": [
+     "competitor",
+     "conference"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2847,7 +4605,15 @@
    "id": "54d3785051a43cf0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "Data ownership and cloud-database trend affects how you structure audit tooling and data workflows.",
+    "topics": [
+     "data-architecture",
+     "cloud"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2859,7 +4625,15 @@
    "id": "29f3b995a861f6cd",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Twinmotion and Unreal Engine alignment; visualization tool, outside your add-in and automation scope.",
+    "topics": [
+     "visualization",
+     "unreal-engine"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2871,7 +4645,15 @@
    "id": "f1fa00b45545422f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Trimble's agentic AI strategy; worth knowing but no direct Revit API or add-in toolchain impact yet.",
+    "topics": [
+     "competitor",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2883,7 +4665,14 @@
    "id": "c9fc2d25d1c76d4d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Directory of AI tools for AEC; a listicle with no technique or concrete learning.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2895,7 +4684,14 @@
    "id": "7d908f21da1ca283",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Conference announcement; event promotion only.",
+    "topics": [
+     "event"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2907,7 +4703,15 @@
    "id": "8e49bc24193ab634",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Aecom acquiring AI startup; market consolidation worth tracking but no immediate operational impact.",
+    "topics": [
+     "competitor",
+     "acquisition"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2919,7 +4723,15 @@
    "id": "f1f8b53e95ec7b6a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Howie funding for AEC data analytics; a competing data platform but no Revit integration detail.",
+    "topics": [
+     "competitor",
+     "data-analytics"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2931,7 +4743,14 @@
    "id": "f36fb41ffc3bad9f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Sponsored content on water infrastructure asset management; not applicable to your BIM tooling work.",
+    "topics": [
+     "sponsored"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2943,7 +4762,15 @@
    "id": "7e9b07fd1e65bcf3",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "NHS digital twin use case; operational BIM application but no technique or tooling lesson for you.",
+    "topics": [
+     "case-study",
+     "digital-twin"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2955,7 +4782,15 @@
    "id": "9a932feea2ce8a9e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 35,
+    "why": "Agentic AI for engineering automation; technique relevant if you extend add-in capability with AI.",
+    "topics": [
+     "ai",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2967,7 +4802,14 @@
    "id": "3562cb885c4fa540",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Autodesk Estimate launch for contractors; part of Construction Cloud but tangential to your add-in work.",
+    "topics": [
+     "autodesk-product"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2979,7 +4821,16 @@
    "id": "f84604fc01a037cc",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "Trimble Agent Studio for agentic AI workflows; pattern you may apply to Revit add-in automation design.",
+    "topics": [
+     "ai",
+     "automation",
+     "agentic"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -2991,7 +4842,14 @@
    "id": "620fb452e145bf75",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Rendering and visualization engine update; outside your scope of BIM automation and add-in development.",
+    "topics": [
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3003,7 +4861,16 @@
    "id": "53c63f87c42a7d69",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 40,
+    "why": "AI applied to site imagery and project tracking; technique relevant to audit and model-checking tooling.",
+    "topics": [
+     "ai",
+     "site-capture",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3015,7 +4882,15 @@
    "id": "9337b6f28a6cc1b3",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Marketing case study about real estate visualization; no technical detail or technique applicable to your work.",
+    "topics": [
+     "visualization",
+     "digital-twins"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3027,7 +4902,16 @@
    "id": "5a50460b929a617c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Infrastructure project using browser-based design aggregation; shows market adoption of cross-format visualization platforms.",
+    "topics": [
+     "interoperability",
+     "infrastructure",
+     "design-management"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3039,7 +4923,15 @@
    "id": "677aee6075d6268b",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Project case study using energy modeling software; no technique or API detail relevant to add-in development.",
+    "topics": [
+     "energy-modeling",
+     "case-study"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3051,7 +4943,15 @@
    "id": "27a3dbacd51a9e74",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Drawing management system designed for architects; relevant to understanding how construction document workflows are evolving.",
+    "topics": [
+     "drawing-management",
+     "construction-administration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3063,7 +4963,16 @@
    "id": "06d12fa7f2e370f7",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 45,
+    "why": "Concrete analysis of where AI adds value in architectural work—documentation setup, visualization prep; validates automation priorities.",
+    "topics": [
+     "ai",
+     "automation",
+     "productivity"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3075,7 +4984,16 @@
    "id": "b279c8ad9ead0d7f",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Reality capture platform adoption in construction; shows market direction but no technical detail on integration or interop.",
+    "topics": [
+     "reality-capture",
+     "drone",
+     "project-tracking"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3087,7 +5005,16 @@
    "id": "114d1deeec2faecc",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Nemetschek (Graphisoft, Vectorworks, Allplan) partnering on AI/cloud platforms; signals direction of competitors' tooling.",
+    "topics": [
+     "nemetschek",
+     "market-movement",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3099,7 +5026,16 @@
    "id": "fa8c7b68368d9be6",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 50,
+    "why": "New platform using Siemens Parasolid kernel for DfMA/PLM in buildings; novel geometric modeling approach worth understanding.",
+    "topics": [
+     "modeling-kernel",
+     "dfma",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3111,7 +5047,16 @@
    "id": "0c44f317790c6c23",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "AI extracting knowledge from scattered project documents into searchable KB; concrete technique for audit and reuse workflows.",
+    "topics": [
+     "ai",
+     "knowledge-extraction",
+     "documentation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3123,7 +5068,16 @@
    "id": "59b9f86790ea3bf8",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Construction ERP with AI agents; outside your domain but signals broader automation adoption in adjacent workflows.",
+    "topics": [
+     "erp",
+     "ai",
+     "construction-management"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3135,7 +5089,16 @@
    "id": "aff30341a8ff9527",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "AI automating submittals from drawings; shows tool maturity for document extraction, tangential to your audit work.",
+    "topics": [
+     "ai",
+     "submittals",
+     "document-extraction"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3147,7 +5110,15 @@
    "id": "f5b3403c4ff354b4",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Water infrastructure ROI calculator; not relevant to your Revit add-in or BIM tooling practice.",
+    "topics": [
+     "infrastructure",
+     "calculator"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3159,7 +5130,16 @@
    "id": "7b771e79b1bafabc",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Report on QA/QC fragmentation driving rework; reinforces value of standardized audit and documentation tooling.",
+    "topics": [
+     "qa-qc",
+     "construction-management",
+     "documentation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3171,7 +5151,15 @@
    "id": "83cf21a1999f8fcc",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Structural analysis software update with Eurocode 2 compliance and wind load automation; outside your domain.",
+    "topics": [
+     "structural-analysis",
+     "code-compliance"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3183,7 +5171,16 @@
    "id": "b2dd69c49332e7e7",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 8,
+    "why": "Traffic analysis digital twin; not applicable to building BIM or your add-in work.",
+    "topics": [
+     "digital-twins",
+     "ai",
+     "infrastructure"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3195,7 +5192,15 @@
    "id": "35dc1516cfe040af",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "OpenSpace acquiring progress tracking firm; market consolidation worth tracking but no technical detail.",
+    "topics": [
+     "market-movement",
+     "construction-tracking"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3207,7 +5212,15 @@
    "id": "3b657401c7155f90",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Real-time rendering software update; visualization tooling outside your BIM authoring and automation focus.",
+    "topics": [
+     "visualization",
+     "rendering"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3219,7 +5232,16 @@
    "id": "bca7050ff9c41652",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Allplan 2026 adds WLCA integration and automation; competitor direction on embodied carbon workflows and BIM interop.",
+    "topics": [
+     "allplan",
+     "sustainability",
+     "bim-interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3231,7 +5253,16 @@
    "id": "c32a3449d3e4bee9",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Site software adds 3D model viewer for field tasks; shows integration trend between office and field BIM workflows.",
+    "topics": [
+     "field-workflow",
+     "3d-model",
+     "construction-software"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3243,7 +5274,16 @@
    "id": "d03aea481f60bf11",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "AI zoning code search tool; adjacent to BIM but outside authoring, API, or audit work.",
+    "topics": [
+     "ai",
+     "planning",
+     "zoning"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3255,7 +5295,15 @@
    "id": "f5ed3fa944a3362d",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Agentic electrical design tool; not relevant to your production BIM and add-in work.",
+    "topics": [
+     "ai-design",
+     "electrical"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3267,7 +5315,15 @@
    "id": "235e95ae417c0865",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "No-code automation for engineering tasks; not Revit-specific, not your workflow.",
+    "topics": [
+     "automation",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3279,7 +5335,14 @@
    "id": "197367927677cfc8",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Duplicate of 235e95ae417c0865; no-code app builder, marketing focused.",
+    "topics": [
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3291,7 +5354,14 @@
    "id": "128fed1a9c845ec3",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Flood modelling platform; unrelated to BIM authoring, add-in development, or Revit.",
+    "topics": [
+     "infrastructure"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3303,7 +5373,15 @@
    "id": "8a777ce281dd76ad",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Construction scanner using Nvidia hardware; tangential to BIM data capture but not your add-in or API work.",
+    "topics": [
+     "hardware",
+     "lidar"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3315,7 +5393,16 @@
    "id": "412f1fd354e4dd26",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "V-Ray gains AMD GPU support including in Revit; useful to know but rendering is outside your scope.",
+    "topics": [
+     "revit",
+     "gpu",
+     "rendering"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3327,7 +5414,15 @@
    "id": "f55bae35d36cf004",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Cintoo–ArcGIS integration for 3D scan data; GIS-focused, not relevant to Revit add-ins.",
+    "topics": [
+     "interoperability",
+     "gis"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3339,7 +5434,14 @@
    "id": "d3522f54e5f93b58",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Datacentre workstation hardware update; not relevant to your development or production work.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3351,7 +5453,16 @@
    "id": "dafd1731ee187b1c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Free Revit add-in for grid, opening, and section annotation automation—directly adjacent to your viewport and sheet tooling.",
+    "topics": [
+     "revit-addon",
+     "annotation",
+     "viewport"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3363,7 +5474,15 @@
    "id": "fca24df0f177784e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 40,
+    "why": "Higharc's sketch-to-design automation shows concrete AI technique for building generation; architectural but instructive.",
+    "topics": [
+     "ai-design",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3375,7 +5494,16 @@
    "id": "d0c8901ab25ef479",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Speckle CEO interview on data infrastructure; relevant to interop and sharing BIM data from your tools.",
+    "topics": [
+     "speckle",
+     "interoperability",
+     "data"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3387,7 +5515,16 @@
    "id": "3e8377b3c4b0d0ab",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "AEC Magazine TOC including EULA/data rights, Forma, AI—context on vendor landscape but no technical detail here.",
+    "topics": [
+     "licensing",
+     "autodesk",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3399,7 +5536,15 @@
    "id": "fb07ac030a775115",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 45,
+    "why": "Pirros adds Revit family management integration; could be a competitor or complement to your family tooling.",
+    "topics": [
+     "revit-addon",
+     "family-management"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3411,7 +5556,16 @@
    "id": "0b520c3f2b75cee7",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 60,
+    "why": "Revit 2026 Accelerated Graphics Tech Preview with GPU offload; concrete performance improvement you should know about.",
+    "topics": [
+     "revit-2026",
+     "graphics",
+     "performance"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3423,7 +5577,15 @@
    "id": "fea8145819fb2466",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "SketchUp collaboration tools; not Revit-related to your production or add-in work.",
+    "topics": [
+     "sketchup",
+     "collaboration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3435,7 +5597,14 @@
    "id": "aec211579312dadf",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Opinion piece on tool development culture; no concrete techniques or technical changes.",
+    "topics": [
+     "culture"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3447,7 +5616,15 @@
    "id": "79428162cf484aab",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Lenovo workstation marketing; generic productivity messaging with no technical substance.",
+    "topics": [
+     "hardware",
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3459,7 +5636,14 @@
    "id": "5f702fbfbb570b3e",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Snaptrude AI for early-stage design; early-concept tool, not relevant to your detailed design and audit work.",
+    "topics": [
+     "ai-design"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3471,7 +5655,16 @@
    "id": "ca49404a52468dfa",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 85,
+    "why": "EULA/licensing shifts in Autodesk and vendor software; directly affects how you distribute, license, and use add-ins.",
+    "topics": [
+     "licensing",
+     "eula",
+     "legal"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3483,7 +5676,16 @@
    "id": "9357eb7402b1d963",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "learn",
+    "relevance": 70,
+    "why": "Autodesk's live AI tool demos at AU 2025; concrete examples of production-ready AI features you may integrate.",
+    "topics": [
+     "autodesk",
+     "ai",
+     "revit"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3495,7 +5697,15 @@
    "id": "be87e6372fd5f3bf",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "3D scanning workflow for others; no technique or API integration relevant to your add-in work.",
+    "topics": [
+     "scanning",
+     "construction-tech"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3507,7 +5717,16 @@
    "id": "00529be2b284ee79",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 85,
+    "why": "RevitLookup 2026 support, add-in isolation disabled in 2026, vendor change—critical for your tooling ecosystem.",
+    "topics": [
+     "revit-2026",
+     "revitlookup",
+     "breaking-changes"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3519,7 +5738,15 @@
    "id": "e42b1e3444c69ced",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Performance analysis add-in; not relevant to viewport automation, family repair, or model audit tooling.",
+    "topics": [
+     "revit-addons",
+     "simulation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3531,7 +5758,15 @@
    "id": "e320692a1b8a1f76",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "CTC Software company overview; useful context on ecosystem players but no technical detail or API news.",
+    "topics": [
+     "revit-addons",
+     "vendor-profile"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3543,7 +5778,16 @@
    "id": "1a1d85d2dba594d6",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 90,
+    "why": "Major RevitLookup release with Revit 2026 support, UI redesign, architecture changes—essential for your debugging and inspection workflows.",
+    "topics": [
+     "revit-2026",
+     "revitlookup",
+     "toolchain"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3555,7 +5799,16 @@
    "id": "54ca504c4dfb57aa",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "alert",
+    "relevance": 75,
+    "why": "Add-in template 5.0.0 release with redesigned publishing pipeline and CI/CD improvements—directly impacts your C# project setup.",
+    "topics": [
+     "revit-api",
+     "add-in-templates",
+     "toolchain"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3567,7 +5820,15 @@
    "id": "996199d2b7667584",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Competitor add-in product; worth knowing the feature set but no technique or API insight for your practice.",
+    "topics": [
+     "revit-addons",
+     "competitor"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3579,7 +5840,14 @@
    "id": "3396592a7d2f0b29",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Generic sustainability opinion piece from competitor vendor; no concrete technique or actionable detail.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3591,7 +5859,14 @@
    "id": "18ef39e4219d8a93",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Generic design philosophy post; no technical depth or relevance to add-in development or BIM tooling.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3603,7 +5878,14 @@
    "id": "9b053ce9e42f6db0",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Vendor thought-leadership on sustainability; no actionable technique or API/tool change.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3615,7 +5897,15 @@
    "id": "0259341d5892a3f6",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Competitor whitepaper on BIM/project management integration; context on industry thinking but no technical leverage for your work.",
+    "topics": [
+     "competitor",
+     "bim-workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3627,7 +5917,14 @@
    "id": "3285b4165cbe4e7a",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Marketing content on BIM + project management platform; no concrete technique or API detail.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3639,7 +5936,15 @@
    "id": "d52249cefb04ff0c",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Competitor feature for web-based model sharing; adjacent to your work but not actionable for Revit add-in development.",
+    "topics": [
+     "competitor",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3651,7 +5956,15 @@
    "id": "ab252a191ef30985",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Competitor authentication feature announcement; no relevance to Revit tooling or your practice.",
+    "topics": [
+     "competitor",
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   },
   {
@@ -3663,7 +5976,15 @@
    "id": "4283654519c4d7c8",
    "fetched_at": "2026-07-25T16:05:54.777547Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Competitor customer success story; marketing content with no technique or actionable insight.",
+    "topics": [
+     "competitor",
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-25T20:06:02.422958Z"
    }
   }
  ]
