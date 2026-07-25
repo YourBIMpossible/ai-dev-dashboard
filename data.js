@@ -715,7 +715,7 @@ window.DASHBOARD_DATA = {
       oneLiner: "AI-assisted Revit family workflow (multi-repo: Families-by-BIMpossible \"brain\" + BIMpossible-AddIns \"hands\"). Single source of truth is ROADMAP.md: 3 numbered phases (close the RevitLink gap / family-creation geometry primitives / MCP copilot) + a 4th ribbon-button thread + the independent per-family rollout.",
       status: "active",
       phase: "Spans two repos per ROADMAP.md: Families-by-BIMpossible (\"brain\" — Python planner/verifier/harness) + BIMpossible-AddIns (\"hands\" — BIMpossible.RevitLink). Roadmap committed 2026-07-23 (d3dd3de) after nearly being lost unwritten — the doc's own words. Both repos in sync with origin. See progress.phases[] for real status; this field intentionally stays short now that ROADMAP.md is the detailed source of truth.",
-      focus: "Phase 1 is ~90% done (only wire_nested_params + one live end-to-end rehearsal remain) and the ribbon button is code-complete pending Gate B. The real gate now is ROADMAP.md's open questions -- sequencing, who writes Phase 2's C#, the Phase 3 safety-model choice -- none formally answered yet, and Phase 2 (geometry) / Phase 3 (copilot) can't start for real until they are.",
+      focus: "Phase 1 is ~90% done (only wire_nested_params + one live end-to-end rehearsal remain) and the ribbon button is code-complete pending Gate B. The button merged, and rehearsal partially run per ROADMAP.md's 2026-07-25 update. The real gate now is ROADMAP.md's open questions -- sequencing, who writes Phase 2's C#, the Phase 3 safety-model choice -- none formally answered yet, and Phase 2 (geometry) / Phase 3 (copilot) can't start for real until they are.",
       progress: {
         label: "Roadmap (ROADMAP.md)",
         phases: [
@@ -732,7 +732,11 @@ window.DASHBOARD_DATA = {
         summary: "docs(roadmap): correct the button-thread status the roadmap's own last update missed (c72a2a9)"
       },
       branch: "main",
-      nextActions: ["Run Phase 1's live end-to-end rehearsal (LIVE_TEST_RUNBOOK.md) + port wire_nested_params — closes Phase 1","Schedule Gate B (live-Revit click-through) for the ribbon button — code-complete, waiting on your window","Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing, Phase 3 safety-model flavor) before Phase 2 or 3 can really start"],
+      nextActions: [
+        "Run Phase 1's live end-to-end rehearsal (LIVE_TEST_RUNBOOK.md) — partially run already per ROADMAP.md — and port wire_nested_params — closes Phase 1",
+        "Schedule Gate B (live-Revit click-through) for the ribbon button — merged, waiting on your window",
+        "Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing, Phase 3 safety-model flavor) before Phase 2 or 3 can really start"
+      ],
       pendingDecisions: [],
       blockers: [],
       reminders: ["ROADMAP.md (repo root) is the single source of truth for this whole multi-repo effort — update its status lines whenever a phase moves, in whichever repo/session does the moving","Multiple sessions/worktrees can work this roadmap in parallel for source edits, but Deploy-Local.ps1 writes to a SHARED %APPDATA% Revit Addins folder, last-writer-wins — only one session may hold the deploy target (mid-rehearsal/mid-deploy) at a time"],
@@ -741,11 +745,11 @@ window.DASHBOARD_DATA = {
         { label: "Tool README", path: "F:\\AI-Dev\\Families by BIMpossible\\README.md" }
       ],
       recent: [
+        "2026-07-25 - button merged, rehearsal partially run (aa41e62)",
         "2026-06-28 - NetworkX remediation-order DAG: blast-radius + clusters + topo sort (7fd2e48)",
         "2026-06-27 - Device verifier + phase-1 handoff checklist + ideas backlog (7891090); XFMR_PROFILE expanded 5→12 params + 4 new shared params (b0d5f0b)",
         "2026-06-13 - device-class param profiles (CB/MTR/DISC) + 1:1 device param map (4a52fc2); per-type equipment profiles + display-recipe framework (a9fb7f0)",
-        "2026-06-12 - session postmortem + approach decision (Approach B locked)",
-        "2026-06-11 - git repo scaffolded (code-only, no .rfa binaries); 23 commits"
+        "2026-06-12 - session postmortem + approach decision (Approach B locked)"
       ]
     },
     /* PROJECT:families:END */
