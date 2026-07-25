@@ -51,8 +51,11 @@ def main(argv: list[str] | None = None) -> int:
     items, state = collect.collect_all(sources, state, now=now)
     summary = store.ingest(archive, items, now=now)
     archive = store.prune(archive, now=now)
+    expired = summary.get("expired", 0)
     print(f"\n  fetched {len(items)}, new {summary['added']}, "
-          f"updated {summary['updated']}, archive now {len(archive)}")
+          f"updated {summary['updated']}"
+          + (f", {expired} too old to keep" if expired else "")
+          + f", archive now {len(archive)}")
 
     if args.no_classify:
         print("  classification skipped (--no-classify)")

@@ -61,6 +61,25 @@ class ClassificationUnavailable(RuntimeError):
     """Raised internally when a batch cannot be classified; callers degrade."""
 
 
+class PermanentAuthError(ClassificationUnavailable):
+    """The credentials are wrong. Retrying cannot help and neither can the next batch."""
+
+
+def _is_permanent_auth_error(exc: Exception) -> bool:
+    """Distinguish "your key is wrong" from "the API is busy".
+
+    Retrying a 401 is pointless, and doing it per-batch turns an instant, obvious
+    failure into a wall of identical errors that buries the one line that matters.
+    Observed live: a placeholder key produced 15 batches x 3 retries = 45 doomed
+    calls before the run reported anything useful.
+    """
+    status = getattr(exc, "status_code", None)
+    if status in (401, 403):
+        return True
+    text = str(exc).lower()
+    return "authentication_error" in text or "invalid x-api-key" in text
+
+
 def load_profile(path: str) -> str:
     try:
         with open(path, "r", encoding="utf-8") as handle:
@@ -113,6 +132,15 @@ def classify_items(items: list[dict], profile: str, *, client=None,
         batch = pending[start:start + BATCH_SIZE]
         try:
             verdicts = _classify_batch(batch, profile, client, model)
+        except PermanentAuthError as exc:
+            # Bad credentials will fail identically for every remaining batch. Stop
+            # now and say so once, rather than emitting the same error 15 times.
+            remaining = len(pending) - classified - failed
+            log(f"  ANTHROPIC_API_KEY rejected: {exc}")
+            log(f"  aborting triage; {remaining} items stay unsorted and retry next run")
+            log("  (check the key is a real value, not the 'sk-ant-...' placeholder)")
+            return {"classified": classified, "skipped": len(items) - len(pending),
+                    "failed": remaining, "available": False, "reason": "invalid api key"}
         except Exception as exc:
             log(f"  batch {start // BATCH_SIZE + 1} failed ({type(exc).__name__}: {exc}); "
                 "items stay unsorted and retry next run")
@@ -160,6 +188,8 @@ def _classify_batch(batch: list[dict], profile: str, client, model: str) -> dict
             )
             return _parse_verdicts(text)
         except Exception as exc:  # network, rate limit, or unparseable response
+            if _is_permanent_auth_error(exc):
+                raise PermanentAuthError(str(exc)) from exc
             last_error = exc
             if attempt == MAX_RETRIES - 1:
                 break

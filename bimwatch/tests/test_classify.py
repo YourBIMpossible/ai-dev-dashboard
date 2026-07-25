@@ -151,6 +151,65 @@ class TestDegradation:
         assert classify.needs_classification(items[1])
 
 
+class TestPermanentAuthFailure:
+    """A 401 is permanent. Retrying it, per batch, buries the one useful line.
+
+    Regression guard for a real run: a placeholder key produced 15 batches x 3
+    retries = 45 doomed calls before the cause was visible.
+    """
+
+    class Unauthorized(Exception):
+        status_code = 401
+
+        def __str__(self):
+            return "Error code: 401 - {'type': 'authentication_error'}"
+
+    def test_aborts_immediately_without_retrying(self):
+        client = StubClient(error=self.Unauthorized())
+        classify.classify_items([item("a")], PROFILE, client=client, now=NOW,
+                                log=lambda *a: None)
+        assert len(client.calls) == 1, "a 401 must not be retried"
+
+    def test_does_not_attempt_remaining_batches(self, monkeypatch):
+        monkeypatch.setattr(classify, "BATCH_SIZE", 1)
+        items = [item(str(n)) for n in range(10)]
+        client = StubClient(error=self.Unauthorized())
+
+        result = classify.classify_items(items, PROFILE, client=client, now=NOW,
+                                         log=lambda *a: None)
+
+        assert len(client.calls) == 1, "must stop after the first auth failure"
+        assert result["available"] is False
+        assert result["reason"] == "invalid api key"
+        assert result["failed"] == 10
+
+    def test_reports_the_placeholder_hint(self):
+        lines = []
+        classify.classify_items([item("a")], PROFILE, client=StubClient(error=self.Unauthorized()),
+                                now=NOW, log=lines.append)
+        assert any("sk-ant-..." in line for line in lines)
+
+    def test_detects_auth_failure_from_message_when_no_status_code(self):
+        """Injected/mocked clients may not carry status_code."""
+        client = StubClient(error=RuntimeError("invalid x-api-key"))
+        classify.classify_items([item("a")], PROFILE, client=client, now=NOW,
+                                log=lambda *a: None)
+        assert len(client.calls) == 1
+
+    def test_transient_errors_are_still_retried(self):
+        """Rate limits and outages must keep the existing retry behaviour."""
+        client = StubClient(error=RuntimeError("529 overloaded"))
+        classify.classify_items([item("a")], PROFILE, client=client, now=NOW,
+                                log=lambda *a: None)
+        assert len(client.calls) == classify.MAX_RETRIES
+
+    def test_items_survive_an_auth_failure_unsorted(self):
+        items = [item("a"), item("b")]
+        classify.classify_items(items, PROFILE, client=StubClient(error=self.Unauthorized()),
+                                now=NOW, log=lambda *a: None)
+        assert all(classify.needs_classification(i) for i in items)
+
+
 class TestVerdictParsing:
     def test_tolerates_a_markdown_fence(self):
         client = StubClient("```json\n" + verdict_json(["a"]) + "\n```")

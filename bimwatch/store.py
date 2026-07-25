@@ -79,11 +79,21 @@ def ingest(archive: list[dict], incoming: list[dict], *, now: datetime | None = 
     """
     now = now or datetime.now(timezone.utc)
     by_id = {item["id"]: item for item in archive if item.get("id")}
+    cutoff = now - timedelta(days=MAX_AGE_DAYS)
 
-    added, updated = 0, 0
+    added, updated, expired = 0, 0, 0
     for raw in incoming:
         url = raw.get("url", "")
         if not url:
+            continue
+
+        # Skip what prune() would delete moments later. Without this, feeds carrying
+        # deep back-catalogues (AEC Magazine ships 200 entries, Blogspot 25) re-add
+        # the same expired items every run, and "added" reports a steady stream of
+        # new items while the archive size never moves -- a number that reads as
+        # activity but means churn.
+        if not _within(raw, cutoff):
+            expired += 1
             continue
         iid = item_id(url)
         existing = by_id.get(iid)
@@ -111,7 +121,8 @@ def ingest(archive: list[dict], incoming: list[dict], *, now: datetime | None = 
             changed = True
         updated += changed
 
-    return {"added": added, "updated": updated, "total": len(archive)}
+    return {"added": added, "updated": updated, "expired": expired,
+            "total": len(archive)}
 
 
 def prune(archive: list[dict], *, now: datetime | None = None) -> list[dict]:

@@ -99,6 +99,41 @@ class TestIngest:
         store.ingest(archive, [item("https://e.com/a", summary="teaser")], now=NOW)
         assert archive[0]["summary"] == "full text"
 
+    def test_items_past_retention_are_not_ingested(self):
+        """Otherwise deep back-catalogues are re-added and re-pruned every run,
+        and 'added' reports churn as though it were activity."""
+        old = (NOW - timedelta(days=store.MAX_AGE_DAYS + 30)).isoformat().replace("+00:00", "Z")
+        archive = []
+
+        result = store.ingest(
+            archive,
+            [item("https://e.com/old", published=old), item("https://e.com/new")],
+            now=NOW,
+        )
+
+        assert result["added"] == 1
+        assert result["expired"] == 1
+        assert [i["url"] for i in archive] == ["https://e.com/new"]
+
+    def test_repeated_runs_over_a_stale_feed_converge_to_zero_new(self):
+        """The observed symptom: 'new 24' on every run while the archive never grew."""
+        old = (NOW - timedelta(days=store.MAX_AGE_DAYS + 30)).isoformat().replace("+00:00", "Z")
+        feed = [item("https://e.com/old", published=old), item("https://e.com/fresh")]
+        archive = []
+
+        first = store.ingest(archive, feed, now=NOW)
+        archive = store.prune(archive, now=NOW)
+        second = store.ingest(archive, feed, now=NOW)
+
+        assert first["added"] == 1
+        assert second["added"] == 0, "a second identical run must add nothing"
+
+    def test_undated_items_are_still_ingested(self):
+        """Unknown date is not the same as known-old."""
+        archive = []
+        result = store.ingest(archive, [item("https://e.com/x", published=None)], now=NOW)
+        assert result["added"] == 1
+
     def test_items_without_url_are_dropped(self):
         archive = []
         result = store.ingest(archive, [item("")], now=NOW)
