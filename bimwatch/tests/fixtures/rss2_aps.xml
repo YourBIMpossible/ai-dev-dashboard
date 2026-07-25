@@ -1,0 +1,361 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xml:base="https://aps.autodesk.com/">
+  <channel>
+    <title>Autodesk Platform Services</title>
+    <link>https://aps.autodesk.com/</link>
+    <description />
+    <language>en</language>
+    
+    <item>
+  <title>The DevCon MCP Workshop Now Speaks .NET</title>
+  <link>https://aps.autodesk.com/blog/devcon-mcp-workshop-now-speaks-net</link>
+  <description>&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;The DevCon MCP Workshop Now Speaks .NET&lt;/span&gt;
+&lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span&gt;sajith.subrama…&lt;/span&gt;&lt;/span&gt;
+
+&lt;div class="node__date"&gt;
+  &lt;p class="dhig-typography-eyebrow dhig-mt-0"&gt;22 Jul 2026&lt;/p&gt;
+&lt;/div&gt;
+
+      &lt;div class="field field--name-field-author field--type-entity-reference field--label-hidden field__items"&gt;
+              &lt;div class="field__item"&gt;
+
+&lt;article class="node node__author view-mode__list"&gt;
+  &lt;div class="node__content"&gt;
+    
+            &lt;div class="field field--name-field-primary-image field--type-image field--label-hidden field__item"&gt;  &lt;img loading="lazy" src="https://aps.autodesk.com/sites/default/files/styles/author/public/2026-05/headshot_light_blue_2.png?itok=Hybuld4K" width="200" height="200" alt class="image-style-author"&gt;
+
+
+&lt;/div&gt;
+      
+    &lt;a href="https://aps.autodesk.com/author/sajith-subramanian"&gt;Sajith Subramanian&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+&lt;/div&gt;
+              &lt;div class="field__item"&gt;
+
+&lt;article class="node node__author view-mode__list"&gt;
+  &lt;div class="node__content"&gt;
+    
+            &lt;div class="field field--name-field-primary-image field--type-image field--label-hidden field__item"&gt;  &lt;img loading="lazy" src="https://aps.autodesk.com/sites/default/files/styles/author/public/2026-05/poyraz1_0.jpg?itok=cY3GHCih" width="200" height="200" alt class="image-style-author"&gt;
+
+
+&lt;/div&gt;
+      
+    &lt;a href="https://aps.autodesk.com/author/poyraz-yildirim"&gt;Poyraz Yildirim&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;div class="block-share"&gt;
+  &lt;p&gt;Share&lt;/p&gt;
+  &lt;div class="a2a_kit a2a_kit_size_30 addtoany_list" data-a2a-url="https://aps.autodesk.com/blog/devcon-mcp-workshop-now-speaks-net" data-a2a-title="The DevCon MCP Workshop Now Speaks .NET"&gt;&lt;a class="a2a_button_linkedin"&gt;&lt;/a&gt;&lt;a class="a2a_button_facebook"&gt;&lt;/a&gt;&lt;a class="a2a_button_twitter"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+
+            &lt;div class="field field--name-field-primary-image field--type-image field--label-hidden field__item"&gt;  &lt;img loading="lazy" src="https://aps.autodesk.com/sites/default/files/2026-07/hero-dotnet.png" width="1200" height="630" alt&gt;
+
+&lt;/div&gt;
+      
+            &lt;div class="clearfix text-formatted field field--name-field-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;The hands-on&amp;nbsp;&lt;strong&gt;Model Context Protocol (MCP) workshop&lt;/strong&gt;&amp;nbsp;from &lt;strong&gt;DevCon 2026&lt;/strong&gt; now ships with a complete&amp;nbsp;&lt;strong&gt;C# / .NET track&lt;/strong&gt;, sitting side by side with the original Node.js content. If you build on .NET, you can now work through the entire workshop end-to-end without leaving your language of choice — the code, the tooling, and the docs are all there.&lt;/p&gt;
+&lt;h3&gt;What is the MCP Workshop?&lt;/h3&gt;
+&lt;p&gt;The workshop is a guided, seven-step journey that takes you from a bare MCP server all the way to a production-ready agent grounded in real Autodesk Platform Services (APS) APIs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Build an MCP server and connect it to VS Code and GitHub Copilot.&lt;/li&gt;
+&lt;li&gt;Extend it with external tools — a filesystem tool and a live weather API.&lt;/li&gt;
+&lt;li&gt;Connect to the Autodesk Platform Services (APS)&amp;nbsp;API using 2-legged OAuth to list and create OSS buckets.&lt;/li&gt;
+&lt;li&gt;Add 3-legged OAuth so your agent can call APS APIs on behalf of a signed-in user.&lt;/li&gt;
+&lt;li&gt;Build your own MCP client and wire in an LLM to create a fully autonomous agent.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Until now, every step was written for Node.js. With this release, every step is also written for .NET.&lt;/p&gt;
+&lt;h3&gt;What's in the .NET Track?&lt;/h3&gt;
+&lt;p&gt;The .NET track is purely additive — nothing in the existing Node.js experience changed. What's new:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Language-tabbed docs.&lt;/strong&gt; Every chapter now has switchable &lt;strong&gt;Node.js&amp;nbsp;&lt;/strong&gt;and &lt;strong&gt;.NET&amp;nbsp;&lt;/strong&gt;code tabs, so you can follow whichever runtime you prefer with a single click.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Seven .NET code snapshots.&amp;nbsp;&lt;/strong&gt;A complete `&lt;em&gt;-dotnet&lt;/em&gt;` code state for each stage of the workshop, from the first `&lt;em&gt;add&lt;/em&gt;` and `&lt;em&gt;greet&lt;/em&gt;` tools to the full APS-connected agent — so you can jump in at any step.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Modern .NET foundations.&amp;nbsp;&lt;/strong&gt;The server is built on &lt;strong&gt;ASP.NET Core&lt;/strong&gt;&amp;nbsp;and the official `&lt;a href="https://www.nuget.org/packages/ModelContextProtocol.AspNetCore"&gt;&lt;em&gt;ModelContextProtocol.AspNetCore&lt;/em&gt;&lt;/a&gt;`&amp;nbsp;SDK, targeting &lt;strong&gt;.NET 10&lt;/strong&gt;, with tools declared through clean `&lt;em&gt;McpServerTool&lt;/em&gt;` attributes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Full APS integration in C#.&amp;nbsp;&lt;/strong&gt;2-legged and 3-legged OAuth, OSS bucket operations, a custom MCP client, and an interactive agent with an AEC-focused system prompt — all in idiomatic C#.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Where to Find It&lt;/h3&gt;
+&lt;p&gt;The complete source code is available on GitHub:&amp;nbsp;&lt;a href="https://github.com/autodesk-platform-services/mcp-devcon2026"&gt;autodesk-platform-services/mcp-devcon2026&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Whether you're a longtime .NET developer or just curious how MCP fits into the C# world, there's never been a better time to build your first agent on Autodesk Platform Services.&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-categories field--type-entity-reference field--label-hidden field__items"&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/topics/autodesk-devcon" hreflang="en"&gt;Autodesk DevCon&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/topics/code-samples" hreflang="en"&gt;Code Samples&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/topics/c" hreflang="en"&gt;C#&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  </description>
+  <pubDate>Wed, 22 Jul 2026 05:49:22 +0000</pubDate>
+    <dc:creator>sajith.subramanian@autodesk.com</dc:creator>
+    <guid isPermaLink="false">4022 at https://aps.autodesk.com</guid>
+    </item>
+<item>
+  <title>Forma Takeoff API Classification and Sheet Reference Migration/Deprecation Announcement</title>
+  <link>https://aps.autodesk.com/blog/forma-takeoff-api-classification-and-sheet-reference-migrationdeprecation-announcement</link>
+  <description>&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;Forma Takeoff API Classification and Sheet Reference Migration/Deprecation Announcement&lt;/span&gt;
+&lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span&gt;zhong.wu@autod…&lt;/span&gt;&lt;/span&gt;
+
+&lt;div class="node__date"&gt;
+  &lt;p class="dhig-typography-eyebrow dhig-mt-0"&gt;23 Jul 2026&lt;/p&gt;
+&lt;/div&gt;
+
+      &lt;div class="field field--name-field-author field--type-entity-reference field--label-hidden field__items"&gt;
+              &lt;div class="field__item"&gt;
+
+&lt;article class="node node__author view-mode__list"&gt;
+  &lt;div class="node__content"&gt;
+    
+            &lt;div class="field field--name-field-primary-image field--type-image field--label-hidden field__item"&gt;  &lt;img loading="lazy" src="https://aps.autodesk.com/sites/default/files/styles/author/public/2017-10/536720470.jpg?itok=m5Glg3SY" width="200" height="200" alt class="image-style-author"&gt;
+
+
+&lt;/div&gt;
+      
+    &lt;a href="https://aps.autodesk.com/author/zhong-wu"&gt;Zhong Wu&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+&lt;/div&gt;
+              &lt;div class="field__item"&gt;
+
+&lt;article class="node node__author view-mode__list"&gt;
+  &lt;div class="node__content"&gt;
+    
+            &lt;div class="field field--name-field-primary-image field--type-image field--label-hidden field__item"&gt;  &lt;img loading="lazy" src="https://aps.autodesk.com/sites/default/files/styles/author/public/2026-07/robert.png?itok=pv2NE1ig" width="200" height="200" alt class="image-style-author"&gt;
+
+
+&lt;/div&gt;
+      
+    &lt;a href="https://aps.autodesk.com/author/robert-morgan"&gt;Robert Morgan&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;div class="block-share"&gt;
+  &lt;p&gt;Share&lt;/p&gt;
+  &lt;div class="a2a_kit a2a_kit_size_30 addtoany_list" data-a2a-url="https://aps.autodesk.com/blog/forma-takeoff-api-classification-and-sheet-reference-migrationdeprecation-announcement" data-a2a-title="Forma Takeoff API Classification and Sheet Reference Migration/Deprecation Announcement"&gt;&lt;a class="a2a_button_linkedin"&gt;&lt;/a&gt;&lt;a class="a2a_button_facebook"&gt;&lt;/a&gt;&lt;a class="a2a_button_twitter"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+
+            &lt;div class="field field--name-field-primary-image field--type-image field--label-hidden field__item"&gt;  &lt;img loading="lazy" src="https://aps.autodesk.com/sites/default/files/2026-07/ChatGPT%20Image%20Jul%2021%2C%202026%2C%2004_30_18%20PM.png" width="1456" height="971" alt="Forma Takeoff API Classification and Sheet Reference Migration/Deprecation Announcement" title="Forma Takeoff API Classification and Sheet Reference Migration/Deprecation Announcement"&gt;
+
+&lt;/div&gt;
+      
+            &lt;div class="clearfix text-formatted field field--name-field-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;blockquote data-end="631" data-start="294"&gt;&lt;h2 data-end="321" data-start="296"&gt;&lt;strong data-renderer-mark="true"&gt;Safe Harbor Statement&lt;/strong&gt;:&lt;/h2&gt;
+&lt;p data-end="631" data-start="326"&gt;The features and timelines described below are forward-looking and subject to change. This notice is provided for planning purposes only and is not a commitment, promise, or legal obligation to deliver any material, code, or functionality. Do not rely on this information when making purchasing decisions.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr data-end="1856" data-start="1853"&gt;
+&lt;p data-end="1868" data-section-id="1evq9p" data-start="1858"&gt;Autodesk continues to evolve the Preconstruction platform and its APIs. As part of this work, Takeoff is transitioning classification management to the &lt;strong data-end="818" data-start="785"&gt;Forma Classifications Service&lt;/strong&gt; and updating how classification and sheet reference data are exposed through the Takeoff API.&lt;/p&gt;
+&lt;p data-end="1114" data-start="914"&gt;Autodesk will begin migrating projects soon. As each project is migrated, its existing Takeoff classification systems will be recreated in the Forma Classifications Service, and the Takeoff project will automatically reference the new classification data.&lt;/p&gt;
+&lt;hr data-end="1856" data-start="1853"&gt;
+&lt;h2 data-end="1868" data-section-id="1evq9p" data-start="1858"&gt;What's Changing&lt;/h2&gt;
+&lt;p data-end="1194" data-start="1136"&gt;The migration introduces the following high-level changes:&lt;/p&gt;
+&lt;ul data-end="1638" data-start="1196"&gt;
+&lt;li data-end="1309" data-section-id="16daqy1" data-start="1196"&gt;Takeoff-specific Classification Systems endpoints are being deprecated in favor of the &lt;strong data-end="1308" data-start="1285"&gt;Classifications API&lt;/strong&gt;.&lt;/li&gt;
+&lt;li data-end="1426" data-section-id="y8hwmb" data-start="1310"&gt;Takeoff API responses are being updated to reference classifications managed by the Forma Classifications Service.&lt;/li&gt;
+&lt;li data-end="1520" data-section-id="1fwzywo" data-start="1427"&gt;New APIs are available for managing classification structures assigned to Takeoff projects.&lt;/li&gt;
+&lt;li data-end="1638" data-section-id="1cfq86p" data-start="1521"&gt;2D sheet references within the Takeoff API are moving from Sheets identifiers to Data Management file version URNs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p data-end="1851" data-start="1640"&gt;For complete technical details, including endpoint changes, payload updates, request/response examples, and migration guidance, refer to the &lt;a href="https://aps.autodesk.com/en/docs/acc/v1/overview/migration-guides/takeoff-classification-migration/"&gt;&lt;strong data-end="1812" data-start="1781"&gt;Takeoff API Migration Guide&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p data-end="1851" data-start="1640"&gt;&amp;nbsp;&lt;/p&gt;
+&lt;hr data-end="1856" data-start="1853"&gt;
+&lt;h2 data-end="1868" data-section-id="1evq9p" data-start="1858"&gt;Timeline&lt;/h2&gt;
+&lt;table data-end="2353" data-start="1870"&gt;
+&lt;thead data-end="1890" data-start="1870"&gt;
+&lt;tr data-end="1890" data-start="1870"&gt;
+&lt;th class="text-align-left" data-col-size="sm" data-end="1877" data-start="1870" style="width: 189px;"&gt;Date&lt;/th&gt;
+&lt;th class="text-align-left" data-col-size="xl" data-end="1890" data-start="1877" style="width: 931px;"&gt;Milestone&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody data-end="2353" data-start="1913"&gt;
+&lt;tr data-end="2133" data-start="1913"&gt;
+&lt;td data-col-size="sm" data-end="1932" data-start="1913" style="width: 189px;"&gt;&lt;strong data-end="1931" data-start="1915"&gt;July 22, 2026&lt;/strong&gt;&lt;/td&gt;
+&lt;td data-col-size="xl" data-end="2133" data-start="1932" style="width: 931px;"&gt;
+&lt;ul&gt;
+&lt;li&gt;Updated Takeoff API and Forma Classifications API are released.&lt;/li&gt;
+&lt;li&gt;Updated Takeoff API documentation and Migration Guide are published.&lt;/li&gt;
+&lt;li&gt;The deprecation process begins for the legacy classification endpoints and fields. They are now deprecated and will be removed after Jan 29, 2027.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr data-end="2192" data-start="2134"&gt;
+&lt;td data-col-size="sm" data-end="2152" data-start="2134" style="width: 189px;"&gt;&lt;strong data-end="2151" data-start="2136"&gt;Sep&amp;nbsp;1, 2026&lt;/strong&gt;&lt;/td&gt;
+&lt;td data-col-size="xl" data-end="2192" data-start="2152" style="width: 931px;"&gt;
+&lt;ul&gt;
+&lt;li&gt;Project-by-project migration begins.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr data-end="2353" data-start="2193"&gt;
+&lt;td data-col-size="sm" data-end="2212" data-start="2193" style="width: 189px;"&gt;&lt;strong data-end="2211" data-start="2195"&gt;Jan 29, 2027&lt;/strong&gt;&lt;/td&gt;
+&lt;td data-col-size="xl" data-end="2353" data-start="2212" style="width: 931px;"&gt;
+&lt;ul&gt;
+&lt;li&gt;All projects should be migrated.&lt;/li&gt;
+&lt;li&gt;Legacy classification fields (&lt;em&gt;classificationCodeOne&lt;/em&gt; / &lt;em&gt;classificationCodeTwo&lt;/em&gt;) and deprecated classification functionality are removed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr data-end="2358" data-start="2355"&gt;
+&lt;h2 data-end="2379" data-section-id="1xpetrz" data-start="2360"&gt;Project Migration&lt;/h2&gt;
+&lt;p data-end="2431" data-start="2381"&gt;Migration is performed &lt;strong data-end="2430" data-start="2404"&gt;on a per-project basis&lt;/strong&gt;.&lt;/p&gt;
+&lt;p data-end="2642" data-start="2433"&gt;During the rollout period, some projects may already use the new behavior while others continue using the legacy format. Integrations should support both formats until all of their projects have been migrated.&lt;/p&gt;
+&lt;p data-end="2763" data-start="2644"&gt;Detailed migration behavior is documented in the &lt;a href="https://aps.autodesk.com/en/docs/acc/v1/overview/migration-guides/takeoff-classification-migration/"&gt;&lt;strong data-end="2724" data-start="2693"&gt;Takeoff API Migration Guide&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;hr data-end="2768" data-start="2765"&gt;
+&lt;h2 data-end="2790" data-section-id="4lccdp" data-start="2770"&gt;What You Should Do&lt;/h2&gt;
+&lt;p data-end="2856" data-start="2792"&gt;If your application integrates with the Takeoff API, you should:&lt;/p&gt;
+&lt;ul data-end="3286" data-start="2858"&gt;
+&lt;li data-end="2990" data-section-id="17z9kh6" data-start="2858"&gt;Review the &lt;strong data-end="2902" data-start="2871"&gt;Takeoff API Migration Guide&lt;/strong&gt; for the complete list of API and payload changes.&lt;/li&gt;
+&lt;li data-end="3081" data-section-id="1topbtl" data-start="2991"&gt;Request a test project by emailing &lt;strong&gt;&lt;a href="mailto:takeoff.migration.support@autodesk.com"&gt;takeoff.migration.support@autodesk.com&lt;/a&gt;&lt;/strong&gt; so you can validate your integration before the production migration.&lt;/li&gt;
+&lt;li data-end="3179" data-section-id="18s0p8" data-start="3082"&gt;Update your integration to support both legacy and migrated projects during the rollout period.&lt;/li&gt;
+&lt;li data-end="3286" data-section-id="gncodx" data-start="3180"&gt;Complete your migration before &lt;strong data-end="3234" data-start="3213"&gt;January 29, 2027&lt;/strong&gt;, when the deprecated functionality will be removed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For details, please refer&amp;nbsp;&lt;a href="https://aps.autodesk.com/en/docs/acc/v1/overview/migration-guides/takeoff-classification-migration/"&gt;&lt;strong data-end="2724" data-start="2693"&gt;Takeoff API Migration Guide&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;hr data-end="3291" data-start="3288"&gt;
+&lt;h2 data-end="3311" data-section-id="x49zi9" data-start="3293"&gt;Who Is Affected?&lt;/h2&gt;
+&lt;p data-end="3386" data-start="3313"&gt;You will need to update your integration if it uses any of the following:&lt;/p&gt;
+&lt;ul data-end="3570" data-start="3388"&gt;
+&lt;li data-end="3422" data-section-id="18s1zw8" data-start="3388"&gt;Classification Systems endpoints&lt;/li&gt;
+&lt;li data-end="3472" data-section-id="15ff3gr" data-start="3423"&gt;Classification data returned by the Takeoff API&lt;/li&gt;
+&lt;li data-end="3525" data-section-id="gg2hlp" data-start="3473"&gt;&lt;strong&gt;classificationCodeOne&lt;/strong&gt; or &lt;strong&gt;classificationCodeTwo&lt;/strong&gt;&lt;/li&gt;
+&lt;li data-end="3570" data-section-id="3i1753" data-start="3526"&gt;&lt;strong&gt;contentView.version&lt;/strong&gt; for 2D takeoff items&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p data-end="3657" data-start="3572"&gt;If your integration does not use these capabilities, no action is required.&lt;/p&gt;
+&lt;p data-end="3805" data-start="3659"&gt;See the &lt;a href="https://aps.autodesk.com/en/docs/acc/v1/overview/migration-guides/takeoff-classification-migration/"&gt;&lt;strong data-end="3698" data-start="3667"&gt;Takeoff API Migration Guide&lt;/strong&gt;&lt;/a&gt; for the complete list of affected APIs and required migration steps.&lt;/p&gt;
+&lt;hr data-end="3810" data-start="3807"&gt;
+&lt;h2 data-end="3821" data-section-id="1k191l5" data-start="3812"&gt;Support&lt;/h2&gt;
+&lt;p data-end="3958" data-start="3823"&gt;If you have questions about the migration or would like access to a test environment, please email&amp;nbsp;&lt;a aria-haspopup="menu" href="mailto:takeoff.migration.support@autodesk.com" rel="noopener noreferrer" target="_blank"&gt;takeoff.migration.support@autodesk.com&lt;/a&gt;&amp;nbsp;to get direct support. Our team is happy to help you plan and validate your migration.&lt;/p&gt;
+&lt;p data-end="4080" data-start="4017"&gt;&amp;nbsp;&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-categories field--type-entity-reference field--label-hidden field__items"&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/topics/announcements" hreflang="en"&gt;Announcements&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/apis-and-services/forma-apis" hreflang="en"&gt;Forma APIs&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/autodesk-products/autodesk-forma-takeoff" hreflang="en"&gt;Autodesk Forma Takeoff&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  </description>
+  <pubDate>Tue, 21 Jul 2026 19:53:10 +0000</pubDate>
+    <dc:creator>zhong.wu@autodesk.com</dc:creator>
+    <guid isPermaLink="false">4021 at https://aps.autodesk.com</guid>
+    </item>
+<item>
+  <title>From Two Days to Two Minutes: How Khansaheb Turned Model Data into Commercial Intelligence</title>
+  <link>https://aps.autodesk.com/blog/two-days-two-minutes-how-khansaheb-turned-model-data-commercial-intelligence</link>
+  <description>&lt;span class="field field--name-title field--type-string field--label-hidden"&gt;From Two Days to Two Minutes: How Khansaheb Turned Model Data into Commercial Intelligence&lt;/span&gt;
+&lt;span class="field field--name-uid field--type-entity-reference field--label-hidden"&gt;&lt;span&gt;Anna Baranova&lt;/span&gt;&lt;/span&gt;
+
+&lt;div class="node__date"&gt;
+  &lt;p class="dhig-typography-eyebrow dhig-mt-0"&gt;24 Jul 2026&lt;/p&gt;
+&lt;/div&gt;
+
+      &lt;div class="field field--name-field-author field--type-entity-reference field--label-hidden field__items"&gt;
+              &lt;div class="field__item"&gt;
+
+&lt;article class="node node__author view-mode__list"&gt;
+  &lt;div class="node__content"&gt;
+    
+            &lt;div class="field field--name-field-primary-image field--type-image field--label-hidden field__item"&gt;  &lt;img loading="lazy" src="https://aps.autodesk.com/sites/default/files/styles/author/public/2026-07/1755246465903.png?itok=CMefj3fY" width="200" height="200" alt class="image-style-author"&gt;
+
+
+&lt;/div&gt;
+      
+    &lt;a href="https://aps.autodesk.com/author/anna-baranova"&gt;Anna Baranova&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;div class="block-share"&gt;
+  &lt;p&gt;Share&lt;/p&gt;
+  &lt;div class="a2a_kit a2a_kit_size_30 addtoany_list" data-a2a-url="https://aps.autodesk.com/blog/two-days-two-minutes-how-khansaheb-turned-model-data-commercial-intelligence" data-a2a-title="From Two Days to Two Minutes: How Khansaheb Turned Model Data into Commercial Intelligence"&gt;&lt;a class="a2a_button_linkedin"&gt;&lt;/a&gt;&lt;a class="a2a_button_facebook"&gt;&lt;/a&gt;&lt;a class="a2a_button_twitter"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+
+            &lt;div class="field field--name-field-primary-image field--type-image field--label-hidden field__item"&gt;  &lt;img loading="lazy" src="https://aps.autodesk.com/sites/default/files/2026-07/Data%20Exchange%20sesssions%20at%20AU_0.png" width="1456" height="819" alt="Header" title="Visit Data Exchange sessions at Autodesk University"&gt;
+
+&lt;/div&gt;
+      
+            &lt;div class="clearfix text-formatted field field--name-field-body field--type-text-with-summary field--label-hidden field__item"&gt;&lt;p&gt;On a complex construction project, waiting on information is rarely just a small delay—often it can slow teams down, push decisions out, and break the flow of work.&lt;/p&gt;
+&lt;p&gt;That was the reality at Khansaheb Civil Engineering. Its commercial teams depended on accurate, up-to-date quantities for estimating, cost control, monthly measurement, and resource planning. But much of that information was buried inside BIM models. Accessing it meant submitting requests to the BIM team, waiting for manual exports, and often working with data that was already out of date by the time it arrived.&lt;/p&gt;
+&lt;p&gt;The existing workflow had created a bottleneck. BIM specialists were constantly pulled away from their core work, while commercial teams often had to wait longer than they should for the information they needed.&lt;/p&gt;
+&lt;p&gt;Khansaheb needed a way to publish structured model data directly into the business tools its commercial teams already used, rather than introducing another manual export workflow.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;Autodesk Data Exchange provided that connection.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Each week, discipline-specific models are brought together and structured model data is published automatically to Microsoft Power BI. Commercial teams can open a dashboard they’re already comfortable with and explore up-to-date quantities—doors, slabs, blockwork, structural elements—without opening Revit or waiting for the BIM team to prepare another export.&lt;/p&gt;
+&lt;p&gt;The impact on speed has been hard to ignore. According to Khansaheb, tasks like sheet production, which used to take up to two days, now take less than two minutes—a reduction of more than &lt;strong&gt;99%&lt;/strong&gt;. Coordination issues that previously took &lt;strong&gt;over an hour&lt;/strong&gt; can now be resolved in &lt;strong&gt;under ten minutes&lt;/strong&gt;. Complex model-data calculations that once required days of manual work can be completed in less than a minute.&lt;/p&gt;
+&lt;p&gt;But the benefits go beyond faster reporting.&lt;/p&gt;
+&lt;p&gt;Giving commercial teams direct access to current model data changes how information moves through the project. Decisions can be made sooner, questions can be answered without waiting for a specialist, and errors or missing information are more likely to be spotted early. As more teams use the data, they also help improve its quality.&lt;/p&gt;
+&lt;p&gt;Khansaheb’s story is a strong example of what Data Exchange can make possible. It puts useful project information in the hands of the people who need it, without requiring every team to use the same application or workflow.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.autodesk.com/customer-stories/khansaheb-commercial-intelligence-story" title="Khansaheb turns connected data into commercial intelligence"&gt;Learn more about this case in the full Khansaheb success story&lt;/a&gt;—and continue the conversation with Khansaheb and the Data Exchange team at Autodesk University.&lt;/p&gt;
+&lt;h2&gt;Continue the Conversation at Autodesk University&lt;/h2&gt;
+&lt;p&gt;Khansaheb will share more about its approach in the AU session:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;From Chaos to Clarity: The Data Exchange Strategy Behind a $1.3B Dubai Harbour Icon&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The session will explore the challenges behind the workflow, the decisions that shaped Khansaheb’s approach, and the role connected model data is playing in faster, more informed commercial decision-making.&lt;/p&gt;
+&lt;p&gt;It is one of several Data Exchange sessions at AU for teams interested in interoperability, connected workflows, and practical ways to make design and construction data more useful.&lt;/p&gt;
+&lt;h3&gt;Autodesk team-led Data Exchange sessions&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Session&lt;/th&gt;
+&lt;th&gt;Date and time&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1774283278736001BLAE"&gt;From Data Exchange to Spatial Computing: Building Immersive Autodesk Platform Services Experiences&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Tuesday, September 15, 2026 · 12:30–1:00 PM&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1775553043537001lzFw"&gt;Breaking Data Silos: Connecting Design and Construction Insights with Power BI&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Wednesday, September 16, 2026 · 4:30 AM–5:30 PM&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1775588613819001SFLV"&gt;APS GraphQL in Production: AEC &amp;amp; MFG Patterns from Analytics to AI Agents&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Thursday, September 17, 2026 · 11:30 AM–12:00 PM&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1775584081932001q7BF"&gt;Data Exchange in the Real World: Customer Stories, Lessons Learned, and What’s Next&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Thursday, September 17, 2026 · 12:30–1:00 PM&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1775575943170001vIu3"&gt;openBIM and Interoperability Workflows at Autodesk: 2026 Edition&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Thursday, September 17, 2026 · 3:00–4:00 PM&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Customer-led&amp;nbsp;Data Exchange sessions&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Session&lt;/th&gt;
+&lt;th&gt;Date and time&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1773989460627001ya6c"&gt;Data-Centered Delivery at Scale: Selective IFC Exports from Autodesk Forma Using Autodesk Data Exchange — Ramboll&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Tuesday, September 15, 2026 · 12:30 PM–1:00 PM PDT&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1775478709685001kB5e"&gt;Breaking Down Silos: Modernizing AutoCAD–Inventor–Revit Interoperability with Data Exchange — EFCO&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Wednesday, September 16, 2026 · 11:30 AM–12:00 PM&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1775460773065001pQ6i"&gt;From Chaos to Clarity: The Data Exchange Strategy Behind a $1.3 Billion Dubai Harbour Icon — Khansaheb&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Wednesday, September, 16 2026 · 4:30 PM–5:30 PM&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="https://conferences.autodesk.com/flow/autodesk/au2026/sessioncatalog/page/inperson/session/1775593429105001UiXy"&gt;HKS Is Making Autodesk Data Exchanges Real at Stadium Scale — HKS&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Thursday, September 17, 2026 · 4:30 PM–5:30 PM&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;!-- notionvc: 144f8c7a-3248-4387-88e7-010505d09694 --&gt;&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-categories field--type-entity-reference field--label-hidden field__items"&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/apis-and-services/data-exchange-api" hreflang="en"&gt;Data Exchange API&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/autodesk-products/revit" hreflang="en"&gt;Revit&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field__item"&gt;&lt;a href="https://aps.autodesk.com/topics/power-bi" hreflang="en"&gt;Power BI&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  </description>
+  <pubDate>Mon, 20 Jul 2026 10:01:41 +0000</pubDate>
+    <dc:creator>Anna Baranova</dc:creator>
+    <guid isPermaLink="false">4018 at https://aps.autodesk.com</guid>
+    </item>
+</channel>
+</rss>

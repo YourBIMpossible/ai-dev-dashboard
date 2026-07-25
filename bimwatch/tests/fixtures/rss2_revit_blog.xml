@@ -1,0 +1,866 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://purl.org/rss/1.0/modules/syndication/" xmlns:ns3="http://purl.org/rss/1.0/modules/content/" version="2.0">
+
+<channel>
+	<title>AEC Tech Drop</title>
+	<ns0:link href="https://autodeskblog.wpengine.com/aec/feed/?redirected=1" rel="self" type="application/rss+xml" />
+	<link>https://autodeskblog.wpengine.com/aec/</link>
+	<description>News and notes about Autodesk's CAD, BIM, and cloud solutions.</description>
+	<lastBuildDate>Wed, 22 Jul 2026 21:14:50 +0000</lastBuildDate>
+	<language>en-US</language>
+	<ns1:updatePeriod>
+	hourly	</ns1:updatePeriod>
+	<ns1:updateFrequency>
+	1	</ns1:updateFrequency>
+	
+
+<image>
+	<url>https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/autodesk-favicon.svg</url>
+	<title>AEC Tech Drop</title>
+	<link>https://autodeskblog.wpengine.com/aec/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Build Once, Reuse Everywhere: Bringing Search Sets to Forma Design Collaboration</title>
+		<link>https://autodeskblog.wpengine.com/aec/2026/07/22/search-sets-forma-design-collaboration/</link>
+		
+		<dc:creator>Monserrat Elaskar</dc:creator>
+		<pubDate>Wed, 22 Jul 2026 21:10:26 +0000</pubDate>
+				<category>Architecture</category>
+		<category>Autodesk Forma</category>
+		<category>Forma Design Collaboration</category>
+		<category>Search Sets</category>
+		<guid isPermaLink="false">https://autodeskblog.wpengine.com/aec/?p=13080</guid>
+
+					<description>&lt;p&gt;Anyone who&amp;#160;coordinates&amp;#160;models knows the routine. You open a federated model and immediately need to focus on a specific slice of the project: ductwork on Levels 2–4, structural framing, a particular assembly code, or the systems involved in a coordination review. The coordination decisions matter. Getting to the right content shouldn&amp;#8217;t be the hard part. Yet [&amp;#8230;]&lt;/p&gt;
+&lt;p&gt;The post &lt;a href="https://autodeskblog.wpengine.com/aec/2026/07/22/search-sets-forma-design-collaboration/"&gt;Build Once, Reuse Everywhere: Bringing Search Sets to Forma Design Collaboration&lt;/a&gt; appeared first on &lt;a href="https://autodeskblog.wpengine.com/aec"&gt;AEC Tech Drop&lt;/a&gt;.&lt;/p&gt;
+</description>
+										<ns3:encoded>
+&lt;figure class="wp-block-image size-large"&gt;&lt;img fetchpriority="high" decoding="async" width="1024" height="546" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Search-Set-Feature-1024x546.png" alt="" class="wp-image-13081" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Search-Set-Feature-1024x546.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Search-Set-Feature-300x160.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Search-Set-Feature-768x410.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Search-Set-Feature-1536x819.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Search-Set-Feature.png 1717w" sizes="(max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;p&gt;Anyone who&amp;nbsp;coordinates&amp;nbsp;models knows the routine. You open a federated model and immediately need to focus on a specific slice of the project: ductwork on Levels 2–4, structural framing, a particular assembly code, or the systems involved in a coordination review.&lt;/p&gt;
+
+
+
+&lt;p&gt;The coordination decisions matter. Getting to the right content shouldn&amp;#8217;t be the hard part. Yet on many projects, teams spend valuable time rebuilding the same filters, recreating the same selections, and navigating the same model scope&amp;nbsp;over and over again&amp;nbsp;before the actual coordination work can begin.&lt;/p&gt;
+
+
+
+&lt;p&gt;As projects evolve and scale, the need for standardized coordination becomes increasingly important. Teams need easy access to these standards so they can efficiently manage, reference, and apply them throughout coordination workflows. Having reliable, accessible standards helps reduce errors, improve consistency, and gives teams confidence that they are working from a trusted source.&lt;/p&gt;
+
+
+
+&lt;p&gt;&lt;a href="https://help.autodesk.com/view/COORD/ENU/?guid=Model_Coord_Search_Sets" target="_blank" rel="noreferrer noopener"&gt;Search Sets&lt;/a&gt; in Autodesk Forma help teams define that logic once and reuse it wherever it&amp;#8217;s needed.&lt;/p&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-what-are-search-sets"&gt;What are Search Sets?&lt;/h2&gt;
+
+
+
+&lt;p&gt;At their core, Search Sets are reusable queries that identify model objects based on their properties and metadata.&lt;/p&gt;
+
+
+
+&lt;p&gt;The concept is familiar to many BIM professionals. Search Sets have long been a foundational workflow in coordination platforms because they solve a common challenge: finding the right group of elements inside increasingly complex models and reusing these groupings across different models and projects. Instead of manually selecting objects every time, a Search Set stores the criteria used to find them and can be reapplied whenever needed.&lt;/p&gt;
+
+
+
+&lt;p&gt;Search Sets work the same way.&lt;/p&gt;
+
+
+
+&lt;p&gt;They allow teams to create dynamic groups of model elements using properties, values, and logical operators. Rather than saving a static selection, they save the rules behind the selection. As models evolve, the Search Set continues to identify objects that match those criteria.&lt;/p&gt;
+
+
+
+&lt;p&gt;For example, a team might create Search Sets for:&lt;/p&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;All ductwork elements&lt;/li&gt;
+
+
+
+&lt;li&gt;Objects with a specific assembly code&lt;/li&gt;
+
+
+
+&lt;li&gt;Elements located on a particular level&lt;/li&gt;
+
+
+
+&lt;li&gt;Systems that follow a defined naming convention&lt;/li&gt;
+
+
+
+&lt;li&gt;Structural framing within a specific project zone&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;p&gt;As the Search Set is built, matching objects are highlighted directly in the model viewer, providing immediate visual feedback and helping users validate the query before saving it.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img decoding="async" width="1024" height="640" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Select-by-Search-Set-1024x640.png" alt="" class="wp-image-13084" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Select-by-Search-Set-1024x640.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Select-by-Search-Set-300x187.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Select-by-Search-Set-768x480.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Select-by-Search-Set-1536x960.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Select-by-Search-Set-2048x1280.png 2048w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Select-by-Search-Set-1092x684.png 1092w" sizes="(max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img decoding="async" width="1024" height="640" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Create-Search-Set-1024x640.png" alt="" class="wp-image-13083" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Create-Search-Set-1024x640.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Create-Search-Set-300x187.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Create-Search-Set-768x480.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Create-Search-Set-1536x960.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Create-Search-Set-2048x1280.png 2048w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Create-Search-Set-1092x684.png 1092w" sizes="(max-width: 1024px) 100vw, 1024px" /&gt;&lt;figcaption class="wp-element-caption"&gt;Search Set creation workflow with highlighted objects in the model viewer.&lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-where-search-sets-pay-off-in-real-coordination-work"&gt;Where Search Sets Pay Off in Real Coordination Work&lt;/h2&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-1-get-to-the-right-scope-faster"&gt;1. Get to the Right Scope Faster&lt;/h3&gt;
+
+
+
+&lt;p&gt;Most coordination sessions start with the same objective:&amp;nbsp;Isolate&amp;nbsp;the relevant part of the model so the team can focus on the discussion at hand.&lt;/p&gt;
+
+
+
+&lt;p&gt;Without Search Sets, that often means rebuilding filters or manually navigating model structures before every review.&lt;/p&gt;
+
+
+
+&lt;p&gt;With Search Sets, the scope is already defined.&lt;/p&gt;
+
+
+
+&lt;p&gt;Whether you&amp;#8217;re reviewing MEP systems against structure, preparing a weekly trade coordination meeting, or focusing on a specific floor, zone, or phase, a saved Search Set lets you move directly into coordination instead of spending time preparing for it.&lt;/p&gt;
+
+
+
+&lt;p&gt;This is especially valuable when:&lt;/p&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;Running recurring reviews by discipline&lt;/li&gt;
+
+
+
+&lt;li&gt;Reviewing by level, zone, or construction phase&lt;/li&gt;
+
+
+
+&lt;li&gt;Preparing consistent views for weekly coordination meetings&lt;/li&gt;
+
+
+
+&lt;li&gt;Aligning multiple coordinators on the same model scope&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;p&gt;Think of Search Sets as reusable coordination lenses. Once created, they can be applied whenever that scope needs to be revisited.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="640" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filter-by-search-set-1024x640.png" alt="" class="wp-image-13085" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filter-by-search-set-1024x640.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filter-by-search-set-300x187.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filter-by-search-set-768x480.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filter-by-search-set-1536x960.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filter-by-search-set-2048x1280.png 2048w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filter-by-search-set-1092x684.png 1092w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;figcaption class="wp-element-caption"&gt;Model Browser filtered using a Search Set.&lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-2-validate-scope-before-the-meeting-starts"&gt;2. Validate Scope Before the Meeting Starts&lt;/h3&gt;
+
+
+
+&lt;p&gt;One of the most common coordination questions is surprisingly simple:&lt;/p&gt;
+
+
+
+&lt;p&gt;&lt;strong&gt;&amp;#8220;Are we looking at the right things?&amp;#8221;&lt;/strong&gt;&lt;/p&gt;
+
+
+
+&lt;p&gt;Search Sets help answer that immediately.&lt;/p&gt;
+
+
+
+&lt;p&gt;When a Search Set is selected, all matching objects are highlighted in the viewer. Coordinators can quickly verify that the intended systems, levels, or assemblies are included—and, just as&amp;nbsp;importantly,&amp;nbsp;identify anything that shouldn&amp;#8217;t be there.&lt;/p&gt;
+
+
+
+&lt;p&gt;That visual validation step helps catch issues early, before the review begins&lt;/p&gt;
+
+
+
+&lt;p&gt;Teams can also combine multiple Search Sets to investigate related scopes together, such as:&lt;/p&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;Supply Air Duct + Fire Protection&lt;/li&gt;
+
+
+
+&lt;li&gt;Level 3 + Mechanical Room&lt;/li&gt;
+
+
+
+&lt;li&gt;Structural Steel + Architectural Ceiling System&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;p&gt;The result is a faster path from model navigation to meaningful coordination conversations.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="640" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filters-OT-and-Select-1024x640.png" alt="" class="wp-image-13087" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filters-OT-and-Select-1024x640.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filters-OT-and-Select-300x187.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filters-OT-and-Select-768x480.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filters-OT-and-Select-1536x960.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filters-OT-and-Select-2048x1280.png 2048w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Filters-OT-and-Select-1092x684.png 1092w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;figcaption class="wp-element-caption"&gt;Multiple Search Sets selected with combined highlight results.&lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-3-move-from-model-selection-to-model-intelligence"&gt;3. Move from Model Selection to Model Intelligence&lt;/h3&gt;
+
+
+
+&lt;p&gt;Coordination isn&amp;#8217;t only about what you see.&lt;/p&gt;
+
+
+
+&lt;p&gt;It&amp;#8217;s also about understanding what is in the model, how it is classified, and whether the data behind it supports downstream workflows.&lt;/p&gt;
+
+
+
+&lt;p&gt;Search Sets work alongside the Object Table, allowing teams to transition from visual selection to structured model data.&lt;/p&gt;
+
+
+
+&lt;p&gt;This makes it easier to:&lt;/p&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;Review object counts within a scope&lt;/li&gt;
+
+
+
+&lt;li&gt;Verify parameter consistency&lt;/li&gt;
+
+
+
+&lt;li&gt;Spot missing or incomplete properties&lt;/li&gt;
+
+
+
+&lt;li&gt;Check classification standards&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;p&gt;Validate naming conventions before clash grouping or issue assignment&lt;/p&gt;
+
+
+
+&lt;p&gt;Instead of searching through thousands—or millions—of model objects, teams can start with a Search Set and immediately focus on the information that matters.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="640" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/OT-and-Select-1024x640.png" alt="" class="wp-image-13088" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/OT-and-Select-1024x640.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/OT-and-Select-300x187.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/OT-and-Select-768x480.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/OT-and-Select-1536x960.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/OT-and-Select-2048x1280.png 2048w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/OT-and-Select-1092x684.png 1092w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;figcaption class="wp-element-caption"&gt;Search Set selected with results shown in Object Table.&lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-reuse-standards-across-teams-and-projects"&gt;Reuse Standards Across Teams and Projects&lt;/h2&gt;
+
+
+
+&lt;p&gt;Many organizations already have coordination standards.&lt;/p&gt;
+
+
+
+&lt;p&gt;The challenge is that those standards often live in spreadsheets, personal notes, templates, or simply in the experience of individual coordinators.&lt;/p&gt;
+
+
+
+&lt;p&gt;Search Sets provide a practical way to turn those unwritten rules into reusable project assets.&lt;/p&gt;
+
+
+
+&lt;p&gt;A shared library of Search Sets can help teams:&lt;/p&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;Use consistent definitions across project&lt;/li&gt;
+
+
+
+&lt;li&gt;Reduce variation between coordinators&lt;/li&gt;
+
+
+
+&lt;li&gt;Standardize recurring review workflows&lt;/li&gt;
+
+
+
+&lt;li&gt;Accelerate onboarding for new team members&lt;/li&gt;
+
+
+
+&lt;li&gt;Reuse proven coordination setups instead of rebuilding them&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;p&gt;Because Search Sets can be imported across projects, organizations can carry successful coordination practices from one project to the next rather than starting from a blank slate every time.&lt;/p&gt;
+
+
+
+&lt;p&gt;The result is not just&amp;nbsp;efficiency—it is consistency.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="640" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Import-Search-Sets-1024x640.png" alt="" class="wp-image-13089" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Import-Search-Sets-1024x640.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Import-Search-Sets-300x187.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Import-Search-Sets-768x480.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Import-Search-Sets-1536x960.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Import-Search-Sets-2048x1280.png 2048w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Import-Search-Sets-1092x684.png 1092w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;figcaption class="wp-element-caption"&gt;Search Set import dialog.&lt;/figcaption&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-getting-started-build-search-sets-that-last"&gt;Getting Started: Build Search Sets That Last&lt;/h2&gt;
+
+
+
+&lt;p&gt;The most valuable Search Sets are the ones teams continue using months later.&lt;/p&gt;
+
+
+
+&lt;p&gt;A few simple practices help make that happen:&lt;/p&gt;
+
+
+
+&lt;h4 class="wp-block-heading" id="h-start-with-stable-properties"&gt;Start with stable properties&lt;/h4&gt;
+
+
+
+&lt;p&gt;Build queries around properties that are consistently populated across authoring tools and disciplines, such as:&lt;/p&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;System&lt;/li&gt;
+
+
+
+&lt;li&gt;Category&lt;/li&gt;
+
+
+
+&lt;li&gt;Level&lt;/li&gt;
+
+
+
+&lt;li&gt;Discipline&lt;/li&gt;
+
+
+
+&lt;li&gt;Assembly code&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;p&gt;The more reliable the data source, the more reliable the Search Set.&lt;/p&gt;
+
+
+
+&lt;h4 class="wp-block-heading" id="h-name-them-for-the-workflow"&gt;Name them for the workflow&lt;/h4&gt;
+
+
+
+&lt;p&gt;Good names&amp;nbsp;communicate&amp;nbsp;intent.&lt;/p&gt;
+
+
+
+&lt;p&gt;&lt;strong&gt;MEP | Ductwork | Levels 2–4&lt;/strong&gt; tells a coordinator exactly when and why the Search Set exists.&lt;/p&gt;
+
+
+
+&lt;p&gt;&lt;strong&gt;Duct Query v3&lt;/strong&gt; does not.&lt;/p&gt;
+
+
+
+&lt;h4 class="wp-block-heading" id="h-validate-before-saving"&gt;Validate before saving&lt;/h4&gt;
+
+
+
+&lt;p&gt;Use highlighting to confirm the results match your expectations before adding the Search Set to your library.&lt;/p&gt;
+
+
+
+&lt;p&gt;A few seconds of validation can prevent weeks of confusion later.&lt;/p&gt;
+
+
+
+&lt;h4 class="wp-block-heading" id="h-build-a-library-not-a-collection"&gt;Build a library, not a collection&lt;/h4&gt;
+
+
+
+&lt;p&gt;The goal isn&amp;#8217;t to create hundreds of Search Sets.&lt;/p&gt;
+
+
+
+&lt;p&gt;The goal is to create a focused set of reusable coordination tools that teams can easily understand, maintain, and apply.&lt;/p&gt;
+
+
+
+&lt;p&gt;A concise library of high-value Search Sets often delivers more value than a long list no one uses.&lt;/p&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-the-bottom-line"&gt;The Bottom Line&lt;/h2&gt;
+
+
+
+&lt;p&gt;&lt;a href="https://help.autodesk.com/view/COORD/ENU/?guid=Model_Coord_Search_Sets" target="_blank" rel="noreferrer noopener"&gt;Search Sets&lt;/a&gt; may seem like a small feature, but they address a surprisingly common source of coordination friction: repeatedly finding the same model content.&lt;/p&gt;
+
+
+
+&lt;p&gt;By capturing selection logic once and reusing it across reviews, teams can spend less time preparing model views and more time resolving issues, validating design intent, and making coordination decisions.&lt;/p&gt;
+
+
+
+&lt;p&gt;Build the scope once.&lt;/p&gt;
+
+
+
+&lt;p&gt;Reuse it across views, reviews, meetings, and data workflows.&lt;/p&gt;
+
+
+
+&lt;p&gt;That&amp;#8217;s where Search Sets deliver their real value.&lt;/p&gt;
+
+
+
+&lt;div class="wp-block-media-text is-stacked-on-mobile is-vertically-aligned-top is-image-fill-element" style="grid-template-columns:33% auto"&gt;&lt;figure class="wp-block-media-text__media"&gt;&lt;img loading="lazy" decoding="async" width="588" height="418" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Forma-Design-Thumbnail.jpg" alt="" class="wp-image-13090 size-large" style="object-position:50% 50%" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Forma-Design-Thumbnail.jpg 588w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Forma-Design-Thumbnail-300x213.jpg 300w" sizes="auto, (max-width: 588px) 100vw, 588px" /&gt;&lt;/figure&gt;&lt;div class="wp-block-media-text__content"&gt;
+&lt;h2 class="wp-block-heading" id="h-forma-design-collaboration-connected-design-through-handover"&gt;Forma Design Collaboration: &lt;br&gt;Connected design through handover&lt;/h2&gt;
+
+
+
+&lt;div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex"&gt;&lt;?xml encoding="utf-8" ?&gt;&lt;div class="wp-block-button is-style-outline is-style-outline--1"&gt;&lt;a href="https://www.autodesk.com/products/forma-design-collaboration/overview" class="
+            MuiButtonBase-root MuiButton-root
+            wp-block-button__link wp-element-button
+            
+            
+            
+            MuiButton-outlined
+        "&gt;
+
+        &lt;span class="MuiButton-label"&gt;
+            
+            
+Start a free trial
+
+            
+        &lt;/span&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The post &lt;a href="https://autodeskblog.wpengine.com/aec/2026/07/22/search-sets-forma-design-collaboration/"&gt;Build Once, Reuse Everywhere: Bringing Search Sets to Forma Design Collaboration&lt;/a&gt; appeared first on &lt;a href="https://autodeskblog.wpengine.com/aec"&gt;AEC Tech Drop&lt;/a&gt;.&lt;/p&gt;
+</ns3:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>What’s New in Revit 2027.2: Faster, More Connected, and More Precise BIM Workflows</title>
+		<link>https://autodeskblog.wpengine.com/aec/2026/07/22/whats-new-in-revit-2027-2/</link>
+		
+		<dc:creator>Cesar Escalante</dc:creator>
+		<pubDate>Wed, 22 Jul 2026 14:00:00 +0000</pubDate>
+				<category>Architecture</category>
+		<category>Infrastructure</category>
+		<category>What’s New</category>
+		<category>Autodesk Assistant</category>
+		<category>Autodesk Forma</category>
+		<category>Featured-1up</category>
+		<category>Forma Connected Client</category>
+		<category>MEP</category>
+		<category>Revit 2027</category>
+		<category>Revit 2027.2</category>
+		<guid isPermaLink="false">https://autodeskblog.wpengine.com/aec/?p=13057</guid>
+
+					<description>&lt;p&gt;Revit 2027.2 continues the 2027 release with a set of features focused on connected, higher-performance, and more predictable BIM workflows. Practical improvements support everyday production, from opening large models and navigating accelerated views to documenting design intent, coordinating site context, evaluating outdoor comfort, detailing reinforcement, and sizing MEP systems. The release also expands the connection [&amp;#8230;]&lt;/p&gt;
+&lt;p&gt;The post &lt;a href="https://autodeskblog.wpengine.com/aec/2026/07/22/whats-new-in-revit-2027-2/"&gt;What’s New in Revit 2027.2: Faster, More Connected, and More Precise BIM Workflows&lt;/a&gt; appeared first on &lt;a href="https://autodeskblog.wpengine.com/aec"&gt;AEC Tech Drop&lt;/a&gt;.&lt;/p&gt;
+</description>
+										<ns3:encoded>
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="576" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Revit-2027.2-Feature-1024x576.jpg" alt="" class="wp-image-13060" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Revit-2027.2-Feature-1024x576.jpg 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Revit-2027.2-Feature-300x169.jpg 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Revit-2027.2-Feature-768x432.jpg 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Revit-2027.2-Feature-1536x864.jpg 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Revit-2027.2-Feature-2048x1152.jpg 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;p&gt;Revit 2027.2 continues the 2027 release with a set of features focused on connected, higher-performance, and more predictable BIM workflows. Practical improvements support everyday production, from opening large models and navigating accelerated views to documenting design intent, coordinating site context, evaluating outdoor comfort, detailing reinforcement, and sizing MEP systems. The release also expands the connection between Revit and Autodesk Forma, while new Tech Preview capabilities give teams an opportunity to evaluate emerging workflows and provide feedback.&lt;/p&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-core-enhancements"&gt;Core Enhancements&lt;/h2&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-autodesk-assistant"&gt;Autodesk Assistant&lt;/h3&gt;
+
+
+
+&lt;p&gt;Revit’s AI-powered Assistant continues to mature with more dependable element graphic overrides and visibility management, clearer guidance about current limitations, and a refined palette. Timestamped responses and a clearer response layout make activity easier to follow, while improved chat content management helps users navigate and manage longer interactions.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-full"&gt;&lt;img loading="lazy" decoding="async" width="1920" height="1080" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/1-Autodesk-Assistant-Updates.gif" alt="" class="wp-image-13061"/&gt;&lt;/figure&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-tag-by-example"&gt;Tag by Example&lt;/h3&gt;
+
+
+
+&lt;p&gt;Create new tags from a selected example tag while retaining its appearance and properties. Filter target hosts by category, family, or type; include or ignore nested families; replace existing tags; and preview placement before committing. Orientation, host rotation, and flip or mirror options provide more control over positioning. The command supports tags on loadable component family instances, walls, rooms, areas, and spaces, and follows standard Revit selection behaviors when tagging multiple hosts.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-full"&gt;&lt;img loading="lazy" decoding="async" width="1920" height="1080" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/2-Tag-by-Example.gif" alt="" class="wp-image-13064"/&gt;&lt;/figure&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-view-title-snapping"&gt;View Title Snapping&lt;/h3&gt;
+
+
+
+&lt;p&gt;View titles and their extension lines now snap when dragging to overall view boundaries, crop-region edges, sheet geometry, title-block geometry, and guide grids. Extension-line grips also appear when the view title is selected, eliminating the extra step of selecting the viewport first. These refinements make sheet alignment faster and more predictable.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-full"&gt;&lt;img loading="lazy" decoding="async" width="1920" height="1080" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/3-View-Title-Snapping.gif" alt="" class="wp-image-13065"/&gt;&lt;/figure&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-forma-connected-client-updates"&gt;Forma Connected Client Updates&lt;/h3&gt;
+
+
+
+&lt;p&gt;Revit 2027.2 expands &lt;a href="https://www.autodesk.com/blogs/aec/2025/09/16/revit-becomes-a-forma-connected-client-bridging-cloud-and-desktop-with-the-forma-industry-cloud/" target="_blank" rel="noreferrer noopener"&gt;Forma connected workflows&lt;/a&gt; with richer site context and new analysis capabilities, reducing friction between cloud and desktop workflows.&lt;/p&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;&lt;strong&gt;Microclimate Analysis in Revit&lt;/strong&gt;: As a Forma Connected Client, Revit can access Forma’s cloud-based, outcome-driven analysis capabilities directly within detailed design workflows. Evaluate perceived outdoor temperature by combining sun, wind, sky exposure, and localized climate data. Define the study area, time, and wind conditions from the Analyze tab, then view automatically updated UTCI results directly in Revit. A connected Forma scenario is required.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="576" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/3.-Microclimate-Analysis-1024x576.png" alt="" class="wp-image-13066" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/3.-Microclimate-Analysis-1024x576.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/3.-Microclimate-Analysis-300x169.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/3.-Microclimate-Analysis-768x432.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/3.-Microclimate-Analysis-1536x864.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/3.-Microclimate-Analysis.png 1920w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;&lt;strong&gt;Order parcel data from the Forma Data Marketplace&lt;/strong&gt;: In addition to terrain and building context, users can order parcel data directly from the Forma Data Marketplace in Revit. Coordination Models can display the resulting 2D parcel-line objects, providing another layer of site context without leaving Revit. Availability varies by country and geolocation.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="754" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/4.-Order-Parcels-1024x754.png" alt="" class="wp-image-13067" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/4.-Order-Parcels-1024x754.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/4.-Order-Parcels-300x221.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/4.-Order-Parcels-768x566.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/4.-Order-Parcels.png 1227w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-accelerated-graphics-enhancements"&gt;Accelerated Graphics Enhancements&lt;/h3&gt;
+
+
+
+&lt;p&gt;Building on &lt;a href="https://www.autodesk.com/blogs/aec/2025/04/09/accelerated-graphics-tech-preview-revit-2026/" target="_blank" rel="noreferrer noopener"&gt;Revit&amp;#8217;s new GPU-powered graphics platform&lt;/a&gt;, Revit 2027.2 improves visual fidelity and introduces an optional rendering engine.&lt;/p&gt;
+
+
+
+&lt;ul class="wp-block-list"&gt;
+&lt;li&gt;&lt;strong&gt;Ambient Shadows:&lt;/strong&gt; Now supported across view types, including plans at different elevations, without compromising performance.&lt;/li&gt;
+
+
+
+&lt;li&gt;&lt;strong&gt;Vulkan Hydra graphics engine&lt;/strong&gt;: An optional, low-overhead graphics mode that improves GPU efficiency for more fluid navigation and editing. Enable it through Revit.ini and confirm activation in the Revit journal.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="558" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/5.Accelerated-grahics-1024x558.png" alt="" class="wp-image-13068" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/5.Accelerated-grahics-1024x558.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/5.Accelerated-grahics-300x163.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/5.Accelerated-grahics-768x418.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/5.Accelerated-grahics-1536x837.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/5.Accelerated-grahics.png 1775w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-incremental-model-open-tech-preview"&gt;Incremental Model Open &amp;#8211; Tech Preview&lt;/h3&gt;
+
+
+
+&lt;p&gt;Revit introduces a new way to open models by loading only the data required for the initial view, then reading additional information from the model database as needed. This can reduce opening time and memory use, particularly for large models, although it does not reduce the time required to download or cache cloud models. Enable the application-level option under &lt;em&gt;File &gt; Options &gt; General&lt;/em&gt; before opening a model. The setting remains active for the current Revit session. As a Tech Preview, this capability provides early access to functionality still under development and is intended for evaluation and feedback.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image aligncenter size-full is-resized"&gt;&lt;img loading="lazy" decoding="async" width="794" height="933" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/6.-incremental-model-open.png" alt="" class="wp-image-13069" style="width:500px" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/6.-incremental-model-open.png 794w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/6.-incremental-model-open-255x300.png 255w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/6.-incremental-model-open-768x902.png 768w" sizes="auto, (max-width: 794px) 100vw, 794px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-structural-detailing-workflows"&gt;Structural Detailing Workflows&lt;/h2&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-presentation-options-for-sliced-rebar-sets"&gt;Presentation Options for Sliced Rebar Sets&lt;/h3&gt;
+
+
+
+&lt;p&gt;Building on Revit 2027’s enhanced rebar distribution and splicing and 3D placement workflows, this new feature improves the representation of reinforcement in drawings. Control bar visibility across an entire splice chain without changing the modeled reinforcement. &lt;em&gt;Middle of Splice Chain&lt;/em&gt; automatically displays representative bars to clearly communicate lap conditions, while &lt;em&gt;Custom Selection&lt;/em&gt; provides detailed control for standard, staggered, and custom-spacing layouts. The &lt;em&gt;No Shift&lt;/em&gt; option keeps selected bars adjacent, reducing repetitive adjustments and producing clearer reinforcement documentation.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="557" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/7.-presentation-options-splice-bars-1024x557.png" alt="" class="wp-image-13070" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/7.-presentation-options-splice-bars-1024x557.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/7.-presentation-options-splice-bars-300x163.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/7.-presentation-options-splice-bars-768x418.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/7.-presentation-options-splice-bars-1536x836.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/7.-presentation-options-splice-bars.png 1920w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-mep-design-and-fabrication-workflows"&gt;MEP Design and Fabrication Workflows&lt;/h2&gt;
+
+
+
+&lt;h3 class="wp-block-heading" id="h-mep-sizing-calculator-updates"&gt;MEP Sizing Calculator updates&lt;/h3&gt;
+
+
+
+&lt;p&gt;Building on the duct-sizing workflow introduced in Revit 2027.1, the calculator now supports pipes using friction, velocity, or both. Review or temporarily override roughness, density, and viscosity to test sizing conditions without changing the system definition. Revit evaluates sizes from Mechanical Settings and fabrication-parts catalogs, identifies those that meet the selected limits, and applies the chosen size directly.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image aligncenter size-full is-resized"&gt;&lt;img loading="lazy" decoding="async" width="820" height="781" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/8.-MEP-sizing-calculator.png" alt="" class="wp-image-13071" style="width:500px" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/8.-MEP-sizing-calculator.png 820w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/8.-MEP-sizing-calculator-300x286.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/8.-MEP-sizing-calculator-768x731.png 768w" sizes="auto, (max-width: 820px) 100vw, 820px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-get-started-with-revit-2027-2"&gt;Get Started with Revit 2027.2&lt;/h2&gt;
+
+
+
+&lt;p&gt;Revit 2027.2 is a focused point release that improves performance, documentation control, connected context, and analysis continuity. For full documentation on Revit 2027.2, refer to &lt;a href="https://help.autodesk.com/view/RVT/2027/ENU/?guid=RevitReleaseNotes_2027updates_2027_2_html" target="_blank" rel="noreferrer noopener"&gt;Revit Help&lt;/a&gt;. To see what is coming next, visit &lt;a href="https://www.autodesk.com/blogs/aec/roadmap/" target="_blank" rel="noreferrer noopener"&gt;the Autodesk AEC Public Roadmap&lt;/a&gt; for upcoming feature plans.&lt;/p&gt;
+
+
+
+&lt;p&gt;Get started with Revit 2027.2 through the Autodesk Access application on your desktop or through your Autodesk Account page.&lt;/p&gt;
+
+
+
+&lt;p&gt;Happy Revit-ing!&lt;/p&gt;
+
+
+
+&lt;div class="wp-block-media-text is-stacked-on-mobile is-vertically-aligned-center is-image-fill-element" style="grid-template-columns:33% auto"&gt;&lt;figure class="wp-block-media-text__media"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="533" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/BIM-image-1024x533.jpg" alt="" class="wp-image-12222 size-large" style="object-position:50% 50%" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/BIM-image-1024x533.jpg 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/BIM-image-300x156.jpg 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/BIM-image-768x400.jpg 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/BIM-image-1536x799.jpg 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/BIM-image.jpg 1920w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;&lt;div class="wp-block-media-text__content"&gt;
+&lt;h2 class="wp-block-heading" id="h-autodesk-revit-bim-software-to-design-and-make-anything"&gt;Autodesk Revit: BIM software to design and make anything&lt;/h2&gt;
+
+
+
+&lt;div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex"&gt;&lt;?xml encoding="utf-8" ?&gt;&lt;div class="wp-block-button is-style-outline is-style-outline--2"&gt;&lt;a href="https://www.autodesk.com/products/revit/overview" class="
+            MuiButtonBase-root MuiButton-root
+            wp-block-button__link wp-element-button
+            
+            
+            
+            MuiButton-outlined
+        "&gt;
+
+        &lt;span class="MuiButton-label"&gt;
+            
+            
+Start a free trial
+
+            
+        &lt;/span&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The post &lt;a href="https://autodeskblog.wpengine.com/aec/2026/07/22/whats-new-in-revit-2027-2/"&gt;What’s New in Revit 2027.2: Faster, More Connected, and More Precise BIM Workflows&lt;/a&gt; appeared first on &lt;a href="https://autodeskblog.wpengine.com/aec"&gt;AEC Tech Drop&lt;/a&gt;.&lt;/p&gt;
+</ns3:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>The 2026 State of Design &amp; Make Spotlight on Transportation: Insights Shaping the Future of Infrastructure</title>
+		<link>https://autodeskblog.wpengine.com/aec/2026/07/15/2026-state-of-design-make-spotlight-on-transportation/</link>
+		
+		<dc:creator>McKenzie Price</dc:creator>
+		<pubDate>Wed, 15 Jul 2026 18:47:27 +0000</pubDate>
+				<category>Infrastructure</category>
+		<category>AI</category>
+		<category>BIM</category>
+		<category>GIS</category>
+		<guid isPermaLink="false">https://autodeskblog.wpengine.com/aec/?p=13036</guid>
+
+					<description>&lt;p&gt;The transportation infrastructure that connects our cities, countries, and continents is experiencing unprecedented pressure—and undergoing rapid transformation. Roads and highways, rail networks, bridges, tunnels, ports, airports: these systems form the connective tissue of modern life. Right now, the professionals responsible for planning, building, and maintaining them are navigating a convergence of forces unlike anything the [&amp;#8230;]&lt;/p&gt;
+&lt;p&gt;The post &lt;a href="https://autodeskblog.wpengine.com/aec/2026/07/15/2026-state-of-design-make-spotlight-on-transportation/"&gt;The 2026 State of Design &amp;amp; Make Spotlight on Transportation: Insights Shaping the Future of Infrastructure&lt;/a&gt; appeared first on &lt;a href="https://autodeskblog.wpengine.com/aec"&gt;AEC Tech Drop&lt;/a&gt;.&lt;/p&gt;
+</description>
+										<ns3:encoded>
+&lt;figure class="wp-block-image size-large"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="613" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/SDM-2025_Spotlight_Transportation_Cover-1024x613.png" alt="" class="wp-image-13039" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/SDM-2025_Spotlight_Transportation_Cover-1024x613.png 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/SDM-2025_Spotlight_Transportation_Cover-300x180.png 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/SDM-2025_Spotlight_Transportation_Cover-768x460.png 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/SDM-2025_Spotlight_Transportation_Cover-1536x920.png 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/SDM-2025_Spotlight_Transportation_Cover-2048x1227.png 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;p&gt;The transportation infrastructure that connects our cities, countries, and continents is experiencing unprecedented pressure—and undergoing rapid transformation.&lt;/p&gt;
+
+
+
+&lt;p&gt;Roads and highways, rail networks, bridges, tunnels, ports, airports: these systems form the connective tissue of modern life. Right now, the professionals responsible for planning, building, and maintaining them are navigating a convergence of forces unlike anything the industry has faced before. Aging infrastructure. Climate volatility. A shrinking talent pipeline. Tightening budgets. And on top of it all, a technological shift that is fundamentally reshaping how work gets done.&lt;/p&gt;
+
+
+
+&lt;p&gt;How are transportation leaders responding? The &lt;em&gt;2026 State of Design &amp;amp; Make: Spotlight on Transportation&lt;/em&gt; is a new industry report with net new focused data on real challenges in the industry combined with Autodesk&amp;#8217;s annual global study of thousands of design and make leaders across architecture, design, engineering, construction, and operations.&lt;/p&gt;
+
+
+
+&lt;p&gt;This spotlight report focuses on the transportation sector specifically—infrastructure owners, engineering service providers, and construction firms—to surface the trends, challenges, and strategies that matter most to them right now.&lt;/p&gt;
+
+
+
+&lt;div class="wp-block-media-text is-stacked-on-mobile is-vertically-aligned-center is-image-fill-element" style="grid-template-columns:33% auto"&gt;&lt;figure class="wp-block-media-text__media"&gt;&lt;img loading="lazy" decoding="async" width="1024" height="576" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Spotlight-feature-1024x576.jpg" alt="" class="wp-image-13037 size-large" style="object-position:50% 50%" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Spotlight-feature-1024x576.jpg 1024w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Spotlight-feature-300x169.jpg 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Spotlight-feature-768x432.jpg 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Spotlight-feature-1536x864.jpg 1536w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Spotlight-feature-2048x1152.jpg 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /&gt;&lt;/figure&gt;&lt;div class="wp-block-media-text__content"&gt;
+&lt;h2 class="wp-block-heading" id="h-2026-state-of-design-amp-make-spotlight-on-transportation"&gt;2026 State of Design &amp;amp; Make: Spotlight on Transportation&lt;/h2&gt;
+
+
+
+&lt;div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex"&gt;&lt;?xml encoding="utf-8" ?&gt;&lt;div class="wp-block-button is-style-outline is-style-outline--3"&gt;&lt;a href="https://www.autodesk.com/campaigns/design-make-spotlight-transportation" class="
+            MuiButtonBase-root MuiButton-root
+            wp-block-button__link wp-element-button
+            
+            
+            
+            MuiButton-outlined
+        "&gt;
+
+        &lt;span class="MuiButton-label"&gt;
+            
+            
+Download now
+
+            
+        &lt;/span&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-from-instant-data-to-better-insight"&gt;&lt;strong&gt;From instant data to better insight&lt;/strong&gt;&lt;/h2&gt;
+
+
+
+&lt;p&gt;If there’s one theme that cuts across the transportation sector, it’s this: Data is no longer the problem, but making sense of it is.&lt;/p&gt;
+
+
+
+&lt;p&gt;Most organizations have already adopted a wide range of digital tools. But many are still struggling to connect and efficiently apply them. Siloed systems, inconsistent standards, and fragmented workflows continue to limit and lock the value of that data.&lt;/p&gt;
+
+
+
+&lt;p&gt;The impact is tangible. A significant portion of transportation leaders report ongoing challenges with interoperability—and many have experienced project rework as a direct result. Even when the technology exists, the ability to move information seamlessly across teams and partners remains a barrier.&lt;/p&gt;
+
+
+
+&lt;p&gt;Data security adds another layer of complexity. Transportation data often includes sensitive operational and asset information, requiring rigorous governance and compliance. Without shared standards and trust across stakeholders, data can become a bottleneck rather than a catalyst.&lt;/p&gt;
+
+
+
+&lt;p&gt;And yet, progress is undeniable. Many organizations report meaningful advancement in their digital transformation journeys, with foundational technologies like BIM and GIS now firmly in place especially with owners. The next frontier—digital twins, generative design, and more integrated ecosystems—is already coming into view.&lt;/p&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-ai-moves-from-potential-to-priority"&gt;&lt;strong&gt;AI moves from potential to priority&lt;/strong&gt;&lt;/h2&gt;
+
+
+
+&lt;p&gt;Artificial intelligence is no longer a future-state concept in transportation—it’s quickly becoming foundational.&lt;/p&gt;
+
+
+
+&lt;p&gt;Nearly every leader in the sector sees AI as essential to staying competitive. While use cases and implementation continue to emerge, adoption is accelerating, with many organizations actively piloting and scaling AI-driven workflows.&lt;/p&gt;
+
+
+
+&lt;p&gt;What’s driving that urgency? Efficiency and time.&lt;/p&gt;
+
+
+
+&lt;p&gt;Engineering and infrastructure teams are under constant pressure to deliver more with less. AI is helping to automate repetitive tasks, surface insights faster, and support better decision-making across the asset lifecycle. For many organizations, the most immediate benefit is simple but powerful: giving time back to focus on higher-value work. In an industry defined by complexity, that shift to freeing up teams to focus on higher-value work matters.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-full"&gt;&lt;img loading="lazy" decoding="async" width="1000" height="563" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Overlay.jpg" alt="" class="wp-image-13043" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Overlay.jpg 1000w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Overlay-300x169.jpg 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Overlay-768x432.jpg 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-the-talent-equation"&gt;The talent equation&lt;/h2&gt;
+
+
+
+&lt;p&gt;Talent remains a critical and increasingly constrained resource.&lt;/p&gt;
+
+
+
+&lt;p&gt;Transportation leaders are nearly unanimous in their concern about future workforce availability. Globally, a declining pipeline of civil engineering graduates is already being felt across the industry, affecting everything from recruitment costs to project delivery.&lt;/p&gt;
+
+
+
+&lt;p&gt;But the issue isn’t just quantity—it’s capability.&lt;/p&gt;
+
+
+
+&lt;p&gt;As digital tools and AI become more embedded in workflows, the skills required to fully leverage them are evolving. Organizations that can attract, develop, and retain talent with both domain expertise and digital fluency will be better positioned to scale transformation.&lt;/p&gt;
+
+
+
+&lt;p&gt;In many ways, the success of digital initiatives depends as much on the willingness of people as it does on platforms.&lt;/p&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-resiliency-is-the-new-baseline"&gt;Resiliency is the new baseline&lt;/h2&gt;
+
+
+
+&lt;p&gt;Asset resilience is no longer a parallel priority. It’s central to how infrastructure is designed, made and managed.&lt;/p&gt;
+
+
+
+&lt;p&gt;Transportation leaders increasingly recognize that resilience must be built into projects from the initial plan. Extreme weather events and shifting environmental conditions are already influencing design decisions.&lt;/p&gt;
+
+
+
+&lt;p&gt;Data plays a critical role here as well. Better access to reliable information enables teams to anticipate risk, model scenarios, and make more informed decisions earlier in the lifecycle.&lt;/p&gt;
+
+
+
+&lt;p&gt;Water-related risks are becoming a defining factor in transportation infrastructure planning. From flooding to drainage to long-term environmental impact, many organizations are turning to advanced technologies including AI to better understand and mitigate these challenges before assets are even built.&lt;/p&gt;
+
+
+
+&lt;figure class="wp-block-image size-full"&gt;&lt;img loading="lazy" decoding="async" width="1000" height="658" src="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Bridge.jpg" alt="" class="wp-image-13044" srcset="https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Bridge.jpg 1000w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Bridge-300x197.jpg 300w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Bridge-768x505.jpg 768w, https://autodeskblog.wpengine.com/aec/wp-content/uploads/sites/36/Bridge-366x241.jpg 366w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /&gt;&lt;/figure&gt;
+
+
+
+&lt;h2 class="wp-block-heading" id="h-complexity-creativity-and-continued-innovation"&gt;&lt;strong&gt;Complexity, creativity, and continued innovation&lt;/strong&gt;&lt;/h2&gt;
+
+
+
+&lt;p&gt;What the report ultimately reveals is not a portrait of an industry in crisis, but one amid a meaningful and necessary transformation. The firms and owners pulling ahead aren&amp;#8217;t those that have somehow avoided new challenges—they&amp;#8217;re the ones that have built the capabilities to respond to them faster and more effectively.&lt;/p&gt;
+
+
+
+&lt;p&gt;The &lt;em&gt;Spotlight on Transportation&lt;/em&gt; offers a detailed look at where the industry stands, where it&amp;#8217;s headed, and what distinguishes the leaders setting the pace.&lt;/p&gt;
+
+
+
+&lt;p&gt;&lt;a href="https://www.autodesk.com/campaigns/design-make-spotlight-transportation" target="_blank" rel="noreferrer noopener"&gt;Download the&lt;em&gt; 2026 State of Design &amp;amp; Make: Spotlight on Transportation&lt;/em&gt;&lt;/a&gt; to benchmark your organization against peers, explore the full data, and gain the perspective you need to lead with confidence in a rapidly changing landscape.&lt;/p&gt;
+
+
+
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;The post &lt;a href="https://autodeskblog.wpengine.com/aec/2026/07/15/2026-state-of-design-make-spotlight-on-transportation/"&gt;The 2026 State of Design &amp;amp; Make Spotlight on Transportation: Insights Shaping the Future of Infrastructure&lt;/a&gt; appeared first on &lt;a href="https://autodeskblog.wpengine.com/aec"&gt;AEC Tech Drop&lt;/a&gt;.&lt;/p&gt;
+</ns3:encoded>
+					
+		
+		
+			</item>
+		</channel>
+</rss>
