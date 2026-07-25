@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-07-24T13:00:12Z",
+  "generated": "2026-07-25T04:02:34Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 10082,
       "edges": 20208,
       "commit": "30e34966",
-      "commitsBehind": 28,
+      "commitsBehind": 36,
       "builtAt": "2026-07-21",
       "stale": true
     },
@@ -86,8 +86,8 @@ window.NETWORKX_IMPACT = {
         "file": "main.py",
         "kind": "file",
         "degree": 62,
-        "churn": 29,
-        "risk": 339.6
+        "churn": 30,
+        "risk": 345.2
       },
       {
         "label": "_by_category()",

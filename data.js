@@ -224,10 +224,10 @@ window.DASHBOARD_DATA = {
           { name: "P16 Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path", pct: 10, note: "CONDITIONAL — Persistent local orchestration hub for cross-tool workflows (Revit, BIMpossible Site, filesystem/git, reporting) via explicit, scoped MCP servers as the default path; GUI/desktop automation admitted only as a named, allowlisted exception for apps with no workable API — under explicit consent, sandboxing, and audit logging, never a general \"control my desktop\" mode. Full rationale, architecture, and the 3-condition go/no-go ratification test: `2026-07-23__Phase16_DesktopOrchestrationHub_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately." }
         ]
       },
-      activity: [16,15,3,10,16,5,0,0,0,2,36,9,2,0],
+      activity: [16,15,3,10,16,5,0,0,0,2,36,9,3,16],
       lastActivity: {
-        date: "2026-07-23",
-        summary: "chore(gitleaks): allowlist checkpoint-commit fingerprint for test_auth_issuer dummy key (#213) (5ef16fd)"
+        date: "2026-07-24",
+        summary: "docs: audit SS9 - renumber, record guard false positive + hash fix (#223) + live happy-path pass (cde8c5b)"
       },
       branch: "main at a7a434c; 0 ahead of origin",
       git: {
@@ -480,10 +480,10 @@ window.DASHBOARD_DATA = {
           { name: "QA scanners (6/7 deployed)", pct: 72, note: "Unchanged since 07-14 — no scanner commits after that day's audit-remediation fixes (8a1b82a/aced184/d292a38). Core consolidated + audit-hardened; live smokes still owed." }
         ]
       },
-      activity: [16,6,0,16,19,4,0,0,0,1,12,2,0,0],
+      activity: [16,6,0,16,19,4,0,0,0,1,12,2,0,1],
       lastActivity: {
-        date: "2026-07-22",
-        summary: "fix(open-in-revit): widen the pending-open TTL 120sâ†’300s for cold-start boots (#24) (c188a19)"
+        date: "2026-07-24",
+        summary: "feat: Family Fixer ribbon dialog â€” service core + redesigned WPF UI (#25) (7b94ad2)"
       },
       branch: "main; synced with origin",
       git: null,
