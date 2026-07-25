@@ -33,8 +33,10 @@
   .bw-warn ul{margin:var(--sp-2) 0 0;padding-left:18px;color:var(--muted);}
   .bw-item{padding:var(--sp-3) 0;border-bottom:1px solid var(--border);}
   .bw-item:last-child{border-bottom:0;}
-  .bw-item a.ti{color:var(--text);text-decoration:none;font-size:var(--ts-base);font-weight:500;line-height:1.45;}
-  .bw-item a.ti:hover{color:var(--w);text-decoration:underline;}
+  /* NOT .ti — the dashboard already defines .ti as a 17px circular status badge,
+     which crushed every headline into one word per line. Namespace everything. */
+  .bw-item a.bw-ti{display:block;color:var(--text);text-decoration:none;font-size:var(--ts-base);font-weight:500;line-height:1.45;}
+  .bw-item a.bw-ti:hover{color:var(--w);text-decoration:underline;}
   .bw-why{font-size:var(--ts-sm);color:var(--muted);margin-top:var(--sp-1);line-height:1.5;}
   .bw-meta{display:flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-2);flex-wrap:wrap;}
   .bw-tag{font-size:var(--ts-xs);color:var(--dim);background:rgba(255,255,255,.05);border-radius:5px;padding:1px 7px;}
@@ -109,7 +111,7 @@
     const rel = item.rel != null ? item.rel : item.relevance;
     const why = item.why ? `<div class="bw-why">${esc(item.why)}</div>` : '';
     return `<div class="bw-item">
-      <a class="ti" href="${esc(safeUrl(item.u || item.url))}" target="_blank" rel="noopener noreferrer">${esc(item.t || item.title)}</a>
+      <a class="bw-ti" href="${esc(safeUrl(item.u || item.url))}" target="_blank" rel="noopener noreferrer">${esc(item.t || item.title)}</a>
       ${why}
       <div class="bw-meta">
         <span class="bw-tag">${esc(sourceName(item.s || item.source))}</span>
