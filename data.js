@@ -467,10 +467,10 @@ window.DASHBOARD_DATA = {
       id: "addins",
       name: "Add-Ins / RevitLink",
       icon: "wrench",
-      oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (8 tools SHIP, Check Conflicts unwired, 6 retired, 2 new ideas) + Trade QA Scanner suite (6 trades deployed).",
+      oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (8 tools SHIP, Check Conflicts unwired, 6 retired, 2 new ideas).",
       status: "active",
       phase: "main at a661924 (2026-07-20), synced with origin. New this week: **Open-in-Revit** — a bimpossible:// protocol handler (new BIMpossible.OpenInRevit project: strict URI validation, registry-based Revit locator, exact-version-only launch policy, atomic pending-open.json handoff, HKCU registration via Deploy-Local.ps1 --register, no admin needed) plus RevitLink's PendingOpenWatcher consumer — pairs with the BIMpossible backend's new cloud-ids endpoint + web R-button (#188) so clicking 'Open in Revit' on the web app actually launches the right model. New xunit suite for the pure parts. Two more draft PRs open, unmerged: #11 (Phase 7 step-2, add-in side — remove the SyncWithCentral force-guard in lockstep with the backend's confirmation flow, stacks with BIMpossible PR #187) and #12 (Family Fixer: probe_family/add_shared_params/go_single_panel pipe operations). Prior week: the 2026-07-12 audit CLOSED (C-01 disproven, all 10 highs fixed) and the CI gap that was C-01's real lesson closed same week (CI now compiles RevitLink on both TFMs).",
-      focus: "Merge #11 (Phase 7 step-2, add-in side) in lockstep with BIMpossible's #187 — they're two halves of the same re-enable and will drift if one lands without the other. Ribbon icon/tooltip polish pass still postponed: 20/37 buttons missing ToolTipImage, Place Callout Sheets' placeholder icon. M-14 (split-level sheet title marker) needs a signature-level redesign — deferred, not scheduled. Live-verify the Retag All Rooms orphan-tag fix in Revit (shipped without that confirmation). QA Scanners: live smoke Architectural (4 tools, 21 tests); live spikes for E/M/P/FP/S collectors.",
+      focus: "Merge #11 (Phase 7 step-2, add-in side) in lockstep with BIMpossible's #187 — they're two halves of the same re-enable and will drift if one lands without the other. Ribbon icon/tooltip polish pass still postponed: 20/37 buttons missing ToolTipImage, Place Callout Sheets' placeholder icon. M-14 (split-level sheet title marker) needs a signature-level redesign — deferred, not scheduled.",
       progress: {
         label: "Tracks",
         phases: [
@@ -534,32 +534,129 @@ window.DASHBOARD_DATA = {
         lastRun: "2026-07-14",
         runType: "Resolution of the 2026-07-12 full audit (106 findings) — 8 fix commits landed ~85 findings in code, then an explicit owner-decision pass (audits/2026-07-12__audit-resolution.md) closed everything left: 3 findings disproven as false positives (including the sole CRITICAL), the rest fixed, won't-fix (verified safe), deferred-design, or postponed pending owner time.",
         cadence: "on-demand",
-        counts: { critical: 0, high: 0, medium: 4, low: 6, info: 1 },
+        counts: {
+          critical: 0,
+          high: 0,
+          medium: 4,
+          low: 6,
+          info: 1
+        },
         closedLastRun: 95,
         trend: "improving",
         reportPath: "F:\\AI-Dev\\Add-Ins\\audits\\2026-07-12__audit-resolution.md",
         reportFile: "addins/2026-07-12__audit-resolution.md",
         ledgerPath: "F:\\AI-Dev\\Add-Ins\\audits",
         open: [
-          { id: "M-14", sev: "medium", title: "LevelSheetTitle.Build's split-level continuation marker needs a signature-level redesign, not a patch — deferred, not scheduled, explicitly not 'fixed'.", where: "Shared/Sheets/LevelSheetAllocator.cs (LevelSheetTitle.Build)" },
-          { id: "MI-17", sev: "medium", title: "SortSheetsCommand's 'fix' is a documented mirror, not a real extraction — the pure sort logic stays private inside a Revit-bound class and the test hand-copies the algorithm. A real fix needs an H-03-style extraction.", where: "Commands/SortSheetsCommand.cs:167-180" },
-          { id: "MI-19", sev: "medium", title: "Stale worktrees under .claude/worktrees/ — 3 fully merged/identical to main (safe to remove), 1 detached orphaned HEAD needing inspection before touching. No behavioral impact; deferred as destructive git hygiene.", where: ".claude/worktrees/*" },
-          { id: "MI-20", sev: "medium", title: "5 branches carry real unmerged work, legitimately gated on explicit owner sign-off, but all fork from an aging main and independently touch files main has since changed repeatedly — merge-conflict cost grows the longer sign-off is deferred.", where: "docs/conformance-*, feat/conformance-* branches" },
-          { id: "M-30", sev: "low", title: "Reclassified from a safety finding to screenshot debt: Trim Out-of-Scope Sheets' guide text and toggle warning are correct and complete, but 3 images are stale/missing (captured before the destructive toggle existed). Errs safe — under-shows the danger, not over.", where: "How to Guides/.../Trim Out-of-Scope Sheets/assets/*" },
-          { id: "M-33", sev: "low", title: "Place Callout Sheets ships with a placeholder icon, reusing Create Callout Views' icon pixel-for-pixel (self-admitted in a code comment). Ribbon icon/tooltip-image polish (also: 20/37 buttons missing ToolTipImage) postponed to a dedicated pass, owner decision 2026-07-14.", where: "App.cs (Place Callout Sheets Icon=)" },
-          { id: "L-03", sev: "low", title: "Zero 16px icon variants exist anywhere in Resources (all 56 icons are 32×32) — corrected severity 2026-07-14: this is a Quick Access Toolbar edge case only (Revit downscales cleanly inside the ribbon panel itself), not the 'affects the majority of the ribbon' issue originally claimed.", where: "Resources/*.png" },
-          { id: "L-13", sev: "low", title: "Set Up Project still shows 4 sequential modal dialogs (Tool1, Tool2, Tool3, then the orchestrator's own) instead of one consolidated report — a UX redesign, needs a human call.", where: "SetupProjectOrchestratorCommand.cs:72,202,206,212" },
-          { id: "L-19", sev: "low", title: "secrets.DASHBOARD_PAT's actual token scope is still unconfirmable from any file visible to static inspection.", where: ".github/workflows/dashboard-sync.yml:37" },
-          { id: "L-21", sev: "low", title: "RevitAPI NuGet still pinned to 2026.*-* across RevitLink and all 6 discipline add-ins for a net8 target CLAUDE.md describes as spanning Revit 2025/26/27 — a cross-version API difference would only surface via manual multi-version testing; needs a human policy call.", where: "e.g. BIMpossible.Structural/BIMpossible.Structural.csproj:24" },
-          { id: "I-08", sev: "info", title: "Dead decision-log citation (decision-log/2026-05-25__revit-link-remediation.md, which doesn't exist) lives in .cs comments — out of scope for the 2026-07-14 docs-only reconciliation pass.", where: "Commands/SyncWithCentralCommand.cs:28,49 · SyncWithCentralRibbonCommand.cs:49" }
+          {
+            id: "M-14",
+            sev: "medium",
+            title: "LevelSheetTitle.Build's split-level continuation marker needs a signature-level redesign, not a patch — deferred, not scheduled, explicitly not 'fixed'.",
+            where: "Shared/Sheets/LevelSheetAllocator.cs (LevelSheetTitle.Build)"
+          },
+          {
+            id: "MI-17",
+            sev: "medium",
+            title: "SortSheetsCommand's 'fix' is a documented mirror, not a real extraction — the pure sort logic stays private inside a Revit-bound class and the test hand-copies the algorithm. A real fix needs an H-03-style extraction.",
+            where: "Commands/SortSheetsCommand.cs:167-180"
+          },
+          {
+            id: "MI-19",
+            sev: "medium",
+            title: "Stale worktrees under .claude/worktrees/ — 3 fully merged/identical to main (safe to remove), 1 detached orphaned HEAD needing inspection before touching. No behavioral impact; deferred as destructive git hygiene.",
+            where: ".claude/worktrees/*"
+          },
+          {
+            id: "MI-20",
+            sev: "medium",
+            title: "5 branches carry real unmerged work, legitimately gated on explicit owner sign-off, but all fork from an aging main and independently touch files main has since changed repeatedly — merge-conflict cost grows the longer sign-off is deferred.",
+            where: "docs/conformance-*, feat/conformance-* branches"
+          },
+          {
+            id: "M-30",
+            sev: "low",
+            title: "Reclassified from a safety finding to screenshot debt: Trim Out-of-Scope Sheets' guide text and toggle warning are correct and complete, but 3 images are stale/missing (captured before the destructive toggle existed). Errs safe — under-shows the danger, not over.",
+            where: "How to Guides/.../Trim Out-of-Scope Sheets/assets/*"
+          },
+          {
+            id: "M-33",
+            sev: "low",
+            title: "Place Callout Sheets ships with a placeholder icon, reusing Create Callout Views' icon pixel-for-pixel (self-admitted in a code comment). Ribbon icon/tooltip-image polish (also: 20/37 buttons missing ToolTipImage) postponed to a dedicated pass, owner decision 2026-07-14.",
+            where: "App.cs (Place Callout Sheets Icon=)"
+          },
+          {
+            id: "L-03",
+            sev: "low",
+            title: "Zero 16px icon variants exist anywhere in Resources (all 56 icons are 32×32) — corrected severity 2026-07-14: this is a Quick Access Toolbar edge case only (Revit downscales cleanly inside the ribbon panel itself), not the 'affects the majority of the ribbon' issue originally claimed.",
+            where: "Resources/*.png"
+          },
+          {
+            id: "L-13",
+            sev: "low",
+            title: "Set Up Project still shows 4 sequential modal dialogs (Tool1, Tool2, Tool3, then the orchestrator's own) instead of one consolidated report — a UX redesign, needs a human call.",
+            where: "SetupProjectOrchestratorCommand.cs:72,202,206,212"
+          },
+          {
+            id: "L-19",
+            sev: "low",
+            title: "secrets.DASHBOARD_PAT's actual token scope is still unconfirmable from any file visible to static inspection.",
+            where: ".github/workflows/dashboard-sync.yml:37"
+          },
+          {
+            id: "L-21",
+            sev: "low",
+            title: "RevitAPI NuGet still pinned to 2026.*-* across RevitLink and all 6 discipline add-ins for a net8 target CLAUDE.md describes as spanning Revit 2025/26/27 — a cross-version API difference would only surface via manual multi-version testing; needs a human policy call.",
+            where: "e.g. BIMpossible.Structural/BIMpossible.Structural.csproj:24"
+          },
+          {
+            id: "I-08",
+            sev: "info",
+            title: "Dead decision-log citation (decision-log/2026-05-25__revit-link-remediation.md, which doesn't exist) lives in .cs comments — out of scope for the 2026-07-14 docs-only reconciliation pass.",
+            where: "Commands/SyncWithCentralCommand.cs:28,49 · SyncWithCentralRibbonCommand.cs:49"
+          }
         ],
         history: [
-          { date: "2026-07-14", type: "Resolution — 8 fix commits + owner-decision pass", scope: "Every one of the 106 findings from the 2026-07-12 audit got a real decision: fixed in code (~85), disproven as a false positive (3, including the sole CRITICAL), won't-fix as verified-safe (2), deferred design (2), gated on destructive git ops (2), or postponed pending dedicated owner/polish time (~10).", result: "C-01 (the only CRITICAL) was FALSE — Revit 2024's net48 API has both ElementId.Value and ElementId(long); the audit never ran the build that would have disproven it. All 10 HIGHs genuinely fixed and code-verified (not just commit-message-claimed): H-01/H-02 (Section Clip one-shot expiry, Room Data binding refuse), H-03/H-09/H-10 (testable extraction, rollback unit-test, 18-file dead-code sweep), H-04 (SetUniqueViewName sanitizes + reports), H-05/H-06 (ScopeBox collision fix + ranked substring match — both confirmed in code with explicit 'H-05'/'H-06' comments), H-07 (ViewRenamePreview literal-mode $ escaping), H-08 (PdfPageCounter returns null, never a false 1, on ambiguous PDFs). Two false-positive side-findings: M-30 (guide is accurate, only 3 screenshots stale) and MI-12-part (2 of 4 'unwired' commands are wired on the Trades > Electrical panel, which the audit's RevitLink-only search missed). Also fixed same-day, outside the audit: Retag All Rooms orphan-tag bug (owner-caught), oversized ribbon tooltips (owner-caught), 2 theme-blind popups. What the audit did NOT catch: 'reports success, quietly did nothing' surfaced 3 more times the same day (panel-schedule legend cell, Section Clip selection path, Retag All Rooms) — the pattern the audit itself named is still live in the codebase.", report: "2026-07-12__audit-resolution.md" },
-          { date: "2026-07-12", type: "Full (7 parallel review agents)", scope: "Complete top-to-bottom re-read of all active projects — RevitLink (Commands + ModelHealth + Scaffold + Shared) + ModelQA.Core + 6 discipline add-ins + 7 test suites + docs/CI; 114 commits since the 2026-06-14 baseline, ~90% of them in RevitLink.", result: "1 CRITICAL + 10 HIGH + 53 MEDIUM + 24 LOW + 18 INFO. Headline C-01: the net48 (Revit 2024) build is very likely broken (net8-only ElementId APIs unguarded in ReloadLinksCommand) and CI never builds the shipping add-in for either TFM. Recurring themes: silent-failure-reported-as-success, tested-but-dead code (3 files still certified green while unreachable in production), spec/doc-vs-code drift. Prior audit: 13 of the 2026-06-14 findings verified genuinely fixed (H-02/H-04/M-11/M-12/M-17/M-18/M-20-23 et al.). NOTE: the dashboard's earlier '2026-06-14 all-clear' was itself wrong — those findings were open then too and never ingested. Audit tab surfaces C-01 + the 10 highs as cards; the 53 medium / 24 low / 18 info are in the full report (local monitor expands them per-severity).", report: "2026-07-12__audit-report-full.md" },
-          { date: "2026-07-10", type: "Code-level re-verification (not a full audit re-run)", scope: "C-01, checked against current source + build output", result: "FIXED — was actually fixed same-day back on 2026-06-14 (commit aa9e65e, Directory.Build.props sets AssemblyVersion 1.1.0.0, confirmed in build output), but the dashboard never got updated to reflect it until now. Caveat carried from the fix itself: diagnostic only (assembly isn't strong-named, so a stale DLL still isn't load-time BLOCKED, just detectable) — real mitigation is coordinated add-in redeploy, tracked separately as M-19, still open", report: "2026-06-14__audit-report-full.md" },
-          { date: "2026-06-14", type: "Full (3 agents)", scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests", result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption", report: "2026-06-14__audit-report-full.md" },
-          { date: "2026-06-13", type: "Tools 8-33 sweep", scope: "Tools 8-33 + punchlist", result: "Punchlist sweep across the tool suite", report: "2026-06-13__tools-8-33-audit-sweep.md" },
-          { date: "2026-06-09", type: "Triple audit (google / perf / perp)", scope: "Add-Ins repo", result: "9 findings closed in remediation — CSV-injection guards ×7, culture-invariant formatting, rolling log", report: "2026-06-09__perp-audit.md" }
+          {
+            date: "2026-07-14",
+            type: "Resolution — 8 fix commits + owner-decision pass",
+            scope: "Every one of the 106 findings from the 2026-07-12 audit got a real decision: fixed in code (~85), disproven as a false positive (3, including the sole CRITICAL), won't-fix as verified-safe (2), deferred design (2), gated on destructive git ops (2), or postponed pending dedicated owner/polish time (~10).",
+            result: "C-01 (the only CRITICAL) was FALSE — Revit 2024's net48 API has both ElementId.Value and ElementId(long); the audit never ran the build that would have disproven it. All 10 HIGHs genuinely fixed and code-verified (not just commit-message-claimed): H-01/H-02 (Section Clip one-shot expiry, Room Data binding refuse), H-03/H-09/H-10 (testable extraction, rollback unit-test, 18-file dead-code sweep), H-04 (SetUniqueViewName sanitizes + reports), H-05/H-06 (ScopeBox collision fix + ranked substring match — both confirmed in code with explicit 'H-05'/'H-06' comments), H-07 (ViewRenamePreview literal-mode $ escaping), H-08 (PdfPageCounter returns null, never a false 1, on ambiguous PDFs). Two false-positive side-findings: M-30 (guide is accurate, only 3 screenshots stale) and MI-12-part (2 of 4 'unwired' commands are wired on the Trades > Electrical panel, which the audit's RevitLink-only search missed). Also fixed same-day, outside the audit: Retag All Rooms orphan-tag bug (owner-caught), oversized ribbon tooltips (owner-caught), 2 theme-blind popups. What the audit did NOT catch: 'reports success, quietly did nothing' surfaced 3 more times the same day (panel-schedule legend cell, Section Clip selection path, Retag All Rooms) — the pattern the audit itself named is still live in the codebase.",
+            report: "2026-07-12__audit-resolution.md"
+          },
+          {
+            date: "2026-07-12",
+            type: "Full (7 parallel review agents)",
+            scope: "Complete top-to-bottom re-read of all active projects — RevitLink (Commands + ModelHealth + Scaffold + Shared) + ModelQA.Core + 6 discipline add-ins + 7 test suites + docs/CI; 114 commits since the 2026-06-14 baseline, ~90% of them in RevitLink.",
+            result: "1 CRITICAL + 10 HIGH + 53 MEDIUM + 24 LOW + 18 INFO. Headline C-01: the net48 (Revit 2024) build is very likely broken (net8-only ElementId APIs unguarded in ReloadLinksCommand) and CI never builds the shipping add-in for either TFM. Recurring themes: silent-failure-reported-as-success, tested-but-dead code (3 files still certified green while unreachable in production), spec/doc-vs-code drift. Prior audit: 13 of the 2026-06-14 findings verified genuinely fixed (H-02/H-04/M-11/M-12/M-17/M-18/M-20-23 et al.). NOTE: the dashboard's earlier '2026-06-14 all-clear' was itself wrong — those findings were open then too and never ingested. Audit tab surfaces C-01 + the 10 highs as cards; the 53 medium / 24 low / 18 info are in the full report (local monitor expands them per-severity).",
+            report: "2026-07-12__audit-report-full.md"
+          },
+          {
+            date: "2026-07-10",
+            type: "Code-level re-verification (not a full audit re-run)",
+            scope: "C-01, checked against current source + build output",
+            result: "FIXED — was actually fixed same-day back on 2026-06-14 (commit aa9e65e, Directory.Build.props sets AssemblyVersion 1.1.0.0, confirmed in build output), but the dashboard never got updated to reflect it until now. Caveat carried from the fix itself: diagnostic only (assembly isn't strong-named, so a stale DLL still isn't load-time BLOCKED, just detectable) — real mitigation is coordinated add-in redeploy, tracked separately as M-19, still open",
+            report: "2026-06-14__audit-report-full.md"
+          },
+          {
+            date: "2026-06-14",
+            type: "Full (3 agents)",
+            scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests",
+            result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption",
+            report: "2026-06-14__audit-report-full.md"
+          },
+          {
+            date: "2026-06-13",
+            type: "Tools 8-33 sweep",
+            scope: "Tools 8-33 + punchlist",
+            result: "Punchlist sweep across the tool suite",
+            report: "2026-06-13__tools-8-33-audit-sweep.md"
+          },
+          {
+            date: "2026-06-09",
+            type: "Triple audit (google / perf / perp)",
+            scope: "Add-Ins repo",
+            result: "9 findings closed in remediation — CSV-injection guards ×7, culture-invariant formatting, rolling log",
+            report: "2026-06-09__perp-audit.md"
+          }
         ]
       }
     },
