@@ -35,10 +35,7 @@ warning disappears once it succeeds.
 
 ---
 
-## Step 2 — Chat (Cloudflare secret + Access policy)
-
-**Both parts are required. The secret without the policy leaves a public endpoint
-that spends your API credits for anyone who finds it.**
+## Step 2 — Chat (Cloudflare secret + Access, both live)
 
 ### 2a. The secret
 
@@ -50,26 +47,53 @@ Environment variables → Add variable**:
 
 Optional: `BIMWATCH_MODEL` to override the chat model (defaults to `claude-sonnet-5`).
 
-### 2b. The gate — do not skip
+### 2b. The gate — done, via the API (2026-07-25)
 
-Cloudflare dashboard → **Zero Trust → Access → Applications → Add an application →
-Self-hosted**:
+The dashboard UI ("Zero Trust → Access → Applications → Add application →
+Self-hosted") could not create this app: it rejected every attempt with
+`use_clientless_isolation_app_launcher_url can only be enabled for apps with
+private destinations`, including against a fresh policy with that setting
+confirmed off. Cause never identified; worked around instead of fixed.
 
-- Application name: `BIM-Watch chat`
-- Domain: your Pages domain, path `api/*`
-- Policy: **Allow**, rule type **Emails**, value `zeriah.t@gmail.com`
-- Identity provider: One-time PIN, or Google
+**The working path was the API, not the dashboard.** A scoped, one-time API
+token (Account → Access: Apps and Policies → Edit) plus one `POST` created it
+cleanly:
 
-You will log in once in the browser; the cookie persists. The chat box then works
-from any device, including your phone.
+```powershell
+$headers = @{ Authorization = "Bearer $token" }
+$body = @{
+  type = "self_hosted"
+  name = "BIM-Watch chat"
+  session_duration = "24h"
+  destinations = @(@{ type = "public"; uri = "ai-dev-dashboard.pages.dev/api/*" })
+  policies = @("<existing-policy-id>")
+} | ConvertTo-Json -Depth 6
 
-Free tier covers up to 50 users, so this costs nothing.
+Invoke-RestMethod -Method Post `
+  -Uri "https://api.cloudflare.com/client/v4/accounts/93935ceacb9b794dd034df02c223a3d3/access/apps" `
+  -Headers $headers -ContentType "application/json" -Body $body
+```
 
-### What is in place already as backstop
+Two things worth keeping in mind if this is ever rebuilt:
 
-Independent of Access, the Function itself enforces: 600-character question cap,
-30-item context cap, 900-token output cap, and 10 requests/minute/IP. These bound
-the damage if the policy is ever misconfigured — they are not a substitute for it.
+- **`destinations` (array), not `domain` (string).** This account's Access setup
+  is on the newer schema; the legacy flat `domain` field is what triggered the
+  rejection in earlier attempts, not the isolation flag itself.
+- **Use `Invoke-RestMethod`, not `curl.exe`, for the request.** PowerShell's own
+  quote-escaping into a native exe's argv mangled a JSON body full of `\"` and
+  `[...]` on the first attempt — a genuinely unreliable combination on Windows,
+  independent of anything Cloudflare-side.
+
+App ID: `51d20ce7-5c9c-4e82-94c2-901768df078a`. Policy: the existing `me only`
+policy, restricting access to `zeriah.t@gmail.com`.
+
+**Verified live** (private browser session, no cookies): `GET
+/api/bimwatch-chat` redirects to `flat-queen-a958.cloudflareaccess.com` and
+shows a Cloudflare login prompt — no JSON, nothing leaked.
+
+**Backstop, regardless of Access:** the Function itself still enforces a
+600-character question cap, 30-item context cap, 900-token output cap, and
+10 requests/minute per visitor.
 
 ---
 
@@ -171,8 +195,9 @@ below it cannot be tested until the owner-only secrets exist.
       split matches your judgement, then tune `profile.md` if not.
 - [ ] **Cloudflare deploy carries the new files** — verify `bimwatch.js` and
       `bimwatch-archive.json` are served from the Pages URL.
-- [ ] **Chat endpoint answers** — needs the Cloudflare secret.
-- [ ] **Access policy actually blocks** — the one that matters. Verify by opening
-      `/api/bimwatch-chat` in a private window: it must challenge for login, not answer.
-      Until this is confirmed, the endpoint is a public spend endpoint with guardrails,
-      not a protected one.
+- [x] **Access policy actually blocks** — verified 2026-07-25 in a private
+      browser session: `/api/bimwatch-chat` redirects to Cloudflare's login
+      page, no JSON leaked. See "The gate — done, via the API" above.
+- [ ] **Chat endpoint answers** — Access is confirmed blocking; still needs
+      `ANTHROPIC_API_KEY` set as a Cloudflare Pages environment variable
+      before it does anything beyond challenge for login.
