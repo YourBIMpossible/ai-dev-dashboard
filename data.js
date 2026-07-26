@@ -800,7 +800,7 @@ window.DASHBOARD_DATA = {
       oneLiner: "AI-assisted Revit family workflow (multi-repo: Families-by-BIMpossible \"brain\" + BIMpossible-AddIns \"hands\"). Single source of truth is ROADMAP.md: 3 numbered phases (close the RevitLink gap / family-creation geometry primitives / MCP copilot) + a 4th ribbon-button thread + the independent per-family rollout.",
       status: "active",
       phase: "Spans two repos per ROADMAP.md: Families-by-BIMpossible (\"brain\" — Python planner/verifier/harness) + BIMpossible-AddIns (\"hands\" — BIMpossible.RevitLink). Roadmap committed 2026-07-23 (d3dd3de) after nearly being lost unwritten — the doc's own words. Both repos in sync with origin. See progress.phases[] for real status; this field intentionally stays short now that ROADMAP.md is the detailed source of truth.",
-      focus: "Phase 1 is ~90% done (only wire_nested_params + one live end-to-end rehearsal remain) and the ribbon button is code-complete pending Gate B. The button merged, and rehearsal partially run per ROADMAP.md's 2026-07-25 update. The real gate now is ROADMAP.md's open questions -- sequencing, who writes Phase 2's C#, the Phase 3 safety-model choice -- none formally answered yet, and Phase 2 (geometry) / Phase 3 (copilot) can't start for real until they are.",
+      focus: "Phase 1 is ~90% done (only wire_nested_params + one live end-to-end rehearsal remain) and the ribbon button is code-complete pending Gate B. The button merged, and rehearsal partially run per ROADMAP.md's 2026-07-25 update. Phase 3 findings from Autodesk MCP/Assistant platform added per ROADMAP.md's 2026-07-25 update. The real gate now is ROADMAP.md's open questions -- sequencing, who writes Phase 2's C#, the Phase 3 safety-model choice -- none formally answered yet, and Phase 2 (geometry) / Phase 3 (copilot) can't start for real until they are.",
       progress: {
         label: "Roadmap (ROADMAP.md)",
         phases: [
@@ -820,7 +820,8 @@ window.DASHBOARD_DATA = {
       nextActions: [
         "Run Phase 1's live end-to-end rehearsal (LIVE_TEST_RUNBOOK.md) — partially run already per ROADMAP.md — and port wire_nested_params — closes Phase 1",
         "Schedule Gate B (live-Revit click-through) for the ribbon button — merged, waiting on your window",
-        "Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing, Phase 3 safety-model flavor) before Phase 2 or 3 can really start"
+        "Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing, Phase 3 safety-model flavor) before Phase 2 or 3 can really start",
+        "Incorporate Autodesk MCP/Assistant platform findings into Phase 3 planning per ROADMAP.md's 2026-07-25 update"
       ],
       pendingDecisions: [],
       blockers: [],
