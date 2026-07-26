@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-07-25T13:00:10Z",
+  "generated": "2026-07-26T13:00:09Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 10082,
       "edges": 20208,
       "commit": "30e34966",
-      "commitsBehind": 38,
+      "commitsBehind": 43,
       "builtAt": "2026-07-21",
       "stale": true
     },
@@ -21,7 +21,7 @@ window.NETWORKX_IMPACT = {
       "baseline": 0,
       "delta": 0,
       "rootCauses": [],
-      "excludedExternal": 188,
+      "excludedExternal": 189,
       "examples": []
     },
     "hubs": [
@@ -38,8 +38,8 @@ window.NETWORKX_IMPACT = {
         "file": "db/models.py",
         "kind": "file",
         "degree": 91,
-        "churn": 39,
-        "risk": 575.5
+        "churn": 40,
+        "risk": 582.7
       },
       {
         "label": "_serve_pool_schedule()",
@@ -70,24 +70,24 @@ window.NETWORKX_IMPACT = {
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 63,
-        "churn": 39,
-        "risk": 398.4
+        "churn": 40,
+        "risk": 403.4
       },
       {
         "label": "Firm",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 60,
-        "churn": 39,
-        "risk": 379.5
+        "churn": 40,
+        "risk": 384.2
       },
       {
         "label": "main.py",
         "file": "main.py",
         "kind": "file",
         "degree": 62,
-        "churn": 30,
-        "risk": 345.2
+        "churn": 31,
+        "risk": 350.7
       },
       {
         "label": "_by_category()",
@@ -102,8 +102,8 @@ window.NETWORKX_IMPACT = {
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 47,
-        "churn": 39,
-        "risk": 297.3
+        "churn": 40,
+        "risk": 300.9
       },
       {
         "label": "_require_auth()",
@@ -118,8 +118,8 @@ window.NETWORKX_IMPACT = {
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 45,
-        "churn": 39,
-        "risk": 284.6
+        "churn": 40,
+        "risk": 288.1
       }
     ],
     "baseline": {
@@ -137,7 +137,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 0,
-      "finding": "No circular imports. 188 third-party symbols excluded (graphify credits them to the importing file).",
+      "finding": "No circular imports. 189 third-party symbols excluded (graphify credits them to the importing file).",
       "category": "clear"
     },
     {
