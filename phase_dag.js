@@ -40,7 +40,7 @@ window.PHASE_DAG = {
 {
 "id": "6",
 "name": "Platform / Billing + Client-Management",
-"status": "CLOSED",
+"status": "CLOSED (original scope) — reopened 2026-07-27, PLACED not ratified, for new sub-scope below",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -175,7 +175,7 @@ window.PHASE_DAG = {
 {
 "id": "6",
 "name": "Platform / Billing + Client-Management",
-"status": "CLOSED"
+"status": "CLOSED (original scope) — reopened 2026-07-27, PLACED not ratified, for new sub-scope below"
 },
 {
 "id": "7",

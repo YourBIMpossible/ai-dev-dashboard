@@ -1,10 +1,10 @@
 window.AUDIT_FRESHNESS = {
-  "checked": "2026-07-26 19:58:39",
+  "checked": "2026-07-27 06:00:09",
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "lastRun": "2026-07-20",
-      "newestOnDisk": "2026-07-25",
+      "newestOnDisk": "2026-07-27",
       "stale": true
     },
     "addins": {
