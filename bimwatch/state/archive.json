@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-07-27T09:37:21.679278Z",
- "count": 296,
+ "generated_at": "2026-07-27T10:38:28.935642Z",
+ "count": 298,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,7 +9,7 @@
    "last_item_published": "2026-07-22T16:18:07Z",
    "last_modified": "Thu, 23 Jul 2026 02:56:41 GMT",
    "last_status": 200,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,16 +19,16 @@
    "last_item_published": "2026-07-22T08:44:43Z",
    "last_modified": "Wed, 22 Jul 2026 09:17:13 GMT",
    "last_status": 304,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
    "consecutive_failures": 0,
    "last_item_count": 10,
-   "last_item_published": "2026-07-22T05:49:22Z",
+   "last_item_published": "2026-07-27T08:55:23Z",
    "last_status": 200,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -40,7 +40,7 @@
    "last_item_published": "2026-06-16T07:31:25Z",
    "last_modified": "Wed, 24 Jun 2026 08:23:47 GMT",
    "last_status": 304,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -50,7 +50,7 @@
    "last_item_count": 8,
    "last_modified": "Mon, 27 Jul 2026 00:25:17 GMT",
    "last_status": 200,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -60,7 +60,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-24T19:01:06Z",
    "last_status": 304,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -70,30 +70,30 @@
    "last_item_published": "2025-10-10T01:18:00Z",
    "last_modified": "Sat, 25 Jul 2026 15:47:23 GMT",
    "last_status": 200,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": true,
    "stale_reason": "no new items in 290 days (expects ~10)"
   },
   "revit-blog": {
-   "consecutive_failures": 4,
+   "consecutive_failures": 5,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-07-27T09:37:21.679278Z",
+   "last_failure": "2026-07-27T10:38:28.935642Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "4 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "5 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
-   "etag": "W/\"51ce070d76d2aba401f59a35e4b723ec\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-07-01T10:00:00Z",
-   "last_status": 304,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "etag": "W/\"f3da6ec73c42ac40fef38e3750b709ec\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-07-27T10:00:00Z",
+   "last_status": 200,
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -103,17 +103,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"461596b39acb950a67a127be91d1c48f\"",
+   "etag": "W/\"36f4879ea6eee2a5bbf046a09dd4903d\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -123,12 +123,54 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-07-27T09:37:21.679278Z",
+   "last_success": "2026-07-27T10:38:28.935642Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Top 5 New Features in Revit 2027.1 and Revit 2027.2",
+   "url": "https://www.bimpure.com/blog/top-5-new-features-in-revit-2027-1-and-revit-2027-2",
+   "source": "revit-pure",
+   "published": "2026-07-27T10:00:00Z",
+   "summary": "Revit 2027.1 and 2027.2 have both been released with a 5-week gap. Is Autodesk speeding up updates? Read Revit 2027.1 full release notes Read Revit 2027.2 full release notes Here are our favorite features. 1- Tag by Example Added in Revit 2027.2 In the Tag dropdown menu, you will find Tag by Example . This is meant to quickly recreate a tag orientation, host relation, flip, and mirror to other elements. Start by selecting the tag to emulate. Press Enter . Then, select the other elements you want to propagate the tag into. Optionally, you can delete any existing tag for the elements. 2- View Title Snapping Added in Revit 2027.2 When a guide grid is active on a sheet, you can now snap a view title to it. The line extension of the view title can also be snapped to the grid. 3- Rotate Custom Patterns Added in Revit 2027.1 You can now set a rotation angle to custom patterns. 4- Autodesk AI Assistant Improvements Added in Revit 2027.1 and 2027.2 The Autodesk Assistant wasn't great when it was initially released. It was inferior to 3rd party solutions, and it was hard to see the value. But Autodesk is pouring resources into improving it. In my most recent test, it succeeded on more…",
+   "id": "7b44063f5c70a399",
+   "fetched_at": "2026-07-27T10:38:28.935642Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 75,
+    "why": "Two new Revit versions released; Tag by Example and View Title Snapping affect your viewport and annotation automation workflows.",
+    "topics": [
+     "revit-release",
+     "viewport-automation",
+     "tagging"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-27T10:38:28.935642Z"
+   }
+  },
+  {
+   "title": "Python Joins the DevCon MCP Workshop",
+   "url": "https://aps.autodesk.com/blog/python-joins-devcon-mcp-workshop",
+   "source": "aps-blog",
+   "published": "2026-07-27T08:55:23Z",
+   "summary": "Python Joins the DevCon MCP Workshop sajith.subrama… 27 Jul 2026 Sajith Subramanian Poyraz Yildirim Share The hands-on Model Context Protocol (MCP) workshop from DevCon 2026 now ships with a complete Python track , joining the existing Node.js and .NET content. If you build in Python, you can now work through the entire workshop end-to-end without leaving your language of choice — the code, the tooling, and the docs are all there. What is the MCP Workshop? The workshop is a guided, seven-step journey that takes you from a bare MCP server all the way to a production-ready agent grounded in real Autodesk Platform Services (APS) APIs: Build an MCP server and connect it to VS Code and GitHub Copilot. Extend it with external tools — a filesystem tool and a live weather API. Connect to the Autodesk Platform Services (APS) API using 2-legged OAuth to list and create OSS buckets. Add 3-legged OAuth so your agent can call APS APIs on behalf of a signed-in user. Build your own MCP client and wire in an LLM to create a fully autonomous agent. Every step is now available in Python, right alongside the Node.js and .NET versions. What's in the Python Track? The Python track is purely additive —…",
+   "id": "8ee20fc64636560e",
+   "fetched_at": "2026-07-27T10:38:28.935642Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 35,
+    "why": "Python MCP workshop for APS; useful if you bridge Revit tooling to cloud services, but your core work is C# add-ins.",
+    "topics": [
+     "aps",
+     "python",
+     "mcp"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-27T10:38:28.935642Z"
+   }
+  },
   {
    "title": "Revit add-in templates 6.2.3",
    "url": "https://github.com/Nice3point/RevitTemplates/releases/tag/6.2.3",
