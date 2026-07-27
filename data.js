@@ -224,10 +224,10 @@ window.DASHBOARD_DATA = {
           { name: "P16 Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path", pct: 10, note: "CONDITIONAL — Persistent local orchestration hub for cross-tool workflows (Revit, BIMpossible Site, filesystem/git, reporting) via explicit, scoped MCP servers as the default path; GUI/desktop automation admitted only as a named, allowlisted exception for apps with no workable API — under explicit consent, sandboxing, and audit logging, never a general \"control my desktop\" mode. Full rationale, architecture, and the 3-condition go/no-go ratification test: `2026-07-23__Phase16_DesktopOrchestrationHub_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately." }
         ]
       },
-      activity: [3,10,16,5,0,0,0,2,36,9,3,20,16,0],
+      activity: [3,10,16,5,0,0,0,2,36,9,3,20,16,2],
       lastActivity: {
-        date: "2026-07-25",
-        summary: "docs: audit-resolution for CI-1 and WSR9a (0d5b54a)"
+        date: "2026-07-26",
+        summary: "docs(strategy): harvest ecosystem-research findings into decision ledgers (f5c7a5a)"
       },
       branch: "main at a7a434c; 0 ahead of origin",
       git: {
@@ -480,10 +480,10 @@ window.DASHBOARD_DATA = {
           { name: "QA scanners (6/7 deployed)", pct: 72, note: "Unchanged since 07-14 — no scanner commits after that day's audit-remediation fixes (8a1b82a/aced184/d292a38). Core consolidated + audit-hardened; live smokes still owed." }
         ]
       },
-      activity: [0,16,19,4,0,0,0,1,12,2,0,6,11,0],
+      activity: [0,16,19,4,0,0,0,1,12,2,0,6,11,2],
       lastActivity: {
-        date: "2026-07-25",
-        summary: "docs(decision-log): slot ledger -- Task 6 deploy record (7360B902/5816F73D) (1ff1042)"
+        date: "2026-07-26",
+        summary: "ï»¿docs: restore post-audit UI workflow to CLAUDE.md (#44) (1366569)"
       },
       branch: "main; synced with origin",
       git: null,
@@ -811,10 +811,10 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Doesn't block Phase 1/2/3 — only Family Fixer's own promote-to-library step (PHASE1_FAMILY_CHECKLIST.md). PANEL is DONE (gold master, promoted). CB/MTR/DISC SW/XFMR+ALT1 have params added, waiting on human label-rewires in Revit. MV CB + MV CB_DRAWOUT BLOCKED on a scope decision (LV mains vs. true medium-voltage). ~40 annotation-only symbols queued for a batch SL_ rename, needing only a go-ahead." }
         ]
       },
-      activity: [0,0,0,3,0,0,0,0,1,3,2,2,0,0],
+      activity: [0,0,0,3,0,0,0,0,1,3,2,2,0,1],
       lastActivity: {
-        date: "2026-07-24",
-        summary: "docs(roadmap): catch status up to 2026-07-25 â€” button merged, rehearsal partially run (#6) (aa41e62)"
+        date: "2026-07-26",
+        summary: "docs(roadmap): add Autodesk MCP/Assistant platform findings to Phase 3 (7041c59)"
       },
       branch: "main",
       nextActions: [
