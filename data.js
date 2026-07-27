@@ -467,55 +467,38 @@ window.DASHBOARD_DATA = {
       id: "addins",
       name: "Add-Ins / RevitLink",
       icon: "wrench",
-      oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (7 tools SHIP, Check Conflicts unwired, 7 retired, 2 new ideas).",
+      oneLiner: "Revit ribbon add-ins: BIMpossible.RevitLink (all 6 discipline QA add-ins + RevitLink ship as one smoke-tested set) + Family Fixer (ribbon merged) + a new Glossy Glass UI theme, owner-ratified.",
       status: "active",
-      phase: "main at a661924 (2026-07-20), synced with origin. New this week: **Open-in-Revit** — a bimpossible:// protocol handler (new BIMpossible.OpenInRevit project: strict URI validation, registry-based Revit locator, exact-version-only launch policy, atomic pending-open.json handoff, HKCU registration via Deploy-Local.ps1 --register, no admin needed) plus RevitLink's PendingOpenWatcher consumer — pairs with the BIMpossible backend's new cloud-ids endpoint + web R-button (#188) so clicking 'Open in Revit' on the web app actually launches the right model. New xunit suite for the pure parts. Two more draft PRs open, unmerged: #11 (Phase 7 step-2, add-in side — remove the SyncWithCentral force-guard in lockstep with the backend's confirmation flow, stacks with BIMpossible PR #187) and #12 (Family Fixer: probe_family/add_shared_params/go_single_panel pipe operations). Prior week: the 2026-07-12 audit CLOSED (C-01 disproven, all 10 highs fixed) and the CI gap that was C-01's real lesson closed same week (CI now compiles RevitLink on both TFMs).",
-      focus: "Merge #11 (Phase 7 step-2, add-in side) in lockstep with BIMpossible's #187 — they're two halves of the same re-enable and will drift if one lands without the other. Ribbon icon/tooltip polish pass still postponed: 20/37 buttons missing ToolTipImage, Place Callout Sheets' placeholder icon. M-14 (split-level sheet title marker) needs a signature-level redesign — deferred, not scheduled.",
+      phase: "main at 1366569 (2026-07-26), synced with origin. Huge window: a \"Glossy Glass\" UI redesign (feat/glass-alerts, 9 commits, owner-ratified — \"I just went through hours and hours of making that the default for every view\") merged 07-25 (PR #35, ebfdcc8), reconciled with 2 fixes that had landed on main first (PR #26 collection-name, PR #29 room-tag disclosure — confirmed via merge-base ancestor check, both are ancestors of current main). Phase 13 T4 \"Apply BIMpossible Changes\" merged + LIVE-VERIFIED (PR #38/#39, 07-25/07-26). Phase 15a Revit pane merged + live e2e passed (PR #30, 07-25); a separately-rebased 38-commit line was abandoned (only a not-for-merge backup branch survives — owner should confirm nothing of value was lost). PR #40 (\"Passes 1-4\", merged today 07-26 18:44) live-verified in Revit 2026 against a real project file — found + fixed 3 real defects (silent Cancelled-after-commit data loss, Tool 1 self-deleting worksets, a decorative Cancel button) AND a Deploy-Local.ps1 bug that was silently deploying NOTHING (wrong x64 path, exit 0 despite failing). A 2026-07-25 forensic audit found a runtime-clobber incident during this cleanup (glass build briefly overwritten by a main build in the shared deploy slot, then hash-verified restored) — a new \"decision-log slot ledger\" discipline now tracks which branch occupies that shared deploy target.",
+      focus: "Family Fixer's ribbon button is merged but not yet live-clicked, and go_single_panel — its one destructive operation — has never been exercised live; that's the real remaining risk, not a merge gate. Confirm the abandoned phase15a-pane rebase line is safe to lose. Hash-verify the %APPDATA% deploy slot against current HEAD (1366569) — last explicit slot-ledger entry predates PR #40's deploy-script fix.",
       progress: {
         label: "Tracks",
         phases: [
-          { name: "RevitLink tools (9 SHIP, 2 retired, 1 future)", pct: 78, note: "Catalog unchanged since the 07-14 closeout (TOOL_BACKLOG.md static). Since then: SyncWithCentral force-guard removed (#11 be4d6a8, 07-21), Tool3 template-slot fix (#22 8e8664a, 07-21), bimpossible:// open-in-revit handler shipped (#13 a661924, 07-20) + pending-open TTL widened 120s→300s (#24 c188a19, 07-22)." },
-          { name: "Family Fixer (backend merged, ribbon UI unmerged)", pct: 70, note: "4 of 5 backend pipe ops on main — probe_family/add_shared_params/go_single_panel (#12 1ccc43c, 07-21) + add_family_params (#23 2ea3657, 07-22); only wire_nested_params remains unported (scoped, prior art exists). Ribbon UI: 14/14 build tasks done on feat/family-fixer-ribbon (1276/1276 tests, both TFMs), Gate A (net48 Release) PASS. Gate B (live-Revit rehearsal) still awaiting the owner's window — the branch's own status doc says the button has never been clicked in a live Revit. Overnight UX redesign (07-23, b80f74c) fixed 6 of 7 live-test findings same night. Owed before merge: Gate B + icon approval + owner merge decision." },
-          { name: "Duplicate Collection / Replicate Levels", pct: 80, note: "Post-07-14 hardening wave: check-all/uncheck-all + shift-click range-select (9fd4791/c40ac1c, 07-15), progress popups (3368097, 07-15), naming-collision perf fix (65dfa51, 07-15), filter-scoped bulk toggles + debounced filtering (6510f55, 07-21)." },
-          { name: "QA scanners (6/7 deployed)", pct: 72, note: "Unchanged since 07-14 — no scanner commits after that day's audit-remediation fixes (8a1b82a/aced184/d292a38). Core consolidated + audit-hardened; live smokes still owed." }
+          { name: "RevitLink tools (9 SHIP, 2 retired, 1 future)", pct: 84, note: "PR #40 (\"Passes 1-4\", 07-26) live-verified in Revit 2026 against Winchester_ELEC_R26_EXP — found+fixed 3 silent-failure defects (Cancelled-after-commit data loss, Tool 1 self-deleting worksets, decorative Cancel button) and a Deploy-Local.ps1 bug that was silently deploying nothing (wrong x64 path, exit 0)." },
+          { name: "Family Fixer (ribbon merged, Glass-themed)", pct: 78, note: "Ribbon button merged (PR #25, 07-23) and Glass-themed (6c9a139); dialogs migrated to GlassAlert (PR #40). Live-Revit click-through, icon sign-off, and one live go_single_panel execution — the one destructive op — are still not done. 4/5 backend pipe ops in production; only wire_nested_params remains unported." },
+          { name: "Duplicate Collection / Replicate Levels", pct: 80, note: "No activity this window — unchanged since 07-21." },
+          { name: "QA scanners (7/7 deployed)", pct: 88, note: "All 6 discipline QA add-ins + RevitLink now ship and deploy as one smoke-tested set (PR #40, 07-26) — the 7th scanner (Civil) question is answered by inclusion, not a standalone Trade-7 build. Deep per-discipline QA scanning itself still deferred." },
+          { name: "Glossy Glass UI", pct: 92, note: "Owner-ratified theme + GlassAlert layer merged to main (PR #35, ebfdcc8, 07-25) after reconciling with 2 fixes that had landed on main during the theme's development (PR #26 collection-name, PR #29 room-tag disclosure) — confirmed via merge-base ancestor check, not just trusted. All 4 Revit-year deploy slots hash-verified matching." },
+          { name: "Phase 13 T4 — Apply BIMpossible Changes", pct: 90, note: "Merged (PR #38, cfb4cc1, 07-25) and LIVE-VERIFIED same day (BIMpossible_Workspace/01_BuildLog/2026-07-25__T4-live-smoke_RESULTS.md). Task 6 (PR #39, faf9475, 07-26) — idempotency race fix + per-edit apply outcomes posted to edit_log — also merged and live-verified end-to-end." },
+          { name: "Phase 15a Revit pane", pct: 90, note: "Merged (PR #30, 3457c65, 07-25) and live e2e passed (Stage A) same day; backend halves merged in BIMpossible (PR #221/#226). A separately-rebased 38-commit line has no surviving branch except a not-for-merge backup (PR #42) — owner should confirm nothing of value was lost in abandoning it." }
         ]
       },
       activity: [0,16,19,4,0,0,0,1,12,2,0,6,11,2],
       lastActivity: {
         date: "2026-07-26",
-        summary: "ï»¿docs: restore post-audit UI workflow to CLAUDE.md (#44) (1366569)"
+        summary: "﻿docs: restore post-audit UI workflow to CLAUDE.md (#44) (1366569)"
       },
       branch: "main; synced with origin",
       git: null,
-      nextActions: [
-        "Merge PR #11 (Phase 7 step-2, add-in side) together with BIMpossible's #187 — same re-enable, split across two repos, will drift if landed separately",
-        "Review PR #12 (Family Fixer: probe_family/add_shared_params/go_single_panel pipe operations, DRAFT since 07-16)",
-        "Ribbon icon/tooltip polish pass: wire ToolTipImage for 20/37 buttons, fix Place Callout Sheets' placeholder icon",
-        "M-14: signature-level redesign for LevelSheetTitle.Build's split-level continuation marker",
-        "Live-verify Retag All Rooms' orphan-tag fix (95c0ba4) in Revit — shipped without that confirmation",
-        "QA Scanners: live smoke Architectural (4 tools, 21 tests); live spikes for E/M/P/FP/S collectors",
-        "Git hygiene: remove 3 merged/identical worktrees under .claude/worktrees/; resolve 5 unmerged conformance branches (owner sign-off needed, all fork from an aging main)"
-      ],
-      pendingDecisions: [
-        "Civil Shared-Coordinate Audit scanner - scope unanswered (PARKED)"
-      ],
-      blockers: [],
-      reminders: [
-        "Core.dll co-loads in one Revit process: redeploy ALL add-ins together when Core changes",
-        "RoomTagger.TagView:105 still swallows NewRoomTag failures in the fresh-tag pass (flagged, deliberately not fixed 07-14 — changes a shared signature)",
-        "3 stale/missing Trim Out-of-Scope Sheets guide screenshots (M-30, reclassified from a safety finding — the guide's toggle warning text is correct and complete; only images are stale, and they err safe)",
-        "MI-19/MI-20: stale worktrees + 5 unmerged conformance branches — deferred, destructive git ops need explicit sign-off",
-        "Deferred: Deploy-Local.ps1 PS 5.1-safe; Revit dev-mode hot-reload"
-      ],
+      nextActions: ["Family Fixer: live-Revit click-through + icon sign-off + one live go_single_panel execution — the one destructive op never yet run live","Hash-verify the %APPDATA% deploy slot against current HEAD (1366569) — last explicit slot-ledger entry predates PR #40's deploy-script fix","Port wire_nested_params — the one remaining unported Family Fixer backend op","Ribbon icon/tooltip polish pass: wire ToolTipImage for 20/37 buttons, fix Place Callout Sheets' placeholder icon","Git hygiene: resolve remaining unmerged conformance branches (owner sign-off needed)"],
+      pendingDecisions: ["Confirm the abandoned feat/phase15a-revit-pane rebased line (38 commits, no surviving branch except not-for-merge backup PR #42) is safe to lose"],
+      blockers: ["POWER_SYSTEM deletion-list ruling (PR #33) — still an open owner decision, carried over"],
+      reminders: ["Deploy-Local.ps1 writes to a SHARED %APPDATA% Revit Addins folder — hash-check before deploying, never deploy while Revit is open (the 07-25 forensic audit found this exact guard skipped once)","\"Backed up to origin\" is not \"safe to overwrite at runtime\" — the 07-25 postmortem's core lesson; a clean worktree means committed, not complete","Core.dll co-loads in one Revit process: redeploy ALL add-ins together when Core changes"],
       links: [
-        {
-          label: "Tool backlog",
-          path: "F:\\AI-Dev\\Add-Ins\\TOOL_BACKLOG.md"
-        },
-        {
-          label: "Decision log (2026-05-10)",
-          path: "F:\\AI-Dev\\Add-Ins\\decision-log\\2026-05-10.md"
-        }
+        { label: "Runtime slot ledger", path: "F:\\AI-Dev\\Add-Ins\\decision-log\\2026-07-25__runtime-slot-handoff.md" },
+        { label: "2026-07-25 forensic audit (clobber + cleanup)", path: "F:\\AI-Dev\\Add-Ins\\audits\\2026-07-25__session-audit-cleanup-stream.md" },
+        { label: "T4 live-smoke results", path: "F:\\AI-Dev\\BIMpossible_Workspace\\01_BuildLog\\2026-07-25__T4-live-smoke_RESULTS.md" },
+        { label: "Tool backlog", path: "F:\\AI-Dev\\Add-Ins\\TOOL_BACKLOG.md" }
       ],
       recent: [
         "2026-07-20 - feat(open-in-revit): bimpossible:// protocol handler (new BIMpossible.OpenInRevit project) + RevitLink PendingOpenWatcher (a661924) — pairs with BIMpossible's cloud-ids endpoint (#188) so the web app's 'Open in Revit' button actually launches the model",
@@ -800,15 +783,15 @@ window.DASHBOARD_DATA = {
       oneLiner: "AI-assisted Revit family workflow (multi-repo: Families-by-BIMpossible \"brain\" + BIMpossible-AddIns \"hands\"). Single source of truth is ROADMAP.md: 3 numbered phases (close the RevitLink gap / family-creation geometry primitives / MCP copilot) + a 4th ribbon-button thread + the independent per-family rollout.",
       status: "active",
       phase: "Spans two repos per ROADMAP.md: Families-by-BIMpossible (\"brain\" — Python planner/verifier/harness) + BIMpossible-AddIns (\"hands\" — BIMpossible.RevitLink). Roadmap committed 2026-07-23 (d3dd3de) after nearly being lost unwritten — the doc's own words. Both repos in sync with origin. See progress.phases[] for real status; this field intentionally stays short now that ROADMAP.md is the detailed source of truth.",
-      focus: "Phase 1 is ~90% done (only wire_nested_params + one live end-to-end rehearsal remain) and the ribbon button is code-complete pending Gate B. The button merged, and rehearsal partially run per ROADMAP.md's 2026-07-25 update. Phase 3 findings from Autodesk MCP/Assistant platform added per ROADMAP.md's 2026-07-25 update. The real gate now is ROADMAP.md's open questions -- sequencing, who writes Phase 2's C#, the Phase 3 safety-model choice -- none formally answered yet, and Phase 2 (geometry) / Phase 3 (copilot) can't start for real until they are.",
+      focus: "Phase 1's live rehearsal ran 07-22 (Revit 2026, via revitlink_pipe_adapter): probe_family, add_shared_params, and add_family_params all verified; go_single_panel — the one destructive op — was NOT exercised, which the roadmap itself now calls \"the real remaining Phase 1 risk.\" The ribbon button MERGED (Add-Ins PR #25, 07-25) — no longer awaiting a window. Phase 3 gained real Autodesk-platform findings (Revit Public MCP Server Tech Preview + in-product Assistant GA) that narrow its scope to family-editing + the safety model specifically, and surface a new dependency: reconcile with BIMpossible_Workspace's own \"Phase 16 — Desktop Orchestration Hub\" ledger proposal before scoping further — two related MCP initiatives now exist in two repos.",
       progress: {
         label: "Roadmap (ROADMAP.md)",
         phases: [
-          { name: "Phase 1 — close the RevitLink method gap", pct: 90, note: "4 of 5 methods done in production BIMpossible.RevitLink: probe_family/add_shared_params/go_single_panel (Add-Ins #12) + add_family_params (Add-Ins #23). wire_nested_params NOT started (scoped, prior art exists). The harness↔production pipe adapter is done + hardened (Families PR #1, #2/#3/#4). What's actually left to call this closed, per ROADMAP.md: port wire_nested_params, then run the live end-to-end rehearsal (real .rfa writes) — not yet run." },
-          { name: "Phase 2 — family-creation geometry primitives", pct: 0, note: "NOT STARTED. New RevitLink methods to generate families from scratch via an image/spec — create_extrusion, create_reference_plane, create_sweep, create_blend, add_parameter (the FamFab pattern: Claude turns an image into structured JSON, a C# add-in builds the geometry via FamilyItemFactory). Blocked on open questions in ROADMAP.md: who writes the C#, and sequencing against Phase 1/the button thread." },
-          { name: "Phase 3 — wrap RevitLink as an MCP server (live copilot)", pct: 0, note: "NOT STARTED. Exposes whatever method set exists (Phase 1 + 2) over MCP so families become chat-drivable directly (\"add a KVA label to this family\") instead of only script-driven. Two flavors identified: wrap the existing typed methods as MCP tools (RECOMMENDED — same safety model, just a transport swap) vs. extending the separate dev-time TCP-8080 code-execution bridge (more powerful, materially less safe). Decision still open, along with what \"the current assistant\" concretely targets." },
-          { name: "Fourth thread — Revit ribbon button (not one of the 3 phases)", pct: 90, note: "A deterministic, no-AI, one-click way for drafters to run the standard operations — not blocked by anything above, calls the same Phase 1 operations in-process. Code-complete on feat/family-fixer-ribbon (Add-Ins): 14/14 build tasks done, 1276/1276 tests, both TFMs, Gate A (net48 Release) PASS. Gate B (live-Revit rehearsal) + icon approval + owner merge decision still owed — the button has never been clicked in a live Revit yet. ROADMAP.md itself had this marked \"Not started\" until corrected today (c72a2a9) — exactly the kind of drift its own preamble warns about." },
-          { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Doesn't block Phase 1/2/3 — only Family Fixer's own promote-to-library step (PHASE1_FAMILY_CHECKLIST.md). PANEL is DONE (gold master, promoted). CB/MTR/DISC SW/XFMR+ALT1 have params added, waiting on human label-rewires in Revit. MV CB + MV CB_DRAWOUT BLOCKED on a scope decision (LV mains vs. true medium-voltage). ~40 annotation-only symbols queued for a batch SL_ rename, needing only a go-ahead." }
+          { name: "Phase 1 — close the RevitLink method gap", pct: 90, note: "Live rehearsal ran 07-22 against Revit 2026: probe_family ✅, add_shared_params ✅ (byte-identical wire contract), add_family_params ✅ (stamp+verify clean). go_single_panel — the one destructive op — NOT exercised; the roadmap calls this the real remaining risk, not wire_nested_params (still unported, but additive/low-risk by comparison). Judgment model corrected: gold-master comparison retired for a user-authored family-standard.json (verify_standard.py + dependents realigned, PR #7)." },
+          { name: "Phase 2 — family-creation geometry primitives", pct: 0, note: "NOT STARTED — zero methods built, no schema written, no prototype run. Blocked on open questions in ROADMAP.md: who writes the C#, and sequencing against Phase 1/the button thread." },
+          { name: "Phase 3 — wrap RevitLink as an MCP server (live copilot)", pct: 0, note: "NOT STARTED. Gained real findings (07-26): Autodesk's own Revit Public MCP Server (Tech Preview) + in-product Assistant GA (Revit 2027.2) are read-only today but pointed at writes, and notably don't cover family editing — narrows this phase's scope to family-editing + the safety model specifically. New dependency: reconcile with BIMpossible_Workspace's separate \"Phase 16 — Desktop Orchestration Hub\" ledger proposal (same MCP-first direction, different repo) before scoping further." },
+          { name: "Fourth thread — Revit ribbon button (not one of the 3 phases)", pct: 95, note: "MERGED (Add-Ins PR #25, 2026-07-25) — flipped from \"code-complete pending Gate B\" to shipped. Glass-themed same window (Add-Ins 6c9a139). Live-Revit click-through and icon sign-off are still owed but non-blocking." },
+          { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
       activity: [0,0,0,3,0,0,0,0,1,3,2,2,0,1],
@@ -817,12 +800,7 @@ window.DASHBOARD_DATA = {
         summary: "docs(roadmap): add Autodesk MCP/Assistant platform findings to Phase 3 (7041c59)"
       },
       branch: "main",
-      nextActions: [
-        "Run Phase 1's live end-to-end rehearsal (LIVE_TEST_RUNBOOK.md) — partially run already per ROADMAP.md — and port wire_nested_params — closes Phase 1",
-        "Schedule Gate B (live-Revit click-through) for the ribbon button — merged, waiting on your window",
-        "Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing, Phase 3 safety-model flavor) before Phase 2 or 3 can really start",
-        "Incorporate Autodesk MCP/Assistant platform findings into Phase 3 planning per ROADMAP.md's 2026-07-25 update"
-      ],
+      nextActions: ["Run a live go_single_panel execution against a real family — the one destructive Phase 1 op never yet exercised live","Port wire_nested_params to close Phase 1 fully","Reconcile Phase 3's scope with BIMpossible_Workspace's Phase 16 (Desktop Orchestration Hub) proposal before scoping further","Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing) before Phase 2 can start"],
       pendingDecisions: [],
       blockers: [],
       reminders: ["ROADMAP.md (repo root) is the single source of truth for this whole multi-repo effort — update its status lines whenever a phase moves, in whichever repo/session does the moving","Multiple sessions/worktrees can work this roadmap in parallel for source edits, but Deploy-Local.ps1 writes to a SHARED %APPDATA% Revit Addins folder, last-writer-wins — only one session may hold the deploy target (mid-rehearsal/mid-deploy) at a time"],
@@ -846,8 +824,8 @@ window.DASHBOARD_DATA = {
       icon: "cube",
       oneLiner: "Portable, fully-local LLM inference + automation platform. Dev on the RTX 5080 now; relocates to a dedicated RTX 3090 box by one .env line (OLLAMA_HOST).",
       status: "active",
-      phase: "Repo live + private (YourBIMpossible/AI-Server), CI green (131 tests pass, up from 83). WP-A/B/C/F all merged via PR #1-4 (06-16/17); WP-D1 merged via PR #5. The 2026-07-12 incremental audit (regression-check + review of the new dictation-cleanup proxy) raised 11 findings, all fixed same session in f37d165 — current HEAD, tree clean. 11 days quiet since.",
-      focus: "WP-E (ops/serving hardening) and WP-G2 (advanced/agentic tooling) are the remaining untouched work packages — a worktree-harness branch has 7/8 WP-G2-adjacent tasks done but unmerged. WP-D3's last piece (owner's G:-hosted SKILL.md cutover) is the only WP-D item still open.",
+      phase: "Repo live + private (YourBIMpossible/AI-Server); main at 413bdc9, 3 commits ahead of origin (unpushed docs) + uncommitted PROGRAM_PLAN.md/README.md edits — an active session, not stale. New since 07-12: a \"pickup_checker\" tool built on a separate unmerged branch/worktree (worktree-pickup-checker) — see progress.phases[] below. WP-A/B/C/F/D1 all merged and stable; no regressions found.",
+      focus: "pickup_checker's Milestone-1 code is done (14/14 tasks, 67/67 tests) but its own spec's ship-gate — 4/4 golden-set gates passing on real labeled data — is unmet, and the code isn't even merged to main yet. WP-E (ops/serving hardening) and WP-G2 (advanced/agentic tooling) remain the untouched work packages otherwise.",
       progress: {
         label: "Work packages",
         phases: [
@@ -855,10 +833,11 @@ window.DASHBOARD_DATA = {
           { name: "WP-A Core library (aiserver)", pct: 100, note: "Merged PR #1 (06-17); hardened (CLIENT-2, CONFIG-1/2) in f37d165 (07-12); covered by the 131-pass suite." },
           { name: "WP-B RAG / knowledge", pct: 100, note: "Merged PR #2 (06-17); ingest/query/drift/store/chunk shipped; hardened (RAG-1,2,4,5,6) in f37d165." },
           { name: "WP-C Automation suite", pct: 100, note: "Merged PR #3 (06-17); framework + daily_digest + weekly_rollup + decision_drift + Windows task registration shipped; hardened (AUTO-2,6) in f37d165." },
-          { name: "WP-D Dashboard + integration", pct: 90, note: "D1 live (this card, merged PR #5, 06-17). D2 built + enabled in PC-Monitor (sources/ollama.py, config.json enabled=true, audited 07-12). D3 --engine deterministic|local flag built in AI-Brain-Data; only the owner's G:-hosted SKILL.md cutover remains." },
+          { name: "WP-D Dashboard + integration", pct: 90, note: "D1 live (this card, merged PR #5, 06-17). D2 built + enabled in PC-Monitor. D3 --engine flag built in AI-Brain-Data; only the owner's G:-hosted SKILL.md cutover remains." },
           { name: "WP-F Eval harness", pct: 100, note: "Merged PR #4 (06-16); cases/run/report/baseline/scoring shipped; hardened (EVAL-1..5) in f37d165." },
-          { name: "Dictation-cleanup proxy (new, ungated)", pct: 90, note: "OpenWhispr dictation-cleanup proxy shipped (3c4d4e6) and hardened same-session (DP-1..7 in f37d165) — a real shipped subsystem that wasn't tracked as a work package before." },
-          { name: "WP-E/G Ops, advanced", pct: 5, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A worktree-harness branch (7/8 tool-loop tasks done, aimed at WP-G2) is unmerged as of 07-12." }
+          { name: "Dictation-cleanup proxy", pct: 90, note: "OpenWhispr dictation-cleanup proxy shipped (3c4d4e6) and hardened (DP-1..7 in f37d165). No activity since 07-10." },
+          { name: "PDF pickup checker (new, unmerged)", pct: 60, note: "Automates \"did every redline get addressed\" QA on reissued drawing sets — compares only markup-anchored regions (not full-sheet diffing), and only ever claims a region changed/unchanged, never that a redline was \"addressed\" (a human judgment) — enforced structurally via a MaxClaim field. M1 detection core: 14/14 planned tasks built, 67/67 tests pass, CLI works end-to-end for annotation-form markups. BUT the spec's own ship gate (4/4 golden-set gates pass on real labeled data, §13) is unmet — zero labeled golden-set jobs exist, 3/4 gates report \"no data.\" Code sits on an unmerged worktree-pickup-checker branch, not main." },
+          { name: "WP-E/G Ops, advanced", pct: 5, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12." }
         ]
       },
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -867,7 +846,7 @@ window.DASHBOARD_DATA = {
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
       },
       branch: "main at f37d165",
-      nextActions: ["Merge or continue the worktree-harness branch (7/8 tasks done, WP-G2-adjacent tool-loop work)","WP-D3: land the owner's G:-hosted SKILL.md cutover — last open WP-D item","Start WP-E (serving/ops hardening) when ready — currently untouched"],
+      nextActions: ["Label a real GoldenSet v1.0 for pickup_checker and run its 4 ship gates against real data","Merge worktree-pickup-checker to main once the golden-set gate is met","Merge or continue the worktree-harness branch (7/8 tasks done, WP-G2-adjacent)","WP-D3: land the owner's G:-hosted SKILL.md cutover — last open WP-D item"],
       pendingDecisions: [
         "3090 box OS (Ubuntu Server vs Windows) + runtime (Ollama now vs vLLM later) - see build plan"
       ],
@@ -968,39 +947,28 @@ window.DASHBOARD_DATA = {
       icon: "folder",
       oneLiner: "Strategy docs, build logs, prompts, and diagrams that support the BIMpossible platform repo. Phase status ledgers, wave logs, Claude startup prompts, and design proposals all live here.",
       status: "active",
-      phase: "main branch, synced with origin. Last commit ae4b7af (2026-07-16 05:21): docs(write-spine) — recorded items 1/3/4/5 of the convergence plan (contract shipped, Schedule-Push re-spec direction, the two-lane audit boundary, an Audit & History Pattern doc-reconciliation addendum); also corrected the PHASE-STATUS Phase-7/Phase-3 rows (DA4R = reserved name only, no code — 'scaffolded' overstated it) and updated WAVE-STATUS Wave 29 with that night's four ships. Nothing has landed in this repo since — 5 days quiet while the real activity moved to three unmerged draft PRs in the CODE repo (Phase 7/8/13 work) that this ledger doesn't yet reflect. Key sources of truth: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
-      focus: "Place Phase 13's companion Wave 23 row in WAVE-STATUS.md — drafted paste-ready 2026-06-26, still unplaced, and now more urgent since real Phase 13 code exists on a draft PR. Write a Phase 15 definition doc (it entered build with no proposal/ratification artifact, unlike 13/14). Get WSR8's decision docs + buildlogs onto main — stranded on a docs-repo branch while main's decision-log/INDEX.md has nothing newer than 2026-07-07.",
+      phase: "main branch, synced with origin except 1 unpushed local commit (`1cd954a`, active session). ~50 commits 07-24->07-26: ecosystem-research findings ratified into decision ledgers (eco-3/4/7/5); a structure-sprawl audit closed at zero, independently re-verified; a 2026-07-25 session forensic audit filed after a runtime clobber during Add-Ins/Families cleanup (now resolved — see the addins card); prod auth verified working 07-25; Phase 13 T4 + Phase 15a rows corrected to merged+live in the ledger. Key sources of truth unchanged: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
+      focus: "Ratify eco-5 (Phase 10 portfolio guardrail) — still \"researching\" despite a completed Speckle competitive comparison. Confirm the abandoned feat/phase15a-revit-pane rebased line (38 commits, no surviving branch) is safe to lose — cross-referenced from the addins card's forensic audit. Land the active, uncommitted Task 6 edit-log-contract design doc once finalized.",
       progress: {
         label: "Content areas",
         phases: [
-          { name: "Strategy + ledgers", pct: 90, note: "PHASE-STATUS, WAVE-STATUS, STATE-LIVE live and updated regularly — STATE-LIVE backups daily through 07-23; WAVE-STATUS last commit ae4b7af (07-16); Phase 16 row added 07-23 (CONDITIONAL/PROPOSAL). Canonical Guide v2 last touched 06-25." },
-          { name: "Prompts + skills", pct: 85, note: "Core 3 files (startup prompt, project context, DEBUG_3_STAGE) stable since 06-01; grown to 6 .claude/skills/, 5 agents, 7 commands (06-28, e9d8af1) + a full bimpossible-audit-skill package, SKILL.md + 6 reference docs (06-26, 95fc936)." },
-          { name: "Design proposals + architecture", pct: 85, note: "design-docs/ grew 2→13 files, latest 07-21 (c6343c3) — Change-Set build plan, DA4R APS strategy, UX research, write-spine convergence; plus root Phase13/14/16 PhaseDefinition proposals + a 5-doc ProjectRecipe set." }
+          { name: "Strategy + ledgers", pct: 90, note: "Ecosystem research harvested into decision ledgers: eco-3 (generic-PM exclusion) ratified; eco-4 (annotation automation) denied, moved to reopenable Watchlist FG-R3; eco-5 (Phase 10 portfolio guardrail) extended w/ a Speckle competitive comparison, still \"researching\"; eco-7 (MCP scope) corrected researching→approved (f5c7a5a, 1cd954a — latter unpushed, active session). PHASE-STATUS/STATE-LIVE hand-updated same day for Phase 13 T4 + Phase 15." },
+          { name: "Repo hygiene + workflow guardrails", pct: 92, note: "Structure-sprawl audit closed \"sprawl reaches ZERO,\" independently re-verified in a second pass that also found+cleaned 6 stale remote refs (5f27190, 8061e1a, 7604960, 20d505d, cde8c5b, all 07-24). 2026-07-25 session forensic audit filed after a runtime clobber during Add-Ins/Families cleanup — glass build briefly overwritten by main, hash-verified restore, since fully reconciled (see the addins card). Prod auth verified working 07-25 + a 3-minute regression recipe written (5c63239)." },
+          { name: "Design proposals + architecture", pct: 88, note: "design-docs/ grew 13→16 files: Phase 13 T4 \"Apply BIMpossible Changes\" plan + reality-check + self-contained handoff doc (2bea7ec, cd19fc5, b835120); a new Task 6 edit-log-contract plan (untracked, active session). Write-engine type-param design brief added (1cd954a). Open-in-Revit cross-browser UX plan explicitly PARKED, not to be implemented (f3d6fd4)." },
+          { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [7,3,4,1,3,6,3,0,0,0,1,13,3,0],
+      activity: [1,3,6,3,0,0,0,1,13,3,1,11,11,1],
       lastActivity: {
-        date: "2026-07-22",
-        summary: "docs(phase8): PHASE-STATUS row 8 -> LIVE + C4R API-access request (231c309)"
+        date: "2026-07-26",
+        summary: "docs(strategy): harvest ecosystem-research findings into decision ledgers (f5c7a5a)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
-      nextActions: [
-        "Place Phase 13's companion Wave 23 row in WAVE-STATUS.md — drafted paste-ready 2026-06-26 §2, still unplaced, now more pressing since real Phase 13 code exists on draft PR #186",
-        "Write a Phase 15 definition doc — it entered build with no proposal/ratification artifact (13 and 14 both have one)",
-        "Get WSR8's decision docs + buildlogs onto main; backfill decision-log/INDEX.md (nothing newer than 2026-07-07)",
-        "Once #186/#187/#189 merge in the code repo, update PHASE-STATUS/WAVE-STATUS to reflect real Phase 7/8/13 progress — this ledger doesn't know about them yet",
-        "Commit the pending uncommitted files (16 as of 2026-07-21)"
-      ],
-      pendingDecisions: [
-        "Ratify Phase 13 (flip PLANNED → ACTIVE) and promote Phase 14 — both rows are now on the ledger but neither is ratified; placing a row was not ratifying it"
-      ],
+      nextActions: ["Land the active Task 6 edit-log-contract design doc (currently untracked) once finalized","Push the unpushed local commit (1cd954a) once this session's eco-research work is ready to share","Ratify eco-5 (Phase 10 portfolio guardrail) — Speckle comparison done, still marked \"researching\""],
+      pendingDecisions: ["Ratify eco-5 (Phase 10 portfolio guardrail) — Speckle comparison done, still marked \"researching\"","Confirm the abandoned feat/phase15a-revit-pane rebased line (38 commits, no surviving branch) is safe to lose — cross-referenced from Add-Ins' 07-25 forensic audit"],
       blockers: [],
-      reminders: [
-        "PHASE-STATUS.md gained Phases 13/14/15 on 2026-07-15 — P13's row had sat paste-ready and unplaced since 2026-06-26; P14 was propose-only; P15 had no doc at all despite being the furthest along. Statuses recorded as their docs define them (13 unratified, 14 propose-only)",
-        "This ledger is 5 days behind the real Phase 7/8/13 activity, which is happening on 3 unmerged draft PRs in the code repo — nothing here reflects it until those PRs land and someone updates PHASE-STATUS/WAVE-STATUS accordingly",
-        "16 uncommitted files as of 2026-07-21 (routine backup rotations + ledger updates)"
-      ],
+      reminders: ["2026-07-25 session forensic audit (`02_Reference/Audit Reports/2026-07-25__session-audit-addins-cleanup-runtime-clobber.md`) is a process/custody postmortem, not a code-quality `/audit` report — it won't appear in `_audit-runs.md` and its findings live in narrative fields on the addins/families cards, not in any audit finding-count","Decision ledger for ecosystem research: 00_Strategy/Dashboard/strategy_decisions_ledger.md (eco-N items)"],
       links: [
         { label: "Local workspace", path: "F:\\AI-Dev\\BIMpossible_Workspace" },
         { label: "Phase status", path: "F:\\AI-Dev\\BIMpossible_Workspace\\00_Strategy\\BIMpossible_PHASE-STATUS.md" },
@@ -1032,10 +1000,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [4,2,3,4,5,2,3,2,2,2,2,21,3,6],
+      activity: [4,5,2,3,2,2,2,2,21,3,12,6,11,10],
       lastActivity: {
-        date: "2026-07-23",
-        summary: "content: families roadmap was 3-line-summarized from README, not the real docs (c63a7bc)"
+        date: "2026-07-26",
+        summary: "dashboard refresh 2026-07-26 19:58 (feb818f)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
@@ -1072,7 +1040,7 @@ window.DASHBOARD_DATA = {
           { name: "AI-Server integration", pct: 60, note: "sources/ollama.py (Ollama HTTP-API polling: model+VRAM, endpoint up/down, unload tracking) built, README-documented, unit-tested, and enabled=true in config.json — actively collecting on this rig now. Not yet deployed to a standalone 3090 AI-Server box (hardware not assembled)." }
         ]
       },
-      activity: [0,0,3,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-07-12",
         summary: "Record resolution of the 2026-07-12 audit findings in the report itself (bb97b0c)"
