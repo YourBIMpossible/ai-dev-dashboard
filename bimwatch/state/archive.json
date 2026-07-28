@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-07-27T10:38:28.935642Z",
- "count": 298,
+ "generated_at": "2026-07-28T08:21:22.535313Z",
+ "count": 302,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,48 +9,48 @@
    "last_item_published": "2026-07-22T16:18:07Z",
    "last_modified": "Thu, 23 Jul 2026 02:56:41 GMT",
    "last_status": 200,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-07-22T08:44:43Z",
-   "last_modified": "Wed, 22 Jul 2026 09:17:13 GMT",
-   "last_status": 304,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-07-28T07:30:13Z",
+   "last_modified": "Tue, 28 Jul 2026 07:30:13 GMT",
+   "last_status": 200,
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
    "consecutive_failures": 0,
    "last_item_count": 10,
-   "last_item_published": "2026-07-27T08:55:23Z",
+   "last_item_published": "2026-07-27T14:01:44Z",
    "last_status": 200,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "\"0fa477406962d24a1f6556e4fd312505\"",
+   "etag": "W/\"b84dc0c2050a61f0efdde2c12dc01485\"",
    "last_failure": "2026-07-25T20:06:02.422958Z",
-   "last_item_count": 0,
-   "last_item_published": "2026-06-16T07:31:25Z",
-   "last_modified": "Wed, 24 Jun 2026 08:23:47 GMT",
-   "last_status": 304,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_item_count": 10,
+   "last_item_published": "2026-07-27T14:49:23Z",
+   "last_modified": "Tue, 28 Jul 2026 07:31:09 GMT",
+   "last_status": 200,
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"c0c8fc1dfcb23379a0b746ad3b671b81\"",
+   "etag": "W/\"17f189bb6874eb768dd8415ee2b36956\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 27 Jul 2026 00:25:17 GMT",
+   "last_modified": "Tue, 28 Jul 2026 06:43:58 GMT",
    "last_status": 200,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -60,7 +60,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-24T19:01:06Z",
    "last_status": 304,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -70,30 +70,30 @@
    "last_item_published": "2025-10-10T01:18:00Z",
    "last_modified": "Sat, 25 Jul 2026 15:47:23 GMT",
    "last_status": 200,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": true,
-   "stale_reason": "no new items in 290 days (expects ~10)"
+   "stale_reason": "no new items in 291 days (expects ~10)"
   },
   "revit-blog": {
-   "consecutive_failures": 5,
+   "consecutive_failures": 6,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-07-27T10:38:28.935642Z",
+   "last_failure": "2026-07-28T08:21:22.535313Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "5 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "6 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
    "etag": "W/\"f3da6ec73c42ac40fef38e3750b709ec\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-07-27T10:00:00Z",
-   "last_status": 200,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_status": 304,
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -103,17 +103,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"36f4879ea6eee2a5bbf046a09dd4903d\"",
+   "etag": "W/\"f2e3dab24de4d85aca51a49a2d7bcc30\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -123,12 +123,75 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-07-27T10:38:28.935642Z",
+   "last_success": "2026-07-28T08:21:22.535313Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Revizto opens project data to external AI platforms via new API and MCP server",
+   "url": "https://aecmag.com/news/revizto-opens-project-data-to-external-ai-platforms-via-new-api-and-mcp-server/",
+   "source": "aec-magazine",
+   "published": "2026-07-28T07:30:13Z",
+   "summary": "Developer portal, model API and Model Context Protocol integration allow AECO teams to connect ChatGPT, Claude or Copilot directly to live Revizto data Revizto has launched a set of integration capabilities designed to let architecture, engineering, construction and operations teams connect external AI platforms directly to structured project data held within the Revizto environment. The release comprises three components: a Model Context Protocol (MCP) server, a Model and Object Properties API, and a Developer Portal for managing integrations. The MCP server acts as a bridge between Revizto and any large language model, translating project data into a format that AI agents can query without requiring custom integration work. In practical terms, a project manager could use natural language prompts to ask which fire doors are missing certification or what the top unresolved clashes on a particular level are, and receive answers drawn from live project data rather than from a static export or separate spreadsheet. The Model and Object Properties API provides real-time access to model and object metadata, including material types, systems, fire ratings and quantities, without opening…",
+   "id": "f25cc3ffb65dbac5",
+   "fetched_at": "2026-07-28T08:21:22.535313Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 35,
+    "why": "Revizto's MCP/API approach shows a pattern for exposing structured model data to LLMs; worth understanding even though you target Revit natively.",
+    "topics": [
+     "interop",
+     "ai-integration",
+     "api-patterns"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-28T08:21:22.535313Z"
+   }
+  },
+  {
+   "title": "LOIN to IDS: How to Create IDS Files With AI in Minutes",
+   "url": "https://bimcorner.com/loin-to-ids/",
+   "source": "bim-corner",
+   "published": "2026-07-27T14:49:23Z",
+   "summary": "“It’s a continuation. Most of the requirements stay the same. Should be quick.” That’s what we told ourselves at the start of phase two on the New Stavanger University Hospital. The requirements were mostly written, we just had to adjust them for lessons learned. Easy. It wasn’t. Adjusting them turned into a full property audit, changes to the shared parameters file across every discipline, hunting duplicates, fixing the naming convention, untangling conflicting logic, and long feedback loops with every stakeholder. Two full weeks of cleaning, and that was with a solid starting point. Without proper templates, add another two. If that feels familiar, good. It means you’ve lived it too. It’s normal BIM life on a big project. Except that document, the one that ate two weeks, is something your model checker can’t read. Not the Excel. Not the PDF. Nothing. So before you validate a single model, somebody has to translate those requirements one more time, into the only language a checker understands. It’s called IDS. And doing that by hand is the most mind-numbing job in the chain. This post is about handing that job to AI. What is IDS - and why Excel or a PDF won't cut it Two quick…",
+   "id": "ed8a0bbaf07921b9",
+   "fetched_at": "2026-07-28T08:21:22.535313Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "IDS/LOIN workflow and AI-assisted requirement generation directly relevant to your audit and family library tooling; concrete problem-solving technique.",
+    "topics": [
+     "ifc",
+     "audit-tooling",
+     "ai-technique"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-28T08:21:22.535313Z"
+   }
+  },
+  {
+   "title": "Introducing queue visibility for Automation API",
+   "url": "https://aps.autodesk.com/blog/introducing-queue-visibility-automation-api-3",
+   "source": "aps-blog",
+   "published": "2026-07-27T14:01:44Z",
+   "summary": "Introducing queue visibility for Automation API Rami Kuret 27 Jul 2026 Share By Rami Kuret, Product Manager, Autodesk Platform Services Automation API is adding queue visibility. System-wide queue health metrics are live today, and a new per-job queue position field ships in two weeks, August 10th 2026. Today, when you submit a workitem and poll GET /workitems/{id} , a pending status is all you get. You can’t tell whether the system is busy, whether your job is stuck, or whether a delay is on Autodesk’s side or your own. Queue visibility addresses this, and we’re delivering it in two steps. System-level queue health metrics are live today: query recent queue-time percentiles for any engine to see whether the system is running smoothly or under load. Job-level queue position, which tells you approximately where your workitem stands while it is pending, ships in two weeks as a new approximateQueuePosition field on GET /workitems/{id} . We’re announcing it now, ahead of the change, so you have a two-week window to adapt if you need it. ( Automation API lets developers run Revit®, AutoCAD®, Inventor, 3ds Max, and Fusion plugins and workflows programmatically in the cloud on a…",
+   "id": "2b3ce355c5ba7e2c",
+   "fetched_at": "2026-07-28T08:21:22.535313Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 40,
+    "why": "Automation API queue visibility ships in two weeks; matters if you use APS workitems for cloud processing, less so for desktop-only add-ins.",
+    "topics": [
+     "aps",
+     "automation-api",
+     "feature-release"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-28T08:21:22.535313Z"
+   }
+  },
   {
    "title": "Top 5 New Features in Revit 2027.1 and Revit 2027.2",
    "url": "https://www.bimpure.com/blog/top-5-new-features-in-revit-2027-1-and-revit-2027-2",
@@ -210,6 +273,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-07-25T20:06:02.422958Z"
+   }
+  },
+  {
+   "title": "Data Exchange Webinar: Summer Updates",
+   "url": "https://aps.autodesk.com/blog/data-exchange-webinar-summer-updates",
+   "source": "aps-blog",
+   "published": "2026-07-24T13:30:54Z",
+   "summary": "Data Exchange Webinar: Summer Updates Lejla Secerbegovic 27 Jul 2026 Lejla Secerbegovic Gaurav Bhamre Trupti Deshpande Anna Baranova Share Summer is usually the season for slowing down. Unless you're building new Data Exchange capabilities. ☀️ Over the past few months, our team has been working on new connectors, expanding existing workflows, and making it easier to connect data across Autodesk products and beyond. We're excited to share what we've been working on in our upcoming webinar. Join us on August 5 - Register now! Data Exchange: Summer Updates - What's New and What's Coming Next In this session, we'll showcase several recent and upcoming enhancements, including: The next generation of the Power BI Connector - A completely redesigned experience with new capabilities for reporting and analytics. Upcoming Model Coordination support - Bring coordination data into your connected workflows. Civil 3D beta update - Learn about the latest improvements for infrastructure workflows. A look ahead - Get a preview of what's on the Data Exchange roadmap and where we're headed next. Whether you're already using Data Exchange or just exploring ways to improve interoperability across your…",
+   "id": "7af34717a7871d37",
+   "fetched_at": "2026-07-28T08:21:22.535313Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Webinar announcement with no concrete detail on what the updates are; revisit if the actual session agenda or release notes drop.",
+    "topics": [
+     "aps",
+     "data-exchange"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-28T08:21:22.535313Z"
    }
   },
   {
