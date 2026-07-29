@@ -1,56 +1,56 @@
 {
- "generated_at": "2026-07-28T08:21:22.535313Z",
- "count": 302,
+ "generated_at": "2026-07-29T08:27:23.486462Z",
+ "count": 306,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"3bd19bc41b8ed73a9978d798e47b7f52-gzip\"",
+   "etag": "\"724a607606ef07f3043643f262cffeb9-gzip\"",
    "last_item_count": 10,
-   "last_item_published": "2026-07-22T16:18:07Z",
-   "last_modified": "Thu, 23 Jul 2026 02:56:41 GMT",
+   "last_item_published": "2026-07-28T15:00:16Z",
+   "last_modified": "Tue, 28 Jul 2026 19:04:01 GMT",
    "last_status": 200,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 200,
+   "last_item_count": 0,
    "last_item_published": "2026-07-28T07:30:13Z",
    "last_modified": "Tue, 28 Jul 2026 07:30:13 GMT",
-   "last_status": 200,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_status": 304,
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
    "consecutive_failures": 0,
    "last_item_count": 10,
-   "last_item_published": "2026-07-27T14:01:44Z",
+   "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"b84dc0c2050a61f0efdde2c12dc01485\"",
+   "etag": "W/\"8fdbc322efb05e9250feecae6851a9c0\"",
    "last_failure": "2026-07-25T20:06:02.422958Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-27T14:49:23Z",
-   "last_modified": "Tue, 28 Jul 2026 07:31:09 GMT",
+   "last_modified": "Tue, 28 Jul 2026 08:44:24 GMT",
    "last_status": 200,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"17f189bb6874eb768dd8415ee2b36956\"",
+   "etag": "W/\"fc1ea884889e7f0cc9a34ce1b97063e4\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 28 Jul 2026 06:43:58 GMT",
+   "last_modified": "Tue, 28 Jul 2026 23:12:55 GMT",
    "last_status": 200,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -60,7 +60,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-24T19:01:06Z",
    "last_status": 304,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -70,22 +70,22 @@
    "last_item_published": "2025-10-10T01:18:00Z",
    "last_modified": "Sat, 25 Jul 2026 15:47:23 GMT",
    "last_status": 200,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": true,
-   "stale_reason": "no new items in 291 days (expects ~10)"
+   "stale_reason": "no new items in 292 days (expects ~10)"
   },
   "revit-blog": {
-   "consecutive_failures": 6,
+   "consecutive_failures": 7,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-07-28T08:21:22.535313Z",
+   "last_failure": "2026-07-29T08:27:23.486462Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "6 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "7 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -93,7 +93,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-27T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -103,17 +103,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"f2e3dab24de4d85aca51a49a2d7bcc30\"",
+   "etag": "W/\"e7dd12705124dd670cc2d9e9a1429fbc\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -123,12 +123,51 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-07-28T08:21:22.535313Z",
+   "last_success": "2026-07-29T08:27:23.486462Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Autodesk Forma Classifications API – Public Beta is Here",
+   "url": "https://aps.autodesk.com/blog/autodesk-forma-classifications-api-public-beta-here",
+   "source": "aps-blog",
+   "published": "2026-07-29T06:54:40Z",
+   "summary": "Autodesk Forma Classifications API – Public Beta is Here eason.kangEDLV4 29 Jul 2026 Eason Kang Share We are pleased to announce that Autodesk has released the Autodesk Forma Classifications API as public beta! Classifications lets you organize project information — categories, types, taxonomies such as Uniformat or MasterFormat — into hierarchical structures (“trees”) that can be referenced across Forma workflows. You can find more information about the feature in the product help . In this initial public beta, we have released the following endpoints: WRITE endpoints PATCH trees/:treeId : Updates a tree’s name or description. POST trees:import : Creates a new tree by importing a full hierarchy of nodes, published as its initial version. POST trees/:treeId:reimport : Updates an existing tree by reimporting its full hierarchy, published as a new version. READ endpoints GET trees : Gets a list of classification trees in a project. GET trees/:treeId : Gets metadata for a specific tree by ID. GET trees/:treeId/versions/tip/nodes : Gets the flat list of nodes from a tree’s latest published version. A few things worth knowing before you start: Structures are versioned as a whole.…",
+   "id": "3240ebf33ae7fa01",
+   "fetched_at": "2026-07-29T08:27:23.486462Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Forma Classifications API is cloud-based; relevant only if you build APS integrations or cloud workflows, not desktop add-in work.",
+    "topics": [
+     "aps-api",
+     "forma"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-29T08:27:23.486462Z"
+   }
+  },
+  {
+   "title": "Autodesk celebrates the 40 Under 40 Champions of Construction for 2026",
+   "url": "https://adsknews.autodesk.com/en/stories/stories-40-under-40-2026/",
+   "source": "adsk-news",
+   "published": "2026-07-28T15:00:16Z",
+   "summary": "From artificial intelligence and connected data to sustainable construction and robotics, these emerging leaders are finding practical ways to improve how the world builds. Across AEC, new ways of working are changing how projects are designed, built, and delivered. But progress depends on leaders who turn ideas and tools into meaningful results. Now in its eighth year, Autodesk’s peer-nominated 40 Under 40: Champions of Construction honors rising leaders who are driving innovation, inspiring their teams, and making a lasting impact. We’re highlighting 10 honorees from the global 2026 class to reflect the geographic breadth and range of work represented across this year’s winners. Meet all 40 winners and read more about the list here . Sofia Kasapantoniou Senior Standards and R&D Manager, Amazon Greece Sofia Kasapantoniou, Senior Standards and R&D Manager at Amazon. At Amazon, Sofia Kasapantoniou leads the development of enterprise-wide information-management standards for projects including fulfillment centers, retail stores, and AWS infrastructure. She also leads the development of a platform connecting Autodesk systems with Amazon’s internal tools and is building AI-powered…",
+   "id": "05ca2926880781a4",
+   "fetched_at": "2026-07-29T08:27:23.486462Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Award announcement with no technical content or market shift; does not affect your tooling or practice.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-29T08:27:23.486462Z"
+   }
+  },
   {
    "title": "Revizto opens project data to external AI platforms via new API and MCP server",
    "url": "https://aecmag.com/news/revizto-opens-project-data-to-external-ai-platforms-via-new-api-and-mcp-server/",
@@ -148,6 +187,25 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-07-28T08:21:22.535313Z"
+   }
+  },
+  {
+   "title": "July News Recap",
+   "url": "https://aps.autodesk.com/blog/july-news-recap-2",
+   "source": "aps-blog",
+   "published": "2026-07-27T20:19:52Z",
+   "summary": "July News Recap carolyn.albee@… 28 Jul 2026 Marnee Dupont Share We don’t want you to miss any updates! Below you’ll find a recap of all APS blog posts published since our last recap—including new API releases and exciting improvements. Announcements Early Bird Registration for AU2026 Ends on August 3 Early bird pricing for AU2026 ends at 11:59PM PT on August 3, 2026. With the event less than 7 weeks away, it’s smart to start planning now—and lock in the lowest price. Get your pass today . AU2026 Session Catalog Released Ready to start planning your schedule for AU2026? Still not sure if you’ll attend? The session catalog is now live! Explore strategy talks, technical deep dives, hands-on labs, networking opportunities, and more. Check it out , and we’ll see you there. Reminder: Changes to Data Model APIs We want to remind you that on August 17, pricing will be introduced for AEC Data Model APIs and Manufacturing Data Model APIs. All customers will continue to have limited access through the APS Free tier, and qualifying Autodesk product subscriptions will include monthly API usage. Learn more here . AutoCAD 2026 .NET 10 Update Beta Preview Now Available The AutoCAD 2026 .NET 10…",
+   "id": "4072f4ae8c59f928",
+   "fetched_at": "2026-07-29T08:27:23.486462Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Index of APS blog updates; skim for breaking changes, but most content is marketing or cloud-focused, not desktop API.",
+    "topics": [
+     "aps-news"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-29T08:27:23.486462Z"
    }
   },
   {
@@ -734,6 +792,18 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-07-25T20:06:02.422958Z"
+   }
+  },
+  {
+   "title": "Tandem Data API - Tickets",
+   "url": "https://aps.autodesk.com/blog/tandem-data-api-tickets",
+   "source": "aps-blog",
+   "published": "2026-07-20T13:55:15Z",
+   "summary": "Tandem Data API - Tickets jan.liska 28 Jul 2026 Jan Liska Michael Beale Share https://aps.autodesk.com/get-help Autodesk Tandem provides possibility to display tickets managed by external systems. For example application can bring maintenance and service information from CMMS application and provide possibility to view issues in the context of the facility, assets and systems. This article provides details how to interact with tickets using API: Create ticket List tickets Update ticket Create ticket To create ticket use POST create endpoint – same endpoint can be used to create other elements (i.e. streams). The tickets are stored in default model. Note that default model is not created automatically – check if model exists in the facility. Optionally it can be created using POST defaultmodel endpoint. When creating new ticket following data should be provided – identifier of the field is also included: Flags ( n:a ) field is used to control type of element. In case of the ticket the value is 0x01000007 ( 16777223 ). Name ( n:n ) field of the ticket. The name is displayed in the user interface, Priority ( n:pr ) field defines priority of ticket. It can be one of the values (Low,…",
+   "id": "7b078456f5e266ce",
+   "fetched_at": "2026-07-29T08:27:23.486462Z",
+   "classification": {
+    "tier": "unsorted"
    }
   },
   {
