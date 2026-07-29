@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-07-28",
+  generated: "2026-07-29",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-07-15",
+  activitySince: "2026-07-16",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -224,7 +224,7 @@ window.DASHBOARD_DATA = {
           { name: "P16 Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path", pct: 10, note: "CONDITIONAL — Persistent local orchestration hub for cross-tool workflows (Revit, BIMpossible Site, filesystem/git, reporting) via explicit, scoped MCP servers as the default path; GUI/desktop automation admitted only as a named, allowlisted exception for apps with no workable API — under explicit consent, sandboxing, and audit logging, never a general \"control my desktop\" mode. Full rationale, architecture, and the 3-condition go/no-go ratification test: `2026-07-23__Phase16_DesktopOrchestrationHub_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately." }
         ]
       },
-      activity: [16,5,0,0,0,2,36,9,3,20,16,9,8,2],
+      activity: [5,0,0,0,2,36,9,3,20,16,9,8,2,0],
       lastActivity: {
         date: "2026-07-28",
         summary: "chore(deps): bump the frontend-minor-patch group (#234) (f2f24bf)"
@@ -348,7 +348,7 @@ window.DASHBOARD_DATA = {
           { name: "Phase 15a Revit pane", pct: 90, note: "Merged (PR #30, 3457c65, 07-25) and live e2e passed (Stage A) same day; backend halves merged in BIMpossible (PR #221/#226). A separately-rebased 38-commit line has no surviving branch except a not-for-merge backup (PR #42) — owner should confirm nothing of value was lost in abandoning it." }
         ]
       },
-      activity: [19,4,0,0,0,1,12,2,0,6,11,2,1,0],
+      activity: [4,0,0,0,1,12,2,0,6,11,2,1,0,0],
       lastActivity: {
         date: "2026-07-27",
         summary: "fix(revitlink): close RE-1 abandoned-request execution + add secret scan (#46) (19c5ddd)"
@@ -659,7 +659,7 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,3,0,0,0,0,1,3,2,2,0,1,0,0],
+      activity: [3,0,0,0,0,1,3,2,2,0,1,0,0,0],
       lastActivity: {
         date: "2026-07-26",
         summary: "docs(roadmap): add Autodesk MCP/Assistant platform findings to Phase 3 (7041c59)"
