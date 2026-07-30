@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-07-29T08:27:23.486462Z",
- "count": 306,
+ "generated_at": "2026-07-30T08:11:43.585409Z",
+ "count": 309,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-07-28T15:00:16Z",
    "last_modified": "Tue, 28 Jul 2026 19:04:01 GMT",
    "last_status": 200,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-07-28T07:30:13Z",
-   "last_modified": "Tue, 28 Jul 2026 07:30:13 GMT",
-   "last_status": 304,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-07-30T07:26:32Z",
+   "last_modified": "Thu, 30 Jul 2026 08:06:02 GMT",
+   "last_status": 200,
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -28,7 +28,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -40,27 +40,27 @@
    "last_item_published": "2026-07-27T14:49:23Z",
    "last_modified": "Tue, 28 Jul 2026 08:44:24 GMT",
    "last_status": 200,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"fc1ea884889e7f0cc9a34ce1b97063e4\"",
+   "etag": "W/\"65f391a10eaa9d5d7cf35ced7e682a00\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 28 Jul 2026 23:12:55 GMT",
+   "last_modified": "Thu, 30 Jul 2026 07:41:42 GMT",
    "last_status": 200,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"ca926b660480b555008ec1352e290444\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-07-24T19:01:06Z",
-   "last_status": 304,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "etag": "W/\"b962cd47fe6cd90a0e74fb94d7fedc2f\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-07-30T06:31:11Z",
+   "last_status": 200,
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -68,24 +68,24 @@
    "consecutive_failures": 0,
    "last_item_count": 25,
    "last_item_published": "2025-10-10T01:18:00Z",
-   "last_modified": "Sat, 25 Jul 2026 15:47:23 GMT",
+   "last_modified": "Thu, 30 Jul 2026 00:09:05 GMT",
    "last_status": 200,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": true,
-   "stale_reason": "no new items in 292 days (expects ~10)"
+   "stale_reason": "no new items in 293 days (expects ~10)"
   },
   "revit-blog": {
-   "consecutive_failures": 7,
+   "consecutive_failures": 8,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-07-29T08:27:23.486462Z",
+   "last_failure": "2026-07-30T08:11:43.585409Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "7 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "8 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -93,7 +93,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-27T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -103,17 +103,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"e7dd12705124dd670cc2d9e9a1429fbc\"",
+   "etag": "W/\"bebc645255995113375b6a088b5f08a0\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -123,12 +123,31 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-07-29T08:27:23.486462Z",
+   "last_success": "2026-07-30T08:11:43.585409Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Procore to acquire DroneDeploy for $845m",
+   "url": "https://aecmag.com/reality-capture-modelling/procore-agrees-to-acquire-dronedeploy-for-845m/",
+   "source": "aec-magazine",
+   "published": "2026-07-30T07:26:32Z",
+   "summary": "Deal would bring aerial and ground reality capture into Procore’s construction management platform Procore Technologies has entered into a definitive agreement to acquire DroneDeploy , the reality capture and visual intelligence platform, for approximately $845 million in cash. The transaction is expected to close later this year, subject to regulatory approvals. DroneDeploy’s platform spans drone, ground robot, mobile, fixed and wearable camera capture, processing imagery into three-dimensional site documentation. The company says its technology is used on more than three million jobsites across 180 countries. Procore, which is publicly listed on the NYSE, provides construction management software encompassing project documentation, collaboration and workflows. The strategic logic centres on connecting Procore’s project data with DroneDeploy’s visual record of what is actually happening on site. Procore holds what it describes as nearly 400 million photos, over 126 million drawings and more than 10 million RFIs, submittals and inspections from the past year alone. DroneDeploy contributes approximately 20 trillion square feet of visual data, tens of millions of user-generated…",
+   "id": "a09934c901bbe994",
+   "fetched_at": "2026-07-30T08:11:43.585409Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Market consolidation worth tracking, but no technical impact on your add-in work or Revit ecosystem.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-30T08:11:43.585409Z"
+   }
+  },
   {
    "title": "Autodesk Forma Classifications API – Public Beta is Here",
    "url": "https://aps.autodesk.com/blog/autodesk-forma-classifications-api-public-beta-here",
@@ -169,6 +188,27 @@
    }
   },
   {
+   "title": "Use Fusion Automation API without PAT",
+   "url": "https://aps.autodesk.com/blog/use-fusion-automation-api-without-pat",
+   "source": "aps-blog",
+   "published": "2026-07-28T09:42:51Z",
+   "summary": "Use Fusion Automation API without PAT adam.nagy 29 Jul 2026 Adam Nagy Share Previously, if you wanted to automate something on another user's behalf, the user needed to create a PAT (Personal Access Token) and provide it for your app. That's how the Fusion Configurator sample used to work too - see https://github.com/autodesk-platform-services/aps-configurator-fusion/tree/ac4096f22cc09ae3e8d3bfd0ccba0f8771d6b052 Now you can achieve the same without a PAT , simply using 2LO (2-legged authentication) when starting a work item, plus 3LO (3-legged authentication) passed in as a work item parameter named `adsk3LeggedToken` (does not need to be declared in the activity). See the updated sample https://github.com/autodesk-platform-services/aps-configurator-fusion You can find more info about the options here: https://aps.autodesk.com/en/docs/design-automation/v3/developers_guide/fusion_specific/fusion-team-integration/#authentication-and-data-access Here is a quick overview of the options with my explanations: 2LO request (no user impersonation) If you're importing or creating models from scratch, exporting to non-Fusion formats, and don't need Fusion account access, this is your easiest…",
+   "id": "2809aba3882d615f",
+   "fetched_at": "2026-07-30T08:11:43.585409Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 45,
+    "why": "APS authentication pattern shift; useful if you build cloud-integrated tooling, though not core Revit API.",
+    "topics": [
+     "aps",
+     "authentication",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-30T08:11:43.585409Z"
+   }
+  },
+  {
    "title": "Revizto opens project data to external AI platforms via new API and MCP server",
    "url": "https://aecmag.com/news/revizto-opens-project-data-to-external-ai-platforms-via-new-api-and-mcp-server/",
    "source": "aec-magazine",
@@ -187,6 +227,27 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-07-28T08:21:22.535313Z"
+   }
+  },
+  {
+   "title": "Revizto opens project data to external AI platforms",
+   "url": "https://aecmag.com/project-management/revizto-opens-project-data-to-external-ai-platforms-via-new-api-and-mcp-server/",
+   "source": "aec-magazine",
+   "published": "2026-07-28T07:30:13Z",
+   "summary": "Developer portal, model API and Model Context Protocol (MCP) integration allow AECO teams to connect ChatGPT, Claude or Copilot directly to live Revizto data Revizto has launched a set of integration capabilities designed to let architecture, engineering, construction and operations teams connect external AI platforms directly to structured project data held within the Revizto environment. The release comprises three components: a Model Context Protocol (MCP) server, a Model and Object Properties API, and a Developer Portal for managing integrations. The MCP server acts as a bridge between Revizto and any large language model, translating project data into a format that AI agents can query without requiring custom integration work. In practical terms, a project manager could use natural language prompts to ask which fire doors are missing certification or what the top unresolved clashes on a particular level are, and receive answers drawn from live project data rather than from a static export or separate spreadsheet. The Model and Object Properties API provides real-time access to model and object metadata, including material types, systems, fire ratings and quantities, without…",
+   "id": "680cde4f38a8e2d9",
+   "fetched_at": "2026-07-30T08:11:43.585409Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 50,
+    "why": "MCP bridge and LLM integration on BIM data shows interop direction; relevant if you explore AI for audit/analysis tooling.",
+    "topics": [
+     "ai",
+     "interop",
+     "api"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-30T08:11:43.585409Z"
    }
   },
   {
@@ -803,7 +864,15 @@
    "id": "7b078456f5e266ce",
    "fetched_at": "2026-07-29T08:27:23.486462Z",
    "classification": {
-    "tier": "unsorted"
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Tandem ticket API is facility ops–focused; low relevance unless you integrate maintenance workflows into models.",
+    "topics": [
+     "tandem",
+     "api"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-07-30T08:11:43.585409Z"
    }
   },
   {
