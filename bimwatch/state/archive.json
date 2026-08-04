@@ -1,36 +1,38 @@
 {
- "generated_at": "2026-08-03T10:38:20.411629Z",
- "count": 310,
+ "generated_at": "2026-08-04T08:25:41.483426Z",
+ "count": 316,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"ce3268c92b0a9a5f24fce175f687b0a4-gzip\"",
+   "etag": "\"b7ea2a82e2c7691ac900652af41f4edf-gzip\"",
    "last_item_count": 10,
-   "last_item_published": "2026-07-28T15:00:16Z",
-   "last_modified": "Thu, 30 Jul 2026 19:31:48 GMT",
+   "last_item_published": "2026-08-03T12:42:51Z",
+   "last_modified": "Mon, 03 Aug 2026 12:45:02 GMT",
    "last_status": 200,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-07-30T07:26:32Z",
-   "last_modified": "Thu, 30 Jul 2026 08:06:02 GMT",
-   "last_status": 304,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-08-03T13:01:04Z",
+   "last_modified": "Mon, 03 Aug 2026 13:38:41 GMT",
+   "last_status": 200,
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 0,
+   "consecutive_failures": 1,
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": false,
-   "stale_reason": ""
+   "stale_reason": "",
+   "last_error": "HttpError: response exceeded 8388608 bytes",
+   "last_failure": "2026-08-04T08:25:41.483426Z"
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -40,17 +42,17 @@
    "last_item_published": "2026-07-27T14:49:23Z",
    "last_modified": "Fri, 31 Jul 2026 11:19:55 GMT",
    "last_status": 200,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"2a2578c1c00d2f6b40d0044dc5342972\"",
+   "etag": "W/\"62fcd26baa9a19adc5e3cb38430ae880\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 03 Aug 2026 10:35:19 GMT",
+   "last_modified": "Tue, 04 Aug 2026 08:15:44 GMT",
    "last_status": 200,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -60,40 +62,40 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-03T05:33:16Z",
    "last_status": 304,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2025-10-10T01:18:00Z",
-   "last_modified": "Sun, 2 Aug 2026 12:34:48 GMT",
+   "last_item_published": "2026-08-04T02:27:00Z",
+   "last_modified": "Tue, 4 Aug 2026 03:41:49 GMT",
    "last_status": 200,
-   "last_success": "2026-08-03T10:38:20.411629Z",
-   "stale": true,
-   "stale_reason": "no new items in 297 days (expects ~10)"
+   "last_success": "2026-08-04T08:25:41.483426Z",
+   "stale": false,
+   "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 13,
+   "consecutive_failures": 14,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-08-03T10:38:20.411629Z",
+   "last_failure": "2026-08-04T08:25:41.483426Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "13 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "14 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
    "etag": "W/\"2baba72ffaf6dc7f5d62049e6375007b\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-03T10:00:00Z",
-   "last_status": 200,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_status": 304,
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -103,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"5c5831d09867f135ec1ba6f6dfb1e284\"",
+   "etag": "W/\"6ac54789c04ce385894c202ffcd7bd2c\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -123,12 +125,131 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-03T10:38:20.411629Z",
+   "last_success": "2026-08-04T08:25:41.483426Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "We're Back... Again!",
+   "url": "http://revitaddons.blogspot.com/2026/08/were-back-again.html",
+   "source": "revit-addons",
+   "published": "2026-08-04T02:27:00Z",
+   "summary": "It's been awhile. Those familiar with Revit Add-ons might know that I suspended it when I joined Bentley Systems in 2020 (that proved to be an ill-advised career departure). My buddy Cord Ellison took over for a couple years, but that, unfortunately, ended. Back in 2024, I prematurely announced the return of the blog. That's because I had joined Woolpert as a BIM Coordinator (working on Mission Critical projects) and was free to post again. In fact, my hiring was in large part thanks to my past work here on Revit Add-ons! As such, this blog has continued to reward me. But, over those past two years, after an initial spurt, I've only posted sporadically. What can I say? It's been hard man... As you may know, we offer ad space here on Revit Add-ons. But, for convoluted reasons I won't go into here, I've been unable to collect revenue from those ads for years. And, as I got older, that revenue had become a prime motivator. Without it, it was hard to find the impetus. Fortunately, that all changes next year (2027), so I figured I'd better get my butt back to work! Time has marched on. Although mostly fallow, Revit Add-ons has continued to tick up in pageviews, now totaling nearly 8.5…",
+   "id": "de3a3c11ecb295e4",
+   "fetched_at": "2026-08-04T08:25:41.483426Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Personal blog return announcement with no technical content or product updates relevant to your work.",
+    "topics": [
+     "community"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-04T08:25:41.483426Z"
+   }
+  },
+  {
+   "title": "Free BIMify Add-in: Convert 2D DWG Data into 3D Revit Elements",
+   "url": "http://revitaddons.blogspot.com/2026/08/free-bimify-add-in-convert-2d-dwg-data.html",
+   "source": "revit-addons",
+   "published": "2026-08-04T02:03:00Z",
+   "summary": "BIMify is a productivity tool that converts linked 2D AutoCAD DWG data into native 3D Revit elements by reading CAD layer information and automatically generating geometry such as walls and columns. It helps architects, engineers, and BIM managers migrate legacy CAD work or coordinate with 2D consultants while reducing repetitive manual modeling. Users cited include WSP, AECOM, JLL, Arup, and Jacobs. BIMify is brought to you by AK Tools . It's free. This add-in is compatible with Revit 2026, 2025, 2024, 2023, and 2022. Download from the Autodesk Design and Make Marketplace » Questions? Contact the developer » var now = new Date(); var start = new Date(now.getFullYear(), 0, 0); var diff = now - start; var oneDay = 1000 * 60 * 60 * 24; var dayOfYear = Math.floor(diff / oneDay); var arraylength = 1; var numadvertisers = arraylength + 1; var numoffset = dayOfYear % numadvertisers; var indx = new Array(arraylength); for (i = 0; i = numadvertisers) { indx[index] = indx[index] - numadvertisers; } if (index === arraylength) { break; } } var images = new Array(arraylength); images[indx[0]] = \" \"; images[indx[1]] = \" \"; var currentdate = new Date(); var numSeconds =…",
+   "id": "c2322db31147b855",
+   "fetched_at": "2026-08-04T08:25:41.483426Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Free add-in demonstrating DWG-to-Revit 3D conversion via layer parsing; concrete implementation pattern worth studying for your automation toolkit.",
+    "topics": [
+     "revit-addin",
+     "interoperability",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-04T08:25:41.483426Z"
+   }
+  },
+  {
+   "title": "Arcadis invests in AEC AI platform Nomic",
+   "url": "https://aecmag.com/data-management/arcadis-invests-in-aec-ai-platform-nomic/",
+   "source": "aec-magazine",
+   "published": "2026-08-03T13:01:04Z",
+   "summary": "Strategic partnership follows six-month trial deployment across 12 countries, with 86% of 150 participating engineers reporting a change in how they approach their work Arcadis has made a strategic investment in Nomic, an AI platform built specifically for architecture, engineering and construction workflows, and entered into a long-term commercial partnership with the company. Financial terms were not disclosed. The investment follows a six-month trial involving around 150 Arcadis engineers across multiple disciplines, sectors and countries. The trial tested Nomic’s AI agents on core delivery tasks including drawing review against firm standards, code compliance checks, submittal review, RFI research and BIM coordination. Arcadis reports that 86% of participating engineers said the platform changed how they approached their work, with over a quarter describing the shift as fundamental. In one example, a workflow reduced several days of manual document cataloguing to hours. The underlying problem Nomic addresses is a familiar one in large engineering consultancies: decades of institutional knowledge locked in designs, specifications and project data spread across disconnected…",
+   "id": "b74ca97e45b9b526",
+   "fetched_at": "2026-08-04T08:25:41.483426Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Arcadis backs an AEC AI platform; market signal, but no technical detail on how it works or whether it integrates with Revit API.",
+    "topics": [
+     "ai",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-04T08:25:41.483426Z"
+   }
+  },
+  {
+   "title": "Trimble Dimensions returns to Vegas in November",
+   "url": "https://aecmag.com/reality-capture-modelling/trimble-dimensions-returns-to-vegas-in-november/",
+   "source": "aec-magazine",
+   "published": "2026-08-03T12:53:06Z",
+   "summary": "User conference expected to attract over 8,000 AEC and land survey professionals Trimble has confirmed that its Dimensions user conference will take place from 9 to 11 November 2026 at The Venetian Resort in Las Vegas. The event, which serves as Trimble ‘s flagship gathering for its user base across architecture, engineering, construction and surveying, will feature more than 700 sessions including workshops and certified training courses. New additions for 2026 include a Developer Summit aimed at software engineers and systems architects working with Trimble’s platform infrastructure, and two startup pitch competitions, the Trimble 0-60 Challenge and Construction Startup Competition. The conference also includes the Offsite Expo, a hands-on outdoor demonstration area covering construction and survey technology across a 15-acre working site, and 3D Basecamp Summit for the SketchUp user community. Trimble’s Construction Innovation Awards will be presented during the event. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here Rob Painter, President and CEO of Trimble, said the conference…",
+   "id": "5997ff12121f4246",
+   "fetched_at": "2026-08-04T08:25:41.483426Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Trimble conference announcement; worth noting for awareness, but no Revit-relevant content or technical workshops described.",
+    "topics": [
+     "events"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-04T08:25:41.483426Z"
+   }
+  },
+  {
+   "title": "Welcoming MaintainX to Autodesk: The next chapter in connected operations",
+   "url": "https://adsknews.autodesk.com/en/news/welcoming-maintainx/",
+   "source": "adsk-news",
+   "published": "2026-08-03T12:42:51Z",
+   "summary": "Earlier this year, we introduced Autodesk Operations Solutions (AOS) and shared our vision for helping customers connect design, make, and operate in a continuous lifecycle. We also announced our intent to acquire MaintainX, a leading mobile-first computerized maintenance management system (CMMS). Today, I’m excited to share that we’ve completed that acquisition. This is an important milestone and the beginning of the next chapter as we thoughtfully bring together our teams, technologies, and expertise over time. Building on a strong foundation Operations isn’t new for Autodesk. For years, we’ve helped customers better understand, optimize, and improve real-world operations through solutions like Tandem, FlexSim, Fusion Operations, and Factory Design Utilities. Earlier this year, we brought these technologies together under AOS, reflecting our belief that the lifecycle shouldn’t end when something is designed or made. Customers need connected workflows that span design, construction, manufacturing, and operations, bringing together the people, data, and processes that drive better outcomes. MaintainX builds on that strategy. Its mobile-first CMMS platform is trusted by thousands…",
+   "id": "cc881441008a0b3f",
+   "fetched_at": "2026-08-04T08:25:41.483426Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Autodesk acquires MaintainX for operations; watch for future Revit/APS integration, but no technical changes yet.",
+    "topics": [
+     "autodesk",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-04T08:25:41.483426Z"
+   }
+  },
+  {
+   "title": "Endra expands to US and UK after $50m raise",
+   "url": "https://aecmag.com/mep/endra-expands-to-us-and-uk-after-50m-raise/",
+   "source": "aec-magazine",
+   "published": "2026-08-03T12:40:57Z",
+   "summary": "Stockholm-based startup backed by Andreessen Horowitz targets engineering consultancies with automated system design, routing and documentation Endra, a Stockholm-based AI company focused on mechanical, electrical and plumbing engineering, has opened offices in New York, San Francisco and London as it begins scaling outside its home market. The expansion follows a $50 million Series A led by Andreessen Horowitz earlier this year. The company’s platform is aimed at the detailed engineering work that sits behind every major building project, the calculation of loads and flows, system sizing, device placement, routing of cabling, ductwork and piping, cross-discipline coordination and production of construction documentation. Endra says its software ingests standard building model files, integrates with BIM tools including Revit, and reconstructs each building in a detailed 3D environment from which it automates system design, routing, model generation and compliance-ready documentation across 3D and 2D deliverables. The company claims a code-compliant electrical design for a 500,000 square foot commercial building that would traditionally take around two months can be completed in…",
+   "id": "26d8bd9cd13ce528",
+   "fetched_at": "2026-08-04T08:25:41.483426Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 18,
+    "why": "AI company automating MEP design and routing; competitive awareness, but no Revit API or interoperability angle disclosed.",
+    "topics": [
+     "ai",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-04T08:25:41.483426Z"
+   }
+  },
   {
    "title": "Revit + AI Tutorial - Generate System Families from Image",
    "url": "https://www.bimpure.com/blog/revit-ai-tutorial-generate-system-families-from-image",
