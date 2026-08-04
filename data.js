@@ -224,10 +224,10 @@ window.DASHBOARD_DATA = {
           { name: "P16 Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path", pct: 10, note: "CONDITIONAL — Persistent local orchestration hub for cross-tool workflows (Revit, BIMpossible Site, filesystem/git, reporting) via explicit, scoped MCP servers as the default path; GUI/desktop automation admitted only as a named, allowlisted exception for apps with no workable API — under explicit consent, sandboxing, and audit logging, never a general \"control my desktop\" mode. Full rationale, architecture, and the 3-condition go/no-go ratification test: `2026-07-23__Phase16_DesktopOrchestrationHub_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately." }
         ]
       },
-      activity: [9,3,20,16,9,8,2,0,0,0,0,0,0,2],
+      activity: [9,3,20,16,9,8,2,0,0,0,0,0,0,5],
       lastActivity: {
         date: "2026-08-04",
-        summary: "chore(deps): bump the frontend-minor-patch group (#238) (1d97b2c)"
+        summary: "sec(deps): bump brace-expansion and postcss overrides past new advisories (#240) (c7d4f01)"
       },
       branch: "main at a7a434c; 0 ahead of origin",
       git: {
