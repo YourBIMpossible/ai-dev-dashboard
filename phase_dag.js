@@ -128,6 +128,14 @@ window.PHASE_DAG = {
 "gatesCount": 0
 },
 {
+"id": "13.1",
+"name": "Write Engine — Typed Values + Type Params (Phase 13 sub-increment)",
+"status": "PARTIAL",
+"dependsOn": [],
+"gates": [],
+"gatesCount": 0
+},
+{
 "id": "14",
 "name": "Local AI Inference — On-Device RAG + Revit Context (Optional)",
 "status": "CONDITIONAL",
@@ -196,6 +204,11 @@ window.PHASE_DAG = {
 "id": "11.1",
 "name": "Coordination & Health Report",
 "status": "SHIPPED — LIVE in prod"
+},
+{
+"id": "13.1",
+"name": "Write Engine — Typed Values + Type Params (Phase 13 sub-increment)",
+"status": "PARTIAL"
 },
 {
 "id": "14",
@@ -308,6 +321,10 @@ window.PHASE_DAG = {
 {
 "phase": "11.1",
 "gate": "2026-07-02"
+},
+{
+"phase": "13.1",
+"gate": "Increment 1 closes on a live Revit smoke (human gate) + 3 owner decisions in the build plan; backend PR merges before/with the Add-Ins PR"
 },
 {
 "phase": "14",
