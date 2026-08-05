@@ -130,7 +130,7 @@ window.PHASE_DAG = {
 {
 "id": "13.1",
 "name": "Write Engine — Typed Values + Type Params (Phase 13 sub-increment)",
-"status": "PARTIAL",
+"status": "ACTIVE — Increment 1 SHIPPED",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -208,7 +208,7 @@ window.PHASE_DAG = {
 {
 "id": "13.1",
 "name": "Write Engine — Typed Values + Type Params (Phase 13 sub-increment)",
-"status": "PARTIAL"
+"status": "ACTIVE — Increment 1 SHIPPED"
 },
 {
 "id": "14",
@@ -324,7 +324,7 @@ window.PHASE_DAG = {
 },
 {
 "phase": "13.1",
-"gate": "Increment 1 closes on a live Revit smoke (human gate) + 3 owner decisions in the build plan; backend PR merges before/with the Add-Ins PR"
+"gate": "Increment 2 (type-param targeting, String-only) gated on Increment 1's live smoke — gate CLEARED 2026-08-04; Increment 4 (ElementId) stays owner-ruled out until then"
 },
 {
 "phase": "14",
@@ -369,5 +369,5 @@ window.PHASE_DAG = {
 "to": "10"
 }
 ],
-"generated": "2026-08-04"
+"generated": "2026-08-05"
 };
