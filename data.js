@@ -661,7 +661,7 @@ window.DASHBOARD_DATA = {
       oneLiner: "Portable, fully-local LLM inference + automation platform. Dev on the RTX 5080 now; relocates to a dedicated RTX 3090 box by one .env line (OLLAMA_HOST).",
       status: "active",
       phase: "Repo live + private (YourBIMpossible/AI-Server); main at 413bdc9, 3 commits ahead of origin (unpushed docs) + uncommitted PROGRAM_PLAN.md/README.md edits — an active session, not stale. New since 07-12: a \"pickup_checker\" tool built on a separate unmerged branch/worktree (worktree-pickup-checker) — see progress.phases[] below. WP-A/B/C/F/D1 all merged and stable; no regressions found.",
-      focus: "pickup_checker's Milestone-1 code is done (14/14 tasks, 67/67 tests) but its own spec's ship-gate — 4/4 golden-set gates passing on real labeled data — is unmet, and the code isn't even merged to main yet. WP-E (ops/serving hardening) and WP-G2 (advanced/agentic tooling) remain the untouched work packages otherwise.",
+      focus: "pickup_checker's Milestone-1 code is done (14/14 tasks, 67/67 tests) but its own spec's ship-gate — 4/4 golden-set gates passing on real labeled data — is unmet, and the code isn't even merged to main yet. WP-E (ops/serving hardening) remains untouched; WP-G is mostly untouched too, with one exception — a local coding agent (opencode + qwen3-coder) verified working 07-25, see progress below.",
       progress: {
         label: "Work packages",
         phases: [
@@ -673,7 +673,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-F Eval harness", pct: 100, note: "Merged PR #4 (06-16); cases/run/report/baseline/scoring shipped; hardened (EVAL-1..5) in f37d165." },
           { name: "Dictation-cleanup proxy", pct: 90, note: "OpenWhispr dictation-cleanup proxy shipped (3c4d4e6) and hardened (DP-1..7 in f37d165). No activity since 07-10." },
           { name: "PDF pickup checker (new, unmerged)", pct: 60, note: "Automates \"did every redline get addressed\" QA on reissued drawing sets — compares only markup-anchored regions (not full-sheet diffing), and only ever claims a region changed/unchanged, never that a redline was \"addressed\" (a human judgment) — enforced structurally via a MaxClaim field. M1 detection core: 14/14 planned tasks built, 67/67 tests pass, CLI works end-to-end for annotation-form markups. BUT the spec's own ship gate (4/4 golden-set gates pass on real labeled data, §13) is unmet — zero labeled golden-set jobs exist, 3/4 gates report \"no data.\" Code sits on an unmerged worktree-pickup-checker branch, not main." },
-          { name: "WP-E/G Ops, advanced", pct: 5, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12." }
+          { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -682,7 +682,7 @@ window.DASHBOARD_DATA = {
         summary: "fix: resolve findings from the 2026-07-12 audit + carried-over mediums (f37d165)"
       },
       branch: "main at f37d165",
-      nextActions: ["Label a real GoldenSet v1.0 for pickup_checker and run its 4 ship gates against real data","Merge worktree-pickup-checker to main once the golden-set gate is met","Merge or continue the worktree-harness branch (7/8 tasks done, WP-G2-adjacent)","WP-D3: land the owner's G:-hosted SKILL.md cutover — last open WP-D item"],
+      nextActions: ["Label a real GoldenSet v1.0 for pickup_checker and run its 4 ship gates against real data","Merge worktree-pickup-checker to main once the golden-set gate is met","Merge or continue the worktree-harness branch (7/8 tasks done, WP-G2-adjacent)","Commit + push the opencode/local-coding-agent doc updates (PROGRAM_PLAN.md + README.md) — currently uncommitted edits on main","WP-D3: land the owner's G:-hosted SKILL.md cutover — last open WP-D item"],
       pendingDecisions: [
         "3090 box OS (Ubuntu Server vs Windows) + runtime (Ollama now vs vLLM later) - see build plan"
       ],
