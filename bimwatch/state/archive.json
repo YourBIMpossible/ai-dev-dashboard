@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-08-04T08:25:41.483426Z",
- "count": 316,
+ "generated_at": "2026-08-05T08:23:49.244269Z",
+ "count": 322,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"b7ea2a82e2c7691ac900652af41f4edf-gzip\"",
+   "etag": "\"8ed9e1cdba20398f490765d37dd70dc1-gzip\"",
    "last_item_count": 10,
-   "last_item_published": "2026-08-03T12:42:51Z",
-   "last_modified": "Mon, 03 Aug 2026 12:45:02 GMT",
+   "last_item_published": "2026-08-04T16:30:13Z",
+   "last_modified": "Tue, 04 Aug 2026 22:02:46 GMT",
    "last_status": 200,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -17,42 +17,42 @@
    "consecutive_failures": 0,
    "last_item_count": 200,
    "last_item_published": "2026-08-03T13:01:04Z",
-   "last_modified": "Mon, 03 Aug 2026 13:38:41 GMT",
+   "last_modified": "Tue, 04 Aug 2026 10:19:19 GMT",
    "last_status": 200,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 1,
+   "consecutive_failures": 2,
+   "last_error": "HttpError: response exceeded 8388608 bytes",
+   "last_failure": "2026-08-05T08:23:49.244269Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": false,
-   "stale_reason": "",
-   "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-04T08:25:41.483426Z"
+   "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"4554e8de479ce0322a60b6ef02381725\"",
+   "etag": "W/\"91dcdafcdf42b35a3123a747f93a8af3\"",
    "last_failure": "2026-07-25T20:06:02.422958Z",
    "last_item_count": 10,
-   "last_item_published": "2026-07-27T14:49:23Z",
-   "last_modified": "Fri, 31 Jul 2026 11:19:55 GMT",
+   "last_item_published": "2026-08-04T11:47:00Z",
+   "last_modified": "Wed, 05 Aug 2026 08:24:20 GMT",
    "last_status": 200,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"62fcd26baa9a19adc5e3cb38430ae880\"",
+   "etag": "W/\"01eca4abdf93659c3b4c5e89269ea539\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 04 Aug 2026 08:15:44 GMT",
+   "last_modified": "Tue, 04 Aug 2026 09:42:53 GMT",
    "last_status": 200,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -62,32 +62,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-03T05:33:16Z",
    "last_status": 304,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-04T02:27:00Z",
-   "last_modified": "Tue, 4 Aug 2026 03:41:49 GMT",
+   "last_item_published": "2026-08-05T00:38:00Z",
+   "last_modified": "Wed, 5 Aug 2026 01:43:08 GMT",
    "last_status": 200,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 14,
+   "consecutive_failures": 15,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-08-04T08:25:41.483426Z",
+   "last_failure": "2026-08-05T08:23:49.244269Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "14 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "15 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -95,7 +95,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-03T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"6ac54789c04ce385894c202ffcd7bd2c\"",
+   "etag": "W/\"6b1e34378b1b36baf242bee235b521f4\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +125,92 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-04T08:25:41.483426Z",
+   "last_success": "2026-08-05T08:23:49.244269Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Kestrel Compliance Platform: Code Compliance Inside Revit",
+   "url": "http://revitaddons.blogspot.com/2026/08/kestrel-compliance-platform-code.html",
+   "source": "revit-addons",
+   "published": "2026-08-05T00:38:00Z",
+   "summary": "Kestrel integrates building code compliance checking directly into Revit, analyzing BIM models against applicable code requirements and highlighting potential issues early in design. It maps results to model elements, links each issue to cited code references, and includes Kestrel Chat, an AI assistant for exploring code questions. Built with licensed code content and ICC collaboration, Kestrel supports continuous compliance feedback, helping architects reduce rework and approach permitting with greater confidence while preserving professional judgment. Review compliance results directly within Revit. Kestrel organizes identified issues by category Understand why an issue was flagged. Kestrel provides detailed explanations, relevant project context, code citation Select a compliance issue and immediately locate the affected element in your BIM model Review individual compliance findings with linked code references and project-specific context Kestrel Compliance Platform is brought to you by Kestrel Labs . Pricing is tailored to customer's firm size. A free trial is available. This add-in is compatible with Revit 2027, 2026, 2025, and 2024 There's more information available on the…",
+   "id": "e4e5f66b09a08e57",
+   "fetched_at": "2026-08-05T08:23:49.244269Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A Revit-integrated product; worth knowing exists, but no API technique or add-in tooling to learn.",
+    "topics": [
+     "revit-integration",
+     "product"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-05T08:23:49.244269Z"
+   }
+  },
+  {
+   "title": "Autodesk and the University of Florida open the most advanced robotics industrialized construction lab in the US to tackle housing and labor shortages",
+   "url": "https://adsknews.autodesk.com/en/news/uf-lab-opening/",
+   "source": "adsk-news",
+   "published": "2026-08-04T16:30:13Z",
+   "summary": "A $1 million donation from Autodesk will fund the equipment, renovations, and technical support behind the new Autodesk Design and Make Laboratory at the University of Florida, helping prepare students for careers in industrialized construction, an industry where 41% of today’s workforce nears retirement by 2031. The local workforce pipeline will be prime to help address the shortage of more than 121,000 homes and rental units in Florida. The most advanced robotics lab in the US dedicated to industrialized construction opens its doors this fall semester at the University of Florida, with a ribbon-cutting ceremony held today, aimed at three converging challenges: Florida can’t build homes fast enough to stay affordable, an estimated 41% of construction workers will be at or near retirement by 2031*, and hurricane-hit communities wait years to rebuild. In early testing, robots developed by the lab’s research team point to the possibility of framing a set of houses in a weekend instead of months. The Autodesk Design and Make Laboratory opens with a $1 million unrestricted donation from Autodesk, announced today by EVP & COO and University of Florida alum Steve Blum and becomes the…",
+   "id": "f593b3ce5348fd52",
+   "fetched_at": "2026-08-05T08:23:49.244269Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Corporate philanthropy and workforce development news; no impact on your add-in work or tooling.",
+    "topics": [
+     "corporate-news"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-05T08:23:49.244269Z"
+   }
+  },
+  {
+   "title": "From generation to direction: Autodesk launches 3D Editor + Canvas within Flow Studio, bringing directable control to generative AI filmmaking",
+   "url": "https://adsknews.autodesk.com/en/news/direct-ai-3d-editor-canvas-flow-studio/",
+   "source": "adsk-news",
+   "published": "2026-08-04T13:57:43Z",
+   "summary": "Autodesk Flow Studio’s new 3D Editor + Canvas solves one of the biggest limitations of AI video creation: precise control. Rather than relying solely on 2D video models that offer less control over the outcome, creators can build and direct scenes in a realistic 3D environment–giving them precise control over cameras, animation, blocking, and the environment–while still taking advantage of 2D video models for the final look. Autodesk Flow Studio’s 3D Editor + Canvas brings AI-powered scene building, direction, and refinement into one creative workspace. As generative AI tools make it faster to create characters, environments, and other visual assets, the next challenge is turning those elements into cohesive shots that creators can direct, control, and refine. Creating assets is becoming easier but shaping them into intentional scenes still requires precise control over performance, camera movement, composition, and timing. Today, Autodesk announced 3D Editor + Canvas, a major expansion of Autodesk Flow Studio and the next step in its evolution into an AI-native creative platform. Rather than relying on prompts or reference images to direct characters, animation, camera movement,…",
+   "id": "876612ab3495c349",
+   "fetched_at": "2026-08-05T08:23:49.244269Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 3,
+    "why": "Video/filmmaking product outside BIM and AEC; unrelated to your Revit API or model automation work.",
+    "topics": [
+     "video-ai",
+     "out-of-scope"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-05T08:23:49.244269Z"
+   }
+  },
+  {
+   "title": "Why Rhino and Grasshopper are winning the AEC industry",
+   "url": "https://bimcorner.com/rhino-grasshopper-winning-aec/",
+   "source": "bim-corner",
+   "published": "2026-08-04T11:47:00Z",
+   "summary": "Rhino and Grasshopper were not originally built for buildings, BIM, or structural analysis. Rhino began as a tool for accurate, complex geometry, but its ability to work with many different applications has made it increasingly important in AEC industry. Instead of replacing Revit, Tekla, Archicad, or analysis software, Rhino and Grasshopper connect them. They help architects and engineers automate repetitive work, generate geometry, and build workflows that would be difficult inside one closed platform. The future of AEC may belong not to the software that does everything, but to the software that connects everything. Table of Contents 1. The AEC tool winning right now was not built for AEC Rhino did not begin as an architecture, BIM, or structural engineering platform. Its story started around AutoCAD, where Robert McNeel & Associates worked on adding advanced NURBS geometry to existing CAD workflows. In 1992, the company began developing a prototype with Applied Geometry, followed by a NURBS modeling solution for AutoCAD. McNeel later decided that the technology would be more powerful as an independent Windows application, and Rhino 1.0 was released in 1998. Its first major…",
+   "id": "14386a07182a3d9d",
+   "fetched_at": "2026-08-05T08:23:49.244269Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 50,
+    "why": "Concrete discussion of Rhino/Grasshopper as integrator layer; directly relevant to interop and automation patterns you build.",
+    "topics": [
+     "interoperability",
+     "grasshopper",
+     "workflow-automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-05T08:23:49.244269Z"
+   }
+  },
   {
    "title": "We're Back... Again!",
    "url": "http://revitaddons.blogspot.com/2026/08/were-back-again.html",
@@ -2146,6 +2226,27 @@
   },
   {
    "title": "7 Practical Grasshopper Automations for Steel Design in Tekla Structures",
+   "url": "https://bimcorner.com/https-bimcorner-com-7-practical-grasshopper-automations-for-steel-design-in-tekla-structures/",
+   "source": "bim-corner",
+   "published": "2026-05-25T12:53:00Z",
+   "summary": "Tekla Structures is one of the world’s leading tools for steel design and detailing, and in many areas it is far ahead of its competitors. However, even in such an advanced environment, engineers still spend a lot of time on manual clicks connected to 3D modeling, drawing creation, quality assurance, exports, and project deliveries. Many of these repetitive tasks can be eliminated with Grasshopper, so let’s look at seven practical Grasshopper automations for steel design in Tekla Structures. Table of Contents Workshop Recording Below you can get the recording from the live session, where we presented all seven scripts in action. The recording and shared materials are still available, so you can go through the examples at your own pace. Watch the recording Below, you will also find short blog sections describing each practical application and how it can help automate steel design workflows in Tekla Structures. 1. Export and import to FEM software. One of Grasshopper’s biggest strengths is that it can sit in the middle of a much larger workflow, not just inside Tekla. I has already published broad roundups of Grasshopper links across BIM and FEM software, so this is no longer a…",
+   "id": "ef161759a1e9f1f7",
+   "fetched_at": "2026-08-05T08:23:49.244269Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 35,
+    "why": "Steel automation patterns in Grasshopper; useful reference for batch processing and automation design even outside Tekla.",
+    "topics": [
+     "grasshopper",
+     "automation-patterns",
+     "steel-design"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-05T08:23:49.244269Z"
+   }
+  },
+  {
+   "title": "7 Practical Grasshopper Automations for Steel Design in Tekla Structures",
    "url": "https://bimcorner.com/7-practical-grasshopper-automations-for-steel-design-in-tekla-structures/",
    "source": "bim-corner",
    "published": "2026-05-25T12:29:44Z",
@@ -2560,6 +2661,27 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-07-25T20:06:02.422958Z"
+   }
+  },
+  {
+   "title": "What’s New in Grasshopper–Tekla Live Link 2026",
+   "url": "https://bimcorner.com/https-bimcorner-com-whats-new-in-grasshopper-tekla-live-link-2026/",
+   "source": "bim-corner",
+   "published": "2026-04-21T12:45:07Z",
+   "summary": "Grasshopper-Tekla Live Link 2026 brings some of the most practical workflow improvements we have seen in a while. From better rotation control and bolt handling to base points and beam splitting, this update makes parametric work in Tekla more flexible and easier to manage. In this article, I break down the biggest new features, how they worked before, and what they can change in real projects. In the webinar “What’s New in Grasshopper-Tekla LiveLink 2026”, developers Simon Iversen and Sebastian Lindholm showed the most important new features and improvements. I put together a short summary of the biggest changes, what’s new, what worked differently before, and what this means in practice. Table of Contents Major Changes in LiveLink 2026 Calculate Rotation component The old Beam Rotation has been renamed and extended. The new Calculate Rotation computes the needed angle for beams/columns and for items or bolt groups based on a desired orientation. In other words, you can plug its output into an object’s rotation input to align items and even entire bolt patterns automatically. Before , rotation support was limited to individual beams. Now , it covers more object types (…",
+   "id": "d498d56cd0b4c183",
+   "fetched_at": "2026-08-05T08:23:49.244269Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 40,
+    "why": "New Grasshopper-Tekla Live Link features; relevant if you use parametric interop or consider it for workflows.",
+    "topics": [
+     "grasshopper",
+     "interoperability",
+     "tekla"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-05T08:23:49.244269Z"
    }
   },
   {
