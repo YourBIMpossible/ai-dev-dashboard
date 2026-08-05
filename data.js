@@ -225,10 +225,10 @@ window.DASHBOARD_DATA = {
           { name: "P16 Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path", pct: 10, note: "CONDITIONAL — Persistent local orchestration hub for cross-tool workflows (Revit, BIMpossible Site, filesystem/git, reporting) via explicit, scoped MCP servers as the default path; GUI/desktop automation admitted only as a named, allowlisted exception for apps with no workable API — under explicit consent, sandboxing, and audit logging, never a general \"control my desktop\" mode. Full rationale, architecture, and the 3-condition go/no-go ratification test: `2026-07-23__Phase16_DesktopOrchestrationHub_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately." }
         ]
       },
-      activity: [3,20,16,9,8,2,0,0,0,0,0,0,23,0],
+      activity: [3,20,16,9,8,2,0,0,0,0,0,0,23,1],
       lastActivity: {
-        date: "2026-08-04",
-        summary: "docs(3.10b): land the Doors room-pair join build results (344d8f8)"
+        date: "2026-08-05",
+        summary: "feat(3.10b): doors resolve to the room PAIR they separate (#253) (751155f)"
       },
       branch: "main at a7a434c; 0 ahead of origin",
       git: {
