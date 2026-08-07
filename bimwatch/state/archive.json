@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-06T08:21:25.084250Z",
- "count": 324,
+ "generated_at": "2026-08-07T07:03:05.648683Z",
+ "count": 325,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,7 +9,7 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Tue, 04 Aug 2026 22:02:46 GMT",
    "last_status": 200,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,20 +19,20 @@
    "last_item_published": "2026-08-03T13:01:04Z",
    "last_modified": "Tue, 04 Aug 2026 10:19:19 GMT",
    "last_status": 304,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 3,
+   "consecutive_failures": 4,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-06T08:21:25.084250Z",
+   "last_failure": "2026-08-07T07:03:05.648683Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "3 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "4 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -42,17 +42,17 @@
    "last_item_published": "2026-08-04T11:47:00Z",
    "last_modified": "Wed, 05 Aug 2026 09:03:43 GMT",
    "last_status": 200,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"b674747628f28c4dc4835af2105afd13\"",
+   "etag": "W/\"db6beb200873804a273f5ea271854fa4\"",
    "last_item_count": 8,
-   "last_modified": "Thu, 06 Aug 2026 07:36:02 GMT",
+   "last_modified": "Fri, 07 Aug 2026 00:41:35 GMT",
    "last_status": 200,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -62,40 +62,40 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-03T05:33:16Z",
    "last_status": 304,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-06T01:12:00Z",
-   "last_modified": "Thu, 6 Aug 2026 02:32:11 GMT",
+   "last_item_published": "2026-08-07T01:26:00Z",
+   "last_modified": "Fri, 7 Aug 2026 03:39:12 GMT",
    "last_status": 200,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 16,
+   "consecutive_failures": 17,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-08-06T08:21:25.084250Z",
+   "last_failure": "2026-08-07T07:03:05.648683Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "16 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "17 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
    "etag": "W/\"d7b240796668fa9c20255b8d546ec53b\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-05T17:28:27Z",
-   "last_status": 200,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_status": 304,
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"ba52f1a9a2a560b220a7d822dd339710\"",
+   "etag": "W/\"d6fe17e24a7f01d3e49f2f616651ef06\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,14 +125,33 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-06T08:21:25.084250Z",
+   "last_success": "2026-08-07T07:03:05.648683Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
   {
-   "title": "Qbitec: Frictionless Point Clouds for Revit",
+   "title": "PARS-BIM: Architectural Tools",
+   "url": "http://revitaddons.blogspot.com/2026/08/pars-bim-architectural-tools.html",
+   "source": "revit-addons",
+   "published": "2026-08-07T01:26:00Z",
+   "summary": "From the Autodesk Design and Make Marketplace: Built on years of hands-on modelling experience, this plugin is designed to dramatically speed up your workflow while saving both time and costs. With powerful automation tools and smart features, it takes the repetitive, time-consuming tasks out of your hands—so you can focus on design. Here’s what it can do for you: Common Tools (Included in all versions) View & Template: Rapidly duplicate views and standardize templates across projects. Sheet Automation: Re-number, manage, and batch-create sheets from Excel. Family Placement: Precision-place families on CAD blocks or ceilings automatically. Selection & Filtering: Save selection rules, automate V/G filters, and group elements by level/type. Clash Coordination: Sync Navisworks clash reports or manage internal model collisions with instant navigation. Annotation & Data: Automate Marks, sync parameters, batch-tag elements, and clean up schematic line intersections. Architecture Tools (Exclusive) Room & Interior: Auto-generate wall/floor finishes and visualize ceiling height legends. Auto-Modeling: Convert 2D CAD files to 3D BIM elements (walls/doors/windows) and auto-join structural…",
+   "id": "4e3720f8b25878e8",
+   "fetched_at": "2026-08-07T07:03:05.648683Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 15,
+    "why": "Product announcement with no technical detail, API surface, or technique applicable to your own tooling work.",
+    "topics": [
+     "marketplace-product"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-07T07:03:05.648683Z"
+   }
+  },
+  {
+   "title": "Qbitec: Frictionless Point Clouds in Revit",
    "url": "http://revitaddons.blogspot.com/2026/08/qbitec-frictionless-point-clouds-for.html",
    "source": "revit-addons",
    "published": "2026-08-06T01:12:00Z",
