@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-08-06T13:00:07Z",
+  "generated": "2026-08-07T13:00:09Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 10082,
       "edges": 20208,
       "commit": "30e34966",
-      "commitsBehind": 80,
+      "commitsBehind": 102,
       "builtAt": "2026-07-21",
       "stale": true
     },
@@ -38,8 +38,8 @@ window.NETWORKX_IMPACT = {
         "file": "db/models.py",
         "kind": "file",
         "degree": 91,
-        "churn": 45,
-        "risk": 617.2
+        "churn": 46,
+        "risk": 623.9
       },
       {
         "label": "_serve_pool_schedule()",
@@ -70,24 +70,24 @@ window.NETWORKX_IMPACT = {
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 63,
-        "churn": 45,
-        "risk": 427.3
+        "churn": 46,
+        "risk": 431.9
       },
       {
         "label": "Firm",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 60,
-        "churn": 45,
-        "risk": 406.9
+        "churn": 46,
+        "risk": 411.3
       },
       {
         "label": "main.py",
         "file": "main.py",
         "kind": "file",
         "degree": 62,
-        "churn": 32,
-        "risk": 356.2
+        "churn": 34,
+        "risk": 366.8
       },
       {
         "label": "_by_category()",
@@ -102,16 +102,16 @@ window.NETWORKX_IMPACT = {
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 47,
-        "churn": 45,
-        "risk": 318.8
+        "churn": 46,
+        "risk": 322.2
       },
       {
         "label": "UserFirmMembership",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 45,
-        "churn": 45,
-        "risk": 305.2
+        "churn": 46,
+        "risk": 308.5
       },
       {
         "label": "_require_auth()",
