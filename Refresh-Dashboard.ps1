@@ -253,7 +253,10 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     # 4. Stage only the dashboard data + metrics + the graphify bundle from 1e. Nothing
     #    staged => already current. `codebase` is a directory: git add stages whatever
     #    codebase_sync.mjs rewrote, and stages nothing when the backend graph is unchanged.
-    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","networkx_impact.js","audit-freshness.js","codebase") | Out-Null
+    #    graphify-health.js is rendered by .tools\graphify\Check-GraphifyHealth.ps1
+    #    (daily, 05:45 - ahead of this run). That script deliberately does not commit,
+    #    so this refresh is the single committer for the file.
+    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","networkx_impact.js","audit-freshness.js","graphify-health.js","codebase") | Out-Null
     $staged = (& git diff --cached --name-only) -join "`n"
     if (-not $staged.Trim()) { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
 
