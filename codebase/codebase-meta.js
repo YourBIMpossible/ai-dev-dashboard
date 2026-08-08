@@ -1,9 +1,9 @@
 window.DASHBOARD_CODEBASE = {
-  "generated": "2026-07-22T01:15:18.524Z",
-  "commit": "30e3496",
-  "nodes": 10082,
-  "links": 20208,
-  "communities": 510,
+  "generated": "2026-08-08T09:16:26.902Z",
+  "commit": "1af1c41",
+  "nodes": 8884,
+  "links": 20978,
+  "communities": 364,
   "shownNodes": 170,
-  "shownEdges": 499
+  "shownEdges": 494
 };
