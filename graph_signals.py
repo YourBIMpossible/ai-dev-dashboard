@@ -211,7 +211,7 @@ def _is_test(path: str) -> bool:
 
 def blast_radius(G, external: set, churn: dict, repo_prefix: str = "backend/",
                  top: int = 12) -> list:
-    """Rank first-party production nodes by degree, annotated with churn.
+    """Rank first-party production nodes by Personalized PageRank seeded on churn.
 
     The old list was 3/10 test-file helpers and 2/10 third-party imports, and
     it flagged `assert_project_allowed()` -- the security gate on all 74 routes
@@ -219,8 +219,14 @@ def blast_radius(G, external: set, churn: dict, repo_prefix: str = "backend/",
     Churn is what separates the two: widely-depended-on AND frequently edited
     is a real risk; widely-depended-on and untouched for 90 days is just
     load-bearing.
+
+    Degree only measures local fan-in/out; PageRank personalized on the churn
+    vector scores global structural reach from recently-edited code, so a hub
+    two hops from every hot file outranks an equally-connected hub in a cold
+    corner. Falls back to the old degree*churn formula when there is no churn
+    signal to personalize on (fresh repo, git unavailable).
     """
-    rows = []
+    cand, pers = [], {}
     for n, deg in G.degree:
         if n in external:
             continue
@@ -231,14 +237,28 @@ def blast_radius(G, external: set, churn: dict, repo_prefix: str = "backend/",
         if not label:
             continue
         commits = churn.get(repo_prefix + sf, 0)
+        cand.append((n, deg, sf, label, commits))
+        if commits:
+            pers[n] = float(commits)
+
+    scores = {}
+    if pers:
+        try:
+            scores = nx.pagerank(G, alpha=0.85, personalization=pers, weight=None)
+        except Exception:
+            scores = {}   # multigraph/solver hiccup -> degree fallback below
+
+    rows = []
+    for n, deg, sf, label, commits in cand:
+        risk = (round(scores[n] * 1e4, 1) if scores and n in scores
+                else round(deg * (1 + commits) ** 0.5, 1))
         rows.append({
             "label":  label,
             "file":   sf,
             "kind":   "file" if label.endswith(".py") else "symbol",
             "degree": deg,
             "churn":  commits,
-            # Frequently-edited hubs rank above equally-connected stable ones.
-            "risk":   round(deg * (1 + commits) ** 0.5, 1),
+            "risk":   risk,
         })
     rows.sort(key=lambda r: -r["risk"])
     return rows[:top]
