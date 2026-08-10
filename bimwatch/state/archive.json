@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-10T07:16:25.595330Z",
+ "generated_at": "2026-08-10T08:24:07.885524Z",
  "count": 328,
  "health": {
   "adsk-news": {
@@ -9,7 +9,7 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Fri, 07 Aug 2026 17:39:04 GMT",
    "last_status": 200,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,20 +19,20 @@
    "last_item_published": "2026-08-03T13:01:04Z",
    "last_modified": "Tue, 04 Aug 2026 10:19:19 GMT",
    "last_status": 304,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 7,
+   "consecutive_failures": 8,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-10T07:16:25.595330Z",
+   "last_failure": "2026-08-10T08:24:07.885524Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "7 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "8 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -42,7 +42,7 @@
    "last_item_published": "2026-08-04T11:47:00Z",
    "last_modified": "Wed, 05 Aug 2026 09:03:43 GMT",
    "last_status": 200,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -52,7 +52,7 @@
    "last_item_count": 8,
    "last_modified": "Mon, 10 Aug 2026 06:51:29 GMT",
    "last_status": 200,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -62,7 +62,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-03T05:33:16Z",
    "last_status": 304,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -72,22 +72,22 @@
    "last_item_published": "2026-08-09T21:18:00Z",
    "last_modified": "Sun, 9 Aug 2026 22:19:55 GMT",
    "last_status": 200,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 20,
+   "consecutive_failures": 21,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-08-10T07:16:25.595330Z",
+   "last_failure": "2026-08-10T08:24:07.885524Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "20 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "21 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -95,7 +95,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-05T17:28:27Z",
    "last_status": 304,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"e8ca10498c9a5763ad51a3311d7ee3b8\"",
+   "etag": "W/\"401a3f2f266f459fe0c5c3f8b6308cdc\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,7 +125,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-10T07:16:25.595330Z",
+   "last_success": "2026-08-10T08:24:07.885524Z",
    "stale": false,
    "stale_reason": ""
   }
