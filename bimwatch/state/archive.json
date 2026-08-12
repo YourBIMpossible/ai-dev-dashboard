@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-11T06:54:07.099666Z",
- "count": 330,
+ "generated_at": "2026-08-12T07:13:23.185046Z",
+ "count": 332,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,30 +9,30 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Mon, 10 Aug 2026 21:02:07 GMT",
    "last_status": 200,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-08-03T13:01:04Z",
-   "last_modified": "Tue, 04 Aug 2026 10:19:19 GMT",
-   "last_status": 304,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-08-11T12:36:31Z",
+   "last_modified": "Tue, 11 Aug 2026 12:36:31 GMT",
+   "last_status": 200,
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 9,
+   "consecutive_failures": 10,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-11T06:54:07.099666Z",
+   "last_failure": "2026-08-12T07:13:23.185046Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "9 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "10 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -42,60 +42,60 @@
    "last_item_published": "2026-08-04T11:47:00Z",
    "last_modified": "Wed, 05 Aug 2026 09:03:43 GMT",
    "last_status": 200,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"e96e9159edde8a485ec803d7f46c45b8\"",
+   "etag": "W/\"82648bb50e7328f67d64c9b311a8a5e9\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 10 Aug 2026 13:33:50 GMT",
+   "last_modified": "Tue, 11 Aug 2026 15:49:48 GMT",
    "last_status": 200,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"c79be9f4ba6cde6f6a11dd72e82c34b8\"",
+   "etag": "W/\"16cb45c8510621515f9474980b3f76eb\"",
    "last_item_count": 10,
-   "last_item_published": "2026-08-10T17:29:19Z",
+   "last_item_published": "2026-08-11T18:59:39Z",
    "last_status": 200,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-11T01:12:00Z",
-   "last_modified": "Tue, 11 Aug 2026 03:15:59 GMT",
+   "last_item_published": "2026-08-12T00:21:00Z",
+   "last_modified": "Wed, 12 Aug 2026 02:16:46 GMT",
    "last_status": 200,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 22,
+   "consecutive_failures": 23,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-08-11T06:54:07.099666Z",
+   "last_failure": "2026-08-12T07:13:23.185046Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "22 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "23 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
   },
   "revit-pure": {
    "consecutive_failures": 0,
    "etag": "W/\"b62b9964c27c96a5feac74dde1acca47\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-10T10:00:00Z",
-   "last_status": 200,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_status": 304,
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"947fe04f08ae755a4686e5f9ab633652\"",
+   "etag": "W/\"b84ea67fb95027aa0103046eda060278\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +125,52 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-11T06:54:07.099666Z",
+   "last_success": "2026-08-12T07:13:23.185046Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Famiglia: Composite Family Round-Trip",
+   "url": "http://revitaddons.blogspot.com/2026/08/famiglia-composite-family-round-trip.html",
+   "source": "revit-addons",
+   "published": "2026-08-12T00:21:00Z",
+   "summary": "Famiglia is a Revit add-in designed to streamline composite family creation, separation, and placement workflows without scripting or manual Family Editor work. It provides three ribbon-based tools: Join Family , Separate Family , and Place Along Curve . Key benefits include a complete round-trip composite family workflow, accurate preservation of position and orientation, automatic Generic Model template discovery, configurable curve-based placement, and diagnostic log files for troubleshooting. Join Family combines multiple selected project instances into a new composite family file. It automatically creates the family document, loads each selected component, preserves their positions and rotations relative to the group centroid, saves the new family temporarily, and reloads it into the project at the correct location. This reduces a workflow that might normally take 30–60 minutes manually to roughly 30 seconds. Separate Family reverses this process by breaking a composite family instance back into its original individual components. It restores each component to its exact world position while preserving horizontal rotation and elevation. Once all eligible components are placed…",
+   "id": "00955dd79eeee34e",
+   "fetched_at": "2026-08-12T07:13:23.185046Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 45,
+    "why": "Composite family automation at scale; useful pattern for batch family operations and placement workflows you may adapt.",
+    "topics": [
+     "revit-api",
+     "family-authoring",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-12T07:13:23.185046Z"
+   }
+  },
+  {
+   "title": "Buildots adds laser scanning through NavVis partnership",
+   "url": "https://aecmag.com/news/buildots-adds-laser-scanning-through-navvis-partnership/",
+   "source": "aec-magazine",
+   "published": "2026-08-11T12:36:31Z",
+   "summary": "Construction intelligence platform gains survey-grade reality capture, viewable alongside progress data and BIM Buildots has added laser scanning to its construction intelligence platform through a partnership with reality-capture specialist NavVis , bringing survey-grade precision to the system for the first time. The company is positioning the capability at mission-critical and mega-projects — data centres, semiconductor fabs and hospitals among them — where dimensional tolerances are tight and as-built accuracy has to be verified rather than assumed. Buildots’ platform already builds a verified visual record of construction progress, largely from 360-degree imagery captured on site. Laser scanning adds a more precise layer on top of that record, giving teams survey-grade data to confirm dimensions, clearances and installation accuracy where it matters most, and to check for clashes between installed work and the model. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here Data can be captured using NavVis’s own hardware — the VLX wearable and MLX handheld mobile mapping systems — or any…",
+   "id": "6b6a2a62a9fa69eb",
+   "fetched_at": "2026-08-12T07:13:23.185046Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 8,
+    "why": "Product partnership announcement with no technical detail or implication for add-in development or Revit interop.",
+    "topics": [
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-12T07:13:23.185046Z"
+   }
+  },
   {
    "title": "HMK Tools: Productivity Add-ins & AI for Revit",
    "url": "http://revitaddons.blogspot.com/2026/08/hmk-tools-productivity-add-ins-ai-for.html",
