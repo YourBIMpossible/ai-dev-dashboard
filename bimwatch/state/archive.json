@@ -1,68 +1,68 @@
 {
- "generated_at": "2026-08-12T07:13:23.185046Z",
- "count": 332,
+ "generated_at": "2026-08-13T07:16:18.656722Z",
+ "count": 333,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"302a5b78408dd092e2a1c67ec2e4e6a3-gzip\"",
-   "last_item_count": 10,
+   "etag": "\"422fdda8b3c8e6309ceb0629d6e52919-gzip\"",
+   "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Mon, 10 Aug 2026 21:02:07 GMT",
+   "last_modified": "Thu, 13 Aug 2026 02:48:15 GMT",
    "last_status": 200,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 200,
+   "last_item_count": 0,
    "last_item_published": "2026-08-11T12:36:31Z",
    "last_modified": "Tue, 11 Aug 2026 12:36:31 GMT",
-   "last_status": 200,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_status": 304,
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 10,
+   "consecutive_failures": 11,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-12T07:13:23.185046Z",
+   "last_failure": "2026-08-13T07:16:18.656722Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "10 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "11 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"043cc7d4742768fbf7128b40001c0cda\"",
+   "etag": "W/\"e46f90a053ce1a3a153f4e1c4826ad13\"",
    "last_failure": "2026-07-25T20:06:02.422958Z",
    "last_item_count": 10,
-   "last_item_published": "2026-08-04T11:47:00Z",
-   "last_modified": "Wed, 05 Aug 2026 09:03:43 GMT",
+   "last_item_published": "2026-08-12T08:49:32Z",
+   "last_modified": "Wed, 12 Aug 2026 09:16:18 GMT",
    "last_status": 200,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"82648bb50e7328f67d64c9b311a8a5e9\"",
+   "etag": "W/\"592dc019608fe8566a60e7d29ae274e1\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 11 Aug 2026 15:49:48 GMT",
+   "last_modified": "Thu, 13 Aug 2026 06:14:47 GMT",
    "last_status": 200,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"16cb45c8510621515f9474980b3f76eb\"",
+   "etag": "W/\"09f7ac60122ab029d0da0796274f14dc\"",
    "last_item_count": 10,
-   "last_item_published": "2026-08-11T18:59:39Z",
+   "last_item_published": "2026-08-13T06:00:41Z",
    "last_status": 200,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -70,24 +70,24 @@
    "consecutive_failures": 0,
    "last_item_count": 25,
    "last_item_published": "2026-08-12T00:21:00Z",
-   "last_modified": "Wed, 12 Aug 2026 02:16:46 GMT",
+   "last_modified": "Wed, 12 Aug 2026 18:05:17 GMT",
    "last_status": 200,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 23,
+   "consecutive_failures": 24,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
-   "last_error": "ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)",
-   "last_failure": "2026-08-12T07:13:23.185046Z",
+   "last_error": "HTTP 403",
+   "last_failure": "2026-08-13T07:16:18.656722Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "23 consecutive failures: ReadTimeout: HTTPSConnectionPool(host='www.autodesk.com', port=443): Read timed out. (read timeout=25)"
+   "stale_reason": "24 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -95,7 +95,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-10T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"b84ea67fb95027aa0103046eda060278\"",
+   "etag": "W/\"df0319792f8c01cc1a190c1cc1f57fe4\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +125,31 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-12T07:13:23.185046Z",
+   "last_success": "2026-08-13T07:16:18.656722Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "In the Age of AI, the winner won’t be the best clicker",
+   "url": "https://bimcorner.com/in-the-age-of-ai-the-winner-wont-be-the-best-clicker/",
+   "source": "bim-corner",
+   "published": "2026-08-12T08:49:32Z",
+   "summary": "contents into Appearance → Customize → Additional CSS. Then the styles also apply inside the block-editor preview.) 2. Paste each following BOX (1–11) as its OWN \"Custom HTML\" block. 3. BETWEEN the boxes, add regular \"Image\" blocks (see image suggestions at the bottom). 4. Replace the CTA button URL (BOX 11): https://roadtobim.com/webinar-0 5. If your theme already prints the post title, delete the in BOX 1 (avoid two H1s). SEO meta (set in Yoast/RankMath, not in the body): SEO title: openBIM in the Age of AI: the skills that just gained value Meta desc: In the age of AI, the edge comes not from another piece of software but from understanding information — openBIM, IFC 4.3 and data structure in infrastructure. Focus kw: openBIM, IFC 4.3, AI in BIM, BIM in infrastructure, information management ═══════════════════════════════════════════════════════════════════════ --> @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap'); .bc-box{ font-family:'Montserrat',system-ui,-apple-system,Segoe UI,sans-serif; color:#666; line-height:1.8; font-size:17px; max-width:820px; margin:26px auto; background:#fff; border:1px solid #ececec;…",
+   "id": "69358c36c75396a8",
+   "fetched_at": "2026-08-13T07:16:18.656722Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "HTML template markup with no technical content about BIM, Revit, or AI applications.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-13T07:16:18.656722Z"
+   }
+  },
   {
    "title": "Famiglia: Composite Family Round-Trip",
    "url": "http://revitaddons.blogspot.com/2026/08/famiglia-composite-family-round-trip.html",
