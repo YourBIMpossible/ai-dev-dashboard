@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-08-14T13:00:09Z",
+  "generated": "2026-08-15T13:00:10Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 10088,
       "edges": 23441,
       "commit": "a2344bd7",
-      "commitsBehind": 0,
+      "commitsBehind": 11,
       "builtAt": "2026-08-09",
       "stale": false
     },
@@ -21,7 +21,7 @@ window.NETWORKX_IMPACT = {
       "baseline": 0,
       "delta": 0,
       "rootCauses": [],
-      "excludedExternal": 10,
+      "excludedExternal": 19,
       "examples": []
     },
     "hubs": [
@@ -30,40 +30,40 @@ window.NETWORKX_IMPACT = {
         "file": "aec/router.py",
         "kind": "file",
         "degree": 169,
-        "churn": 94,
-        "risk": 171.9
+        "churn": 96,
+        "risk": 170.3
       },
       {
         "label": "_serve_pool_schedule()",
         "file": "aec/router.py",
         "kind": "symbol",
         "degree": 53,
-        "churn": 94,
-        "risk": 82.3
+        "churn": 96,
+        "risk": 81.5
       },
       {
         "label": "_by_category()",
         "file": "aec/router.py",
         "kind": "symbol",
         "degree": 35,
-        "churn": 94,
-        "risk": 69.9
+        "churn": 96,
+        "risk": 69.2
       },
       {
         "label": "db/models.py",
         "file": "db/models.py",
         "kind": "file",
         "degree": 128,
-        "churn": 52,
-        "risk": 46.0
+        "churn": 54,
+        "risk": 46.3
       },
       {
         "label": "_require_auth()",
         "file": "aec/router.py",
         "kind": "symbol",
         "degree": 39,
-        "churn": 94,
-        "risk": 41.0
+        "churn": 96,
+        "risk": 40.9
       },
       {
         "label": "assert_project_allowed()",
@@ -71,31 +71,31 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 63,
         "churn": 3,
-        "risk": 36.9
+        "risk": 37.3
       },
       {
         "label": "assistant.py",
         "file": "aec/assistant.py",
         "kind": "file",
         "degree": 83,
-        "churn": 33,
-        "risk": 32.6
+        "churn": 35,
+        "risk": 33.1
       },
       {
         "label": "aps/router.py",
         "file": "aps/router.py",
         "kind": "file",
         "degree": 62,
-        "churn": 24,
-        "risk": 30.5
+        "churn": 26,
+        "risk": 31.3
       },
       {
         "label": "Base",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 58,
-        "churn": 52,
-        "risk": 30.5
+        "churn": 54,
+        "risk": 30.7
       },
       {
         "label": "assistant_tools.py",
@@ -103,23 +103,23 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 53,
         "churn": 20,
-        "risk": 27.6
+        "risk": 27.1
       },
       {
         "label": "main.py",
         "file": "main.py",
         "kind": "file",
         "degree": 67,
-        "churn": 36,
-        "risk": 24.9
+        "churn": 37,
+        "risk": 25.0
       },
       {
         "label": "get_elements_endpoint()",
         "file": "aec/router.py",
         "kind": "symbol",
         "degree": 22,
-        "churn": 94,
-        "risk": 23.5
+        "churn": 96,
+        "risk": 23.3
       }
     ],
     "baseline": {
@@ -137,7 +137,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 0,
-      "finding": "No circular imports. 10 third-party symbols excluded (graphify credits them to the importing file).",
+      "finding": "No circular imports. 19 third-party symbols excluded (graphify credits them to the importing file).",
       "category": "clear"
     },
     {
@@ -147,7 +147,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "degree \u00d7 90d churn",
       "nodes": 12,
-      "finding": "aec/router.py is the hotspot \u2014 169 dependents, 94 commits in 90d",
+      "finding": "aec/router.py is the hotspot \u2014 169 dependents, 96 commits in 90d",
       "category": "watch"
     },
     {
