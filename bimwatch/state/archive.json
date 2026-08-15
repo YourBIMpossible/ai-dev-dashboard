@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-08-14T07:13:47.158324Z",
- "count": 334,
+ "generated_at": "2026-08-15T06:24:30.438665Z",
+ "count": 335,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"0cc33534b66f4634638f7cddcddead65-gzip\"",
+   "etag": "\"7304c1d84811f11086bb5f8f86079759-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Thu, 13 Aug 2026 16:25:12 GMT",
+   "last_modified": "Fri, 14 Aug 2026 15:12:23 GMT",
    "last_status": 200,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,76 +19,75 @@
    "last_item_published": "2026-08-11T12:36:31Z",
    "last_modified": "Tue, 11 Aug 2026 12:36:31 GMT",
    "last_status": 304,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 12,
+   "consecutive_failures": 13,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-14T07:13:47.158324Z",
+   "last_failure": "2026-08-15T06:24:30.438665Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "12 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "13 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
-   "consecutive_failures": 1,
+   "consecutive_failures": 0,
    "etag": "W/\"e46f90a053ce1a3a153f4e1c4826ad13\"",
    "last_failure": "2026-08-14T07:13:47.158324Z",
    "last_item_count": 10,
    "last_item_published": "2026-08-12T08:49:32Z",
    "last_modified": "Wed, 12 Aug 2026 09:16:18 GMT",
    "last_status": 200,
-   "last_success": "2026-08-13T07:16:18.656722Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
-   "stale_reason": "",
-   "last_error": "HTTP 403"
+   "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"4b0275f16399ed9f0782a28a3132d5f8\"",
+   "etag": "W/\"d1972a83c640f74a0e267a28e17f45d4\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 14 Aug 2026 07:04:52 GMT",
+   "last_modified": "Fri, 14 Aug 2026 13:30:59 GMT",
    "last_status": 200,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
    "etag": "W/\"6a8c1583eda6ae181825424e642583c7\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-13T15:45:52Z",
-   "last_status": 200,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_status": 304,
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-14T00:36:00Z",
-   "last_modified": "Fri, 14 Aug 2026 04:16:31 GMT",
+   "last_item_published": "2026-08-15T00:46:00Z",
+   "last_modified": "Sat, 15 Aug 2026 05:42:12 GMT",
    "last_status": 200,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 25,
+   "consecutive_failures": 26,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-14T07:13:47.158324Z",
+   "last_failure": "2026-08-15T06:24:30.438665Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "25 consecutive failures: HTTP 403"
+   "stale_reason": "26 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -96,7 +95,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-10T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -106,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"31760aa8905a3b3dcdebb0de638a9070\"",
+   "etag": "W/\"586f96ed18448c582dd792bcabc00dd7\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -126,12 +125,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-14T07:13:47.158324Z",
+   "last_success": "2026-08-15T06:24:30.438665Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Enlazo: Parameter Link Propagation",
+   "url": "http://revitaddons.blogspot.com/2026/08/enlazo-parameter-link-propagation.html",
+   "source": "revit-addons",
+   "published": "2026-08-15T00:46:00Z",
+   "summary": "Summary Enlazo is an add-in for Autodesk Revit designed to automate the transfer of parameter values from parent elements, such as structural columns, beams, walls, or slabs, to nearby child elements in any Revit category with writable instance parameters. Instead of requiring users to manually copy values from one element to another, Enlazo uses spatial proximity detection to identify related elements and apply the appropriate parameter values in a controlled, repeatable workflow. Purpose and Problem Solved The add-in addresses a common BIM coordination problem: many Revit elements need parameter values that reflect their relationship to nearby structural or spatial elements, but those relationships are not always explicitly stored in the Revit data model. In typical workflows, BIM coordinators, structural engineers, or MEP coordinators must visually inspect the model, determine which elements belong to the same zone or structural relationship, and then enter values one element at a time. This process is slow, repetitive, and prone to inconsistency, especially on projects with hundreds or thousands of related elements. Workflow Select the parent category and the parent parameter…",
+   "id": "6aba8e03c5c24a80",
+   "fetched_at": "2026-08-15T06:24:30.438665Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A parameter-linking add-in for common coordination tasks; worth knowing exists, but no API technique or tooling insight for your own work.",
+    "topics": [
+     "revit-addons",
+     "parameters"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-15T06:24:30.438665Z"
+   }
+  },
   {
    "title": "Ecco: Logistics Planning",
    "url": "http://revitaddons.blogspot.com/2026/08/ecco-logistics-planning.html",
