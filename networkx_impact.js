@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-08-15T13:00:10Z",
+  "generated": "2026-08-16T13:00:07Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 10088,
       "edges": 23441,
       "commit": "a2344bd7",
-      "commitsBehind": 11,
+      "commitsBehind": 14,
       "builtAt": "2026-08-09",
       "stale": false
     },
@@ -21,7 +21,7 @@ window.NETWORKX_IMPACT = {
       "baseline": 0,
       "delta": 0,
       "rootCauses": [],
-      "excludedExternal": 19,
+      "excludedExternal": 21,
       "examples": []
     },
     "hubs": [
@@ -31,7 +31,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 169,
         "churn": 96,
-        "risk": 170.3
+        "risk": 169.8
       },
       {
         "label": "_serve_pool_schedule()",
@@ -39,7 +39,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 53,
         "churn": 96,
-        "risk": 81.5
+        "risk": 81.3
       },
       {
         "label": "_by_category()",
@@ -47,7 +47,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 35,
         "churn": 96,
-        "risk": 69.2
+        "risk": 69.0
       },
       {
         "label": "db/models.py",
@@ -55,7 +55,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 128,
         "churn": 54,
-        "risk": 46.3
+        "risk": 46.2
       },
       {
         "label": "_require_auth()",
@@ -63,7 +63,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 39,
         "churn": 96,
-        "risk": 40.9
+        "risk": 40.8
       },
       {
         "label": "assert_project_allowed()",
@@ -71,7 +71,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 63,
         "churn": 3,
-        "risk": 37.3
+        "risk": 37.4
       },
       {
         "label": "assistant.py",
@@ -95,15 +95,15 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 58,
         "churn": 54,
-        "risk": 30.7
+        "risk": 30.6
       },
       {
         "label": "assistant_tools.py",
         "file": "aec/assistant_tools.py",
         "kind": "file",
         "degree": 53,
-        "churn": 20,
-        "risk": 27.1
+        "churn": 21,
+        "risk": 27.9
       },
       {
         "label": "main.py",
@@ -111,7 +111,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 67,
         "churn": 37,
-        "risk": 25.0
+        "risk": 24.9
       },
       {
         "label": "get_elements_endpoint()",
@@ -119,7 +119,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 22,
         "churn": 96,
-        "risk": 23.3
+        "risk": 23.2
       }
     ],
     "baseline": {
@@ -137,7 +137,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 0,
-      "finding": "No circular imports. 19 third-party symbols excluded (graphify credits them to the importing file).",
+      "finding": "No circular imports. 21 third-party symbols excluded (graphify credits them to the importing file).",
       "category": "clear"
     },
     {
