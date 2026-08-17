@@ -40,7 +40,7 @@ window.PHASE_DAG = {
 {
 "id": "6",
 "name": "Platform / Billing + Client-Management",
-"status": "CLOSED (original scope) — reopened 2026-07-27, PLACED not ratified, for new sub-scope below",
+"status": "PARTIAL — original scope shipped + live; Client-Mgmt E and F open (reopened 2026-07-27, PLACED not ratified)",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -71,7 +71,7 @@ window.PHASE_DAG = {
 {
 "id": "9",
 "name": "Product Data Ingestion",
-"status": "CONDITIONAL",
+"status": "ACTIVE",
 "dependsOn": [
 "7"
 ],
@@ -92,16 +92,8 @@ window.PHASE_DAG = {
 },
 {
 "id": "11",
-"name": "Model QA & Health",
-"status": "SHIPPED — LIVE in prod",
-"dependsOn": [],
-"gates": [],
-"gatesCount": 0
-},
-{
-"id": "11.1",
-"name": "Coordination & Health Report",
-"status": "SHIPPED — LIVE in prod",
+"name": "Model QA & Health (incl. Coordination & Health Report)",
+"status": "ACTIVE — core shipped + LIVE in prod; reopened for further development",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -119,7 +111,7 @@ window.PHASE_DAG = {
 },
 {
 "id": "13",
-"name": "Augmentation & Write-back Layer",
+"name": "Augmentation & Write-back Layer (incl. Write Engine — Typed Values + Type Params)",
 "status": "ACTIVE",
 "dependsOn": [
 "7"
@@ -128,17 +120,9 @@ window.PHASE_DAG = {
 "gatesCount": 0
 },
 {
-"id": "13.1",
-"name": "Write Engine — Typed Values + Type Params (Phase 13 sub-increment)",
-"status": "ACTIVE — Increment 1 SHIPPED",
-"dependsOn": [],
-"gates": [],
-"gatesCount": 0
-},
-{
 "id": "14",
 "name": "Local AI Inference — On-Device RAG + Revit Context (Optional)",
-"status": "CONDITIONAL",
+"status": "ACTIVE",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -158,6 +142,14 @@ window.PHASE_DAG = {
 "id": "16",
 "name": "Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path",
 "status": "CONDITIONAL",
+"dependsOn": [],
+"gates": [],
+"gatesCount": 0
+},
+{
+"id": "18",
+"name": "Client Knowledge Assistant (3 pillars)",
+"status": "ACTIVE",
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
@@ -183,7 +175,7 @@ window.PHASE_DAG = {
 {
 "id": "6",
 "name": "Platform / Billing + Client-Management",
-"status": "CLOSED (original scope) — reopened 2026-07-27, PLACED not ratified, for new sub-scope below"
+"status": "PARTIAL — original scope shipped + live; Client-Mgmt E and F open (reopened 2026-07-27, PLACED not ratified)"
 },
 {
 "id": "7",
@@ -197,28 +189,23 @@ window.PHASE_DAG = {
 },
 {
 "id": "11",
-"name": "Model QA & Health",
-"status": "SHIPPED — LIVE in prod"
-},
-{
-"id": "11.1",
-"name": "Coordination & Health Report",
-"status": "SHIPPED — LIVE in prod"
-},
-{
-"id": "13.1",
-"name": "Write Engine — Typed Values + Type Params (Phase 13 sub-increment)",
-"status": "ACTIVE — Increment 1 SHIPPED"
+"name": "Model QA & Health (incl. Coordination & Health Report)",
+"status": "ACTIVE — core shipped + LIVE in prod; reopened for further development"
 },
 {
 "id": "14",
 "name": "Local AI Inference — On-Device RAG + Revit Context (Optional)",
-"status": "CONDITIONAL"
+"status": "ACTIVE"
 },
 {
 "id": "16",
 "name": "Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path",
 "status": "CONDITIONAL"
+},
+{
+"id": "18",
+"name": "Client Knowledge Assistant (3 pillars)",
+"status": "ACTIVE"
 }
 ],
 [
@@ -230,7 +217,7 @@ window.PHASE_DAG = {
 {
 "id": "9",
 "name": "Product Data Ingestion",
-"status": "CONDITIONAL"
+"status": "ACTIVE"
 },
 {
 "id": "12",
@@ -239,7 +226,7 @@ window.PHASE_DAG = {
 },
 {
 "id": "13",
-"name": "Augmentation & Write-back Layer",
+"name": "Augmentation & Write-back Layer (incl. Write Engine — Typed Values + Type Params)",
 "status": "ACTIVE"
 },
 {
@@ -265,7 +252,7 @@ window.PHASE_DAG = {
 {
 "id": "9",
 "name": "Product Data Ingestion",
-"status": "CONDITIONAL"
+"status": "ACTIVE"
 },
 {
 "id": "10",
@@ -319,20 +306,16 @@ window.PHASE_DAG = {
 "gate": "2026-07-01"
 },
 {
-"phase": "11.1",
-"gate": "2026-07-02"
-},
-{
-"phase": "13.1",
-"gate": "Increment 2 (type-param targeting, String-only) gated on Increment 1's live smoke — gate CLEARED 2026-08-04; Increment 4 (ElementId) stays owner-ruled out until then"
-},
-{
 "phase": "14",
 "gate": "Owner ratification — optional track; gates nothing on the main line and must not block Phases 7–13"
 },
 {
 "phase": "16",
 "gate": "Owner ratification — gates nothing on the main line; not scheduled until the core product line (Phases 3–13) is complete or far enough along to prove the target workflows (owner instruction 2026-07-23)"
+},
+{
+"phase": "18",
+"gate": "Owner-authorized multi-session completion program (2026-08-09)"
 }
 ],
 "edges": [
