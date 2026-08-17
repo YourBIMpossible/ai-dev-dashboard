@@ -1040,10 +1040,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [9,7,3,7,4,2,5,2,3,3,4,3,6,4],
+      activity: [9,7,3,7,4,2,5,2,3,3,4,3,6,5],
       lastActivity: {
         date: "2026-08-17",
-        summary: "dashboard refresh 2026-08-17 06:00 (235dcac)"
+        summary: "dashboard refresh 2026-08-17 11:32 (1872b6b)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
