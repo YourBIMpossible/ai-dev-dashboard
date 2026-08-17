@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-08-17T18:33:21Z",
+  "generated": "2026-08-17T20:25:38Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 12543,
       "edges": 29677,
       "commit": "bf469930",
-      "commitsBehind": 4,
+      "commitsBehind": 7,
       "builtAt": "2026-08-17",
       "stale": false
     },

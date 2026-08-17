@@ -225,10 +225,10 @@ window.DASHBOARD_DATA = {
           { name: "P18 Client Knowledge Assistant (3 pillars)", pct: 50, note: "ACTIVE — Added as its own top-level row 2026-08-17. Previously invisible in this ledger despite being a fully-scoped, owner-authorized, multi-session program — the ledger↔engineering-store blind spot (its state lived only in `.tools/state/queue.yaml` + an anchor doc). Given 18, not 17, at creation (history): when this row was placed, Phase 17 was retired-unused per the 2026-08-07 ruling, so 18 was simply the next free integer after 16. That ruling was superseded the same day: 17 was promoted to Phase 17 — App Integrations (2026-08-17, see row 17). CKA stays 18 — unchanged — because it is a distinct product surface, not an app integration; the two now coexist and ordering holds 16 < 17 < 18. Not nested under 14 or 15: Pillar 1's search resembles 14's retrieval in spirit, but CKA is its own product surface (client documents + model explainability + product help), not local inference and not the Revit pane. Anchor / source of truth: `00_Strategy/2026-08-09__CKA-completion-program__ANCHOR.md` (locked mission, locked decisions A–E, stop conditions, internal Phase 0–4 plan, checkpoint log) + `2026-08-09__CKA-product-spec.md`. Three pillars (status verbatim from `queue.yaml`): Pillar 1 — Product help (BM25 help ranker + how-to corpus, waves 1–4) = live (`CKA-PILLAR1-HELP-CORPUS`; 41 help `.md` articles at tip, deployed-container search verified 2026-08-17). Pillar 2 — Per-firm documents (Private/Project/Multi-project/Firm-Library access model, RBAC + classification, upload/extraction/BM25 retrieval, assistant tool) = landed, not yet confirmed live (`CKA-PILLAR2-FIRM-DOCS`, PR #327; tenant-isolation-sensitive — flagged for a live firm_id-scoping + cross-firm-leak probe before external clients). Pillar 3 — Model explainability (14 gap-fills + Groups read parity, change sets, help handoff, model-health remedies, alert next-steps) = landed, not yet confirmed live (`CKA-PILLAR3-EXPLAINABILITY`, PR #326; CI-green is the only evidence — visual verification blocked on local sign-in). Internal Phase 0–4 stages are sub-phase notes (below), not top-level rows — launched under the corrected convention from day one to avoid the 11/11.1-style cleanup later. Hard boundaries per the anchor (do not cross without a fresh owner turn): no prod deploy/config/migration/data access, isolated/dev infra only, no new assistant-initiated write authority." }
         ]
       },
-      activity: [27,36,33,25,29,7,0,2,0,2,5,10,48,6],
+      activity: [27,36,33,25,29,7,0,2,0,2,5,10,48,19],
       lastActivity: {
         date: "2026-08-17",
-        summary: "feat(home): pinned-first projects, right-column model favorites, header actions (#401) (887668b)"
+        summary: "docs(phase-status): promote chat gateways to standalone Phase 17 — App Integrations (#59) (d45f86c)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -998,10 +998,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [9,20,12,8,12,0,0,0,0,1,2,9,14,1],
+      activity: [9,20,12,8,12,0,0,0,0,1,2,9,14,4],
       lastActivity: {
         date: "2026-08-17",
-        summary: "chore(docs-hygiene): clear scheduled G3/G4 gate — fix 5 dangling refs, archive 75 aged build logs (#56) (7170b08)"
+        summary: "docs(phase-status): promote chat gateways to standalone Phase 17 — App Integrations (#59) (d45f86c)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1040,10 +1040,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [9,7,3,7,4,2,5,2,3,3,4,3,6,5],
+      activity: [9,7,3,7,4,2,5,2,3,3,4,3,6,6],
       lastActivity: {
         date: "2026-08-17",
-        summary: "dashboard refresh 2026-08-17 11:32 (1872b6b)"
+        summary: "dashboard refresh 2026-08-17 11:33 (9f67d9f)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
