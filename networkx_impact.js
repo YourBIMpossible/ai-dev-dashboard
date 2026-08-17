@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-08-16T13:00:07Z",
+  "generated": "2026-08-17T00:07:42Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,9 +12,9 @@ window.NETWORKX_IMPACT = {
       "nodes": 10088,
       "edges": 23441,
       "commit": "a2344bd7",
-      "commitsBehind": 14,
+      "commitsBehind": 31,
       "builtAt": "2026-08-09",
-      "stale": false
+      "stale": true
     },
     "cycles": {
       "count": 0,
@@ -31,7 +31,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 169,
         "churn": 96,
-        "risk": 169.8
+        "risk": 167.5
       },
       {
         "label": "_serve_pool_schedule()",
@@ -39,7 +39,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 53,
         "churn": 96,
-        "risk": 81.3
+        "risk": 80.0
       },
       {
         "label": "_by_category()",
@@ -47,15 +47,15 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 35,
         "churn": 96,
-        "risk": 69.0
+        "risk": 67.8
       },
       {
         "label": "db/models.py",
         "file": "db/models.py",
         "kind": "file",
         "degree": 128,
-        "churn": 54,
-        "risk": 46.2
+        "churn": 57,
+        "risk": 47.2
       },
       {
         "label": "_require_auth()",
@@ -63,15 +63,15 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 39,
         "churn": 96,
-        "risk": 40.8
+        "risk": 40.4
       },
       {
         "label": "assert_project_allowed()",
         "file": "guard.py",
         "kind": "symbol",
         "degree": 63,
-        "churn": 3,
-        "risk": 37.4
+        "churn": 4,
+        "risk": 37.5
       },
       {
         "label": "assistant.py",
@@ -79,39 +79,39 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 83,
         "churn": 35,
-        "risk": 33.1
+        "risk": 32.8
       },
       {
         "label": "aps/router.py",
         "file": "aps/router.py",
         "kind": "file",
         "degree": 62,
-        "churn": 26,
-        "risk": 31.3
+        "churn": 28,
+        "risk": 32.4
       },
       {
         "label": "Base",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 58,
-        "churn": 54,
-        "risk": 30.6
+        "churn": 57,
+        "risk": 31.3
       },
       {
         "label": "assistant_tools.py",
         "file": "aec/assistant_tools.py",
         "kind": "file",
         "degree": 53,
-        "churn": 21,
-        "risk": 27.9
+        "churn": 22,
+        "risk": 28.4
       },
       {
         "label": "main.py",
         "file": "main.py",
         "kind": "file",
         "degree": 67,
-        "churn": 37,
-        "risk": 24.9
+        "churn": 38,
+        "risk": 25.1
       },
       {
         "label": "get_elements_endpoint()",
@@ -119,7 +119,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 22,
         "churn": 96,
-        "risk": 23.2
+        "risk": 22.9
       }
     ],
     "baseline": {
@@ -156,7 +156,7 @@ window.NETWORKX_IMPACT = {
       "repo": "BIMpossible",
       "tool": "security_scan",
       "algo": "betweenness_centrality",
-      "nodes": 149,
+      "nodes": 232,
       "finding": "Auth-gate and permission edges mapped",
       "category": "active"
     },
