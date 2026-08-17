@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-16T06:06:41.329630Z",
- "count": 336,
+ "generated_at": "2026-08-17T06:09:57.080995Z",
+ "count": 338,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,7 +9,7 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Fri, 14 Aug 2026 15:12:23 GMT",
    "last_status": 200,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,20 +19,20 @@
    "last_item_published": "2026-08-11T12:36:31Z",
    "last_modified": "Tue, 11 Aug 2026 12:36:31 GMT",
    "last_status": 304,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 14,
+   "consecutive_failures": 15,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-16T06:06:41.329630Z",
+   "last_failure": "2026-08-17T06:09:57.080995Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "14 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "15 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -42,7 +42,7 @@
    "last_item_published": "2026-08-12T08:49:32Z",
    "last_modified": "Wed, 12 Aug 2026 09:16:18 GMT",
    "last_status": 200,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -52,42 +52,42 @@
    "last_item_count": 8,
    "last_modified": "Fri, 14 Aug 2026 13:30:59 GMT",
    "last_status": 200,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"6a8c1583eda6ae181825424e642583c7\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-08-13T15:45:52Z",
-   "last_status": 304,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "etag": "W/\"c689ecd65cc4ea15f37955c3d530a002\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-08-17T00:22:03Z",
+   "last_status": 200,
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-15T19:33:00Z",
-   "last_modified": "Sat, 15 Aug 2026 20:18:55 GMT",
+   "last_item_published": "2026-08-16T22:42:00Z",
+   "last_modified": "Sun, 16 Aug 2026 23:53:36 GMT",
    "last_status": 200,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 27,
+   "consecutive_failures": 28,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-16T06:06:41.329630Z",
+   "last_failure": "2026-08-17T06:09:57.080995Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "27 consecutive failures: HTTP 403"
+   "stale_reason": "28 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -95,7 +95,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-10T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"c8327c332b869a759e9524558ca0fb9d\"",
+   "etag": "W/\"81b988fdd7f9de4eed4d85762ce5fcad\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +125,54 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-16T06:06:41.329630Z",
+   "last_success": "2026-08-17T06:09:57.080995Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Schema: View Layout Manager For Project to Project Organization",
+   "url": "http://revitaddons.blogspot.com/2026/08/schema-view-layout-manager-for-project.html",
+   "source": "revit-addons",
+   "published": "2026-08-16T22:42:00Z",
+   "summary": "Summary Schema is a Revit add-in designed to streamline BIM project setup by automating the reuse of standard sheet and viewport arrangements. It addresses a common source of repetitive work for BIM managers, template administrators, and project teams: rebuilding the same drawing set structure on every new model. Instead of manually laying out sheets, viewports, and schedules project after project, teams can define a standard arrangement once and apply it consistently across future Revit models. Core Purpose In many BIM environments, drawing set organization is standardized across projects, but the setup process still requires substantial manual effort. Sheet names, viewport placements, schedule locations, and drawing arrangements are often recreated from scratch even when a proven layout already exists. Schema captures the structure of an established drawing set and converts it into a portable schema file that can be reused without transferring model geometry, project-specific content, or full template files. Two-Step Workflow Schema works through a two-step process: first capturing a layout from a source model, then assembling that layout in a target model. This approach…",
+   "id": "e6e1adb039779909",
+   "fetched_at": "2026-08-17T06:09:57.080995Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 72,
+    "why": "Direct parallel to your sheet/viewport automation work; reference for techniques and scope you may already build or extend.",
+    "topics": [
+     "sheet-automation",
+     "viewport-templates",
+     "add-in-design"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-17T06:09:57.080995Z"
+   }
+  },
+  {
+   "title": "pyRevit v6.5.4",
+   "url": "https://github.com/pyrevitlabs/pyRevit/releases/tag/v6.5.4.26228%2B1146",
+   "source": "pyrevit-releases",
+   "published": "2026-08-16T16:07:19Z",
+   "summary": "Last 6.x hotfix before 7.0. Ships the post-6.5.3 fixes that were waiting on develop without the Revit <2021 drop from #3438 (that work stays on develop for 7.0). Highlights Admin installer settings — standard users can save settings again on all-users installs; writable config lives in AppData, ProgramData stays a machine-wide seed ( #3512 @jmcouffin , #3523 @jmcouffin , #3504 ) Output window — trailing prints, logger records, and uncaught traceback bodies flush correctly; normal output no longer inherits red error styling ( #3477 @ChrisCrosley ) Filter Legend — new tool builds a legend of view/template filters (swatch, name, parameter, value) with 8-language localization and column auto-fit ( #3522 @Wurschdhaud , #3542 @Wurschdhaud ) Keynote Manager — modeless-window crash fix plus DB/runtime reliability ( #3517 , #3518 @tay0thman , #3519 @tay0thman ) Icon theme on reload — Dark/Light switch no longer needs a Revit restart; ribbon icons refresh in place ( #3493 @app/copilot-swe-agent) Convert Line Styles — source styles are retired (merged/renamed) instead of hard-deleted, avoiding Linework crashes ( #3505 @jmcouffin , #3385 ) C# loader auth + Search — authusers from…",
+   "id": "b145fe1fff0b057b",
+   "fetched_at": "2026-08-17T06:09:57.080995Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 68,
+    "why": "Last 6.x release before 7.0; version fork decision point if you ship pyRevit scripts to clients on mixed Revit versions.",
+    "topics": [
+     "pyrevit",
+     "version-support",
+     "breaking-changes"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-17T06:09:57.080995Z"
+   }
+  },
   {
    "title": "Spazio: Extract and Regenerate Rooms Across Floors, Buildings or Projects",
    "url": "http://revitaddons.blogspot.com/2026/08/spazio-extract-and-regenerate-rooms.html",

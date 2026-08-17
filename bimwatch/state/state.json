@@ -6,7 +6,7 @@
   "last_item_published": "2026-08-04T16:30:13Z",
   "last_modified": "Fri, 14 Aug 2026 15:12:23 GMT",
   "last_status": 200,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -16,20 +16,20 @@
   "last_item_published": "2026-08-11T12:36:31Z",
   "last_modified": "Tue, 11 Aug 2026 12:36:31 GMT",
   "last_status": 304,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
  "aps-blog": {
-  "consecutive_failures": 14,
+  "consecutive_failures": 15,
   "last_error": "HttpError: response exceeded 8388608 bytes",
-  "last_failure": "2026-08-16T06:06:41.329630Z",
+  "last_failure": "2026-08-17T06:09:57.080995Z",
   "last_item_count": 10,
   "last_item_published": "2026-07-29T06:54:40Z",
   "last_status": 200,
   "last_success": "2026-08-03T10:38:20.411629Z",
   "stale": true,
-  "stale_reason": "14 consecutive failures: HttpError: response exceeded 8388608 bytes"
+  "stale_reason": "15 consecutive failures: HttpError: response exceeded 8388608 bytes"
  },
  "bim-corner": {
   "consecutive_failures": 0,
@@ -39,7 +39,7 @@
   "last_item_published": "2026-08-12T08:49:32Z",
   "last_modified": "Wed, 12 Aug 2026 09:16:18 GMT",
   "last_status": 200,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -49,42 +49,42 @@
   "last_item_count": 8,
   "last_modified": "Fri, 14 Aug 2026 13:30:59 GMT",
   "last_status": 200,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
  "pyrevit-releases": {
   "consecutive_failures": 0,
-  "etag": "W/\"6a8c1583eda6ae181825424e642583c7\"",
-  "last_item_count": 0,
-  "last_item_published": "2026-08-13T15:45:52Z",
-  "last_status": 304,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "etag": "W/\"c689ecd65cc4ea15f37955c3d530a002\"",
+  "last_item_count": 10,
+  "last_item_published": "2026-08-17T00:22:03Z",
+  "last_status": 200,
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
  "revit-addons": {
   "consecutive_failures": 0,
   "last_item_count": 25,
-  "last_item_published": "2026-08-15T19:33:00Z",
-  "last_modified": "Sat, 15 Aug 2026 20:18:55 GMT",
+  "last_item_published": "2026-08-16T22:42:00Z",
+  "last_modified": "Sun, 16 Aug 2026 23:53:36 GMT",
   "last_status": 200,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
  "revit-blog": {
-  "consecutive_failures": 27,
+  "consecutive_failures": 28,
   "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
   "last_error": "HTTP 403",
-  "last_failure": "2026-08-16T06:06:41.329630Z",
+  "last_failure": "2026-08-17T06:09:57.080995Z",
   "last_item_count": 0,
   "last_item_published": "2026-07-22T21:10:26Z",
   "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
   "last_status": 304,
   "last_success": "2026-07-25T19:27:39.918043Z",
   "stale": true,
-  "stale_reason": "27 consecutive failures: HTTP 403"
+  "stale_reason": "28 consecutive failures: HTTP 403"
  },
  "revit-pure": {
   "consecutive_failures": 0,
@@ -92,7 +92,7 @@
   "last_item_count": 0,
   "last_item_published": "2026-08-10T10:00:00Z",
   "last_status": 304,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -102,17 +102,17 @@
   "last_item_count": 0,
   "last_item_published": "2026-07-25T21:05:05Z",
   "last_status": 304,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
  "revitlookup-releases": {
   "consecutive_failures": 0,
-  "etag": "W/\"c8327c332b869a759e9524558ca0fb9d\"",
+  "etag": "W/\"81b988fdd7f9de4eed4d85762ce5fcad\"",
   "last_item_count": 10,
   "last_item_published": "2026-07-05T11:05:33Z",
   "last_status": 200,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -122,7 +122,7 @@
   "last_item_count": 0,
   "last_item_published": "2026-06-15T16:47:47Z",
   "last_status": 304,
-  "last_success": "2026-08-16T06:06:41.329630Z",
+  "last_success": "2026-08-17T06:09:57.080995Z",
   "stale": false,
   "stale_reason": ""
  }
