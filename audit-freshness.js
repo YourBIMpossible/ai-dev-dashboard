@@ -1,17 +1,17 @@
 window.AUDIT_FRESHNESS = {
-  "checked": "2026-08-16 17:08:15",
+  "checked": "2026-08-16 17:40:21",
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
-      "lastRun": "2026-08-04",
+      "lastRun": "2026-08-08",
       "newestOnDisk": "2026-08-08",
-      "stale": true
+      "stale": false
     },
     "addins": {
       "name": "Add-Ins / RevitLink",
-      "lastRun": "2026-07-14",
+      "lastRun": "2026-07-25",
       "newestOnDisk": "2026-07-25",
-      "stale": true
+      "stale": false
     },
     "site": {
       "name": "BIMpossible Site",
