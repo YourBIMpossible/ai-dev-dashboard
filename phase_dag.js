@@ -42,8 +42,10 @@ window.PHASE_DAG = {
 "name": "Platform / Billing + Client-Management",
 "status": "PARTIAL — original scope shipped + live; Client-Mgmt E and F open (reopened 2026-07-27, PLACED not ratified)",
 "dependsOn": [],
-"gates": [],
-"gatesCount": 0
+"gates": [
+"17"
+],
+"gatesCount": 1
 },
 {
 "id": "7",
@@ -56,9 +58,10 @@ window.PHASE_DAG = {
 "10",
 "12",
 "13",
-"15"
+"15",
+"17"
 ],
-"gatesCount": 6
+"gatesCount": 7
 },
 {
 "id": "8",
@@ -116,8 +119,10 @@ window.PHASE_DAG = {
 "dependsOn": [
 "7"
 ],
-"gates": [],
-"gatesCount": 0
+"gates": [
+"17"
+],
+"gatesCount": 1
 },
 {
 "id": "14",
@@ -143,6 +148,17 @@ window.PHASE_DAG = {
 "name": "Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path",
 "status": "CONDITIONAL",
 "dependsOn": [],
+"gates": [],
+"gatesCount": 0
+},
+{
+"id": "17",
+"name": "App Integrations (governed third-party app surfaces — chat gateways + collaboration / CDE / reporting apps over a shared control plane)",
+"status": "PARTIAL",
+"dependsOn": [
+"6",
+"13"
+],
 "gates": [],
 "gatesCount": 0
 },
@@ -240,6 +256,11 @@ window.PHASE_DAG = {
 "id": "10",
 "name": "Cost Intelligence / Estimating",
 "status": "CONDITIONAL"
+},
+{
+"id": "17",
+"name": "App Integrations (governed third-party app surfaces — chat gateways + collaboration / CDE / reporting apps over a shared control plane)",
+"status": "PARTIAL"
 }
 ]
 ],
@@ -264,14 +285,15 @@ window.PHASE_DAG = {
 {
 "id": "7",
 "name": "Model Write-back — DA4R + Revit Link (two engines)",
-"gatesCount": 6,
+"gatesCount": 7,
 "gates": [
 "5",
 "9",
 "10",
 "12",
 "13",
-"15"
+"15",
+"17"
 ]
 },
 {
@@ -284,11 +306,27 @@ window.PHASE_DAG = {
 ]
 },
 {
+"id": "6",
+"name": "Platform / Billing + Client-Management",
+"gatesCount": 1,
+"gates": [
+"17"
+]
+},
+{
 "id": "9",
 "name": "Product Data Ingestion",
 "gatesCount": 1,
 "gates": [
 "10"
+]
+},
+{
+"id": "13",
+"name": "Augmentation & Write-back Layer (incl. Write Engine — Typed Values + Type Params)",
+"gatesCount": 1,
+"gates": [
+"17"
 ]
 }
 ],
@@ -328,6 +366,10 @@ window.PHASE_DAG = {
 "to": "15"
 },
 {
+"from": "6",
+"to": "17"
+},
+{
 "from": "7",
 "to": "5"
 },
@@ -350,6 +392,10 @@ window.PHASE_DAG = {
 {
 "from": "9",
 "to": "10"
+},
+{
+"from": "13",
+"to": "17"
 }
 ],
 "generated": "2026-08-17"

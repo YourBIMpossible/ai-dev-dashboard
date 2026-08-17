@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-08-17T13:00:09Z",
+  "generated": "2026-08-17T18:32:48Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 12543,
       "edges": 29677,
       "commit": "bf469930",
-      "commitsBehind": 0,
+      "commitsBehind": 4,
       "builtAt": "2026-08-17",
       "stale": false
     },
@@ -31,7 +31,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 179,
         "churn": 97,
-        "risk": 159.0
+        "risk": 158.8
       },
       {
         "label": "_serve_pool_schedule()",
@@ -39,7 +39,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 53,
         "churn": 97,
-        "risk": 71.9
+        "risk": 71.8
       },
       {
         "label": "_by_category()",
@@ -47,7 +47,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 35,
         "churn": 97,
-        "risk": 60.3
+        "risk": 60.2
       },
       {
         "label": "db/models.py",
@@ -55,7 +55,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 154,
         "churn": 58,
-        "risk": 52.8
+        "risk": 52.7
       },
       {
         "label": "Base",
@@ -63,7 +63,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 73,
         "churn": 58,
-        "risk": 37.9
+        "risk": 37.8
       },
       {
         "label": "_require_auth()",
@@ -78,8 +78,8 @@ window.NETWORKX_IMPACT = {
         "file": "aps/router.py",
         "kind": "file",
         "degree": 73,
-        "churn": 29,
-        "risk": 28.9
+        "churn": 30,
+        "risk": 29.6
       },
       {
         "label": "assistant_tools.py",
@@ -95,7 +95,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 19,
         "churn": 97,
-        "risk": 25.0
+        "risk": 24.9
       },
       {
         "label": "assistant.py",
@@ -119,7 +119,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 22,
         "churn": 97,
-        "risk": 20.8
+        "risk": 20.7
       }
     ],
     "baseline": {
