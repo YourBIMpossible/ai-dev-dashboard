@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-08-17T07:48:17.883225Z",
- "count": 338,
+ "generated_at": "2026-08-18T06:07:31.631904Z",
+ "count": 339,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"7304c1d84811f11086bb5f8f86079759-gzip\"",
+   "etag": "\"7dd825813d3156e5478f875e5d01b6dd-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Fri, 14 Aug 2026 15:12:23 GMT",
+   "last_modified": "Mon, 17 Aug 2026 20:03:03 GMT",
    "last_status": 200,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,20 +19,20 @@
    "last_item_published": "2026-08-11T12:36:31Z",
    "last_modified": "Tue, 11 Aug 2026 12:36:31 GMT",
    "last_status": 304,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 16,
+   "consecutive_failures": 17,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-17T07:48:17.883225Z",
+   "last_failure": "2026-08-18T06:07:31.631904Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "16 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "17 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -42,17 +42,17 @@
    "last_item_published": "2026-08-12T08:49:32Z",
    "last_modified": "Wed, 12 Aug 2026 09:16:18 GMT",
    "last_status": 200,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"3dcfd3880ffedeb62ea1fb9d3432218b\"",
+   "etag": "W/\"87c661e9da6779750ef3119871d736a9\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 17 Aug 2026 07:08:51 GMT",
+   "last_modified": "Mon, 17 Aug 2026 13:44:14 GMT",
    "last_status": 200,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -62,32 +62,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-17T00:22:03Z",
    "last_status": 304,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-16T22:42:00Z",
-   "last_modified": "Sun, 16 Aug 2026 23:53:36 GMT",
+   "last_item_published": "2026-08-18T00:26:00Z",
+   "last_modified": "Tue, 18 Aug 2026 01:15:41 GMT",
    "last_status": 200,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 29,
+   "consecutive_failures": 30,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-17T07:48:17.883225Z",
+   "last_failure": "2026-08-18T06:07:31.631904Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "29 consecutive failures: HTTP 403"
+   "stale_reason": "30 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -95,7 +95,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-10T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"5905668c578eefb8a5d6c8f2e5362d19\"",
+   "etag": "W/\"66750eb69538bc969ca558f511cc4997\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +125,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-17T07:48:17.883225Z",
+   "last_success": "2026-08-18T06:07:31.631904Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Mostra: Parameter Colorization",
+   "url": "http://revitaddons.blogspot.com/2026/08/mostra-parameter-colorization.html",
+   "source": "revit-addons",
+   "published": "2026-08-18T00:26:00Z",
+   "summary": "Summary Mostra is an Autodesk Revit add-in designed to help BIM teams quickly visualize model data by grouping elements according to shared parameter values and applying color-coded graphics across the model. Instead of manually creating filters, assigning colors, or building separate coordination views, users can select a category, choose a parameter, pick a color palette, and generate visual results in seconds. Core Purpose The primary purpose of Mostra is to make model information easier to understand, review, and communicate. Revit models often contain valuable parameter data, but reviewing that data element by element or building visual filters manually can be slow and error-prone. Mostra turns parameter values into immediate visual groupings, making it possible to see patterns, gaps, inconsistencies, and distribution across a model without writing filter rules by hand. Workflow and Interface When Revit loads, Mostra adds two ribbon buttons to the AvantLeap Tools tab: MOSTRA and MOSTRA PRO . The standard MOSTRA button supports a focused, single-category workflow. Users choose one element category, select one visible parameter such as Level, Phase, Fire Rating, Assembly Code,…",
+   "id": "cdc9642530d60001",
+   "fetched_at": "2026-08-18T06:07:31.631904Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A visualization add-in for parameter-driven coloring; useful to know as a built product, but no API techniques or tooling insight.",
+    "topics": [
+     "revit-addons",
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-18T06:07:31.631904Z"
+   }
+  },
   {
    "title": "Schema: View Layout Manager For Project to Project Organization",
    "url": "http://revitaddons.blogspot.com/2026/08/schema-view-layout-manager-for-project.html",
