@@ -5,7 +5,7 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-08-17",
+  generated: "2026-08-18",
   generatedBy: "scheduled refresh",
   activitySince: "2026-08-04",
   projects: [
