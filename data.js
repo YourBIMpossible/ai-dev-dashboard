@@ -5,7 +5,7 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-08-18",
+  generated: "2026-08-19",
   generatedBy: "scheduled refresh",
   activitySince: "2026-08-04",
   projects: [
@@ -73,7 +73,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P5 Views / Sheets / 3D / Workspace Coherence",
             pct: 15,
-            note: "ON HOLD — Bonus, not a need (owner 2026-06-24). Pre-pilot/early wiring only (5.1/5.2 ViewPreset/Markups); 5.3/5.4 unconfirmed pending re-scan. Wave 9 (Forma) only affects how 5.1/5.3/5.5 viewer slices are hosted at resume. 5.5 Navisworks planned; Sheets gated OFF. 5.6 Visual Model Graph — read-only node-link view (select element → trace/load-tree highlight); frontend-only on the live `get_relationships_graph` endpoint; PARKED, ready-to-build (see `design-docs/visual-model-graph_design-doc_2026-06-28.md`). 5.7 (proposed, unratified) Element Visual Preview — family-in-context PNG on element select; read-only Viewer-screenshot slice, no DA4R/Q6 dep; reuses existing ACC SVF/SVF2 — no APS translation jobs or new DA4R/server-rendering compute; 2 feasibility spikes gate build; brief: `design-docs/2026-08-08__Phase5_ElementVisualPreview_DesignBrief.md` (2026-08-08)",
+            note: "ON HOLD — Bonus, not a need (owner 2026-06-24). Pre-pilot/early wiring only (5.1/5.2 ViewPreset/Markups); 5.3/5.4 unconfirmed pending re-scan. Wave 9 (Forma) only affects how 5.1/5.3/5.5 viewer slices are hosted at resume. 5.5 Navisworks planned; Sheets gated OFF. 5.6 Visual Model Graph — read-only node-link view (select element → trace/load-tree highlight); frontend-only on the live `get_relationships_graph` endpoint; PARKED, ready-to-build (see `design-docs/visual-model-graph_design-doc_2026-06-28.md`). 5.7 (proposed, unratified) Element Visual Preview — family-in-context PNG on element select; read-only Viewer-screenshot slice, no DA4R/Q6 dep; reuses existing ACC SVF/SVF2 — no APS translation jobs or new DA4R/server-rendering compute; 2 feasibility spikes gate build; brief: `design-docs/2026-08-08__Phase5_ElementVisualPreview_DesignBrief.md` (2026-08-08). 5.2 re-scan (2026-08-18): reuse ACC Build's Sheets/Transmittals APIs, don't rebuild version control — Transmittals reachability CONFIRMED live (200, proven under BIMpossible's APS app reg); Sheets API blocked only by Build-entitlement on the tested project (403, not an app-reg gap); client-hub Build-entitlement still open. `design-docs/2026-08-18__Phase5_ExternalToolingResearch_SheetsAndRevitAddins.md`",
             tasks: [
               { label: "5.1/5.2 early wiring: ViewPresetSidebar + MarkupsList", status: "done", note: "Shipped 39c326b" },
               { label: "5.2 PDF-first sheet rendering decision locked", status: "done", note: "06-04 — PDF as canonical artifact; PyMuPDF/AGPL removed; SVF2/APS Viewer deferred to later wave" },
