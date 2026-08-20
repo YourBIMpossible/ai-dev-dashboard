@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-08-19",
+  generated: "2026-08-20",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-04",
+  activitySince: "2026-08-07",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -225,10 +225,10 @@ window.DASHBOARD_DATA = {
           { name: "P18 Client Knowledge Assistant (3 pillars)", pct: 50, note: "ACTIVE — Added as its own top-level row 2026-08-17. Previously invisible in this ledger despite being a fully-scoped, owner-authorized, multi-session program — the ledger↔engineering-store blind spot (its state lived only in `.tools/state/queue.yaml` + an anchor doc). Given 18, not 17, at creation (history): when this row was placed, Phase 17 was retired-unused per the 2026-08-07 ruling, so 18 was simply the next free integer after 16. That ruling was superseded the same day: 17 was promoted to Phase 17 — App Integrations (2026-08-17, see row 17). CKA stays 18 — unchanged — because it is a distinct product surface, not an app integration; the two now coexist and ordering holds 16 < 17 < 18. Not nested under 14 or 15: Pillar 1's search resembles 14's retrieval in spirit, but CKA is its own product surface (client documents + model explainability + product help), not local inference and not the Revit pane. Anchor / source of truth: `00_Strategy/2026-08-09__CKA-completion-program__ANCHOR.md` (locked mission, locked decisions A–E, stop conditions, internal Phase 0–4 plan, checkpoint log) + `2026-08-09__CKA-product-spec.md`. Three pillars (status verbatim from `queue.yaml`): Pillar 1 — Product help (BM25 help ranker + how-to corpus, waves 1–4) = live (`CKA-PILLAR1-HELP-CORPUS`; 41 help `.md` articles at tip, deployed-container search verified 2026-08-17). Pillar 2 — Per-firm documents (Private/Project/Multi-project/Firm-Library access model, RBAC + classification, upload/extraction/BM25 retrieval, assistant tool) = landed, not yet confirmed live (`CKA-PILLAR2-FIRM-DOCS`, PR #327; tenant-isolation-sensitive — flagged for a live firm_id-scoping + cross-firm-leak probe before external clients). Pillar 3 — Model explainability (14 gap-fills + Groups read parity, change sets, help handoff, model-health remedies, alert next-steps) = landed, not yet confirmed live (`CKA-PILLAR3-EXPLAINABILITY`, PR #326; CI-green is the only evidence — visual verification blocked on local sign-in). Internal Phase 0–4 stages are sub-phase notes (below), not top-level rows — launched under the corrected convention from day one to avoid the 11/11.1-style cleanup later. Hard boundaries per the anchor (do not cross without a fresh owner turn): no prod deploy/config/migration/data access, isolated/dev infra only, no new assistant-initiated write authority." }
         ]
       },
-      activity: [27,36,33,25,29,7,0,2,0,2,5,10,48,19],
+      activity: [25,29,7,0,2,0,2,5,10,48,44,9,3,0],
       lastActivity: {
-        date: "2026-08-17",
-        summary: "docs(phase-status): promote chat gateways to standalone Phase 17 — App Integrations (#59) (d45f86c)"
+        date: "2026-08-19",
+        summary: "feat(revit-link): sign syncAuth pipe attestation into remote sync_with_central (#433) (10392e7)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -528,10 +528,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [7,0,0,6,2,0,0,0,0,0,0,0,2,1],
+      activity: [6,2,0,0,0,0,0,0,0,2,6,3,1,0],
       lastActivity: {
-        date: "2026-08-17",
-        summary: "fix(retag-rooms): remove phase as a room-tag eligibility condition (#66) (5cf8227)"
+        date: "2026-08-19",
+        summary: "feat(revit-link): verify backend-signed syncAuth pipe attestation in-process; lift sync_with_central refusal (#78) (91a4046)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -834,10 +834,10 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,1,0,0],
       lastActivity: {
-        date: "2026-07-26",
-        summary: "docs(roadmap): add Autodesk MCP/Assistant platform findings to Phase 3 (7041c59)"
+        date: "2026-08-18",
+        summary: "Gate PR CI on draft status (cost control) (#8) (75494fe)"
       },
       branch: "main",
       nextActions: ["Run a live go_single_panel execution against a real family — the one destructive Phase 1 op never yet exercised live","Port wire_nested_params to close Phase 1 fully","Reconcile Phase 3's scope with BIMpossible_Workspace's Phase 16 (Desktop Orchestration Hub) proposal before scoping further","Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing) before Phase 2 can start"],
@@ -880,10 +880,10 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+      activity: [0,1,0,0,0,0,0,0,0,0,0,1,0,0],
       lastActivity: {
-        date: "2026-08-08",
-        summary: "docs: document opencode local coding-agent (WP-G piece, verified 2026-07-25) (7553b6e)"
+        date: "2026-08-18",
+        summary: "Gate PR CI on draft status (cost control) (#10) (4b04e77)"
       },
       branch: "main at f37d165",
       nextActions: ["Label a real GoldenSet v1.0 for pickup_checker and run its 4 ship gates against real data","Merge worktree-pickup-checker to main once the golden-set gate is met","Merge or continue the worktree-harness branch (7/8 tasks done, WP-G2-adjacent)","Commit + push the opencode/local-coding-agent doc updates (PROGRAM_PLAN.md + README.md) — currently uncommitted edits on main","WP-D3: land the owner's G:-hosted SKILL.md cutover — last open WP-D item"],
