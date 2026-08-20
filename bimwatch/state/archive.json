@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-08-19T06:07:58.586376Z",
- "count": 340,
+ "generated_at": "2026-08-20T06:08:08.328110Z",
+ "count": 342,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"19c51f577d7b2ece93f360041d1e3a2a-gzip\"",
+   "etag": "\"9d4bbf092fb16d38d249480931c75cf7-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Tue, 18 Aug 2026 19:00:08 GMT",
+   "last_modified": "Thu, 20 Aug 2026 06:07:43 GMT",
    "last_status": 200,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,20 +19,20 @@
    "last_item_published": "2026-08-11T12:36:31Z",
    "last_modified": "Tue, 11 Aug 2026 12:36:31 GMT",
    "last_status": 304,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 18,
+   "consecutive_failures": 19,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-19T06:07:58.586376Z",
+   "last_failure": "2026-08-20T06:08:08.328110Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "18 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "19 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -42,60 +42,60 @@
    "last_item_published": "2026-08-12T08:49:32Z",
    "last_modified": "Tue, 18 Aug 2026 12:35:07 GMT",
    "last_status": 200,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"cc9bff49c9c00608778fb22d3cfffcfd\"",
+   "etag": "W/\"e33a50da717da39ea6931fdcf5cfe310\"",
    "last_item_count": 8,
-   "last_modified": "Wed, 19 Aug 2026 05:20:19 GMT",
+   "last_modified": "Wed, 19 Aug 2026 13:46:53 GMT",
    "last_status": 200,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"c06f2e2eaa5a1537d8da00aacbbb192a\"",
+   "etag": "W/\"b32b9351b8a837997a1c60ba5a8263fe\"",
    "last_item_count": 10,
-   "last_item_published": "2026-08-18T23:38:22Z",
+   "last_item_published": "2026-08-19T07:43:44Z",
    "last_status": 200,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-19T00:37:00Z",
-   "last_modified": "Wed, 19 Aug 2026 03:28:28 GMT",
+   "last_item_published": "2026-08-20T01:12:00Z",
+   "last_modified": "Thu, 20 Aug 2026 01:55:54 GMT",
    "last_status": 200,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 31,
+   "consecutive_failures": 32,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-19T06:07:58.586376Z",
+   "last_failure": "2026-08-20T06:08:08.328110Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "31 consecutive failures: HTTP 403"
+   "stale_reason": "32 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
-   "etag": "W/\"b62b9964c27c96a5feac74dde1acca47\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-08-10T10:00:00Z",
-   "last_status": 304,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "etag": "W/\"e27122d8ded5540c3d84bef59feceb49\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-08-19T14:03:17Z",
+   "last_status": 200,
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"3e4b49424433b94e05addea7b3b18cf6\"",
+   "etag": "W/\"0a4b6c35cefd19a6546529d6ca58ebf7\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +125,52 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-19T06:07:58.586376Z",
+   "last_success": "2026-08-20T06:08:08.328110Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Sequenza: 4D Construction Sequence Exporter",
+   "url": "http://revitaddons.blogspot.com/2026/08/sequenza-4d-construction-sequence.html",
+   "source": "revit-addons",
+   "published": "2026-08-20T01:12:00Z",
+   "summary": "Summary Sequenza is an Autodesk Revit add-in designed to automate the extraction of construction sequence information from a Revit model and convert it into structured files for 4D construction simulation. It bridges Revit model data with downstream tools such as Navisworks TimeLiner and 3ds Max by generating the task, component, and animation data needed to build a construction timeline. Core Purpose The primary purpose of Sequenza is to eliminate the manual effort required to create construction sequence data for 4D workflows. Instead of building Navisworks TimeLiner task hierarchies and element assignments by hand, users can generate structured CSV outputs directly from the Revit model. This allows project teams to spend more time refining the actual construction logic and less time assembling the underlying data structure. Model Reading and Grouping Workflow Sequenza reads the active Revit project and organizes model elements by level and category. This grouping creates a practical construction-oriented structure that reflects how work is commonly planned and sequenced in the field. By grouping elements into level-category packages, the tool can generate a manageable hierarchy…",
+   "id": "b07da7e2eed49c82",
+   "fetched_at": "2026-08-20T06:08:08.328110Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Shows how to extract and structure Revit model data for downstream 4D tools; useful pattern for your automation and export tooling.",
+    "topics": [
+     "revit-api",
+     "automation",
+     "data-export"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-20T06:08:08.328110Z"
+   }
+  },
+  {
+   "title": "Inside Qonic with Aaron Perry | BIM Pure Live 114",
+   "url": "https://www.bimpure.com/blog/inside-qonic-with-aaron-perry-bim-pure-live-114",
+   "source": "revit-pure",
+   "published": "2026-08-19T14:03:17Z",
+   "summary": "👨🏻 Guest: Aaron Perry 📖 Topic: Inside Qonic 📅 Date: Wednesday, September 9th, 2026 at 11 AM EDT 🔗Add to Calendar: https://addcal.co/e/hrsojty09f3i Qonic is a cloud-based BIM software built around IFC and openBIM. It lets teams create, edit, coordinate, and document BIM models directly in the browser. Qonic can handle both ultra-small and ultra-large scales while maintaining blazing-fast performance. You can import massive sites or model detailed wall framing with studs and other small elements. Join us live on September 9th for a look inside Qonic and a demonstration of how it works. Thanks to Pirros for sponsoring this episode of BIM Pure Live: https://www.pirros.com/ Learn more about Qonic: https://www.qonic.com/",
+   "id": "a481d2c01f0e2200",
+   "fetched_at": "2026-08-20T06:08:08.328110Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Webinar announcement for a competitor product; no technical detail or technique to learn.",
+    "topics": [
+     "event"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-20T06:08:08.328110Z"
+   }
+  },
   {
    "title": "Ostacolo: Clash Detection & Tracking in Revit",
    "url": "http://revitaddons.blogspot.com/2026/08/ostacolo-clash-detection-tracking-in.html",
