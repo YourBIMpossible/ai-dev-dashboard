@@ -1,38 +1,38 @@
 {
- "generated_at": "2026-08-20T06:08:08.328110Z",
- "count": 342,
+ "generated_at": "2026-08-21T06:09:01.488497Z",
+ "count": 345,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"9d4bbf092fb16d38d249480931c75cf7-gzip\"",
+   "etag": "\"6b38b1ea94239071b7f3900aa3961fea-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Thu, 20 Aug 2026 06:07:43 GMT",
+   "last_modified": "Thu, 20 Aug 2026 16:46:07 GMT",
    "last_status": 200,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-08-11T12:36:31Z",
-   "last_modified": "Tue, 11 Aug 2026 12:36:31 GMT",
-   "last_status": 304,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-08-21T05:54:42Z",
+   "last_modified": "Fri, 21 Aug 2026 05:54:42 GMT",
+   "last_status": 200,
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 19,
+   "consecutive_failures": 20,
    "last_error": "HttpError: response exceeded 8388608 bytes",
-   "last_failure": "2026-08-20T06:08:08.328110Z",
+   "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
    "last_item_published": "2026-07-29T06:54:40Z",
    "last_status": 200,
    "last_success": "2026-08-03T10:38:20.411629Z",
    "stale": true,
-   "stale_reason": "19 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "stale_reason": "20 consecutive failures: HttpError: response exceeded 8388608 bytes"
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -42,60 +42,60 @@
    "last_item_published": "2026-08-12T08:49:32Z",
    "last_modified": "Tue, 18 Aug 2026 12:35:07 GMT",
    "last_status": 200,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"e33a50da717da39ea6931fdcf5cfe310\"",
+   "etag": "W/\"1cbd6feed1368ce6d8066527c3ac11be\"",
    "last_item_count": 8,
-   "last_modified": "Wed, 19 Aug 2026 13:46:53 GMT",
+   "last_modified": "Thu, 20 Aug 2026 09:37:18 GMT",
    "last_status": 200,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
    "etag": "W/\"b32b9351b8a837997a1c60ba5a8263fe\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-19T07:43:44Z",
-   "last_status": 200,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_status": 304,
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-20T01:12:00Z",
-   "last_modified": "Thu, 20 Aug 2026 01:55:54 GMT",
+   "last_item_published": "2026-08-21T00:27:00Z",
+   "last_modified": "Fri, 21 Aug 2026 01:38:43 GMT",
    "last_status": 200,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 32,
+   "consecutive_failures": 33,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-20T06:08:08.328110Z",
+   "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "32 consecutive failures: HTTP 403"
+   "stale_reason": "33 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
    "etag": "W/\"e27122d8ded5540c3d84bef59feceb49\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-19T14:03:17Z",
-   "last_status": 200,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_status": 304,
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +105,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"0a4b6c35cefd19a6546529d6ca58ebf7\"",
+   "etag": "W/\"400cf7dc8a7843b935130bcecb8217fa\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +125,72 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-20T06:08:08.328110Z",
+   "last_success": "2026-08-21T06:09:01.488497Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Sherpa brings ‘prompt-free’ AI rendering to SketchUp",
+   "url": "https://aecmag.com/visualisation/sherpa-brings-prompt-free-ai-rendering-to-sketchup/",
+   "source": "aec-magazine",
+   "published": "2026-08-21T05:54:42Z",
+   "summary": "Browser-based software works from the SketchUp viewport using controls instead of a text prompt Sherpa, an AI rendering tool that works image-to-image on a snapshot of the user’s own design rather than text-to-image, is now available for SketchUp, allowing architects and interior designers to render straight from the SketchUp viewport. With Sherpa, everything that would normally go into a prompt is instead a control: luminosity, time of day, colour temperature, artificial lights, whether people appear, styling level, and named per-surface materials. Leave a control alone and that part of the image stays as modelled. Because the controls sit on top of the same base image and camera, an architect can run one viewpoint through daylight, evening light, an empty version for handover drawings, a marble floor, and a different sofa — then compare all five results from a single export. Every version stays grouped with the image it came from. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here Sherpa is not just limited to SketchUp. The software runs in the browser and can accept any base image,…",
+   "id": "ddc8ea879b1b41ee",
+   "fetched_at": "2026-08-21T06:09:01.488497Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "SketchUp rendering tool; not relevant to Revit API work or add-in development.",
+    "topics": [
+     "rendering",
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-21T06:09:01.488497Z"
+   }
+  },
+  {
+   "title": "Product Roundup: AvantLeap",
+   "url": "http://revitaddons.blogspot.com/2026/08/product-roundup-avantleap.html",
+   "source": "revit-addons",
+   "published": "2026-08-21T00:27:00Z",
+   "summary": "From the Autodesk Design and Make Marketplace: At Avant Leap, our mission is to revolutionize the engineering landscape by providing cutting-edge digital solutions. We empower engineers to achieve excellence through seamless integration of technology, automation, and intelligence. Our commitment is to lead the way in transforming industries, optimizing practices, and creating a sustainable impact on the world. We are a team of passionate thinkers and strategists in the building industry. Utilizing cutting-edge technology and innovation, we tackle intricate challenges. Our collaboration with architects, engineers, contractors, and owners ensures optimized project delivery across the entire lifecycle. Editor's Note: Ratings are static and accurate at press time. Ecco Ecco is an Autodesk® Revit® add-in that creates unified proxy solids from assemblies, families, and groups for logistics planning — enabling QTO, delivery sequencing, and truck assignment. | $39.00 ★ ★ ★ ★ ★ (1 review) Enlazo The Enlazo is an add-in that automatically assigns parameter values from parent structural elements to nearby child elements using proximity detection. | $39.00 No ratings yet Famiglia Automate…",
+   "id": "ff3f53a0c44c856f",
+   "fetched_at": "2026-08-21T06:09:01.488497Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 8,
+    "why": "Generic product announcement with no technical detail or techniques to learn.",
+    "topics": [
+     "marketplace",
+     "product"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-21T06:09:01.488497Z"
+   }
+  },
+  {
+   "title": "PlanRadar adds AI Agents to automate routine tasks",
+   "url": "https://aecmag.com/project-management/planradar-adds-ai-agents-to-automate-routine-tasks/",
+   "source": "aec-magazine",
+   "published": "2026-08-20T12:36:41Z",
+   "summary": "Once an agent is triggered it completes the action itself, without an approval step, although PlanRadar maintains that judgement stays with the people who know the work best PlanRadar has added a series of “ AI Agents” to its construction-focused documentation, reality capture, communication, and reporting platform that can complete actions automatically, without having to wait for an approval, helping projects move forward faster. The Response agent, for example, reads an incoming Request for Information (RFI), searches the project’s documents, and creates a reply with the exact source named, cutting the time to a first response from hours to minutes. Every agent action is logged and attributed, and customers can test exactly what an agent will do before it goes live, so teams stay in full control of what runs automatically. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here In addition to using a collection of ready-made PlanRadar agents, customers can build their own agents using natural language prompts to automate workflows. For customers who want extra support, PlanRadar’s Forward…",
+   "id": "7d136d50a6e56b81",
+   "fetched_at": "2026-08-21T06:09:01.488497Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Construction management tool; watch for broader patterns in AI agent automation but not your immediate work.",
+    "topics": [
+     "ai-agents",
+     "construction-software"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-21T06:09:01.488497Z"
+   }
+  },
   {
    "title": "Sequenza: 4D Construction Sequence Exporter",
    "url": "http://revitaddons.blogspot.com/2026/08/sequenza-4d-construction-sequence.html",
