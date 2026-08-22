@@ -17,7 +17,7 @@ window.DASHBOARD_DATA = {
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
       phase: "main at 751155f, 0 ahead of origin. Phase 3.10a (Cross-Model Room Join) is now fully unconditional — the rollout flag deleted (#244) — while 3.10b (Doors) advances fast: D0's two-pass probe against real electrical models found zero ambiguous cases (#250), then D1 shipped boundary-element resolution so doors resolve to the room PAIR they separate, not a single room (#253). Phase 13 (Write Engine) cleared its first real gate: Increment 1 (typed values) shipped backend+Add-Ins lockstep and passed live Revit smoke 8/8 (see focus) — Increment 2 is now unblocked. The three long-parked draft PRs from mid-July finally merged 07-21/22: #186 (Phase 7 sync-token + DA4R scaffold, plus the first real Phase 13 backend code), #187 (SyncWithCentral re-enable), #189 (Phase 8 elevated-consent token). An owner-authorized overnight run then merged on green CI: admin/member roles (#243), firm-key admin gating + personal-key tier (#245), account-link headers (#246), backend access logs + /whoami (#247) — all live-verified after a container rebuild. The same evening, just outside that run's own scope: C-1 key-management unification (#249, previously misreported as not-done), the firm-parameter neutrality doc (#248), a redis 8.1.0 bump (#237), and #244 above. Ledger note: PHASE-STATUS.md hasn't moved to reflect the 07-21/22 merges of #186/#187/#189 — now running ~2 weeks stale on that owner-maintained doc.",
-      focus: "Latest audit (2026-08-17 weekly full, Hygiene+Slop lenses run for the first time): 0 Critical / 10 High / 38 Medium / 22 Low / 4 Info open -- a real jump from 08-08's 0/0/4/3/4, driven mainly by the two new lenses plus a wider review window, not a sudden regression. Highest-value open item: ARCH-PROJGATE-INVARIANT-1 (no default-deny invariant over the route table) -- it's the control that would have caught SEC-WIZ-HUB-1 (cross-tenant hub-write gap) and will catch the next one; both are High and unfixed. Also open High: SEC-PAIR-1 (pairing handoff has no re-confirm/identity check), RE-RESOLVE-SCAN-1 (unbounded model-resolve scan), FE-CSS-1 (dead CSS selectors on documents/account), and 4 Hygiene Highs (stale scheduled-task mirror, unenforced .env protection, no artifact for the 08-10 run, missing Slop lens in the task's own definitions) plus SLOP-1 (test fixture stubs out the exact gate the invariant is meant to check). Auto-Fix Pass: 5th straight cycle at zero applied fixes (sandbox has no PowerShell/Docker) -- owner decision recommended: retire the write-enabled stage from the scheduled task rather than keep it as a standing 'lane blocked' report. Write Engine Increment 1 (typed values) remains SHIPPED and live-smoke-verified from the prior cycle; program work (Phase 3.10b Doors, Phase 13 Change Sets, revit-link sync hardening #429-#445) has continued heavily since this audit's window closed.",
+      focus: "2026-08-17 weekly full audit (0/10/38/22/4, 74 open), reconciled against merged fixes through 2026-08-21: 47 findings closed in code (52 PRs, #393-#443), including all 9 Highs -- SEC-WIZ-HUB-1 (#397), SEC-PAIR-1 (#402), FE-CSS-1 (#398), the ARCH-PROJGATE-INVARIANT-1 default-deny route invariant + SLOP-1 (#397), RE-RESOLVE-SCAN-1 (#400), and HYG-1/2/4. 30 remain open: 1 High (HYG-3, stale scheduled-task mirror), 19 Medium, 8 Low, 2 Info -- predominantly accepted-deferred debt (RE-2 single-pipe concurrency, ARCH-NEW-2 aec/router.py size, ARCH-WIDENED-SCOPE-1 record-only) and doc/process hygiene, plus Add-Ins-side pairing items (SEC-PAIR-2, RE-PAIR-1, CQ-TEST-PAIR-1) not yet confirmed closed. No open Critical or Security-High remains on the live web app. Write Engine Increment 1 SHIPPED; program work has continued heavily since the audit window (Phase 13 Change Sets, revit-link sync hardening #429-#445, Write Engine Increment 2 in Add-Ins).",
       progress: {
         label: "Program phases",
         phases: [
@@ -235,7 +235,13 @@ window.DASHBOARD_DATA = {
       git: {
         warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)."
       },
-      nextActions: ["Ship the ARCH-PROJGATE-INVARIANT-1 default-deny route-table invariant first -- it's expected to catch SEC-WIZ-HUB-1 and RE-RESOLVE-SCAN-1 on the same pass","Fix SEC-WIZ-HUB-1 (cross-tenant hub-write gap, High, currently returns 200 where it should 403) once the invariant above exists to prove it","Add a bounded candidate cap + deadline to the model-resolve scan (RE-RESOLVE-SCAN-1)","Wire HYG-4 for real: add Edit/Write/Read deny entries for **/.env to .claude/settings.json -- four prose restatements is not enforcement","Decide the Auto-Fix Pass's fate: give the scheduled runner a Windows/Docker lane, or formally re-scope that stage report-only -- 5 cycles, zero fixes applied","Re-point the HYG-6 dangling backend/guard.py refs at aec/hub_tenancy.py, where the enforcement actually moved","Re-snapshot the HYG-3 scheduled-task mirror from the real live path and fix its README's source pointer"],
+      nextActions: [
+        "Close out HYG-3, the one remaining open High: re-snapshot the scheduled-task mirror from the live path and fix its source pointer",
+        "Schedule the accepted-deferred debt when its trigger arrives: RE-2 pipe-instance cap (now unblocked by RE-1's fix) and the ARCH-NEW-2 aec/router.py domain split on the next major touch",
+        "Decide the Auto-Fix Pass's fate (plan D4): retire the write-enabled stage from the weekly scheduled task -- 5 straight cycles at zero applied fixes",
+        "Reconcile the Add-Ins pairing findings (SEC-PAIR-2, RE-PAIR-1, CQ-TEST-PAIR-1, FE-PAIR-2) against the pairing-hardening PRs and update the next audit's open set",
+        "Run the next weekly audit against current HEAD to re-baseline -- the 08-17 report now predates 52 PRs of resolution plus continued program work"
+      ],
       pendingDecisions: ["Phase 3.10b Ducts/Pipes: output shape (list vs. from/to pair) — still undecided; the categories are explicitly excluded in _PHASE3_10_IN_SCOPE_CATEGORIES until it lands","Schedule-push: staleness cadence, classifier rules, fidelity degradation list, SPF ship location (scoped as a write-spine ORIGIN, direction only — no code yet)","Wave 16 Interiors: build dedicated shapers for Ceilings/Flooring now or batch with Wave 15 Civil?","Phase B admin auth: Google OAuth client + env (AUTH_GOOGLE_ID == backend GOOGLE_CLIENT_ID); B0 unify legacy admin routes onto require_admin (Option A chosen)","Phase 13 ledger ratification (flip PLANNED → ACTIVE) — Q1/Q2 scoping was decided 2026-07-16 and the code merged 2026-07-21 (#186), but the ledger status itself still hasn't moved, now ~2 weeks stale; Phase 14 promotion and a Phase 15 definition doc are still owed too","D-4: break-glass admin secret mechanism — design not yet made","D-5: provider routing for local LLM inference — gates C-2/C-3, not yet decided","D-8: where the audit hash-chain tip anchors outside the DB — dormant until a B-6 trigger fires (none has: single-operator deployment, no client/contract/insurer record on file)"],
       blockers: [],
       reminders: ["Branch protection has enforce_admins=false and no required-PR-review, and Push-And-Verify.ps1 pushes direct to main as admin — required checks are a SIGNAL, not a gate, on the real push path.","The weekly audit report is point-in-time and has now twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) — always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints — Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","reportlab not installed → aec/exports.py PDF routes inert (CSV works); add before Phase C /account/export/*.pdf"],
@@ -250,116 +256,357 @@ window.DASHBOARD_DATA = {
       recent: ["2026-08-05 - Doors D0/D1 shipped: a two-pass probe against real electrical models found zero ambiguous cases (#250, 4590c77), then boundary-element resolution shipped for real — doors now resolve to the room PAIR they separate, not a single room (#253, 751155f)","2026-08-04 - Write Engine Increment 1 (typed values) shipped lockstep across both repos and cleared its live-smoke gate 8/8, incl. a unit-conversion proof at a ×10,763.91 factor — backend #232 (0e8dd03) + Add-Ins #49 (0f3d318)","2026-08-04 - Owner-authorized overnight run merged on green CI: admin/member roles (#243), firm-key admin-gating + personal-key tier + audit log (#245), account-link headers (#246), backend access logs + /whoami (#247) — all live-verified after the container rebuild (DB migration head corrected to 13014695175a); C-1 key-management unification (#249) and the firm-parameter neutrality doc (#248) landed the same evening just outside the report's own scope, plus a redis 8.1.0 bump (#237) and Phase 3.10a's rollout flag deletion (#244)","2026-07-21/22 - The three long-parked draft PRs finally merged: #186 (Phase 7 sync-token + DA4R scaffold + Phase 13 Change Set backend Stage 1), #187 (SyncWithCentral re-enable behind a one-time token), #189 (Phase 8 provision-time elevated consent)","2026-07-21 - docs(strategy): land the 2026-07-21 ProjectRecipe set (decision brief v2, direction summary, gap analysis, panel synthesis)","2026-07-20 - Weekly audit: WSR8 fully resolved + 4 conditional gaps closed alongside it; RE-1 (EventDispatcher queue-drain in the Revit add-in) surfaces as the new High, traced end-to-end for the first time","2026-07-20 - feat(open-in-revit): cloud-ids endpoint + R-button wiring merged via #188 (d2264eb) — first main-branch commit since the WriteEngine contract 4 days earlier","2026-07-16/20 - 3 substantial draft PRs opened, all still unmerged: #186 (Phase 7 sync-token + DA4R scaffold, plus Phase 13 Change Set backend Domain A Stage 1 — real code for a phase the ledger lists at 0%), #187 (stacked on #186 — full SyncWithCentral re-enable behind a one-time token), #189 (Phase 8's provision-time elevated-consent token, closing its last documented gap)","2026-07-16 - Write-spine convergence items 1+2 DONE, both merged same day: WriteEngine contract (29e96da — Protocol + engine enum + gated seam) and gate unification (df7add1 — live-write auth unified on the fail-closed check_firm_model_editor, the two hand-mirrored gate functions merged)","2026-07-15 - Phase 3.10a PROVEN LIVE: first-ever warm + join against a real cloud project (a4ecece) after the externalElementId↔native-id bridge fix (c2d5756); AC-1 closed via the real endpoint, AC-3 FAIL→PASS with p50 215ms→18ms via room-pool cache + bbox pre-filter (7f8735f/413adf8) — the blocker two audits called the #1 issue","2026-07-15 - WSR8 step 2 wired: fail-closed check_firm_model_editor role (92738b3) → gated LLM→live-Revit parameter write (9713356, flag OFF); marked BUILT+SHIPPED (8114f8e)","2026-07-15 - Phase 3.8 restarted: owner ratified the minimal wedge (b0369de); slice 1 ACC role-sync columns + is_draft landed inert (48c4826); is_draft moved to user_firm_memberships for per-user draft mode (d5cee40)","2026-07-15 - Write-spine convergence target RATIFIED (9eccdc6): one proposal contract + one permission gate + one audit trail; pluggable origins (spreadsheet, AI, in-Revit pane, batch) and engines (Revit Link, DA4R). Schedule-Push's designed gate-bypass overturned by banner","2026-07-15 - Day-2 Phase 3 audit (5 evidence agents) — written 18:40, then overtaken by its own findings' fixes the same evening; ProgramPlan Wave-22 cross-refs corrected (7be8f6a)","2026-07-14 - Phase 3 production-readiness audit + same-day fixes: Alembic single-head CI guard (1e07550), Dockerfile Phase 3.10a flag ARG/ENV (a2a4a23), frontend per-row status + flag-on crash guard (87ca90c), PHASE-STATUS.md + WAVE-STATUS.md corrected (f07ebb9)","2026-07-13/14 - Prod outage root-caused + fixed: 351 backend container restarts from two migrations landing with no backend-migrate run","2026-07-13 - Weekly full audit + same-day closeout: WSR8 (assistant Revit-write auth gate) + 16 other findings — 11 shipped in code/config, 6 accepted owner decisions, zero dangling (c4194c5, b6bb96f)","2026-07-12/13 - Phase 3.10a Cross-Model Room Join merged + migrated to prod (dd5adb1); warm-time writer gap found+fixed next day (c72f647/09cb66b); Phase 3.10b Furniture slice shipped (4bb6497); dynamic firm resolution P3-8-DYN shipped (72e88f8)","2026-06-28 - PRs #153–#157 merged: Embedded Assistant Phase 4c (conversation persistence + stop-and-edit) + Phase 4d project-context grounding; NetworkX graph-topology tools + Model Health graph checks (#157) + permission-flow graph tool; report-only security-scan + BIM semgrep + prose-flag hook; trivy CI pin (main 80d3407)","2026-06-23 - PR #142 merged (9f6f55c): P11 Model QA rules engine + P8 Wizard committed to main; expr-eval prototype-pollution CVE removed; relay frame guard + multi-tenant auth scoping + aec edge cases (audit remediation)"],
       audit: {
         lastRun: "2026-08-17",
-        runType: "Weekly full audit (3 sub-agent lenses + Hygiene + Slop, consolidated) over the window since 2026-08-08. 0 Critical / 10 High / 38 Medium / 22 Low / 4 Info open (74 total, report's own claimed sum). 5 findings resolved this cycle (SEC-SCRIPTS-PERF-1, RE-WIZ-POLL-2, CQ-SYNTH-HOST-ENV-1, ARCH-UNTRACKED-PS1-2, FE-GROUPMODAL-1). This is a genuine jump from the 2026-08-08 incremental's 0/0/4/3/4 -- driven mostly by two new lenses running this cycle (Hygiene, Slop) plus a wider window than the prior incremental pass covered, not a sudden regression in a narrow area. Auto-Fix Pass: 5th consecutive cycle at zero applied fixes (no PowerShell/Docker in the sandbox runner); report-only, no code touched. Companion doc ops-followups_2026-08-17.md (operational follow-ups, not code findings) reports its own six flags CLOSED as of its final addendum -- PR merges, a live Cowork task amendment, and a _backups/postgres deletion all executed and hash-verified; unrelated to the code-finding counts here. git log --since=2026-08-17 on BIMpossible shows 24 further commits landing after this report was written (through #445, dfe2a53), but none were individually verified against a specific finding ID in this pass, so counts below are transcribed as-reported rather than adjusted -- treat this as a point-in-time snapshot per house rule.",
+        runType: "Weekly full audit 2026-08-17 (0/10/38/22/4, 74 open), reconciled 2026-08-21 against merged resolution work. 47 of the 74 findings are closed in code across 52 PRs (#393-#443) -- every one of the 9 open Highs fixed: SEC-WIZ-HUB-1 (#397 firm-scoped wizard hub gate), SEC-PAIR-1 (#402 paired-account identity on redeem), FE-CSS-1 (#398), ARCH-PROJGATE-INVARIANT-1 + SLOP-1 (#397 route-level project-access invariant), RE-RESOLVE-SCAN-1 (#400 bounded resolve scan), HYG-1/2/4. 30 remain open (1 High HYG-3, 19 Medium, 8 Low, 2 Info) -- predominantly accepted-deferred (RE-2 single-pipe concurrency, ARCH-NEW-2 router size, ARCH-WIDENED-SCOPE-1 record-only), doc/process hygiene (HYG-7/10-17/19/20), and Add-Ins-side pairing/dist items (SEC-PAIR-2, RE-PAIR-1, CQ-TEST-PAIR-1) not yet cited as closed. Resolved set verified by finding-ID citation in merged fix commits via git log --since=2026-08-17, not the report summary; the 30 open are conservatively retained (uncited != confirmed-open). No open Critical or Security-High remains on the live web app.",
         cadence: "weekly Sun 11:45pm + incremental Sun/Tue + on-demand",
-        counts: { critical: 0, high: 10, medium: 38, low: 22, info: 4 },
-        closedLastRun: 5,
-        trend: "worsening (Critical 0->0, High 0->10, Medium 4->38, Low 3->22, Info 4->4) -- two new lenses (Hygiene, Slop) ran for the first time this cycle and account for most of the jump, not a sudden regression in previously-scored areas",
+        counts: {
+          critical: 0,
+          high: 1,
+          medium: 19,
+          low: 8,
+          info: 2
+        },
+        closedLastRun: 47,
+        trend: "improving",
         reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-08-17.md",
         reportFile: "bimpossible/weekly-full-audit_2026-08-17.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
         open: [
-          { id: "SEC-WIZ-HUB-1", sev: "high", title: "Wizard provisioning: cross-tenant authorization gap on the hub write path (two parallel, cross-unreferenced hub-authority sources with no reconciliation)", where: "wizard provisioning hub-authorization path (backend)" },
-          { id: "SEC-PAIR-1", sev: "high", title: "Revit-pane pairing handoff has no origin/intent state and no re-pair confirmation before re-authenticating an existing paired session", where: "Revit-pane pairing handoff (Add-Ins + backend)" },
-          { id: "RE-RESOLVE-SCAN-1", sev: "high", title: "Model-resolve scan has no candidate cap or wall-clock deadline; unbounded hub listing can run indefinitely with no truncated state", where: "backend/aps/router.py:679-746" },
-          { id: "ARCH-PROJGATE-INVARIANT-1", sev: "high", title: "No default-deny invariant walks the mounted route table to guarantee every project-scoped route resolves a project-access gate", where: "backend/tests/test_route_tenancy_invariant.py (test doesn't exist yet)" },
-          { id: "FE-CSS-1", sev: "high", title: "Documents/account pages reference CSS selectors with zero definitions anywhere in the repo", where: "app/documents/page.tsx, app/account/**" },
-          { id: "HYG-1", sev: "high", title: "No artifact proves the 2026-08-10 scheduled weekly-audit run actually fired vs. never ran", where: "system/scheduled-tasks" },
-          { id: "HYG-2", sev: "high", title: "The Slop lens is missing from the scheduled task's own LENS DEFINITIONS block though the matrix marks it required weekly", where: "task SKILL.md" },
-          { id: "HYG-3", sev: "high", title: "The \"authoritative\" scheduled-task mirror is 2 months stale and points at a dead source path", where: "BIMpossible_Workspace/system/scheduled-tasks/_live/" },
-          { id: "HYG-4", sev: "high", title: ".env protection is prose-only across 4 restatements; no Edit/Write deny entry actually enforces it in a pipeline with a write-enabled stage", where: "BIMpossible/.claude/settings.json:3-16" },
-          { id: "SLOP-1", sev: "high", title: "Tested-but-stubbed: an autouse test fixture unconditionally allows project access across the six largest routers, hiding a missing dependency the invariant claims to catch", where: "backend/tests/conftest.py:586-619" },
-          { id: "SEC-CONSENT-REUSE-1", sev: "medium", title: "Elevated-consent reuse edge has no explicit state; a cached token is indistinguishable from a freshly consented one", where: "backend/wizard/consent.py:82" },
-          { id: "SEC-AUTHZLOG-RETENTION-1", sev: "medium", title: "No load test yet measures authz_decision_log insert rate / p99 latency before any SHADOW-mode fleet flip", where: "backend/db/models.py; audit_stream_worker.py" },
-          { id: "SEC-PAIR-2", sev: "medium", title: "Claimed-file lifecycle has no terminal orphaned state and no sweeper; claimed->deleted is best-effort only", where: "Add-Ins pairing file lifecycle" },
-          { id: "SEC-DIST-1", sev: "medium", title: "Distribution/installer security item carried from prior cycle, unchanged", where: "installer" },
-          { id: "SEC-FAV-CROSSFIRM-1", sev: "medium", title: "Cross-firm favorite ownership key is single-owner; re-starring under a different firm silently destroys prior state with no event", where: "backend/favorites_router.py:139-157" },
-          { id: "RE-RECONCILE-UNBOUNDED-1", sev: "medium", title: "Cache-reconcile worker has no wall-clock timeout bound on its wait", where: "backend/aec/cache_reconcile_worker.py:37-61" },
-          { id: "RE-PAIR-1", sev: "medium", title: "Watcher liveness has no failure transition — alive to dead happens via an unsubscribed Error event with no detection or recovery", where: "Add-Ins pairing watcher" },
-          { id: "RE-2", sev: "medium", title: "Single pipe instance vs. a 4-worker relay thread pool caps Revit-link throughput to one operation at a time by design (carried, accepted scope)", where: "PipeServer.cs:82,97 - revit-relay/relay.py:107" },
-          { id: "ARCH-CI-ADDINS-1", sev: "medium", title: "Add-Ins CI gap item, carried from prior cycle", where: "Add-Ins CI config" },
-          { id: "ARCH-DIST-2", sev: "medium", title: "Two AppIds share one installer payload with no refcount; installed(suite)+uninstall(opener) can reach a broken, unmodeled state", where: "installer" },
-          { id: "ARCH-WIDENED-SCOPE-1", sev: "medium", title: "Enrollment grant->scope->enroll->revoke lifecycle is fully implemented and read live but structurally unreachable while its flag is OFF", where: "backend enrollment" },
-          { id: "ARCH-NEW-2", sev: "medium", title: "aec/router.py last measured at 2,828 lines — maintainability drag, no regression (carried)", where: "backend/aec/router.py" },
-          { id: "CQ-TEST-PAIR-1", sev: "medium", title: "PendingPairWatcher.cs has no test coverage for concurrent CheckNow, malformed JSON, TTL-exceeded, duplicate-nonce, or delete-failure paths", where: "Add-Ins PendingPairWatcher.cs" },
-          { id: "FE-CSS-2", sev: "medium", title: "Second CSS selector/definition mismatch on the account surface", where: "app/account/**" },
-          { id: "FE-SHARE-VIRT-1", sev: "medium", title: "Share-list virtualization gap", where: "frontend share components" },
-          { id: "FE-SHARE-DS-1", sev: "medium", title: "Share design-system inconsistency", where: "frontend share components" },
-          { id: "FE-A11Y-COMBO-1", sev: "medium", title: "Combobox accessibility gap", where: "frontend" },
-          { id: "FE-A11Y-NEST-1", sev: "medium", title: "Nested-interactive-element accessibility gap", where: "frontend" },
-          { id: "FE-TOUCH-1", sev: "medium", title: "Touch target sizing gap", where: "frontend" },
-          { id: "FE-MOTION-1", sev: "medium", title: "Reduced-motion preference not respected in one surface", where: "frontend" },
-          { id: "FE-WATERFALL-1", sev: "medium", title: "Request waterfall performance gap on a data-heavy page", where: "frontend" },
-          { id: "FE-PAIR-1", sev: "medium", title: "Pairing UI gap (frontend half)", where: "frontend pairing UI" },
-          { id: "FE-3", sev: "medium", title: "model/page.tsx god-component last measured at ~3,458 LOC (carried, deferred to the 5k-element benchmark trigger)", where: "frontend/app/project/[id]/model/page.tsx" },
-          { id: "HYG-5", sev: "medium", title: "Docs-budget ratchet reads red, but 32 of 43 new docs are the shipped client-facing help corpus, not real debt", where: "BIMpossible/docs-budget.json:19" },
-          { id: "HYG-6", sev: "medium", title: "Reference validator red with 4 new dangling refs to backend/guard.py, deleted 2026-08-16, still cited by 10+ live docs/agents", where: "docs + .claude/agents/*.md + system/REINSTALL-RECOVERY-PROMPT.md" },
-          { id: "HYG-7", sev: "medium", title: "_backups/ is simultaneously declared retired and mandated by two directly contradicting rules", where: ".claude/commands/audit-resolution.md Step 0 vs task SKILL.md:42,44,55" },
-          { id: "HYG-8", sev: "medium", title: "\"Automatic agent gates\" table claims gates run every time; nothing invokes them — no hook, no CI matcher", where: "BIMpossible/CLAUDE.md:72-82; .claude/settings.json:18-26" },
-          { id: "HYG-9", sev: "medium", title: "PROJECT_CONSTITUTION.md restates the superseded direct-push-to-main / WIP regime as current", where: "docs/PROJECT_CONSTITUTION.md:63-64" },
-          { id: "HYG-10", sev: "medium", title: "Audit skill's own lens catalog omits the Hygiene lens despite claiming \"seven lenses\"", where: "bimpossible-audit-skill/SKILL.md:15,81,113-126" },
-          { id: "HYG-11", sev: "medium", title: "No Checklist routing rule exists for HYG- findings; a Medium Hygiene finding is written once and tracked nowhere", where: "task SKILL.md:42; BIMpossible_Verification_Checklist.md" },
-          { id: "HYG-12", sev: "medium", title: "Doc-hygiene mechanical checks cover the code repo only; the 1.5M-word Workspace and Add-Ins have no reference validator or budget", where: "BIMpossible/scripts/*.mjs" },
-          { id: "HYG-13", sev: "medium", title: "docs-hygiene CI job is non-gating and both its checks are currently FAIL with nobody acting on the tracking issue", where: ".github/workflows/security-scan.yml:249-300" },
-          { id: "HYG-14", sev: "medium", title: "Verification Checklist growing with no ceiling and no archive rule (~178 KB/mo trajectory)", where: "02_Reference/Audit and Scan Info/BIMpossible_Verification_Checklist.md" },
-          { id: "HYG-15", sev: "medium", title: "Add-Ins Definition-of-Done and the 355px ToolTipImage limit remain unenforced by any check", where: "Add-Ins/CLAUDE.md:136-144" },
-          { id: "HYG-16", sev: "medium", title: "A live slash command cites a strategy-ledger file that does not exist and fails on run", where: "Workspace/.claude/commands/promote-approved.md" },
-          { id: "SLOP-2", sev: "medium", title: "count_categories sets a category to 0 on any exception — a fetch failure and a genuine zero-count read identically to every caller", where: "backend/aec/model_discovery.py:132-141" },
-          { id: "SLOP-3", sev: "medium", title: "Dark ACL importer silently drops unrecognized/inactive entries with no skip census in the seed result", where: "backend/aec/authz/acl_source.py:162-198; seed_service.py:35" },
-          { id: "SLOP-FE-1", sev: "medium", title: "Favorites load failure is caught into an empty list, rendering as \"you have no pins\" and inviting duplicate re-pinning on a backend 500", where: "app/hooks/useFavorites.ts:45; PinnedSection.tsx:26; app/page.tsx:157" },
-          { id: "SLOP-FE-2", sev: "medium", title: "Document search failure renders as \"No matches,\" indistinguishable from a genuine zero-result", where: "app/documents/page.tsx:101,213-215" },
-          { id: "SEC-CI-ADDINS-2", sev: "low", title: "Add-Ins CI security-gate gap, carried from prior cycle", where: "Add-Ins CI config" },
-          { id: "RE-HOOK-1", sev: "low", title: "Reliability gap on a hook path, carried (borderline low/medium in source report)", where: "backend hooks" },
-          { id: "ARCH-WRITE-1", sev: "low", title: "Write planner should refuse an ElementType target with IsTypeParam=false rather than silently applying", where: "Add-Ins planner/command" },
-          { id: "CQ-AUDIT-DOC-STALE-1", sev: "low", title: "Two doc lines still describe the deleted guard.py as live — the single most trivially fixable item in the report", where: "backend/aec/authz/guard.py:59-60" },
-          { id: "CQ-ENROLL-INDEX-1", sev: "low", title: "Missing composite index on an enrollment table", where: "backend/db/models.py:1314-1324" },
-          { id: "CQ-FAV-DELETE-BODY-1", sev: "low", title: "Favorite-delete endpoint body-handling gap", where: "backend/favorites_router.py" },
-          { id: "CQ-SCHED-CADENCE-1", sev: "low", title: "Synthetic-audit scheduling ownership remains an unresolved two-writer state, now described contradictorily in two docs", where: "scheduling docs" },
-          { id: "FE-PAIR-2", sev: "low", title: "Pairing UI gap (secondary, Low)", where: "frontend pairing UI" },
-          { id: "FE-URLSTATE-1", sev: "low", title: "URL state sync gap", where: "frontend" },
-          { id: "FE-FAV-ARCH-1", sev: "low", title: "Favorites architecture debt item", where: "frontend favorites" },
-          { id: "FE-LINT-1", sev: "low", title: "Lint debt item", where: "frontend" },
-          { id: "FE-IMG-1", sev: "low", title: "Image optimization gap", where: "frontend" },
-          { id: "FE-4", sev: "low", title: "A few hardcoded hex colors were never migrated onto design tokens (carried)", where: "frontend/app/components/MarkupPins.tsx:16-20,27 - ThemeToggle.tsx:46" },
-          { id: "FE-1", sev: "low", title: "useScheduleFetch still calls pollUntilWarm<any>(...) (carried, accepted debt)", where: "frontend/app/hooks/useScheduleFetch.ts:123-126" },
-          { id: "FE-2", sev: "low", title: "Legacy filter/sort/grouping schema-migration any types remain in the normalizer (carried)", where: "frontend/app/lib/filters/normalize.ts:33,44,45,57,63,64,76" },
-          { id: "HYG-17", sev: "low", title: "references/fix-phase.md cited as a lens file; the actual file is auto-fix.md", where: "00_Strategy/Add-AutoFix-To-Weekly-Audit_Cowork-Setup.md" },
-          { id: "HYG-18", sev: "low", title: "last_verified frontmatter is required to exist but never age-checked; 11 of 41 help articles are 67 days old", where: "backend/tests/test_help_corpus_guard.py:25" },
-          { id: "HYG-19", sev: "low", title: "3 verification claims are past 90 days old, one now factually wrong", where: "Add-Ins/setup.md:84; Workspace/.claude/memory/add-ins-state.md:16; .claude/memory/workspace_structure.md:12" },
-          { id: "HYG-20", sev: "low", title: "Duplicate/superseded doc families across archive and migrated-memory directories", where: "system/scheduled-tasks/*; migrated_from_dot_claude/*" },
-          { id: "HYG-21", sev: "low", title: "4 docs have no inbound link from any tracked doc or code file, incl. an unreachable runbook", where: "docs/PROJECT-ENROLLMENT-RUNBOOK.md; docs/ai/ADOPTION.md" },
-          { id: "HYG-22", sev: "low", title: "_db-backups/logs/ has no retention rule — 169 log files, 634 MB, unpruned since 2026-07-09", where: "BIMpossible/Backup-Db.ps1:284-290" },
-          { id: "SLOP-4", sev: "low", title: "_est_element_bytes silently degrades to 0 on any exception and feeds the reconcile report's size figures", where: "backend/aec/cache_reconcile.py:268-276" },
-          { id: "SLOP-DIST-3", sev: "low", title: "Per-year Revit installer outcome is never reported; a failed year is silently skipped", where: "Add-Ins installer/BIMpossibleRevitTools.iss:53-86,102-105,122-132" },
-          { id: "SLOP-FE-3", sev: "low", title: "RecentModels silently vanishes the entire \"Recently opened\" column on a backend fetch failure", where: "app/components/RecentModels.tsx:48,50" },
-          { id: "SEC-cloud-1", sev: "info", title: "EMEA region inferred from URN convention; unrecognized region returns None rather than guessing (carried, unexercised)", where: "backend/aps/cloud_ids.py:18-33,64-77" },
-          { id: "FE-BASELINE-1", sev: "info", title: "Three raw-fetch call sites remain the only documented exceptions to the central apiFetch wrapper, re-confirmed unchanged (carried)", where: "frontend/app/lib/api/persistence.ts - lib/adminApi.ts - lib/viewer/initViewer.ts:78" },
-          { id: "HYG-23", sev: "info", title: "Automation output-consumer census: two parallel decision-log roots, several report-only outputs with no confirmed reader", where: "flag-prose.mjs; decision-log/ + docs/decision-log/INDEX.md" },
-          { id: "INFO-GRAPHIFY-1", sev: "info", title: "Stale graphify-out artifacts still display the retired X-Admin-Secret admin-auth path; documentation drift only, not reachable in the running app (carried, not reassessed this cycle)", where: "backend/graphify-out/**" }
+          {
+            id: "HYG-3",
+            sev: "high",
+            title: "The \"authoritative\" scheduled-task mirror is 2 months stale and points at a dead source path",
+            where: "BIMpossible_Workspace/system/scheduled-tasks/_live/"
+          },
+          {
+            id: "SEC-PAIR-2",
+            sev: "medium",
+            title: "Claimed-file lifecycle has no terminal orphaned state and no sweeper; claimed->deleted is best-effort only",
+            where: "Add-Ins pairing file lifecycle"
+          },
+          {
+            id: "SEC-DIST-1",
+            sev: "medium",
+            title: "Distribution/installer security item carried from prior cycle, unchanged",
+            where: "installer"
+          },
+          {
+            id: "RE-PAIR-1",
+            sev: "medium",
+            title: "Watcher liveness has no failure transition — alive to dead happens via an unsubscribed Error event with no detection or recovery",
+            where: "Add-Ins pairing watcher"
+          },
+          {
+            id: "RE-2",
+            sev: "medium",
+            title: "Single pipe instance vs. a 4-worker relay thread pool caps Revit-link throughput to one operation at a time by design (carried, accepted scope)",
+            where: "PipeServer.cs:82,97 - revit-relay/relay.py:107"
+          },
+          {
+            id: "ARCH-CI-ADDINS-1",
+            sev: "medium",
+            title: "Add-Ins CI gap item, carried from prior cycle",
+            where: "Add-Ins CI config"
+          },
+          {
+            id: "ARCH-DIST-2",
+            sev: "medium",
+            title: "Two AppIds share one installer payload with no refcount; installed(suite)+uninstall(opener) can reach a broken, unmodeled state",
+            where: "installer"
+          },
+          {
+            id: "ARCH-WIDENED-SCOPE-1",
+            sev: "medium",
+            title: "Enrollment grant->scope->enroll->revoke lifecycle is fully implemented and read live but structurally unreachable while its flag is OFF",
+            where: "backend enrollment"
+          },
+          {
+            id: "ARCH-NEW-2",
+            sev: "medium",
+            title: "aec/router.py last measured at 2,828 lines — maintainability drag, no regression (carried)",
+            where: "backend/aec/router.py"
+          },
+          {
+            id: "CQ-TEST-PAIR-1",
+            sev: "medium",
+            title: "PendingPairWatcher.cs has no test coverage for concurrent CheckNow, malformed JSON, TTL-exceeded, duplicate-nonce, or delete-failure paths",
+            where: "Add-Ins PendingPairWatcher.cs"
+          },
+          {
+            id: "FE-SHARE-VIRT-1",
+            sev: "medium",
+            title: "Share-list virtualization gap",
+            where: "frontend share components"
+          },
+          {
+            id: "FE-SHARE-DS-1",
+            sev: "medium",
+            title: "Share design-system inconsistency",
+            where: "frontend share components"
+          },
+          {
+            id: "HYG-7",
+            sev: "medium",
+            title: "_backups/ is simultaneously declared retired and mandated by two directly contradicting rules",
+            where: ".claude/commands/audit-resolution.md Step 0 vs task SKILL.md:42,44,55"
+          },
+          {
+            id: "HYG-10",
+            sev: "medium",
+            title: "Audit skill's own lens catalog omits the Hygiene lens despite claiming \"seven lenses\"",
+            where: "bimpossible-audit-skill/SKILL.md:15,81,113-126"
+          },
+          {
+            id: "HYG-11",
+            sev: "medium",
+            title: "No Checklist routing rule exists for HYG- findings; a Medium Hygiene finding is written once and tracked nowhere",
+            where: "task SKILL.md:42; BIMpossible_Verification_Checklist.md"
+          },
+          {
+            id: "HYG-12",
+            sev: "medium",
+            title: "Doc-hygiene mechanical checks cover the code repo only; the 1.5M-word Workspace and Add-Ins have no reference validator or budget",
+            where: "BIMpossible/scripts/*.mjs"
+          },
+          {
+            id: "HYG-13",
+            sev: "medium",
+            title: "docs-hygiene CI job is non-gating and both its checks are currently FAIL with nobody acting on the tracking issue",
+            where: ".github/workflows/security-scan.yml:249-300"
+          },
+          {
+            id: "HYG-14",
+            sev: "medium",
+            title: "Verification Checklist growing with no ceiling and no archive rule (~178 KB/mo trajectory)",
+            where: "02_Reference/Audit and Scan Info/BIMpossible_Verification_Checklist.md"
+          },
+          {
+            id: "HYG-15",
+            sev: "medium",
+            title: "Add-Ins Definition-of-Done and the 355px ToolTipImage limit remain unenforced by any check",
+            where: "Add-Ins/CLAUDE.md:136-144"
+          },
+          {
+            id: "HYG-16",
+            sev: "medium",
+            title: "A live slash command cites a strategy-ledger file that does not exist and fails on run",
+            where: "Workspace/.claude/commands/promote-approved.md"
+          },
+          {
+            id: "SEC-CI-ADDINS-2",
+            sev: "low",
+            title: "Add-Ins CI security-gate gap, carried from prior cycle",
+            where: "Add-Ins CI config"
+          },
+          {
+            id: "ARCH-WRITE-1",
+            sev: "low",
+            title: "Write planner should refuse an ElementType target with IsTypeParam=false rather than silently applying",
+            where: "Add-Ins planner/command"
+          },
+          {
+            id: "CQ-SCHED-CADENCE-1",
+            sev: "low",
+            title: "Synthetic-audit scheduling ownership remains an unresolved two-writer state, now described contradictorily in two docs",
+            where: "scheduling docs"
+          },
+          {
+            id: "FE-PAIR-2",
+            sev: "low",
+            title: "Pairing UI gap (secondary, Low)",
+            where: "frontend pairing UI"
+          },
+          {
+            id: "HYG-17",
+            sev: "low",
+            title: "references/fix-phase.md cited as a lens file; the actual file is auto-fix.md",
+            where: "00_Strategy/Add-AutoFix-To-Weekly-Audit_Cowork-Setup.md"
+          },
+          {
+            id: "HYG-19",
+            sev: "low",
+            title: "3 verification claims are past 90 days old, one now factually wrong",
+            where: "Add-Ins/setup.md:84; Workspace/.claude/memory/add-ins-state.md:16; .claude/memory/workspace_structure.md:12"
+          },
+          {
+            id: "HYG-20",
+            sev: "low",
+            title: "Duplicate/superseded doc families across archive and migrated-memory directories",
+            where: "system/scheduled-tasks/*; migrated_from_dot_claude/*"
+          },
+          {
+            id: "SLOP-DIST-3",
+            sev: "low",
+            title: "Per-year Revit installer outcome is never reported; a failed year is silently skipped",
+            where: "Add-Ins installer/BIMpossibleRevitTools.iss:53-86,102-105,122-132"
+          },
+          {
+            id: "SEC-cloud-1",
+            sev: "info",
+            title: "EMEA region inferred from URN convention; unrecognized region returns None rather than guessing (carried, unexercised)",
+            where: "backend/aps/cloud_ids.py:18-33,64-77"
+          },
+          {
+            id: "INFO-GRAPHIFY-1",
+            sev: "info",
+            title: "Stale graphify-out artifacts still display the retired X-Admin-Secret admin-auth path; documentation drift only, not reachable in the running app (carried, not reassessed this cycle)",
+            where: "backend/graphify-out/**"
+          }
         ],
         history: [
-          { date: "2026-08-17", type: "Weekly full audit (3 lens sub-agents + Hygiene + Slop, first run for both) -- read-only, no same-day remediation in this pass", scope: "Main repo HEAD (24 further commits since, through PR #445). First cycle running the Hygiene and Slop lenses end-to-end alongside the standard Security/Reliability/Architecture/Code-quality/Frontend sweep -- companion doc ops-followups_2026-08-17.md covers 6 separate OPERATIONAL follow-up flags (not code findings), all closed per its own final addendum (PRs #409/#410/#411/#70/#60 merged, a live Cowork task amendment applied, _backups/postgres deleted, scheduler drift confirmed matching).", result: "0 Critical / 10 High / 38 Medium / 22 Low / 4 Info open (74 total). 5 findings closed since 2026-08-08 (SEC-SCRIPTS-PERF-1, RE-WIZ-POLL-2, CQ-SYNTH-HOST-ENV-1, ARCH-UNTRACKED-PS1-2, FE-GROUPMODAL-1). The jump from 08-08's 0/0/4/3/4 is driven mainly by the two new lenses running for the first time (most Hygiene/Slop findings are process/doc-hygiene and silent-catch items, not new regressions in previously-scored code) plus a wider review window than the prior incremental covered. Highest-value open item: ARCH-PROJGATE-INVARIANT-1 (no default-deny invariant walking the route table) -- it is the control that would catch SEC-WIZ-HUB-1 (cross-tenant hub-write gap) and SLOP-1 (a test fixture that stubs out the exact gate the invariant would check); all three are open Highs. Auto-Fix Pass: 5th consecutive cycle at zero applied fixes (sandbox has no PowerShell/Docker) -- report-only, no code touched by the pass itself. git log --since=2026-08-17 shows 24 further commits landed after this report was written (through PR #445), not individually checked against a specific finding ID in this ingest pass -- counts here are transcribed as-reported, a point-in-time snapshot per house rule.", report: "weekly-full-audit_2026-08-17.md" },
-          { date: "2026-08-08", type: "Incremental audit (six focused cluster sub-agents, #256->#312 window) + same-window resolution", scope: "~150 changed files across ~40 commits (#256->#312) plus 2 uncommitted items; ~95 files deep-read in six clusters (gateways / firm-tenancy sweep / auth-admin-allowlist / firm-alias+schedules+cross-model-join / backup PowerShell / migrations+models). The window's security-critical work -- the firm-wide require_active_membership sweep (#264), APS hub isolation (#265/#267), upstream-error sanitization (#266), personal-listing firm-scoping (#312/#278/#287/#290), the D-4 admin-secret retirement, and Slack/Teams crypto+signature -- was verified sound.", result: "0 Critical / 3 High / 10 Medium / 14 Low + ~10 NIT / 1 INFO. All 3 High were in NEW surfaces: H-1 Slack pairing collapsed identity-less sessions onto one shared UUID (twin of a prior Teams bug -- fixed with require_identity()); H-2 an unbounded docker-exec in Backup-Db reopened the exact backup-hang the pipeline exists to close (routed through Invoke-BoundedCommand); H-3 the restore drill greened on a partially-restored dump (added --exit-on-error). All 10 Medium and all 14 Low were fixed or accepted-documented: 24 implemented + L-2 already-fixed on baseline (b19e377) + L-7 owner-decided (firm-first alias precedence stays; documented in CLAUDE.md + clientRules.ts). The resolution doc was authored uncommitted on a review worktree ('nothing committed/pushed'), but the fixes have SINCE landed -- verified present on origin/main 2026-08-16 (require_identity, Invoke-BoundedCommand, --exit-on-error, _MAX_BODY_BYTES). Verify-Local-CI green: backend Docker pytest incl. 12 new regression tests, frontend 1726+6 vitest / tsc / next build (model route 198 KB < 207 KB ceiling). Excluded from remediation by instruction: the ~10 NIT, the 1 INFO (stale graphify X-Admin-Secret artifacts -- still on disk, incl. a 2026-08-10 graph), and the OPS-C*/CANON-C* harness-layer candidates (one flags that the repo's 'never touch .env/guard.py' rule is instruction-not-control -- recorded, not actioned).", report: "audit-resolution_2026-08-08.md" },
-          { date: "2026-08-04", type: "Weekly full audit (scheduled, autonomous, 3 lens sub-agents) — then a same-day close-out of everything it raised", scope: "Main repo HEAD ff42ac3 (exactly one commit past last week's audited tree — that commit being last week's own 12-item close-out). Add-Ins origin/main 19c5ddd. The consolidating pass caught and corrected one of its own sub-agents, which had read RE-1's status off a stale unmerged local branch (cc4adc3, not an ancestor of origin/main) and reported it still open.", result: "**RE-1 RESOLVED — the carried High for 4 consecutive cycles, and the first High-free cycle in this report format.** Verified by direct diff read, not commit message: Add-Ins PR #46 (19c5ddd, merged 07-27) moved the queue lifecycle into a new Revit-free PendingRequestQueue.cs with a 3-state CAS (Pending/Abandoned/Dispatching) so abandon-vs-dispatch has exactly one winner, and PipeServer now abandons on timeout and in the generic catch too — broader than the original finding, which named only the EVENT_REJECTED path. Backed by 9 new tests, red-green verified (reverting the drain fails 5 of 9) — the first coverage EventDispatcher/PipeServer have ever had. The audit also re-verified all 9 of last week's BIMpossible-repo closures against current file content, and confirmed the detection gap that let two items sit unfixed for two cycles (a source-scan test with a blind spot) was itself closed. It then raised 6 genuinely new findings, all Low/Medium — and ALL SIX were resolved the same day by PR #239 (68bb596, 11:22), hours after the report was written: a code-enforced BIMPOSSIBLE_ALLOW_SYNTHETIC_SEED opt-in guard on the perf-seeding scripts (the run's headline new risk), transient-HTTP retry parity between the wizard's two sibling poll loops, a non-loopback refusal in the load-test harness, three more open-on-demand modals moved to dynamic import, and the untracked-script/scheduling-cadence pair resolved by tracking the wrapper and removing its Task-Scheduler registration path. PR #240 followed with two dependency-advisory bumps. Auto-Fix Pass: BLOCKED for a 4th consecutive cycle (preflight found no PowerShell/Docker) — but this run did land the process fix that had been flagged as undoable from a working session: the live scheduled-task prompt was patched via the scheduled-tasks tools to run the preflight explicitly and to check the Add-Ins repo's origin/main rather than whatever branch is checked out locally.", report: "weekly-full-audit_2026-08-04.md" },
-          { date: "2026-07-27", type: "Weekly full audit (scheduled, autonomous, 3 lens sub-agents) — then a same-day resolution pass from a Windows/Docker-capable session", scope: "Main repo HEAD 569bcb8 at audit time (47 commits since 2026-07-20). Add-Ins HEAD cc4adc3 (an unmerged PR #45 tip, confirmed byte-identical to main on the audited files). Resolution work branched from origin/main in a worktree, verified with Verify-Local-CI.ps1 (Docker 29.6.1 + MSBuild available) rather than asserted.", result: "Audit found Critical 0 / High 1 (RE-1, carried) / Medium 8 / Low 8 / Info 6, essentially flat vs 07-20, with one sub-agent finding (SEC-WIZ-APPROVAL-1) checked and DISPROVEN by the consolidating pass. Same day, a Windows/Docker session resolved 12 of the queued 12 Human-Review items — the first time in 3 consecutive cycles (07-13/07-20/07-27) this sandbox-CI-verification gap didn't block every fix. RE-1 (the carried High): the audit's own suggested test wasn't buildable as described (BIMpossible.RevitLink.Tests has no Revit package refs) — real fix extracted the queue lifecycle into a new Revit-free PendingRequestQueue.cs with a 3-state CAS ownership handoff (abandon vs. dispatch has exactly one winner), producing EventDispatcher/PipeServer's first-ever test coverage (9 new tests, red-green verified) and closing 2 more instances of the same defect the audit didn't catch (TIMEOUT/EXECUTION_ERROR paths, not just EVENT_REJECTED). SEC-MEMBERSHIP-1 required an owner design decision, taken same day: bind the static-firm fallback to single-tenancy (no-op below 2 registered firms, denies past that). SEC-NPMALERT-1's own acceptance test (0 open HIGH Dependabot alerts) only passed after merging to the default branch, then was re-run live to confirm, not inferred. 2 more Info items independently closed: FE-BASELINE-1 (a Checklist claim was found FALSE when re-checked — corrected, not just re-asserted) and ARCH-ADDINS-TEST-COUNT (last week's '634 vs 895' scare reconciled: the audit counted a stale PR branch, not main; 904 attribute-count is the real baseline, distinct from the 1473 dotnet-test prints). CQ-WIZ-LEGACY-1 formally deferred with its unblock precondition now written down. Both PRs merged (BIMpossible #231 -> ff42ac3e, Add-Ins #46 -> 19c5ddde), post-merge CI green on both, 0 open Dependabot alerts re-confirmed live after merge. Structural finding: the recurring 3-cycle Auto-Fix stall's real root cause is that the SCHEDULED audit prompt itself is hosted outside every reachable dev-session surface (not in .claude/skills, not in CronList/list_scheduled_tasks) — genuinely unpatchable from here. A reachable sibling automation (bimpossible-audit-loop.js) had the identical fail-open defect and was fixed this pass (now fails closed with an explicit preflight verdict); the remote routine itself remains the one item only the owner can act on.", report: "audit-resolution_2026-07-27.md" },
-          { date: "2026-07-20", type: "Weekly full audit (scheduled, autonomous, 3 lens sub-agents) — read-only, no same-day remediation", scope: "HEAD 29e96da, 21 commits since the 2026-07-13 run. Largest new surface: WSR8 write-gate unification + convergence work (92738b3/9713356/df7add1/29e96da), continued Phase 3.10a/3.10b performance work, and the new Alembic single-head CI guard.", result: "5 resolved, independently re-verified (not just claimed): WSR8 (the write-gate bypass — now one shared check_firm_model_editor predicate used identically by both call shapes, proven by a source-scan test), plus the 4 conditional day-two gaps that shipped alongside WSR8 step 2 rather than after it (RE-NEW-4 CAS guard on finalize, RE-NEW-5 reclaim sweep, ARCH-NEW-1 365-day retention, CQ-NEW-1 dormant-status test). Net severity is flat, not down: the prior High (WSR8) resolved, but a DIFFERENT previously-carried High (RE-1 — EventDispatcher's queue-drain bug) surfaces as this cycle's headline, traced end-to-end for the first time (was always open, just not previously the loudest finding). 4 new low/medium items are foreseeable loose ends after a big refactor (stale docstrings, an engine-factory bypass on a read-only path, a supply-chain gap in the newly-split Add-Ins repo, a test-count delta needing reconciliation) — not signs of regression. Auto-Fix Pass ran but applied zero fixes: the scheduled runner's sandbox has no Docker/PowerShell, so every candidate (including the trivial docstring fix) was routed to human-review rather than applied unverified.", report: "weekly-full-audit_2026-07-20.md" },
-          { date: "2026-07-15", type: "Phase 3 production-readiness / roadmap-truth audit (day-2, 5 evidence agents) — then overtaken by same-evening work", scope: "Both repos, re-verifying every prior claim against live code/git/docker/GitHub-API state rather than trusting yesterday's audit or this morning's owner decisions. Pure audit — no files modified.", result: "⚠️ POINT-IN-TIME: the report was written 18:40 and most of its headline findings were resolved within 3 hours, by work done the same evening. Its #1 blocker — 'the Phase 3.10a warm pipeline has produced exactly zero rows on every dimension since it was built, 0 room_join_geometry jobs ever even ENQUEUED, re-confirmed live today 2×' — was closed at 19:18 by a4ecece: the FIRST-EVER live warm + join proof against a real cloud project (the id-bridge fix c2d5756 that unblocked it had landed at 18:33, 7 minutes before the report was written). AC-1 then closed via the real endpoint and AC-3 went from FAIL to PASS (p50 215ms → 18ms) via a per-(project, arch-version) room-pool cache + bbox pre-filter (7f8735f/413adf8/c169f61/3b2fa93) during a supervised flag-flip. Finding #4 (ProgramPlan's 3 stale 'Wave 22' cross-refs surviving two correction passes) fixed at 19:22 (7be8f6a). Finding #9 ('two owner decisions landed today with zero code behind them') is obsolete: Phase 3.8's minimal-wedge slice 1 landed 19:14 (48c4826) and WSR8 step 2 went from the check_firm_model_editor role (19:31, 92738b3) to fully wired gated LLM→live-Revit parameter write (21:30, 9713356, flag OFF), marked BUILT+SHIPPED in the docs repo at 04:40 the next morning. Finding #2 (an uncommitted worktree 'BIMpossible-warm-idbridge' with live edits to exactly the files implicated in the 0-rows bug, status unknown, flagged to the owner) resolved itself — the worktree is gone from disk and its fix c2d5756 is on main. Finding #6 was self-corrected inside the report: the 'Phase 15 branch contains no WPF/C# code' alarm was a scoping error — the pane lives in a THIRD repo (Add-Ins), which no agent was pointed at; it is genuinely built (1124/1124 tests, both TFMs). GENUINELY STILL OPEN: branch protection has enforce_admins=false so required checks are a signal not a gate on the direct-to-main push path; two rival unmerged shared-parameters branches (both confirmed still present); WSR8's doc trail stranded off main; and the live revit_link READ flag has no default-value regression test.", report: "2026-07-15__phase3-production-readiness-audit.md" },
-          { date: "2026-07-14", type: "Phase 3 production-readiness audit (ground-truth verification, 4 evidence passes) + same-day partial remediation", scope: "Every Phase 3 feature, sub-phase, spec, plan, migration, flag, endpoint, worker, and runbook, cross-checked against live prod DB rows, real CI status, and git history — not the ledgers' own claims.", result: "Headline: the project's own status ledgers disagreed with each other and with the running system on nearly every point that mattered. Found (and same-day fixed): no automated guard against Alembic multi-head migration collisions — this exact risk class caused a real prod outage the night before (351 backend container restarts, two migrations landed with no backend-migrate run); fixed via a new CI guard (1e07550). Also found+fixed: frontend/Dockerfile had no ARG/ENV line for the Phase 3.10a flag at all, silently no-opping the documented 'flip it on locally to test' path (a2a4a23). Corrected same-day, citing this audit: PHASE-STATUS.md (Phase 3.10a's warm-time pipeline is code-complete, migrated to prod, CI-green — but has NEVER executed against real data, 0 rows in room_footprint_cache/level_band_cache/element_cache.origin_x, confirmed live; the prior 'owed a live-test verification' framing was wrong the day it was written; added the missing Phase 3.8 entry) and WAVE-STATUS.md (was 13 days stale despite 4 real waves shipping; backfilled waves 26-29 for 3.10a/3.10b-Furniture/P3-8-DYN/WSR8). Still genuinely open: ProgramPlan.md (1,574 lines) was explicitly NOT corrected — still gates Commercial Launch on the Phase 3.8 custom-role-matrix design abandoned 2026-07-12, and has zero mentions of 3.10/3.10a/3.10b/WSR8 anywhere; Phase 3.10a's flag-ON path has no ErrorBoundary/malformed-row guard (the flag-OFF path does) — turning the flag on, the literal next planned step, risks a whole-page crash; and a broader silent-empty-state sweep found 3 spots where a genuine failure and genuine emptiness render identically (category-vanish-on-0-elements, Circuits timeout-vs-404, ElementPreviewPanel's Related section with no error state at all).", report: "2026-07-14__phase3-production-readiness-audit.md" },
-          { date: "2026-07-13", type: "Weekly full audit (3 parallel lens sub-agents) + same-day closeout", scope: "HEAD 85f27e2, 47 commits since the 07-06 run; largest new surface is the assistant live Revit-parameter-write execution primitive (9891132). Every Medium+ carryover re-verified by direct code read, not commit-message trust.", result: "0 crit / 1 high / ~7 medium / ~14 low / ~4 info — then EVERY finding closed (11 shipped in code/config + 6 accepted, documented owner decisions), zero dangling. Headline WSR8 (High): the new assistant Revit-write primitive bypassed revit_link/router's flag+role gate stack — re-routed through a single-source assert_write_authorized() (c4194c5, on main + pushed, remote CI green); it stays dormant/unwired. Remaining fixes (RE-NEW-4/5/6 CAS + reclaim sweep + batching, FE a11y/types, ARCH-NEW-1 365-day retention, docker resource caps, RE-NEW-3 backup-failure webhook, SEC-NEW-1 fails-closed tripwire) landed in b6bb96f, now merged to main + pushed. Accepted-deferred (tracked, not dangling): SEC-3 + SEC-NEW-1 open-mode fallback close at multi-user; ARCH-NEW-2 router god-file split at next major touch. Prior run's Critical (07-06 uncommitted git merge) confirmed resolved.", report: "weekly-full-audit_2026-07-13.md" },
-          { date: "2026-07-11", type: "Incremental verification (6 agents) + same-day TDD resolution (7 agents) + 1 follow-up fix", scope: "53 findings carried in from 07-08 (6 Critical/High + 47 Medium/backlog), independently re-derived from live code/tests/gh api/semgrep rather than trusted; everything still open after that was then fixed same-day, including the one item tracked outside the batch", result: "Verification pass: 41 of 47 confirmed genuinely fixed; 4 medium open (1 new bug introduced by the WIZ-5 fix, 2 reclassified from 'fixed' to partial after live semgrep/code-path checks, 1 known live gap needing a GitHub settings change) + 5 low partials, each with a real narrow open half. Resolution pass, same day: all 9 fixed via strict TDD (failing test first, minimal fix, full-suite regression) by 7 agents on disjoint files, caught and fixed one incidental cross-test logging-isolation bug along the way, finished with backend 2784+1933+4 passed / frontend 1648/1648+build clean — LOCAL CI GREEN. CI-2's settings half (dependabot-automerge past a red security scan) closed same day too: code-side GitHub-issue notification added and verified (12/12 mocked assertions), then the owner wired security-scan-summary into branch-protection required checks, confirmed live via gh api. Final item, task_645d4dde (the rated_pressure_pa unit-conversion bug adjacent to SCH-M5, deliberately tracked outside this batch): fixed same day too (f07fb3e) — added an exact PSI→Pa constant mirroring the existing flow-rate pattern, test asserts against an independently hand-computed literal so a wrong constant would still fail, full pure-lane suite verified (1903 passed, 0 failed). Zero Critical/High/Medium/Low open — only the pre-existing 8 info/cosmetic residuals remain. Operational note: 2 unpushed-but-verified-correct commits (711b8a5 + merge bdfba8a) found on local main earlier — unrelated maintenance, not an audit item", report: "2026-07-11__audit-report.md" },
-          { date: "2026-07-10", type: "Code-level re-verification (not a full audit re-run)", scope: "All 5 open Critical/High from the 07-08 report, checked against current source + live system state (Task Scheduler, Docker container restart times, live Postgres migration)", result: "All 5 confirmed FIXED with live verification, not just source: OPS-1 (efbbbea, LastTaskResult 0 + fresh dump today), WIZ-6 (21013bb, running in restarted container), AST-1 (376e180, migration d3e4f5a6b7c8 applied to live DB), WIZ-1/WIZ-2 (2d36353, fix for WIZ-2 actually lives in wizard/executor.py not aps_write.py as originally logged). Medium/Low/Info backlog (44/28/14) not re-checked this pass.", report: "2026-07-08__audit-report.md" },
-          { date: "2026-07-08", type: "Incremental (5 agents)", scope: "22 commits / 117 files since bd472b0: remediation batches 07-01→07-07 + wizard APS write client + Coordination Report 11.1 + shared-parameters registry", result: "OPS-1 (Critical, live): nightly DB backup silently failing since 07-06 repoint; +4 HIGH on the write-back perimeter (WIZ-6 live write endpoint no authz, AST-1 unscoped edit-log tool, WIZ-1/2 latent audit-trail integrity). All 30 prior closures verified genuine", report: "2026-07-08__audit-report.md" },
-          { date: "2026-07-06", type: "Weekly full (3 agents)", scope: "Whole tree @ 83384da — 39 commits since 06-29", result: "OPS-CRIT-1 (Critical): main in unresolved uncommitted merge (~856 files) — resolved same-day. 0 High; SEC-10/11/12, OPS-2, FE-16/18 verified closed; wizard write surface judged best-gated in codebase. 11 findings resolved via fe7720c + 07-07 follow-up closed the remainder", report: "weekly-full-audit_2026-07-06.md" },
-          { date: "2026-07-01", type: "Full (run 2, deep — 7 agents)", scope: "Whole tree @ bd472b0 — adversarial bug-hunt", result: "9 HIGH the same-day survey missed: SCH-H1 empty schedule endpoints, SCH-H2 missing auth gate, AST-H1 fail-open crypto, AST-H2 denial-of-wallet, FE-H1/H2, OPS-H1 backup-verify-can't-fail, OPS-H2 lying CI watcher, OPS-H3 dead automerge — 8 fixed same-day + wave-2 (#173)", report: "2026-07-01__audit-report-full-2.md" },
-          { date: "2026-07-01", type: "Full (run 1, survey — 5 agents)", scope: "Completeness survey @ bd472b0; carry-forward re-verify (all 6 confirmed fixed)", result: "'Clean sprint' verdict SUPERSEDED — the same-day deep re-run found 9 HIGH this survey missed", report: "2026-07-01__audit-report-full.md" },
-          { date: "2026-06-30", type: "Full", scope: "Assistant subsystem, prewarm worker, Sheets OAuth, FieldCombobox, graph topology, CI, semgrep", result: "GRAPH-1 (High, carry-forward): O(n²) _load_served still unaddressed — fixed 07-01 with O(V+E) rewrite + regression test", report: "2026-06-30__audit-report-full.md" },
-          { date: "2026-06-29", type: "Incremental", scope: "~50 files / 30 commits: Phase 4d Levers 1–4, NetworkX topology, security CI hardening, backup fix", result: "DIGEST-1 (High): useDigest never re-fetches after 'preparing' — digest spinner never resolves during model warming", report: "2026-06-29__audit-report.md" },
-          { date: "2026-06-22", type: "Weekly full", scope: "Whole tree", result: "All clear — 0 open · 5 closed (expr-eval CVE removed, relay frame guard, multi-tenant auth scoping via #142)", report: "2026-06-16__code-audit.md" },
-          { date: "2026-06-16", type: "Weekly full + verification", scope: "Whole tree @ 04b5d8d", result: "0 Critical / 0 live-exploitable · new SEC-9 backend CSV formula-injection (Medium); SEC-8 PUT /ref 500s", report: "weekly-full-audit_2026-06-16.md" },
-          { date: "2026-06-15", type: "Weekly full", scope: "Whole tree + QA/wizard WIP", result: "0 Critical · OPS-1 (High, process): new QA/wizard surface CI-unverified while Actions billing-blocked", report: "weekly-full-audit_2026-06-15.md" },
-          { date: "2026-06-14", type: "Full (backend + frontend)", scope: "Phase 3 F-1…F-28, Phase 4a/5, expr-eval removal", result: "NM-1 (Medium): list_views checks project allowlist before auth — probe via differing error codes", report: "2026-06-14__audit-report-full.md" },
-          { date: "2026-06-13", type: "Full", scope: "Whole tree @ 58fd53c (W10-17 merges)", result: "FEA-4 (Medium): 15 new Wave 10-17 schedule views ship with zero unit tests", report: "2026-06-13__audit-report-full.md" },
-          { date: "2026-06-10", type: "Full (7 agents)", scope: "Whole tree @ 277e6d2 · re-verified 68 perp-audit fixes", result: "CORE-1 (High): refresh never invalidates the durable category cache → stale sidebar on republish", report: "2026-06-10__audit-report-full.md" }
+          {
+            date: "2026-08-17",
+            type: "Weekly full audit (Security/Reliability/Architecture/Code-quality/Frontend + first-run Hygiene & Slop) -- read-only; findings since remediated across 52 PRs, reconciled 2026-08-21",
+            scope: "Main repo HEAD (24 further commits since, through PR #445). First cycle running the Hygiene and Slop lenses end-to-end alongside the standard Security/Reliability/Architecture/Code-quality/Frontend sweep -- companion doc ops-followups_2026-08-17.md covers 6 separate OPERATIONAL follow-up flags (not code findings), all closed per its own final addendum (PRs #409/#410/#411/#70/#60 merged, a live Cowork task amendment applied, _backups/postgres deleted, scheduler drift confirmed matching).",
+            result: "0 Critical / 10 High / 38 Medium / 22 Low / 4 Info at audit time (74 total). RECONCILED 2026-08-21: 47 of 74 findings closed in code across 52 merged PRs (#393-#443) -- all 9 Highs (SEC-WIZ-HUB-1 #397, SEC-PAIR-1 #402, FE-CSS-1 #398, ARCH-PROJGATE-INVARIANT-1 + SLOP-1 #397, RE-RESOLVE-SCAN-1 #400, HYG-1/2/4), plus 20 Medium, 16 Low, 2 Info. Each closure verified by finding-ID citation in the merged fix commit, not the report summary. 30 open remain (1 High HYG-3 stale scheduled-task mirror, 19 Medium, 8 Low, 2 Info) -- predominantly accepted-deferred debt, doc/process hygiene, and Add-Ins pairing items not yet cited as closed. The 08-08->08-17 jump was the Hygiene and Slop lenses running for the first time, since substantially remediated.",
+            report: "weekly-full-audit_2026-08-17.md"
+          },
+          {
+            date: "2026-08-08",
+            type: "Incremental audit (six focused cluster sub-agents, #256->#312 window) + same-window resolution",
+            scope: "~150 changed files across ~40 commits (#256->#312) plus 2 uncommitted items; ~95 files deep-read in six clusters (gateways / firm-tenancy sweep / auth-admin-allowlist / firm-alias+schedules+cross-model-join / backup PowerShell / migrations+models). The window's security-critical work -- the firm-wide require_active_membership sweep (#264), APS hub isolation (#265/#267), upstream-error sanitization (#266), personal-listing firm-scoping (#312/#278/#287/#290), the D-4 admin-secret retirement, and Slack/Teams crypto+signature -- was verified sound.",
+            result: "0 Critical / 3 High / 10 Medium / 14 Low + ~10 NIT / 1 INFO. All 3 High were in NEW surfaces: H-1 Slack pairing collapsed identity-less sessions onto one shared UUID (twin of a prior Teams bug -- fixed with require_identity()); H-2 an unbounded docker-exec in Backup-Db reopened the exact backup-hang the pipeline exists to close (routed through Invoke-BoundedCommand); H-3 the restore drill greened on a partially-restored dump (added --exit-on-error). All 10 Medium and all 14 Low were fixed or accepted-documented: 24 implemented + L-2 already-fixed on baseline (b19e377) + L-7 owner-decided (firm-first alias precedence stays; documented in CLAUDE.md + clientRules.ts). The resolution doc was authored uncommitted on a review worktree ('nothing committed/pushed'), but the fixes have SINCE landed -- verified present on origin/main 2026-08-16 (require_identity, Invoke-BoundedCommand, --exit-on-error, _MAX_BODY_BYTES). Verify-Local-CI green: backend Docker pytest incl. 12 new regression tests, frontend 1726+6 vitest / tsc / next build (model route 198 KB < 207 KB ceiling). Excluded from remediation by instruction: the ~10 NIT, the 1 INFO (stale graphify X-Admin-Secret artifacts -- still on disk, incl. a 2026-08-10 graph), and the OPS-C*/CANON-C* harness-layer candidates (one flags that the repo's 'never touch .env/guard.py' rule is instruction-not-control -- recorded, not actioned).",
+            report: "audit-resolution_2026-08-08.md"
+          },
+          {
+            date: "2026-08-04",
+            type: "Weekly full audit (scheduled, autonomous, 3 lens sub-agents) — then a same-day close-out of everything it raised",
+            scope: "Main repo HEAD ff42ac3 (exactly one commit past last week's audited tree — that commit being last week's own 12-item close-out). Add-Ins origin/main 19c5ddd. The consolidating pass caught and corrected one of its own sub-agents, which had read RE-1's status off a stale unmerged local branch (cc4adc3, not an ancestor of origin/main) and reported it still open.",
+            result: "**RE-1 RESOLVED — the carried High for 4 consecutive cycles, and the first High-free cycle in this report format.** Verified by direct diff read, not commit message: Add-Ins PR #46 (19c5ddd, merged 07-27) moved the queue lifecycle into a new Revit-free PendingRequestQueue.cs with a 3-state CAS (Pending/Abandoned/Dispatching) so abandon-vs-dispatch has exactly one winner, and PipeServer now abandons on timeout and in the generic catch too — broader than the original finding, which named only the EVENT_REJECTED path. Backed by 9 new tests, red-green verified (reverting the drain fails 5 of 9) — the first coverage EventDispatcher/PipeServer have ever had. The audit also re-verified all 9 of last week's BIMpossible-repo closures against current file content, and confirmed the detection gap that let two items sit unfixed for two cycles (a source-scan test with a blind spot) was itself closed. It then raised 6 genuinely new findings, all Low/Medium — and ALL SIX were resolved the same day by PR #239 (68bb596, 11:22), hours after the report was written: a code-enforced BIMPOSSIBLE_ALLOW_SYNTHETIC_SEED opt-in guard on the perf-seeding scripts (the run's headline new risk), transient-HTTP retry parity between the wizard's two sibling poll loops, a non-loopback refusal in the load-test harness, three more open-on-demand modals moved to dynamic import, and the untracked-script/scheduling-cadence pair resolved by tracking the wrapper and removing its Task-Scheduler registration path. PR #240 followed with two dependency-advisory bumps. Auto-Fix Pass: BLOCKED for a 4th consecutive cycle (preflight found no PowerShell/Docker) — but this run did land the process fix that had been flagged as undoable from a working session: the live scheduled-task prompt was patched via the scheduled-tasks tools to run the preflight explicitly and to check the Add-Ins repo's origin/main rather than whatever branch is checked out locally.",
+            report: "weekly-full-audit_2026-08-04.md"
+          },
+          {
+            date: "2026-07-27",
+            type: "Weekly full audit (scheduled, autonomous, 3 lens sub-agents) — then a same-day resolution pass from a Windows/Docker-capable session",
+            scope: "Main repo HEAD 569bcb8 at audit time (47 commits since 2026-07-20). Add-Ins HEAD cc4adc3 (an unmerged PR #45 tip, confirmed byte-identical to main on the audited files). Resolution work branched from origin/main in a worktree, verified with Verify-Local-CI.ps1 (Docker 29.6.1 + MSBuild available) rather than asserted.",
+            result: "Audit found Critical 0 / High 1 (RE-1, carried) / Medium 8 / Low 8 / Info 6, essentially flat vs 07-20, with one sub-agent finding (SEC-WIZ-APPROVAL-1) checked and DISPROVEN by the consolidating pass. Same day, a Windows/Docker session resolved 12 of the queued 12 Human-Review items — the first time in 3 consecutive cycles (07-13/07-20/07-27) this sandbox-CI-verification gap didn't block every fix. RE-1 (the carried High): the audit's own suggested test wasn't buildable as described (BIMpossible.RevitLink.Tests has no Revit package refs) — real fix extracted the queue lifecycle into a new Revit-free PendingRequestQueue.cs with a 3-state CAS ownership handoff (abandon vs. dispatch has exactly one winner), producing EventDispatcher/PipeServer's first-ever test coverage (9 new tests, red-green verified) and closing 2 more instances of the same defect the audit didn't catch (TIMEOUT/EXECUTION_ERROR paths, not just EVENT_REJECTED). SEC-MEMBERSHIP-1 required an owner design decision, taken same day: bind the static-firm fallback to single-tenancy (no-op below 2 registered firms, denies past that). SEC-NPMALERT-1's own acceptance test (0 open HIGH Dependabot alerts) only passed after merging to the default branch, then was re-run live to confirm, not inferred. 2 more Info items independently closed: FE-BASELINE-1 (a Checklist claim was found FALSE when re-checked — corrected, not just re-asserted) and ARCH-ADDINS-TEST-COUNT (last week's '634 vs 895' scare reconciled: the audit counted a stale PR branch, not main; 904 attribute-count is the real baseline, distinct from the 1473 dotnet-test prints). CQ-WIZ-LEGACY-1 formally deferred with its unblock precondition now written down. Both PRs merged (BIMpossible #231 -> ff42ac3e, Add-Ins #46 -> 19c5ddde), post-merge CI green on both, 0 open Dependabot alerts re-confirmed live after merge. Structural finding: the recurring 3-cycle Auto-Fix stall's real root cause is that the SCHEDULED audit prompt itself is hosted outside every reachable dev-session surface (not in .claude/skills, not in CronList/list_scheduled_tasks) — genuinely unpatchable from here. A reachable sibling automation (bimpossible-audit-loop.js) had the identical fail-open defect and was fixed this pass (now fails closed with an explicit preflight verdict); the remote routine itself remains the one item only the owner can act on.",
+            report: "audit-resolution_2026-07-27.md"
+          },
+          {
+            date: "2026-07-20",
+            type: "Weekly full audit (scheduled, autonomous, 3 lens sub-agents) — read-only, no same-day remediation",
+            scope: "HEAD 29e96da, 21 commits since the 2026-07-13 run. Largest new surface: WSR8 write-gate unification + convergence work (92738b3/9713356/df7add1/29e96da), continued Phase 3.10a/3.10b performance work, and the new Alembic single-head CI guard.",
+            result: "5 resolved, independently re-verified (not just claimed): WSR8 (the write-gate bypass — now one shared check_firm_model_editor predicate used identically by both call shapes, proven by a source-scan test), plus the 4 conditional day-two gaps that shipped alongside WSR8 step 2 rather than after it (RE-NEW-4 CAS guard on finalize, RE-NEW-5 reclaim sweep, ARCH-NEW-1 365-day retention, CQ-NEW-1 dormant-status test). Net severity is flat, not down: the prior High (WSR8) resolved, but a DIFFERENT previously-carried High (RE-1 — EventDispatcher's queue-drain bug) surfaces as this cycle's headline, traced end-to-end for the first time (was always open, just not previously the loudest finding). 4 new low/medium items are foreseeable loose ends after a big refactor (stale docstrings, an engine-factory bypass on a read-only path, a supply-chain gap in the newly-split Add-Ins repo, a test-count delta needing reconciliation) — not signs of regression. Auto-Fix Pass ran but applied zero fixes: the scheduled runner's sandbox has no Docker/PowerShell, so every candidate (including the trivial docstring fix) was routed to human-review rather than applied unverified.",
+            report: "weekly-full-audit_2026-07-20.md"
+          },
+          {
+            date: "2026-07-15",
+            type: "Phase 3 production-readiness / roadmap-truth audit (day-2, 5 evidence agents) — then overtaken by same-evening work",
+            scope: "Both repos, re-verifying every prior claim against live code/git/docker/GitHub-API state rather than trusting yesterday's audit or this morning's owner decisions. Pure audit — no files modified.",
+            result: "⚠️ POINT-IN-TIME: the report was written 18:40 and most of its headline findings were resolved within 3 hours, by work done the same evening. Its #1 blocker — 'the Phase 3.10a warm pipeline has produced exactly zero rows on every dimension since it was built, 0 room_join_geometry jobs ever even ENQUEUED, re-confirmed live today 2×' — was closed at 19:18 by a4ecece: the FIRST-EVER live warm + join proof against a real cloud project (the id-bridge fix c2d5756 that unblocked it had landed at 18:33, 7 minutes before the report was written). AC-1 then closed via the real endpoint and AC-3 went from FAIL to PASS (p50 215ms → 18ms) via a per-(project, arch-version) room-pool cache + bbox pre-filter (7f8735f/413adf8/c169f61/3b2fa93) during a supervised flag-flip. Finding #4 (ProgramPlan's 3 stale 'Wave 22' cross-refs surviving two correction passes) fixed at 19:22 (7be8f6a). Finding #9 ('two owner decisions landed today with zero code behind them') is obsolete: Phase 3.8's minimal-wedge slice 1 landed 19:14 (48c4826) and WSR8 step 2 went from the check_firm_model_editor role (19:31, 92738b3) to fully wired gated LLM→live-Revit parameter write (21:30, 9713356, flag OFF), marked BUILT+SHIPPED in the docs repo at 04:40 the next morning. Finding #2 (an uncommitted worktree 'BIMpossible-warm-idbridge' with live edits to exactly the files implicated in the 0-rows bug, status unknown, flagged to the owner) resolved itself — the worktree is gone from disk and its fix c2d5756 is on main. Finding #6 was self-corrected inside the report: the 'Phase 15 branch contains no WPF/C# code' alarm was a scoping error — the pane lives in a THIRD repo (Add-Ins), which no agent was pointed at; it is genuinely built (1124/1124 tests, both TFMs). GENUINELY STILL OPEN: branch protection has enforce_admins=false so required checks are a signal not a gate on the direct-to-main push path; two rival unmerged shared-parameters branches (both confirmed still present); WSR8's doc trail stranded off main; and the live revit_link READ flag has no default-value regression test.",
+            report: "2026-07-15__phase3-production-readiness-audit.md"
+          },
+          {
+            date: "2026-07-14",
+            type: "Phase 3 production-readiness audit (ground-truth verification, 4 evidence passes) + same-day partial remediation",
+            scope: "Every Phase 3 feature, sub-phase, spec, plan, migration, flag, endpoint, worker, and runbook, cross-checked against live prod DB rows, real CI status, and git history — not the ledgers' own claims.",
+            result: "Headline: the project's own status ledgers disagreed with each other and with the running system on nearly every point that mattered. Found (and same-day fixed): no automated guard against Alembic multi-head migration collisions — this exact risk class caused a real prod outage the night before (351 backend container restarts, two migrations landed with no backend-migrate run); fixed via a new CI guard (1e07550). Also found+fixed: frontend/Dockerfile had no ARG/ENV line for the Phase 3.10a flag at all, silently no-opping the documented 'flip it on locally to test' path (a2a4a23). Corrected same-day, citing this audit: PHASE-STATUS.md (Phase 3.10a's warm-time pipeline is code-complete, migrated to prod, CI-green — but has NEVER executed against real data, 0 rows in room_footprint_cache/level_band_cache/element_cache.origin_x, confirmed live; the prior 'owed a live-test verification' framing was wrong the day it was written; added the missing Phase 3.8 entry) and WAVE-STATUS.md (was 13 days stale despite 4 real waves shipping; backfilled waves 26-29 for 3.10a/3.10b-Furniture/P3-8-DYN/WSR8). Still genuinely open: ProgramPlan.md (1,574 lines) was explicitly NOT corrected — still gates Commercial Launch on the Phase 3.8 custom-role-matrix design abandoned 2026-07-12, and has zero mentions of 3.10/3.10a/3.10b/WSR8 anywhere; Phase 3.10a's flag-ON path has no ErrorBoundary/malformed-row guard (the flag-OFF path does) — turning the flag on, the literal next planned step, risks a whole-page crash; and a broader silent-empty-state sweep found 3 spots where a genuine failure and genuine emptiness render identically (category-vanish-on-0-elements, Circuits timeout-vs-404, ElementPreviewPanel's Related section with no error state at all).",
+            report: "2026-07-14__phase3-production-readiness-audit.md"
+          },
+          {
+            date: "2026-07-13",
+            type: "Weekly full audit (3 parallel lens sub-agents) + same-day closeout",
+            scope: "HEAD 85f27e2, 47 commits since the 07-06 run; largest new surface is the assistant live Revit-parameter-write execution primitive (9891132). Every Medium+ carryover re-verified by direct code read, not commit-message trust.",
+            result: "0 crit / 1 high / ~7 medium / ~14 low / ~4 info — then EVERY finding closed (11 shipped in code/config + 6 accepted, documented owner decisions), zero dangling. Headline WSR8 (High): the new assistant Revit-write primitive bypassed revit_link/router's flag+role gate stack — re-routed through a single-source assert_write_authorized() (c4194c5, on main + pushed, remote CI green); it stays dormant/unwired. Remaining fixes (RE-NEW-4/5/6 CAS + reclaim sweep + batching, FE a11y/types, ARCH-NEW-1 365-day retention, docker resource caps, RE-NEW-3 backup-failure webhook, SEC-NEW-1 fails-closed tripwire) landed in b6bb96f, now merged to main + pushed. Accepted-deferred (tracked, not dangling): SEC-3 + SEC-NEW-1 open-mode fallback close at multi-user; ARCH-NEW-2 router god-file split at next major touch. Prior run's Critical (07-06 uncommitted git merge) confirmed resolved.",
+            report: "weekly-full-audit_2026-07-13.md"
+          },
+          {
+            date: "2026-07-11",
+            type: "Incremental verification (6 agents) + same-day TDD resolution (7 agents) + 1 follow-up fix",
+            scope: "53 findings carried in from 07-08 (6 Critical/High + 47 Medium/backlog), independently re-derived from live code/tests/gh api/semgrep rather than trusted; everything still open after that was then fixed same-day, including the one item tracked outside the batch",
+            result: "Verification pass: 41 of 47 confirmed genuinely fixed; 4 medium open (1 new bug introduced by the WIZ-5 fix, 2 reclassified from 'fixed' to partial after live semgrep/code-path checks, 1 known live gap needing a GitHub settings change) + 5 low partials, each with a real narrow open half. Resolution pass, same day: all 9 fixed via strict TDD (failing test first, minimal fix, full-suite regression) by 7 agents on disjoint files, caught and fixed one incidental cross-test logging-isolation bug along the way, finished with backend 2784+1933+4 passed / frontend 1648/1648+build clean — LOCAL CI GREEN. CI-2's settings half (dependabot-automerge past a red security scan) closed same day too: code-side GitHub-issue notification added and verified (12/12 mocked assertions), then the owner wired security-scan-summary into branch-protection required checks, confirmed live via gh api. Final item, task_645d4dde (the rated_pressure_pa unit-conversion bug adjacent to SCH-M5, deliberately tracked outside this batch): fixed same day too (f07fb3e) — added an exact PSI→Pa constant mirroring the existing flow-rate pattern, test asserts against an independently hand-computed literal so a wrong constant would still fail, full pure-lane suite verified (1903 passed, 0 failed). Zero Critical/High/Medium/Low open — only the pre-existing 8 info/cosmetic residuals remain. Operational note: 2 unpushed-but-verified-correct commits (711b8a5 + merge bdfba8a) found on local main earlier — unrelated maintenance, not an audit item",
+            report: "2026-07-11__audit-report.md"
+          },
+          {
+            date: "2026-07-10",
+            type: "Code-level re-verification (not a full audit re-run)",
+            scope: "All 5 open Critical/High from the 07-08 report, checked against current source + live system state (Task Scheduler, Docker container restart times, live Postgres migration)",
+            result: "All 5 confirmed FIXED with live verification, not just source: OPS-1 (efbbbea, LastTaskResult 0 + fresh dump today), WIZ-6 (21013bb, running in restarted container), AST-1 (376e180, migration d3e4f5a6b7c8 applied to live DB), WIZ-1/WIZ-2 (2d36353, fix for WIZ-2 actually lives in wizard/executor.py not aps_write.py as originally logged). Medium/Low/Info backlog (44/28/14) not re-checked this pass.",
+            report: "2026-07-08__audit-report.md"
+          },
+          {
+            date: "2026-07-08",
+            type: "Incremental (5 agents)",
+            scope: "22 commits / 117 files since bd472b0: remediation batches 07-01→07-07 + wizard APS write client + Coordination Report 11.1 + shared-parameters registry",
+            result: "OPS-1 (Critical, live): nightly DB backup silently failing since 07-06 repoint; +4 HIGH on the write-back perimeter (WIZ-6 live write endpoint no authz, AST-1 unscoped edit-log tool, WIZ-1/2 latent audit-trail integrity). All 30 prior closures verified genuine",
+            report: "2026-07-08__audit-report.md"
+          },
+          {
+            date: "2026-07-06",
+            type: "Weekly full (3 agents)",
+            scope: "Whole tree @ 83384da — 39 commits since 06-29",
+            result: "OPS-CRIT-1 (Critical): main in unresolved uncommitted merge (~856 files) — resolved same-day. 0 High; SEC-10/11/12, OPS-2, FE-16/18 verified closed; wizard write surface judged best-gated in codebase. 11 findings resolved via fe7720c + 07-07 follow-up closed the remainder",
+            report: "weekly-full-audit_2026-07-06.md"
+          },
+          {
+            date: "2026-07-01",
+            type: "Full (run 2, deep — 7 agents)",
+            scope: "Whole tree @ bd472b0 — adversarial bug-hunt",
+            result: "9 HIGH the same-day survey missed: SCH-H1 empty schedule endpoints, SCH-H2 missing auth gate, AST-H1 fail-open crypto, AST-H2 denial-of-wallet, FE-H1/H2, OPS-H1 backup-verify-can't-fail, OPS-H2 lying CI watcher, OPS-H3 dead automerge — 8 fixed same-day + wave-2 (#173)",
+            report: "2026-07-01__audit-report-full-2.md"
+          },
+          {
+            date: "2026-07-01",
+            type: "Full (run 1, survey — 5 agents)",
+            scope: "Completeness survey @ bd472b0; carry-forward re-verify (all 6 confirmed fixed)",
+            result: "'Clean sprint' verdict SUPERSEDED — the same-day deep re-run found 9 HIGH this survey missed",
+            report: "2026-07-01__audit-report-full.md"
+          },
+          {
+            date: "2026-06-30",
+            type: "Full",
+            scope: "Assistant subsystem, prewarm worker, Sheets OAuth, FieldCombobox, graph topology, CI, semgrep",
+            result: "GRAPH-1 (High, carry-forward): O(n²) _load_served still unaddressed — fixed 07-01 with O(V+E) rewrite + regression test",
+            report: "2026-06-30__audit-report-full.md"
+          },
+          {
+            date: "2026-06-29",
+            type: "Incremental",
+            scope: "~50 files / 30 commits: Phase 4d Levers 1–4, NetworkX topology, security CI hardening, backup fix",
+            result: "DIGEST-1 (High): useDigest never re-fetches after 'preparing' — digest spinner never resolves during model warming",
+            report: "2026-06-29__audit-report.md"
+          },
+          {
+            date: "2026-06-22",
+            type: "Weekly full",
+            scope: "Whole tree",
+            result: "All clear — 0 open · 5 closed (expr-eval CVE removed, relay frame guard, multi-tenant auth scoping via #142)",
+            report: "2026-06-16__code-audit.md"
+          },
+          {
+            date: "2026-06-16",
+            type: "Weekly full + verification",
+            scope: "Whole tree @ 04b5d8d",
+            result: "0 Critical / 0 live-exploitable · new SEC-9 backend CSV formula-injection (Medium); SEC-8 PUT /ref 500s",
+            report: "weekly-full-audit_2026-06-16.md"
+          },
+          {
+            date: "2026-06-15",
+            type: "Weekly full",
+            scope: "Whole tree + QA/wizard WIP",
+            result: "0 Critical · OPS-1 (High, process): new QA/wizard surface CI-unverified while Actions billing-blocked",
+            report: "weekly-full-audit_2026-06-15.md"
+          },
+          {
+            date: "2026-06-14",
+            type: "Full (backend + frontend)",
+            scope: "Phase 3 F-1…F-28, Phase 4a/5, expr-eval removal",
+            result: "NM-1 (Medium): list_views checks project allowlist before auth — probe via differing error codes",
+            report: "2026-06-14__audit-report-full.md"
+          },
+          {
+            date: "2026-06-13",
+            type: "Full",
+            scope: "Whole tree @ 58fd53c (W10-17 merges)",
+            result: "FEA-4 (Medium): 15 new Wave 10-17 schedule views ship with zero unit tests",
+            report: "2026-06-13__audit-report-full.md"
+          },
+          {
+            date: "2026-06-10",
+            type: "Full (7 agents)",
+            scope: "Whole tree @ 277e6d2 · re-verified 68 perp-audit fixes",
+            result: "CORE-1 (High): refresh never invalidates the durable category cache → stale sidebar on republish",
+            report: "2026-06-10__audit-report-full.md"
+          }
         ]
       },
       waves: {
