@@ -169,6 +169,14 @@ window.PHASE_DAG = {
 "dependsOn": [],
 "gates": [],
 "gatesCount": 0
+},
+{
+"id": "19",
+"name": "BIMpossible Workbench (desktop task-prep & closure workspace for Claude Code)",
+"status": "PROPOSAL",
+"dependsOn": [],
+"gates": [],
+"gatesCount": 0
 }
 ],
 "generations": [
@@ -222,6 +230,11 @@ window.PHASE_DAG = {
 "id": "18",
 "name": "Client Knowledge Assistant (3 pillars)",
 "status": "ACTIVE"
+},
+{
+"id": "19",
+"name": "BIMpossible Workbench (desktop task-prep & closure workspace for Claude Code)",
+"status": "PROPOSAL"
 }
 ],
 [
@@ -354,6 +367,10 @@ window.PHASE_DAG = {
 {
 "phase": "18",
 "gate": "Owner-authorized multi-session completion program (2026-08-09)"
+},
+{
+"phase": "19",
+"gate": "Owner ratification — gates nothing on the main line; not scheduled"
 }
 ],
 "edges": [
@@ -398,5 +415,5 @@ window.PHASE_DAG = {
 "to": "17"
 }
 ],
-"generated": "2026-08-21"
+"generated": "2026-08-22"
 };
