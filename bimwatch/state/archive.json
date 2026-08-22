@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-21T06:09:01.488497Z",
- "count": 345,
+ "generated_at": "2026-08-22T06:06:09.179686Z",
+ "count": 357,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,30 +9,29 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 20 Aug 2026 16:46:07 GMT",
    "last_status": 200,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-08-21T05:54:42Z",
-   "last_modified": "Fri, 21 Aug 2026 05:54:42 GMT",
+   "last_item_published": "2026-08-21T08:12:58Z",
+   "last_modified": "Fri, 21 Aug 2026 08:12:58 GMT",
    "last_status": 200,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
   "aps-blog": {
-   "consecutive_failures": 20,
-   "last_error": "HttpError: response exceeded 8388608 bytes",
+   "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-07-29T06:54:40Z",
+   "last_item_published": "2026-08-18T14:13:44Z",
    "last_status": 200,
-   "last_success": "2026-08-03T10:38:20.411629Z",
-   "stale": true,
-   "stale_reason": "20 consecutive failures: HttpError: response exceeded 8388608 bytes"
+   "last_success": "2026-08-22T06:06:09.179686Z",
+   "stale": false,
+   "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
@@ -42,7 +41,7 @@
    "last_item_published": "2026-08-12T08:49:32Z",
    "last_modified": "Tue, 18 Aug 2026 12:35:07 GMT",
    "last_status": 200,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -52,7 +51,7 @@
    "last_item_count": 8,
    "last_modified": "Thu, 20 Aug 2026 09:37:18 GMT",
    "last_status": 200,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -62,32 +61,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-19T07:43:44Z",
    "last_status": 304,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-21T00:27:00Z",
-   "last_modified": "Fri, 21 Aug 2026 01:38:43 GMT",
+   "last_item_published": "2026-08-22T00:58:00Z",
+   "last_modified": "Sat, 22 Aug 2026 02:24:49 GMT",
    "last_status": 200,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 33,
+   "consecutive_failures": 34,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-21T06:09:01.488497Z",
+   "last_failure": "2026-08-22T06:06:09.179686Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "33 consecutive failures: HTTP 403"
+   "stale_reason": "34 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -95,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-19T14:03:17Z",
    "last_status": 304,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"400cf7dc8a7843b935130bcecb8217fa\"",
+   "etag": "W/\"f626d846c2fffb223731d10a86535e62\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +124,51 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-21T06:09:01.488497Z",
+   "last_success": "2026-08-22T06:06:09.179686Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Product Roundup: PARS-BIM",
+   "url": "http://revitaddons.blogspot.com/2026/08/product-roundup-pars-bim.html",
+   "source": "revit-addons",
+   "published": "2026-08-22T00:58:00Z",
+   "summary": "From the Autodesk Design and Make Marketplace: We are making construction easier. Editor's Note: Ratings are static and accurate at press time. Please see the Autodesk Design and Make Marketplace for latest ratings. PARS-BIM: Architecture Tools Accelerate your architectural workflow in Revit. From rapid sheet management and rule-based modeling to advanced CAD-to-BIM conversion, PARS-BIM Architecture Tools empowers you to complete projects faster. | $30.00/month or $250.00/year ★ ★ ★ ★ ★ (5 reviews) PARS-BIM: MEP Tools The ultimate MEP productivity suite for Autodesk® Revit®. Solve complex clash detection, automate pipe/duct routing, and fix common Revit bugs with one-click professional MEP tools. | $35.00/month or $300.00/year No ratings yet PARS-BIM: Architecture Tools & MEP Tools Bundle The complete BIM solution. Get the full power of PARS-BIM Architectural and MEP toolsets in one professional package. Your ultimate competitive advantage in Autodesk® Revit®. | $40.00/month or $400.00/year No ratings yet Ceiling Walls By using this app you can easily create a wall between two ceilings in just a couple of seconds. | $10.00/year ★ ★ ★ ★ ★ (1 review) Custom Tile Hatch Pattern This…",
+   "id": "421421562dcbb599",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Product marketplace listing with no technique or API detail; competitor product announcement only.",
+    "topics": [
+     "marketplace"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
+   "title": "Illoca brings ‘vibe modelling’ to AEC with Plamo",
+   "url": "https://aecmag.com/cad/illoca-brings-vibe-modelling-to-aec-with-plamo/",
+   "source": "aec-magazine",
+   "published": "2026-08-21T08:12:58Z",
+   "summary": "California startup founded by former Autodesk AI Lab, Google DeepMind and Tesla staff launches an agentic 3D workspace that turns sketches, images and prompts into editable parametric geometry Illoca, an AI startup based in San Ramon, California, has launched the beta of Plamo, a browser-based agentic 3D modelling workspace that turns sketches, reference images, drawings and natural language into editable geometry. Plamo is the company’s second product, following Tracing Paper, an AI-assisted workspace for rapid architectural prototyping that converts sketches, mark-ups and prompts into editable plans, massing studies and design documentation. The company frames the launch as bringing “vibe modelling” to architecture and engineering — a deliberate echo of vibe coding, where developers direct software at the level of intent rather than writing every line themselves. Illoca argues that designers still spend too much time manually building, rebuilding and coordinating geometry as projects evolve, and that an agent can handle more of that work while the designer directs the design. “Vibe coding showed us that the biggest shift wasn’t simply making software development faster,” said…",
+   "id": "d74dc74708cec2e6",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Novel AI application to parametric modelling worth tracking; no concrete integration path to Revit add-ins yet.",
+    "topics": [
+     "ai",
+     "parametric-modeling"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
   {
    "title": "Sherpa brings ‘prompt-free’ AI rendering to SketchUp",
    "url": "https://aecmag.com/visualisation/sherpa-brings-prompt-free-ai-rendering-to-sketchup/",
@@ -152,7 +190,7 @@
    }
   },
   {
-   "title": "Product Roundup: AvantLeap",
+   "title": "Product Roundup: Avant Leap",
    "url": "http://revitaddons.blogspot.com/2026/08/product-roundup-avantleap.html",
    "source": "revit-addons",
    "published": "2026-08-21T00:27:00Z",
@@ -253,6 +291,27 @@
    }
   },
   {
+   "title": "Revit Automation Engine Upgrading to Revit 2026.5 and .NET 10 on September 21, 2026",
+   "url": "https://aps.autodesk.com/blog/revit-automation-engine-upgrading-revit-20265-and-net-10-september-21-2026",
+   "source": "aps-blog",
+   "published": "2026-08-18T14:13:44Z",
+   "summary": "Revit Automation Engine Upgrading to Revit 2026.5 and .NET 10 on September 21, 2026 zhong.wu@autod… 21 Aug 2026 Zhong Wu Share Autodesk Platform Services is preparing to update the Revit Automation engine to Revit 2026.5 on September 21, 2026 . This update will also move the engine runtime to .NET 10 . We are sharing this notice in advance so Revit Automation customers have time to validate their applications before the production update. What is changing? The Revit Automation engine for Revit 2026 will be upgraded to Revit 2026.5 . As part of this Revit update, the Automation environment will also move to .NET 10 . For security reasons, we do not plan to keep the Revit 2026 Automation engine on an earlier Revit or .NET version after the migration. Do I need to update my AppBundle? For most applications, no changes are expected to be required . Existing Revit Automation AppBundles are generally expected to continue working with Revit 2026.5 and .NET 10. However, because this update changes the underlying Revit and .NET runtime, we recommend that developers perform a quick compatibility check before the production migration, particularly for AppBundles that depend on…",
+   "id": "22d961b65cf7966c",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 85,
+    "why": "Revit Automation Engine upgrade to 2026.5 and .NET 10 on fixed date; you must validate APS automation deployments before September 21.",
+    "topics": [
+     "revit-version",
+     "aps",
+     "dotnet"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
    "title": "Mostra: Parameter Colorization",
    "url": "http://revitaddons.blogspot.com/2026/08/mostra-parameter-colorization.html",
    "source": "revit-addons",
@@ -273,7 +332,27 @@
    }
   },
   {
-   "title": "Schema: View Layout Manager For Project to Project Organization",
+   "title": "Now available in ChatGPT: Autodesk Product Help plugin",
+   "url": "https://aps.autodesk.com/blog/now-available-chatgpt-autodesk-product-help-plugin",
+   "source": "aps-blog",
+   "published": "2026-08-18T00:13:23Z",
+   "summary": "Now available in ChatGPT: Autodesk Product Help plugin whitney.lawrence 18 Aug 2026 Nevin Yuksel-Ekici Share When people have a product question today, they increasingly start with AI. But the answers AI provides are only useful if they can be trusted. Not long ago, getting an answer often meant bouncing between tools: asking ChatGPT a question, searching the web, opening Autodesk Help to verify the information, then returning to the conversation. Every step introduced another opportunity for information to become incomplete, out of date, or open to interpretation. The Autodesk Product Help MCP changes that. Earlier this year, we introduced the Autodesk Product Help MCP Server—a secure, read-only service that gives AI assistants access to Autodesk's official public-facing product documentation which stems across more than 110 products, including AutoCAD®, Fusion®, Revit®, Inventor®, Maya®, Civil 3D®, and many more. Today, we're making that experience even easier by bringing the Autodesk Product Help MCP to ChatGPT as a plugin. Instead of treating Autodesk help and support documentation as something you have to search for separately, the Autodesk Product Help plugin in ChatGPT can…",
+   "id": "56de3c81fef24a9d",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "ChatGPT plugin for Autodesk Help; useful for lookup, not actionable for your add-in or automation work.",
+    "topics": [
+     "aps",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
+   "title": "Schema: View Layout Manager For Project-to-Project Organization",
    "url": "http://revitaddons.blogspot.com/2026/08/schema-view-layout-manager-for-project.html",
    "source": "revit-addons",
    "published": "2026-08-16T22:42:00Z",
@@ -373,6 +452,47 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-08-14T07:13:47.158324Z"
+   }
+  },
+  {
+   "title": "One Skill. One LISP. One Automation: Migrating a 1998 AutoLISP Dialog to APS Automation",
+   "url": "https://aps.autodesk.com/blog/one-skill-one-lisp-one-automation-migrating-1998-autolisp-dialog-aps-automation",
+   "source": "aps-blog",
+   "published": "2026-08-13T18:33:49Z",
+   "summary": "One Skill. One LISP. One Automation: Migrating a 1998 AutoLISP Dialog to APS Automation madhukar.mooga… 13 Aug 2026 Madhukar Moogala Share Before and after: an AI-native skill migrates a desktop AutoLISP/DCL flange workflow to APS Automation, replacing the desktop dialog with a web form and cloud-generated result.dwg . AI-assisted illustration, reviewed by the author. Product screenshots are from the actual workflow; flange rendering is illustrative. One LISP. Flange.lsp is a 1998 parametric flange generator, desktop-only, driven by a DCL dialog. Dead on arrival in headless Design Automation: the dialog has no screen to draw on, and the underlying logic never had to be anything but desktop code. One Skill. /lisp-to-dotnet read it, mapped every LISP pattern to a typed .NET equivalent, scaffolded the whole DA project, and wrote its own tests. One Automation. FLANGE now runs as a real APS Design Automation Activity. Browser form in, result.dwg out. No AutoCAD desktop touched. That's the shape of the problem this skill exists to solve, and Flange is the clearest example of it, but the mechanism behind it is general, not a one-off trick. The wall it gets around AutoLISP's Visual LISP…",
+   "id": "52f4c29a6de7d32d",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Concrete case study migrating legacy desktop LISP logic to APS Automation; relevant pattern for modernizing scripted workflows.",
+    "topics": [
+     "aps",
+     "automation",
+     "migration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
+   "title": "Manufacturing Data Model API price changes",
+   "url": "https://aps.autodesk.com/manufacturing-data-model-api-price-changes",
+   "source": "aps-blog",
+   "published": "2026-08-12T17:12:09Z",
+   "summary": "Manufacturing Data Model API price changes jordan.haber 17 Aug 2026",
+   "id": "dab9edaaf9923916",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Manufacturing API pricing change; not relevant unless you use Manufacturing Data Model API.",
+    "topics": [
+     "aps",
+     "pricing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
    }
   },
   {
@@ -572,6 +692,46 @@
    }
   },
   {
+   "title": "COOLORANGE brings ERP context to manufacturing design with the powerGate ERP Connector for AI",
+   "url": "https://aps.autodesk.com/blog/coolorange-brings-erp-context-manufacturing-design-powergate-erp-connector-ai",
+   "source": "aps-blog",
+   "published": "2026-08-06T21:34:52Z",
+   "summary": "COOLORANGE brings ERP context to manufacturing design with the powerGate ERP Connector for AI arunima.kumar 11 Aug 2026 Tulika Garg Share Engineers make dozens of decisions a day, and most of the information they need doesn't live in the design model: Is this part in stock? What's the lead time? Has this assembly been quoted? Today, that means logging into three or four systems by hand. To close that gap, COOLORANGE built the powerGate ERP Connector for AI, now available on the Design and Make Marketplace. This MCP server gives AI clients a standard way to discover and use trusted business capabilities, connecting design data with enterprise systems. An assistant can now check inventory, review lead times, and with approval, update a bill of materials or kick off a purchasing request. When I sat down with Christian Gessner, co-founder and head of research and innovation at COOLORANGE, he pointed to a bigger shift in how engineers will work with AI going forward. \"The engineer simply expresses the goal,\" he told me. \"That's where agentic AI becomes transformative. Not because it replaces engineers, but because it removes the friction between all the different systems an engineer…",
+   "id": "758003c941a564f5",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "MCP server for ERP integration in design workflows; useful pattern if you bridge BIM and enterprise systems.",
+    "topics": [
+     "aps",
+     "mcp"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
+   "title": "Introducing the Scene API in APS Viewer",
+   "url": "https://aps.autodesk.com/blog/introducing-scene-api-aps-viewer",
+   "source": "aps-blog",
+   "published": "2026-08-06T15:46:40Z",
+   "summary": "Introducing the Scene API in APS Viewer petr.broz@auto… 7 Aug 2026 Petr Broz Share If you've ever added custom 3D content to APS Viewer , you've probably run into this. You start with overlays because it's the simplest option, then watch your frame rate drop as you add more content. So you switch to the Scene Builder extension, which renders progressively, but now you're dealing with a different set of types and no object tree. And neither API was ever a documented contract, so filling the gaps meant reverse-engineering our internals. We're excited to announce the new Scene API , which replaces both. It's one documented, typed API for creating and manipulating 3D content, built on the same code paths the Viewer already uses for models loaded from our platform. The Mental Model Let's start with the most important Concepts of the API: A Model is a container. It can hold content loaded from a design file or content you construct at runtime (aka dynamic model ), and the renderer treats both identically. An instance is the unit that actually gets drawn: geometry + material + transform + visibility state. There's no Instance class to construct; instances are owned and addressed by…",
+   "id": "cac0f1de6b27a2f6",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 45,
+    "why": "New Scene API for APS Viewer replaces undocumented overlay/SceneBuilder patterns; relevant if you build custom 3D viewers.",
+    "topics": [
+     "aps-viewer",
+     "api"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
    "title": "Qbitec: Frictionless Point Clouds in Revit",
    "url": "http://revitaddons.blogspot.com/2026/08/qbitec-frictionless-point-clouds-for.html",
    "source": "revit-addons",
@@ -610,6 +770,86 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-08-06T08:21:25.084250Z"
+   }
+  },
+  {
+   "title": "Forma Reviews API Adds Approver Delegation, More Initiator Controls, and Approval Tracking",
+   "url": "https://aps.autodesk.com/blog/forma-reviews-api-adds-approver-delegation-more-initiator-controls-and-approval-tracking",
+   "source": "aps-blog",
+   "published": "2026-08-05T15:17:12Z",
+   "summary": "Forma Reviews API Adds Approver Delegation, More Initiator Controls, and Approval Tracking eason.kangEDLV4 5 Aug 2026 Eason Kang Share Disclosure: parts of this post were produced with the assistance of AI tools, then reviewed and edited by the author In the previous update , the Forma Reviews API added Update Attributes and more granular Initiator Edit Permissions to Approval Workflows. This release extends both areas further, and adds a way to track who and when a review was finally approved. With this update, when creating or retrieving an Approval Workflow ( POST workflows / GET workflows / GET workflows/:workflowId ), you can now: Grant initiators two new initiatorEditPermissions values in additionalOptions : CLOSED_REVIEW_TITLE — allows initiators to rename closed reviews. START_OWN_REVIEW — allows initiators to start their own reviews. Grant approvers edit permissions via a new additionalOptions.approverEditPermissions array. Its only current value, APPROVERS , lets approvers modify the approver candidate list — useful for delegating an approval to someone else on the fly. And when querying reviews or review versions: GET reviews and GET reviews/:reviewId now return…",
+   "id": "384ffc1ed8b8b9c1",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Forma Reviews API enhancement; only relevant if you integrate review workflows into your tooling.",
+    "topics": [
+     "aps",
+     "forma"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
+   "title": "Files API Now Supports Project-Level Custom Attribute Definitions and Large Drop-down Lists",
+   "url": "https://aps.autodesk.com/blog/files-api-now-supports-project-level-custom-attribute-definitions-and-large-drop-down-lists",
+   "source": "aps-blog",
+   "published": "2026-08-05T15:13:49Z",
+   "summary": "Files API Now Supports Project-Level Custom Attribute Definitions and Large Drop-down Lists eason.kangEDLV4 13 Aug 2026 Eason Kang Share Disclosure: parts of this post were produced with the assistance of AI tools, then reviewed and edited by the author. Custom attributes on files in Autodesk Forma projects just got two updates: a new GET custom-attribute-definitions endpoint that retrieves all custom attribute definitions for a project, and support for large drop-down list custom attributes with up to 2,000 values. With this update, you can now: Retrieve all custom attribute definitions for a project, without specifying the folder id, in one call with the new GET custom-attribute-definitions endpoint. Previously, you could only retrieve custom attribute definitions associated with a folder. This also makes it easier to create approval workflows with POST workflows that have Update Attributes enabled — since the May update , those workflows specify which file custom attributes get updated on completion, so you need the definitions to reference them. Create large drop-down list custom attributes (up to 2,000 values) directly from the Files UI. Identify large drop-down definitions…",
+   "id": "28b82ca99d8f521b",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 18,
+    "why": "Files API custom attributes and dropdowns; low priority unless you manage Forma project metadata at scale.",
+    "topics": [
+     "aps",
+     "forma"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
+   "title": "Autodesk Platform Services Extension for VS Code: What's New Since 3.0",
+   "url": "https://aps.autodesk.com/blog/autodesk-platform-services-extension-vs-code-whats-new-30",
+   "source": "aps-blog",
+   "published": "2026-08-05T15:12:56Z",
+   "summary": "Autodesk Platform Services Extension for VS Code: What's New Since 3.0 petr.broz@auto… 20 Aug 2026 Petr Broz Share Our extension for Visual Studio Code has had a busy few releases. Since version 3.0.0 it's gained flexible authentication, new ways to browse your data, and a long list of reliability fixes. And it's now published to both the Visual Studio Marketplace ( link ) and Open VSX ( link ), so it works in Cursor and Antigravity as well. Here's a tour of what changed, and how to get going in whichever editor you use. What's new since 3.0.0 Sign in the way that fits your app We've added proper support for every APS authentication mechanism, not just the classic 2-legged flow: 3-legged OAuth (confidential client) 3-legged OAuth with PKCE (public client, no secret required) Secure Service Account sign-in, using a service account's private key A pasted access token obtained from another APS application Sessions now persist per environment in VS Code's encrypted secret storage, so you stay signed in across window reloads, and 3-legged/PKCE tokens refresh automatically in the background. Views that need a signed-in user show a simple \"Sign in to APS\" button until you are. Note: all…",
+   "id": "8ec59f2d67ddbd96",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 50,
+    "why": "APS VS Code extension now supports all auth flows and works in Cursor; worth adopting if you script against APS.",
+    "topics": [
+     "aps",
+     "tooling",
+     "vscode"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
+   }
+  },
+  {
+   "title": "Spatial Innovations",
+   "url": "https://aps.autodesk.com/customer-stories/spatial-innovations",
+   "source": "aps-blog",
+   "published": "2026-08-05T13:30:02Z",
+   "summary": "Spatial Innovations Yvette Gong 21 Aug 2026 The Challenge: Unorganized facility data and CAD-dependent workflows make data inaccessible Critical facility data is often scattered across CAD software, files, spreadsheets and paper records. As a result, the people responsible for day-to-day facility operations struggle to locate and use the information they need. Using the CAD-centric faciliCAD Desktop application, the employees of one Spatial Innovations client, for example, could only access important data during the two half-days a week that a CAD-trained intern was in the office. Spatial Innovations recognized the need for a single source of truth that makes facility information easier to access, visualize, and understand. To overcome disconnected data and workflows, Spatial Innovations created FaciliTwin, a web application that integrates cloud-based spatial data from a facility’s digital model with operational datasets for the facility’s spaces, assets, and people. The application provides intuitive dashboards, data visualization, reporting, and search capabilities. Spatial Innovations Connecting CAD, BIM, and facility operations Share Spatial Innovations is a technology…",
+   "id": "f0d896a3287ec93f",
+   "fetched_at": "2026-08-22T06:06:09.179686Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Customer success story; no technique or API detail to act on.",
+    "topics": [
+     "case-study"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-22T06:06:09.179686Z"
    }
   },
   {
