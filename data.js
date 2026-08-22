@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-08-21",
+  generated: "2026-08-22",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-08",
+  activitySince: "2026-08-09",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -226,10 +226,10 @@ window.DASHBOARD_DATA = {
           { name: "P19 BIMpossible Workbench (desktop task-prep & closure workspace for Claude Code)", pct: 0, note: "PROPOSAL — Added 2026-08-21, from a phase plan submitted outside this ledger session and placed here on request. Native WPF/.NET desktop app, local-first and provider-agnostic (Ollama default, Claude/OpenAI/Gemini/Grok as optional adapters): work-item queue (`Inbox → Prepared → Active → Review → Closed`, plus `Blocked`/`Unverified`/`Parked`/`Reverted`) that captures a task (Revit selection, issue, family batch, code bug, test failure, design note), deterministically collects evidence (Git status/diff, targeted source search, test/build logs, read-only Revit context), uses a local model to draft a structured task contract (goal/evidence/constraints/scope/acceptance criteria — never silently proposing completed code changes), and generates a bounded Claude Code handoff; Claude Code implements and validates, Workbench records the closeout (changed files, validation evidence, risks, next action). Durable artifacts are project-local Markdown/JSON under `.ai/` (tasks/work/handoffs/decisions/prompts), not transient chat history. Not a Claude Code replacement, not a generic chat client, not an agent runtime/sandbox/terminal/browser-automation platform, and not an autonomous mutation engine — mutation is fail-closed by default (inspect/read-only; Revit and source-tree writes require explicit dry-run → review → apply). Closest ledger neighbor is Phase 16 (Desktop Orchestration Hub) — both are local/desktop, both explicitly gate nothing on the main product line, both are PROPOSAL/CONDITIONAL rather than scheduled — but they are distinct programs (16 = cross-tool MCP orchestration with a gated GUI-exception path; 19 = task-prep-and-closure workbench with its own evidence/local-AI/handoff pipeline) and should stay separate rows. Open decisions before any build work, per the plan's own gate list: product name confirmation; artifact-policy scope (repo-local `.ai/` only vs. app workspace + export); single- vs. multi-workspace v1 support; initial local model(s) + context/performance target; first Claude Code integration level (clipboard/file handoff only vs. controlled process launch); the first real (non-demo) vertical-slice task; secret/path exclusion policy before evidence collection is enabled. Full plan: `2026-08-21__Phase19_BIMpossibleWorkbench_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately, per the freeze-numbers rule (ordering holds 16 < 17 < 18 < 19)." }
         ]
       },
-      activity: [29,7,0,2,0,2,5,10,48,44,9,3,12,14],
+      activity: [7,0,2,0,2,5,10,48,44,9,3,12,17,8],
       lastActivity: {
-        date: "2026-08-21",
-        summary: "sync(queue): mirror REVITLINK-OPAQUE-500-MAPPING landed -- PR#435 merged 16df5c9 (7b7ef2c)"
+        date: "2026-08-22",
+        summary: "fix(authz): normalize unresolved firm_id to NULL in Track-2 read audit (#452) (3bf4b6f)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -790,10 +790,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [2,0,0,0,0,0,0,0,2,6,3,1,1,2],
+      activity: [0,0,0,0,0,0,0,2,6,3,1,1,3,2],
       lastActivity: {
-        date: "2026-08-21",
-        summary: "docs(decision-log): 2026-08-21 design-knowledge reconciliation (#80) (2d66683)"
+        date: "2026-08-22",
+        summary: "fix(link-pdf): center full grid footprint in usable drawing area (#85) (cde77ad)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -994,7 +994,7 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,1,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,1,0,0,0,0],
       lastActivity: {
         date: "2026-08-18",
         summary: "Gate PR CI on draft status (cost control) (#8) (75494fe)"
@@ -1040,7 +1040,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [1,0,0,0,0,0,0,0,0,0,1,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,1,0,0,0,0],
       lastActivity: {
         date: "2026-08-18",
         summary: "Gate PR CI on draft status (cost control) (#10) (4b04e77)"
