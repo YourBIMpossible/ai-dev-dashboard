@@ -17,7 +17,7 @@ window.DASHBOARD_DATA = {
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
       phase: "main at 751155f, 0 ahead of origin. Phase 3.10a (Cross-Model Room Join) is now fully unconditional — the rollout flag deleted (#244) — while 3.10b (Doors) advances fast: D0's two-pass probe against real electrical models found zero ambiguous cases (#250), then D1 shipped boundary-element resolution so doors resolve to the room PAIR they separate, not a single room (#253). Phase 13 (Write Engine) cleared its first real gate: Increment 1 (typed values) shipped backend+Add-Ins lockstep and passed live Revit smoke 8/8 (see focus) — Increment 2 is now unblocked. The three long-parked draft PRs from mid-July finally merged 07-21/22: #186 (Phase 7 sync-token + DA4R scaffold, plus the first real Phase 13 backend code), #187 (SyncWithCentral re-enable), #189 (Phase 8 elevated-consent token). An owner-authorized overnight run then merged on green CI: admin/member roles (#243), firm-key admin gating + personal-key tier (#245), account-link headers (#246), backend access logs + /whoami (#247) — all live-verified after a container rebuild. The same evening, just outside that run's own scope: C-1 key-management unification (#249, previously misreported as not-done), the firm-parameter neutrality doc (#248), a redis 8.1.0 bump (#237), and #244 above. Ledger note: PHASE-STATUS.md hasn't moved to reflect the 07-21/22 merges of #186/#187/#189 — now running ~2 weeks stale on that owner-maintained doc.",
-      focus: "2026-08-17 weekly full audit (0/10/38/22/4, 74 open), reconciled against merged fixes through 2026-08-21: 47 findings closed in code (52 PRs, #393-#443), including all 9 Highs -- SEC-WIZ-HUB-1 (#397), SEC-PAIR-1 (#402), FE-CSS-1 (#398), the ARCH-PROJGATE-INVARIANT-1 default-deny route invariant + SLOP-1 (#397), RE-RESOLVE-SCAN-1 (#400), and HYG-1/2/4. 30 remain open: 1 High (HYG-3, stale scheduled-task mirror), 19 Medium, 8 Low, 2 Info -- predominantly accepted-deferred debt (RE-2 single-pipe concurrency, ARCH-NEW-2 aec/router.py size, ARCH-WIDENED-SCOPE-1 record-only) and doc/process hygiene, plus Add-Ins-side pairing items (SEC-PAIR-2, RE-PAIR-1, CQ-TEST-PAIR-1) not yet confirmed closed. No open Critical or Security-High remains on the live web app. Write Engine Increment 1 SHIPPED; program work has continued heavily since the audit window (Phase 13 Change Sets, revit-link sync hardening #429-#445, Write Engine Increment 2 in Add-Ins).",
+      focus: "2026-08-17 weekly full audit -- 77 findings at audit time (10 High / 39 Medium / 24 Low / 4 Info). Reconciled 2026-08-22 against implementation-backed closure evidence in the covered repos: 32 findings resolved with a matching post-report code change, 45 remain active (4 High / 25 Medium / 13 Low / 3 Info). 15 items previously recorded as resolved in the manual reconciliation were restored to active status -- their prior closure records lacked implementation-backed evidence (no commit citation, audit-bookkeeping-only, or audit-artifact-only); this is a records correction, not a new regression. Open Highs: HYG-1/HYG-2/HYG-4 (audit-run and scheduled-task assurance) and HYG-3 (stale scheduled-task mirror source).",
       progress: {
         label: "Program phases",
         phases: [
@@ -236,11 +236,11 @@ window.DASHBOARD_DATA = {
         warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)."
       },
       nextActions: [
-        "Close out HYG-3, the one remaining open High: re-snapshot the scheduled-task mirror from the live path and fix its source pointer",
-        "Schedule the accepted-deferred debt when its trigger arrives: RE-2 pipe-instance cap (now unblocked by RE-1's fix) and the ARCH-NEW-2 aec/router.py domain split on the next major touch",
-        "Decide the Auto-Fix Pass's fate (plan D4): retire the write-enabled stage from the weekly scheduled task -- 5 straight cycles at zero applied fixes",
-        "Reconcile the Add-Ins pairing findings (SEC-PAIR-2, RE-PAIR-1, CQ-TEST-PAIR-1, FE-PAIR-2) against the pairing-hardening PRs and update the next audit's open set",
-        "Run the next weekly audit against current HEAD to re-baseline -- the 08-17 report now predates 52 PRs of resolution plus continued program work"
+        "Triage the 15 findings restored to active status: land an implementation-backed fix, or record an explicit accepted-deferred decision, so the next reconciliation can close them on evidence rather than a manual note",
+        "Close the open Highs -- HYG-1/HYG-2/HYG-4 (prove the scheduled weekly-audit run fired; restore the Slop lens definition and .env deny coverage) and HYG-3 (re-point the stale scheduled-task mirror source)",
+        "Schedule the accepted-deferred debt when its trigger arrives: RE-2 pipe-instance cap and the ARCH-NEW-2 aec/router.py domain split on the next major touch",
+        "Reconcile the Add-Ins pairing findings (SEC-PAIR-2, RE-PAIR-1, CQ-TEST-PAIR-1, FE-PAIR-2) against the pairing-hardening work and update the next audit's open set",
+        "Decide the Auto-Fix Pass's fate: retire the write-enabled stage from the weekly scheduled task after 5 straight cycles at zero applied fixes"
       ],
       pendingDecisions: ["Phase 3.10b Ducts/Pipes: output shape (list vs. from/to pair) — still undecided; the categories are explicitly excluded in _PHASE3_10_IN_SCOPE_CATEGORIES until it lands","Schedule-push: staleness cadence, classifier rules, fidelity degradation list, SPF ship location (scoped as a write-spine ORIGIN, direction only — no code yet)","Wave 16 Interiors: build dedicated shapers for Ceilings/Flooring now or batch with Wave 15 Civil?","Phase B admin auth: Google OAuth client + env (AUTH_GOOGLE_ID == backend GOOGLE_CLIENT_ID); B0 unify legacy admin routes onto require_admin (Option A chosen)","Phase 13 ledger ratification (flip PLANNED → ACTIVE) — Q1/Q2 scoping was decided 2026-07-16 and the code merged 2026-07-21 (#186), but the ledger status itself still hasn't moved, now ~2 weeks stale; Phase 14 promotion and a Phase 15 definition doc are still owed too","D-4: break-glass admin secret mechanism — design not yet made","D-5: provider routing for local LLM inference — gates C-2/C-3, not yet decided","D-8: where the audit hash-chain tip anchors outside the DB — dormant until a B-6 trigger fires (none has: single-operator deployment, no client/contract/insurer record on file)"],
       blockers: [],
@@ -260,22 +260,46 @@ window.DASHBOARD_DATA = {
         cadence: "weekly Sun 11:45pm + incremental Sun/Tue + on-demand",
         counts: {
           critical: 0,
-          high: 1,
-          medium: 19,
-          low: 8,
-          info: 2
+          high: 4,
+          medium: 25,
+          low: 13,
+          info: 3
         },
-        closedLastRun: 47,
+        closedLastRun: 32,
         trend: "improving",
         reportPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-08-17.md",
         reportFile: "bimpossible/weekly-full-audit_2026-08-17.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
         open: [
           {
+            id: "HYG-1",
+            sev: "high",
+            title: "No artifact proves the 2026-08-10 scheduled weekly-audit run actually fired vs. never ran",
+            where: "system/scheduled-tasks"
+          },
+          {
+            id: "HYG-2",
+            sev: "high",
+            title: "The Slop lens is missing from the scheduled task's own LENS DEFINITIONS block though the matrix marks it required weekly",
+            where: "task SKILL.md"
+          },
+          {
             id: "HYG-3",
             sev: "high",
             title: "The \"authoritative\" scheduled-task mirror is 2 months stale and points at a dead source path",
             where: "BIMpossible_Workspace/system/scheduled-tasks/_live/"
+          },
+          {
+            id: "HYG-4",
+            sev: "high",
+            title: ".env protection is prose-only across 4 restatements; no Edit/Write deny entry actually enforces it in a pipeline with a write-enabled stage",
+            where: "BIMpossible/.claude/settings.json:3-16"
+          },
+          {
+            id: "SEC-AUTHZLOG-RETENTION-1",
+            sev: "medium",
+            title: "No load test yet measures authz_decision_log insert rate / p99 latency before any SHADOW-mode fleet flip",
+            where: "backend/db/models.py; audit_stream_worker.py"
           },
           {
             id: "SEC-PAIR-2",
@@ -344,10 +368,40 @@ window.DASHBOARD_DATA = {
             where: "frontend share components"
           },
           {
+            id: "FE-3",
+            sev: "medium",
+            title: "model/page.tsx god-component last measured at ~3,458 LOC (carried, deferred to the 5k-element benchmark trigger)",
+            where: "frontend/app/project/[id]/model/page.tsx"
+          },
+          {
+            id: "HYG-5",
+            sev: "medium",
+            title: "Docs-budget ratchet reads red, but 32 of 43 new docs are the shipped client-facing help corpus, not real debt",
+            where: "BIMpossible/docs-budget.json:19"
+          },
+          {
+            id: "HYG-6",
+            sev: "medium",
+            title: "Reference validator red with 4 new dangling refs to backend/guard.py, deleted 2026-08-16, still cited by 10+ live docs/agents",
+            where: "docs + .claude/agents/*.md + system/REINSTALL-RECOVERY-PROMPT.md"
+          },
+          {
             id: "HYG-7",
             sev: "medium",
             title: "_backups/ is simultaneously declared retired and mandated by two directly contradicting rules",
             where: ".claude/commands/audit-resolution.md Step 0 vs task SKILL.md:42,44,55"
+          },
+          {
+            id: "HYG-8",
+            sev: "medium",
+            title: "\"Automatic agent gates\" table claims gates run every time; nothing invokes them — no hook, no CI matcher",
+            where: "BIMpossible/CLAUDE.md:72-82; .claude/settings.json:18-26"
+          },
+          {
+            id: "HYG-9",
+            sev: "medium",
+            title: "PROJECT_CONSTITUTION.md restates the superseded direct-push-to-main / WIP regime as current",
+            where: "docs/PROJECT_CONSTITUTION.md:63-64"
           },
           {
             id: "HYG-10",
@@ -416,10 +470,28 @@ window.DASHBOARD_DATA = {
             where: "frontend pairing UI"
           },
           {
+            id: "FE-1",
+            sev: "low",
+            title: "useScheduleFetch still calls pollUntilWarm<any>(...) (carried, accepted debt)",
+            where: "frontend/app/hooks/useScheduleFetch.ts:123-126"
+          },
+          {
+            id: "FE-2",
+            sev: "low",
+            title: "Legacy filter/sort/grouping schema-migration any types remain in the normalizer (carried)",
+            where: "frontend/app/lib/filters/normalize.ts:33,44,45,57,63,64,76"
+          },
+          {
             id: "HYG-17",
             sev: "low",
             title: "references/fix-phase.md cited as a lens file; the actual file is auto-fix.md",
             where: "00_Strategy/Add-AutoFix-To-Weekly-Audit_Cowork-Setup.md"
+          },
+          {
+            id: "HYG-18",
+            sev: "low",
+            title: "last_verified frontmatter is required to exist but never age-checked; 11 of 41 help articles are 67 days old",
+            where: "backend/tests/test_help_corpus_guard.py:25"
           },
           {
             id: "HYG-19",
@@ -434,6 +506,18 @@ window.DASHBOARD_DATA = {
             where: "system/scheduled-tasks/*; migrated_from_dot_claude/*"
           },
           {
+            id: "HYG-21",
+            sev: "low",
+            title: "4 docs have no inbound link from any tracked doc or code file, incl. an unreachable runbook",
+            where: "docs/PROJECT-ENROLLMENT-RUNBOOK.md; docs/ai/ADOPTION.md"
+          },
+          {
+            id: "HYG-22",
+            sev: "low",
+            title: "_db-backups/logs/ has no retention rule — 169 log files, 634 MB, unpruned since 2026-07-09",
+            where: "BIMpossible/Backup-Db.ps1:284-290"
+          },
+          {
             id: "SLOP-DIST-3",
             sev: "low",
             title: "Per-year Revit installer outcome is never reported; a failed year is silently skipped",
@@ -446,6 +530,12 @@ window.DASHBOARD_DATA = {
             where: "backend/aps/cloud_ids.py:18-33,64-77"
           },
           {
+            id: "HYG-23",
+            sev: "info",
+            title: "Automation output-consumer census: two parallel decision-log roots, several report-only outputs with no confirmed reader",
+            where: "flag-prose.mjs; decision-log/ + docs/decision-log/INDEX.md"
+          },
+          {
             id: "INFO-GRAPHIFY-1",
             sev: "info",
             title: "Stale graphify-out artifacts still display the retired X-Admin-Secret admin-auth path; documentation drift only, not reachable in the running app (carried, not reassessed this cycle)",
@@ -455,9 +545,9 @@ window.DASHBOARD_DATA = {
         history: [
           {
             date: "2026-08-17",
-            type: "Weekly full audit (Security/Reliability/Architecture/Code-quality/Frontend + first-run Hygiene & Slop) -- read-only; findings since remediated across 52 PRs, reconciled 2026-08-21",
+            type: "Weekly full audit (Security/Reliability/Architecture/Code-quality/Frontend + first-run Hygiene & Slop) -- read-only. Reconciled 2026-08-22 on implementation-backed closure evidence: 32 of 77 findings resolved with a matching post-report code change; 45 active. 15 items previously recorded resolved without closure evidence were restored to active status (records correction, not new regressions).",
             scope: "Main repo HEAD (24 further commits since, through PR #445). First cycle running the Hygiene and Slop lenses end-to-end alongside the standard Security/Reliability/Architecture/Code-quality/Frontend sweep -- companion doc ops-followups_2026-08-17.md covers 6 separate OPERATIONAL follow-up flags (not code findings), all closed per its own final addendum (PRs #409/#410/#411/#70/#60 merged, a live Cowork task amendment applied, _backups/postgres deleted, scheduler drift confirmed matching).",
-            result: "0 Critical / 10 High / 38 Medium / 22 Low / 4 Info at audit time (74 total). RECONCILED 2026-08-21: 47 of 74 findings closed in code across 52 merged PRs (#393-#443) -- all 9 Highs (SEC-WIZ-HUB-1 #397, SEC-PAIR-1 #402, FE-CSS-1 #398, ARCH-PROJGATE-INVARIANT-1 + SLOP-1 #397, RE-RESOLVE-SCAN-1 #400, HYG-1/2/4), plus 20 Medium, 16 Low, 2 Info. Each closure verified by finding-ID citation in the merged fix commit, not the report summary. 30 open remain (1 High HYG-3 stale scheduled-task mirror, 19 Medium, 8 Low, 2 Info) -- predominantly accepted-deferred debt, doc/process hygiene, and Add-Ins pairing items not yet cited as closed. The 08-08->08-17 jump was the Hygiene and Slop lenses running for the first time, since substantially remediated.",
+            result: "0 Critical / 10 High / 39 Medium / 24 Low / 4 Info at audit time (77 total). RECONCILED 2026-08-22: 32 of 77 findings closed with implementation-backed evidence -- each verified by an exact finding-ID citation in a post-report commit that changed at least one implementation file in a covered repo (6 High, 14 Medium, 11 Low, 1 Info). 45 remain active (4 High / 25 Medium / 13 Low / 3 Info). 15 findings previously marked resolved in the manual reconciliation were restored to active status after reconciliation found their closure records lacked implementation-backed evidence (no citation, audit-bookkeeping-only, or audit-artifact-only); this corrects the record and is not a new regression. Resolved Highs retained: SEC-WIZ-HUB-1, SEC-PAIR-1.",
             report: "weekly-full-audit_2026-08-17.md"
           },
           {
@@ -607,7 +697,59 @@ window.DASHBOARD_DATA = {
             result: "CORE-1 (High): refresh never invalidates the durable category cache → stale sidebar on republish",
             report: "2026-06-10__audit-report-full.md"
           }
-        ]
+        ],
+        reportDate: "2026-08-17",
+        reconciledAt: "2026-08-22 01:23:04",
+        reconciliationHeads: [
+          {
+            repo: "BIMpossible",
+            head: "de7901375c",
+            inspected: true
+          },
+          {
+            repo: "BIMpossible_Workspace",
+            head: "0c9bcb2abc",
+            inspected: true
+          }
+        ],
+        rawCounts: {
+          critical: 0,
+          high: 10,
+          medium: 39,
+          low: 24,
+          info: 4
+        },
+        openCounts: {
+          critical: 0,
+          high: 4,
+          medium: 25,
+          low: 13,
+          info: 3
+        },
+        unknownCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        resolvedCounts: {
+          critical: 0,
+          high: 6,
+          medium: 14,
+          low: 11,
+          info: 1
+        },
+        publishedCounts: {
+          critical: 0,
+          high: 4,
+          medium: 25,
+          low: 13,
+          info: 3
+        },
+        ingestStatus: "success",
+        ingestDetail: "reconciled against BIMpossible, BIMpossible_Workspace; 32 of 77 closed by implementation-backed finding-ID evidence, 45 open (32 insufficient-evidence citation(s) rejected)",
+        unknown: []
       },
       waves: {
         updated: "2026-08-17",
