@@ -259,8 +259,8 @@ window.DASHBOARD_DATA = {
         reportFile: "bimpossible/weekly-full-audit_2026-08-17.md",
         ledgerPath: "F:\\AI-Dev\\BIMpossible_Workspace\\02_Reference\\_audit-runs.md",
         open: [
-          { id: "SEC-WIZ-HUB-1", sev: "high", title: "Wizard provisioning: cross-tenant authorization gap on the hub write path (two parallel, cross-unreferenced hub-authority sources with no reconciliation)", where: "backend/wizard/gate.py:49-90" },
-          { id: "SEC-PAIR-1", sev: "high", title: "Revit-pane pairing handoff has no origin/intent state and no re-pair confirmation before re-authenticating an existing paired session", where: "Add-Ins AssistantPaneView.cs / OpenInRevit/Program.cs" },
+          { id: "SEC-WIZ-HUB-1", sev: "high", title: "Wizard provisioning: cross-tenant authorization gap on the hub write path (two parallel, cross-unreferenced hub-authority sources with no reconciliation)", where: "wizard provisioning hub-authorization path (backend)" },
+          { id: "SEC-PAIR-1", sev: "high", title: "Revit-pane pairing handoff has no origin/intent state and no re-pair confirmation before re-authenticating an existing paired session", where: "Revit-pane pairing handoff (Add-Ins + backend)" },
           { id: "RE-RESOLVE-SCAN-1", sev: "high", title: "Model-resolve scan has no candidate cap or wall-clock deadline; unbounded hub listing can run indefinitely with no truncated state", where: "backend/aps/router.py:679-746" },
           { id: "ARCH-PROJGATE-INVARIANT-1", sev: "high", title: "No default-deny invariant walks the mounted route table to guarantee every project-scoped route resolves a project-access gate", where: "backend/tests/test_route_tenancy_invariant.py (test doesn't exist yet)" },
           { id: "FE-CSS-1", sev: "high", title: "Documents/account pages reference CSS selectors with zero definitions anywhere in the repo", where: "app/documents/page.tsx, app/account/**" },
