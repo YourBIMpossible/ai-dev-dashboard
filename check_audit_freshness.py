@@ -87,6 +87,13 @@ def main():
             "lastRun": audit["lastRun"],
             "newestOnDisk": newest,
             "stale": is_stale,
+            # Detect-only. A newer report on disk NEVER auto-ingests here: audit
+            # ingest is point-in-time and must be reconciled against merged fixes
+            # (reconcile_audit.py) by a human-run /dashboard-update. This field
+            # just names the required manual action for the refresh log / badge;
+            # it does not trigger anything.
+            "action": "new audit report detected; manual reconciled ingest required"
+                      if is_stale else None,
         }
         if is_stale:
             stale_ids.append(p["id"])
@@ -102,6 +109,8 @@ def main():
 
     if stale_ids:
         print(f"[audit-freshness] {len(stale_ids)} project(s) have a newer report on disk than data.js reflects: {', '.join(stale_ids)}")
+        print("[audit-freshness] new audit report detected; manual reconciled ingest required "
+              "(run /dashboard-update ingest — reconcile_audit.py; the daily refresh never auto-ingests audits).")
     else:
         print(f"[audit-freshness] checked {len(results)} audited project(s); all current with disk")
     return 0
