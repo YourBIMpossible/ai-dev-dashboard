@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-22T06:06:09.179686Z",
- "count": 357,
+ "generated_at": "2026-08-23T06:07:28.699586Z",
+ "count": 358,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 20 Aug 2026 16:46:07 GMT",
    "last_status": 200,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 200,
+   "last_item_count": 0,
    "last_item_published": "2026-08-21T08:12:58Z",
    "last_modified": "Fri, 21 Aug 2026 08:12:58 GMT",
-   "last_status": 200,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_status": 304,
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-08-18T14:13:44Z",
    "last_status": 200,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,7 +41,7 @@
    "last_item_published": "2026-08-12T08:49:32Z",
    "last_modified": "Tue, 18 Aug 2026 12:35:07 GMT",
    "last_status": 200,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,7 +51,7 @@
    "last_item_count": 8,
    "last_modified": "Thu, 20 Aug 2026 09:37:18 GMT",
    "last_status": 200,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -61,32 +61,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-19T07:43:44Z",
    "last_status": 304,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-22T00:58:00Z",
-   "last_modified": "Sat, 22 Aug 2026 02:24:49 GMT",
+   "last_item_published": "2026-08-22T18:06:00Z",
+   "last_modified": "Sat, 22 Aug 2026 20:54:34 GMT",
    "last_status": 200,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 34,
+   "consecutive_failures": 35,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-22T06:06:09.179686Z",
+   "last_failure": "2026-08-23T06:07:28.699586Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "34 consecutive failures: HTTP 403"
+   "stale_reason": "35 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-19T14:03:17Z",
    "last_status": 304,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"f626d846c2fffb223731d10a86535e62\"",
+   "etag": "W/\"529320f78f8b492d461d5e7b3fe10518\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,31 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-22T06:06:09.179686Z",
+   "last_success": "2026-08-23T06:07:28.699586Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "3Dconnexion Keyboard Pro",
+   "url": "http://revitaddons.blogspot.com/2026/08/3dconnexion-keyboard-pro.html",
+   "source": "revit-addons",
+   "published": "2026-08-22T18:06:00Z",
+   "summary": "From the 3Dconnexion website: The 3Dconnexion Keyboard Pro with detached numpad is engineered to help you create digital 3D models and professional designs. Its compact width enables a better position of your mouse or pen resulting in a more natural and comfortable posture. Twelve programmable 3Dconnexion keys automatically provide access to app-specific commands you need most – saving time and keeping you focused. 3Dconnexion keys adapt to the app you are using The 3Dconnexion Keyboard Pro features 12 additional function keys located above the standard keys. The keyboard instantly recognizes the applications you are using, as well as their environments. Commands you use most are automatically assigned to the individual keys, so you can access them directly. You can also easily personalize the 3Dconnexion keys according to your preferences. An on-screen display lets you know which commands are assigned at all times. Better posture. Better workflow. Ideal mouse position The keyboard is full-sized, yet with the numpad detached for a reduced width. This allows you to ideally place your mouse or pen and keep your shoulders, forearms and hands in a more relaxed position. Simultaneous…",
+   "id": "3afe4581664a6a27",
+   "fetched_at": "2026-08-23T06:07:28.699586Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Hardware periphery; no impact on add-in development, API, or Revit tooling workflows.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-23T06:07:28.699586Z"
+   }
+  },
   {
    "title": "Product Roundup: PARS-BIM",
    "url": "http://revitaddons.blogspot.com/2026/08/product-roundup-pars-bim.html",
