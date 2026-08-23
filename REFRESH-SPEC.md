@@ -65,20 +65,20 @@ the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE
 ## Per-project sources
 
 ### bimpossible - BIMpossible Platform
-- `git -C F:\AI-Dev\BIMpossible log --oneline --all --since="7 days ago"` + branches + unpushed check (rule 9)
-- `F:\AI-Dev\BIMpossible_Workspace\00_Strategy\` - newest dated docs (`YYYY-MM-DD__*.md`) by filename date AND the newest `BIMpossible_STATE_*.md`. If the STATE doc trails the newest dated doc by >5 days, flag it in `reminders`.
-- `F:\AI-Dev\BIMpossible_Workspace\01_BuildLog\` - newest 3 files
+- `git -C F:\BIMpossible log --oneline --all --since="7 days ago"` + branches + unpushed check (rule 9)
+- `F:\BIMpossible-Workspace\00_Strategy\` - newest dated docs (`YYYY-MM-DD__*.md`) by filename date AND the newest `BIMpossible_STATE_*.md`. If the STATE doc trails the newest dated doc by >5 days, flag it in `reminders`.
+- `F:\BIMpossible-Workspace\01_BuildLog\` - newest 3 files
 - Workspace memory: `project_bimpossible-state.md`, `project_followups-queue.md`, `open-questions.md`
 - Graph metrics: `F:\AI-Dev\Dashboard\graph-metrics.js` (`window.GRAPH_METRICS`, last entry) - read-only staleness check per rule 10. Produced by `Update-Graph.ps1` on push/wave; never written by the refresh.
 
 ### addins - Add-Ins / RevitLink
-- `git -C F:\AI-Dev\Add-Ins log -5` + branch + unpushed check
-- `F:\AI-Dev\Add-Ins\TOOL_BACKLOG.md` - BOTH tables: RevitLink backlog (status column drives RevitLink `progress.phases` pct) and Trade QA Scanners
-- `F:\AI-Dev\Add-Ins\BIMpossible.RevitLink\DEV-NOTES.md` + its CLAUDE.md "Open items"
+- `git -C F:\BIMpossible-AddIns log -5` + branch + unpushed check
+- `F:\BIMpossible-AddIns\TOOL_BACKLOG.md` - BOTH tables: RevitLink backlog (status column drives RevitLink `progress.phases` pct) and Trade QA Scanners
+- `F:\BIMpossible-AddIns\BIMpossible.RevitLink\DEV-NOTES.md` + its CLAUDE.md "Open items"
 - **ZIM Tools (RevitAddin_Z) is RETIRED (2026-05) - do NOT include it.** Never add a ZIM Tools phase, reminder, or mention to the addins entry, regardless of what `add-ins-state.md` or `Add-Ins/CLAUDE.md` still say about it.
 
 ### site - BIMpossible Site
-- `F:\AI-Dev\BIMpossible Site\01_BuildLog\` newest files; `00_README.md`; `IP-Lockdown-Checklist.md` (checked items drive progress)
+- `F:\BIMpossible-Site\01_BuildLog\` newest files; `00_README.md`; `IP-Lockdown-Checklist.md` (checked items drive progress)
 
 ### pickem - Preseason Pick'em
 - `F:\AI-Dev\Preseason Pick'em\01_BuildLog\` + `WORKSPACE_INDEX.md`; app folder mtimes as fallback
@@ -87,7 +87,7 @@ the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE
 - No state doc yet (flagged). Folder mtimes; check `docs\`.
 
 ### families - Families by BIMpossible
-- `F:\AI-Dev\Families by BIMpossible\README.md` + folder mtimes (repo: YourBIMpossible/Families-by-BIMpossible)
+- `F:\BIMpossible-Families\README.md` + folder mtimes (repo: YourBIMpossible/Families-by-BIMpossible)
 
 ### aiserver - AI-Server (local LLM + automation)
 - `git -C F:\AI-Dev\AI-Server log --oneline --all --since="7 days ago"` + branches + unpushed check (rule 9). Repo: `YourBIMpossible/AI-Server` (private, branch-protected: PR + CI gate).
@@ -121,11 +121,11 @@ reports for any project are picked up by the next refresh (say "refresh dashboar
 
 For each project, find the newest audit report, then populate its `audit` block:
 - **bimpossible** - newest audit across BOTH locations (the audit archive was reorganized 2026-06-10):
-  (a) `F:\AI-Dev\BIMpossible_Workspace\02_Reference\Audit Reports\` - the 2026-06-10-onward archive: full = `YYYY-MM-DD__audit-report-full.md`, incremental = `YYYY-MM-DD__audit-report.md`, same-day reruns append `-2`/`-3`. On a same-date tie prefer `-full`, else the highest numeric suffix.
-  (b) legacy `F:\AI-Dev\BIMpossible_Workspace\02_Reference\` root - pre-2026-06-10 reports (`YYYY-MM-DD_BIMpossible_Weekly_Foundation_Audit.md`, FullProject / PerpAudit runs).
+  (a) `F:\BIMpossible-Workspace\02_Reference\Audit Reports\` - the 2026-06-10-onward archive: full = `YYYY-MM-DD__audit-report-full.md`, incremental = `YYYY-MM-DD__audit-report.md`, same-day reruns append `-2`/`-3`. On a same-date tie prefer `-full`, else the highest numeric suffix.
+  (b) legacy `F:\BIMpossible-Workspace\02_Reference\` root - pre-2026-06-10 reports (`YYYY-MM-DD_BIMpossible_Weekly_Foundation_Audit.md`, FullProject / PerpAudit runs).
   **Recurse into `Audit Reports\`** and **match `audit` case-insensitively** (the new files are lowercase `audit-report`, which the old `*Audit*.md` glob silently skipped). Pick the newest by filename date across both. **Do NOT** ingest `02_Reference\Audit and Scan Info\` - that folder is security reviews + the living Verification Checklist (a working hub), NOT periodic audits. Ledger: `02_Reference\_audit-runs.md`.
-- **addins** - newest `F:\AI-Dev\Add-Ins\audits\*.md`.
-- **site** - newest `F:\AI-Dev\BIMpossible Site\01_BuildLog\*audit*.md`; ledger `_site-audit-runs.md`.
+- **addins** - newest `F:\BIMpossible-AddIns\audits\*.md`.
+- **site** - newest `F:\BIMpossible-Site\01_BuildLog\*audit*.md`; ledger `_site-audit-runs.md`.
 - other projects - only if an audit report exists; otherwise omit the `audit` block (they show under "Not yet audited").
 
 Extraction rules:
@@ -139,7 +139,7 @@ Extraction rules:
 ## Wave status ingestion (bimpossible only)
 
 Waves are a BIMpossible concept; this applies to the `bimpossible` project only. The single source of
-truth is the ledger `F:\AI-Dev\BIMpossible_Workspace\00_Strategy\BIMpossible_WAVE-STATUS.md` (one row per
+truth is the ledger `F:\BIMpossible-Workspace\00_Strategy\BIMpossible_WAVE-STATUS.md` (one row per
 wave). It is **push-independent** — read it EVERY refresh and populate the `waves` block. NEVER write it.
 This is what stops wave completions slipping when builds land without a fresh build-log or push.
 
@@ -150,7 +150,7 @@ This is what stops wave completions slipping when builds land without a fresh bu
 3. `current` = every ACTIVE/PARTIAL/BUILT row + the next 1-2 SCOPE-LOCK/PLANNED, terse `{ id, title, status, date?, note? }`, cap ~6.
 4. `lastCompleted` = newest SHIPPED/CLOSED row by Date. `updated` = the ledger's **Updated:** line. `source` = the ledger path.
 5. **Drift cross-check (catches delayed pushes) -> `waves.drift`, mirror the worst into `reminders`:**
-   - `git -C F:\AI-Dev\BIMpossible tag --list 'wave-*-complete'` (read-only).
+   - `git -C F:\BIMpossible tag --list 'wave-*-complete'` (read-only).
      - If ZERO such tags exist (the tagging ritual isn't in use - current reality), emit ONE note "no wave-*-complete tags; ledger is the sole completion signal" and **skip** per-wave tag drift (do NOT flag every done wave - that's noise, not signal).
      - If tags DO exist: a tag with no CLOSED/SHIPPED ledger row -> "Wave N tagged complete in git, ledger still says X - update ledger"; a CLOSED/SHIPPED ledger row with no matching tag -> "Wave N done in ledger, not yet tagged/pushed" (the unpushed-completion signal, the point of this check).
    - newest `01_BuildLog\*closeout*.md` for a wave the ledger doesn't show CLOSED -> flag it.
@@ -160,7 +160,7 @@ This is what stops wave completions slipping when builds land without a fresh bu
 ## Phase status ingestion (bimpossible only)
 
 Phases (the product arc) are a BIMpossible concept; this applies to the `bimpossible` project only. The
-single source of truth is the ledger `F:\AI-Dev\BIMpossible_Workspace\00_Strategy\BIMpossible_PHASE-STATUS.md`
+single source of truth is the ledger `F:\BIMpossible-Workspace\00_Strategy\BIMpossible_PHASE-STATUS.md`
 (one row per PRODUCT phase). Like the wave ledger it is **push-independent** — read it EVERY refresh and
 populate `progress.phases[]`; NEVER write it. This is what stops phase definitions drifting when an owner
 renumber lands without a fresh hand-edit (the historical cause of dashboard phase rot).
