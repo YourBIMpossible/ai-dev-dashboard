@@ -1200,10 +1200,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [2,5,2,3,3,4,3,6,8,3,3,3,8,8],
+      activity: [2,5,2,3,3,4,3,6,8,3,3,3,8,9],
       lastActivity: {
         date: "2026-08-22",
-        summary: "chore(paths): AI-Dev extraction — repoint to F:\\Claude-Tools / F:\\AI-Dashboard / F:\\AI-Brain-Data / Claude-Profile docs (7c72e59)"
+        summary: "dashboard refresh 2026-08-22 21:29 (46be99e)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
