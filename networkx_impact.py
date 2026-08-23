@@ -11,18 +11,23 @@ import pathlib
 import sys
 from datetime import datetime, timezone
 
-ROOT = pathlib.Path(__file__).parent.parent  # F:\AI-Dev
+# Explicit canonical roots (2026-08-22 AI-Dev extraction): this clone lives in
+# F:\AI-Dashboard, so parent.parent is no longer the project workspace.
+BIM_ROOT   = pathlib.Path(r"F:\BIMpossible")
+WS_ROOT    = pathlib.Path(r"F:\BIMpossible-Workspace")
+FAM_ROOT   = pathlib.Path(r"F:\BIMpossible-Families")
+BRAIN_ROOT = pathlib.Path(r"F:\AI-Brain-Data")
 
 # -- source paths ------------------------------------------------------------
 SOURCES = {
-    "security_graph":  ROOT / "BIMpossible"              / "tools" / "security_graph.json",
-    "doc_drift":       ROOT / "BIMpossible_Workspace"    / "tools" / "doc_drift.json",
-    "family_dag":      ROOT / "Families by BIMpossible"  / "tool"  / "family_dag.json",
-    "graphify":        ROOT / "AI-Brain-Data"             / "graphify-out" / "graph.json",
+    "security_graph":  BIM_ROOT   / "tools" / "security_graph.json",
+    "doc_drift":       WS_ROOT    / "tools" / "doc_drift.json",
+    "family_dag":      FAM_ROOT   / "tool"  / "family_dag.json",
+    "graphify":        BRAIN_ROOT / "graphify-out" / "graph.json",
 }
 
 # Backend knowledge graph -- the source for the two codebase risk signals.
-BACKEND_REPO  = ROOT / "BIMpossible"
+BACKEND_REPO  = BIM_ROOT
 BACKEND_ROOT  = BACKEND_REPO / "backend"
 BACKEND_GRAPH = BACKEND_ROOT / "graphify-out" / "graph.json"
 BASELINE_PATH = pathlib.Path(__file__).parent / "codebase_baseline.json"

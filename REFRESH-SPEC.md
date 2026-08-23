@@ -1,7 +1,7 @@
 # Dashboard Refresh Spec (schema v3)
 
 Instructions for any Claude session (scheduled or on-demand "refresh dashboard") that updates
-`F:\AI-Dev\Dashboard\data.js`. The HTML shell (`index.html`) never needs touching on a refresh.
+`F:\AI-Dashboard\Dashboard\data.js`. The HTML shell (`index.html`) never needs touching on a refresh.
 
 ## Automation architecture (read first — 2026-06-23)
 
@@ -25,7 +25,7 @@ It blocks the push if any phase number contradicts the ledger (e.g. P7 named "Mo
 P6 named "content authoring"). Wrong phase numbering can no longer reach the live site.
 
 **Schedule:** Windows Task "BIMpossible Dashboard Daily Refresh" runs `Refresh-Dashboard.ps1`
-from the dedicated automation clone `F:\AI-Dev\Dashboard-auto` (NOT the editing clone) daily at
+from the dedicated automation clone `F:\AI-Dashboard\Dashboard-auto` (NOT the editing clone) daily at
 06:00 — ledger render → activity → date stamp → guard → push. No model calls. To change names on
 the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE: the prose bot
 (sync_dashboard.py) has no trigger on the code repos, so prose fields are refreshed on-demand only.
@@ -35,7 +35,7 @@ the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE
 1. **Only rewrite `data.js`.** Do not modify `index.html` or this file during a routine refresh.
 2. Update `generated` (YYYY-MM-DD) and `generatedBy` ("scheduled refresh" or "on-demand refresh").
 3. Read-only refresh: scan sources; do NOT modify project files, or create files outside `Dashboard\`.
-4. **After writing data.js**, run `powershell -File "F:\AI-Dev\Dashboard\push-dashboard.ps1"` to commit and push to GitHub. This is the only permitted git mutation during a refresh.
+4. **After writing data.js**, run `powershell -File "F:\AI-Dashboard\Dashboard\push-dashboard.ps1"` to commit and push to GitHub. This is the only permitted git mutation during a refresh.
 5. Keep entries terse - one line each. Glance surface, not documentation.
 6. Missing source: keep previous data, note it in that project's `reminders`.
 7. New project folder at F:\AI-Dev root: add a tab, note "auto-added - confirm tracking" in its `reminders`.
@@ -69,7 +69,7 @@ the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE
 - `F:\BIMpossible-Workspace\00_Strategy\` - newest dated docs (`YYYY-MM-DD__*.md`) by filename date AND the newest `BIMpossible_STATE_*.md`. If the STATE doc trails the newest dated doc by >5 days, flag it in `reminders`.
 - `F:\BIMpossible-Workspace\01_BuildLog\` - newest 3 files
 - Workspace memory: `project_bimpossible-state.md`, `project_followups-queue.md`, `open-questions.md`
-- Graph metrics: `F:\AI-Dev\Dashboard\graph-metrics.js` (`window.GRAPH_METRICS`, last entry) - read-only staleness check per rule 10. Produced by `Update-Graph.ps1` on push/wave; never written by the refresh.
+- Graph metrics: `F:\AI-Dashboard\Dashboard\graph-metrics.js` (`window.GRAPH_METRICS`, last entry) - read-only staleness check per rule 10. Produced by `Update-Graph.ps1` on push/wave; never written by the refresh.
 
 ### addins - Add-Ins / RevitLink
 - `git -C F:\BIMpossible-AddIns log -5` + branch + unpushed check
@@ -92,7 +92,7 @@ the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE
 ### aiserver - AI-Server (local LLM + automation)
 - `git -C F:\AI-Dev\AI-Server log --oneline --all --since="7 days ago"` + branches + unpushed check (rule 9). Repo: `YourBIMpossible/AI-Server` (private, branch-protected: PR + CI gate).
 - `F:\AI-Dev\AI-Server\PROGRAM_PLAN.md` - the work-package map (Foundation + WP-A..G); drives `progress.phases`. `handoffs\WP-*.md` - one per work package; when a WP's PR merges (CI green), flip its phase tasks to `done` and raise the phase pct.
-- Build/hardware plan: `F:\AI-Dev\AI-Brain-Data\_status\AI-Server_Build_and_Integration_Plan.md` (the dedicated 3090 box). Keep its open OS/runtime choices in `pendingDecisions` until locked.
+- Build/hardware plan: `F:\AI-Brain-Data\_status\AI-Server_Build_and_Integration_Plan.md` (the dedicated 3090 box). Keep its open OS/runtime choices in `pendingDecisions` until locked.
 - CI: GitHub Actions `ci.yml` (pytest matrix 3.10-3.12). If the newest run is failing, add a `reminders` line. Minutes show in the Actions panel (AI-Server is in `github_actions_sync.mjs` REPOS).
 - **Live status snapshot (WP-D1) — run the helper, read-only LAN poll:**
   `python F:\AI-Dev\AI-Server\scripts\aiserver_status.py` prints JSON with `endpoint`

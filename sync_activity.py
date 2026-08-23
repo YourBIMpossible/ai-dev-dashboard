@@ -46,8 +46,8 @@ WINDOW_DAYS = 14
 # Local-only repos (git-initialized, no GitHub remote) that PROJECT_REPOS points at
 # directly instead of an "owner/repo" slug. Env var overrides let another machine
 # relocate a clone without editing source - same pattern as sync_ledgers.py's WS/BIM_REPO.
-AI_BRAIN_DATA_REPO = Path(os.environ.get("AI_BRAIN_DATA_REPO", r"F:\AI-Dev\AI-Brain-Data"))
-PC_MONITOR_REPO = Path(os.environ.get("PC_MONITOR_REPO", r"F:\AI-Dev\PC-Monitor"))
+AI_BRAIN_DATA_REPO = Path(os.environ.get("AI_BRAIN_DATA_REPO", r"F:\AI-Brain-Data"))
+PC_MONITOR_REPO = Path(os.environ.get("PC_MONITOR_REPO", r"F:\PC-Monitor"))
 
 # project id (data.js marker) -> source repo(s). A project may span repos (the
 # platform card counts both the code repo and the strategy workspace). Each entry is

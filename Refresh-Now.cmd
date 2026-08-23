@@ -6,7 +6,7 @@ rem task runs, from the SAME automation clone, so the button and the 6am
 rem schedule cannot drift apart. Targeting Dashboard-auto is deliberate: this
 rem clone is the editing clone, and its pre-commit hook rejects the
 rem CI/automation-owned files (graph-metrics.js) that a refresh must write.
-set "AUTO=F:\AI-Dev\Dashboard-auto"
+set "AUTO=F:\AI-Dashboard\Dashboard-auto"
 echo ============================================================
 echo  Refreshing dashboard on demand
 echo    - phases/waves from the ledgers

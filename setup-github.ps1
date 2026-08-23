@@ -1,13 +1,13 @@
 # ============================================================
 # Dashboard → GitHub one-time setup
-# Run this ONCE from PowerShell in F:\AI-Dev\Dashboard
+# Run this ONCE from PowerShell in F:\AI-Dashboard\Dashboard
 # before running it, create the repo on GitHub:
 #   https://github.com/organizations/YourBIMpossible/repositories/new
 #   Name: ai-dev-dashboard  |  Private  |  No README / .gitignore / license
 # ============================================================
 
 $ErrorActionPreference = "Stop"
-$dashDir = $PSScriptRoot   # F:\AI-Dev\Dashboard
+$dashDir = $PSScriptRoot   # F:\AI-Dashboard\Dashboard
 
 Set-Location $dashDir
 

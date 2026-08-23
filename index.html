@@ -2099,7 +2099,7 @@ function _usd(n){n=+n||0;return n>=1000?'$'+(n/1000).toFixed(n>=10000?0:1)+'K':'
 function _tok(n){n=+n||0;return n>=1e9?(n/1e9).toFixed(1)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':''+n;}
 function usageBody(){
   const U=window.DASHBOARD_USAGE;
-  if(!U)return '<p class="sub">No usage data yet — run <code>node usage_sync.mjs</code> in F:\\AI-Dev\\Dashboard.</p>';
+  if(!U)return '<p class="sub">No usage data yet — run <code>node usage_sync.mjs</code> in F:\\AI-Dashboard\\Dashboard.</p>';
   const a=U.allTime;
   let h='<p class="sub">API-equivalent value of local Claude Code usage (via <b>ccusage</b>) — what the same tokens would cost at pay-as-you-go API rates: value extracted, not money paid.</p>';
   h+=`<div class="stat-row fade">
@@ -2148,7 +2148,7 @@ function _ago(iso){
 }
 function agentsBody(){
   const A=window.DASHBOARD_AGENTS;
-  if(!A)return '<p class="sub">No agent data yet — run <code>node agents_sync.mjs</code> in F:\\AI-Dev\\Dashboard.</p>';
+  if(!A)return '<p class="sub">No agent data yet — run <code>node agents_sync.mjs</code> in F:\\AI-Dashboard\\Dashboard.</p>';
   const t=A.totals;
   let h='<p class="sub">Session activity across your Claude Code agents. Each session is one agent run; cost is API-equivalent. Snapshot, refreshes on sync.</p>';
   h+=`<div class="stat-row fade">
@@ -2559,8 +2559,8 @@ function monitorView(){
   else if(mt==='github')h+=githubActionsBody();
   h+=`<div style="margin-top:20px;padding:11px 14px;background:rgba(110,168,255,.05);border:1px solid rgba(110,168,255,.14);border-radius:9px;font-size:var(--ts-sm);color:var(--muted);line-height:1.7">
     <b style="color:var(--text)">↻ Refresh locally</b> (PowerShell on your PC) — these regenerate the data from <code>~/.claude</code> and auto-deploy in ~30s:<br>
-    <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\usage_sync.mjs</code> &nbsp;·&nbsp; <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\agents_sync.mjs</code><br>
-    <b style="color:var(--text)">GitHub Actions:</b> drop a new billing CSV in <code>~/Downloads</code> then run <code style="color:var(--w)">node F:\\AI-Dev\\Dashboard\\github_actions_sync.mjs</code> (also fetches live summary via <code>gh api</code>).<br>
+    <code style="color:var(--w)">node F:\\AI-Dashboard\\Dashboard\\usage_sync.mjs</code> &nbsp;·&nbsp; <code style="color:var(--w)">node F:\\AI-Dashboard\\Dashboard\\agents_sync.mjs</code><br>
+    <b style="color:var(--text)">GitHub Actions:</b> drop a new billing CSV in <code>~/Downloads</code> then run <code style="color:var(--w)">node F:\\AI-Dashboard\\Dashboard\\github_actions_sync.mjs</code> (also fetches live summary via <code>gh api</code>).<br>
     <span style="color:var(--dim)">The "Reload data" button only re-pulls what's already published — it doesn't run these. Run Refresh-Now.cmd, or wait for the 6am task.</span></div>`;
   return h;
 }
@@ -2847,7 +2847,7 @@ function _pchip(n){return `<span class="dag-chip" role="button" tabindex="0" tit
 function roadmapView(){
   const G=window.PHASE_DAG;
   let h='<div class="crumbs">BIMpossible</div><h2 class="page">Roadmap — Phase Dependencies</h2>';
-  if(!G||!G.nodes){return h+'<p class="sub">No phase DAG yet — run <code>python phase_dag.py</code> in F:\\AI-Dev\\Dashboard to generate it.</p>';}
+  if(!G||!G.nodes){return h+'<p class="sub">No phase DAG yet — run <code>python phase_dag.py</code> in F:\\AI-Dashboard\\Dashboard to generate it.</p>';}
   h+=`<p class="sub">Derived from the PHASE-STATUS ledger's “Gate / depends on” column — real dependencies, no guesses. Generated ${esc(G.generated||'—')}.</p>`;
   const cp=G.criticalPath||[];
   h+=`<div class="card fade"><h3>Critical path — longest dependency chain</h3>`;

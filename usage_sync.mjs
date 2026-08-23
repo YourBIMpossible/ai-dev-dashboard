@@ -16,7 +16,7 @@
 import { execSync } from "node:child_process";
 import { writeFileSync, readFileSync, existsSync } from "node:fs";
 
-const REPO = "F:/AI-Dev/Dashboard";
+const REPO = "F:/AI-Dashboard/Dashboard";
 const OUT = `${REPO}/usage.js`;
 const PUSH = !process.argv.includes("--no-push");
 

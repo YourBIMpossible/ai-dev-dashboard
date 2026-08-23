@@ -235,9 +235,9 @@ def classify_commit(subject: str, files: list[str]) -> dict:
 # sync_activity.py so another machine can relocate a clone without editing source.
 # A project with no entry here has NO declared repo -> reconciliation fails closed.
 # --------------------------------------------------------------------------- #
-BIM_REPO = Path(os.environ.get("BIMPOSSIBLE_REPO", r"F:\AI-Dev\BIMpossible"))
-WS_REPO = Path(os.environ.get("BIMPOSSIBLE_WORKSPACE", r"F:\AI-Dev\BIMpossible_Workspace"))
-ADDINS_REPO = Path(os.environ.get("BIMPOSSIBLE_ADDINS_REPO", r"F:\AI-Dev\Add-Ins"))
+BIM_REPO = Path(os.environ.get("BIMPOSSIBLE_REPO", r"F:\BIMpossible"))
+WS_REPO = Path(os.environ.get("BIMPOSSIBLE_WORKSPACE", r"F:\BIMpossible-Workspace"))
+ADDINS_REPO = Path(os.environ.get("BIMPOSSIBLE_ADDINS_REPO", r"F:\BIMpossible-AddIns"))
 
 PROJECT_RECON_REPOS: dict[str, list[Path]] = {
     "bimpossible": [BIM_REPO, WS_REPO],

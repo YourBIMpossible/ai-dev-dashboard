@@ -22,7 +22,7 @@ import { createInterface } from "node:readline";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-const REPO = "F:/AI-Dev/Dashboard";
+const REPO = "F:/AI-Dashboard/Dashboard";
 const OUT = `${REPO}/agents.js`;
 const PUSH = !process.argv.includes("--no-push");
 const RECENT_LIMIT = 30;

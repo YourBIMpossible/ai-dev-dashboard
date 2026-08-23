@@ -73,7 +73,7 @@ const splitRow = line => line.split(/(?<!\\)\|/).slice(1, -1).map(c => c.trim())
 
 function ledgerTemplate(tableBlock, updatedLine) {
   return `<!-- BIMpossible strategy decisions ledger — durable record of decisions made in the
-     dashboard Strategy tab. MERGE-populated by F:\\AI-Dev\\Dashboard\\strategy_cowork_sync.mjs
+     dashboard Strategy tab. MERGE-populated by F:\\AI-Dashboard\\Dashboard\\strategy_cowork_sync.mjs
      from strategy_decisions.json (exported via the Strategy tab's "→ Cowork" button):
      rows are appended/updated by ID, never overwritten — history and the Promoted flag persist.
      Claude Cowork READS this as the source of truth. Promotion of approved items into
