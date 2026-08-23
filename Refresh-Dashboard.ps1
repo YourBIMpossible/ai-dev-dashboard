@@ -232,7 +232,7 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #     the ledger lives in a DIFFERENT repo's working tree; if it is absent or short,
     #     origin's copy (restored by step 0's checkout) ships unchanged and we retry
     #     tomorrow. Runs after 1e so a codebase_sync failure cannot skip it.
-    $ledger = if ($env:BIMPOSSIBLE_LEDGER) { $env:BIMPOSSIBLE_LEDGER } else { "F:\AI-Dev\BIMpossible\backend\graphify-out\metrics-history.jsonl" }
+    $ledger = if ($env:BIMPOSSIBLE_LEDGER) { $env:BIMPOSSIBLE_LEDGER } else { "F:\BIMpossible\backend\graphify-out\metrics-history.jsonl" }
     $gm = Update-GraphMetricsFromLedger -LedgerPath $ledger -OutPath (Join-Path $PSScriptRoot "graph-metrics.js")
     if ($gm.ok) {
         "graph-metrics.js: $($gm.reason)" | Add-Content -Path $log -Encoding utf8

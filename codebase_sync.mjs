@@ -30,7 +30,7 @@ import { fileURLToPath } from "node:url";
 // "F:/AI-Dev/Dashboard" would bundle into the editing clone instead - the automation
 // clone would then commit a `codebase/` it never refreshed. Both clones keep this script
 // at the repo root, so script-dir is the repo root in either. Env vars override for tests.
-const SRC = process.env.GRAPHIFY_OUT || "F:/AI-Dev/BIMpossible/backend/graphify-out";
+const SRC = process.env.GRAPHIFY_OUT || "F:/BIMpossible/backend/graphify-out";
 const REPO = process.env.DASHBOARD_REPO || dirname(fileURLToPath(import.meta.url));
 const OUT = join(REPO, "codebase");
 const PUSH = !process.argv.includes("--no-push");

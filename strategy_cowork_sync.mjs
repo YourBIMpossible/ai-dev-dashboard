@@ -8,7 +8,7 @@
  * the button downloads strategy_decisions.json, and you run this to merge it into
  * the same durable decisions ledger in the workspace:
  *
- *     F:\AI-Dev\BIMpossible_Workspace\00_Strategy\Dashboard\strategy_decisions_ledger.md
+ *     F:\BIMpossible-Workspace\00_Strategy\Dashboard\strategy_decisions_ledger.md
  *
  * The merge is BY ID — new decisions are appended, existing ones are updated in place,
  * and the per-row "Promoted" flag plus any rows not present in the export are preserved.

@@ -28,7 +28,7 @@ DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 # reportPath.parent so the newest report across ALL of them drives staleness.
 EXTRA_SCAN_ROOTS = {
     "bimpossible": [
-        pathlib.Path(r"F:\AI-Dev\BIMpossible_Workspace\02_Reference\Audit and Scan Info"),
+        pathlib.Path(r"F:\BIMpossible-Workspace\02_Reference\Audit and Scan Info"),
     ],
 }
 

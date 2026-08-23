@@ -82,8 +82,8 @@ def compact_to_js(value, indent: int) -> str:
     return json.dumps(value, ensure_ascii=False)
 
 HERE = Path(__file__).resolve().parent
-WS = Path(os.environ.get("BIMPOSSIBLE_WORKSPACE", r"F:\AI-Dev\BIMpossible_Workspace"))
-BIM_REPO = Path(os.environ.get("BIMPOSSIBLE_REPO", r"F:\AI-Dev\BIMpossible"))
+WS = Path(os.environ.get("BIMPOSSIBLE_WORKSPACE", r"F:\BIMpossible-Workspace"))
+BIM_REPO = Path(os.environ.get("BIMPOSSIBLE_REPO", r"F:\BIMpossible"))
 
 DEFAULT_DATA = HERE / "data.js"
 DEFAULT_PHASE_LEDGER = WS / "00_Strategy" / "BIMpossible_PHASE-STATUS.md"

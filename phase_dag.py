@@ -29,7 +29,7 @@ from pathlib import Path
 import networkx as nx
 
 HERE = Path(__file__).resolve().parent
-WS = Path(os.environ.get("BIMPOSSIBLE_WORKSPACE", r"F:\AI-Dev\BIMpossible_Workspace"))
+WS = Path(os.environ.get("BIMPOSSIBLE_WORKSPACE", r"F:\BIMpossible-Workspace"))
 DEFAULT_LEDGER = WS / "00_Strategy" / "BIMpossible_PHASE-STATUS.md"
 
 _PHASE_REF = re.compile(r"Phase\s+(\d+)", re.IGNORECASE)
