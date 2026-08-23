@@ -23,7 +23,7 @@
  *
  * Overrides (optional env vars):
  *   STRATEGY_DECISIONS=<path to json>        # default: ./strategy_decisions.json
- *   STRATEGY_LEDGER=<path to ledger.md>      # default: ../BIMpossible_Workspace/00_Strategy/Dashboard/strategy_decisions_ledger.md
+ *   STRATEGY_LEDGER=<path to ledger.md>      # default: F:/BIMpossible-Workspace/00_Strategy/Dashboard/strategy_decisions_ledger.md
  */
 
 import fs from 'fs';
@@ -32,8 +32,10 @@ import { fileURLToPath } from 'url';
 
 const DIR = path.dirname(fileURLToPath(import.meta.url));
 const DECISIONS = process.env.STRATEGY_DECISIONS || path.join(DIR, 'strategy_decisions.json');
+// Absolute: since the 2026-08-23 AI-Dev extraction the workspace repo is no longer a
+// sibling of this clone (F:\AI-Dashboard\Dashboard vs F:\BIMpossible-Workspace).
 const LEDGER = process.env.STRATEGY_LEDGER ||
-  path.join(DIR, '..', 'BIMpossible_Workspace', '00_Strategy', 'Dashboard', 'strategy_decisions_ledger.md');
+  'F:/BIMpossible-Workspace/00_Strategy/Dashboard/strategy_decisions_ledger.md';
 
 const COLS = ['ID', 'Title', 'Category', 'Status', 'Priority', 'Decided', 'Promoted', 'Notes'];
 const HEADER = '| ' + COLS.join(' | ') + ' |';
