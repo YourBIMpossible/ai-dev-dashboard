@@ -184,6 +184,15 @@ $result = 1   # 0 = pushed, 2 = already current (nothing to push), 1 = failed
 for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     "--- attempt $attempt/$MAX_ATTEMPTS ---" | Add-Content -Path $log -Encoding utf8
 
+    # Degradation counter (2026-08-24 slop audit MEDIUM-1): every non-fatal WARN branch
+    # below increments this. A partially-failed run used to stamp today's date, say
+    # "scheduled refresh", and clear the failure alert - indistinguishable from a full
+    # success anywhere but the log. Non-zero => the generatedBy stamp carries a
+    # "(partial: N step(s) failed)" marker (rendered in the sidefoot) and the durable
+    # REFRESH-FAILED.flag is NOT cleared. Reset per attempt: only the attempt that
+    # actually ships decides what the board claims.
+    $degraded = 0
+
     # 0. Base our work on the live tip WITHOUT touching the working tree (mixed reset),
     #    then refresh data.js + the CI-owned files from origin so the render starts fresh.
     if ((Invoke-Logged "git" @("fetch","origin","main")) -ne 0) { Alert-Failure "git fetch failed."; $result = 1; break }
@@ -199,6 +208,7 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #     still ship; dates catch up next run).
     if ((Invoke-Logged $python @("$PSScriptRoot\sync_activity.py")) -ne 0) {
         "WARN: sync_activity.py failed - activity/dates not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
 
     # 1c. Build the phase-dependency DAG from the ledger's gate column (non-fatal:
@@ -206,12 +216,15 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #     the committed phase_dag.js stays valid until the next successful run).
     if ((Invoke-Logged $python @("$PSScriptRoot\phase_dag.py")) -ne 0) {
         "WARN: phase_dag.py failed - phase DAG not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
     if ((Invoke-Logged $python @("$PSScriptRoot\networkx_impact.py")) -ne 0) {
         "WARN: networkx_impact.py failed - impact data not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
     if ((Invoke-Logged $python @("$PSScriptRoot\check_audit_freshness.py")) -ne 0) {
         "WARN: check_audit_freshness.py failed - audit staleness badge not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
 
     # 1e. Re-bundle the graphify artifacts the Codebase tab iframes (GRAPH_REPORT.md,
@@ -223,8 +236,10 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #     good bundle stays committed and we retry tomorrow.
     if (-not $node) {
         "WARN: node not on PATH - codebase/ graphify bundle not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     } elseif ((Invoke-Logged $node @("$PSScriptRoot\codebase_sync.mjs","--no-push")) -ne 0) {
         "WARN: codebase_sync.mjs failed - codebase/ graphify bundle not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
 
     # 1f. Render graph-metrics.js from the tracked BIMpossible ledger (see the
@@ -238,13 +253,18 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
         "graph-metrics.js: $($gm.reason)" | Add-Content -Path $log -Encoding utf8
     } else {
         "WARN: graph-metrics.js not rendered - $($gm.reason) - keeping origin's copy this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
 
     # 2. Stamp the generated date (UTF-8 no BOM via .NET; only two lines change).
+    #    A degraded run says so on the board itself, not just in the log: the sidefoot
+    #    renders generatedBy's "(partial: ...)" marker as a warning.
+    $stampBy = if ($degraded -gt 0) { "scheduled refresh (partial: $degraded step(s) failed)" } else { "scheduled refresh" }
+    if ($degraded -gt 0) { "WARN: $degraded non-fatal step(s) failed - stamping partial marker." | Add-Content -Path $log -Encoding utf8 }
     $path = Join-Path $PSScriptRoot "data.js"
     $text = [System.IO.File]::ReadAllText($path)
     $text = [regex]::Replace($text, 'generated: "\d{4}-\d{2}-\d{2}"', "generated: `"$today`"")
-    $text = [regex]::Replace($text, 'generatedBy: "[^"]*"', 'generatedBy: "scheduled refresh"')
+    $text = [regex]::Replace($text, 'generatedBy: "[^"]*"', "generatedBy: `"$stampBy`"")
     [System.IO.File]::WriteAllText($path, $text)
 
     # 3. Guard: phase numbering in data.js must match the ledger, or refuse to ship.
@@ -283,7 +303,13 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     if ($attempt -eq $MAX_ATTEMPTS) { Alert-Failure "push still rejected after $MAX_ATTEMPTS attempts - live dashboard may be STALE." }
 }
 
-if ($result -eq 0 -or $result -eq 2) { Clear-Alert }
+# Clear the durable failure flag only on a FULLY clean success. A mostly-failed run
+# that still reached commit+push (result 0/2) must not erase yesterday's alert -
+# the flag exists precisely so a degraded backend surfaces before the 3-day banner.
+if (($result -eq 0 -or $result -eq 2) -and $degraded -eq 0) { Clear-Alert }
+elseif (($result -eq 0 -or $result -eq 2) -and $degraded -gt 0) {
+    "NOTE: shipped with $degraded failed step(s) - leaving any existing REFRESH-FAILED.flag in place." | Add-Content -Path $log -Encoding utf8
+}
 "=== $ts  refresh done (result $result) ===" | Add-Content -Path $log -Encoding utf8
 # 0 pushed, 2 already-current both mean success to the scheduler.
 if ($result -eq 1) { exit 1 } else { exit 0 }
