@@ -614,6 +614,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .c-cowork{color:var(--p2);background:rgba(251,191,36,.1);}
 .c-connector{color:#5eead4;background:rgba(94,234,212,.1);}
 .c-scheduled{color:var(--p);background:rgba(251,146,60,.1);}
+.c-script{color:#f472b6;background:rgba(244,114,182,.1);}
 .tk-desc{font-size:12px;color:var(--muted);line-height:1.55;}
 .tk-card-f{display:flex;align-items:center;gap:9px;margin-top:auto;padding-top:5px;flex-wrap:wrap;}
 .tk-cmd{display:inline-flex;align-items:center;gap:6px;max-width:100%;font-family:ui-monospace,'Cascadia Code','SFMono-Regular',Consolas,monospace;font-size:var(--ts-sm);color:var(--text);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:7px;padding:4px 9px;cursor:pointer;transition:color .14s,border-color .14s;}
@@ -2977,6 +2978,9 @@ function toolkitView(){
       {cmd:'calendar',name:'Calendar',desc:'List, create, and update calendar events; suggest meeting times.'},
       {cmd:'context7',name:'Context7 Docs',desc:'Fetch current library, framework, and API documentation on demand.'},
     ]},
+    {cat:'script',title:'Dashboard Scripts',ctx:'Run in the Dashboard repo',items:[
+      {cmd:'node export-audit-findings.js',name:'Audit Findings Export',desc:'One-command consolidated report of every open audit finding across all cards, read from the same data the board renders (data.js + audit-freshness.js). Markdown by default; flags for JSON, open-only, and a custom output path. Pure reader — never mutates dashboard state.',trigger:'node export-audit-findings.js [--json | --open-only | --out <path>]',where:'Dashboard repo'},
+    ]},
     {cat:'scheduled',title:'Scheduled Tasks',ctx:'Fully automated',items:[
       {cmd:'bimpossible-audit-full',name:'Weekly Full Audit',desc:'Read-only top-to-bottom audit across Security, Reliability, Architecture, Code Quality, and UX via 3 parallel lens agents. Writes a dated report and drafts an email. Its Auto-Fix stage is preflight-gated and reports honestly when it has no verification lane.',trigger:'Sundays 11:45 PM PT'},
       {cmd:'bimpossible-audit-incremental',name:'Incremental Audit',desc:'Audits only what changed since the last report — the between-cycles counterpart to the full run.',trigger:'Sun + Tue 11:45 PM PT'},
@@ -2989,7 +2993,7 @@ function toolkitView(){
       {cmd:'bimwatch',name:'BIM Watch',desc:'Collects 12 Autodesk/Revit/AEC feeds, classifies each item against a personal relevance profile, and publishes the briefing and archive to this dashboard. GitHub Action, not Task Scheduler.',trigger:'Daily 6:00 AM UTC · weekly briefing Mondays'},
     ]},
   ];
-  const CHIPS=[['all','All'],['command','Commands'],['skill','Skills'],['agent','Agents'],['cowork','Cowork'],['connector','Connectors'],['scheduled','Scheduled']];
+  const CHIPS=[['all','All'],['command','Commands'],['skill','Skills'],['agent','Agents'],['cowork','Cowork'],['connector','Connectors'],['script','Scripts'],['scheduled','Scheduled']];
   let h=`<div class="crumbs">Mission Control</div>
 <h2 class="page">Toolkit</h2>
 <div class="tk-controls">
