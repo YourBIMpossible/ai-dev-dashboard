@@ -16,3 +16,6 @@ strategy_cowork_brief.md
 # Evidence Compiler runtime output (per-repo, never committed); config.yaml stays trackable
 **/.evidence-compiler/packets/
 **/.evidence-compiler/logs/
+
+# Generated audit-findings report (regenerate anytime: node export-audit-findings.js)
+audit-findings-report.md
