@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-08-24",
+  generated: "2026-08-25",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-11",
+  activitySince: "2026-08-12",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -158,7 +158,7 @@ window.DASHBOARD_DATA = {
           {
             name: "P11 Model QA & Health (incl. Coordination & Health Report)",
             pct: 64,
-            note: "ACTIVE — core shipped + LIVE in prod; reopened for further development — `BIMPOSSIBLE_QA_ENABLED=1` set by owner; Q1 live smokes ALL PASS on pilot `ISI-SB-SL-EL.rvt` via prod path (health 89/100 on 47k elements, `.ids` import evaluated 10053/10053, panel renders, 401/403 leak checks hold, Q2 fixes live-verified incl. 422 on broken imported-rule override). Full log: GitHubWorkflow §11 2026-07-01. Read-only QA rules + `.ids` import; was unnumbered (\"Phase 7-ish\"). Row-merge 2026-08-17: the former standalone row 11.1 — Coordination & Health Report is folded in here. 11.1 was a packaging/reporting layer built entirely on 11's own findings (same graph substrate, same QA output — presentation, not new analysis), the only case in the ledger where such a layer was promoted to its own peer row instead of a sub-note the way Phase 3's sub-phases live. It shipped LIVE 2026-07-02 via [PR #172](https://github.com/YourBIMpossible/BIMpossible/pull/172) (squash, CI-green), deployed + live-smoked same day on `ISI-SB-SL-EL.rvt` (JSON 200/1.7s warm; .doc download 172KB, branded+dated, severity-ranked, 5 plain-language critical hubs, island+unconnected traces; unauth 401 ×4 + non-allowlisted 403 ×2 hold); both smoke findings fixed same evening (`83384da`) — report runs the resolved project rule set (panel↔report parity live: 90.2==90.2, 89.11==89.11), `model_name` threaded UI→API. Coordination & Health Report acceptance criteria AC1–AC7 now live under 11 (see §Phase 11 — Coordination & Health Report below); AC1–AC6 verified live, AND `ACTIVE` status reopens 11 for further QA/health development. ⚠️ ONE OPEN ITEM CARRIED FORWARD IN THE MERGE: AC7 (per-model report-history table) was explicitly deferred and never built — needs versioned snapshots; it is 11's outstanding work, not lost in the merge.",
+            note: "ACTIVE — core shipped + LIVE in prod; reopened for further development — `BIMPOSSIBLE_QA_ENABLED=1` set by owner; Q1 live smokes ALL PASS on pilot `ISI-SB-SL-EL.rvt` via prod path (health 89/100 on 47k elements, `.ids` import evaluated 10053/10053, panel renders, 401/403 leak checks hold, Q2 fixes live-verified incl. 422 on broken imported-rule override). Full log: GitHubWorkflow §11 2026-07-01. Read-only QA rules + `.ids` import; was unnumbered (\"Phase 7-ish\"). Row-merge 2026-08-17: the former standalone row 11.1 — Coordination & Health Report is folded in here. 11.1 was a packaging/reporting layer built entirely on 11's own findings (same graph substrate, same QA output — presentation, not new analysis), the only case in the ledger where such a layer was promoted to its own peer row instead of a sub-note the way Phase 3's sub-phases live. It shipped LIVE 2026-07-02 via [PR #172](https://github.com/YourBIMpossible/BIMpossible/pull/172) (squash, CI-green), deployed + live-smoked same day on `ISI-SB-SL-EL.rvt` (JSON 200/1.7s warm; .doc download 172KB, branded+dated, severity-ranked, 5 plain-language critical hubs, island+unconnected traces; unauth 401 ×4 + non-allowlisted 403 ×2 hold); both smoke findings fixed same evening (`83384da`) — report runs the resolved project rule set (panel↔report parity live: 90.2==90.2, 89.11==89.11), `model_name` threaded UI→API. Coordination & Health Report acceptance criteria AC1–AC7 now live under 11 (see §Phase 11 — Coordination & Health Report below); AC1–AC6 verified live, AND `ACTIVE` status reopens 11 for further QA/health development. ⚠️ ONE OPEN ITEM CARRIED FORWARD IN THE MERGE: AC7 (per-model report-history table) was explicitly deferred and never built — needs versioned snapshots; it is 11's outstanding work, not lost in the merge. → DELIVERED 2026-08-24: PR #476 (foundation) + PR #478 (capture-everywhere, lifecycle purge, UI states) — see the §Coordination & Health Report Status line.",
             tasks: [
               { label: "Rules engine (declarative Rule: applicability + requirement + IDS cardinality over a predicate library)", status: "done", note: "06-14 — backend/aec/qa/engine.py; pure, dependency-free" },
               { label: "4 starter rules (completeness / identity / correctness / classification families)", status: "done", note: "06-14 — adding a rule = a registry entry, no engine code" },
@@ -226,10 +226,10 @@ window.DASHBOARD_DATA = {
           { name: "P19 BIMpossible Workbench (desktop task-prep & closure workspace for Claude Code)", pct: 0, note: "PROPOSAL — Added 2026-08-21, from a phase plan submitted outside this ledger session and placed here on request. Native WPF/.NET desktop app, local-first and provider-agnostic (Ollama default, Claude/OpenAI/Gemini/Grok as optional adapters): work-item queue (`Inbox → Prepared → Active → Review → Closed`, plus `Blocked`/`Unverified`/`Parked`/`Reverted`) that captures a task (Revit selection, issue, family batch, code bug, test failure, design note), deterministically collects evidence (Git status/diff, targeted source search, test/build logs, read-only Revit context), uses a local model to draft a structured task contract (goal/evidence/constraints/scope/acceptance criteria — never silently proposing completed code changes), and generates a bounded Claude Code handoff; Claude Code implements and validates, Workbench records the closeout (changed files, validation evidence, risks, next action). Durable artifacts are project-local Markdown/JSON under `.ai/` (tasks/work/handoffs/decisions/prompts), not transient chat history. Not a Claude Code replacement, not a generic chat client, not an agent runtime/sandbox/terminal/browser-automation platform, and not an autonomous mutation engine — mutation is fail-closed by default (inspect/read-only; Revit and source-tree writes require explicit dry-run → review → apply). Closest ledger neighbor is Phase 16 (Desktop Orchestration Hub) — both are local/desktop, both explicitly gate nothing on the main product line, both are PROPOSAL/CONDITIONAL rather than scheduled — but they are distinct programs (16 = cross-tool MCP orchestration with a gated GUI-exception path; 19 = task-prep-and-closure workbench with its own evidence/local-AI/handoff pipeline) and should stay separate rows. Open decisions before any build work, per the plan's own gate list: product name confirmation; artifact-policy scope (repo-local `.ai/` only vs. app workspace + export); single- vs. multi-workspace v1 support; initial local model(s) + context/performance target; first Claude Code integration level (clipboard/file handoff only vs. controlled process launch); the first real (non-demo) vertical-slice task; secret/path exclusion policy before evidence collection is enabled. Full plan: `2026-08-21__Phase19_BIMpossibleWorkbench_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately, per the freeze-numbers rule (ordering holds 16 < 17 < 18 < 19)." }
         ]
       },
-      activity: [2,0,2,5,10,48,44,9,3,12,17,18,18,0],
+      activity: [0,2,5,10,48,44,9,3,12,17,18,18,30,0],
       lastActivity: {
-        date: "2026-08-23",
-        summary: "sec(pdp): federated shared-texture binding — same-project authorized cdn_root only (defect #5) (#463) (ac8ba6f)"
+        date: "2026-08-24",
+        summary: "docs(audit): weekly audit 2026-08-24 — implementation pass, resolution table, full scan report (42577a4)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -790,10 +790,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [0,0,0,0,0,2,6,3,1,1,3,7,15,0],
+      activity: [0,0,0,0,2,6,3,1,1,3,7,15,1,0],
       lastActivity: {
-        date: "2026-08-23",
-        summary: "Local-first verification and installer CI cost control (#101) (b1da3d9)"
+        date: "2026-08-24",
+        summary: "Migrate Evidence Compiler hook to Python-native hardened launcher (#102) (e0f23bb)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -994,10 +994,10 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,1,0,0,0,1,0,0],
+      activity: [0,0,0,0,0,0,1,0,0,0,1,0,2,0],
       lastActivity: {
-        date: "2026-08-22",
-        summary: "chore(paths): Batch B5 — tool scripts + How-To -> F:\\BIMpossible-Families (#9) (473351e)"
+        date: "2026-08-24",
+        summary: "Migrate Evidence Compiler hook to Python-native hardened launcher (#11) (72e53d5)"
       },
       branch: "main",
       nextActions: ["Run a live go_single_panel execution against a real family — the one destructive Phase 1 op never yet exercised live","Port wire_nested_params to close Phase 1 fully","Reconcile Phase 3's scope with BIMpossible_Workspace's Phase 16 (Desktop Orchestration Hub) proposal before scoping further","Settle ROADMAP.md's open questions (who writes Phase 2's C#, sequencing) before Phase 2 can start"],
@@ -1040,7 +1040,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,1,0,0,0,4,0,0],
+      activity: [0,0,0,0,0,0,1,0,0,0,4,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "chore(rag): rag_sources Workspace root → F:\\BIMpossible-Workspace (census 19 B8) (6ff31ad)"
@@ -1110,7 +1110,7 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,1,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,1,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "Revit-AI pipeline data through 2026-08-23 (raw-logs, processed, daily-summaries, context) — pre AI-Dev extraction (7d1b22b)"
@@ -1158,10 +1158,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [0,0,1,2,9,14,13,3,0,9,8,7,5,0],
+      activity: [0,1,2,9,14,13,3,0,9,8,7,5,13,0],
       lastActivity: {
-        date: "2026-08-23",
-        summary: "docs: land orphaned Phase 19 / PR-backlog / authz-worklog docs (#86) (d95dbbc)"
+        date: "2026-08-24",
+        summary: "docs(audit): weekly audit 2026-08-24 — implementation pass, resolution table, full scan report (42577a4)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1200,10 +1200,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [2,3,3,4,3,6,8,3,3,3,8,11,4,2],
+      activity: [3,3,4,3,6,8,3,3,3,8,11,4,5,1],
       lastActivity: {
-        date: "2026-08-24",
-        summary: "chore: live billing sync 2026-08-24 (0d8788a)"
+        date: "2026-08-25",
+        summary: "chore: live billing sync 2026-08-25 (235209a)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
