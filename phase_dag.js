@@ -50,7 +50,7 @@ window.PHASE_DAG = {
 {
 "id": "7",
 "name": "Model Write-back — DA4R + Revit Link (two engines)",
-"status": "ON HOLD",
+"status": "LIVE — supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); flag ON in .env",
 "dependsOn": [],
 "gates": [
 "5",
@@ -204,7 +204,7 @@ window.PHASE_DAG = {
 {
 "id": "7",
 "name": "Model Write-back — DA4R + Revit Link (two engines)",
-"status": "ON HOLD"
+"status": "LIVE — supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); flag ON in .env"
 },
 {
 "id": "8",
@@ -281,7 +281,7 @@ window.PHASE_DAG = {
 {
 "id": "7",
 "name": "Model Write-back — DA4R + Revit Link (two engines)",
-"status": "ON HOLD"
+"status": "LIVE — supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); flag ON in .env"
 },
 {
 "id": "9",
