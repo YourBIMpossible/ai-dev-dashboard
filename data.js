@@ -1200,10 +1200,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,3,4,3,6,8,3,3,3,8,11,4,5,1],
+      activity: [3,3,4,3,6,8,3,3,3,8,11,4,5,4],
       lastActivity: {
         date: "2026-08-25",
-        summary: "chore: live billing sync 2026-08-25 (235209a)"
+        summary: "fix(paths): update dashboard links for AI-Brain-Data and Dashboard-auto (9c56dfa)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
