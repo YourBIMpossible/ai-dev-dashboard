@@ -246,9 +246,9 @@ window.DASHBOARD_DATA = {
       blockers: [],
       reminders: ["Branch protection has enforce_admins=false and no required-PR-review, and Push-And-Verify.ps1 pushes direct to main as admin — required checks are a SIGNAL, not a gate, on the real push path.","The weekly audit report is point-in-time and has now twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) — always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints — Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","reportlab not installed → aec/exports.py PDF routes inert (CSV works); add before Phase C /account/export/*.pdf"],
       links: [
-        { label: "STATE doc (canonical, 06-12)", path: "F:\\BIMpossible-Workspace\\00_Strategy\\BIMpossible_STATE_2026-06-12.md" },
+        { label: "STATE doc (canonical, 06-12, archived)", path: "F:\\BIMpossible-Workspace\\99_Archive\\00_Strategy\\state-snapshots\\BIMpossible_STATE_2026-06-12.md" },
         { label: "True-prod deploy runbook (06-12)", path: "F:\\BIMpossible-Workspace\\02_Reference\\2026-06-12__true-prod-deploy-runbook.md" },
-        { label: "Wave 4.10 spec libs (backend)", path: "F:\\BIMpossible\\backend\\spec_sections" },
+        { label: "Wave 4.10 spec libs (backend)", path: "F:\\BIMpossible\\backend\\aec\\spec_data" },
         { label: "Waves 10-19 closeout (06-13)", path: "F:\\BIMpossible-Workspace\\00_Strategy\\2026-06-13__Waves10-19_CloseOut_Status_and_Remaining_Work.md" },
         { label: "Build log", path: "F:\\BIMpossible-Workspace\\01_BuildLog" },
         { label: "Code", path: "F:\\BIMpossible" }
