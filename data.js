@@ -1055,7 +1055,7 @@ window.DASHBOARD_DATA = {
       links: [
         { label: "Program plan", path: "F:\\AI-Dev\\AI-Server\\PROGRAM_PLAN.md" },
         { label: "Handoffs (WP-A..G)", path: "F:\\AI-Dev\\AI-Server\\handoffs" },
-        { label: "Build/hardware plan", path: "F:\\AI-Dev\\AI-Brain-Data\\_status\\AI-Server_Build_and_Integration_Plan.md" },
+        { label: "Build/hardware plan", path: "F:\\AI-Brain-Data\\_status\\AI-Server_Build_and_Integration_Plan.md" },
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
@@ -1129,8 +1129,8 @@ window.DASHBOARD_DATA = {
         "123 uncommitted files as of 2026-07-21 (up from 3 on 06-28, 84 on 07-14) — daily Revit-AI context/copy-state/raw-log churn has gone 3+ weeks without a commit"
       ],
       links: [
-        { label: "Local vault", path: "F:\\AI-Dev\\AI-Brain-Data" },
-        { label: "Revit-AI context", path: "F:\\AI-Dev\\AI-Brain-Data\\Revit-AI\\context" }
+        { label: "Local vault", path: "F:\\AI-Brain-Data" },
+        { label: "Revit-AI context", path: "F:\\AI-Brain-Data\\Revit-AI\\context" }
       ],
       recent: [
         "2026-06-28 — normalize line endings (8e8b564)",
@@ -1188,10 +1188,10 @@ window.DASHBOARD_DATA = {
       id: "dashboard-auto",
       name: "Dashboard (Auto Clone)",
       icon: "refresh",
-      oneLiner: "Automation-dedicated clone of the ai-dev-dashboard repo. The scheduled refresh pipeline (sync_*.py scripts, GitHub Actions sync) commits directly here; F:\\AI-Dev\\Dashboard is the human-edit copy.",
+      oneLiner: "Automation-dedicated clone of the ai-dev-dashboard repo. The scheduled refresh pipeline (sync_*.py scripts, GitHub Actions sync) commits directly here; F:\\AI-Dashboard\\Dashboard is the human-edit copy.",
       status: "active",
       phase: "main branch, same remote as Dashboard (YourBIMpossible/ai-dev-dashboard) — both clones now in sync with origin (confirmed 2026-07-23, HEAD a571627). The 2026-06-28 10-commit fast-forward lag is long resolved; the scheduler runs the 06:00 daily refresh from THIS clone via Task Scheduler, confirmed landing pushes 07-19 through 07-23. The local dashboard monitor (:8081 live-server + 2min loop) was REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan state — refresh is now scheduled-or-on-demand only (Refresh-Now.cmd).",
-      focus: "CI/CD write target for automated data refreshes; do not hand-edit here — manual changes go in F:\\AI-Dev\\Dashboard. Both known deploy targets are live and independently verified: Cloudflare Pages (deploy.yml → wrangler, the deliberate pipeline) and a parallel, unconfigured default GitHub Pages auto-build (no workflow file drives it — just a side effect of the repo being public). They currently serve identical content; worth deciding which one is canonical if that ever matters.",
+      focus: "CI/CD write target for automated data refreshes; do not hand-edit here — manual changes go in F:\\AI-Dashboard\\Dashboard. Both known deploy targets are live and independently verified: Cloudflare Pages (deploy.yml → wrangler, the deliberate pipeline) and a parallel, unconfigured default GitHub Pages auto-build (no workflow file drives it — just a side effect of the repo being public). They currently serve identical content; worth deciding which one is canonical if that ever matters.",
       progress: {
         label: "Automation pipeline",
         phases: [
@@ -1212,7 +1212,7 @@ window.DASHBOARD_DATA = {
       blockers: [],
       reminders: ["Two independently-live copies of this dashboard exist: Cloudflare Pages (deliberate, deploy.yml) and GitHub Pages (incidental, unconfigured default for a public repo) — both served identical content as of 2026-07-23"],
       links: [
-        { label: "Auto clone folder", path: "F:\\AI-Dev\\Dashboard-auto" },
+        { label: "Auto clone folder", path: "F:\\AI-Dashboard\\Dashboard-auto" },
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/ai-dev-dashboard" }
       ],
       recent: [
