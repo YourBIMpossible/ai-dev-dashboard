@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-08-25T06:08:32.200298Z",
- "count": 361,
+ "generated_at": "2026-08-26T06:09:38.595209Z",
+ "count": 365,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"b4820cecc7b4c796eef6e17473616a57-gzip\"",
+   "etag": "\"56f05fbd55b7ff6cd5b6ff2d85968bf9-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Mon, 24 Aug 2026 13:08:42 GMT",
+   "last_modified": "Tue, 25 Aug 2026 23:45:29 GMT",
    "last_status": 200,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -19,7 +19,7 @@
    "last_item_published": "2026-08-21T08:12:58Z",
    "last_modified": "Fri, 21 Aug 2026 08:12:58 GMT",
    "last_status": 304,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,67 +27,66 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-08-18T14:13:44Z",
+   "last_item_published": "2026-08-25T18:23:07Z",
    "last_status": 200,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
-   "consecutive_failures": 1,
-   "etag": "W/\"9bc344e1a9e1b68e862632a4d9b9b58c\"",
+   "consecutive_failures": 0,
+   "etag": "W/\"abe4422225b223ae7c304f1e820f2166\"",
    "last_failure": "2026-08-25T06:08:32.200298Z",
    "last_item_count": 10,
-   "last_item_published": "2026-08-12T08:49:32Z",
-   "last_modified": "Tue, 18 Aug 2026 12:35:07 GMT",
+   "last_item_published": "2026-08-25T14:15:28Z",
+   "last_modified": "Tue, 25 Aug 2026 14:38:46 GMT",
    "last_status": 200,
-   "last_success": "2026-08-24T07:24:44.927714Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
-   "stale_reason": "",
-   "last_error": "HTTP 403"
+   "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"407d89154ff5d5fedde67a105a7d2ed3\"",
+   "etag": "W/\"8d4bf0ca60126e2117b78ad500da12b7\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 24 Aug 2026 11:14:01 GMT",
+   "last_modified": "Tue, 25 Aug 2026 15:03:44 GMT",
    "last_status": 200,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"73c65519a54dc02c6e6e510d6f690bcf\"",
+   "etag": "W/\"ffdfa94d3e9ecf8d7fda814c5e2d5f0e\"",
    "last_item_count": 10,
-   "last_item_published": "2026-08-24T16:54:09Z",
+   "last_item_published": "2026-08-25T20:44:00Z",
    "last_status": 200,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-25T01:05:00Z",
-   "last_modified": "Tue, 25 Aug 2026 02:30:08 GMT",
+   "last_item_published": "2026-08-26T00:48:00Z",
+   "last_modified": "Wed, 26 Aug 2026 01:57:27 GMT",
    "last_status": 200,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 38,
+   "consecutive_failures": 39,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-25T06:08:32.200298Z",
+   "last_failure": "2026-08-26T06:09:38.595209Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "38 consecutive failures: HTTP 403"
+   "stale_reason": "39 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -95,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-19T14:03:17Z",
    "last_status": 304,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"a79c399022d213719bdaaa1b2a3c6a76\"",
+   "etag": "W/\"bd277025be5faffb9e957613a3e1f318\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,12 +124,90 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-25T06:08:32.200298Z",
+   "last_success": "2026-08-26T06:09:38.595209Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Exclusive: Interview with BIMdance CEO Aleksandr Sutyagin",
+   "url": "http://revitaddons.blogspot.com/2026/08/exclusive-interview-with-bimdance-ceo.html",
+   "source": "revit-addons",
+   "published": "2026-08-26T00:48:00Z",
+   "summary": "Editor's Note: Aleksandr Sutyagin of BIMdance recently reached out to us and was gracious enough to do an interview. Can you please describe your services and tools in a quick, elevator pitch? BIMdance tools focus on simplifying the day-to-day workflows for Building Controls engineering teams. We replace manual spreadsheets and static drawings with automated visual design, bidirectionally syncing control system logic directly with Autodesk Revit models. What is your Smart Building DataHub? Smart Building DataHub is a unified cloud platform and Autodesk Revit plugin that automates the design and configuration of building control systems, also known as BAS, BMS, or BACS. It allows engineers to visually design control logic in a web browser, automatically generate point lists, schematics, and bills of materials, and sync device placements and cable routing natively inside Revit. Can you give our readers an idea of pricing for your services and tools? Yes. The annual subscription for Smart Building DataHub, which includes full access to both the cloud web platform and the Autodesk Revit plugin, is 1500 USD per user per year. Is there anything else you'd like our readers to know? Smart…",
+   "id": "82c516c0a5b41efc",
+   "fetched_at": "2026-08-26T06:09:38.595209Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Product interview with no technical detail on how the Revit integration works or API usage.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-26T06:09:38.595209Z"
+   }
+  },
+  {
+   "title": "pyRevit v6.5.5",
+   "url": "https://github.com/pyrevitlabs/pyRevit/releases/tag/v6.5.5.26237%2B2044",
+   "source": "pyrevit-releases",
+   "published": "2026-08-25T19:19:34Z",
+   "summary": "Changes Hotfix with tmg gfx bug fix aa5de50 & c7dd28a Downloads 🔹 See Assets section below for all download options pyRevit 📦 pyRevit 6.5.5.26237 Installer 📦 pyRevit 6.5.5.26237 Installer - Admin / All Users / %PROGRAMDATA% pyRevit CLI (Command line utility) 📦 pyRevit CLI 6.5.5.26237 Installer - Admin / System %PATH%",
+   "id": "7e823a0bdaa38955",
+   "fetched_at": "2026-08-26T06:09:38.595209Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 75,
+    "why": "pyRevit hotfix release; you use pyRevit for scripted automation and need to track stability fixes.",
+    "topics": [
+     "pyrevit",
+     "releases"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-26T06:09:38.595209Z"
+   }
+  },
+  {
+   "title": "The next chapter of interoperability starts with connected data",
+   "url": "https://aps.autodesk.com/blog/next-chapter-interoperability-starts-connected-data",
+   "source": "aps-blog",
+   "published": "2026-08-25T18:23:07Z",
+   "summary": "The next chapter of interoperability starts with connected data whitney.lawrence 25 Aug 2026 Shelly Mujtaba Share Today’s design and make workflows rarely happen inside a single application. Architects, engineers, manufacturers, and project teams rely on a growing ecosystem of Autodesk and third-party tools to bring ideas to life. As those workflows become more connected, customers expect their data to move more seamlessly between applications while preserving fidelity and design intent. That helps reduce manual effort, minimize rework, and enable more connected workflows across teams. That is why interoperability remains a strategic priority for Autodesk. Today, Autodesk announced that it has entered into a definitive agreement to acquire select technology assets and intellectual property from BIMDeX , a technology provider focused on data interoperability, and to hire a subset of the talented BIMDeX team. Should the proposed acquisition close as anticipated, the technology and product engineering talent included in the transaction are expected to strengthen Autodesk’s interoperability capabilities and support our broader platform strategy. Building on our existing…",
+   "id": "eb770a38df819b84",
+   "fetched_at": "2026-08-26T06:09:38.595209Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Autodesk interoperability strategy shift; relevant to understanding APS and data flow but no concrete API or format changes announced yet.",
+    "topics": [
+     "interoperability",
+     "autodesk-strategy"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-26T06:09:38.595209Z"
+   }
+  },
+  {
+   "title": "The Surveyor’s Evolution On Model-Based BIM Projects",
+   "url": "https://bimcorner.com/the-surveyors-evolution-on-model-based-bim-projects/",
+   "source": "bim-corner",
+   "published": "2026-08-25T14:15:28Z",
+   "summary": "When industry professionals talk about digital transformation in construction, they usually imagine BIM coordinators sitting in air-conditioned site offices, clicking through 3D models or running clash checks. In my experience, they rarely picture the surveyor out in the rain with a total station and a field controller. However, what I have observed, is that the model-based project delivery has transformed the surveyor’s job more than almost any other role on site. On complex Design and Build infrastructure contracts, 3D models and digital tools have unfortunately not reduced the surveyor’s daily workload, but instead of that, they have expanded it. The background On traditional 2D projects, a surveyor’s scope had clear boundaries. They received approved paper drawings, established control points, staked out lines on site, and checked finished elevations. On model-based jobs, that boundary has disappeared. Surveyors manage a constant flow of spatial data moving between design offices, field rovers, and heavy machinery. Beyond setting out and measuring, their daily routine now includes machine file prep, geometric checks, and spatial coordination across the entire job. In my…",
+   "id": "dad61bdd75b77851",
+   "fetched_at": "2026-08-26T06:09:38.595209Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Workflow narrative about site roles; no technical techniques or BIM authoring detail applicable to your tooling practice.",
+    "topics": [
+     "construction-process"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-26T06:09:38.595209Z"
+   }
+  },
   {
    "title": "Exclusive: Interview with Nonica Co-Founder and CTO Jaime Alonso",
    "url": "http://revitaddons.blogspot.com/2026/08/exclusive-interview-with-nonica-co.html",
@@ -151,7 +228,7 @@
    }
   },
   {
-   "title": "Free Maestro: Create, Organize, Deploy, and Manage Custom Autodesk Revit Tools",
+   "title": "Free Maestro: Create, Organize, Deploy, & Manage Custom Autodesk Revit Tools",
    "url": "http://revitaddons.blogspot.com/2026/08/free-maestro-create-organize-deploy-and.html",
    "source": "revit-addons",
    "published": "2026-08-23T17:31:00Z",
