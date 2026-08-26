@@ -256,151 +256,91 @@ window.DASHBOARD_DATA = {
       recent: ["2026-08-05 - Doors D0/D1 shipped: a two-pass probe against real electrical models found zero ambiguous cases (#250, 4590c77), then boundary-element resolution shipped for real — doors now resolve to the room PAIR they separate, not a single room (#253, 751155f)","2026-08-04 - Write Engine Increment 1 (typed values) shipped lockstep across both repos and cleared its live-smoke gate 8/8, incl. a unit-conversion proof at a ×10,763.91 factor — backend #232 (0e8dd03) + Add-Ins #49 (0f3d318)","2026-08-04 - Owner-authorized overnight run merged on green CI: admin/member roles (#243), firm-key admin-gating + personal-key tier + audit log (#245), account-link headers (#246), backend access logs + /whoami (#247) — all live-verified after the container rebuild (DB migration head corrected to 13014695175a); C-1 key-management unification (#249) and the firm-parameter neutrality doc (#248) landed the same evening just outside the report's own scope, plus a redis 8.1.0 bump (#237) and Phase 3.10a's rollout flag deletion (#244)","2026-07-21/22 - The three long-parked draft PRs finally merged: #186 (Phase 7 sync-token + DA4R scaffold + Phase 13 Change Set backend Stage 1), #187 (SyncWithCentral re-enable behind a one-time token), #189 (Phase 8 provision-time elevated consent)","2026-07-21 - docs(strategy): land the 2026-07-21 ProjectRecipe set (decision brief v2, direction summary, gap analysis, panel synthesis)","2026-07-20 - Weekly audit: WSR8 fully resolved + 4 conditional gaps closed alongside it; RE-1 (EventDispatcher queue-drain in the Revit add-in) surfaces as the new High, traced end-to-end for the first time","2026-07-20 - feat(open-in-revit): cloud-ids endpoint + R-button wiring merged via #188 (d2264eb) — first main-branch commit since the WriteEngine contract 4 days earlier","2026-07-16/20 - 3 substantial draft PRs opened, all still unmerged: #186 (Phase 7 sync-token + DA4R scaffold, plus Phase 13 Change Set backend Domain A Stage 1 — real code for a phase the ledger lists at 0%), #187 (stacked on #186 — full SyncWithCentral re-enable behind a one-time token), #189 (Phase 8's provision-time elevated-consent token, closing its last documented gap)","2026-07-16 - Write-spine convergence items 1+2 DONE, both merged same day: WriteEngine contract (29e96da — Protocol + engine enum + gated seam) and gate unification (df7add1 — live-write auth unified on the fail-closed check_firm_model_editor, the two hand-mirrored gate functions merged)","2026-07-15 - Phase 3.10a PROVEN LIVE: first-ever warm + join against a real cloud project (a4ecece) after the externalElementId↔native-id bridge fix (c2d5756); AC-1 closed via the real endpoint, AC-3 FAIL→PASS with p50 215ms→18ms via room-pool cache + bbox pre-filter (7f8735f/413adf8) — the blocker two audits called the #1 issue","2026-07-15 - WSR8 step 2 wired: fail-closed check_firm_model_editor role (92738b3) → gated LLM→live-Revit parameter write (9713356, flag OFF); marked BUILT+SHIPPED (8114f8e)","2026-07-15 - Phase 3.8 restarted: owner ratified the minimal wedge (b0369de); slice 1 ACC role-sync columns + is_draft landed inert (48c4826); is_draft moved to user_firm_memberships for per-user draft mode (d5cee40)","2026-07-15 - Write-spine convergence target RATIFIED (9eccdc6): one proposal contract + one permission gate + one audit trail; pluggable origins (spreadsheet, AI, in-Revit pane, batch) and engines (Revit Link, DA4R). Schedule-Push's designed gate-bypass overturned by banner","2026-07-15 - Day-2 Phase 3 audit (5 evidence agents) — written 18:40, then overtaken by its own findings' fixes the same evening; ProgramPlan Wave-22 cross-refs corrected (7be8f6a)","2026-07-14 - Phase 3 production-readiness audit + same-day fixes: Alembic single-head CI guard (1e07550), Dockerfile Phase 3.10a flag ARG/ENV (a2a4a23), frontend per-row status + flag-on crash guard (87ca90c), PHASE-STATUS.md + WAVE-STATUS.md corrected (f07ebb9)","2026-07-13/14 - Prod outage root-caused + fixed: 351 backend container restarts from two migrations landing with no backend-migrate run","2026-07-13 - Weekly full audit + same-day closeout: WSR8 (assistant Revit-write auth gate) + 16 other findings — 11 shipped in code/config, 6 accepted owner decisions, zero dangling (c4194c5, b6bb96f)","2026-07-12/13 - Phase 3.10a Cross-Model Room Join merged + migrated to prod (dd5adb1); warm-time writer gap found+fixed next day (c72f647/09cb66b); Phase 3.10b Furniture slice shipped (4bb6497); dynamic firm resolution P3-8-DYN shipped (72e88f8)","2026-06-28 - PRs #153–#157 merged: Embedded Assistant Phase 4c (conversation persistence + stop-and-edit) + Phase 4d project-context grounding; NetworkX graph-topology tools + Model Health graph checks (#157) + permission-flow graph tool; report-only security-scan + BIM semgrep + prose-flag hook; trivy CI pin (main 80d3407)","2026-06-23 - PR #142 merged (9f6f55c): P11 Model QA rules engine + P8 Wizard committed to main; expr-eval prototype-pollution CVE removed; relay frame guard + multi-tenant auth scoping + aec edge cases (audit remediation)"],
       audit: {
         lastRun: "2026-08-25",
-        runType: "Read-only reconciliation of the 45-item BIMpossible-web backlog against current repo state (4 parallel validation agents, 2026-08-25). The backlog was badly stale: 20 of 45 were already fixed in code and are now recorded closed (HYG-4/5/9/10/11/14/15/17/18/20/21/22, ARCH-CI-ADDINS-1, SEC-CI-ADDINS-2, ARCH-WRITE-1, CQ-SCHED-CADENCE-1, FE-PAIR-2, FE-SHARE-VIRT-1, FE-SHARE-DS-1, SLOP-DIST-3); 2 were factually wrong when logged and removed (ARCH-WIDENED-SCOPE-1 -- enrollment flag is ON not OFF; INFO-GRAPHIFY-1 -- no stale artifact exists); 8 carried a stale metric/line-ref now corrected in place (HYG-3 downgraded High->Medium, ARCH-NEW-2, FE-3, HYG-8/12/19, CQ-TEST-PAIR-1); ARCH-DIST-2 was corrected then RESOLVED in the Phase-3 re-verify (opener keeping uninsdeletekey is correct-by-design; the standalone opener owns the bimpossible:// handler and must clean up on uninstall -- sibling suite .iss documents the split). 22 remain genuinely open: 2 High (HYG-1 record-only, HYG-2 owner-gated), and a mix of Phase-2 fixes (HYG-6/13/16, SEC-AUTHZLOG-RETENTION-1), Phase-3 AddIns items which are build-lane-blocked or owner-queued (CQ-TEST-PAIR-1, HYG-12 AddIns half), and accepted-deferred items (RE-2, FE-1/2/3, SEC-cloud-1, HYG-23). No open Critical or live-exploitable Security-High. Full record: audit-resolution_2026-08-25.md; per-finding evidence: audit-findings-validation_2026-08-25.md.",
+        runType: "FINAL reconciliation (Phase 5, 2026-08-25). Of the original 45-item BIMpossible-web backlog, 33 are now dispositioned+closed and 12 remain — none of the 12 is undone work: they are 5 held-external/owner-action items + 7 accept-as-designed awaiting a one-word owner ratification. Phase 5 closed 10 more beyond the Phase-1 pass: HYG-6 (dead guard.py refs fixed, 0 residual cites), HYG-13 (docs-hygiene fixed upstream via #483; PR-non-gating is a documented deliberate ratchet), HYG-16 (promote-approved.md self-flags DORMANT-by-design), HYG-8 (hook DOES fire — core premise refuted), HYG-19 (no factually-wrong claim survives), HYG-3 (false-authoritative core fixed; snapshot frozen by owner decision D6), HYG-1 (historical gap, forward-prevention shipped), SEC-DIST-1 (unactionable — retired), CQ-TEST-PAIR-1 (delete-failure retry test added, AddIns 81c06f8), and SEC-AUTHZLOG-RETENTION-1/WSR22 (finding-prover red->green: the request path opens NO DB session — structurally supersedes the p99 load test; waiver ratified with evidence; .env SHADOW->ENFORCE is a SEPARATE owner rollout gate, not this finding). Remaining 12: held-external (HYG-2+HYG-7 live-task apply, HYG-12 AddIns-gate-subsystem merge, SEC-PAIR-2+RE-PAIR-1 owner scope) and accept-as-designed (RE-2, ARCH-NEW-2, FE-3, FE-1, FE-2, SEC-cloud-1, HYG-23). No open Critical or live-exploitable Security-High. Full record: audit-closure-FINAL_2026-08-25.md; per-finding evidence: audit-findings-validation_2026-08-25.md.",
         cadence: "weekly Sun 11:45pm + incremental Sun/Tue + on-demand",
         counts: {
           critical: 0,
-          high: 2,
-          medium: 15,
-          low: 3,
+          high: 1,
+          medium: 7,
+          low: 2,
           info: 2
         },
-        closedLastRun: 23,
+        closedLastRun: 33,
         trend: "improving",
         reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\audit-resolution_2026-08-25.md",
         reportFile: "bimpossible/audit-resolution_2026-08-25.md",
         ledgerPath: "F:\\BIMpossible-Workspace\\02_Reference\\_audit-runs.md",
         open: [
           {
-            id: "HYG-1",
-            sev: "high",
-            title: "No artifact proves the 2026-08-10 scheduled weekly-audit run actually fired vs. never ran (historical gap; forward-prevention shipped in amended task — record-only, unfixable retroactively)",
-            where: "system/scheduled-tasks"
-          },
-          {
             id: "HYG-2",
             sev: "high",
-            title: "The live scheduled task's SKILL.md still omits the Slop + Hygiene lenses though the matrix marks them required weekly; fix sits in the unapplied SKILL.amended-candidate.md (owner-gated apply, closes with HYG-7)",
-            where: "task SKILL.md"
+            title: "[HELD — apply to live G:\\ scheduled task] SKILL.amended-candidate.md (adds Slop + Hygiene lenses) is COMPLETE + defect-corrected locally; applying it to the live task closes this + HYG-7. Live-task mutation held for owner go.",
+            where: "task SKILL.md (candidate ready)"
           },
           {
-            id: "HYG-3",
+            id: "HYG-7",
             sev: "medium",
-            title: "Core fixed 2026-08-17 (mirror README now says POINTER, source path _G-Coord-Desktop exists); only the raw snapshot itself remains ~2.3mo stale — refresh or delete it (downgraded from High per 2026-08-25 validation)",
-            where: "BIMpossible_Workspace/system/scheduled-tasks/_live/"
+            title: "[HELD — apply to live G:\\ scheduled task] _backups/ retirement + Step-0 contradiction fix are in the same candidate; closes together with HYG-2 on apply.",
+            where: "task SKILL.amended-candidate.md"
           },
           {
-            id: "SEC-AUTHZLOG-RETENTION-1",
+            id: "HYG-12",
             sev: "medium",
-            title: "No load test yet measures authz_decision_log insert rate / p99 latency before any SHADOW-mode fleet flip (= Checklist WSR22; .env still AUTHZ_ENFORCEMENT_MODE=SHADOW)",
-            where: "backend/db/models.py; aec/authz/audit.py"
+            title: "[BUILT LOCALLY — merge held] AddIns doc-reference + docs-budget gates ported (AddIns 0b39bcf; byte-identical .mjs, 184 refs baselined, dormant workflow, gates green). This is a NEW CI subsystem — merging the AddIns branch activates it. Owner go/no-go on the merge.",
+            where: "AddIns scripts/check-doc-references.mjs + docs-hygiene.yml"
           },
           {
             id: "SEC-PAIR-2",
             sev: "medium",
-            title: "Claimed-file lifecycle has no terminal orphaned state and no sweeper; claimed->deleted is best-effort only",
+            title: "[OWNER SCOPE] Claimed-file lifecycle has no terminal orphaned state / sweeper (carried AddIns) — needs owner scope confirmation before build.",
             where: "Add-Ins pairing file lifecycle"
-          },
-          {
-            id: "SEC-DIST-1",
-            sev: "medium",
-            title: "Distribution/installer security item carried from prior cycle — never named a concrete file/line, unactionable as written (proposed for retirement or re-specification per 2026-08-25 validation)",
-            where: "installer"
           },
           {
             id: "RE-PAIR-1",
             sev: "medium",
-            title: "Watcher liveness has no failure transition — alive to dead happens via an unsubscribed Error event with no detection or recovery",
+            title: "[OWNER SCOPE] Watcher liveness has no failure transition (alive->dead via unsubscribed Error, no detection/recovery; carried AddIns) — needs owner scope confirmation.",
             where: "Add-Ins pairing watcher"
           },
           {
             id: "RE-2",
             sev: "medium",
-            title: "Single pipe instance vs. a 4-worker relay thread pool caps Revit-link throughput to one operation at a time by design (carried, accepted scope)",
+            title: "[ACCEPT-AS-DESIGNED — owner ratify] Single pipe instance vs a 4-worker relay thread pool caps Revit-link throughput to one op at a time, by design for current scale.",
             where: "PipeServer.cs:82,97 - revit-relay/relay.py:107"
           },
           {
             id: "ARCH-NEW-2",
             sev: "medium",
-            title: "aec/router.py now 3,233 lines (not 2,828) and has regressed twice — maintainability drag; size-reduction deferred (metric corrected 2026-08-25, \"no regression\" claim dropped)",
+            title: "[ACCEPT-AS-DESIGNED — owner ratify] aec/router.py 3,233 lines — maintainability drag; size-reduction deferred to a size/complexity trigger.",
             where: "backend/aec/router.py"
-          },
-          {
-            id: "CQ-TEST-PAIR-1",
-            sev: "medium",
-            title: "4 of 5 named PendingPairWatcher.cs paths now tested (claim-race, malformed JSON, TTL, duplicate-nonce); only the delete-failure retry path remains untested (Phase 3 AddIns fix)",
-            where: "Add-Ins PendingPairWatcher.cs"
           },
           {
             id: "FE-3",
             sev: "medium",
-            title: "model/page.tsx god-component now 3,564 LOC (not ~3,458) — carried, deferred to the 5k-element benchmark trigger (metric corrected 2026-08-25)",
+            title: "[ACCEPT-AS-DESIGNED — owner ratify] model/page.tsx god-component 3,564 LOC — split deferred to the 5k-element benchmark trigger.",
             where: "frontend/app/project/[id]/model/page.tsx"
-          },
-          {
-            id: "HYG-6",
-            sev: "medium",
-            title: "Reference validator red with dangling refs to backend/guard.py, deleted 2026-08-16, still cited by 7+ agent defs + system/REINSTALL-RECOVERY-PROMPT.md (Phase 2 fix)",
-            where: "docs + .claude/agents/*.md + system/REINSTALL-RECOVERY-PROMPT.md"
-          },
-          {
-            id: "HYG-7",
-            sev: "medium",
-            title: "_backups/ is simultaneously declared retired and mandated by two directly contradicting rules (owner-gated apply, closes with HYG-2)",
-            where: ".claude/commands/audit-resolution.md Step 0 vs task SKILL.md:42,44,55"
-          },
-          {
-            id: "HYG-8",
-            sev: "medium",
-            title: "Agent-gates: hook remind-agent-gates.mjs now DOES fire on the 3 gate patterns (\"nothing invokes them\" is false), but it is advisory-only and never blocks; CLAUDE.md still overclaims \"run every time\" (text corrected 2026-08-25)",
-            where: "BIMpossible/CLAUDE.md:72-82; .claude/hooks/remind-agent-gates.mjs"
-          },
-          {
-            id: "HYG-12",
-            sev: "medium",
-            title: "Workspace now has a reference-validator + docs-budget + docs-hygiene.yml; only the AddIns repo still has no reference validator or budget (Workspace half resolved 2026-08-25; AddIns half = Phase 3)",
-            where: "Add-Ins repo (no scripts/*.mjs validator)"
-          },
-          {
-            id: "HYG-13",
-            sev: "medium",
-            title: "docs-hygiene CI job is non-gating and both its checks are currently FAIL with nobody acting on the tracking issue #345 (Phase 2 fix)",
-            where: ".github/workflows/security-scan.yml:249-300"
-          },
-          {
-            id: "HYG-16",
-            sev: "medium",
-            title: "A live slash command cites a strategy-ledger file that does not exist and fails on run (self-flagged DORMANT) — fix or retire (Phase 2)",
-            where: "Workspace/.claude/commands/promote-approved.md:11"
           },
           {
             id: "FE-1",
             sev: "low",
-            title: "useScheduleFetch still calls pollUntilWarm<any>(...) (carried, accepted debt)",
+            title: "[ACCEPT-AS-DESIGNED — owner ratify] useScheduleFetch pollUntilWarm<any>(...) accepted typing debt.",
             where: "frontend/app/hooks/useScheduleFetch.ts:123-126"
           },
           {
             id: "FE-2",
             sev: "low",
-            title: "Legacy filter/sort/grouping schema-migration any types remain in the normalizer (carried, accepted debt)",
+            title: "[ACCEPT-AS-DESIGNED — owner ratify] normalize.ts any x7 accepted schema-migration debt.",
             where: "frontend/app/lib/filters/normalize.ts:33,44,45,57,63,64,76"
-          },
-          {
-            id: "HYG-19",
-            sev: "low",
-            title: "Doc-age hygiene: 2 of 3 cited docs already self-flag as historical/retired and the 3rd was rewritten 2026-08-22 — no \"now factually wrong\" claim survives; downgraded to plain staleness (corrected 2026-08-25)",
-            where: "Add-Ins/setup.md:84; Workspace memory docs"
           },
           {
             id: "SEC-cloud-1",
             sev: "info",
-            title: "EMEA region inferred from URN convention; unrecognized region returns None rather than guessing (as designed) — \"unexercised\" was stale; test_cloud_ids.py:118 covers it (accept-as-designed)",
+            title: "[ACCEPT-AS-DESIGNED — owner ratify] cloud_ids.py returns None for unknown region rather than guessing (by design); tested at test_cloud_ids.py:118.",
             where: "backend/aps/cloud_ids.py:18-33,64-77"
           },
           {
             id: "HYG-23",
             sev: "info",
-            title: "Automation output-consumer census: two parallel decision-log roots (decision-log/ + docs/decision-log/), several report-only outputs with no confirmed reader — consolidation is an owner call",
+            title: "[OWNER POLICY] Two parallel decision-log roots (decision-log/ + docs/decision-log/); consolidation is an owner call (also owns the I-08 cross-repo-cite reroute).",
             where: "flag-prose.mjs; decision-log/ + docs/decision-log/INDEX.md"
           }
         ],
@@ -679,24 +619,20 @@ window.DASHBOARD_DATA = {
       recent: ["2026-08-05 - feat(a5): Assistant user guide authored + wired to F1, pairing copy fixed (#53, 7bdfa68) — closes out the overnight-run backlog","2026-08-04 - Firm-parameter neutrality rule documented with an exhaustive exception list (#52, 9ce43c9), paired with backend's same-day doc (#248)","2026-08-04 - Overnight-run trio merged on green CI: broken project loads no longer silently render as empty (#50, e0ea397 — root cause was a 200 OK with an unreadable HTML body, not a missed status code); pairing screen now shows which backend it's connecting to (#51, e38648e, paired with backend /whoami #247); Assistant pane header docked + pairing panel compacted (#45, d1040b7)","2026-08-04 - Write Engine Increment 1 (Add-Ins half) shipped: ApplyOne writes typed Integer + unit-aware Double on instance parameters, merged lockstep with backend #232 and cleared live-Revit smoke 8/8 incl. a ×10,763.91 unit-conversion case (#49, 0f3d318)","2026-08-04 - feat(conformance): Project Conformance Engine lands its first real code — Revit-free core + collector adapters, against the 06-28 design spec (#10, 94b21ab)","2026-07-27 - fix(revitlink): RE-1 closed — the audit's carried High (EventDispatcher abandoned-request execution) fixed for real, plus a secret-scan gate added (#46, 19cd5dd)","2026-07-26 - fix(revitlink): \"Passes 1-4\" — functionality + Glass theme + honest controls + definition-of-done + ship-set deploy fix, live-verified in Revit 2026 (#40, 13f1a45); docs restored for the post-audit UI workflow (#44, 1366569)","2026-07-25 - feat(t4-task6): per-edit apply outcomes posted to edit_log, closing an idempotency race (#39, faf9475)","2026-07-20 - feat(open-in-revit): bimpossible:// protocol handler (new BIMpossible.OpenInRevit project) + RevitLink PendingOpenWatcher (a661924) — pairs with BIMpossible's cloud-ids endpoint (#188) so the web app's 'Open in Revit' button actually launches the model","2026-07-15 - CI gap CLOSED (d292a38): CI now compiles RevitLink on both TFMs (net48 + net8.0-windows) — the real lesson C-01 pointed at, even though C-01 itself was a false positive. Same commit fixed 3 latent twins of audit findings M-21/M-10/M-28","2026-07-15 - Panel schedules: grid-aligned rows across columns, copy ALL start-sheet detail items (not just the legend), clear key-plan/level/north-arrow, propagate Sheet Collection (48dde6f/864a672)","2026-07-15 - Duplicate tool UX: nothing pre-checked by default + shift-click range-select, Check-all/Uncheck-all act on the full dataset (not just visible filter results), naming-collision perf fix (c40ac1c/9fd4791/65dfa51)","2026-07-15 - Progress popup for every long-running loop across the suite (cc07730/3368097); Place Callout Sheets popups follow the real Revit theme (23f9d45); Section Clip derives datum from section geometry (3ab69fb)","2026-07-14 - 2026-07-12 audit CLOSED: C-01 disproven (clean net48 build), all 10 highs fixed, Check Conflicts wired, 2 dead tools retired (audits/2026-07-12__audit-resolution.md)","2026-07-14 - feat(revitlink): Replicate Levels tab, Duplicate UX, panel-schedule packing + legend fixes (98c515b)","2026-07-14 - fix(retag-rooms): orphaned '?' tags were silently skipped and never reported — owner-caught bug (95c0ba4)","2026-07-14 - fix(ribbon): tooltip images were 5x over Revit's 355px limit — stripped 16 oversized images + fixed the capture recipe (6a5a48f)","2026-07-14 - fix(theme): last two theme-blind popups (Room Data, Electrical Param Sync) now follow Revit's Light/Dark (e6e936c)","2026-07-14 - feat(duplicate): view-rename autofill detects ALL disciplines in a mixed selection, one Find row each (d97339f)"],
       audit: {
         lastRun: "2026-08-25",
-        runType: "2026-08-25 read-only reconciliation of the carried 2026-07-12 backlog against current repo state: MI-20 RESOLVED (no conformance-* branch exists in git branch -a any more) and MI-19 REMOVED (refuted -- today's 3 AddIns worktrees all carry real unmerged work, none stale/merged/orphaned); L-13's cited line numbers corrected (stale post-refactor, multi-dialog shape persists). The remaining 9 are genuinely open: MI-17 + M-14 (deferred/redesign), and Phase-3 AddIns items (I-08 rerouted to the HYG-23 decision-log-root policy call; ARCH-DIST-2 RESOLVED in Phase-3 re-verify and CQ-TEST-PAIR-1 build-lane-blocked, both tracked on the BIMpossible-web card) alongside asset/policy items (M-30 needs Revit, M-33 icon, L-03/L-19/L-21 owner calls). NOTE the underlying freshness debt persists: no full /audit-format report has run for Add-Ins since 2026-07-12 -- this pass reconciled the existing findings, it was not a new full code audit. git log since 2026-07-12 shows 100+ commits on main not individually re-audited.",
+        runType: "2026-08-25 audit-closure Phase-5 build-lane pass (branch claude/audit-closure, 6 commits; push + PR + merge HELD for owner go). Closed 4 carried findings in real code: M-14 (LevelSheetTitle red->green span fix, 81c06f8), MI-17 (SheetSortKey real extraction + test replacing the documented-mirror, 81c06f8), M-33 (dedicated Place Callout Sheets ribbon icon replacing the placeholder, 1d37070), I-08 (dead decision-log cite requalified + rerouted to the HYG-23 decision-log-root owner policy, 44585d5). Also shipped, tracked elsewhere: CQ-TEST-PAIR-1 delete-failure retry test (81c06f8, carried on the BIMpossible-web card) and HYG-12 doc-reference + docs-budget gate port (0b39bcf) -- a NEW CI subsystem shipped dormant; merging the branch activates it, owner go/no-go. M-30 PARTIAL: guide steps 1+2 render byte-stable (45d04bd), step 3 (built sheets in Project Browser) routed to a documented manual live-Revit capture in CAPTURE-LIST.md -- HELD, explicitly not fabricated. Residual 5 are all owner-call/held: M-30 (held live capture), L-03 / L-13 / L-19 (accept-as-designed), L-21 (RevitAPI version-pin policy ratified in-repo, 096184a). Prior 2026-08-25 reconciliation (MI-20 + MI-19 closed) stands. Freshness debt persists: no full /audit report since 2026-07-12 -- 100+ un-re-audited commits on main.",
         cadence: "on-demand",
-        counts: { critical: 0, high: 0, medium: 2, low: 6, info: 1 },
-        closedLastRun: 2,
-        trend: "improving -- 2 of 11 carried findings reconciled closed 2026-08-25; full re-audit still owed since 2026-07-12",
+        counts: { critical: 0, high: 0, medium: 0, low: 5, info: 0 },
+        closedLastRun: 6,
+        trend: "improving -- 6 of 11 carried findings now closed (2 reconciled + 4 fixed in code 2026-08-25 Phase-5); 5 residual are held/accept-as-designed; full re-audit still owed since 2026-07-12",
         reportPath: "F:\\BIMpossible-AddIns\\audits\\2026-08-22__link-pdf-to-sheets-phase0-audit.md",
         reportFile: "addins/2026-08-22__link-pdf-to-sheets-phase0-audit.md",
         ledgerPath: "F:\\BIMpossible-AddIns\\audits",
         open: [
-          { id: "M-14", sev: "medium", title: "LevelSheetTitle.Build's split-level continuation marker needs a signature-level redesign, not a patch — deferred, not scheduled, explicitly not 'fixed'.", where: "Shared/Sheets/LevelSheetAllocator.cs (LevelSheetTitle.Build)" },
-          { id: "MI-17", sev: "medium", title: "SortSheetsCommand's 'fix' is a documented mirror, not a real extraction — the pure sort logic stays private inside a Revit-bound class and the test hand-copies the algorithm. A real fix needs an H-03-style extraction.", where: "Commands/SortSheetsCommand.cs:167-180" },
-          { id: "M-30", sev: "low", title: "Reclassified from a safety finding to screenshot debt: Trim Out-of-Scope Sheets' guide text and toggle warning are correct and complete, but 3 images are stale/missing (captured before the destructive toggle existed). Errs safe — under-shows the danger, not over.", where: "How to Guides/.../Trim Out-of-Scope Sheets/assets/*" },
-          { id: "M-33", sev: "low", title: "Place Callout Sheets ships with a placeholder icon, reusing Create Callout Views' icon pixel-for-pixel (self-admitted in a code comment). Ribbon icon/tooltip-image polish (also: 20/37 buttons missing ToolTipImage) postponed to a dedicated pass, owner decision 2026-07-14.", where: "App.cs (Place Callout Sheets Icon=)" },
-          { id: "L-03", sev: "low", title: "Zero 16px icon variants exist anywhere in Resources (all 56 icons are 32×32) — corrected severity 2026-07-14: this is a Quick Access Toolbar edge case only (Revit downscales cleanly inside the ribbon panel itself), not the 'affects the majority of the ribbon' issue originally claimed.", where: "Resources/*.png" },
-          { id: "L-13", sev: "low", title: "Set Up Project still shows sequential modal dialogs instead of one consolidated report — a UX redesign, needs a human call. (Cited lines 72/202/206/212 are stale post-refactor; the multi-dialog shape persists — verified 2026-08-25.)", where: "SetupProjectOrchestratorCommand.cs" },
-          { id: "L-19", sev: "low", title: "secrets.DASHBOARD_PAT's actual token scope is still unconfirmable from any file visible to static inspection.", where: ".github/workflows/dashboard-sync.yml:37" },
-          { id: "L-21", sev: "low", title: "RevitAPI NuGet still pinned to 2026.*-* across RevitLink and all 6 discipline add-ins for a net8 target CLAUDE.md describes as spanning Revit 2025/26/27 — a cross-version API difference would only surface via manual multi-version testing; needs a human policy call.", where: "e.g. BIMpossible.Structural/BIMpossible.Structural.csproj:24" },
-          { id: "I-08", sev: "info", title: "Dead decision-log citation (decision-log/2026-05-25__revit-link-remediation.md, which doesn't exist) lives in .cs comments — out of scope for the 2026-07-14 docs-only reconciliation pass.", where: "Commands/SyncWithCentralCommand.cs:28,49 · SyncWithCentralRibbonCommand.cs:49" }
+          { id: "M-30", sev: "low", title: "[HELD — manual live-Revit capture] Place Callout Sheets guide steps 1+2 now render byte-stable (45d04bd); step 3 (built sheets in Project Browser) has no headless window and is routed to a documented manual live-Revit capture in CAPTURE-LIST.md. Honest escape-valve, not fabricated — closes when the owner captures step 3 live.", where: "How to Guides/.../Place Callout Sheets/assets/CAPTURE-LIST.md" },
+          { id: "L-03", sev: "low", title: "[ACCEPT-AS-DESIGNED — owner ratify] Zero 16px icon variants (all 56 icons 32×32) — Quick Access Toolbar edge case only; Revit downscales cleanly inside the ribbon panel. Accepted scope.", where: "Resources/*.png" },
+          { id: "L-13", sev: "low", title: "[ACCEPT-AS-DESIGNED — owner ratify] Set Up Project shows sequential modal dialogs instead of one consolidated report — a UX redesign needing a human call; multi-dialog shape verified 2026-08-25.", where: "SetupProjectOrchestratorCommand.cs" },
+          { id: "L-19", sev: "low", title: "[ACCEPT-AS-DESIGNED — owner ratify] secrets.DASHBOARD_PAT's actual token scope is unconfirmable from any file visible to static inspection — nothing to fix in-repo; owner verifies scope in GitHub settings.", where: ".github/workflows/dashboard-sync.yml:37" },
+          { id: "L-21", sev: "low", title: "[ACCEPT-AS-DESIGNED — policy ratified in-repo 096184a] RevitAPI NuGet pinned 2026.*-* across RevitLink + 6 discipline add-ins; the version-pinning policy is now documented in-repo and a cross-version difference would only surface via manual multi-version testing. Owner ratify the policy.", where: "e.g. BIMpossible.Structural/BIMpossible.Structural.csproj:24" }
         ],
         history: [
           { date: "2026-08-22", type: "Non-audit artifact -- Link PDF to Sheets Phase 0 current-state audit, a single-feature narrative engineering review with NO severity/ID scheme; NOT a scored /audit findings report", scope: "BIMpossible.RevitLink's Link-PDF-to-Sheets command only (drawing-area detection, grid packing, slot order, sheet targeting, ownership/persistence, rerun behavior) -- current-code + current-behavior read, no behavior changes made. Does not touch or re-examine any RevitLink command outside this one feature.", result: "6 gaps documented in prose (no IDs, no High/Med/Low tags): drawing-area detection can still misread internal geometry as an edge within its 0.40 ft cap; the grid packer is a reused generic panel/level packer with no PDF-specific engine; slot order is column-major top-to-bottom left-to-right, the exact opposite of the plan's required top-right-anchored right-to-left order; sheet targeting's reuse test is purely geometric with no ownership concept; there is zero persisted placement identity (no Extensible Storage schema, no owner tag) so the tool cannot tell its own prior placements from unrelated content; and a traced rerun scenario confirms silent duplication-by-overlap at the start sheet. Because none of this maps to the card's severity-scored ID scheme, it cannot be added to open[] or reflected in counts without inventing numbers that were never assigned -- see Strategy Decisions Ledger entry ops-1. lastRun points at this as the newest artifact on disk; the 2026-07-12 baseline's carried open[] findings (unchanged since 2026-07-14) remain untouched and still represent real freshness debt (41+ days since the last full scored code audit).", report: "2026-08-22__link-pdf-to-sheets-phase0-audit.md" },
