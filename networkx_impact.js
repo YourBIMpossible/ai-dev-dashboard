@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-08-26T13:00:13Z",
+  "generated": "2026-08-27T01:05:51Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -31,7 +31,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 178,
         "churn": 88,
-        "risk": 141.0
+        "risk": 141.2
       },
       {
         "label": "_serve_pool_schedule()",
@@ -39,7 +39,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 53,
         "churn": 88,
-        "risk": 63.6
+        "risk": 63.7
       },
       {
         "label": "db/models.py",
@@ -55,7 +55,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 35,
         "churn": 88,
-        "risk": 52.8
+        "risk": 52.9
       },
       {
         "label": "Base",
@@ -79,7 +79,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 73,
         "churn": 33,
-        "risk": 33.8
+        "risk": 33.9
       },
       {
         "label": "_get()",
@@ -95,7 +95,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 58,
         "churn": 26,
-        "risk": 27.6
+        "risk": 27.7
       },
       {
         "label": "assistant.py",
@@ -111,7 +111,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 18,
         "churn": 88,
-        "risk": 22.5
+        "risk": 22.6
       },
       {
         "label": "main.py",
