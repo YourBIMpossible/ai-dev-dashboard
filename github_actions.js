@@ -2,7 +2,7 @@
 // Re-run: node github_actions_sync.mjs          (local, reads ~/Downloads CSV + live API)
 //         node github_actions_sync.mjs --live-only  (CI: updates liveBilling only)
 window.DASHBOARD_GH_ACTIONS = {
-  generated: "2026-08-27T10:23:58.144Z",
+  generated: "2026-08-28T10:37:51.934Z",
   source: "GitHub billing CSV export · account: YourBIMpossible",
   period: { start: "2026-06-01", end: "2026-06-13" },
   liveBilling: null,
