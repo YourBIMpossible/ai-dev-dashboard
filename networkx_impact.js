@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-08-27T13:00:17Z",
+  "generated": "2026-08-28T13:00:16Z",
   "stats": {
     "repos": 4,
     "tools": 3,

@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-08-27",
+  generated: "2026-08-28",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-14",
+  activitySince: "2026-08-15",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -226,10 +226,10 @@ window.DASHBOARD_DATA = {
           { name: "P19 BIMpossible Workbench (desktop task-prep & closure workspace for Claude Code)", pct: 0, note: "PROPOSAL — Added 2026-08-21, from a phase plan submitted outside this ledger session and placed here on request. Native WPF/.NET desktop app, local-first and provider-agnostic (Ollama default, Claude/OpenAI/Gemini/Grok as optional adapters): work-item queue (`Inbox → Prepared → Active → Review → Closed`, plus `Blocked`/`Unverified`/`Parked`/`Reverted`) that captures a task (Revit selection, issue, family batch, code bug, test failure, design note), deterministically collects evidence (Git status/diff, targeted source search, test/build logs, read-only Revit context), uses a local model to draft a structured task contract (goal/evidence/constraints/scope/acceptance criteria — never silently proposing completed code changes), and generates a bounded Claude Code handoff; Claude Code implements and validates, Workbench records the closeout (changed files, validation evidence, risks, next action). Durable artifacts are project-local Markdown/JSON under `.ai/` (tasks/work/handoffs/decisions/prompts), not transient chat history. Not a Claude Code replacement, not a generic chat client, not an agent runtime/sandbox/terminal/browser-automation platform, and not an autonomous mutation engine — mutation is fail-closed by default (inspect/read-only; Revit and source-tree writes require explicit dry-run → review → apply). Closest ledger neighbor is Phase 16 (Desktop Orchestration Hub) — both are local/desktop, both explicitly gate nothing on the main product line, both are PROPOSAL/CONDITIONAL rather than scheduled — but they are distinct programs (16 = cross-tool MCP orchestration with a gated GUI-exception path; 19 = task-prep-and-closure workbench with its own evidence/local-AI/handoff pipeline) and should stay separate rows. Open decisions before any build work, per the plan's own gate list: product name confirmation; artifact-policy scope (repo-local `.ai/` only vs. app workspace + export); single- vs. multi-workspace v1 support; initial local model(s) + context/performance target; first Claude Code integration level (clipboard/file handoff only vs. controlled process launch); the first real (non-demo) vertical-slice task; secret/path exclusion policy before evidence collection is enabled. Full plan: `2026-08-21__Phase19_BIMpossibleWorkbench_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately, per the freeze-numbers rule (ordering holds 16 < 17 < 18 < 19)." }
         ]
       },
-      activity: [5,10,48,44,9,3,12,17,18,18,30,12,5,0],
+      activity: [10,48,44,9,3,12,17,18,18,30,12,5,6,0],
       lastActivity: {
-        date: "2026-08-26",
-        summary: "docs(decision-log): preserve two P7 relay-lifecycle engineering lessons (#493) (6ca1912)"
+        date: "2026-08-27",
+        summary: "sync: mirror queue.yaml/QUEUE.md - resolve app availability leg on PROD-DERIV-3 / P6-CLIENTMGMT-F (confirm-only, source claude-next-state 9f80218) (6a4e241)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -495,16 +495,16 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       waves: {
-        updated: "2026-08-17",
+        updated: "2026-08-26",
         source: "F:\\BIMpossible-Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 30, built: 4, inFlight: 1, ahead: 4 },
+        summary: { done: 30, built: 6, inFlight: 1, ahead: 3 },
         current: [
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
           { id: "26", title: "Phase 3.10a Cross-Model Room Join", status: "BUILT", date: "2026-07-13", note: "Code merged `dd5adb1` (2026-07-12); warm-time writer gap found+fixed `c72f647`/`09cb66b` (2026-07-13); migration genuinely applied to prod (confirmed live). No…" },
           { id: "28", title: "Phase 3.10b Furniture slice", status: "BUILT", date: "2026-07-12", note: "`4bb6497`, reuses 3.10a's algorithm unchanged. Inherits Wave 26's never-executed-pipeline gap — same caveat applies." },
           { id: "29", title: "WSR8 write-primitive cluster (assistant-Revit-write auth gate + reliability hardening)", status: "BUILT", date: "2026-07-13", note: "`c4194c5`, real GitHub Actions CI green. `execute_proposal` has zero production callers, enforced by a real AST-based test in the required CI gate — correctly,…" },
           { id: "30", title: "Phase 17 (17a Slack + 17b Teams) chat assistant gateways", status: "BUILT", date: "2026-08-08", note: "Slack `dd89889` (#262, merged 2026-08-07), Teams `879e857` (#276, merged 2026-08-08). Read-only Q&A against a bound project + model from a channel, fronting `a…" },
-          { id: "8", title: "Revit Link Phase 1 multi-user pass", status: "PLANNED" }
+          { id: "31", title: "Phase 15c — In-Revit Assistant Pane, Revit-context injection", status: "BUILT", date: "2026-08-18", note: "Add-Ins [PR #74](https://github.com/YourBIMpossible/BIMpossible-AddIns/pull/74) \"feat(15c): live document reads in the Assistant pane\", merged 2026-08-18. Buil…" }
         ],
         lastCompleted: { id: "13.1", title: "Phase 13 Increment 1 — Write Engine Typed Values (INSTANCE-scoped) + unit-aware Double", date: "2026-08-04" },
         drift: []
@@ -533,10 +533,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [0,0,2,6,3,1,1,3,7,15,1,4,2,0],
+      activity: [0,2,6,3,1,1,3,7,15,1,4,2,1,0],
       lastActivity: {
-        date: "2026-08-26",
-        summary: "chore(hygiene): untrack _cc_build_check/ build-output snapshot; ignore + policy doc (#108) (39726ac)"
+        date: "2026-08-27",
+        summary: "ci: add advisory Wave-Status PR-body check (#109) (578e412)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -602,10 +602,10 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,2,0],
       lastActivity: {
-        date: "2026-07-10",
-        summary: "fix(site): close CONTACT-RL, TURNSTILE-HOST, CSP-STYLE from the 2026-07-10 audit (0594e6e)"
+        date: "2026-08-27",
+        summary: "docs(site): correct planning-docs path AI-Dev -> F:\\BIMpossible-Site (335c210)"
       },
       branch: null, git: { latestCommit: "709f352" },
       nextActions: ["Email routing aliases: hello@/support@/legal@/billing@/zeriah@ → Gmail (recipe in IP-Lockdown-Checklist.md Phase 1.5)","Product screenshots: get real app screenshots into Leaders + BIM Managers pages","Dashboard auth: fix Cloudflare Zero Trust login — add GitHub OAuth IDP (OAuth App at github.com/settings/applications → callback: https://flat-queen-a958.cloudflareaccess.com/cdn-cgi/access/callback)"],
@@ -733,7 +733,7 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,0,0,0,1,0,0,0,1,0,2,0,0,0],
+      activity: [0,0,0,1,0,0,0,1,0,2,0,0,0,0],
       lastActivity: {
         date: "2026-08-24",
         summary: "Migrate Evidence Compiler hook to Python-native hardened launcher (#11) (72e53d5)"
@@ -779,7 +779,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [0,0,0,0,1,0,0,0,4,0,0,0,0,0],
+      activity: [0,0,0,1,0,0,0,4,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "chore(rag): rag_sources Workspace root → F:\\BIMpossible-Workspace (census 19 B8) (6ff31ad)"
@@ -849,7 +849,7 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,1,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,1,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "Revit-AI pipeline data through 2026-08-23 (raw-logs, processed, daily-summaries, context) — pre AI-Dev extraction (7d1b22b)"
@@ -897,10 +897,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [2,9,14,13,3,0,9,8,7,5,13,5,2,0],
+      activity: [9,14,13,3,0,9,8,7,5,13,5,2,5,0],
       lastActivity: {
-        date: "2026-08-26",
-        summary: "record(audit): M-30 closed — estate 56->0, final closure COMPLETE (#96) (6dfc9e1)"
+        date: "2026-08-27",
+        summary: "sync: mirror queue.yaml/QUEUE.md - resolve app availability leg on PROD-DERIV-3 / P6-CLIENTMGMT-F (confirm-only, source claude-next-state 9f80218) (6a4e241)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -939,10 +939,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [4,3,6,8,3,3,3,8,11,4,5,20,6,2],
+      activity: [3,6,8,3,3,3,8,11,4,5,20,6,3,2],
       lastActivity: {
-        date: "2026-08-27",
-        summary: "chore: live billing sync 2026-08-27 (66c7894)"
+        date: "2026-08-28",
+        summary: "chore: live billing sync 2026-08-28 (84dcda6)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
