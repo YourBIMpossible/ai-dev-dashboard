@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-08-28T09:06:35.158405Z",
- "count": 371,
+ "generated_at": "2026-08-29T06:09:14.725432Z",
+ "count": 373,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"dadd68a05c3b730d1385ea757ae86190-gzip\"",
+   "etag": "\"1813b40c756d65c7116199f4bb8c96f8-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Thu, 27 Aug 2026 20:28:07 GMT",
+   "last_modified": "Fri, 28 Aug 2026 16:05:04 GMT",
    "last_status": 200,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": true,
-   "stale_reason": "no new items in 23 days (expects ~7)"
+   "stale_reason": "no new items in 24 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-08-21T08:12:58Z",
    "last_modified": "Fri, 21 Aug 2026 08:12:58 GMT",
    "last_status": 304,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-08-26T20:10:30Z",
    "last_status": 200,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-08-25T14:15:28Z",
    "last_modified": "Wed, 26 Aug 2026 09:28:31 GMT",
    "last_status": 200,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"50b997a12a13c7beba82498befc6a039\"",
+   "etag": "W/\"398abc71153b068e49758b1f5a68312a\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 28 Aug 2026 09:05:00 GMT",
+   "last_modified": "Fri, 28 Aug 2026 13:55:35 GMT",
    "last_status": 200,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
    "etag": "W/\"2ddd791b9755a8e4de49e2af8e2e8267\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-27T17:36:35Z",
-   "last_status": 200,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_status": 304,
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-28T00:47:00Z",
-   "last_modified": "Fri, 28 Aug 2026 01:40:29 GMT",
+   "last_item_published": "2026-08-29T00:37:00Z",
+   "last_modified": "Sat, 29 Aug 2026 01:59:31 GMT",
    "last_status": 200,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 41,
+   "consecutive_failures": 42,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-28T09:06:35.158405Z",
+   "last_failure": "2026-08-29T06:09:14.725432Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "41 consecutive failures: HTTP 403"
+   "stale_reason": "42 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-26T18:52:52Z",
    "last_status": 304,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"e0410a020c61785cc95cce288d8289db\"",
+   "etag": "W/\"13151e00ec19bbe97c1633990ab73f6a\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-28T09:06:35.158405Z",
+   "last_success": "2026-08-29T06:09:14.725432Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Leveler: “The Ultimate Tool to Control Levels and Grids”",
+   "url": "http://revitaddons.blogspot.com/2026/08/leveler-ultimate-tool-to-control-levels.html",
+   "source": "revit-addons",
+   "published": "2026-08-29T00:37:00Z",
+   "summary": "Summary Leveler is a productivity add-in for Autodesk® Revit® developed by W7k that provides a focused set of tools for managing levels and grids more efficiently. Its primary value is helping users change element level assignments without unintentionally moving elements in the model. In typical Revit workflows, changing a reference level can require careful offset calculations to keep elements in place. Leveler automates that process by recalculating and applying the correct offsets, allowing users to reassign levels while preserving existing element elevations. Core Purpose The add-in is designed for Revit modelers, BIM coordinators, project teams, and production users who need better control over model levels, level names, and grid naming. It is especially useful on projects where elements were modeled against the wrong reference levels, where level naming standards need to be cleaned up, or where multiple levels and grids must be renamed or adjusted consistently. Instead of manually reviewing each element and calculating offset values, Leveler helps automate repetitive level-management tasks and reduces the chance of coordination errors. Key Capabilities Reassign reference…",
+   "id": "1a9117b4b020a16c",
+   "fetched_at": "2026-08-29T06:09:14.725432Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A competitor add-in for level/grid management; useful to know the direction, but not actionable for your own work.",
+    "topics": [
+     "revit-addins",
+     "levels-grids"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-29T06:09:14.725432Z"
+   }
+  },
   {
    "title": "Boxer: “Your Friend When Working with Section Boxes”",
    "url": "http://revitaddons.blogspot.com/2026/08/boxer-your-friend-when-working-with.html",
@@ -286,6 +306,27 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-08-26T06:09:38.595209Z"
+   }
+  },
+  {
+   "title": "August News Recap",
+   "url": "https://aps.autodesk.com/blog/august-news-recap-2",
+   "source": "aps-blog",
+   "published": "2026-08-25T15:49:03Z",
+   "summary": "August News Recap carolyn.albee@… 28 Aug 2026 Marnee Dupont Share We don’t want you to miss any updates! Below you’ll find a recap of all APS blog posts published since our last recap—including new API releases and exciting updates. Announcements Revit Automation Engine Upgrading on September 21, 2026 Autodesk Platform Services is preparing to update the Revit Automation engine to Revit 2026.5 on September 21, 2026. This update will also move the engine runtime to .NET 10. Validate your applications before the update . Content Catalog API v2.1.0 Now Available in Public Beta With the release of Content Catalog API v2.1.0, you can now upload content to Content Catalog programmatically, opening up workflows that were difficult to automate before. It’s now in public beta, and we’d love your feedback . Now Available in ChatGPT: Autodesk Product Help Plugin Earlier this year, we introduced the Autodesk Product Help MCP Server, giving AI assistants access to Autodesk's product documentation. Now we're making it even easier by bringing the Autodesk Product Help MCP to ChatGPT. Get the plugin here . Success Stories COOLORANGE Brings ERP Context to Manufacturing Design The powerGate ERP…",
+   "id": "e020d4827b814fd0",
+   "fetched_at": "2026-08-29T06:09:14.725432Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 85,
+    "why": "Revit Automation Engine upgrading to 2026.5 and .NET 10 on Sept 21—critical if you use or depend on APS integrations.",
+    "topics": [
+     "aps",
+     "revit-2026",
+     "dotnet"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-29T06:09:14.725432Z"
    }
   },
   {
