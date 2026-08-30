@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-29T06:09:14.725432Z",
- "count": 373,
+ "generated_at": "2026-08-30T06:09:43.351178Z",
+ "count": 374,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,9 +9,9 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Fri, 28 Aug 2026 16:05:04 GMT",
    "last_status": 200,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": true,
-   "stale_reason": "no new items in 24 days (expects ~7)"
+   "stale_reason": "no new items in 25 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-08-21T08:12:58Z",
    "last_modified": "Fri, 21 Aug 2026 08:12:58 GMT",
    "last_status": 304,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-08-26T20:10:30Z",
    "last_status": 200,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,7 +41,7 @@
    "last_item_published": "2026-08-25T14:15:28Z",
    "last_modified": "Wed, 26 Aug 2026 09:28:31 GMT",
    "last_status": 200,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,7 +51,7 @@
    "last_item_count": 8,
    "last_modified": "Fri, 28 Aug 2026 13:55:35 GMT",
    "last_status": 200,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -61,32 +61,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-27T17:36:35Z",
    "last_status": 304,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-08-29T00:37:00Z",
-   "last_modified": "Sat, 29 Aug 2026 01:59:31 GMT",
+   "last_item_published": "2026-08-29T22:25:00Z",
+   "last_modified": "Sat, 29 Aug 2026 23:10:13 GMT",
    "last_status": 200,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 42,
+   "consecutive_failures": 43,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-08-29T06:09:14.725432Z",
+   "last_failure": "2026-08-30T06:09:43.351178Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "42 consecutive failures: HTTP 403"
+   "stale_reason": "43 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-26T18:52:52Z",
    "last_status": 304,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"13151e00ec19bbe97c1633990ab73f6a\"",
+   "etag": "W/\"f76bf5b0205cbdf010bb621eb756c342\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-08-29T06:09:14.725432Z",
+   "last_success": "2026-08-30T06:09:43.351178Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Viewer: Create and Document Room Elevations",
+   "url": "http://revitaddons.blogspot.com/2026/08/viewer-create-and-document-room.html",
+   "source": "revit-addons",
+   "published": "2026-08-29T22:25:00Z",
+   "summary": "Summary Viewer is a productivity add-in for Autodesk® Revit® designed to automate the creation of interior views and the placement of those views onto sheets. Its current focus is generating internal elevations from selected rooms, a task that can be highly repetitive on interior design, fit-out, hospitality, workplace, residential, and tenant-improvement projects. Instead of manually creating elevation markers, configuring each view, naming the outputs, creating sheets, and arranging views one by one, Viewer allows users to select rooms and let the add-in generate the required elevation documentation with controlled settings. Core Purpose The main purpose of Viewer is to reduce the time and manual effort required to create consistent room-based elevation packages. Interior elevation production can become tedious when a project contains dozens or hundreds of rooms, especially when each room requires four elevations, a consistent view template, coordinated naming, sheet placement, and title-line alignment. Viewer addresses this by turning a repetitive drafting and documentation task into a guided automation workflow that gives users control over both the views and the resulting…",
+   "id": "fffdf101e76e971e",
+   "fetched_at": "2026-08-30T06:09:43.351178Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A product built on Revit API for viewport/sheet automation—adjacent to your work, but a finished tool not a technique or API insight.",
+    "topics": [
+     "revit-addins",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-08-30T06:09:43.351178Z"
+   }
+  },
   {
    "title": "Leveler: “The Ultimate Tool to Control Levels and Grids”",
    "url": "http://revitaddons.blogspot.com/2026/08/leveler-ultimate-tool-to-control-levels.html",
