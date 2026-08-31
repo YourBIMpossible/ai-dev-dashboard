@@ -251,6 +251,9 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
    lines by default and let the reader open the full text in place; nothing is truncated away. */
 .ph .nt{font-size:var(--ts-sm);color:var(--muted);line-height:1.5;margin-top:5px;}
 .ph .nt.clamped{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+/* Same contract as the phase note, for ledger prose that lands outside a phase row: the audit
+   run summary is 2,894 chars on the largest project and one history "type" field runs 397. */
+.clamp2.clamped{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .nt-more{
   display:inline-flex;align-items:center;gap:4px;margin-top:4px;padding:4px 8px;margin-left:-8px;
   font:600 var(--ts-xs)/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;
@@ -291,6 +294,22 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
    open in place. */
 .hero-note{font-size:var(--ts-sm);color:var(--muted);line-height:1.55;margin-top:11px;}
 .hero-note.clamped{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+
+/* Project detail: reading column + action rail. The phases card is the only thing on this page that
+   runs ~1,800px, and the old 50/50 right column ran out at ~825px — a full screen of dead space
+   beside the one card you actually scroll. Everything you act on now lives in the rail, level with
+   the phases instead of stacked below them. */
+.proj-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);gap:var(--sp-3);align-items:start;margin-bottom:14px;}
+.proj-col{display:flex;flex-direction:column;gap:var(--sp-3);min-width:0;}
+@media(max-width:1080px){
+  /* One column: the things you act on come first, not after 1,800px of phase rows. */
+  .proj-grid{grid-template-columns:minmax(0,1fr);}
+  .proj-rail{order:-1;}
+}
+/* Run history is a three-column row at page width. In the rail it stacks — the same treatment the
+   phone breakpoint already gives it, applied by container position rather than viewport. */
+.proj-rail .ah-row{grid-template-columns:minmax(0,1fr);gap:5px;}
+.proj-rail .ah-when{flex-direction:row;align-items:baseline;gap:8px;}
 .bar{height:7px;border-radius:5px;background:var(--track);overflow:hidden;}
 .bar i{display:block;height:100%;width:0;border-radius:5px;
   background:linear-gradient(90deg,var(--w),var(--w2));
@@ -407,6 +426,7 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
   .ah-ref{display:none;}
 }
 .au-latest{font-size:var(--ts-sm);color:var(--muted);margin-top:2px;}
+.au-run{font-size:var(--ts-sm);color:var(--muted);line-height:1.5;margin-top:5px;}
 .au-latest b{color:var(--text);font-family:Sora,sans-serif;font-weight:600;}
 /* interactive severity pills + per-project breakdown */
 .sevpill{cursor:pointer;user-select:none;transition:filter .15s,border-color .15s;}
@@ -1410,11 +1430,26 @@ function phaseBars(prog,pid){
 function phGroupToggle(btn){secToggle(btn,DISCLOSURE_KEY.project);}
 function ntToggle(e,id,label){
   e.stopPropagation(); // .ph may be .ph-click — don't open the task popover too
-  const el=document.getElementById(id);if(!el)return;
-  const open=el.classList.toggle('clamped')===false;
   const btn=e.currentTarget;
+  // aria-controls may name more than one region — an audit history row clamps its run type and its
+  // result separately but opens them with a single control.
+  const els=String(btn.getAttribute('aria-controls')||id).split(/\s+/)
+    .map(x=>document.getElementById(x)).filter(Boolean);
+  if(!els.length)return;
+  const open=els[0].classList.contains('clamped');
+  els.forEach(el=>el.classList.toggle('clamped',!open));
   btn.setAttribute('aria-expanded',String(open));
   btn.firstChild.nodeValue=open?'Less':(label||'Full note');
+}
+// Prose block that folds to two lines when it is longer than those two lines can hold (~140 chars
+// at these widths). Shorter than that it is just a sentence, and a disclosure would be noise.
+function foldText(text,cls,label){
+  const s=String(text||'').trim();
+  if(!s)return'';
+  if(s.length<=140)return`<div class="${cls}">${esc(s)}</div>`;
+  const id='ft'+(++_ntSeq);
+  return`<div class="${cls} clamp2 clamped" id="${id}">${esc(s)}</div>`
+    +`<button type="button" class="nt-more" aria-expanded="false" aria-controls="${id}" onclick="ntToggle(event,'${id}','${esc(label)}')">${esc(label)}</button>`;
 }
 
 function areaChart(series,w,h,id){
@@ -1821,65 +1856,121 @@ function project(p){
   if(p.git&&p.git.warn)h+=`<div class="gwarn">${esc(p.git.warn)}</div>`;
   h+=`</div></div></div></div>`; // close: flex-1, flex-wrap, card, fade-wrapper
 
-  // Phase bars (left) + decisions/watch/commit activity stacked (right column)
-  h+=`<div class="g g2 fade" style="animation-delay:.05s;margin-bottom:14px">`;
-  h+=`<div class="card ca-blue${isP?' pers-bars':''}"><h3>${esc((p.progress&&p.progress.label)||'Phases')} <span style="font-size:var(--ts-xs);color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">— click a phase for tasks</span></h3>${phaseBars(p.progress,p.id)}</div>`;
-  h+=`<div style="display:flex;flex-direction:column;gap:13px">`;
-  if((p.blockers||[]).length)h+=`<div class="card ca-red"><h3>Blockers</h3><ul class="alist">${p.blockers.map(b=>`<li class="blk">${esc(b)}</li>`).join('')}</ul></div>`;
-  if((p.pendingDecisions||[]).length)h+=`<div class="card ca-amber"><h3>Decisions waiting on you</h3><ul class="alist">${p.pendingDecisions.map(d=>`<li class="dec">${esc(d)}</li>`).join('')}</ul></div>`;
-  if((p.reminders||[]).length)h+=`<div class="card ca-grey"><h3>Watch items</h3><ul class="alist">${p.reminders.map(r=>`<li class="rem">${esc(r)}</li>`).join('')}</ul></div>`;
-  h+=`<div class="card ca-grey"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`;
-  h+=`</div></div>`;
+  // Everything below the hero is a reading column plus an action rail. Previously the phases card
+  // sat beside a stack that ran out after ~825px while it kept going to ~1,800px, and the things
+  // you actually act on — next actions, audit, key files — were stacked underneath, off-screen.
+  // Now the rail carries them, level with the phases.
+  const main=[],rail=[];
 
-  // Next actions (full width)
-  h+=`<div class="fade" style="animation-delay:.09s;margin-bottom:14px">`;
-  h+=`<div class="card ca-blue"><h3>Next actions</h3>`;
-  if((p.nextActions||[]).length)h+=`<ul class="alist">${p.nextActions.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>`;
-  else h+=`<p class="empty">none</p>`;
-  h+=`</div></div>`;
+  // data-ord fixes each card's place in the reading order regardless of which column it ends up in;
+  // data-move="1" marks the reference cards the balancer may relocate. The action set and the phase
+  // list are pinned — those two define what each column is for.
+  main.push(`<div class="card ca-blue${isP?' pers-bars':''}" data-ord="10"><h3>${esc((p.progress&&p.progress.label)||'Phases')} <span style="font-size:var(--ts-xs);color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">— click a phase for tasks</span></h3>${phaseBars(p.progress,p.id)}</div>`);
+
+  // Rail order is the check-in order: what to do → what's stopping you → what needs your call →
+  // what to keep half an eye on → quality state → pulse → where to jump in.
+  rail.push(`<div class="card ca-blue" data-ord="20"><h3>Next actions</h3>`
+    +((p.nextActions||[]).length
+      ?`<ul class="alist">${p.nextActions.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>`
+      :`<p class="empty">none</p>`)
+    +`</div>`);
+  if((p.blockers||[]).length)rail.push(`<div class="card ca-red" data-ord="21"><h3>Blockers</h3><ul class="alist">${p.blockers.map(b=>`<li class="blk">${esc(b)}</li>`).join('')}</ul></div>`);
+  if((p.pendingDecisions||[]).length)rail.push(`<div class="card ca-amber" data-ord="22"><h3>Decisions waiting on you</h3><ul class="alist">${p.pendingDecisions.map(d=>`<li class="dec">${esc(d)}</li>`).join('')}</ul></div>`);
+  if((p.reminders||[]).length)rail.push(`<div class="card ca-grey" data-ord="23"><h3>Watch items</h3><ul class="alist">${p.reminders.map(r=>`<li class="rem">${esc(r)}</li>`).join('')}</ul></div>`);
 
   // Audit
   if(p.audit){
     const a=p.audit;const tot=SEVS.reduce((s,k)=>s+(a.counts[k]||0),0);
-    h+=`<div class="card fade ca-green" style="animation-delay:.13s;margin-bottom:14px"><h3>Audit</h3>`;
-    h+=`<div class="au-latest">Latest run · <b>${esc(a.lastRun)}</b> · ${esc(a.runType)}</div>`;
-    h+=`<div class="sevcounts" style="margin:13px 0 ${tot?'13px':'4px'}">`;
+    let au=`<div class="card ca-green" data-ord="40" data-move="1"><h3>Audit</h3>`;
+    au+=`<div class="au-latest">Latest run · <b>${esc(a.lastRun)}</b></div>`;
+    // runType is a free-text ledger field, not a label — BIMpossible's is 2,894 chars and used to
+    // render as one unbroken run-on beside the date.
+    au+=foldText(a.runType,'au-run','Full run note');
+    au+=`<div class="sevcounts" style="margin:13px 0 ${tot?'13px':'4px'}">`;
     SEVS.forEach(k=>{
       const n=a.counts[k]||0;
-      h+=`<div class="sevpip${(k==='critical'||k==='high')&&n?' hot':''}"><span class="n" style="color:${n?(k==='critical'?'var(--red)':k==='high'?'var(--amber)':'var(--text)'):'var(--dim)'}">${n}</span><span class="k">${SEVLBL[k]}</span></div>`;
+      au+=`<div class="sevpip${(k==='critical'||k==='high')&&n?' hot':''}"><span class="n" style="color:${n?(k==='critical'?'var(--red)':k==='high'?'var(--amber)':'var(--text)'):'var(--dim)'}">${n}</span><span class="k">${SEVLBL[k]}</span></div>`;
     });
-    h+=`</div>`;
+    au+=`</div>`;
     // The full open-findings list ran 4,200px on the largest project — taller than the whole
     // dedicated Audit view. Show the first six (severity-ordered upstream) and fold the rest.
     if(tot){
       const F=f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`;
-      h+=`<div class="ah-h">Open findings · ${tot}</div>`+a.open.slice(0,6).map(F).join('');
-      h+=revealBlock(a.open.slice(6).map(F).join(''),a.open.length-6,'finding');
+      au+=`<div class="ah-h">Open findings · ${tot}</div>`+a.open.slice(0,6).map(F).join('');
+      au+=revealBlock(a.open.slice(6).map(F).join(''),a.open.length-6,'finding');
     }
-    else h+=`<p class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of the last run.</p>`;
-    h+=`<p style="font-size:var(--ts-sm);color:var(--dim);margin-top:10px"><span class="trend ${a.trend||'flat'}">${a.trend||'flat'}</span> · ${a.closedLastRun||0} closed last run${a.cadence?' · '+esc(a.cadence):''}</p>`;
-    h+=auditHistory(p);
-    h+=`<div class="links" style="margin-top:8px">${pathLink(a.reportPath,'Full report')}${a.ledgerPath?pathLink(a.ledgerPath,'Audit ledger'):''}</div></div>`;
+    else au+=`<p class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of the last run.</p>`;
+    au+=`<p style="font-size:var(--ts-sm);color:var(--dim);margin-top:10px"><span class="trend ${a.trend||'flat'}">${a.trend||'flat'}</span> · ${a.closedLastRun||0} closed last run${a.cadence?' · '+esc(a.cadence):''}</p>`;
+    au+=auditHistory(p);
+    au+=`<div class="links" style="margin-top:8px">${pathLink(a.reportPath,'Full report')}${a.ledgerPath?pathLink(a.ledgerPath,'Audit ledger'):''}</div></div>`;
+    rail.push(au);
   }
 
-  // Waves
+  rail.push(`<div class="card ca-grey" data-ord="50" data-move="1"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`);
+  if((p.links||[]).length)rail.push(`<div class="card ca-grey" data-ord="65" data-move="1"><h3>Key files</h3><div class="links">${p.links.map(l=>pathLink(l.path,l.label)).join('')}</div></div>`);
+
+  // Waves and history are reference reading, not check-in actions — they start in the wide column
+  // under the phases, where the wave grid and the timeline have room.
   if(p.waves){
     const w=p.waves;
-    h+=`<div class="card fade ca-purple" style="animation-delay:.15s;margin-bottom:14px"><h3>Waves${w.updated?` <span style="font-size:var(--ts-xs);color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">ledger updated ${esc(w.updated)}</span>`:''}</h3>`;
-    h+=wavePanel(w);
-    if(w.source)h+=`<div class="links" style="margin-top:10px">${pathLink(w.source,'Wave ledger')}</div>`;
-    h+=`</div>`;
+    let wv=`<div class="card ca-purple" data-ord="60" data-move="1"><h3>Waves${w.updated?` <span style="font-size:var(--ts-xs);color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">ledger updated ${esc(w.updated)}</span>`:''}</h3>`;
+    wv+=wavePanel(w);
+    if(w.source)wv+=`<div class="links" style="margin-top:10px">${pathLink(w.source,'Wave ledger')}</div>`;
+    main.push(wv+`</div>`);
+  }
+  if((p.recent||[]).length){
+    main.push(`<div class="card ca-grey" data-ord="70" data-move="1"><h3>Recent activity</h3><div class="tl">${p.recent.map(tlItem).join('')}</div></div>`);
   }
 
-  // Recent + links
-  if((p.recent||[]).length){
-    h+=`<div class="card fade ca-grey" style="animation-delay:.17s;margin-bottom:14px"><h3>Recent activity</h3><div class="tl">${p.recent.map(tlItem).join('')}</div></div>`;
-  }
-  if((p.links||[]).length){
-    h+=`<div class="card fade ca-grey" style="animation-delay:.19s"><h3>Key files</h3><div class="links">${p.links.map(l=>pathLink(l.path,l.label)).join('')}</div></div>`;
-  }
+  h+=`<div class="proj-grid fade" style="animation-delay:.05s">`
+    +`<div class="proj-col">${main.join('')}</div>`
+    +`<div class="proj-col proj-rail">${rail.join('')}</div>`
+    +`</div>`;
   return h;
 }
+
+// The mix of card heights is wildly different per project — BIMpossible's phase list is 1,861px
+// while Add-Ins' is 873px, and the audit card swings between 700px and 1,400px depending on how
+// much ledger prose a run carried. Any fixed column assignment therefore strands a screen of dead
+// space on one side or the other. After the view paints, move the cards marked movable to whichever
+// column closes the gap, keeping each column in its declared reading order. Measured, not
+// predicted: a card's height changes with the column it lands in, so each candidate move is tried,
+// measured, and reverted if it did not help.
+const PROJ_BALANCE_TOL=80;    // below this the columns already read as even — stop moving things
+function balanceProjectGrid(){
+  const g=document.querySelector('.proj-grid');
+  if(!g)return;
+  const main=g.firstElementChild,rail=g.lastElementChild;
+  if(!main||main===rail)return;
+  // Stacked at the narrow breakpoint — one column, nothing to balance, and moving cards there
+  // would only scramble the reading order.
+  if(getComputedStyle(g).gridTemplateColumns.split(/\s+/).length<2)return;
+  const gap=()=>Math.abs(main.offsetHeight-rail.offsetHeight);
+  const sortCol=col=>[...col.children]
+    .sort((a,b)=>(+a.dataset.ord||0)-(+b.dataset.ord||0))
+    .forEach(c=>col.appendChild(c));
+  for(let pass=0;pass<4;pass++){
+    const before=gap();
+    if(before<=PROJ_BALANCE_TOL)return;
+    const from=main.offsetHeight>rail.offsetHeight?main:rail,to=from===main?rail:main;
+    let best=null,bestGap=before;
+    for(const c of [...from.children]){
+      if(c.dataset.move!=='1')continue;
+      const after=c.nextElementSibling;
+      to.appendChild(c);
+      const g2=gap();
+      if(g2<bestGap){bestGap=g2;best=c;}
+      after?from.insertBefore(c,after):from.appendChild(c);   // revert; sortCol fixes order later
+    }
+    if(!best)return;
+    to.appendChild(best);
+    sortCol(from);sortCol(to);
+  }
+}
+// Crossing the stacked/two-column breakpoint invalidates the placement, so redo it once the
+// resize settles. No-ops on every view that has no project grid.
+let _pbTimer=null;
+window.addEventListener('resize',()=>{clearTimeout(_pbTimer);_pbTimer=setTimeout(balanceProjectGrid,180);});
 
 // Generic "N more" disclosure. Content stays in the DOM — nothing is truncated away, it just
 // starts folded so a reference list can't bury the cards below it.
@@ -1904,7 +1995,22 @@ function rvToggle(e,id,n,noun){
 function auditHistory(p){
   const hist=p.audit&&p.audit.history;
   if(!hist||!hist.length)return'';
-  const row=r=>`<div class="ah-row"><div class="ah-when"><span class="ah-date">${esc(r.date||'')}</span><span class="ah-type">${esc(r.type||'')}</span></div><div class="ah-body"><div class="ah-result">${esc(r.result||'')}</div>${r.scope?`<div class="ah-scope">${esc(r.scope)}</div>`:''}</div>${r.report?`<span class="ah-ref au-jump" title="read this report here" onclick="auViewReport('${esc(p.id)}/${esc(r.report)}','${esc(p.name)} — ${esc(r.date||'')} report')">${esc(r.report)}</span>`:''}</div>`;
+  // Both fields are free-text ledger prose, not labels — the longest result in the dataset is
+  // 2,372 chars and the longest type 397, so an unclamped row buried the runs under it. One
+  // control opens the whole row; nothing is truncated away.
+  const row=r=>{
+    const type=String(r.type||''),res=String(r.result||''),scope=String(r.scope||'');
+    const long=type.length>90||res.length>140||scope.length>110,c=long?' clamp2 clamped':'';
+    const tid='ah'+(++_ntSeq),rid='ah'+(++_ntSeq),sid='ah'+(++_ntSeq);
+    return`<div class="ah-row">`
+      +`<div class="ah-when"><span class="ah-date">${esc(r.date||'')}</span><span class="ah-type${c}" id="${tid}">${esc(type)}</span></div>`
+      +`<div class="ah-body"><div class="ah-result${c}" id="${rid}">${esc(res)}</div>`
+      +(scope?`<div class="ah-scope${c}" id="${sid}">${esc(scope)}</div>`:'')
+      +(long?`<button type="button" class="nt-more" aria-expanded="false" aria-controls="${rid} ${tid}${scope?' '+sid:''}" onclick="ntToggle(event,'${rid}','Full note')">Full note</button>`:'')
+      +`</div>`
+      +(r.report?`<span class="ah-ref au-jump" title="read this report here" onclick="auViewReport('${esc(p.id)}/${esc(r.report)}','${esc(p.name)} — ${esc(r.date||'')} report')">${esc(r.report)}</span>`:'')
+      +`</div>`;
+  };
   return`<div class="ah"><div class="ah-h">Run history · ${hist.length} run${hist.length!==1?'s':''}</div>`
     +hist.slice(0,3).map(row).join('')
     +revealBlock(hist.slice(3).map(row).join(''),hist.length-3,'run')
@@ -3920,6 +4026,7 @@ function show(id){
   m.querySelectorAll('.ph-click').forEach(el=>{el.onclick=e=>{e.stopPropagation();openPP(el.dataset.pk,el);};});
   m.querySelectorAll('.mtab[data-mt]').forEach(el=>{el.onclick=()=>{window._mtab=el.dataset.mt;try{localStorage.setItem('dash.mtab',el.dataset.mt);}catch(e){} show('usage');};});
   m.querySelectorAll('.mtab[data-ct]').forEach(el=>{el.onclick=()=>{window._ctab=el.dataset.ct;try{localStorage.setItem('dash.ctab',el.dataset.ct);}catch(e){} show('graph');};});
+  balanceProjectGrid();
   animate();
 }
 

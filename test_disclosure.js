@@ -74,8 +74,9 @@ function extractConstBlock(src, name) {
 
 const FNS = ["readSecOpen", "writeSecOpen", "secInitialOpen", "secToggle",
   "stratSecToggle", "tkSecToggle", "phGroupToggle", "phaseNote", "phaseRow", "phaseBars",
-  "esc", "strategyView", "toolkitView"];
-const SRC = "var _ntSeq=0;\n" +
+  "esc", "strategyView", "toolkitView",
+  "foldText", "ntToggle", "revealBlock", "auditHistory"];
+const SRC = "var _ntSeq=0;var _rvSeq=0;\n" +
   extractConstLine(HTML, "DISCLOSURE_KEY") + "\n" +
   extractConstLine(HTML, "SCAT_COLOR") + "\n" +
   extractConstLine(HTML, "SCAT_LABEL") + "\n" +
@@ -111,13 +112,33 @@ function makeStorage(seed, mode) {
 // Minimal DOM: only what secToggle touches — getElementById, an element's `hidden` property,
 // setAttribute/getAttribute, and a `dataset`. Small enough to be obviously faithful.
 function makeEl(id, attrs) {
+  const cls = new Set(((attrs || {}).className || "").split(/\s+/).filter(Boolean));
   return {
     id, hidden: false, dataset: Object.assign({}, (attrs || {}).dataset),
     _attrs: Object.assign({}, (attrs || {}).attrs),
     setAttribute(k, v) { this._attrs[k] = String(v); },
     getAttribute(k) { return Object.prototype.hasOwnProperty.call(this._attrs, k) ? this._attrs[k] : null; },
+    // Enough of DOMTokenList for ntToggle: contains, and the two-argument force form of toggle.
+    classList: {
+      contains(c) { return cls.has(c); },
+      toggle(c, force) {
+        const on = force === undefined ? !cls.has(c) : !!force;
+        if (on) cls.add(c); else cls.delete(c);
+        return on;
+      },
+    },
+    get className() { return [...cls].join(" "); },
   };
 }
+
+// A disclosure button as ntToggle sees it: the event's currentTarget, with a text node whose
+// nodeValue is the visible label.
+function makeBtn(controls, label) {
+  const el = makeEl("btn", { attrs: { "aria-controls": controls, "aria-expanded": "false" } });
+  el.firstChild = { nodeValue: label };
+  return el;
+}
+const clickOn = btn => ({ currentTarget: btn, stopPropagation() {} });
 
 // Sandbox factory. `items` seeds getStrategyItems(); `lanes` maps item id -> workflow lane.
 function buildEnv(opts) {
@@ -624,6 +645,146 @@ test("stylesheet forces [hidden] to win over class-level display rules", () => {
   // this rule a "collapsed" grid keeps its full height while correctly reporting hidden===true.
   assert.ok(/\[hidden\]\s*\{\s*display:\s*none\s*!important;?\s*\}/.test(HTML),
     "index.html must carry a global [hidden]{display:none!important} rule");
+});
+
+// ============================================================================================
+// prose folding outside a phase row — audit run notes and history rows
+// ============================================================================================
+const SHORT = "Weekly full audit, no findings.";
+const LONG = "x".repeat(400);
+
+test("foldText: a short note renders plain, with no disclosure control", () => {
+  const E = buildEnv({});
+  const h = E.foldText(SHORT, "au-run", "Full run note");
+  assert.ok(h.includes(SHORT));
+  assert.ok(!/clamped/.test(h), "a note that already fits must not be clamped");
+  assert.ok(!/nt-more/.test(h), "and must not carry a control that can only hide it");
+});
+
+test("foldText: empty or absent text renders nothing at all", () => {
+  const E = buildEnv({});
+  ["", "   ", null, undefined].forEach(v =>
+    assert.strictEqual(E.foldText(v, "au-run", "Full run note"), "", "value: " + JSON.stringify(v)));
+});
+
+test("foldText: a long note is clamped and gets a control aimed at it", () => {
+  const E = buildEnv({});
+  const h = E.foldText(LONG, "au-run", "Full run note");
+  const id = (h.match(/id="([^"]+)"/) || [])[1];
+  assert.ok(id, "the folded block must carry an id");
+  assert.ok(h.includes('class="au-run clamp2 clamped"'));
+  assert.ok(h.includes('aria-controls="' + id + '"'), "the control must name the block it folds");
+  assert.ok(h.includes('aria-expanded="false"'));
+  assert.ok(h.includes(LONG), "nothing is truncated away — the full text stays in the markup");
+});
+
+test("foldText: ids are unique, so two notes on one page can't collide", () => {
+  const E = buildEnv({});
+  const ids = [E.foldText(LONG, "au-run", "L"), E.foldText(LONG, "au-run", "L")]
+    .map(h => (h.match(/id="([^"]+)"/) || [])[1]);
+  assert.notStrictEqual(ids[0], ids[1]);
+});
+
+test("foldText: the text is escaped, not injected", () => {
+  const E = buildEnv({});
+  const h = E.foldText("<img src=x onerror=1>" + LONG, "au-run", "L");
+  assert.ok(!/<img/.test(h));
+  assert.ok(h.includes("&lt;img"));
+});
+
+// --- audit history rows -----------------------------------------------------------------------
+const auP = rows => ({ id: "acme", name: "Acme", audit: { history: rows } });
+const auRow = over => Object.assign(
+  { date: "2026-08-26", type: "weekly", result: "clean", scope: "src", report: "r.md" }, over);
+
+test("audit history: a short run renders unclamped, with no control", () => {
+  const E = buildEnv({});
+  const h = E.auditHistory(auP([auRow()]));
+  assert.ok(!/clamp2/.test(h));
+  assert.ok(!/nt-more[^]*Full note/.test(h));
+});
+
+test("audit history: a long run clamps type, result and scope under one control", () => {
+  const E = buildEnv({});
+  const h = E.auditHistory(auP([auRow({ result: LONG, type: "t".repeat(120), scope: "s".repeat(200) })]));
+  const ctrl = (h.match(/aria-controls="([^"]+)"/) || [])[1];
+  const ids = ctrl.split(" ");
+  assert.strictEqual(ids.length, 3, "one control, three folded regions: " + ctrl);
+  ids.forEach(id => {
+    const m = h.match(new RegExp('class="([^"]*)" id="' + id + '"'));
+    assert.ok(m, "no element carries id " + id);
+    assert.ok(/clamp2 clamped/.test(m[1]), id + " is named by the control but is not clamped");
+  });
+});
+
+test("audit history: a long field with no scope controls only the two regions present", () => {
+  const E = buildEnv({});
+  const h = E.auditHistory(auP([auRow({ result: LONG, scope: "" })]));
+  const ctrl = (h.match(/aria-controls="([^"]+)"/) || [])[1];
+  assert.strictEqual(ctrl.trim().split(/\s+/).length, 2);
+  assert.ok(!/ah-scope/.test(h), "an absent scope must not render an empty row");
+});
+
+test("audit history: only the first three runs show; the rest stay in the DOM, folded", () => {
+  const E = buildEnv({});
+  const h = E.auditHistory(auP(Array.from({ length: 7 }, (_, i) => auRow({ date: "2026-08-0" + i }))));
+  assert.ok(/Run history · 7 runs/.test(h));
+  assert.ok(/Show 4 more runs/.test(h));
+  for (let i = 0; i < 7; i++) assert.ok(h.includes("2026-08-0" + i), "run " + i + " must stay in the markup");
+});
+
+// --- ntToggle -----------------------------------------------------------------------------------
+test("ntToggle: opening clears the clamp and flips the control's label and state", () => {
+  const note = makeEl("n1", { className: "au-run clamp2 clamped" });
+  const btn = makeBtn("n1", "Full run note");
+  const E = buildEnv({ byId: { n1: note, btn: btn } });
+  E.ntToggle(clickOn(btn), "n1", "Full run note");
+  assert.ok(!note.classList.contains("clamped"));
+  assert.strictEqual(btn.getAttribute("aria-expanded"), "true");
+  assert.strictEqual(btn.firstChild.nodeValue, "Less");
+});
+
+test("ntToggle: one control drives every region its aria-controls names", () => {
+  const a = makeEl("a", { className: "ah-type clamp2 clamped" });
+  const b = makeEl("b", { className: "ah-result clamp2 clamped" });
+  const c = makeEl("c", { className: "ah-scope clamp2 clamped" });
+  const btn = makeBtn("b a c", "Full note");
+  const E = buildEnv({ byId: { a: a, b: b, c: c } });
+  E.ntToggle(clickOn(btn), "b", "Full note");
+  [a, b, c].forEach(el => assert.ok(!el.classList.contains("clamped"), el.id + " stayed clamped"));
+  E.ntToggle(clickOn(btn), "b", "Full note");
+  [a, b, c].forEach(el => assert.ok(el.classList.contains("clamped"), el.id + " stayed open"));
+  assert.strictEqual(btn.getAttribute("aria-expanded"), "false");
+  assert.strictEqual(btn.firstChild.nodeValue, "Full note");
+});
+
+test("ntToggle: a missing or stale target is a no-op, not a crash", () => {
+  const btn = makeBtn("gone", "Full note");
+  const E = buildEnv({ byId: {} });
+  E.ntToggle(clickOn(btn), "gone", "Full note");
+  assert.strictEqual(btn.getAttribute("aria-expanded"), "false", "state must not claim an open region");
+});
+
+// ============================================================================================
+// project layout contract — the balancer relies on these attributes, not on card order
+// ============================================================================================
+test("project cards declare a reading order the balancer can restore", () => {
+  // Every card the two columns render carries data-ord; the movable ones also carry data-move.
+  const fn = HTML.slice(HTML.indexOf("function project(p)"), HTML.indexOf("const PROJ_BALANCE_TOL"));
+  const ords = [...fn.matchAll(/data-ord="(\d+)"/g)].map(m => +m[1]);
+  assert.ok(ords.length >= 8, "expected every project card to declare data-ord, got " + ords.length);
+  assert.strictEqual(new Set(ords).size, ords.length, "data-ord values must be unique: " + ords);
+  // The action set and the phase list are what each column is for — they must stay put.
+  const pinned = [...fn.matchAll(/data-ord="(1[0-9]|2[0-9])"[^>]*>/g)].map(m => m[0]);
+  pinned.forEach(tag => assert.ok(!/data-move/.test(tag), "pinned card must not be movable: " + tag));
+});
+
+test("the balancer stands down when the grid is stacked into one column", () => {
+  const fn = HTML.slice(HTML.indexOf("function balanceProjectGrid"), HTML.indexOf("let _pbTimer"));
+  assert.ok(/gridTemplateColumns/.test(fn),
+    "balanceProjectGrid must check the computed column count before moving anything");
+  assert.ok(/\.proj-rail\{order:-1;\}/.test(HTML.replace(/\s+/g, "")),
+    "stacked layout must put the action rail above the phase list");
 });
 
 console.log("\n" + passed + " passed");
