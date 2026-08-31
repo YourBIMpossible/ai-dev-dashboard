@@ -233,8 +233,15 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     # Exit 1 here means "stale card(s) detected", which is the NORMAL signal on an
     # active card between manual sweeps, NOT a run failure - so it is logged but does
     # NOT increment $degraded (that would falsely mark the whole refresh partial).
-    if ((Invoke-Logged $python @("$PSScriptRoot\check_narrative_freshness.py")) -ne 0) {
+    # Exit 2 is different: one or more cards could not be EVALUATED at all (missing or
+    # unparseable lastActivity.date, or data.js unreadable). That is an unmeasured
+    # check, not a clean one, so it degrades the attempt (2026-08-31 slop audit).
+    $narrativeRc = Invoke-Logged $python @("$PSScriptRoot\check_narrative_freshness.py")
+    if ($narrativeRc -eq 1) {
         "NOTE: check_narrative_freshness.py flagged stale narrative card(s) - a manual /dashboard-update sweep is owed (see narrative-freshness.js)." | Add-Content -Path $log -Encoding utf8
+    } elseif ($narrativeRc -ne 0) {
+        "WARN: check_narrative_freshness.py exit $narrativeRc - narrative freshness UNKNOWN for one or more cards (see the lines above and narrative-freshness.js)." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
 
     # 1e. Re-bundle the graphify artifacts the Codebase tab iframes (GRAPH_REPORT.md,
