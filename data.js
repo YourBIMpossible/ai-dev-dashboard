@@ -956,10 +956,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,3,3,8,11,4,5,20,6,3,4,3,17,8],
+      activity: [3,3,3,8,11,4,5,20,6,3,4,3,17,10],
       lastActivity: {
         date: "2026-08-31",
-        summary: "dashboard refresh 2026-08-31 14:53 (5a44e90)"
+        summary: "Mission Control UX rework: Today-first check-in, persistent disclosures, project reading column + action rail (#7) (e4905c2)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
