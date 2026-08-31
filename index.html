@@ -757,7 +757,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <div id="toast"></div>
 <div id="pp" class="pp" style="display:none;"></div>
 <script src="data.js"></script>
-<script src="phase_metrics.js"></script><!-- Phase Completion Model v1 helpers (required) -->
+<script src="phase_metrics.js" onerror="window.PhaseMetrics=null"></script><!-- Phase Completion Model v1 helpers (progressive enhancement; headline falls back to legacy math if this fails to load) -->
 <script src="local/audit-findings.js" onerror="void 0"></script><!-- local-only, gitignored: full audit findings detail -->
 <script src="graph-metrics.js" onerror="void 0"></script>
 <script src="strategy.js" onerror="void 0"></script>
@@ -849,28 +849,45 @@ function ageHtml(iso){
 // `bucket`; only `active` phases count toward the headline donut. Held/conditional/
 // placeholder/proposed phases are tracked in the scope inventory but excluded (a flat
 // average over them buries real momentum for months — every unbuilt future phase reads
-// ~0%). A phase with no explicit bucket defaults to `active`, so this is a no-op for
-// every non-BIMpossible project. The note-prefix regex is kept ONLY as a legacy
-// fallback for any phase that predates the bucket field.
-const HELD_PHASE=/^(on hold|conditional|placeholder|proposal)/i;
+// ~0%). A phase with NO bucket is a legacy record and falls back to the note-prefix
+// rule, so migrating one project to buckets never changes another project's headline.
+//
+// phase_metrics.js is a progressive enhancement, not a hard dependency: if it fails to
+// load, `window.PhaseMetrics` is null (see the <script onerror> above) and the headline
+// falls back to the identical legacy math below rather than blanking the whole board.
+// Only the extra baseline donut + scope inventory require the module.
+const HELD_PHASE=(window.PhaseMetrics&&PhaseMetrics.HELD_PHASE)||/^(on hold|conditional|placeholder|proposal)/i;
 function isActivePhase(ph){
-  if(ph&&ph.bucket)return PhaseMetrics.normalizeBucket(ph.bucket)==='active';
-  return !HELD_PHASE.test(((ph&&ph.note)||'').trim()); // legacy: pre-bucket phases
+  if(window.PhaseMetrics)return PhaseMetrics.isActivePhase(ph); // single source of truth when present
+  if(!ph)return false;
+  const b=ph.bucket;
+  if(typeof b==='string'&&b.trim())return b.trim()==='active'; // structured data wins
+  return !HELD_PHASE.test(String(ph.note==null?'':ph.note).trim()); // legacy: pre-bucket phases
+}
+function activePhases(p){
+  const all=(p&&p.progress&&Array.isArray(p.progress.phases))?p.progress.phases:[];
+  if(window.PhaseMetrics)return PhaseMetrics.getActivePhases(p);
+  return all.filter(isActivePhase);
 }
 function inScopePhases(p){
-  if(!p||!p.progress||!p.progress.phases||!p.progress.phases.length)return null;
-  const a=p.progress.phases.filter(isActivePhase);
-  return a.length?a:p.progress.phases;
+  const all=(p&&p.progress&&Array.isArray(p.progress.phases))?p.progress.phases:[];
+  if(!all.length)return null;
+  const a=activePhases(p);
+  return a.length?a:all;
 }
 function overallPct(p){
-  if(!p||!p.progress||!p.progress.phases||!p.progress.phases.length)return null;
-  const r=PhaseMetrics.getFlatCompletion(PhaseMetrics.getActivePhases(p));
-  // fall back to the full phase set if a project somehow has zero active phases,
-  // so the donut still shows a number rather than "no data".
-  return r.pct!==null?r.pct:PhaseMetrics.getFlatCompletion(p.progress.phases).pct;
+  const ins=inScopePhases(p);
+  if(!ins)return null;
+  // Flat mean over scorable phases; computed locally so the headline never depends on
+  // PhaseMetrics being loaded. With the module present this equals getFlatCompletion.
+  const list=ins.filter(x=>x&&typeof x.pct==='number');
+  if(!list.length)return null;
+  return Math.round(list.reduce((s,x)=>s+x.pct,0)/list.length);
 }
-// July-baseline pct for a project that declares a frozen cohort (BIMpossible only), else null.
+// July-baseline pct for a project that declares a frozen cohort (BIMpossible only), else
+// null. Requires PhaseMetrics (alias resolution + dedupe live there); null without it.
 function baselinePct(p){
+  if(!window.PhaseMetrics)return null;
   if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return null;
   return PhaseMetrics.getCohortCompletion(p,p.baselineCohorts[0]).pct;
 }
@@ -885,13 +902,17 @@ function scopeCaption(p){
   const bim=p.id==='bimpossible';
   const label=bim?`active ratified scope · ${held} held/future/proposal excluded`:`active scope · ${held} on-hold/future excluded`;
   const bp=bim?baselinePct(p):null;
-  const baseTxt=bp!==null?` The original July 2026 delivery cohort now stands at ${bp}% complete (up from ~85% in July);`:'';
-  const tip=bim?` title="Reconciled 2026-08-30 against merged delivery evidence. Denominator = active ratified scope only (on-hold, conditional, placeholder and unratified-proposal phases excluded).${baseTxt} the active headline reads lower only because newer early-stage phases were admitted to scope, not because execution regressed."`:'';
+  // Keep every clause a complete, capitalized sentence so the tooltip reads correctly
+  // whether or not a baseline is available (bp is null when PhaseMetrics is absent).
+  const baseTxt=bp!==null?` The original July 2026 delivery cohort now stands at ${bp}% complete (up from ~85% in July).`:'';
+  const tip=bim?` title="Reconciled 2026-08-30 against merged delivery evidence. Denominator = active ratified scope only (on-hold, conditional, placeholder and unratified-proposal phases excluded).${baseTxt} The active headline reads lower only because newer early-stage phases were admitted to scope, not because execution regressed."`:'';
   const cur=bim?';cursor:help':'';
   return`<div${tip} style="font-size:10px;color:var(--dim);text-align:center;margin-top:6px;max-width:130px;line-height:1.3${cur}">${label}</div>`;
 }
 // Baseline donut + scope inventory, rendered only for a project that declares cohorts.
+// No-op without PhaseMetrics — the headline still renders via the legacy path above.
 function cohortMetricsHtml(p){
+  if(!window.PhaseMetrics)return'';
   if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return'';
   let h='<div style="display:flex;flex-direction:column;gap:14px;align-items:center">';
   p.baselineCohorts.forEach(co=>{

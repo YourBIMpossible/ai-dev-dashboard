@@ -10,7 +10,12 @@ These tests guard that contract. Run: python test_phase_completion_model.py
 (stdlib only, also pytest-compatible).
 """
 import math
+import re
+import subprocess
+import sys
+import tempfile
 import unittest
+from pathlib import Path
 
 import sync_ledgers as sl
 
@@ -123,6 +128,36 @@ class BuildProgressPreservation(unittest.TestCase):
         first = sl.build_progress({"phases": cur}, rows)
         second = sl.build_progress(first, rows)
         self.assertEqual(first, second)
+
+
+class ValidatorFailsCleanlyOnBadCohortPct(unittest.TestCase):
+    """Regression for the review finding: a cohort member without a valid numeric pct
+    must produce a clean, actionable validation failure (naming project/cohort/phase and
+    exit code 1) — never a KeyError traceback from `ph["pct"]`."""
+
+    def test_missing_cohort_member_pct_is_clean_failure(self):
+        src = Path(sl.DEFAULT_DATA).read_text(encoding="utf-8")
+        # Drop the pct line of P0-2, a july-2026 cohort member (non-greedy: the first
+        # `pct: N,` after the P0-2 id is P0-2's own).
+        broken, n = re.subn(r'(id: "P0-2",[\s\S]*?)\n\s*pct: \d+,', r"\1", src, count=1)
+        self.assertEqual(n, 1, "test setup: expected to remove exactly one P0-2 pct line")
+
+        with tempfile.TemporaryDirectory() as d:
+            data_path = Path(d) / "data.js"
+            data_path.write_text(broken, encoding="utf-8")
+            proc = subprocess.run(
+                [sys.executable, "validate_dashboard.py", "--data", str(data_path)],
+                capture_output=True, text=True, encoding="utf-8",
+                cwd=str(Path(__file__).parent),
+            )
+
+        out = (proc.stdout or "") + (proc.stderr or "")
+        self.assertEqual(proc.returncode, 1, f"expected clean failure exit 1, got:\n{out}")
+        self.assertNotIn("Traceback", out, f"validator crashed instead of failing cleanly:\n{out}")
+        self.assertNotIn("KeyError", out)
+        self.assertIn("bimpossible", out)   # project named
+        self.assertIn("july-2026", out)     # cohort named
+        self.assertIn("P0-2", out)          # phase named
 
 
 if __name__ == "__main__":

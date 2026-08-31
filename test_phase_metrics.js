@@ -55,6 +55,36 @@ test("getWeightedCompletion: empty -> null", () => {
   assert.strictEqual(M.getWeightedCompletion([]).pct, null);
 });
 
+// ---- isActivePhase: bucket-when-present, legacy note-regex fallback ----
+// Regression for the review finding: migrating one project to buckets must not change
+// the headline of any project still on the legacy (no-bucket) note-prefix convention.
+test("isActivePhase: legacy no-bucket 'On hold ...' note -> excluded", () => {
+  assert.strictEqual(M.isActivePhase({ note: "On hold — bonus, not a need" }), false);
+});
+test("isActivePhase: legacy no-bucket 'conditional ...' note -> excluded", () => {
+  assert.strictEqual(M.isActivePhase({ note: "conditional — pending owner go" }), false);
+});
+test("isActivePhase: legacy no-bucket ordinary note -> active", () => {
+  assert.strictEqual(M.isActivePhase({ note: "ACTIVE — shipping" }), true);
+  assert.strictEqual(M.isActivePhase({}), true); // no note at all -> active
+});
+test("isActivePhase: explicit bucket wins over a held-looking note", () => {
+  assert.strictEqual(M.isActivePhase({ bucket: "active", note: "On hold looks held" }), true);
+});
+test("isActivePhase: explicit bucket:'held' with ordinary note -> excluded", () => {
+  assert.strictEqual(M.isActivePhase({ bucket: "held", note: "ACTIVE — shipping" }), false);
+});
+test("getActivePhases: legacy no-bucket project keeps note-prefix exclusion", () => {
+  const legacy = { progress: { phases: [
+    { name: "A", pct: 100, note: "SHIPPED" },
+    { name: "B", pct: 0, note: "On hold — later" },
+    { name: "C", pct: 50, note: "conditional — maybe" },
+    { name: "D", pct: 80 } // no note -> active
+  ] } };
+  assert.deepStrictEqual(M.getActivePhases(legacy).map(x => x.name), ["A", "D"]);
+  assert.strictEqual(M.getFlatCompletion(M.getActivePhases(legacy)).pct, 90); // (100+80)/2
+});
+
 // ---- active phases + scope counts ----
 const sample = {
   phaseAliases: { "P11.1": "P11" },
@@ -129,6 +159,17 @@ test("real data.js: non-cohort projects yield no baseline", () => {
   const others = D.projects.filter(p => p.id !== "bimpossible");
   others.forEach(p => assert.ok(!Array.isArray(p.baselineCohorts) || !p.baselineCohorts.length,
     p.id + " should not declare cohorts"));
+});
+test("real data.js: non-bucket projects match pure-legacy note-regex scope (headline-neutral)", () => {
+  const D = global.window.DASHBOARD_DATA;
+  const HELD = /^(on hold|conditional|placeholder|proposal)/i;
+  D.projects.filter(p => p.id !== "bimpossible").forEach(p => {
+    const ph = (p.progress && p.progress.phases) || [];
+    if (!ph.length) return;
+    const legacy = ph.filter(x => !HELD.test(String(x.note == null ? "" : x.note).trim()));
+    assert.deepStrictEqual(M.getActivePhases(p).map(x => x.name), legacy.map(x => x.name),
+      p.id + " active scope must equal the pre-model legacy scope");
+  });
 });
 test("real data.js: every project still gets a headline (default-active safe)", () => {
   const D = global.window.DASHBOARD_DATA;

@@ -30,6 +30,11 @@
   // an unknown bucket at build time, so this only ever fires for a legacy phase).
   function normalizeBucket(b) { return BUCKET_SET[b] ? b : "active"; }
 
+  // Legacy scope inference for phases that predate the bucket field: a note whose
+  // prose begins with on hold / conditional / placeholder / proposal is out of scope.
+  // Kept so migrating one project to buckets does not change any other project's headline.
+  var HELD_PHASE = /^(on hold|conditional|placeholder|proposal)/i;
+
   // Curated weight must be a finite positive number; anything else -> 1.
   function normalizeWeight(w) {
     return (typeof w === "number" && isFinite(w) && w > 0) ? w : 1;
@@ -39,7 +44,16 @@
     return (p && p.progress && Array.isArray(p.progress.phases)) ? p.progress.phases : [];
   }
 
-  function isActivePhase(ph) { return normalizeBucket(ph && ph.bucket) === "active"; }
+  // A phase is in the ratified-scope headline when its explicit bucket is "active".
+  // When a phase carries NO bucket (a legacy, unmigrated record), fall back to the
+  // note-prefix rule so the headline is unchanged for projects not yet on the model.
+  // Structured data wins: a present bucket is authoritative even over a held-looking note.
+  function isActivePhase(ph) {
+    if (!ph) return false;
+    var b = ph.bucket;
+    if (typeof b === "string" && b.trim()) return b.trim() === "active";
+    return !HELD_PHASE.test(String(ph.note == null ? "" : ph.note).trim());
+  }
 
   function getActivePhases(p) { return getPhases(p).filter(isActivePhase); }
 
@@ -112,6 +126,7 @@
 
   return {
     VALID_BUCKETS: VALID_BUCKETS,
+    HELD_PHASE: HELD_PHASE,
     normalizeBucket: normalizeBucket,
     normalizeWeight: normalizeWeight,
     getPhases: getPhases,

@@ -220,31 +220,46 @@ def main() -> int:
                 chain.add(cur_id)
             return cur_id
 
+        pct_by_id = {ph.get("id"): ph.get("pct") for ph in pphases if ph.get("id")}
         for co in cohorts:
             cid = co.get("id", "?")
             member_ids = co.get("phaseIds") or []
             if not member_ids:
                 fail(f"[{pid}] baseline cohort {cid!r} has no phaseIds.")
                 errors += 1
-            resolved, dupes = set(), 0
+            resolved, dupes, cohort_pcts, bad = [], 0, [], False
             for raw in member_ids:
                 r = _resolve(raw)
                 if r is None:
                     fail(f"[{pid}] cohort {cid!r} member {raw!r} has a cyclic alias chain.")
                     errors += 1
+                    bad = True
                     continue
                 if r in resolved:
                     dupes += 1
                     continue
-                resolved.add(r)
+                resolved.append(r)
                 if r not in id_set:
                     fail(f"[{pid}] cohort {cid!r} member {raw!r} -> {r!r} "
                          f"does not match any phase id.")
                     errors += 1
-            if resolved:
-                base = round(sum(ph["pct"] for ph in pphases if ph.get("id") in resolved)
-                             / len(resolved))
-                print(f"  · [{pid}] cohort {cid!r}: {len(resolved)} phases "
+                    bad = True
+                    continue
+                # Member resolved to a real phase — its pct must be numeric to average.
+                # (The per-phase loop above also flags this, but a cohort-scoped message
+                # is actionable, and using .get avoids a KeyError crash on absent pct.)
+                v = pct_by_id.get(r)
+                if not isinstance(v, (int, float)) or isinstance(v, bool):
+                    fail(f"[{pid}] cohort {cid!r} member {raw!r} -> {r!r} "
+                         f"has no valid numeric pct ({v!r}); cannot compute the baseline.")
+                    errors += 1
+                    bad = True
+                    continue
+                cohort_pcts.append(v)
+            # Only report a baseline when the whole cohort resolved cleanly.
+            if resolved and not bad and cohort_pcts:
+                base = round(sum(cohort_pcts) / len(cohort_pcts))
+                print(f"  · [{pid}] cohort {cid!r}: {len(cohort_pcts)} phases "
                       f"({dupes} alias-dupe(s) folded) -> {base}% complete.")
 
     # --- verdict -------------------------------------------------------------
