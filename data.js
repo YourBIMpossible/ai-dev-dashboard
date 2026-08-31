@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [9,3,12,17,18,18,30,12,5,6,0,0,31,0],
+      activity: [9,3,12,17,18,18,30,12,5,6,0,0,31,13],
       lastActivity: {
-        date: "2026-08-30",
-        summary: "fix(queue): ignore dangling graph edges in flat-graph ranking (7d3952a)"
+        date: "2026-08-31",
+        summary: "fix(security-scan): run docs-hygiene at PR time and size its ceilings to match (#513) (efe78a2)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -918,10 +918,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [3,0,9,8,7,5,13,5,2,5,0,0,15,0],
+      activity: [3,0,9,8,7,5,13,5,2,5,0,0,15,10],
       lastActivity: {
-        date: "2026-08-30",
-        summary: "fix(queue): ignore dangling graph edges in flat-graph ranking (7d3952a)"
+        date: "2026-08-31",
+        summary: "state(queue): queue the two gitleaks findings surfaced by the 2026-08-31 mirror push (dff02ea)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -956,10 +956,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,3,3,8,11,4,5,20,6,3,4,3,17,2],
+      activity: [3,3,3,8,11,4,5,20,6,3,4,3,17,5],
       lastActivity: {
         date: "2026-08-31",
-        summary: "chore: live billing sync 2026-08-31 (9103095)"
+        summary: "fix(refresh): make the automation clone run origin's code, and refuse to default away curated phase fields (#8) (072afa3)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
