@@ -602,10 +602,10 @@ window.DASHBOARD_DATA = {
         summary: "docs(site): correct planning-docs path AI-Dev -> F:\\BIMpossible-Site (335c210)"
       },
       branch: null, git: { latestCommit: "709f352" },
-      nextActions: ["Email routing aliases: hello@/support@/legal@/billing@/zeriah@ → Gmail (recipe in IP-Lockdown-Checklist.md Phase 1.5)","Product screenshots: get real app screenshots into Leaders + BIM Managers pages","Dashboard auth: fix Cloudflare Zero Trust login — add GitHub OAuth IDP (OAuth App at github.com/settings/applications → callback: https://flat-queen-a958.cloudflareaccess.com/cdn-cgi/access/callback)"],
+      nextActions: ["Email routing aliases: hello@/support@/legal@/billing@/zeriah@ -> Gmail (recipe in IP-Lockdown-Checklist.md Phase 1.5)","Product screenshots: get real app screenshots into Leaders + BIM Managers pages"],
       pendingDecisions: [],
       blockers: [],
-      reminders: ["Dashboard auth IDP = Google via Cloudflare Access, owner's address only (owner-confirmed 2026-08-30; matches the 2026-07-25 bim-watch design). The earlier GitHub-OAuth / OTP-email attempt was abandoned -- purge any doc/note still citing a GitHub OAuth App or OTP delivery.","Product screenshots still needed on the Leaders + BIM Managers pages before M4 is fully complete -- both currently import only Hero.png, no product imagery."],
+      reminders: ["Dashboard auth IDP = Google via Cloudflare Access, owner's address only (zeriah.t@gmail.com; owner-confirmed 2026-08-30, verified live in bimwatch/SETUP.md). The earlier GitHub-OAuth / OTP-email attempt was abandoned.","Product screenshots still needed on the Leaders + BIM Managers pages before M4 is fully complete -- both currently import only Hero.png, no product imagery."],
       links: [
         { label: "Roadmap index", path: "F:\\BIMpossible-Site\\00_README.md" },
         { label: "IP lockdown checklist", path: "F:\\BIMpossible-Site\\IP-Lockdown-Checklist.md" },
