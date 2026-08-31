@@ -276,9 +276,11 @@ Every phase declares exactly one `bucket`:
 - The **headline donut** = flat mean of the `pct` of `active` phases only (`Math.round` at
   display). Non-active phases are tracked in the **scope inventory** (a count per bucket) but
   never dilute the headline.
-- A phase with **no bucket defaults to `active`** — so every project that has not opted into
-  the model (all but bimpossible today) behaves exactly as before. This default is
-  headline-neutral by construction.
+- A phase with **no bucket defaults to `active`** *at render time* — so every project that has
+  not opted into the model (all but bimpossible today) behaves exactly as before. This default
+  is headline-neutral by construction. It does **not** extend to the ledger rebuild: a phase
+  that already exists in `data.js` and has lost its bucket aborts the sync rather than being
+  re-labelled active (see "Sync preservation guarantee").
 - An unknown bucket string is a **build-time error** (`validate_dashboard.py`); the renderer
   still fails safe by treating anything unrecognized as `active`.
 
@@ -330,6 +332,23 @@ tuple, applied per phase). The project-level registries `baselineCohorts` / `pha
 value-spans the splice rewrites, so the splice leaves them byte-identical and a sync never touches
 them. The refresh-drift gate (run twice; output must be
 byte-identical and `node --check` clean) proves a refresh does not perturb the model.
+
+**Loss is fatal, not defaulted (2026-08-31).** If a phase that already exists in `data.js`
+reaches the rebuild without a valid `bucket`/`weight`, `build_progress()` raises
+`CuratedFieldLoss` and the sync exits 1 *without writing*. Defaulting there is what turns one
+bad generation into permanent loss: `data.js` is the only store for these values, so a
+stripped phase silently rebuilt as `active`/`1` erases the scope model with no way back. A
+ledger phase with **no record at all** in `data.js` is genuinely new and is still seeded with
+the defaults. `--allow-model-field-defaults` restores the permissive behaviour and exists only
+for a deliberate migration of records that never carried the schema.
+
+**The automation clone must execute origin's code.** `Refresh-Dashboard.ps1` bases each run on
+`origin/main` with a *mixed* reset, which moves HEAD and the index but leaves the working tree
+alone — so restoring only the data files (as it did before 2026-08-31) let the clone keep
+running whatever generator and validator revisions it happened to hold. Step 0b now checks the
+whole tracked tree out of `origin/main` (excluding `graphify-health.js`, rendered by an earlier
+scheduled job and legitimately newer), logs any drift it corrected, and aborts the run if drift
+survives the restore.
 
 ### Validation
 

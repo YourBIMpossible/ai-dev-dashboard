@@ -38,8 +38,9 @@ class WeightNormalization(unittest.TestCase):
 
 
 class BuildProgressPreservation(unittest.TestCase):
-    def _run(self, current_phases, ledger_rows):
-        return sl.build_progress({"phases": current_phases}, ledger_rows)["phases"]
+    def _run(self, current_phases, ledger_rows, allow_defaults=False):
+        return sl.build_progress({"phases": current_phases}, ledger_rows,
+                                 allow_defaults=allow_defaults)["phases"]
 
     def test_new_schema_fields_survive_rebuild(self):
         cur = [{
@@ -63,23 +64,32 @@ class BuildProgressPreservation(unittest.TestCase):
         self.assertEqual(out["name"], "P7 New Ledger Name")
         self.assertIn("fresh note", out["note"])
 
-    def test_defaults_seeded_when_absent(self):
-        # a phase with no completion-model fields (pre-migration) gets safe defaults
-        out = self._run([{"name": "P4 X", "pct": 96}], [_ledger("4", "X")])[0]
+    def test_new_phase_absent_from_data_js_is_seeded(self):
+        # a ledger row with NO record in data.js is genuinely new: safe defaults, no error.
+        out = self._run([], [_ledger("4", "X", "ACTIVE")])[0]
+        self.assertEqual(out["id"], "P4")
+        self.assertEqual(out["bucket"], "active")
+        self.assertEqual(out["weight"], 1)
+
+    def test_defaults_seeded_when_absent_under_migration_flag(self):
+        # pre-migration records (present, but never carried the schema) get safe defaults
+        # ONLY under the explicit opt-in; the default path refuses - see FieldLossIsFatal.
+        out = self._run([{"name": "P4 X", "pct": 96}], [_ledger("4", "X")],
+                        allow_defaults=True)[0]
         self.assertEqual(out["id"], "P4")
         self.assertEqual(out["bucket"], "active")
         self.assertEqual(out["weight"], 1)
         self.assertEqual(out["pct"], 96)
 
-    def test_unknown_bucket_defaults_to_active(self):
+    def test_unknown_bucket_defaults_to_active_under_migration_flag(self):
         out = self._run([{"id": "P4", "bucket": "bogus", "name": "P4 X", "pct": 1}],
-                        [_ledger("4", "X")])[0]
+                        [_ledger("4", "X")], allow_defaults=True)[0]
         self.assertEqual(out["bucket"], "active")
 
     def test_all_valid_buckets_preserved(self):
         for b in sl.VALID_BUCKETS:
-            out = self._run([{"id": "P4", "bucket": b, "name": "P4 X", "pct": 1}],
-                            [_ledger("4", "X")])[0]
+            out = self._run([{"id": "P4", "bucket": b, "weight": 1,
+                              "name": "P4 X", "pct": 1}], [_ledger("4", "X")])[0]
             self.assertEqual(out["bucket"], b)
 
     def test_id_is_primary_join_key(self):
@@ -96,7 +106,7 @@ class BuildProgressPreservation(unittest.TestCase):
         # migration path: curated pct/tasks join by parsed number before ids exist
         cur = [{"name": "P0-2 Foundation", "pct": 100,
                 "tasks": [{"label": "a", "status": "done"}]}]
-        out = self._run(cur, [_ledger("0-2", "Foundation")])[0]
+        out = self._run(cur, [_ledger("0-2", "Foundation")], allow_defaults=True)[0]
         self.assertEqual(out["id"], "P0-2")
         self.assertEqual(out["pct"], 100)
         self.assertTrue(out["tasks"])
@@ -106,13 +116,15 @@ class BuildProgressPreservation(unittest.TestCase):
         # PROJECT-level registry, never a phase field — its ownership/survival is covered
         # positively by ProjectLevelRegistriesSurviveRender below, not by a trivial
         # per-phase absence check that would pass vacuously.
-        out = self._run([{"id": "P4", "name": "P4 X", "pct": 1}], [_ledger("4", "X")])[0]
+        out = self._run([{"id": "P4", "bucket": "active", "weight": 1,
+                          "name": "P4 X", "pct": 1}], [_ledger("4", "X")])[0]
         for k in ("ratifiedAt", "evidenceUpdatedAt", "scoreBasis"):
             self.assertNotIn(k, out)
 
-    def test_bad_curated_weight_repaired_on_rebuild(self):
-        out = self._run([{"id": "P4", "weight": 0, "name": "P4 X", "pct": 1}],
-                        [_ledger("4", "X")])[0]
+    def test_bad_curated_weight_repaired_under_migration_flag(self):
+        out = self._run([{"id": "P4", "bucket": "active", "weight": 0,
+                          "name": "P4 X", "pct": 1}],
+                        [_ledger("4", "X")], allow_defaults=True)[0]
         self.assertEqual(out["weight"], 1)
 
     def test_build_progress_is_idempotent(self):
@@ -132,6 +144,100 @@ class BuildProgressPreservation(unittest.TestCase):
         first = sl.build_progress({"phases": cur}, rows)
         second = sl.build_progress(first, rows)
         self.assertEqual(first, second)
+
+
+class FieldLossIsFatal(unittest.TestCase):
+    """Regression for the 2026-08-31 completion-model wipe.
+
+    The scheduled refresh ran a stale sync_ledgers.py that emitted no completion-model
+    fields, and every later run would have happily rebuilt those stripped phases with
+    `bucket: "active", weight: 1` — turning one bad generation into a permanently
+    all-active scope model (P5 held, P10/P16 conditional, P12 placeholder, P19 proposed
+    all silently promoted). Losing curated fields must ABORT the render, not default.
+    """
+
+    def _build(self, current_phases, ledger_rows, **kw):
+        return sl.build_progress({"phases": current_phases}, ledger_rows, **kw)
+
+    def test_stripped_phases_abort_the_render(self):
+        # exactly the shape the 2026-08-31 refresh produced: name/pct/note only.
+        cur = [{"name": "P5 Hold", "pct": 15, "note": "ON HOLD"},
+               {"name": "P12 Placeholder", "pct": 0, "note": "TBD"}]
+        rows = [_ledger("5", "Hold", "ON HOLD"), _ledger("12", "Placeholder", "TBD")]
+        with self.assertRaises(sl.CuratedFieldLoss) as ctx:
+            self._build(cur, rows)
+        msg = str(ctx.exception)
+        # every affected phase is named, and the operator is told how to recover
+        for pid in ("P5", "P12"):
+            self.assertIn(pid, msg)
+        self.assertIn("bucket", msg)
+        self.assertIn("weight", msg)
+        self.assertIn("data.js", msg)
+
+    def test_missing_bucket_alone_is_fatal(self):
+        with self.assertRaises(sl.CuratedFieldLoss):
+            self._build([{"id": "P4", "weight": 1, "name": "P4 X", "pct": 1}],
+                        [_ledger("4", "X")])
+
+    def test_missing_weight_alone_is_fatal(self):
+        with self.assertRaises(sl.CuratedFieldLoss):
+            self._build([{"id": "P4", "bucket": "held", "name": "P4 X", "pct": 1}],
+                        [_ledger("4", "X")])
+
+    def test_invalid_bucket_is_fatal(self):
+        # silently rewriting an unknown bucket to "active" is the same class of loss:
+        # the validator downstream would then see a legitimate-looking "active".
+        with self.assertRaises(sl.CuratedFieldLoss):
+            self._build([{"id": "P4", "bucket": "bogus", "weight": 1,
+                          "name": "P4 X", "pct": 1}], [_ledger("4", "X")])
+
+    def test_invalid_weight_is_fatal(self):
+        # bool is the trap: `True == 1`, so a naive numeric check would accept it.
+        for bad in (0, -1, "3", None, True, float("nan"), float("inf")):
+            with self.subTest(weight=bad):
+                with self.assertRaises(sl.CuratedFieldLoss):
+                    self._build([{"id": "P4", "bucket": "active", "weight": bad,
+                                  "name": "P4 X", "pct": 1}], [_ledger("4", "X")])
+
+    def test_healthy_phases_still_rebuild(self):
+        # the guard must not fire on well-formed input (no false positives).
+        out = self._build([{"id": "P4", "bucket": "conditional", "weight": 1,
+                            "name": "P4 X", "pct": 30}], [_ledger("4", "X")])["phases"][0]
+        self.assertEqual(out["bucket"], "conditional")
+
+    def test_cli_refuses_to_write_a_stripped_data_js(self):
+        """End-to-end on the ACTUAL regeneration path: `python sync_ledgers.py --data ...`
+        against a stripped data.js must exit 1 with a clean message and leave the file
+        byte-identical, rather than re-rendering the loss into place."""
+        data = Path(sl.DEFAULT_DATA)
+        ledgers = (Path(sl.DEFAULT_PHASE_LEDGER), Path(sl.DEFAULT_WAVE_LEDGER))
+        if not all(p.is_file() for p in (data, *ledgers)):
+            self.skipTest("ledger inputs not present in this environment")
+
+        src = data.read_text(encoding="utf-8")
+        # Strip the curated tokens wherever they sit — phases render both as multi-line
+        # blocks and as single-line objects, so match the token, not the line.
+        stripped, n_b = re.subn(r'\s*bucket: "[a-z]+",', "", src)
+        stripped, n_w = re.subn(r"\s*weight: [0-9.]+,", "", stripped)
+        self.assertGreater(n_b, 0, "test setup: no bucket fields found to strip")
+        self.assertGreater(n_w, 0, "test setup: no weight fields found to strip")
+
+        with tempfile.TemporaryDirectory() as d:
+            data_path = Path(d) / "data.js"
+            data_path.write_text(stripped, encoding="utf-8")
+            proc = subprocess.run(
+                [sys.executable, "sync_ledgers.py", "--data", str(data_path)],
+                capture_output=True, text=True, encoding="utf-8",
+                cwd=str(Path(__file__).parent),
+            )
+            after = data_path.read_text(encoding="utf-8")
+
+        out = (proc.stdout or "") + (proc.stderr or "")
+        self.assertEqual(proc.returncode, 1, f"expected clean failure exit 1, got:\n{out}")
+        self.assertNotIn("Traceback", out, f"sync crashed instead of failing cleanly:\n{out}")
+        self.assertIn("refusing to render", out)
+        self.assertIn("P5", out)          # a held phase, named in the failure
+        self.assertEqual(after, stripped, "sync wrote to data.js despite refusing")
 
 
 class ValidatorFailsCleanlyOnBadCohortPct(unittest.TestCase):
