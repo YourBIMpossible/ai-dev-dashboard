@@ -333,7 +333,10 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #    graphify-health.js is rendered by .tools\graphify\Check-GraphifyHealth.ps1
     #    (daily, 05:45 - ahead of this run). That script deliberately does not commit,
     #    so this refresh is the single committer for the file.
-    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","codebase") | Out-Null
+    #    PHASE_DAG.md is the second output of phase_dag.py alongside phase_dag.js; staging
+    #    only the .js left the .md permanently dirty, which step 0b now reverts on every
+    #    run - so it must be committed here or it can never update.
+    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","PHASE_DAG.md","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","codebase") | Out-Null
     $staged = (& git diff --cached --name-only) -join "`n"
     if (-not $staged.Trim()) { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
 
