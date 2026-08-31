@@ -12,6 +12,16 @@
  *   node export-audit-findings.js --json          # print structured JSON to stdout (no file)
  *   node export-audit-findings.js --out report.md # write markdown to a custom path
  *   node export-audit-findings.js --open-only     # markdown: skip the history digest
+ *   node export-audit-findings.js --data-dir DIR  # read data.js/audit-freshness.js from DIR (tests)
+ *
+ * Exit codes:
+ *   0  report produced
+ *   1  data.js missing/invalid - nothing can be reported
+ *   2  a REQUIRED input is missing or invalid (e.g. audit-freshness.js). No
+ *      report is written: every sync/staleness claim this script makes depends
+ *      on it, and an absent input is not an empty valid input (2026-08-31 slop
+ *      audit, MEDIUM-2 - a missing audit-freshness.js used to render
+ *      "All cards in sync with disk" and exit 0).
  *
  * Pure reader. Never mutates data.js or any dashboard state.
  */
@@ -20,7 +30,13 @@
 const fs = require("fs");
 const path = require("path");
 
+const argv = process.argv.slice(2);
+const has = (f) => argv.includes(f);
+function argVal(f) { const i = argv.indexOf(f); return i >= 0 ? argv[i + 1] : null; }
+
 const HERE = __dirname;
+// Tests point this at a fixture directory; production always reads the repo.
+const DATA_DIR = argVal("--data-dir") ? path.resolve(argVal("--data-dir")) : HERE;
 const SEV_ORDER = ["critical", "high", "medium", "low", "info"];
 const SEV_RANK = Object.fromEntries(SEV_ORDER.map((s, i) => [s, i]));
 
@@ -29,19 +45,41 @@ const SEV_RANK = Object.fromEntries(SEV_ORDER.map((s, i) => [s, i]));
 // Point `window` at Node's global object and require() them; no eval, no
 // string-built functions — identical to the sync/validate scripts' approach.
 global.window = global.window || {};
+// Returns {ok, value, reason}. A missing or unparseable input is a FAILURE, not
+// an empty value - the callers below decide whether the input is required.
 function loadGlobal(file, prop) {
-  const p = path.join(HERE, file);
-  if (!fs.existsSync(p)) return null;
-  require(p);
-  return global.window[prop] || null;
+  const p = path.join(DATA_DIR, file);
+  if (!fs.existsSync(p)) return { ok: false, reason: `not found: ${p}` };
+  try {
+    require(p);
+  } catch (e) {
+    return { ok: false, reason: `${file} could not be parsed: ${e.message}` };
+  }
+  const value = global.window[prop];
+  if (!value || typeof value !== "object") {
+    return { ok: false, reason: `${file} loaded but did not define window.${prop}` };
+  }
+  return { ok: true, value };
 }
 
-const DATA = loadGlobal("data.js", "DASHBOARD_DATA");
-if (!DATA || !Array.isArray(DATA.projects)) {
-  console.error("ERROR: could not load DASHBOARD_DATA.projects from data.js");
+const dataLoad = loadGlobal("data.js", "DASHBOARD_DATA");
+if (!dataLoad.ok || !Array.isArray(dataLoad.value.projects)) {
+  console.error(`ERROR: could not load DASHBOARD_DATA.projects from data.js - ${dataLoad.reason || "projects is not an array"}`);
   process.exit(1);
 }
-const FRESH = loadGlobal("audit-freshness.js", "AUDIT_FRESHNESS") || { projects: {} };
+const DATA = dataLoad.value;
+
+// audit-freshness.js is REQUIRED: every "in sync with disk" / "stale" claim in
+// this report is derived from it. Without it the answer is unknown, and unknown
+// must not render as an all-clear.
+const freshLoad = loadGlobal("audit-freshness.js", "AUDIT_FRESHNESS");
+if (!freshLoad.ok || !freshLoad.value.projects || typeof freshLoad.value.projects !== "object") {
+  console.error("STALENESS UNKNOWN - audit-freshness.js not loaded or invalid: " +
+    (freshLoad.reason || "audit-freshness.js defines no projects object"));
+  console.error("No report written. Run check_audit_freshness.py, then re-run this export.");
+  process.exit(2);
+}
+const FRESH = freshLoad.value;
 
 // ---- collect ----
 function collect() {
@@ -198,10 +236,6 @@ function toJSON() {
 }
 
 // ---- CLI ----
-const argv = process.argv.slice(2);
-const has = (f) => argv.includes(f);
-function argVal(f) { const i = argv.indexOf(f); return i >= 0 ? argv[i + 1] : null; }
-
 if (has("--json")) {
   process.stdout.write(toJSON() + "\n");
   process.exit(0);

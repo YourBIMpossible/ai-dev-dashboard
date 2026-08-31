@@ -29,6 +29,7 @@
 
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
+. (Join-Path $PSScriptRoot "Refresh-GitStaging.ps1")   # Invoke-GitStage
 
 $backups  = Join-Path $PSScriptRoot "_backups"
 # _backups is runtime-only (not tracked), so a fresh clone won't have it. Create it
@@ -285,9 +286,13 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #    graphify-health.js is rendered by .tools\graphify\Check-GraphifyHealth.ps1
     #    (daily, 05:45 - ahead of this run). That script deliberately does not commit,
     #    so this refresh is the single committer for the file.
-    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","codebase") | Out-Null
-    $staged = (& git diff --cached --name-only) -join "`n"
-    if (-not $staged.Trim()) { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
+    #    A FAILED add is fatal, never "already current": git aborts the whole add on a
+    #    single unmatched pathspec, and the empty index it leaves behind is
+    #    indistinguishable from a genuinely unchanged tree (2026-08-31 slop audit).
+    $stage = Invoke-GitStage -Paths @("data.js","graph-metrics.js","phase_dag.js","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","codebase") `
+                             -Log { param($Message) $Message | Add-Content -Path $log -Encoding utf8 }
+    if (-not $stage.Ok) { Alert-Failure "$($stage.Reason) - dashboard NOT updated."; $result = 1; break }
+    if (-not $stage.Staged.Count) { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
 
     # 5. Commit (parent = origin/main) + push. Fast-forward unless the bot advanced
     #    origin during our render; on rejection, loop onto the new tip and re-render.
