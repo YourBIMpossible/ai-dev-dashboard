@@ -102,8 +102,12 @@ class BuildProgressPreservation(unittest.TestCase):
         self.assertTrue(out["tasks"])
 
     def test_optional_metadata_absent_stays_absent(self):
+        # Only genuinely per-phase optional keys belong here. `baselineCohorts` is a
+        # PROJECT-level registry, never a phase field — its ownership/survival is covered
+        # positively by ProjectLevelRegistriesSurviveRender below, not by a trivial
+        # per-phase absence check that would pass vacuously.
         out = self._run([{"id": "P4", "name": "P4 X", "pct": 1}], [_ledger("4", "X")])[0]
-        for k in ("ratifiedAt", "evidenceUpdatedAt", "scoreBasis", "baselineCohorts"):
+        for k in ("ratifiedAt", "evidenceUpdatedAt", "scoreBasis"):
             self.assertNotIn(k, out)
 
     def test_bad_curated_weight_repaired_on_rebuild(self):

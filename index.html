@@ -806,7 +806,7 @@ const ICO={
 window._PR={};
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function pathLink(p,label){const uri='vscode://file/'+p.replace(/\\/g,'/');return`<a class="path-chip" href="${esc(uri)}" title="${esc(p)}">${esc(label||p)}</a>`;}
 let _toastTimer;
 function copyPath(el,path){
@@ -906,13 +906,18 @@ function scopeCaption(p,cohorts){
   if(!held)return'';
   // A project that declares a frozen baseline cohort gets the reconciliation note + tooltip:
   // the flat active average dilutes as young phases enter scope, so the raw number can move
-  // without progress regressing. Cohort presence (not a hardcoded project id) drives this,
-  // so any project that freezes a delivery cohort gets the same treatment.
+  // without progress regressing. DECLARED cohort presence (not a hardcoded project id, and not
+  // whether PhaseMetrics computed a result) drives every caption affordance — so a cohort
+  // project keeps its ratified-scope label/tooltip even on the module-absent fallback path.
+  // The computed cohorts result is used ONLY for the live baseline pct, which is null without
+  // the module (alias resolution + dedupe live there); the label comes from the declared
+  // registry directly, so it survives fallback too.
+  const decl=(p.baselineCohorts&&Array.isArray(p.baselineCohorts)&&p.baselineCohorts.length)?p.baselineCohorts[0]:null;
+  const hasCohort=!!decl;
   const first=(cohorts&&cohorts.length)?cohorts[0]:null;
-  const hasCohort=!!first;
   const label=hasCohort?`active ratified scope · ${held} held/future excluded`:`active scope · ${held} on-hold/future excluded`;
   const bp=(first&&first.r&&first.r.pct!==null)?first.r.pct:null;
-  const coLabel=(first&&first.co&&first.co.label)?esc(first.co.label):'The frozen delivery cohort';
+  const coLabel=(decl&&decl.label)?esc(decl.label):'The frozen delivery cohort';
   // Keep every clause a complete, capitalized sentence so the tooltip reads correctly
   // whether or not a baseline pct is available (bp is null when PhaseMetrics is absent).
   // Language is neutral and the pct is computed live — no hardcoded historical figure.
@@ -926,7 +931,9 @@ function scopeCaption(p,cohorts){
 // `cohorts` is the per-render result set from cohortResults(p) (computed once, shared with
 // scopeCaption); the scope-inventory chips still come straight from PhaseMetrics.
 function cohortMetricsHtml(p,cohorts){
-  if(!window.PhaseMetrics)return'';
+  // No guard on window.PhaseMetrics: the only caller passes cohortResults(p), which is [] when
+  // the module is absent, so a non-empty `cohorts` already implies PhaseMetrics is present
+  // (getScopeCounts/VALID_BUCKETS below are then safe to deref).
   if(!cohorts||!cohorts.length)return'';
   let h='<div style="display:flex;flex-direction:column;gap:14px;align-items:center">';
   cohorts.forEach(({co,r})=>{
