@@ -76,18 +76,33 @@ function Invoke-Logged {
     return $code
 }
 
-# Same stderr safety as Invoke-Logged, but returns the command's STDOUT lines instead of its
-# exit code - for queries whose answer we need to branch on (e.g. `git diff --name-only`).
-# stderr is dropped rather than merged: git narrates benign notices there ("LF will be
-# replaced by CRLF..."), and merging them via 2>&1 would both pollute the result list and,
-# under EAP=Stop on PS 5.1, terminate the run.
-function Invoke-Capture {
+# Same stderr safety as Invoke-Logged, but for queries whose ANSWER we branch on
+# (e.g. `git diff --name-only`) - so it must fail closed: a query that could not run is
+# not the same thing as a query that returned nothing. Returns a hashtable:
+#   Ok   - $true only when the command ran and exited 0
+#   Code - the native exit code
+#   Out  - non-blank stdout lines (the answer)
+#   Err  - non-blank stderr lines (diagnostics for the failure message)
+# stdout and stderr are kept separate: git narrates benign notices on stderr ("LF will be
+# replaced by CRLF...", detached-HEAD advice), so stderr content alone is NEVER treated as
+# failure - only a nonzero exit code is - and that chatter never pollutes Out. On PS 5.1,
+# 2>&1 wraps each stderr line in an ErrorRecord; under EAP=Continue that is safe to collect,
+# and partitioning on the record type is what splits the two streams back apart.
+function Invoke-CaptureChecked {
     param([Parameter(Mandatory)][string]$Exe, [string[]]$Arguments = @())
     $eap = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
-    $out = & $Exe @Arguments 2>$null
+    $raw = & $Exe @Arguments 2>&1
+    $code = $LASTEXITCODE
     $ErrorActionPreference = $eap
-    return @($out | Where-Object { "$_".Trim() })
+    $stdout = @(); $stderr = @()
+    foreach ($item in @($raw)) {
+        if ("$item".Trim()) {
+            if ($item -is [System.Management.Automation.ErrorRecord]) { $stderr += "$item" }
+            else { $stdout += "$item" }
+        }
+    }
+    return @{ Ok = ($code -eq 0); Code = $code; Out = $stdout; Err = $stderr }
 }
 
 # Render graph-metrics.js from the tracked BIMpossible ledger. This refresh is the
@@ -235,17 +250,28 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #     before executing it, so a corrected copy takes effect on the NEXT run - which is
     #     what makes this self-healing rather than needing a manual clone repair.
     $keepLocal = ":(exclude)graphify-health.js"
-    $drift = Invoke-Capture "git" @("diff","--name-only","origin/main","--",".",$keepLocal)
-    if ($drift) {
+    # Both drift queries fail CLOSED: a diff that could not run (index.lock held by the
+    # 05:45 graphify job, a corrupt ref, git missing) must abort the run, not read as
+    # "no drift" - an unverified tree is exactly what this step exists to refuse.
+    $driftQ = Invoke-CaptureChecked "git" @("diff","--name-only","origin/main","--",".",$keepLocal)
+    if (-not $driftQ.Ok) {
+        Alert-Failure "drift query failed (git diff --name-only origin/main, exit $($driftQ.Code)): $($driftQ.Err -join ' | ')"
+        $result = 1; break
+    }
+    if ($driftQ.Out.Count) {
         "DRIFT: automation clone was running non-origin content, restoring from origin/main:" | Add-Content -Path $log -Encoding utf8
-        $drift | ForEach-Object { "  drift: $_" } | Add-Content -Path $log -Encoding utf8
+        $driftQ.Out | ForEach-Object { "  drift: $_" } | Add-Content -Path $log -Encoding utf8
     }
     if ((Invoke-Logged "git" @("checkout","origin/main","--",".",$keepLocal)) -ne 0) { Alert-Failure "git checkout origin/main -- . failed."; $result = 1; break }
     # Prove it took. Residual drift means the tree is not the code we think we are running,
     # so refuse to render rather than ship whatever this clone happens to contain.
-    $residual = Invoke-Capture "git" @("diff","--name-only","origin/main","--",".",$keepLocal)
-    if ($residual) {
-        Alert-Failure "working tree still differs from origin/main after restore: $($residual -join ', ')"
+    $residualQ = Invoke-CaptureChecked "git" @("diff","--name-only","origin/main","--",".",$keepLocal)
+    if (-not $residualQ.Ok) {
+        Alert-Failure "post-restore verification failed to run (git diff --name-only origin/main, exit $($residualQ.Code)): $($residualQ.Err -join ' | ')"
+        $result = 1; break
+    }
+    if ($residualQ.Out.Count) {
+        Alert-Failure "working tree still differs from origin/main after restore: $($residualQ.Out -join ', ')"
         $result = 1; break
     }
 

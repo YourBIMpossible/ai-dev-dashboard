@@ -1942,13 +1942,27 @@ function balanceProjectGrid(){
   if(!g)return;
   const main=g.firstElementChild,rail=g.lastElementChild;
   if(!main||main===rail)return;
-  // Stacked at the narrow breakpoint — one column, nothing to balance, and moving cards there
-  // would only scramble the reading order.
-  if(getComputedStyle(g).gridTemplateColumns.split(/\s+/).length<2)return;
   const gap=()=>Math.abs(main.offsetHeight-rail.offsetHeight);
   const sortCol=col=>[...col.children]
     .sort((a,b)=>(+a.dataset.ord||0)-(+b.dataset.ord||0))
     .forEach(c=>col.appendChild(c));
+  // Stamp each card's declared column the first time we see it (the view renders fresh markup,
+  // so a stamp always reflects project()'s own placement), then ALWAYS put cards back before
+  // doing anything else. A move made at wide width must not survive a breakpoint change —
+  // stacked layout renders rail-first (.proj-rail{order:-1}), so a leftover move puts a card
+  // in the wrong reading order — and restoring first also means every wide pass balances from
+  // the declared layout instead of compounding earlier moves.
+  [...main.children].forEach(c=>{if(!c.dataset.home)c.dataset.home='main';});
+  [...rail.children].forEach(c=>{if(!c.dataset.home)c.dataset.home='rail';});
+  let restored=false;
+  [...main.children,...rail.children].forEach(c=>{
+    const home=c.dataset.home==='rail'?rail:main;
+    if(c.parentElement!==home){home.appendChild(c);restored=true;}
+  });
+  if(restored){sortCol(main);sortCol(rail);}
+  // Stacked at the narrow breakpoint — one column, nothing to balance, and moving cards there
+  // would only scramble the reading order. Declared placement is already restored above.
+  if(getComputedStyle(g).gridTemplateColumns.split(/\s+/).length<2)return;
   for(let pass=0;pass<4;pass++){
     const before=gap();
     if(before<=PROJ_BALANCE_TOL)return;
@@ -2008,7 +2022,11 @@ function auditHistory(p){
       +(scope?`<div class="ah-scope${c}" id="${sid}">${esc(scope)}</div>`:'')
       +(long?`<button type="button" class="nt-more" aria-expanded="false" aria-controls="${rid} ${tid}${scope?' '+sid:''}" onclick="ntToggle(event,'${rid}','Full note')">Full note</button>`:'')
       +`</div>`
-      +(r.report?`<span class="ah-ref au-jump" title="read this report here" onclick="auViewReport('${esc(p.id)}/${esc(r.report)}','${esc(p.name)} — ${esc(r.date||'')} report')">${esc(r.report)}</span>`:'')
+      // Values travel as escaped data-* attributes (esc covers the double-quoted attribute
+      // context) and a delegated handler in show() reads them back via dataset — never as
+      // inline JS string literals, where esc() would leave apostrophes free to break the
+      // handler for a name like "owner's-review.md".
+      +(r.report?`<span class="ah-ref au-jump" role="button" tabindex="0" title="read this report here" data-report-file="${esc(p.id+'/'+r.report)}" data-report-title="${esc(p.name+' — '+(r.date||'')+' report')}">${esc(r.report)}</span>`:'')
       +`</div>`;
   };
   return`<div class="ah"><div class="ah-h">Run history · ${hist.length} run${hist.length!==1?'s':''}</div>`
@@ -2076,7 +2094,7 @@ function auditView(){
       h+=`<span class="au-break-nm">${esc(p.name)}</span>`;
       h+=`<span class="au-break-meta">unresolved as of ${esc(p.audit.lastRun||'?')}</span>`;
       if(openRows)h+=`<span class="au-jump" onclick="auJump('${k}')">flash ${openRows} below ↓</span>`;
-      if(p.audit.reportFile)h+=`<span class="au-jump" onclick="auViewReport('${esc(p.audit.reportFile)}','${esc(p.name)} — latest audit report')">read report here</span>`;
+      if(p.audit.reportFile)h+=`<span class="au-jump" role="button" tabindex="0" data-report-file="${esc(p.audit.reportFile)}" data-report-title="${esc(p.name+' — latest audit report')}">read report here</span>`;
       if(p.audit.reportPath)h+=pathLink(p.audit.reportPath,'editor');
       h+=`</div>`;
       if(rows&&rows.length){
@@ -2677,9 +2695,14 @@ function strategyView(){
   const anySection=rendered.length>0;
   const secState=readSecOpen(DISCLOSURE_KEY.strategy);
   const sole=rendered.length===1;
+  // A filter that leaves exactly one category MUST show its result: a stored "closed" for
+  // that category would otherwise render the filtered page apparently empty. The forced
+  // open is render-only — nothing is written, so clearing the filter returns to the stored
+  // preference. Unfiltered renders keep the normal precedence (stored wins, then sole).
+  const filtering=catF!=='all'||laneF!=='all';
   rendered.forEach(({c,act:actInCat,comp:compInCat})=>{
     const bid='sts-'+c;
-    const open=secInitialOpen(c,secState,sole);
+    const open=(filtering&&sole)?true:secInitialOpen(c,secState,sole);
     h+=`<div class="strat-section">
       <div class="strat-section-hdr">
         <button type="button" class="strat-sec-toggle" data-sec="${c}" aria-expanded="${open}" aria-controls="${bid}" onclick="stratSecToggle(this)">
@@ -4024,6 +4047,11 @@ function show(id){
   else{const p=D.projects.find(q=>q.id===id);m.innerHTML=project(p);}
   m.querySelectorAll('[data-id]').forEach(el=>{if(!el.classList.contains('nav'))el.onclick=()=>show(el.dataset.id);});
   m.querySelectorAll('.ph-click').forEach(el=>{el.onclick=e=>{e.stopPropagation();openPP(el.dataset.pk,el);};});
+  m.querySelectorAll('.au-jump[data-report-file]').forEach(el=>{
+    const go=e=>{e.stopPropagation();auViewReport(el.dataset.reportFile,el.dataset.reportTitle||el.dataset.reportFile);};
+    el.onclick=go;
+    el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(e);}};
+  });
   m.querySelectorAll('.mtab[data-mt]').forEach(el=>{el.onclick=()=>{window._mtab=el.dataset.mt;try{localStorage.setItem('dash.mtab',el.dataset.mt);}catch(e){} show('usage');};});
   m.querySelectorAll('.mtab[data-ct]').forEach(el=>{el.onclick=()=>{window._ctab=el.dataset.ct;try{localStorage.setItem('dash.ctab',el.dataset.ct);}catch(e){} show('graph');};});
   balanceProjectGrid();
@@ -4039,6 +4067,10 @@ function inField(e){
   return t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable);
 }
 document.addEventListener('keydown',e=>{
+  // An open modal (command palette, shortcut sheet, report viewer) owns the keyboard: its own
+  // listeners handle Escape and typing, and a g-jump must never swap the view underneath it.
+  // No preventDefault here — the modal's handlers still see the event.
+  if(document.querySelector('.cp-bg,.au-modal-bg')){_gPending=false;return;}
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openCP();return;}
   if(inField(e)||e.ctrlKey||e.metaKey||e.altKey)return;
   if(_gPending){

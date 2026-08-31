@@ -787,4 +787,284 @@ test("the balancer stands down when the grid is stacked into one column", () => 
     "stacked layout must put the action rail above the phase list");
 });
 
+// ============================================================================================
+// strategy filter vs stored preference — a filter that leaves one section must show its result
+// ============================================================================================
+test("strategy: stored false is overridden by a category filter leaving one section", () => {
+  const st = makeStorage({ "strat.cat": "idea", "strat.secOpen": '{"idea":false}' });
+  const t = stratToggles(buildEnv({ items: ITEMS, storage: st }).strategyView());
+  assert.strictEqual(t.length, 1);
+  assert.strictEqual(t[0].sec, "idea");
+  assert.strictEqual(t[0].expanded, true, "the sole filtered section must be visible despite stored false");
+  assert.strictEqual(t[0].hidden, false);
+});
+
+test("strategy: stored true + sole filtered section stays open", () => {
+  const st = makeStorage({ "strat.cat": "idea", "strat.secOpen": '{"idea":true}' });
+  const t = stratToggles(buildEnv({ items: ITEMS, storage: st }).strategyView());
+  assert.strictEqual(t[0].expanded, true);
+});
+
+test("strategy: the filter-driven open never writes to the stored map", () => {
+  const st = makeStorage({ "strat.cat": "idea", "strat.secOpen": '{"idea":false}' });
+  buildEnv({ items: ITEMS, storage: st }).strategyView();
+  assert.deepStrictEqual(JSON.parse(st._map["strat.secOpen"]), { idea: false },
+    "render-time convenience must not become a persisted preference");
+});
+
+test("strategy: clearing the filter restores the stored false", () => {
+  const st = makeStorage({ "strat.cat": "idea", "strat.secOpen": '{"idea":false}' });
+  stratToggles(buildEnv({ items: ITEMS, storage: st }).strategyView()); // filtered render
+  st._map["strat.cat"] = "all";
+  const by = Object.fromEntries(
+    stratToggles(buildEnv({ items: ITEMS, storage: st }).strategyView()).map(s => [s.sec, s]));
+  assert.strictEqual(by.idea.expanded, false, "the user's stored choice survives the filter round-trip");
+});
+
+test("strategy: a lane filter leaving one stored-closed section also opens it", () => {
+  const st = makeStorage({ "strat.status": "inprogress", "strat.secOpen": '{"idea":false}' });
+  const t = stratToggles(buildEnv({
+    items: ITEMS,
+    lanes: { i1: "pending", i2: "pending", i3: "inprogress", i4: "pending" },
+    storage: st,
+  }).strategyView());
+  assert.strictEqual(t.length, 1);
+  assert.strictEqual(t[0].expanded, true);
+});
+
+test("strategy: unfiltered multi-section render still honours stored preferences", () => {
+  const st = makeStorage({ "strat.secOpen": '{"idea":true,"blindspot":false}' });
+  const by = Object.fromEntries(
+    stratToggles(buildEnv({ items: ITEMS, storage: st }).strategyView()).map(s => [s.sec, s]));
+  assert.strictEqual(by.idea.expanded, true);
+  assert.strictEqual(by.blindspot.expanded, false);
+});
+
+// ============================================================================================
+// report jump — arbitrary names must survive the trip into and back out of the markup
+// ============================================================================================
+const unesc = s => s.replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+
+test("audit history: report references carry data-* values, never inline JS literals", () => {
+  const h = buildEnv({}).auditHistory(auP([auRow()]));
+  assert.ok(!/onclick="auViewReport/.test(h), "no auViewReport inline handler may remain");
+  assert.ok(/data-report-file="/.test(h) && /data-report-title="/.test(h));
+  assert.ok(/class="ah-ref au-jump"[^>]*role="button"[^>]*tabindex="0"/.test(h),
+    "the reference must stay keyboard-operable once the inline handler is gone");
+});
+
+test("audit history: apostrophes, quotes, ampersands and angle brackets round-trip intact", () => {
+  const p = { id: "acme", name: `O'Brien & Co <x> "West"`, audit: { history: [
+    auRow({ report: `2026-08-31__owner's "final" <v2> & notes.md`, date: "2026-08-31" }),
+  ] } };
+  const h = buildEnv({}).auditHistory(p);
+  const file = (h.match(/data-report-file="([^"]*)"/) || [])[1];
+  const title = (h.match(/data-report-title="([^"]*)"/) || [])[1];
+  assert.strictEqual(unesc(file), `acme/2026-08-31__owner's "final" <v2> & notes.md`,
+    "the dataset value the click handler reads must be the exact name");
+  assert.strictEqual(unesc(title), `O'Brien & Co <x> "West" — 2026-08-31 report`);
+  assert.ok(!/<x>/.test(h), "raw angle brackets must never reach the markup");
+  assert.ok(!/onclick=/.test(h.match(/<span class="ah-ref[^>]*>/)[0]), "no handler attribute on the span");
+});
+
+test("audit history: unicode punctuation in names is preserved verbatim", () => {
+  const p = { id: "acme", name: "Étude — “fancy” ’quotes’", audit: { history: [auRow({ report: "r–1.md" })] } };
+  const h = buildEnv({}).auditHistory(p);
+  assert.strictEqual(unesc((h.match(/data-report-file="([^"]*)"/) || [])[1]), "acme/r–1.md");
+  assert.ok(/Étude — “fancy” ’quotes’/.test(unesc((h.match(/data-report-title="([^"]*)"/) || [])[1])));
+});
+
+test("show() wires a delegated handler for the data-report-file references", () => {
+  const wiring = HTML.slice(HTML.indexOf("function show(id)"), HTML.indexOf("// ══ Keyboard"));
+  assert.ok(/\.au-jump\[data-report-file\]/.test(wiring), "show() must select the report references");
+  assert.ok(/dataset\.reportFile/.test(wiring) && /dataset\.reportTitle/.test(wiring),
+    "the handler must read the values back from dataset, not from source text");
+});
+
+// ============================================================================================
+// balanceProjectGrid — declared placement is restored before any breakpoint decision
+// ============================================================================================
+// A faithful-enough two-column DOM: appendChild/insertBefore reparent, offsetHeight is the sum
+// of the children's declared heights, and getComputedStyle answers from the test's own state.
+function makeCard(ord, h, move) {
+  return {
+    h, parentElement: null,
+    dataset: Object.assign({ ord: String(ord) }, move ? { move: "1" } : {}),
+    get nextElementSibling() {
+      const p = this.parentElement; if (!p) return null;
+      const i = p.children.indexOf(this); return p.children[i + 1] || null;
+    },
+  };
+}
+function makeColumn() {
+  return {
+    children: [],
+    _detach(c) {
+      if (c.parentElement) {
+        const i = c.parentElement.children.indexOf(c);
+        if (i >= 0) c.parentElement.children.splice(i, 1);
+      }
+    },
+    appendChild(c) { this._detach(c); this.children.push(c); c.parentElement = this; },
+    insertBefore(c, ref) {
+      this._detach(c);
+      const i = this.children.indexOf(ref);
+      this.children.splice(i < 0 ? this.children.length : i, 0, c);
+      c.parentElement = this;
+    },
+    get offsetHeight() { return this.children.reduce((s, c) => s + c.h, 0); },
+  };
+}
+function balancerEnv() {
+  const main = makeColumn(), rail = makeColumn();
+  const grid = { firstElementChild: main, lastElementChild: rail };
+  const state = { stacked: false };
+  const sandbox = {
+    console,
+    document: { querySelector: sel => (sel === ".proj-grid" ? grid : null) },
+    getComputedStyle: () => ({ gridTemplateColumns: state.stacked ? "1fr" : "500px 380px" }),
+    window: { addEventListener() {} },
+    setTimeout() { return 0; }, clearTimeout() {},
+  };
+  sandbox.window.window = sandbox.window;
+  vm.createContext(sandbox);
+  const src = HTML.slice(HTML.indexOf("const PROJ_BALANCE_TOL"), HTML.indexOf("let _pbTimer"));
+  vm.runInContext(src, sandbox, { filename: "index.html:balancer" });
+  return { main, rail, state, run: () => vm.runInContext("balanceProjectGrid()", sandbox) };
+}
+// Fixture mirrors a real project: pinned action set + phases in main, pinned audit in rail,
+// movable reference cards. Main is far taller, so the wide pass has a reason to move.
+function seedBalancer(env) {
+  const cards = {
+    actions: makeCard(10, 200, false), phases: makeCard(20, 1400, false),
+    waves: makeCard(60, 500, true), recent: makeCard(70, 200, true),
+    audit: makeCard(30, 400, false), activity: makeCard(50, 150, true),
+  };
+  ["actions", "phases", "waves", "recent"].forEach(k => env.main.appendChild(cards[k]));
+  ["audit", "activity"].forEach(k => env.rail.appendChild(cards[k]));
+  return cards;
+}
+
+test("balancer: a movable card relocates at wide width and pinned cards never move", () => {
+  const env = balancerEnv(); const c = seedBalancer(env);
+  env.run();
+  assert.strictEqual(c.waves.parentElement, env.rail, "the tall movable card closes the gap");
+  assert.strictEqual(c.actions.parentElement, env.main, "pinned action card stays");
+  assert.strictEqual(c.phases.parentElement, env.main, "pinned phase list stays");
+  assert.strictEqual(c.audit.parentElement, env.rail, "pinned audit card stays");
+});
+
+test("balancer: resizing to the stacked breakpoint restores declared placement", () => {
+  const env = balancerEnv(); const c = seedBalancer(env);
+  env.run();                                   // wide pass moves something
+  assert.strictEqual(c.waves.parentElement, env.rail, "precondition: a move happened");
+  env.state.stacked = true;
+  env.run();                                   // the resize pass at the narrow breakpoint
+  assert.strictEqual(c.waves.parentElement, env.main, "the moved card is back in its declared column");
+  assert.deepStrictEqual(env.main.children.map(x => +x.dataset.ord), [10, 20, 60, 70],
+    "main column is back in declared data-ord order");
+  assert.deepStrictEqual(env.rail.children.map(x => +x.dataset.ord), [30, 50],
+    "rail column is back in declared data-ord order");
+});
+
+test("balancer: resizing back to wide balances again from the declared layout", () => {
+  const env = balancerEnv(); const c = seedBalancer(env);
+  env.run();
+  env.state.stacked = true; env.run();
+  env.state.stacked = false; env.run();
+  assert.strictEqual(c.waves.parentElement, env.rail, "wide layout re-balances after the round trip");
+  const ords = col => col.children.map(x => +x.dataset.ord);
+  assert.deepStrictEqual(ords(env.main), [...ords(env.main)].sort((a, b) => a - b), "main stays ord-sorted");
+  assert.deepStrictEqual(ords(env.rail), [...ords(env.rail)].sort((a, b) => a - b), "rail stays ord-sorted");
+});
+
+test("balancer: pinned cards survive every transition in their declared column", () => {
+  const env = balancerEnv(); const c = seedBalancer(env);
+  [false, true, false, true].forEach(stacked => {
+    env.state.stacked = stacked; env.run();
+    assert.strictEqual(c.actions.parentElement, env.main, "actions pinned (stacked=" + stacked + ")");
+    assert.strictEqual(c.phases.parentElement, env.main, "phases pinned (stacked=" + stacked + ")");
+    assert.strictEqual(c.audit.parentElement, env.rail, "audit pinned (stacked=" + stacked + ")");
+  });
+});
+
+test("balancer: balanced columns within tolerance are left untouched", () => {
+  const env = balancerEnv();
+  const a = makeCard(10, 500, false), b = makeCard(60, 100, true);
+  const x = makeCard(30, 550, false), y = makeCard(50, 100, true);
+  env.main.appendChild(a); env.main.appendChild(b);
+  env.rail.appendChild(x); env.rail.appendChild(y);
+  env.run();
+  assert.strictEqual(b.parentElement, env.main, "a 50px gap is under tolerance — nothing moves");
+});
+
+// ============================================================================================
+// keyboard — an open modal owns the keys; g-jumps stop at the backdrop
+// ============================================================================================
+function keyboardEnv() {
+  const calls = { show: [], openCP: 0, openHelp: 0 };
+  const state = { modalOpen: false };
+  const listeners = [];
+  const sandbox = {
+    console,
+    document: {
+      addEventListener: (type, fn) => { if (type === "keydown") listeners.push(fn); },
+      querySelector: sel => (state.modalOpen && /cp-bg|au-modal-bg/.test(sel) ? {} : null),
+    },
+    setTimeout(fn) { return { fn }; }, clearTimeout() {},
+    show: id => calls.show.push(id),
+    openCP: () => calls.openCP++,
+    openHelp: () => calls.openHelp++,
+  };
+  vm.createContext(sandbox);
+  const src = HTML.slice(HTML.indexOf("let _gPending=false"), HTML.indexOf("function openHelp("));
+  vm.runInContext(src, sandbox, { filename: "index.html:keyboard" });
+  return { calls, state, press: key => listeners.forEach(fn => fn({
+    key, ctrlKey: false, metaKey: false, altKey: false, target: { tagName: "BODY" },
+    preventDefault() {},
+  })) };
+}
+
+test("keyboard: modal closed, g o navigates to Overview", () => {
+  const k = keyboardEnv();
+  k.press("g"); k.press("o");
+  assert.deepStrictEqual(k.calls.show, ["overview"]);
+});
+
+test("keyboard: modal open, g o does NOT navigate behind the dialog", () => {
+  const k = keyboardEnv();
+  k.state.modalOpen = true;
+  k.press("g"); k.press("o");
+  assert.deepStrictEqual(k.calls.show, [], "no view change behind an aria-modal dialog");
+});
+
+test("keyboard: modal open, ? does not stack a second shortcut sheet", () => {
+  const k = keyboardEnv();
+  k.state.modalOpen = true;
+  k.press("?");
+  assert.strictEqual(k.calls.openHelp, 0);
+});
+
+test("keyboard: a g pressed before the modal opened cannot fire through it", () => {
+  const k = keyboardEnv();
+  k.press("g");                 // jump armed…
+  k.state.modalOpen = true;     // …then a modal opens (e.g. ? handled elsewhere)
+  k.press("o");
+  assert.deepStrictEqual(k.calls.show, [], "the pending jump is cleared, not held for later");
+  k.state.modalOpen = false;
+  k.press("o");
+  assert.deepStrictEqual(k.calls.show, [], "and it stays cleared after the modal closes");
+});
+
+test("keyboard: shortcuts work normally again after the modal closes", () => {
+  const k = keyboardEnv();
+  k.state.modalOpen = true;
+  k.press("g"); k.press("t");
+  k.state.modalOpen = false;
+  k.press("g"); k.press("t");
+  assert.deepStrictEqual(k.calls.show, ["today"]);
+  k.press("?");
+  assert.strictEqual(k.calls.openHelp, 1);
+});
+
 console.log("\n" + passed + " passed");
