@@ -603,9 +603,9 @@ window.DASHBOARD_DATA = {
       },
       branch: null, git: { latestCommit: "709f352" },
       nextActions: ["Email routing aliases: hello@/support@/legal@/billing@/zeriah@ → Gmail (recipe in IP-Lockdown-Checklist.md Phase 1.5)","Product screenshots: get real app screenshots into Leaders + BIM Managers pages","Dashboard auth: fix Cloudflare Zero Trust login — add GitHub OAuth IDP (OAuth App at github.com/settings/applications → callback: https://flat-queen-a958.cloudflareaccess.com/cdn-cgi/access/callback)"],
-      pendingDecisions: ["Dashboard auth: the repo already specs Cloudflare Access via Google login, owner-only (bim-watch design, 2026-07-25) -- confirm with owner whether the earlier GitHub-OAuth / OTP-email path was abandoned for Google, and whether auth is now live. Cannot verify Cloudflare state from the repo."],
+      pendingDecisions: [],
       blockers: [],
-      reminders: ["Dashboard live at ai-dev-dashboard.pages.dev (mirror: progress.yourbimpossible.com); Cloudflare Zero Trust auth state unconfirmed -- see the pending decision.","Product screenshots still needed on the Leaders + BIM Managers pages before M4 is fully complete -- both currently import only Hero.png, no product imagery."],
+      reminders: ["Dashboard auth IDP = Google via Cloudflare Access, owner's address only (owner-confirmed 2026-08-30; matches the 2026-07-25 bim-watch design). The earlier GitHub-OAuth / OTP-email attempt was abandoned -- purge any doc/note still citing a GitHub OAuth App or OTP delivery.","Product screenshots still needed on the Leaders + BIM Managers pages before M4 is fully complete -- both currently import only Hero.png, no product imagery."],
       links: [
         { label: "Roadmap index", path: "F:\\BIMpossible-Site\\00_README.md" },
         { label: "IP lockdown checklist", path: "F:\\BIMpossible-Site\\IP-Lockdown-Checklist.md" },
