@@ -57,11 +57,32 @@ function extractConstLine(src, name) {
   return src.slice(i, src.indexOf("\n", i));
 }
 
+// Some consts span lines (PHCLS, PHGROUP). Slice from `const NAME=` to the first `;` that sits
+// outside every bracket, so the whole initializer comes across intact.
+function extractConstBlock(src, name) {
+  const i = src.indexOf("const " + name + "=");
+  if (i < 0) throw new Error("const not found in index.html: " + name);
+  let d = 0;
+  for (let j = src.indexOf("=", i); j < src.length; j++) {
+    const c = src[j];
+    if (c === "{" || c === "[" || c === "(") d++;
+    else if (c === "}" || c === "]" || c === ")") d--;
+    else if (c === ";" && d === 0) return src.slice(i, j + 1);
+  }
+  throw new Error("unterminated const " + name);
+}
+
 const FNS = ["readSecOpen", "writeSecOpen", "secInitialOpen", "secToggle",
-  "stratSecToggle", "tkSecToggle", "esc", "strategyView", "toolkitView"];
-const SRC = extractConstLine(HTML, "DISCLOSURE_KEY") + "\n" +
+  "stratSecToggle", "tkSecToggle", "phGroupToggle", "phaseNote", "phaseRow", "phaseBars",
+  "esc", "strategyView", "toolkitView"];
+const SRC = "var _ntSeq=0;\n" +
+  extractConstLine(HTML, "DISCLOSURE_KEY") + "\n" +
   extractConstLine(HTML, "SCAT_COLOR") + "\n" +
   extractConstLine(HTML, "SCAT_LABEL") + "\n" +
+  extractConstLine(HTML, "PHCHIP") + "\n" +
+  extractConstBlock(HTML, "PHCLS") + "\n" +
+  extractConstBlock(HTML, "PHGROUP") + "\n" +
+  extractConstBlock(HTML, "PHG_ORDER") + "\n" +
   FNS.map(n => extractFn(HTML, n)).join("\n");
 
 // --- localStorage doubles ------------------------------------------------------------------
@@ -115,6 +136,11 @@ function buildEnv(opts) {
   sandbox._scLane = it => (o.lanes && o.lanes[it.id]) || "pending";
   sandbox._stratCard = () => "<card/>";
   sandbox.ICO = new Proxy({}, { get: () => "" });   // inline SVG sprites; no bearing on state
+  // phaseRow deps. _PR is the real task-popover registry; the task-count chips are irrelevant
+  // to grouping, so they render as a marker we can assert is present without parsing it.
+  sandbox._PR = {};
+  sandbox.getTC = () => ({ done: 1, open: 1 });
+  sandbox.buildTS = () => "<ts/>";
   vm.createContext(sandbox);
   vm.runInContext(SRC, sandbox, { filename: "index.html:disclosure" });
   return sandbox;
@@ -284,13 +310,16 @@ test("secToggle: a missing body is a no-op, not a crash", () => {
   assert.strictEqual(btn.getAttribute("aria-expanded"), "false", "aria must not drift when nothing moved");
 });
 
-test("the two views use distinct, namespaced, versioned keys", () => {
+test("the three surfaces use distinct, namespaced, versioned keys", () => {
   // `const` at script top level lives in the global lexical scope, not on the global object,
   // so it is read back by evaluating in the same context rather than off the sandbox.
   const E = buildEnv({});
   const keys = vm.runInContext("JSON.stringify(DISCLOSURE_KEY)", E);
-  assert.deepStrictEqual(JSON.parse(keys),
-    { strategy: "strat.secOpen", toolkit: "dashboard.v2.toolkit.secOpen" });
+  assert.deepStrictEqual(JSON.parse(keys), {
+    strategy: "strat.secOpen",
+    toolkit: "dashboard.v2.toolkit.secOpen",
+    project: "dashboard.v2.project.phaseGroups",
+  });
 });
 
 test("stratSecToggle / tkSecToggle write to their own key only", () => {
@@ -482,6 +511,109 @@ test("toolkit: no card is stranded — every section is reachable through its ow
   const ctrls = tkToggles(html).map(s => s.ctrl);
   assert.deepStrictEqual(grids.sort(), ctrls.sort(),
     "every grid must be the aria-controls target of exactly one toggle");
+});
+
+// ============================================================================================
+// project view — phase groups
+// ============================================================================================
+// A stand-in for the largest real project: live/active/partial work, a couple parked, several
+// closed. Chips are the leading token of the note, exactly as the dataset writes them.
+const PROG = { phases: [
+  { name: "P0-2 Foundation", pct: 100, note: "CLOSED — original axis" },
+  { name: "P3 Data Dashboard", pct: 93, note: "ACTIVE — permanent substrate" },
+  { name: "P4 Assistant", pct: 96, note: "CLOSED — live-smoked" },
+  { name: "P5 Views/Sheets", pct: 15, note: "ON HOLD — bonus, not a need" },
+  { name: "P6 Billing", pct: 88, note: "PARTIAL — client-mgmt E and F open" },
+  { name: "P7 Write-back", pct: 68, note: "LIVE — supervised cutover" },
+  { name: "P10 Cost", pct: 0, note: "CONDITIONAL — supersedes 3.X" },
+  { name: "P12 Unlabelled", pct: 40, note: "no leading status token here" },
+] };
+const phToggles = h => readToggles(h, "ph-gh");
+// Return one group's rendered rows. Groups are siblings, so split on the wrapper and take the
+// chunk carrying this body id — nested `.ph` divs make a closing-tag regex unreliable.
+const groupOf = (html, gid) =>
+  html.split('<div class="ph-group">').find(c => c.indexOf('id="' + gid + '"') >= 0) || "";
+
+test("phases: a fresh visit opens In motion and folds Parked and Done", () => {
+  const t = phToggles(buildEnv({}).phaseBars(PROG, "acme"));
+  assert.deepStrictEqual(t.map(g => g.sec), ["motion", "parked", "done"], "order is motion → parked → done");
+  assert.deepStrictEqual(t.map(g => g.expanded), [true, false, false]);
+  t.forEach(g => assert.strictEqual(g.expanded, !g.hidden, "aria/hidden disagree for " + g.sec));
+});
+
+test("phases: every phase lands in exactly one group, and the counts say so", () => {
+  const html = buildEnv({}).phaseBars(PROG, "acme");
+  const counts = [...html.matchAll(/<span class="gct">(\d+)<\/span>/g)].map(m => +m[1]);
+  // motion: P3 ACTIVE, P6 PARTIAL, P7 LIVE, P12 unchipped · parked: P5 ON HOLD, P10 CONDITIONAL
+  // done: P0-2 CLOSED, P4 CLOSED
+  assert.deepStrictEqual(counts, [4, 2, 2]);
+  assert.strictEqual(counts.reduce((a, b) => a + b, 0), PROG.phases.length, "no phase dropped");
+  assert.strictEqual((html.match(/<div class="ph[ "]/g) || []).length, PROG.phases.length);
+});
+
+test("phases: an unchipped phase reads as live work, not folded away on a guess", () => {
+  const html = buildEnv({}).phaseBars(PROG, "acme");
+  const motion = groupOf(html, "phg-acme-motion");
+  assert.ok(/P12 Unlabelled/.test(motion), "unchipped phase must be in the open group");
+});
+
+test("phases: a closed phase under 100% still groups as Done (chip wins, not pct)", () => {
+  const html = buildEnv({}).phaseBars(PROG, "acme");
+  assert.ok(/P4 Assistant/.test(groupOf(html, "phg-acme-done")), "CLOSED 96% belongs to Done");
+});
+
+test("phases: a project with only one group renders a plain list, no header", () => {
+  const only = { phases: [{ name: "A", pct: 10, note: "ACTIVE — x" }, { name: "B", pct: 20, note: "LIVE — y" }] };
+  const html = buildEnv({}).phaseBars(only, "solo");
+  assert.strictEqual(phToggles(html).length, 0, "a lone group needs no control that can only hide everything");
+  assert.ok(/^<div class="phases">/.test(html) && /A/.test(html) && /B/.test(html));
+});
+
+test("phases: a stored preference overrides the default in both directions", () => {
+  const seed = { "dashboard.v2.project.phaseGroups": JSON.stringify({ motion: false, done: true }) };
+  const t = phToggles(buildEnv({ storage: makeStorage(seed) }).phaseBars(PROG, "acme"));
+  assert.deepStrictEqual(t.map(g => [g.sec, g.expanded]),
+    [["motion", false], ["parked", false], ["done", true]]);
+  t.forEach(g => assert.strictEqual(g.expanded, !g.hidden, g.sec));
+});
+
+test("phases: group state is shared across projects, so a choice holds everywhere", () => {
+  const store = makeStorage({ "dashboard.v2.project.phaseGroups": JSON.stringify({ done: true }) });
+  ["acme", "beta"].forEach(pid => {
+    const done = phToggles(buildEnv({ storage: store }).phaseBars(PROG, pid)).find(g => g.sec === "done");
+    assert.strictEqual(done.expanded, true, pid + " must honour the same stored choice");
+    assert.strictEqual(done.ctrl, "phg-" + pid + "-done", "body ids stay per-project so two cards can coexist");
+  });
+});
+
+test("phases: malformed and unavailable storage both fall back to the defaults", () => {
+  [makeStorage({ "dashboard.v2.project.phaseGroups": "{oops" }),
+    makeStorage({ "dashboard.v2.project.phaseGroups": "[1,2,3]" }),
+    makeStorage({ "dashboard.v2.project.phaseGroups": JSON.stringify({ motion: "yes" }) }),
+    makeStorage({}, "blocked")].forEach((storage, i) => {
+    let t;
+    assert.doesNotThrow(() => { t = phToggles(buildEnv({ storage }).phaseBars(PROG, "acme")); }, "case " + i);
+    assert.deepStrictEqual(t.map(g => g.expanded), [true, false, false], "case " + i + " must be the default layout");
+  });
+});
+
+test("phGroupToggle writes to the project key and leaves the other two alone", () => {
+  const body = makeEl("phg-acme-done"); body.hidden = true;
+  const btn = makeEl("b", { dataset: { sec: "done" }, attrs: { "aria-controls": "phg-acme-done", "aria-expanded": "false" } });
+  const store = makeStorage({});
+  const E = buildEnv({ storage: store, byId: { "phg-acme-done": body } });
+  E.phGroupToggle(btn);
+  assert.strictEqual(body.hidden, false);
+  assert.strictEqual(btn.getAttribute("aria-expanded"), "true");
+  assert.deepStrictEqual(JSON.parse(store._map["dashboard.v2.project.phaseGroups"]), { done: true });
+  assert.ok(!("strat.secOpen" in store._map) && !("dashboard.v2.toolkit.secOpen" in store._map),
+    "toggling a phase group must not touch Strategy's or Toolkit's key");
+});
+
+test("phases: no phase data renders the empty state, not a group shell", () => {
+  const E = buildEnv({});
+  assert.ok(/no phase data yet/.test(E.phaseBars(null, "acme")));
+  assert.strictEqual(phToggles(E.phaseBars(null, "acme")).length, 0);
 });
 
 // ============================================================================================

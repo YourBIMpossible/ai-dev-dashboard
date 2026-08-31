@@ -31,15 +31,22 @@
     border-radius:10px;padding:var(--sp-3) var(--sp-4);margin-bottom:var(--sp-4);font-size:var(--ts-sm);color:var(--text);}
   .bw-warn b{color:var(--status-warn);}
   .bw-warn ul{margin:var(--sp-2) 0 0;padding-left:18px;color:var(--muted);}
+  /* The stale-source "check" link had no rule, so it fell back to the UA's #0000ee — 1.6:1 on this
+     panel, effectively invisible. Same treatment as the chat citations. */
+  .bw-warn a{color:var(--w);display:inline-block;min-height:24px;line-height:24px;vertical-align:top;}
   .bw-item{padding:var(--sp-3) 0;border-bottom:1px solid var(--border);}
   .bw-item:last-child{border-bottom:0;}
   /* NOT .ti — the dashboard already defines .ti as a 17px circular status badge,
      which crushed every headline into one word per line. Namespace everything. */
-  .bw-item a.bw-ti{display:block;color:var(--text);text-decoration:none;font-size:var(--ts-base);font-weight:500;line-height:1.45;}
+  /* A block-level headline link is a standalone target, not an inline one — line-height alone left
+     it 20px tall, so pad it to the 24px AA floor without changing the type. */
+  .bw-item a.bw-ti{display:block;color:var(--text);text-decoration:none;font-size:var(--ts-base);font-weight:500;line-height:1.45;
+    padding:2px 0;min-height:24px;box-sizing:border-box;}
   .bw-item a.bw-ti:hover{color:var(--w);text-decoration:underline;}
   .bw-why{font-size:var(--ts-sm);color:var(--muted);margin-top:var(--sp-1);line-height:1.5;}
   .bw-meta{display:flex;align-items:center;gap:var(--sp-2);margin-top:var(--sp-2);flex-wrap:wrap;}
-  .bw-tag{font-size:var(--ts-xs);color:var(--dim);background:rgba(255,255,255,.05);border-radius:5px;padding:1px 7px;}
+  /* --dim on this lifted chip surface measures 4.21:1 — under AA for the 10px it renders at. */
+  .bw-tag{font-size:var(--ts-xs);color:var(--muted);background:rgba(255,255,255,.05);border-radius:5px;padding:1px 7px;}
   .bw-rel{font-family:Sora,sans-serif;font-size:var(--ts-xs);color:var(--dim);}
   .bw-search{width:100%;background:var(--panel3);border:1px solid var(--border);border-radius:10px;
     padding:10px 13px;color:var(--text);font-size:var(--ts-base);font-family:inherit;outline:none;}

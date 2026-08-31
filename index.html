@@ -269,6 +269,28 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
 .phchip.c-active{color:var(--status-info);}
 .phchip.c-partial,.phchip.c-conditional{color:var(--status-warn);}
 .phchip.c-hold,.phchip.c-proposal,.phchip.c-placeholder{color:var(--status-dim);}
+
+/* Phase groups. A check-in reads "what's moving" first; the largest project stacks 18 phases and
+   renders closed work at the same weight as live work. Grouping keeps every phase on the page and
+   folds the ones you are not acting on today. */
+.ph-group+.ph-group{margin-top:6px;}
+.ph-gh{
+  display:flex;align-items:center;gap:8px;width:100%;padding:9px 0;
+  background:none;border:0;border-top:1px solid var(--border);cursor:pointer;text-align:left;
+  font:700 var(--ts-xs)/1 Inter,sans-serif;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--dim);font-family:inherit;
+}
+.ph-gh:hover{color:var(--muted);}
+.ph-gh::before{content:"▸";font-size:10px;letter-spacing:0;transition:transform .15s;}
+.ph-gh[aria-expanded="true"]{color:var(--muted);}
+.ph-gh[aria-expanded="true"]::before{transform:rotate(90deg);}
+.ph-gh .gct{margin-left:auto;font-weight:600;letter-spacing:.04em;color:var(--dim);}
+.ph-group .phases{padding-top:4px;}
+
+/* Hero status note — the same ledger prose as a phase note, at hero width. Three lines, then
+   open in place. */
+.hero-note{font-size:var(--ts-sm);color:var(--muted);line-height:1.55;margin-top:11px;}
+.hero-note.clamped{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .bar{height:7px;border-radius:5px;background:var(--track);overflow:hidden;}
 .bar i{display:block;height:100%;width:0;border-radius:5px;
   background:linear-gradient(90deg,var(--w),var(--w2));
@@ -375,7 +397,10 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
 .ah-body{min-width:0;}
 .ah-result{font-size:12px;color:var(--text);line-height:1.5;}
 .ah-scope{font-size:var(--ts-xs);color:var(--dim);margin-top:3px;}
-.ah-ref{font-family:ui-monospace,Consolas,monospace;font-size:10px;color:var(--dim);white-space:nowrap;flex-shrink:0;padding-top:2px;}
+/* Clickable (auViewReport) — 10px monospace left it an 18px-tall target, so pad it to the 24px
+   AA floor rather than growing the type. */
+.ah-ref{font-family:ui-monospace,Consolas,monospace;font-size:10px;color:var(--dim);white-space:nowrap;flex-shrink:0;
+  display:inline-flex;align-items:center;min-height:24px;}
 @media(max-width:640px){
   .ah-row{grid-template-columns:minmax(0,1fr);gap:5px;}
   .ah-when{flex-direction:row;align-items:baseline;gap:8px;}
@@ -769,7 +794,9 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .ov-group{font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.12em;
   color:var(--dim);margin:20px 0 10px;display:flex;align-items:center;gap:10px;}
 .ov-group::after{content:'';flex:1;height:1px;background:var(--border);}
-.ov-group.pers{color:rgba(251,146,60,.55);}
+/* .55 alpha composited to 3.27:1 on the page base — under AA at this 10px size. .78 keeps the
+   label reading as a muted accent rather than a heading, and clears the threshold. */
+.ov-group.pers{color:rgba(251,146,60,.78);}
 .ov-group.pers::after{background:rgba(251,146,60,.14);}
 
 /* ── Wave 4: Audit redesign ──────────────────────────────────────── */
@@ -1316,6 +1343,12 @@ function heat(series,isP){
 const PHCHIP=/^\s*([A-Z][A-Z0-9 \/&+.()-]{1,24}?)\s*(?:—|–|--|:)\s*/;
 const PHCLS={LIVE:'live',CLOSED:'closed',ACTIVE:'active',PARTIAL:'partial',CONDITIONAL:'conditional',
   'ON HOLD':'hold',PROPOSAL:'proposal',PLACEHOLDER:'placeholder'};
+// Display grouping, keyed on the same status chip the reader sees on the row — so the grouping is
+// literally what is on screen. This reads no bucket, weight or cohort field and feeds nothing back
+// into the completion model; overallPct/activePhases are untouched by it.
+const PHGROUP={live:'motion',active:'motion',partial:'motion',
+  closed:'done',hold:'parked',conditional:'parked',proposal:'parked',placeholder:'parked'};
+const PHG_ORDER=[['motion','In motion',true],['parked','Parked · conditional',false],['done','Done',false]];
 function phaseNote(note){
   const raw=String(note||'').trim();
   if(!raw)return{chip:null,cls:'',body:''};
@@ -1329,37 +1362,59 @@ function phaseNote(note){
   return{chip:tok,cls:'c-'+PHCLS[key],body:raw.slice(m[0].length)};
 }
 let _ntSeq=0;
+function phaseRow(ph,i,pid,n){
+  const key=(pid||'ph')+'_'+i;window._PR[key]=ph;
+  const has=ph.tasks&&ph.tasks.length;
+  const cnt=has?getTC(ph.tasks):null;
+  // ~150 chars is roughly the two rendered lines the clamp allows at this width; below that
+  // the note fits and a disclosure control would be noise.
+  const long=n.body.length>150;
+  const nid='nt'+(++_ntSeq);
+  let body='';
+  if(n.body){
+    body=`<div class="nt${long?' clamped':''}" id="${nid}">${esc(n.body)}</div>`;
+    if(long)body+=`<button type="button" class="nt-more" aria-expanded="false" aria-controls="${nid}" onclick="ntToggle(event,'${nid}')">Full note</button>`;
+  }
+  return`<div class="ph${has?' ph-click':''}"${has?` data-pk="${key}"`:''}>`+
+    `<div class="row"><span class="nm">${esc(ph.name)}</span>`+
+      (n.chip?`<span class="phchip ${n.cls}">${esc(n.chip)}</span>`:'')+
+      `<span class="pv num">${ph.pct}%</span></div>`+
+    `<div class="bar"><i data-w="${ph.pct}" class="${ph.pct>=100?'full':''}"></i></div>`+
+    body+(cnt?buildTS(cnt):'')+'</div>';
+}
 function phaseBars(prog,pid){
   if(!prog)return'<p class="empty">no phase data yet</p>';
-  return'<div class="phases">'+prog.phases.map((ph,i)=>{
-    const key=(pid||'ph')+'_'+i;window._PR[key]=ph;
-    const has=ph.tasks&&ph.tasks.length;
-    const cnt=has?getTC(ph.tasks):null;
+  const rows={motion:[],parked:[],done:[]};
+  prog.phases.forEach((ph,i)=>{
     const n=phaseNote(ph.note);
-    // ~150 chars is roughly the two rendered lines the clamp allows at this width; below that
-    // the note fits and a disclosure control would be noise.
-    const long=n.body.length>150;
-    const nid='nt'+(++_ntSeq);
-    let body='';
-    if(n.body){
-      body=`<div class="nt${long?' clamped':''}" id="${nid}">${esc(n.body)}</div>`;
-      if(long)body+=`<button type="button" class="nt-more" aria-expanded="false" aria-controls="${nid}" onclick="ntToggle(event,'${nid}')">Full note</button>`;
-    }
-    return`<div class="ph${has?' ph-click':''}"${has?` data-pk="${key}"`:''}>`+
-      `<div class="row"><span class="nm">${esc(ph.name)}</span>`+
-        (n.chip?`<span class="phchip ${n.cls}">${esc(n.chip)}</span>`:'')+
-        `<span class="pv num">${ph.pct}%</span></div>`+
-      `<div class="bar"><i data-w="${ph.pct}" class="${ph.pct>=100?'full':''}"></i></div>`+
-      body+(cnt?buildTS(cnt):'')+'</div>';
-  }).join('')+'</div>';
+    // An unchipped phase has no declared status, so it reads as live work rather than being
+    // folded away on a guess.
+    const g=PHGROUP[(n.cls||'').slice(2)]||'motion';
+    rows[g].push(phaseRow(ph,i,pid,n));
+  });
+  const groups=PHG_ORDER.filter(([k])=>rows[k].length);
+  // One group means nothing to separate — render the plain list rather than a header over
+  // everything, which would just add a control that can only ever hide the whole card.
+  if(groups.length<2)return'<div class="phases">'+groups.map(([k])=>rows[k].join('')).join('')+'</div>';
+  const st=readSecOpen(DISCLOSURE_KEY.project);
+  return groups.map(([k,label,dflt])=>{
+    const gid='phg-'+(pid||'p')+'-'+k,open=secInitialOpen(k,st,dflt);
+    return`<div class="ph-group">`
+      +`<button type="button" class="ph-gh" data-sec="${k}" aria-expanded="${open}" aria-controls="${gid}" onclick="phGroupToggle(this)">`
+      +`${label}<span class="gct">${rows[k].length}</span></button>`
+      +`<div class="phases" id="${gid}"${open?'':' hidden'}>${rows[k].join('')}</div></div>`;
+  }).join('');
 }
-function ntToggle(e,id){
+// Shares Strategy's and Toolkit's storage contract, so "I always want Done open" holds across
+// projects and across reloads. Group ids are stable, not the display labels.
+function phGroupToggle(btn){secToggle(btn,DISCLOSURE_KEY.project);}
+function ntToggle(e,id,label){
   e.stopPropagation(); // .ph may be .ph-click — don't open the task popover too
   const el=document.getElementById(id);if(!el)return;
   const open=el.classList.toggle('clamped')===false;
   const btn=e.currentTarget;
   btn.setAttribute('aria-expanded',String(open));
-  btn.firstChild.nodeValue=open?'Less':'Full note';
+  btn.firstChild.nodeValue=open?'Less':(label||'Full note');
 }
 
 function areaChart(series,w,h,id){
@@ -1748,10 +1803,21 @@ function project(p){
   h+=pct!==null?'<div style="display:flex;flex-direction:column;align-items:center">'+donut(pct,130,p.progress&&p.progress.label||'')+scopeCaption(p,cohorts)+'</div>':'';
   h+=cohortMetricsHtml(p,cohorts); // July baseline + scope inventory (cohort-declaring projects only)
   h+=`<div style="flex:1;min-width:260px">`;
-  h+=`<div style="font-family:Sora;font-weight:600;font-size:14px;line-height:1.45">${esc(p.phase||'')}</div>`;
-  h+=`<div style="font-size:12px;color:var(--muted);margin-top:7px">Last activity: <b>${esc((p.lastActivity&&p.lastActivity.date)||'?')}</b> (${ageHtml(p.lastActivity&&p.lastActivity.date)}) — ${esc((p.lastActivity&&p.lastActivity.summary)||'')}</div>`;
+  // Check-in reading order: the call to action, then when it last moved, then the full status
+  // paragraph. The status note is the longest prose on the page — BIMpossible Platform's runs
+  // ~1,300 chars of #-numbered ledger detail — and it was set in bold display type above the
+  // focus box, so the one line that says what to do arrived after fifteen lines that don't.
+  // It keeps every word; it just no longer charges admission for the rest of the card.
+  const statusNote=String(p.phase||'').trim();
+  if(p.focus)h+=`<div class="focus${isP?' focus-p':''}" style="margin-top:0"><b>If you only do one thing</b>${esc(p.focus)}</div>`;
+  h+=`<div style="font-size:12px;color:var(--muted);margin-top:${p.focus?'11px':'0'}">Last activity: <b>${esc((p.lastActivity&&p.lastActivity.date)||'?')}</b> (${ageHtml(p.lastActivity&&p.lastActivity.date)}) — ${esc((p.lastActivity&&p.lastActivity.summary)||'')}</div>`;
   if(p.branch)h+=`<div style="font-size:12px;color:var(--muted);margin-top:5px">Branch: <code>${esc(p.branch)}</code></div>`;
-  if(p.focus)h+=`<div class="focus${isP?' focus-p':''}" style="margin-top:12px"><b>If you only do one thing</b>${esc(p.focus)}</div>`;
+  if(statusNote){
+    // Without a focus line the status note IS the summary, so it stays open.
+    const sid='hn'+(++_ntSeq),fold=p.focus&&statusNote.length>240;
+    h+=`<div class="hero-note${fold?' clamped':''}" id="${sid}">${esc(statusNote)}</div>`;
+    if(fold)h+=`<button type="button" class="nt-more" aria-expanded="false" aria-controls="${sid}" onclick="ntToggle(event,'${sid}','Full status')">Full status</button>`;
+  }
   if(p.git&&p.git.warn)h+=`<div class="gwarn">${esc(p.git.warn)}</div>`;
   h+=`</div></div></div></div>`; // close: flex-1, flex-wrap, card, fade-wrapper
 
@@ -2272,7 +2338,7 @@ function stratFilter(type,val){try{localStorage.setItem('strat.'+type,val);}catc
 // of the dashboard's shared data. Strategy keeps its original `strat.secOpen` key so choices made
 // before this change survive; Toolkit is new and takes the namespaced, versioned key, so a future
 // schema change can bump `v2` instead of silently misreading old values.
-const DISCLOSURE_KEY={strategy:'strat.secOpen',toolkit:'dashboard.v2.toolkit.secOpen'};
+const DISCLOSURE_KEY={strategy:'strat.secOpen',toolkit:'dashboard.v2.toolkit.secOpen',project:'dashboard.v2.project.phaseGroups'};
 // Every read is defensive. A private window, a disabled or full store, a hand-edited value, or a
 // stale schema must all resolve to "no preference" — which resolves to closed — rather than throw
 // and blank the view. Only boolean entries are kept: a half-valid map is not partially trusted.
