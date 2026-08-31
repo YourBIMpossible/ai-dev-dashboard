@@ -956,10 +956,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,3,3,8,11,4,5,20,6,3,4,3,17,5],
+      activity: [3,3,3,8,11,4,5,20,6,3,4,3,17,7],
       lastActivity: {
         date: "2026-08-31",
-        summary: "fix(refresh): make the automation clone run origin's code, and refuse to default away curated phase fields (#8) (072afa3)"
+        summary: "fix(refresh): commit PHASE_DAG.md, the second phase_dag.py output (#9) (0e8a658)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
