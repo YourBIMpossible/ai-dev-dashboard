@@ -30,6 +30,28 @@ from the dedicated automation clone `F:\AI-Dashboard\Dashboard-auto` (NOT the ed
 the dashboard, edit the **ledger** (single source of truth), not `data.js`. NOTE: the prose bot
 (sync_dashboard.py) has no trigger on the code repos, so prose fields are refreshed on-demand only.
 
+## Deployment endpoints (where the pushed site lands)
+
+Every push to `main` publishes the static site to **two** endpoints. A refresh never touches
+either directly — it only pushes `main`; the endpoints redeploy themselves.
+
+1. **Canonical production — Cloudflare Pages: <https://ai-dev-dashboard.pages.dev/>.**
+   Owned by `.github/workflows/deploy.yml` ("Deploy to Cloudflare Pages"), which runs
+   `cloudflare/wrangler-action@v3` → `pages deploy . --project-name=ai-dev-dashboard --branch=main`
+   on every push to `main` (and via `workflow_dispatch`). This is the reliable path — it bypasses
+   the Cloudflare↔GitHub webhook, which silently broke.
+2. **Additional endpoint — GitHub Pages: <https://yourbimpossible.github.io/ai-dev-dashboard/>**
+   (`build_type=legacy`). Serves the same `main` build from the same repo.
+
+Verifying a deploy: check the **`deploy.yml`** (Cloudflare) run AND fetch `ai-dev-dashboard.pages.dev`
+— not just the github.io site. Gotcha: the GitHub Deployments API reports these runs under
+`environment: github-pages` with a `github.io` `environment_url`; that label does **not** mean
+GitHub Pages is the deploy target. Cloudflare is canonical, confirmed by `deploy.yml`, not by the
+Deployments API.
+
+Neither URL is to be retired or re-designated (e.g. one marked "secondary") without the owner's
+explicit decision.
+
 ## Rules
 
 1. **Only rewrite `data.js`.** Do not modify `index.html` or this file during a routine refresh.
