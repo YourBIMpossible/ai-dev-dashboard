@@ -33,7 +33,7 @@ from pathlib import Path
 
 from sync_dashboard import node_check
 from sync_ledgers import (
-    DEFAULT_DATA, DEFAULT_PHASE_LEDGER, STATUS_PCT,
+    DEFAULT_DATA, DEFAULT_PHASE_LEDGER, STATUS_PCT, VALID_BUCKETS,
     _phase_num_of, _status_key, load_current, parse_phase_ledger,
 )
 
@@ -153,6 +153,99 @@ def main() -> int:
             print(f"  ! warning: P{num} pct={pct} contradicts ledger status "
                   f"{status} (~{band}). Reconcile the pct or the ledger.", file=sys.stderr)
             warnings += 1
+
+    # --- 6. phase-completion-model v1 schema ---------------------------------
+    # Applies to any project that opted into the model (declares baselineCohorts or
+    # tags any phase with a bucket). Today that is bimpossible only; other projects
+    # keep the default-active behavior and are skipped here.
+    for proj in current.get("projects", []):
+        pphases = (proj.get("progress") or {}).get("phases", [])
+        cohorts = proj.get("baselineCohorts") or []
+        opted_in = bool(cohorts) or any("bucket" in ph for ph in pphases)
+        if not opted_in:
+            continue
+        pid = proj.get("id", "?")
+        seen_ids: dict[str, int] = {}
+        for ph in pphases:
+            nm = ph.get("name", "?")
+            # id present + unique
+            pid_val = ph.get("id")
+            if not pid_val:
+                fail(f"[{pid}] phase {nm!r} is missing an `id` (required by the completion model).")
+                errors += 1
+            else:
+                seen_ids[pid_val] = seen_ids.get(pid_val, 0) + 1
+            # bucket present + in enum
+            bucket = ph.get("bucket")
+            if bucket is None:
+                fail(f"[{pid}] phase {nm!r} is missing a `bucket`.")
+                errors += 1
+            elif bucket not in VALID_BUCKETS:
+                fail(f"[{pid}] phase {nm!r} has unknown bucket {bucket!r} "
+                     f"(allowed: {sorted(VALID_BUCKETS)}).")
+                errors += 1
+            # weight present + finite positive number (not bool)
+            w = ph.get("weight")
+            if isinstance(w, bool) or not isinstance(w, (int, float)) or w != w \
+                    or w in (float("inf"), float("-inf")) or w <= 0:
+                fail(f"[{pid}] phase {nm!r} has invalid weight {w!r} "
+                     f"(must be a finite number > 0).")
+                errors += 1
+            # pct in range
+            pct = ph.get("pct")
+            if not isinstance(pct, (int, float)) or isinstance(pct, bool) \
+                    or pct < 0 or pct > 100:
+                fail(f"[{pid}] phase {nm!r} has pct {pct!r} out of range [0,100].")
+                errors += 1
+        # duplicate ids
+        for dup, n in seen_ids.items():
+            if n > 1:
+                fail(f"[{pid}] phase id {dup!r} appears {n} times (ids must be unique).")
+                errors += 1
+        # at least one active phase (else the headline has an empty denominator)
+        if pphases and not any((ph.get("bucket") or "active") == "active" for ph in pphases):
+            fail(f"[{pid}] has no `active` phase — the headline denominator would be empty.")
+            errors += 1
+
+        # cohort registry integrity: alias cycles, and every member resolves to a phase
+        aliases = proj.get("phaseAliases") or {}
+        id_set = set(seen_ids)
+
+        def _resolve(raw: str) -> str | None:
+            cur_id, chain = raw, {raw}
+            while cur_id in aliases and aliases[cur_id] != cur_id:
+                cur_id = aliases[cur_id]
+                if cur_id in chain:
+                    return None  # cycle
+                chain.add(cur_id)
+            return cur_id
+
+        for co in cohorts:
+            cid = co.get("id", "?")
+            member_ids = co.get("phaseIds") or []
+            if not member_ids:
+                fail(f"[{pid}] baseline cohort {cid!r} has no phaseIds.")
+                errors += 1
+            resolved, dupes = set(), 0
+            for raw in member_ids:
+                r = _resolve(raw)
+                if r is None:
+                    fail(f"[{pid}] cohort {cid!r} member {raw!r} has a cyclic alias chain.")
+                    errors += 1
+                    continue
+                if r in resolved:
+                    dupes += 1
+                    continue
+                resolved.add(r)
+                if r not in id_set:
+                    fail(f"[{pid}] cohort {cid!r} member {raw!r} -> {r!r} "
+                         f"does not match any phase id.")
+                    errors += 1
+            if resolved:
+                base = round(sum(ph["pct"] for ph in pphases if ph.get("id") in resolved)
+                             / len(resolved))
+                print(f"  · [{pid}] cohort {cid!r}: {len(resolved)} phases "
+                      f"({dupes} alias-dupe(s) folded) -> {base}% complete.")
 
     # --- verdict -------------------------------------------------------------
     if errors:

@@ -757,6 +757,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <div id="toast"></div>
 <div id="pp" class="pp" style="display:none;"></div>
 <script src="data.js"></script>
+<script src="phase_metrics.js"></script><!-- Phase Completion Model v1 helpers (required) -->
 <script src="local/audit-findings.js" onerror="void 0"></script><!-- local-only, gitignored: full audit findings detail -->
 <script src="graph-metrics.js" onerror="void 0"></script>
 <script src="strategy.js" onerror="void 0"></script>
@@ -844,33 +845,69 @@ function ageHtml(iso){
   const c=n>=14?'color:var(--status-danger)':n>=7?'color:var(--status-warn)':'color:var(--dim)';
   return`<span style="${c}">${t}</span>`;
 }
-// Phases the owner has put ON HOLD, or that are CONDITIONAL/PLACEHOLDER future work, are
-// excluded from the headline donut: a flat average over them buries real momentum for months
-// (every unbuilt future phase reads ~0%). They're still shown individually in the phase list
-// below. Status comes from the ledger-rendered note prefix, so this stays honest automatically.
+// Phase Completion Model v1 (see phase_metrics.js). Each phase carries an explicit
+// `bucket`; only `active` phases count toward the headline donut. Held/conditional/
+// placeholder/proposed phases are tracked in the scope inventory but excluded (a flat
+// average over them buries real momentum for months — every unbuilt future phase reads
+// ~0%). A phase with no explicit bucket defaults to `active`, so this is a no-op for
+// every non-BIMpossible project. The note-prefix regex is kept ONLY as a legacy
+// fallback for any phase that predates the bucket field.
 const HELD_PHASE=/^(on hold|conditional|placeholder|proposal)/i;
+function isActivePhase(ph){
+  if(ph&&ph.bucket)return PhaseMetrics.normalizeBucket(ph.bucket)==='active';
+  return !HELD_PHASE.test(((ph&&ph.note)||'').trim()); // legacy: pre-bucket phases
+}
 function inScopePhases(p){
   if(!p||!p.progress||!p.progress.phases||!p.progress.phases.length)return null;
-  const a=p.progress.phases.filter(x=>!HELD_PHASE.test((x.note||'').trim()));
+  const a=p.progress.phases.filter(isActivePhase);
   return a.length?a:p.progress.phases;
 }
 function overallPct(p){
-  const ph=inScopePhases(p);
-  if(!ph)return null;
-  return Math.round(ph.reduce((s,x)=>s+x.pct,0)/ph.length);
+  if(!p||!p.progress||!p.progress.phases||!p.progress.phases.length)return null;
+  const r=PhaseMetrics.getFlatCompletion(PhaseMetrics.getActivePhases(p));
+  // fall back to the full phase set if a project somehow has zero active phases,
+  // so the donut still shows a number rather than "no data".
+  return r.pct!==null?r.pct:PhaseMetrics.getFlatCompletion(p.progress.phases).pct;
+}
+// July-baseline pct for a project that declares a frozen cohort (BIMpossible only), else null.
+function baselinePct(p){
+  if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return null;
+  return PhaseMetrics.getCohortCompletion(p,p.baselineCohorts[0]).pct;
 }
 function scopeCaption(p){
   if(!p||!p.progress||!p.progress.phases)return'';
-  const held=p.progress.phases.length-inScopePhases(p).length;
+  const ins=inScopePhases(p);
+  const held=p.progress.phases.length-(ins?ins.length:0);
   if(!held)return'';
   // BIMpossible headline was reconciled 2026-08-30: the flat average dilutes as young
   // phases enter scope, so the raw number can move without progress regressing. Carry a
   // one-line explanation (+ tooltip) so a rise/fall reads as denominator change, not velocity.
   const bim=p.id==='bimpossible';
   const label=bim?`active ratified scope · ${held} held/future/proposal excluded`:`active scope · ${held} on-hold/future excluded`;
-  const tip=bim?' title="Reconciled 2026-08-30 against merged delivery evidence. Denominator = active ratified scope only (on-hold, conditional, placeholder and unratified-proposal phases excluded). The original July delivery cohort remains ~84% complete; the headline moved because newer early-stage phases were admitted to scope, not because execution regressed."':'';
+  const bp=bim?baselinePct(p):null;
+  const baseTxt=bp!==null?` The original July 2026 delivery cohort now stands at ${bp}% complete (up from ~85% in July);`:'';
+  const tip=bim?` title="Reconciled 2026-08-30 against merged delivery evidence. Denominator = active ratified scope only (on-hold, conditional, placeholder and unratified-proposal phases excluded).${baseTxt} the active headline reads lower only because newer early-stage phases were admitted to scope, not because execution regressed."`:'';
   const cur=bim?';cursor:help':'';
   return`<div${tip} style="font-size:10px;color:var(--dim);text-align:center;margin-top:6px;max-width:130px;line-height:1.3${cur}">${label}</div>`;
+}
+// Baseline donut + scope inventory, rendered only for a project that declares cohorts.
+function cohortMetricsHtml(p){
+  if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return'';
+  let h='<div style="display:flex;flex-direction:column;gap:14px;align-items:center">';
+  p.baselineCohorts.forEach(co=>{
+    const r=PhaseMetrics.getCohortCompletion(p,co);
+    if(r.pct===null)return;
+    const miss=(r.missing&&r.missing.length)?` <span style="color:var(--amber)" title="cohort ids not found in phases: ${esc(r.missing.join(', '))}">⚠</span>`:'';
+    h+=`<div style="display:flex;flex-direction:column;align-items:center">`
+      +donut(r.pct,96,'')
+      +`<div title="${esc(co.rationale||'')}" style="font-size:10px;color:var(--dim);text-align:center;margin-top:6px;max-width:150px;line-height:1.3;cursor:help">${esc(co.label)}${miss}<br>${r.den} phases · frozen ${esc(co.frozenAt||'')}</div>`
+      +`</div>`;
+  });
+  const c=PhaseMetrics.getScopeCounts(p);
+  const chips=PhaseMetrics.VALID_BUCKETS.filter(k=>c[k]>0).map(k=>`${c[k]} ${k}`).join(' · ');
+  h+=`<div style="font-size:10px;color:var(--dim);text-align:center;max-width:160px;line-height:1.5"><b style="color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-size:9px">Scope inventory</b><br>${chips}</div>`;
+  h+='</div>';
+  return h;
 }
 function auditSummary(p){
   if(!p.audit)return null;
@@ -1297,6 +1334,7 @@ function project(p){
   h+=`<div class="fade"><div class="card${p.status==='active'?(isP?' pglow':' glow'):''} ${isP?'proj-hero-p':'proj-hero'}" style="padding:22px 24px;margin-bottom:14px">`;
   h+=`<div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">`;
   h+=pct!==null?'<div style="display:flex;flex-direction:column;align-items:center">'+donut(pct,130,p.progress&&p.progress.label||'')+scopeCaption(p)+'</div>':'';
+  h+=cohortMetricsHtml(p); // July baseline + scope inventory (cohort-declaring projects only)
   h+=`<div style="flex:1;min-width:260px">`;
   h+=`<div style="font-family:Sora;font-weight:600;font-size:14px;line-height:1.45">${esc(p.phase||'')}</div>`;
   h+=`<div style="font-size:12px;color:var(--muted);margin-top:7px">Last activity: <b>${esc((p.lastActivity&&p.lastActivity.date)||'?')}</b> (${ageHtml(p.lastActivity&&p.lastActivity.date)}) — ${esc((p.lastActivity&&p.lastActivity.summary)||'')}</div>`;
