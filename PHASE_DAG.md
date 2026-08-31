@@ -4,18 +4,20 @@ Source: `BIMpossible_PHASE-STATUS.md` (Gate/depends-on column). Auto-generated b
 
 **Critical path:** P7 -> P9 -> P10
 
-**Lynchpins (gate the most downstream phases):** P7 (gates 6), P4 (gates 2), P9 (gates 1)
+**Lynchpins (gate the most downstream phases):** P7 (gates 7), P4 (gates 2), P6 (gates 1), P9 (gates 1), P13 (gates 1)
 
 ## Build order (topological generations)
 
-1. P0-2 Foundation — Env Setup / Skeleton / Auth (CLOSED), P3 Read-Only Data Dashboard (+ 3.x family) (ACTIVE), P4 Embedded Intelligent Assistant (4a/4b) (CLOSED), P6 Platform / Billing + Client-Management (CLOSED), P7 Model Write-back — DA4R + Revit Link (two engines) (ON HOLD), P8 Project Setup Wizard (BUILT (gated OFF)), P11 Model QA & Health (SHIPPED — LIVE in prod), P11.1 Coordination & Health Report (SHIPPED — LIVE in prod), P14 Local AI Inference — On-Device RAG + Revit Context (Optional) (CONDITIONAL)
-2. P5 Views / Sheets / 3D / Workspace Coherence (ON HOLD), P9 Product Data Ingestion (CONDITIONAL), P12 Content Authoring (PLACEHOLDER (unbuilt)), P13 Augmentation & Write-back Layer (ACTIVE), P15 In-Revit BIMpossible Assistant Pane (ACTIVE)
-3. P10 Cost Intelligence / Estimating (CONDITIONAL)
+1. P0-2 Foundation — Env Setup / Skeleton / Auth (CLOSED), P3 Read-Only Data Dashboard (+ 3.x family) (ACTIVE), P4 Embedded Intelligent Assistant (4a/4b) (CLOSED), P6 Platform / Billing + Client-Management (PARTIAL — original scope shipped + live; Client-Mgmt E and F open (reopened 2026-07-27, PLACED not ratified)), P7 Model Write-back — DA4R + Revit Link (two engines) (LIVE — supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); flag ON in .env), P8 Project Setup Wizard (LIVE — deployed on main 2026-07-22), P11 Model QA & Health (incl. Coordination & Health Report) (ACTIVE — core shipped + LIVE in prod; reopened for further development), P14 Local AI Inference — On-Device RAG + Revit Context (Optional) (ACTIVE), P16 Desktop Orchestration Hub — MCP-First, Gated GUI Exception Path (CONDITIONAL), P18 Client Knowledge Assistant (3 pillars) (ACTIVE), P19 BIMpossible Workbench (desktop task-prep & closure workspace for Claude Code) (PROPOSAL)
+2. P5 Views / Sheets / 3D / Workspace Coherence (ON HOLD), P9 Product Data Ingestion (ACTIVE), P12 Content Authoring (PLACEHOLDER (unbuilt)), P13 Augmentation & Write-back Layer (incl. Write Engine — Typed Values + Type Params) (ACTIVE), P15 In-Revit BIMpossible Assistant Pane (ACTIVE)
+3. P10 Cost Intelligence / Estimating (CONDITIONAL), P17 App Integrations (governed third-party app surfaces — chat gateways + collaboration / CDE / reporting apps over a shared control plane) (PARTIAL)
 
 ## External (non-phase) gates
 
 - **P7** — = Wave 8
-- **P8** — APS write-permission approval
+- **P8** — — (write-permission approval GRANTED 2026-07-21)
 - **P11** — 2026-07-01
-- **P11.1** — 2026-07-02
 - **P14** — Owner ratification — optional track; gates nothing on the main line and must not block Phases 7–13
+- **P16** — Owner ratification — gates nothing on the main line; not scheduled until the core product line (Phases 3–13) is complete or far enough along to prove the target workflows (owner instruction 2026-07-23)
+- **P18** — Owner-authorized multi-session completion program (2026-08-09)
+- **P19** — Owner ratification — gates nothing on the main line; not scheduled

@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-08-31 14:53:42",
+  "checked": "2026-08-31 14:54:29",
   "staleDays": 14,
   "projects": {
     "bimpossible": {
