@@ -21,6 +21,9 @@ Ownership split, by field:
   * phase NOTE  <- ledger Status + Note (so an owner status flip shows with no hand-edit)
   * phase PCT   <- PRESERVED from data.js (a human judgement; ledger only sanity-checks it)
   * phase TASKS <- PRESERVED from data.js (curated build detail: PR #s, dates, smokes)
+  * phase BUCKET/WEIGHT <- PRESERVED from data.js (completion-model v1 scope). data.js is
+    their ONLY store, so losing them on a rebuild is unrecoverable: an existing phase that
+    arrives without them ABORTS the render (CuratedFieldLoss) instead of defaulting.
   * waves       <- ledger (fully mechanical: counts, in-flight list, last completed)
 
 The result is spliced in with the same proven, surgical machinery sync_dashboard.py
@@ -31,6 +34,7 @@ Usage:
     python sync_ledgers.py                      # default repo paths
     python sync_ledgers.py --data data.js --phase-ledger <p> --wave-ledger <w>
     python sync_ledgers.py --check              # exit 1 if data.js is out of date, write nothing
+    python sync_ledgers.py --allow-model-field-defaults   # schema migration only, see below
 """
 
 from __future__ import annotations
@@ -254,24 +258,69 @@ VALID_BUCKETS = {"active", "proposed", "held", "conditional", "placeholder"}
 _PRESERVE_OPTIONAL = ("ratifiedAt", "evidenceUpdatedAt", "scoreBasis")
 
 
+class CuratedFieldLoss(Exception):
+    """An EXISTING phase reached the rebuild without its curated completion-model fields.
+
+    Defaulting here is what turns one bad generation into permanent data loss: the curated
+    values live only in data.js, so a phase silently rebuilt as `bucket: "active", weight: 1`
+    erases the held/conditional/placeholder/proposed scope model with no way back except a
+    git archaeology dig. Refusing to render keeps the last good data.js on disk and on the
+    live board. Raised by build_progress(); the CLI turns it into a clean exit-1 message.
+    """
+
+
+def _weight_is_valid(w) -> bool:
+    """Curated weight must be a finite positive number. Bools are rejected explicitly:
+    `True == 1` in Python, so a bool would otherwise pass every numeric comparison."""
+    if isinstance(w, bool) or not isinstance(w, (int, float)):
+        return False
+    return w == w and w not in (float("inf"), float("-inf")) and w > 0
+
+
 def _normalize_weight(w):
     """Curated weight must be a finite positive number; anything else -> 1 (v1 default).
     v1 ships all weights at 1 (flat average); the field is stored + validated, not yet
     activated as a weighted headline."""
-    if isinstance(w, bool) or not isinstance(w, (int, float)):
-        return 1
-    if w != w or w in (float("inf"), float("-inf")) or w <= 0:  # NaN / inf / non-positive
-        return 1
-    return w
+    return w if _weight_is_valid(w) else 1
 
 
-def build_progress(current_progress: dict, phases: list[dict]) -> dict:
+def _curated_problems(pid: str, cur: dict) -> list[str]:
+    """Curated completion-model fields missing/invalid on an EXISTING phase record.
+
+    `id` is not checked: it is derived deterministically from the ledger key, so a phase
+    joined by number carries no information in it that could be lost.
+    """
+    problems = []
+    if "bucket" not in cur:
+        problems.append(f"{pid}: missing 'bucket'")
+    elif cur["bucket"] not in VALID_BUCKETS:
+        problems.append(f"{pid}: invalid bucket {cur['bucket']!r} "
+                        f"(expected one of {sorted(VALID_BUCKETS)})")
+    if "weight" not in cur:
+        problems.append(f"{pid}: missing 'weight'")
+    elif not _weight_is_valid(cur["weight"]):
+        problems.append(f"{pid}: invalid weight {cur['weight']!r} (expected a positive number)")
+    return problems
+
+
+def build_progress(current_progress: dict, phases: list[dict],
+                   *, allow_defaults: bool = False) -> dict:
+    """Rebuild every phase from the ledger, carrying the curated fields through.
+
+    A phase ABSENT from data.js is genuinely new and is seeded with the v1 defaults
+    (`bucket: "active"`, `weight: 1`). A phase PRESENT but missing or corrupting those
+    fields is field loss, not a new phase, and raises CuratedFieldLoss - see that class
+    for why defaulting is the more dangerous option. `allow_defaults=True` restores the
+    old permissive behaviour and exists only for a deliberate re-migration of records
+    that never carried the schema (CLI: --allow-model-field-defaults).
+    """
     cur_phases = current_progress.get("phases", [])
     # `id` is the primary join key; the phase-number parsed from `name` is the fallback
     # so the one-time migration (before any phase carries an explicit id) still matches.
     by_id = {p["id"]: p for p in cur_phases if p.get("id")}
     by_num = {_phase_num_of(p.get("name", "")): p for p in cur_phases}
     new_phases = []
+    losses: list[str] = []
     for ph in phases:
         pid = f"P{ph['key']}"
         cur = by_id.get(pid) or by_num.get(ph["key"], {})
@@ -279,6 +328,8 @@ def build_progress(current_progress: dict, phases: list[dict]) -> dict:
         band = STATUS_PCT.get(_status_key(status), STATUS_PCT.get(status, 0))
         pct = cur.get("pct", band)
         note = f"{status} — {ph['note']}" if ph["note"] else status
+        if cur and not allow_defaults:
+            losses.extend(_curated_problems(pid, cur))
         bucket = cur.get("bucket", "active")
         if bucket not in VALID_BUCKETS:  # unknown -> safe default; validator flags it
             bucket = "active"
@@ -296,6 +347,16 @@ def build_progress(current_progress: dict, phases: list[dict]) -> dict:
         if cur.get("tasks"):
             new_phase["tasks"] = cur["tasks"]
         new_phases.append(new_phase)
+    if losses:
+        raise CuratedFieldLoss(
+            "existing phases have lost their curated completion-model fields:\n  "
+            + "\n  ".join(losses)
+            + "\n\nThis is data loss, not a new phase: rebuilding them with defaults would "
+              "silently relabel the scope model as all-active. Restore the curated fields in "
+              "data.js first (e.g. `git checkout <last-good-rev> -- data.js`, or re-inject the "
+              "fields from that revision) and re-run. Only pass --allow-model-field-defaults "
+              "if these phases genuinely never carried the schema."
+        )
     return {"label": current_progress.get("label", "Program phases"), "phases": new_phases}
 
 
@@ -371,7 +432,8 @@ def _wave_drift(waves: list[dict]) -> list[str]:
 # --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
-def render(data_path: Path, phase_ledger: Path, wave_ledger: Path) -> tuple[str, str, list[str]]:
+def render(data_path: Path, phase_ledger: Path, wave_ledger: Path,
+           *, allow_defaults: bool = False) -> tuple[str, str, list[str]]:
     """Return (current_data_js, new_data_js, change_summary)."""
     for p in (data_path, phase_ledger, wave_ledger):
         if not p.is_file():
@@ -388,7 +450,8 @@ def render(data_path: Path, phase_ledger: Path, wave_ledger: Path) -> tuple[str,
     phases = parse_phase_ledger(phase_ledger)
     waves, updated = parse_wave_ledger(wave_ledger)
 
-    new_progress = build_progress(bim.get("progress") or {}, phases)
+    new_progress = build_progress(bim.get("progress") or {}, phases,
+                                  allow_defaults=allow_defaults)
     new_waves = build_waves(waves, updated, wave_ledger)
 
     # change summary (for the operator / commit message)
@@ -419,6 +482,10 @@ def main() -> int:
     ap.add_argument("--wave-ledger", default=str(DEFAULT_WAVE_LEDGER))
     ap.add_argument("--check", action="store_true",
                     help="Exit 1 if data.js is out of date with the ledgers; write nothing.")
+    ap.add_argument("--allow-model-field-defaults", action="store_true",
+                    help="Seed bucket/weight defaults onto EXISTING phases that lack them. "
+                         "Off by default: missing curated fields are data loss and abort the "
+                         "render. Use only for a deliberate schema migration.")
     args = ap.parse_args()
 
     # Scheduled runs redirect stdout to a log whose encoding may be cp1252; ledger
@@ -430,9 +497,13 @@ def main() -> int:
             pass
 
     data_path = Path(args.data)
-    data_js, spliced, changes = render(
-        data_path, Path(args.phase_ledger), Path(args.wave_ledger)
-    )
+    try:
+        data_js, spliced, changes = render(
+            data_path, Path(args.phase_ledger), Path(args.wave_ledger),
+            allow_defaults=args.allow_model_field_defaults,
+        )
+    except CuratedFieldLoss as exc:
+        sys.exit(f"ERROR: refusing to render — {exc}")
 
     if not node_check(spliced):
         sys.exit("ERROR: rendered data.js failed `node --check` — refusing to write.")

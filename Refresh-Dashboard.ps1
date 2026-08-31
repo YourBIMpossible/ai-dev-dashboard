@@ -8,13 +8,16 @@
 # cloud prose bot touched the same card our activity scan did (2026-06-27).
 #
 # NON-DESTRUCTIVE: uses `git reset origin/main` (MIXED) to base our commit on the live
-# tip - mixed reset moves only HEAD + index and LEAVES every working file untouched. This
-# script runs in the DEDICATED automation clone (Dashboard-auto), not the editing clone, so
-# there is no human WIP to protect; data.js and the CI-owned files (github_actions.js,
-# graph-metrics.js) are refreshed from origin (all regenerated anyway). An earlier version
-# used `reset --hard` and wiped uncommitted files - never do that here.
+# tip - mixed reset moves only HEAD + index and LEAVES every working file untouched. Because
+# of that, the reset alone does NOT update the code this run executes, so step 0b explicitly
+# checks the tracked tree out of origin/main and refuses to render if any drift survives
+# (see 0b for the 2026-08-31 regression this prevents). This script runs in the DEDICATED
+# automation clone (Dashboard-auto), not the editing clone, so there is no human WIP to
+# protect. An earlier version used `reset --hard` and wiped uncommitted files - never do
+# that here; step 0b is scoped to TRACKED paths and leaves _backups and every other
+# untracked runtime file alone.
 #
-# Each attempt:  fetch -> reset (mixed) origin/main -> checkout origin's data.js
+# Each attempt:  fetch -> reset (mixed) origin/main -> checkout origin's tracked tree
 #                -> render (ledgers, activity, date) -> validate -> commit -> push.
 # A push rejected because the cloud bot advanced origin mid-render just loops onto the
 # new tip and re-renders. No rebase, so no merge conflicts ever.
@@ -71,6 +74,20 @@ function Invoke-Logged {
     $ErrorActionPreference = $eap
     if ($out) { $out | Add-Content -Path $log -Encoding utf8 }
     return $code
+}
+
+# Same stderr safety as Invoke-Logged, but returns the command's STDOUT lines instead of its
+# exit code - for queries whose answer we need to branch on (e.g. `git diff --name-only`).
+# stderr is dropped rather than merged: git narrates benign notices there ("LF will be
+# replaced by CRLF..."), and merging them via 2>&1 would both pollute the result list and,
+# under EAP=Stop on PS 5.1, terminate the run.
+function Invoke-Capture {
+    param([Parameter(Mandatory)][string]$Exe, [string[]]$Arguments = @())
+    $eap = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    $out = & $Exe @Arguments 2>$null
+    $ErrorActionPreference = $eap
+    return @($out | Where-Object { "$_".Trim() })
 }
 
 # Render graph-metrics.js from the tracked BIMpossible ledger. This refresh is the
@@ -197,9 +214,40 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #    then refresh data.js + the CI-owned files from origin so the render starts fresh.
     if ((Invoke-Logged "git" @("fetch","origin","main")) -ne 0) { Alert-Failure "git fetch failed."; $result = 1; break }
     if ((Invoke-Logged "git" @("reset","origin/main")) -ne 0)   { Alert-Failure "git reset origin/main failed."; $result = 1; break }
-    # Sync CI-owned working-tree files from origin so this automation clone never drifts
-    # from the CI bot's latest (mixed reset leaves working tree untouched).
-    if ((Invoke-Logged "git" @("checkout","origin/main","--","data.js","github_actions.js","graph-metrics.js")) -ne 0) { Alert-Failure "git checkout data.js failed."; $result = 1; break }
+    # 0b. Sync the WHOLE tracked tree from origin - the executed code surface included, not
+    #     just the CI-owned data files. ROOT CAUSE of the 2026-08-31 completion-model wipe:
+    #     a mixed reset moves HEAD + index only, so the working tree keeps whatever revision
+    #     it happens to hold, and this step used to restore just three DATA files
+    #     (data.js, github_actions.js, graph-metrics.js). This clone therefore went on
+    #     executing its own stale generator + validator: at the 06:00 run that was the
+    #     pre-PR-#5 sync_ledgers.py (no completion-model preservation, so id/bucket/weight
+    #     were never emitted) and the pre-PR-#5 validate_dashboard.py (no completion-model
+    #     guard, so step 3 waved the stripped file through). The fix had been on origin/main
+    #     for eight hours; the scheduler simply never ran it. Fetching code is now part of
+    #     fetching state.
+    #
+    #     graphify-health.js is the one exclusion: .tools\graphify\Check-GraphifyHealth.ps1
+    #     renders it at 05:45 and deliberately does not commit, so the working-tree copy is
+    #     legitimately NEWER than origin's and this refresh is its only committer.
+    #     Everything else is either origin-owned or regenerated below.
+    #
+    #     Overwriting Refresh-Dashboard.ps1 mid-run is safe: PS 5.1 parses the whole script
+    #     before executing it, so a corrected copy takes effect on the NEXT run - which is
+    #     what makes this self-healing rather than needing a manual clone repair.
+    $keepLocal = ":(exclude)graphify-health.js"
+    $drift = Invoke-Capture "git" @("diff","--name-only","origin/main","--",".",$keepLocal)
+    if ($drift) {
+        "DRIFT: automation clone was running non-origin content, restoring from origin/main:" | Add-Content -Path $log -Encoding utf8
+        $drift | ForEach-Object { "  drift: $_" } | Add-Content -Path $log -Encoding utf8
+    }
+    if ((Invoke-Logged "git" @("checkout","origin/main","--",".",$keepLocal)) -ne 0) { Alert-Failure "git checkout origin/main -- . failed."; $result = 1; break }
+    # Prove it took. Residual drift means the tree is not the code we think we are running,
+    # so refuse to render rather than ship whatever this clone happens to contain.
+    $residual = Invoke-Capture "git" @("diff","--name-only","origin/main","--",".",$keepLocal)
+    if ($residual) {
+        Alert-Failure "working tree still differs from origin/main after restore: $($residual -join ', ')"
+        $result = 1; break
+    }
 
     # 1. Render phases + waves from the ledgers (fatal on failure).
     if ((Invoke-Logged $python @("$PSScriptRoot\sync_ledgers.py")) -ne 0) { Alert-Failure "sync_ledgers.py failed."; $result = 1; break }
