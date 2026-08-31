@@ -226,10 +226,10 @@ window.DASHBOARD_DATA = {
           { name: "P19 BIMpossible Workbench (desktop task-prep & closure workspace for Claude Code)", pct: 0, note: "PROPOSAL — Added 2026-08-21, from a phase plan submitted outside this ledger session and placed here on request. Native WPF/.NET desktop app, local-first and provider-agnostic (Ollama default, Claude/OpenAI/Gemini/Grok as optional adapters): work-item queue (`Inbox → Prepared → Active → Review → Closed`, plus `Blocked`/`Unverified`/`Parked`/`Reverted`) that captures a task (Revit selection, issue, family batch, code bug, test failure, design note), deterministically collects evidence (Git status/diff, targeted source search, test/build logs, read-only Revit context), uses a local model to draft a structured task contract (goal/evidence/constraints/scope/acceptance criteria — never silently proposing completed code changes), and generates a bounded Claude Code handoff; Claude Code implements and validates, Workbench records the closeout (changed files, validation evidence, risks, next action). Durable artifacts are project-local Markdown/JSON under `.ai/` (tasks/work/handoffs/decisions/prompts), not transient chat history. Not a Claude Code replacement, not a generic chat client, not an agent runtime/sandbox/terminal/browser-automation platform, and not an autonomous mutation engine — mutation is fail-closed by default (inspect/read-only; Revit and source-tree writes require explicit dry-run → review → apply). Closest ledger neighbor is Phase 16 (Desktop Orchestration Hub) — both are local/desktop, both explicitly gate nothing on the main product line, both are PROPOSAL/CONDITIONAL rather than scheduled — but they are distinct programs (16 = cross-tool MCP orchestration with a gated GUI-exception path; 19 = task-prep-and-closure workbench with its own evidence/local-AI/handoff pipeline) and should stay separate rows. Open decisions before any build work, per the plan's own gate list: product name confirmation; artifact-policy scope (repo-local `.ai/` only vs. app workspace + export); single- vs. multi-workspace v1 support; initial local model(s) + context/performance target; first Claude Code integration level (clipboard/file handoff only vs. controlled process launch); the first real (non-demo) vertical-slice task; secret/path exclusion policy before evidence collection is enabled. Full plan: `2026-08-21__Phase19_BIMpossibleWorkbench_PhaseDefinition_PROPOSAL.md`. PROPOSAL — not ratified, not scheduled; placed at the end of the ledger deliberately, per the freeze-numbers rule (ordering holds 16 < 17 < 18 < 19)." }
         ]
       },
-      activity: [44,9,3,12,17,18,18,30,12,5,6,0,0,0],
+      activity: [44,9,3,12,17,18,18,30,12,5,6,0,0,20],
       lastActivity: {
-        date: "2026-08-27",
-        summary: "sync: mirror queue.yaml/QUEUE.md - resolve app availability leg on PROD-DERIV-3 / P6-CLIENTMGMT-F (confirm-only, source claude-next-state 9f80218) (6a4e241)"
+        date: "2026-08-30",
+        summary: "perf(pdp): bound shared root scans in project model listing (#502) (06d545b)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -533,10 +533,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [6,3,1,1,3,7,15,1,4,2,1,0,0,0],
+      activity: [6,3,1,1,3,7,15,1,4,2,1,0,0,2],
       lastActivity: {
-        date: "2026-08-27",
-        summary: "ci: add advisory Wave-Status PR-body check (#109) (578e412)"
+        date: "2026-08-30",
+        summary: "ARCH-BIMP-PARAMSET: wire BIMP_IsDeliverable v1 setup and diagnostics (#111) (60ebeb1)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -897,10 +897,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [13,3,0,9,8,7,5,13,5,2,5,0,0,0],
+      activity: [13,3,0,9,8,7,5,13,5,2,5,0,0,10],
       lastActivity: {
-        date: "2026-08-27",
-        summary: "sync: mirror queue.yaml/QUEUE.md - resolve app availability leg on PROD-DERIV-3 / P6-CLIENTMGMT-F (confirm-only, source claude-next-state 9f80218) (6a4e241)"
+        date: "2026-08-30",
+        summary: "docs(ops): close read-only VERIFY items in deploy runbook; fix PR #191 ledger status (#104) (e6b0684)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -939,10 +939,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [8,3,3,3,8,11,4,5,20,6,3,4,3,1],
+      activity: [8,3,3,3,8,11,4,5,20,6,3,4,3,2],
       lastActivity: {
         date: "2026-08-30",
-        summary: "chore: live billing sync 2026-08-30 (6466a63)"
+        summary: "dashboard refresh 2026-08-30 06:00 (a2a5d7c)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
