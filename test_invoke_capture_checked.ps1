@@ -71,6 +71,35 @@ Assert-True ($src -match '-not \$driftQ\.Ok') 'pre-restore drift query fails clo
 Assert-True ($src -match '-not \$residualQ\.Ok') 'post-restore verification fails closed'
 Assert-True ($src -match '\$driftQ\.Code' -and $src -match '\$driftQ\.Err') 'failure alert carries exit code and stderr context'
 
+# --- step 0c: untracked shadow-capable classifier -------------------------------------------
+
+$shadowFn = $ast.Find({ param($n)
+    $n -is [System.Management.Automation.Language.FunctionDefinitionAst] -and
+    $n.Name -eq 'Select-ShadowCapable' }, $true)
+Assert-True ($null -ne $shadowFn) 'Select-ShadowCapable is defined in Refresh-Dashboard.ps1'
+Invoke-Expression $shadowFn.Extent.Text
+
+$r = Select-ShadowCapable -Paths @()
+Assert-True ($r.Count -eq 0) 'empty untracked list yields no shadow candidates'
+
+$r = Select-ShadowCapable -Paths @('codebase/stray.html', 'codebase/sub/x.txt')
+Assert-True ($r.Count -eq 2) 'ANY untracked file under codebase/ is shadow-capable (git add codebase publishes it)'
+
+$r = Select-ShadowCapable -Paths @('yaml.py', 'bimwatch/helper.py', 'extra_sync.mjs')
+Assert-True ($r.Count -eq 3) 'untracked .py/.mjs anywhere shadows the import surface'
+
+$r = Select-ShadowCapable -Paths @('notes.md', 'scratch.txt', 'report copy.html', 'test.ps1')
+Assert-True ($r.Count -eq 0) 'benign untracked files (no import/publish surface) are not flagged'
+
+$r = Select-ShadowCapable -Paths @('notes.md', 'codebase/evil.js', 'sync_ledgers_backup.py')
+Assert-True ($r.Count -eq 2 -and ($r -contains 'codebase/evil.js') -and ($r -contains 'sync_ledgers_backup.py')) 'mixed list: only the shadow-capable paths are returned'
+
+# Gate wiring: 0c queries untracked files fail-closed and never deletes anything.
+Assert-True ($src -match 'Invoke-CaptureChecked "git" @\("ls-files","--others","--exclude-standard"\)') 'step 0c lists untracked files via the checked capture'
+Assert-True ($src -match '-not \$untrackedQ\.Ok') 'untracked-file query fails closed'
+Assert-True ($src -match 'Select-ShadowCapable -Paths \$untrackedQ\.Out') 'the classifier gates the render'
+Assert-True ($src -notmatch '@\("clean"' -and $src -notmatch '& git clean' -and $src -notmatch '"clean",') 'the script never invokes git clean'
+
 Write-Host ""
 if ($script:fails) { Write-Host "$($script:fails) FAILED, $($script:passed) passed" -ForegroundColor Red; exit 1 }
 Write-Host "$($script:passed) passed"

@@ -105,6 +105,22 @@ function Invoke-CaptureChecked {
     return @{ Ok = ($code -eq 0); Code = $code; Out = $stdout; Err = $stderr }
 }
 
+# Step 0c's classifier: which UNTRACKED paths can shadow origin content? Two surfaces:
+#   1. codebase/** - step 4 runs `git add codebase` on the whole directory, so any untracked
+#      stray under it would be committed and PUBLISHED on the next refresh.
+#   2. *.py / *.mjs anywhere - the render pipeline runs python/node with this clone as the
+#      script directory, so an untracked module here shadows stdlib/site-package/relative
+#      imports (sys.path[0]) and the node import surface, silently changing what executes.
+# Input is `git ls-files --others --exclude-standard`, so every legitimate untracked runtime
+# file (.gitignore: _backups/, local/, __pycache__/, *.pyc, .claude/, ...) is already out of
+# scope - anything this returns is an anomaly in the automation clone, which holds no human WIP.
+function Select-ShadowCapable {
+    param([string[]]$Paths = @())
+    @($Paths | Where-Object {
+        $_ -like 'codebase/*' -or $_ -match '\.(py|mjs)$'
+    })
+}
+
 # Render graph-metrics.js from the tracked BIMpossible ledger. This refresh is the
 # file's OWNER (since 2026-07-21): BIMpossible\Update-Graph.ps1 appends snapshots to
 # the ledger and no longer writes the rendering; this function is the only writer.
@@ -273,6 +289,27 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     if ($residualQ.Out.Count) {
         Alert-Failure "working tree still differs from origin/main after restore: $($residualQ.Out -join ', ')"
         $result = 1; break
+    }
+    # 0c. UNTRACKED shadowing (review finding #6, deferred from PR #10): the diffs above see
+    #     tracked paths only, so a stale branch's leftover file - untracked, but sitting where
+    #     the pipeline imports it or where step 4's `git add codebase` would publish it - passes
+    #     0b clean. Detect and REFUSE, never delete: this step deliberately has no `git clean`
+    #     and removes nothing, so _backups and every other legitimate untracked runtime file
+    #     stay protected and a flagged file waits for a human to move or remove it.
+    #     Fails closed like the drift queries: an unlistable tree is an unverified tree.
+    $untrackedQ = Invoke-CaptureChecked "git" @("ls-files","--others","--exclude-standard")
+    if (-not $untrackedQ.Ok) {
+        Alert-Failure "untracked-file query failed (git ls-files --others --exclude-standard, exit $($untrackedQ.Code)): $($untrackedQ.Err -join ' | ')"
+        $result = 1; break
+    }
+    $shadow = Select-ShadowCapable -Paths $untrackedQ.Out
+    if ($shadow.Count) {
+        Alert-Failure "untracked shadow-capable file(s) in the automation clone - refusing to render until a human moves or removes them (nothing is deleted automatically): $($shadow -join ', ')"
+        $result = 1; break
+    }
+    if ($untrackedQ.Out.Count) {
+        # Benign untracked files (no import/publish surface): note them, keep rendering.
+        "NOTE: $($untrackedQ.Out.Count) benign untracked file(s) present (not shadow-capable): $($untrackedQ.Out -join ', ')" | Add-Content -Path $log -Encoding utf8
     }
 
     # 1. Render phases + waves from the ledgers (fatal on failure).
