@@ -186,11 +186,17 @@ window.DASHBOARD_DATA = {
     focus,                             // THE one thing to do next (single sentence)
     progress: {                        // null if unknowable
       label,                           // what the bars measure ("Program phases", "Tracks", ...)
-      phases: [{ name, pct, note?,
+      phases: [{ id, bucket, weight,   // Phase Completion Model v1 — see the section below.
+                 name, pct, note?,     //   id: stable phase id ("P6", "P11"); bucket: active|proposed|
+                                       //   held|conditional|placeholder; weight: >0 number (v1 always 1).
                  tasks?: [{ label, status, note? }] }]  // status in done|active|pending|blocked.
-                                       // pct 0-100 per phase; shell averages for the overall donut.
+                                       // pct 0-100 per phase; shell averages ACTIVE phases for the donut.
                                        // PRESERVE existing tasks across refreshes; flip statuses as work lands.
     },
+    baselineCohorts?: [{ id, label, frozenAt, sourceCommit,   // bimpossible only (v1). A frozen set of
+        approvedBy, approvedAt, rationale, phaseIds: [] }],    // phase ids whose CURRENT pct averages into
+                                                              // a delivery baseline. OMIT for other projects.
+    phaseAliases?: { "<oldId>": "<canonicalId>" },  // historical id -> current id, applied to cohort members.
     activity: [n x14],                 // commits (or doc-changes) per day over the window; zeros ok
     lastActivity: { date, summary },
     branch, git: { warn } | null,
@@ -220,3 +226,93 @@ Progress rules: phases are *plan phases*, with an honest percent each.
 - Activity series: `git log --all --since=<window> --format=%ad --date=short | sort | uniq -c`
   per repo; for doc-only projects use build-log file dates. Update `activitySince` so the window
   ends today (14 entries).
+
+---
+
+## Phase Completion Model v1
+
+Before this model, "in scope" was inferred at render time from a phase's note prefix
+(`/^(on hold|conditional|placeholder)/i`). That was fragile — a reworded note
+silently moved a phase in or out of the headline. v1 replaces inference with three explicit,
+refresh-safe fields per phase (`id`, `bucket`, `weight`) plus an optional project-level
+baseline registry. The renderer math lives in [`phase_metrics.js`](phase_metrics.js) and is
+shared verbatim by the browser and the Node tests; the Python build/validator enforce the
+same rules at write time (`sync_ledgers.py`, `validate_dashboard.py`).
+
+### Buckets (what counts toward the headline)
+
+Every phase declares exactly one `bucket`:
+
+| bucket        | meaning                                                              | in headline? |
+|---------------|---------------------------------------------------------------------|:------------:|
+| `active`      | ratified, in the committed delivery scope                           | **yes**      |
+| `proposed`    | floated, not yet ratified into scope                                | no           |
+| `held`        | ratified once but paused / on hold                                  | no           |
+| `conditional` | in scope only if an external condition is met                       | no           |
+| `placeholder` | a reserved slot with no committed work yet                          | no           |
+
+- The **headline donut** = flat mean of the `pct` of `active` phases only (`Math.round` at
+  display). Non-active phases are tracked in the **scope inventory** (a count per bucket) but
+  never dilute the headline.
+- A phase with **no bucket defaults to `active`** — so every project that has not opted into
+  the model (all but bimpossible today) behaves exactly as before. This default is
+  headline-neutral by construction.
+- An unknown bucket string is a **build-time error** (`validate_dashboard.py`); the renderer
+  still fails safe by treating anything unrecognized as `active`.
+
+### Rescoring & transitions
+
+Changing scope = changing a phase's `bucket`, and nothing else:
+
+- Ratify a proposal → `proposed` → `active` (it now enters the headline).
+- Pause active work → `active` → `held` (drops out of the headline; pct is preserved).
+- Resolve a condition → `conditional` → `active`; drop it → leave `conditional` or `held`.
+
+Never encode scope in the note text again. The note is prose; the bucket is the source of truth.
+Because `sync_ledgers.py` preserves curated `bucket`/`weight`/`id` across every refresh (see
+"Sync preservation" below), a rescore survives the next ledger sync untouched.
+
+### Weights (stored, not yet used)
+
+Every phase carries a `weight` (a finite number > 0; v1 writes `1` everywhere). The headline
+uses the **flat** mean today. `phase_metrics.js` also implements a weighted mean
+(`Σ(w·pct)/Σ(w)`), and with all weights = 1 it is identical to the flat mean — so activating
+weighting later is a one-line renderer switch, not a data migration. **v1 does not activate
+weighting and the headline is not "weighted."** Populating real weights is a deferred owner
+scoring pass; until then `weight: 1` is the honest value.
+
+### Baseline cohorts (delivery baselines)
+
+A `baselineCohorts[]` entry freezes a *membership* — a list of phase `id`s that constituted a
+past delivery — and reports that cohort's completion from the members' **current** pct. It is
+a fixed cohort with a moving score, not a hardcoded number:
+
+- `phaseIds` are resolved through `phaseAliases` (e.g. `"P11.1" → "P11"`), then **de-duplicated**,
+  then matched to live phases by `id`. A member that resolves to no phase is reported as
+  `missing` (surfaced by the validator), never silently dropped from the denominator count.
+- The July 2026 baseline cohort (`july-2026`) is the original ratified delivery set at ledger
+  commit `adec7d8`: `P0-2, P3, P4, P6, P8, P11` (with `P11.1` retained as historical membership,
+  aliased to `P11`, then folded). Its value is **computed**, not stored — `validate_dashboard.py`
+  prints it on every run.
+- `frozenAt` / `sourceCommit` / `approvedBy` / `approvedAt` / `rationale` are provenance for the
+  freeze; they are curated fields and are preserved across refreshes.
+
+### Sync preservation guarantee
+
+`sync_ledgers.py build_progress()` rebuilds `progress.phases` from the ledger on every refresh.
+It **preserves** the curated *phase-level* model fields by joining old→new on phase `id` first
+(then phase number as a fallback): `id`, `bucket`, `weight`, and any optional per-phase metadata
+(`ratifiedAt`, `evidenceUpdatedAt`, `scoreBasis`) carry through (this is the `_PRESERVE_OPTIONAL`
+tuple, applied per phase). The project-level registries `baselineCohorts` / `phaseAliases` are
+**not** in that tuple and are **not** protected by it — they live outside the `progress`/`waves`
+value-spans the splice rewrites, so the splice leaves them byte-identical and a sync never touches
+them. The refresh-drift gate (run twice; output must be
+byte-identical and `node --check` clean) proves a refresh does not perturb the model.
+
+### Validation
+
+`validate_dashboard.py` (run before every push) enforces, for any project that opts in
+(declares `baselineCohorts` or tags any phase with a `bucket`): `id` present + unique; `bucket`
+in the enum; `weight` a finite number > 0; `pct` in `[0,100]`; at least one `active` phase; and
+cohort integrity — every `phaseIds` member resolves (after alias + dedupe) to a real phase, with
+alias cycles rejected. All other projects are skipped and keep the default-active behavior.

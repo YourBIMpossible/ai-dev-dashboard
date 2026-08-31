@@ -239,20 +239,60 @@ def _phase_num_of(name: str) -> str:
 # --------------------------------------------------------------------------- #
 # Build the new progress + waves values
 # --------------------------------------------------------------------------- #
+# Phase-completion-model v1 buckets. Only `active` counts toward the ratified-scope
+# headline; the rest are tracked in the scope inventory but excluded from the donut.
+VALID_BUCKETS = {"active", "proposed", "held", "conditional", "placeholder"}
+
+# Curated PHASE-level completion-model fields that MUST survive every ledger rebuild.
+# `pct` and `tasks` were always preserved; the rest are the v1 phase-completion-model
+# schema. Without this, the nightly ledger refresh would silently wipe bucket/weight/etc.
+# NOTE: project-level registries (baselineCohorts, phaseAliases) are deliberately NOT in
+# this tuple. They live outside `progress`/`waves`, and render() rewrites only those two
+# value-spans (see apply_patch in render()), leaving every other byte — the cohort/alias
+# registries included — byte-identical. This copy loop runs per-phase, so a project-level
+# key could never match a phase record anyway. Do not add project-level fields here.
+_PRESERVE_OPTIONAL = ("ratifiedAt", "evidenceUpdatedAt", "scoreBasis")
+
+
+def _normalize_weight(w):
+    """Curated weight must be a finite positive number; anything else -> 1 (v1 default).
+    v1 ships all weights at 1 (flat average); the field is stored + validated, not yet
+    activated as a weighted headline."""
+    if isinstance(w, bool) or not isinstance(w, (int, float)):
+        return 1
+    if w != w or w in (float("inf"), float("-inf")) or w <= 0:  # NaN / inf / non-positive
+        return 1
+    return w
+
+
 def build_progress(current_progress: dict, phases: list[dict]) -> dict:
-    by_num = {_phase_num_of(p.get("name", "")): p for p in current_progress.get("phases", [])}
+    cur_phases = current_progress.get("phases", [])
+    # `id` is the primary join key; the phase-number parsed from `name` is the fallback
+    # so the one-time migration (before any phase carries an explicit id) still matches.
+    by_id = {p["id"]: p for p in cur_phases if p.get("id")}
+    by_num = {_phase_num_of(p.get("name", "")): p for p in cur_phases}
     new_phases = []
     for ph in phases:
-        cur = by_num.get(ph["key"], {})
+        pid = f"P{ph['key']}"
+        cur = by_id.get(pid) or by_num.get(ph["key"], {})
         status = ph["status"]
         band = STATUS_PCT.get(_status_key(status), STATUS_PCT.get(status, 0))
         pct = cur.get("pct", band)
         note = f"{status} — {ph['note']}" if ph["note"] else status
+        bucket = cur.get("bucket", "active")
+        if bucket not in VALID_BUCKETS:  # unknown -> safe default; validator flags it
+            bucket = "active"
         new_phase = {
+            "id": cur.get("id", pid),
+            "bucket": bucket,
+            "weight": _normalize_weight(cur.get("weight", 1)),
             "name": f"P{ph['key']} {ph['name']}",
             "pct": pct,
             "note": note,
         }
+        for k in _PRESERVE_OPTIONAL:
+            if k in cur:
+                new_phase[k] = cur[k]
         if cur.get("tasks"):
             new_phase["tasks"] = cur["tasks"]
         new_phases.append(new_phase)

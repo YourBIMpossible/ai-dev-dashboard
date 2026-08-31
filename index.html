@@ -757,6 +757,7 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 <div id="toast"></div>
 <div id="pp" class="pp" style="display:none;"></div>
 <script src="data.js"></script>
+<script src="phase_metrics.js" onerror="window.PhaseMetrics=null"></script><!-- Phase Completion Model v1 helpers (progressive enhancement; headline falls back to legacy math if this fails to load) -->
 <script src="local/audit-findings.js" onerror="void 0"></script><!-- local-only, gitignored: full audit findings detail -->
 <script src="graph-metrics.js" onerror="void 0"></script>
 <script src="strategy.js" onerror="void 0"></script>
@@ -805,7 +806,7 @@ const ICO={
 window._PR={};
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function pathLink(p,label){const uri='vscode://file/'+p.replace(/\\/g,'/');return`<a class="path-chip" href="${esc(uri)}" title="${esc(p)}">${esc(label||p)}</a>`;}
 let _toastTimer;
 function copyPath(el,path){
@@ -844,26 +845,110 @@ function ageHtml(iso){
   const c=n>=14?'color:var(--status-danger)':n>=7?'color:var(--status-warn)':'color:var(--dim)';
   return`<span style="${c}">${t}</span>`;
 }
-// Phases the owner has put ON HOLD, or that are CONDITIONAL/PLACEHOLDER future work, are
-// excluded from the headline donut: a flat average over them buries real momentum for months
-// (every unbuilt future phase reads ~0%). They're still shown individually in the phase list
-// below. Status comes from the ledger-rendered note prefix, so this stays honest automatically.
-const HELD_PHASE=/^(on hold|conditional|placeholder)/i;
+// Phase Completion Model v1 (see phase_metrics.js). Each phase carries an explicit
+// `bucket`; only `active` phases count toward the headline donut. Held/conditional/
+// placeholder/proposed phases are tracked in the scope inventory but excluded (a flat
+// average over them buries real momentum for months — every unbuilt future phase reads
+// ~0%). A phase with NO bucket is a legacy record and falls back to the note-prefix
+// rule, so migrating one project to buckets never changes another project's headline.
+//
+// phase_metrics.js is a progressive enhancement, not a hard dependency: if it fails to
+// load, `window.PhaseMetrics` is null (see the <script onerror> above) and the headline
+// falls back to the identical legacy math below rather than blanking the whole board.
+// Only the extra baseline donut + scope inventory require the module.
+// Exact pre-model note-prefix rule (three terms, NO "proposal"): a legacy no-bucket
+// phase whose note begins on hold/conditional/placeholder is out of scope, matching the
+// headline byte-for-byte from before the completion model. Sourced from PhaseMetrics so
+// there is one canonical definition; the literal is only the fallback when the module is
+// absent, and it must stay identical to PhaseMetrics.PRE_MODEL_HELD_PHASE.
+const PRE_MODEL_HELD_PHASE=(window.PhaseMetrics&&PhaseMetrics.PRE_MODEL_HELD_PHASE)||/^(on hold|conditional|placeholder)/i;
+function isActivePhase(ph){
+  if(window.PhaseMetrics)return PhaseMetrics.isActivePhase(ph); // single source of truth when present
+  if(!ph)return false;
+  const b=ph.bucket;
+  if(typeof b==='string'&&b.trim())return b.trim()==='active'; // structured data wins
+  return !PRE_MODEL_HELD_PHASE.test(String(ph.note==null?'':ph.note).trim()); // legacy: pre-bucket phases
+}
+function activePhases(p){
+  if(window.PhaseMetrics)return PhaseMetrics.getActivePhases(p);
+  const all=(p&&p.progress&&Array.isArray(p.progress.phases))?p.progress.phases:[];
+  return all.filter(isActivePhase);
+}
 function inScopePhases(p){
-  if(!p||!p.progress||!p.progress.phases||!p.progress.phases.length)return null;
-  const a=p.progress.phases.filter(x=>!HELD_PHASE.test((x.note||'').trim()));
-  return a.length?a:p.progress.phases;
+  const all=(p&&p.progress&&Array.isArray(p.progress.phases))?p.progress.phases:[];
+  if(!all.length)return null;
+  const a=activePhases(p);
+  return a.length?a:all;
 }
 function overallPct(p){
-  const ph=inScopePhases(p);
-  if(!ph)return null;
-  return Math.round(ph.reduce((s,x)=>s+x.pct,0)/ph.length);
+  const ins=inScopePhases(p);
+  if(!ins)return null;
+  // Flat mean over scorable phases; computed locally so the headline never depends on
+  // PhaseMetrics being loaded. With the module present this equals getFlatCompletion.
+  const list=ins.filter(x=>x&&typeof x.pct==='number');
+  if(!list.length)return null;
+  return Math.round(list.reduce((s,x)=>s+x.pct,0)/list.length);
 }
-function scopeCaption(p){
+// Compute every declared baseline cohort's completion ONCE per render. The scope caption,
+// the baseline donut, and the tooltip all read from this single result set, so the number
+// is never computed twice and can never disagree between them. No global cache — the array
+// is recomputed per project render and passed down explicitly. Returns [] without
+// PhaseMetrics (alias resolution + dedupe live there) or when no cohort is declared.
+function cohortResults(p){
+  if(!window.PhaseMetrics)return[];
+  if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return[];
+  return p.baselineCohorts.map(co=>({co:co,r:PhaseMetrics.getCohortCompletion(p,co)}));
+}
+function scopeCaption(p,cohorts){
   if(!p||!p.progress||!p.progress.phases)return'';
-  const held=p.progress.phases.length-inScopePhases(p).length;
+  const ins=inScopePhases(p);
+  const held=p.progress.phases.length-(ins?ins.length:0);
   if(!held)return'';
-  return`<div style="font-size:10px;color:var(--dim);text-align:center;margin-top:6px;max-width:130px;line-height:1.3">active scope · ${held} on-hold/future excluded</div>`;
+  // A project that declares a frozen baseline cohort gets the reconciliation note + tooltip:
+  // the flat active average dilutes as young phases enter scope, so the raw number can move
+  // without progress regressing. DECLARED cohort presence (not a hardcoded project id, and not
+  // whether PhaseMetrics computed a result) drives every caption affordance — so a cohort
+  // project keeps its ratified-scope label/tooltip even on the module-absent fallback path.
+  // The computed cohorts result is used ONLY for the live baseline pct, which is null without
+  // the module (alias resolution + dedupe live there); the label comes from the declared
+  // registry directly, so it survives fallback too.
+  const decl=(p.baselineCohorts&&Array.isArray(p.baselineCohorts)&&p.baselineCohorts.length)?p.baselineCohorts[0]:null;
+  const hasCohort=!!decl;
+  const first=(cohorts&&cohorts.length)?cohorts[0]:null;
+  const label=hasCohort?`active ratified scope · ${held} held/future excluded`:`active scope · ${held} on-hold/future excluded`;
+  const bp=(first&&first.r&&first.r.pct!==null)?first.r.pct:null;
+  const coLabel=(decl&&decl.label)?esc(decl.label):'The frozen delivery cohort';
+  // Keep every clause a complete, capitalized sentence so the tooltip reads correctly
+  // whether or not a baseline pct is available (bp is null when PhaseMetrics is absent).
+  // Language is neutral and the pct is computed live — no hardcoded historical figure.
+  const baseTxt=bp!==null?` ${coLabel} now stands at ${bp}% complete; its membership is fixed, so later scope additions do not change this measure.`:'';
+  const tip=hasCohort?` title="Denominator = active ratified scope only; held, conditional, placeholder and unratified-proposal phases are excluded.${baseTxt} The active headline can read lower purely because newer early-stage phases were admitted to scope, not because execution regressed."`:'';
+  const cur=hasCohort?';cursor:help':'';
+  return`<div${tip} style="font-size:10px;color:var(--dim);text-align:center;margin-top:6px;max-width:130px;line-height:1.3${cur}">${label}</div>`;
+}
+// Baseline donut + scope inventory, rendered only for a project that declares cohorts.
+// No-op without PhaseMetrics — the headline still renders via the legacy path above.
+// `cohorts` is the per-render result set from cohortResults(p) (computed once, shared with
+// scopeCaption); the scope-inventory chips still come straight from PhaseMetrics.
+function cohortMetricsHtml(p,cohorts){
+  // No guard on window.PhaseMetrics: the only caller passes cohortResults(p), which is [] when
+  // the module is absent, so a non-empty `cohorts` already implies PhaseMetrics is present
+  // (getScopeCounts/VALID_BUCKETS below are then safe to deref).
+  if(!cohorts||!cohorts.length)return'';
+  let h='<div style="display:flex;flex-direction:column;gap:14px;align-items:center">';
+  cohorts.forEach(({co,r})=>{
+    if(r.pct===null)return;
+    const miss=(r.missing&&r.missing.length)?` <span style="color:var(--amber)" title="cohort ids not found in phases: ${esc(r.missing.join(', '))}">⚠</span>`:'';
+    h+=`<div style="display:flex;flex-direction:column;align-items:center">`
+      +donut(r.pct,96,'')
+      +`<div title="${esc(co.rationale||'')}" style="font-size:10px;color:var(--dim);text-align:center;margin-top:6px;max-width:150px;line-height:1.3;cursor:help">${esc(co.label)}${miss}<br>${r.den} phases · frozen ${esc(co.frozenAt||'')}</div>`
+      +`</div>`;
+  });
+  const c=PhaseMetrics.getScopeCounts(p);
+  const chips=PhaseMetrics.VALID_BUCKETS.filter(k=>c[k]>0).map(k=>`${c[k]} ${k}`).join(' · ');
+  h+=`<div style="font-size:10px;color:var(--dim);text-align:center;max-width:160px;line-height:1.5"><b style="color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-size:9px">Scope inventory</b><br>${chips}</div>`;
+  h+='</div>';
+  return h;
 }
 function auditSummary(p){
   if(!p.audit)return null;
@@ -1289,7 +1374,9 @@ function project(p){
   // Hero card
   h+=`<div class="fade"><div class="card${p.status==='active'?(isP?' pglow':' glow'):''} ${isP?'proj-hero-p':'proj-hero'}" style="padding:22px 24px;margin-bottom:14px">`;
   h+=`<div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">`;
-  h+=pct!==null?'<div style="display:flex;flex-direction:column;align-items:center">'+donut(pct,130,p.progress&&p.progress.label||'')+scopeCaption(p)+'</div>':'';
+  const cohorts=cohortResults(p); // computed once; shared by the caption and the donut below
+  h+=pct!==null?'<div style="display:flex;flex-direction:column;align-items:center">'+donut(pct,130,p.progress&&p.progress.label||'')+scopeCaption(p,cohorts)+'</div>':'';
+  h+=cohortMetricsHtml(p,cohorts); // July baseline + scope inventory (cohort-declaring projects only)
   h+=`<div style="flex:1;min-width:260px">`;
   h+=`<div style="font-family:Sora;font-weight:600;font-size:14px;line-height:1.45">${esc(p.phase||'')}</div>`;
   h+=`<div style="font-size:12px;color:var(--muted);margin-top:7px">Last activity: <b>${esc((p.lastActivity&&p.lastActivity.date)||'?')}</b> (${ageHtml(p.lastActivity&&p.lastActivity.date)}) — ${esc((p.lastActivity&&p.lastActivity.summary)||'')}</div>`;
