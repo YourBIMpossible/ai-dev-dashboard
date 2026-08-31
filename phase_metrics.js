@@ -30,10 +30,14 @@
   // an unknown bucket at build time, so this only ever fires for a legacy phase).
   function normalizeBucket(b) { return BUCKET_SET[b] ? b : "active"; }
 
-  // Legacy scope inference for phases that predate the bucket field: a note whose
-  // prose begins with on hold / conditional / placeholder / proposal is out of scope.
-  // Kept so migrating one project to buckets does not change any other project's headline.
-  var HELD_PHASE = /^(on hold|conditional|placeholder|proposal)/i;
+  // EXACT pre-model scope inference for phases that predate the bucket field: a note
+  // whose prose begins with on hold / conditional / placeholder is out of scope. This is
+  // the historical three-term regex verbatim — note there is NO "proposal" term — so a
+  // legacy no-bucket project's headline is byte-for-byte what it was before the completion
+  // model existed (a note like "proposal: ..." was in scope pre-model and stays in scope).
+  // Structured `bucket` data is authoritative and is handled first in isActivePhase; this
+  // fallback only fires for records with no bucket at all.
+  var PRE_MODEL_HELD_PHASE = /^(on hold|conditional|placeholder)/i;
 
   // Curated weight must be a finite positive number; anything else -> 1.
   function normalizeWeight(w) {
@@ -52,7 +56,7 @@
     if (!ph) return false;
     var b = ph.bucket;
     if (typeof b === "string" && b.trim()) return b.trim() === "active";
-    return !HELD_PHASE.test(String(ph.note == null ? "" : ph.note).trim());
+    return !PRE_MODEL_HELD_PHASE.test(String(ph.note == null ? "" : ph.note).trim());
   }
 
   function getActivePhases(p) { return getPhases(p).filter(isActivePhase); }
@@ -126,7 +130,7 @@
 
   return {
     VALID_BUCKETS: VALID_BUCKETS,
-    HELD_PHASE: HELD_PHASE,
+    PRE_MODEL_HELD_PHASE: PRE_MODEL_HELD_PHASE,
     normalizeBucket: normalizeBucket,
     normalizeWeight: normalizeWeight,
     getPhases: getPhases,

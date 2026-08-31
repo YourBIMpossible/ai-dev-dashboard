@@ -74,6 +74,22 @@ test("isActivePhase: explicit bucket wins over a held-looking note", () => {
 test("isActivePhase: explicit bucket:'held' with ordinary note -> excluded", () => {
   assert.strictEqual(M.isActivePhase({ bucket: "held", note: "ACTIVE — shipping" }), false);
 });
+test("PRE_MODEL_HELD_PHASE is exactly the historical three-term regex (no 'proposal')", () => {
+  assert.strictEqual(M.PRE_MODEL_HELD_PHASE.source, "^(on hold|conditional|placeholder)");
+  assert.strictEqual(M.PRE_MODEL_HELD_PHASE.test("proposal: pending owner go"), false);
+  ["on hold — x", "conditional — y", "placeholder — z"].forEach(n =>
+    assert.strictEqual(M.PRE_MODEL_HELD_PHASE.test(n), true));
+});
+test("isActivePhase: legacy no-bucket 'proposal:' note -> active (pre-model semantics)", () => {
+  // A "proposal:"-prefixed note was IN scope before the completion model existed. The
+  // fallback must not silently exclude it, or a no-bucket project's headline would drop.
+  assert.strictEqual(M.isActivePhase({ note: "proposal: draft feature for later" }), true);
+});
+test("isActivePhase: explicit bucket:'proposed' -> excluded (structured data wins)", () => {
+  // The bucket, not the note, drives exclusion once a phase is migrated. A "proposed"
+  // bucket is out of the active headline even with an ordinary note.
+  assert.strictEqual(M.isActivePhase({ bucket: "proposed", note: "ACTIVE — drafting" }), false);
+});
 test("getActivePhases: legacy no-bucket project keeps note-prefix exclusion", () => {
   const legacy = { progress: { phases: [
     { name: "A", pct: 100, note: "SHIPPED" },
@@ -162,7 +178,10 @@ test("real data.js: non-cohort projects yield no baseline", () => {
 });
 test("real data.js: non-bucket projects match pure-legacy note-regex scope (headline-neutral)", () => {
   const D = global.window.DASHBOARD_DATA;
-  const HELD = /^(on hold|conditional|placeholder|proposal)/i;
+  // The EXACT pre-model regex (three terms, NO "proposal"). Using the pre-model literal
+  // here makes this a real pin against the historical headline, not a tautology against
+  // whatever the module currently ships.
+  const HELD = /^(on hold|conditional|placeholder)/i;
   D.projects.filter(p => p.id !== "bimpossible").forEach(p => {
     const ph = (p.progress && p.progress.phases) || [];
     if (!ph.length) return;

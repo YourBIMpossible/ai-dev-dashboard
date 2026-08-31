@@ -243,10 +243,15 @@ def _phase_num_of(name: str) -> str:
 # headline; the rest are tracked in the scope inventory but excluded from the donut.
 VALID_BUCKETS = {"active", "proposed", "held", "conditional", "placeholder"}
 
-# Curated completion-model fields that MUST survive every ledger rebuild. `pct` and
-# `tasks` were always preserved; the rest are the v1 phase-completion-model schema.
-# Without this, the nightly ledger refresh would silently wipe bucket/weight/etc.
-_PRESERVE_OPTIONAL = ("ratifiedAt", "evidenceUpdatedAt", "scoreBasis", "baselineCohorts")
+# Curated PHASE-level completion-model fields that MUST survive every ledger rebuild.
+# `pct` and `tasks` were always preserved; the rest are the v1 phase-completion-model
+# schema. Without this, the nightly ledger refresh would silently wipe bucket/weight/etc.
+# NOTE: project-level registries (baselineCohorts, phaseAliases) are deliberately NOT in
+# this tuple. They live outside `progress`/`waves`, and render() rewrites only those two
+# value-spans (see apply_patch in render()), leaving every other byte — the cohort/alias
+# registries included — byte-identical. This copy loop runs per-phase, so a project-level
+# key could never match a phase record anyway. Do not add project-level fields here.
+_PRESERVE_OPTIONAL = ("ratifiedAt", "evidenceUpdatedAt", "scoreBasis")
 
 
 def _normalize_weight(w):

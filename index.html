@@ -856,17 +856,22 @@ function ageHtml(iso){
 // load, `window.PhaseMetrics` is null (see the <script onerror> above) and the headline
 // falls back to the identical legacy math below rather than blanking the whole board.
 // Only the extra baseline donut + scope inventory require the module.
-const HELD_PHASE=(window.PhaseMetrics&&PhaseMetrics.HELD_PHASE)||/^(on hold|conditional|placeholder|proposal)/i;
+// Exact pre-model note-prefix rule (three terms, NO "proposal"): a legacy no-bucket
+// phase whose note begins on hold/conditional/placeholder is out of scope, matching the
+// headline byte-for-byte from before the completion model. Sourced from PhaseMetrics so
+// there is one canonical definition; the literal is only the fallback when the module is
+// absent, and it must stay identical to PhaseMetrics.PRE_MODEL_HELD_PHASE.
+const PRE_MODEL_HELD_PHASE=(window.PhaseMetrics&&PhaseMetrics.PRE_MODEL_HELD_PHASE)||/^(on hold|conditional|placeholder)/i;
 function isActivePhase(ph){
   if(window.PhaseMetrics)return PhaseMetrics.isActivePhase(ph); // single source of truth when present
   if(!ph)return false;
   const b=ph.bucket;
   if(typeof b==='string'&&b.trim())return b.trim()==='active'; // structured data wins
-  return !HELD_PHASE.test(String(ph.note==null?'':ph.note).trim()); // legacy: pre-bucket phases
+  return !PRE_MODEL_HELD_PHASE.test(String(ph.note==null?'':ph.note).trim()); // legacy: pre-bucket phases
 }
 function activePhases(p){
-  const all=(p&&p.progress&&Array.isArray(p.progress.phases))?p.progress.phases:[];
   if(window.PhaseMetrics)return PhaseMetrics.getActivePhases(p);
+  const all=(p&&p.progress&&Array.isArray(p.progress.phases))?p.progress.phases:[];
   return all.filter(isActivePhase);
 }
 function inScopePhases(p){
@@ -884,39 +889,47 @@ function overallPct(p){
   if(!list.length)return null;
   return Math.round(list.reduce((s,x)=>s+x.pct,0)/list.length);
 }
-// July-baseline pct for a project that declares a frozen cohort (BIMpossible only), else
-// null. Requires PhaseMetrics (alias resolution + dedupe live there); null without it.
-function baselinePct(p){
-  if(!window.PhaseMetrics)return null;
-  if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return null;
-  return PhaseMetrics.getCohortCompletion(p,p.baselineCohorts[0]).pct;
+// Compute every declared baseline cohort's completion ONCE per render. The scope caption,
+// the baseline donut, and the tooltip all read from this single result set, so the number
+// is never computed twice and can never disagree between them. No global cache — the array
+// is recomputed per project render and passed down explicitly. Returns [] without
+// PhaseMetrics (alias resolution + dedupe live there) or when no cohort is declared.
+function cohortResults(p){
+  if(!window.PhaseMetrics)return[];
+  if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return[];
+  return p.baselineCohorts.map(co=>({co:co,r:PhaseMetrics.getCohortCompletion(p,co)}));
 }
-function scopeCaption(p){
+function scopeCaption(p,cohorts){
   if(!p||!p.progress||!p.progress.phases)return'';
   const ins=inScopePhases(p);
   const held=p.progress.phases.length-(ins?ins.length:0);
   if(!held)return'';
-  // BIMpossible headline was reconciled 2026-08-30: the flat average dilutes as young
-  // phases enter scope, so the raw number can move without progress regressing. Carry a
-  // one-line explanation (+ tooltip) so a rise/fall reads as denominator change, not velocity.
-  const bim=p.id==='bimpossible';
-  const label=bim?`active ratified scope · ${held} held/future/proposal excluded`:`active scope · ${held} on-hold/future excluded`;
-  const bp=bim?baselinePct(p):null;
+  // A project that declares a frozen baseline cohort gets the reconciliation note + tooltip:
+  // the flat active average dilutes as young phases enter scope, so the raw number can move
+  // without progress regressing. Cohort presence (not a hardcoded project id) drives this,
+  // so any project that freezes a delivery cohort gets the same treatment.
+  const first=(cohorts&&cohorts.length)?cohorts[0]:null;
+  const hasCohort=!!first;
+  const label=hasCohort?`active ratified scope · ${held} held/future excluded`:`active scope · ${held} on-hold/future excluded`;
+  const bp=(first&&first.r&&first.r.pct!==null)?first.r.pct:null;
+  const coLabel=(first&&first.co&&first.co.label)?esc(first.co.label):'The frozen delivery cohort';
   // Keep every clause a complete, capitalized sentence so the tooltip reads correctly
-  // whether or not a baseline is available (bp is null when PhaseMetrics is absent).
-  const baseTxt=bp!==null?` The original July 2026 delivery cohort now stands at ${bp}% complete (up from ~85% in July).`:'';
-  const tip=bim?` title="Reconciled 2026-08-30 against merged delivery evidence. Denominator = active ratified scope only (on-hold, conditional, placeholder and unratified-proposal phases excluded).${baseTxt} The active headline reads lower only because newer early-stage phases were admitted to scope, not because execution regressed."`:'';
-  const cur=bim?';cursor:help':'';
+  // whether or not a baseline pct is available (bp is null when PhaseMetrics is absent).
+  // Language is neutral and the pct is computed live — no hardcoded historical figure.
+  const baseTxt=bp!==null?` ${coLabel} now stands at ${bp}% complete; its membership is fixed, so later scope additions do not change this measure.`:'';
+  const tip=hasCohort?` title="Denominator = active ratified scope only; held, conditional, placeholder and unratified-proposal phases are excluded.${baseTxt} The active headline can read lower purely because newer early-stage phases were admitted to scope, not because execution regressed."`:'';
+  const cur=hasCohort?';cursor:help':'';
   return`<div${tip} style="font-size:10px;color:var(--dim);text-align:center;margin-top:6px;max-width:130px;line-height:1.3${cur}">${label}</div>`;
 }
 // Baseline donut + scope inventory, rendered only for a project that declares cohorts.
 // No-op without PhaseMetrics — the headline still renders via the legacy path above.
-function cohortMetricsHtml(p){
+// `cohorts` is the per-render result set from cohortResults(p) (computed once, shared with
+// scopeCaption); the scope-inventory chips still come straight from PhaseMetrics.
+function cohortMetricsHtml(p,cohorts){
   if(!window.PhaseMetrics)return'';
-  if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return'';
+  if(!cohorts||!cohorts.length)return'';
   let h='<div style="display:flex;flex-direction:column;gap:14px;align-items:center">';
-  p.baselineCohorts.forEach(co=>{
-    const r=PhaseMetrics.getCohortCompletion(p,co);
+  cohorts.forEach(({co,r})=>{
     if(r.pct===null)return;
     const miss=(r.missing&&r.missing.length)?` <span style="color:var(--amber)" title="cohort ids not found in phases: ${esc(r.missing.join(', '))}">⚠</span>`:'';
     h+=`<div style="display:flex;flex-direction:column;align-items:center">`
@@ -1354,8 +1367,9 @@ function project(p){
   // Hero card
   h+=`<div class="fade"><div class="card${p.status==='active'?(isP?' pglow':' glow'):''} ${isP?'proj-hero-p':'proj-hero'}" style="padding:22px 24px;margin-bottom:14px">`;
   h+=`<div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">`;
-  h+=pct!==null?'<div style="display:flex;flex-direction:column;align-items:center">'+donut(pct,130,p.progress&&p.progress.label||'')+scopeCaption(p)+'</div>':'';
-  h+=cohortMetricsHtml(p); // July baseline + scope inventory (cohort-declaring projects only)
+  const cohorts=cohortResults(p); // computed once; shared by the caption and the donut below
+  h+=pct!==null?'<div style="display:flex;flex-direction:column;align-items:center">'+donut(pct,130,p.progress&&p.progress.label||'')+scopeCaption(p,cohorts)+'</div>':'';
+  h+=cohortMetricsHtml(p,cohorts); // July baseline + scope inventory (cohort-declaring projects only)
   h+=`<div style="flex:1;min-width:260px">`;
   h+=`<div style="font-family:Sora;font-weight:600;font-size:14px;line-height:1.45">${esc(p.phase||'')}</div>`;
   h+=`<div style="font-size:12px;color:var(--muted);margin-top:7px">Last activity: <b>${esc((p.lastActivity&&p.lastActivity.date)||'?')}</b> (${ageHtml(p.lastActivity&&p.lastActivity.date)}) — ${esc((p.lastActivity&&p.lastActivity.summary)||'')}</div>`;

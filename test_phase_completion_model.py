@@ -160,5 +160,51 @@ class ValidatorFailsCleanlyOnBadCohortPct(unittest.TestCase):
         self.assertIn("P0-2", out)          # phase named
 
 
+class ProjectLevelRegistriesSurviveRender(unittest.TestCase):
+    """Regression for the review finding: the project-level baseline-cohort and phase-alias
+    registries are NOT in `_PRESERVE_OPTIONAL` (that tuple is per-phase). They survive the
+    nightly refresh only because render() splices in a rewritten `progress`/`waves` and
+    leaves every other byte — the registries included — untouched. Guard both facts:
+      1. render() is idempotent across two passes (the two-run refresh-drift invariant).
+      2. After a full render, the bimpossible project still carries baselineCohorts +
+         phaseAliases with their exact ids/members.
+    """
+
+    def setUp(self):
+        self.data = Path(sl.DEFAULT_DATA)
+        self.phase_ledger = Path(sl.DEFAULT_PHASE_LEDGER)
+        self.wave_ledger = Path(sl.DEFAULT_WAVE_LEDGER)
+        if not all(p.is_file() for p in (self.data, self.phase_ledger, self.wave_ledger)):
+            self.skipTest("ledger inputs not present in this environment")
+
+    def test_baselineCohorts_is_not_in_preserve_optional(self):
+        # It is project-level; adding it to the per-phase tuple would be dead config.
+        self.assertNotIn("baselineCohorts", sl._PRESERVE_OPTIONAL)
+        self.assertNotIn("phaseAliases", sl._PRESERVE_OPTIONAL)
+
+    def test_two_pass_render_is_idempotent_and_preserves_registries(self):
+        _, spliced1, _ = sl.render(self.data, self.phase_ledger, self.wave_ledger)
+
+        with tempfile.TemporaryDirectory() as d:
+            data2 = Path(d) / "data.js"
+            data2.write_text(spliced1, encoding="utf-8")
+
+            # (1) idempotence: rendering the rendered output changes nothing.
+            _, spliced2, _ = sl.render(data2, self.phase_ledger, self.wave_ledger)
+            self.assertEqual(spliced1, spliced2, "render() is not a fixed point (drift)")
+
+            # (2) the project-level registries survive the rebuild intact.
+            parsed = sl.load_current(data2)
+            bim = next(p for p in parsed["projects"] if p["id"] == "bimpossible")
+
+            cohorts = bim.get("baselineCohorts")
+            self.assertTrue(cohorts, "baselineCohorts wiped by refresh")
+            july = next((c for c in cohorts if c.get("id") == "july-2026"), None)
+            self.assertIsNotNone(july, "july-2026 cohort lost")
+            self.assertEqual(july["phaseIds"],
+                             ["P0-2", "P3", "P4", "P6", "P8", "P11", "P11.1"])
+            self.assertEqual(bim.get("phaseAliases"), {"P11.1": "P11"})
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

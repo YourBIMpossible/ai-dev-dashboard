@@ -232,7 +232,7 @@ Progress rules: phases are *plan phases*, with an honest percent each.
 ## Phase Completion Model v1
 
 Before this model, "in scope" was inferred at render time from a phase's note prefix
-(`/^(on hold|conditional|placeholder|proposal)/i`). That was fragile — a reworded note
+(`/^(on hold|conditional|placeholder)/i`). That was fragile — a reworded note
 silently moved a phase in or out of the headline. v1 replaces inference with three explicit,
 refresh-safe fields per phase (`id`, `bucket`, `weight`) plus an optional project-level
 baseline registry. The renderer math lives in [`phase_metrics.js`](phase_metrics.js) and is
@@ -300,11 +300,13 @@ a fixed cohort with a moving score, not a hardcoded number:
 ### Sync preservation guarantee
 
 `sync_ledgers.py build_progress()` rebuilds `progress.phases` from the ledger on every refresh.
-It **preserves** the curated model fields by joining old→new on phase `id` first (then phase
-number as a fallback): `id`, `bucket`, `weight`, and any optional metadata
-(`ratifiedAt`, `evidenceUpdatedAt`, `scoreBasis`, `baselineCohorts`) carry through. Project-level
-`baselineCohorts` / `phaseAliases` live outside the `progress`/`waves` value-spans the splice
-rewrites, so they are never touched by a sync. The refresh-drift gate (run twice; output must be
+It **preserves** the curated *phase-level* model fields by joining old→new on phase `id` first
+(then phase number as a fallback): `id`, `bucket`, `weight`, and any optional per-phase metadata
+(`ratifiedAt`, `evidenceUpdatedAt`, `scoreBasis`) carry through (this is the `_PRESERVE_OPTIONAL`
+tuple, applied per phase). The project-level registries `baselineCohorts` / `phaseAliases` are
+**not** in that tuple and are **not** protected by it — they live outside the `progress`/`waves`
+value-spans the splice rewrites, so the splice leaves them byte-identical and a sync never touches
+them. The refresh-drift gate (run twice; output must be
 byte-identical and `node --check` clean) proves a refresh does not perturb the model.
 
 ### Validation
