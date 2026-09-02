@@ -219,12 +219,12 @@ test("real data.js via renderer: bimpossible = 63% active / 92% computed baselin
 // by kind; blockers/decisions are ripe unless their text is parked; unknown
 // wording fails safe to ripe; every eligible item lands in exactly one bucket.
 // ============================================================================
-const CHECKIN_CONSTS = ["DESK_PARK", "DESK_WAIT", "DESK_DONE"]
+const CHECKIN_CONSTS = ["DESK_PARK", "DESK_WAIT", "DESK_DONE", "DESK_ASK", "EV_TIP"]
   .map(n => extractConstLine(HTML, n)).join("\n");
-const CHECKIN_FNS = ["deskRipe", "tvPartition", "tvHumanize", "tvDesk", "flagshipMetric"]
+const CHECKIN_FNS = ["deskRipe", "tvPartition", "tvHumanize", "tvDesk", "cohortHeadlinePct",
+  "flagshipMetric", "revealBlock", "todayView"]
   .map(n => extractFn(HTML, n)).join("\n");
 const D_ALIAS = extractConstLine(HTML, "D");
-const TODAYVIEW_SRC = extractFn(HTML, "todayView");
 
 // One bundle, one runInContext call, so tvPartition/deskRipe/tvDesk close over
 // the DESK_* consts and the D alias (top-level `const` in vm is script-scoped,
@@ -280,14 +280,35 @@ test("triage 12: open owner choice 'merge or close' is NOT mistaken for done -> 
   assert.ok(isRipe("decision", "PR #1 (scoring self-heal): merge to main or close - open 4 weeks"));
   assert.ok(isRipe("decision", "worktree-harness has sat unmerged for 7 weeks -- ship it or delete it?"));
 });
+test("triage 12c: a terminal 'completed.' clause does NOT park an item still carrying an owner ask", () => {
+  // DESK_DONE matches 'completed.' as a substring; the owner-ask override must keep it ripe.
+  assert.ok(isRipe("decision", "Scoring self-heal completed. Owner: keep the fallback path or remove it?"));
+  assert.ok(isRipe("decision", "P9 already merged; owner still needs to decide whether to backport it"));
+});
+test("triage 12d: soft-demand park cues do NOT hide an open owner kill/keep choice", () => {
+  // DESK_PARK matches 'no demand' / 'blocks nothing' as substrings; an open choice stays ripe.
+  assert.ok(isRipe("decision", "Feature X sees no demand yet - owner, kill it or keep it?"));
+  assert.ok(isRipe("decision", "The shim blocks nothing, but you must choose: keep it or drop it before P12"));
+});
 
 // -- partition invariants on the REAL desk --
 const realDesk = CE.tvDesk();
 const realPart = CE.tvPartition(realDesk);
-test("triage 13: real desk splits 10 Needs-you / 37 Parked / 47 total", () => {
-  assert.strictEqual(realDesk.length, 47, "desk item count drifted; update expected if data.js legitimately changed");
-  assert.strictEqual(realPart.ripe.length, 10, "ripe count");
-  assert.strictEqual(realPart.parked.length, 37, "parked count");
+test("triage 13: real desk partitions by the contract (invariants, not hardcoded counts)", () => {
+  // Assert the RULES the split must obey, not the day's exact totals — coupling a release-gate
+  // test to daily-changing data.js content made it fail on unrelated content edits. Every ripe
+  // item is a blocker/decision that deskRipe() accepts; every parked item is either the wrong kind
+  // or deskRipe-rejected; and the two buckets reconcile to the whole desk with none dropped.
+  assert.ok(realDesk.length > 0, "the real desk should be non-empty");
+  realPart.ripe.forEach(d => {
+    assert.ok(d.kind === "blocker" || d.kind === "decision", "ripe kind must be eligible: " + d.text);
+    assert.ok(CE.deskRipe(d), "a ripe item must satisfy deskRipe(): " + d.text);
+  });
+  realPart.parked.forEach(d => {
+    const eligible = d.kind === "blocker" || d.kind === "decision";
+    assert.ok(!eligible || !CE.deskRipe(d), "a parked item must be ineligible or deskRipe-rejected: " + d.text);
+  });
+  assert.strictEqual(realPart.ripe.length + realPart.parked.length, realDesk.length, "buckets must total the desk");
 });
 test("triage 14: reconciliation — ripe + parked accounts for every item, no loss", () => {
   assert.strictEqual(realPart.ripe.length + realPart.parked.length, realDesk.length);
@@ -315,18 +336,57 @@ test("empty state: an all-parked desk yields zero ripe (band goes empty)", () =>
   assert.strictEqual(allParked.ripe.length, 0);
   assert.strictEqual(allParked.parked.length, 3);
 });
-test("empty state: todayView renders the exact clear-desk copy when ripe is empty", () => {
-  assert.ok(/Nothing needs a decision today\./.test(TODAYVIEW_SRC),
-    "empty-state headline copy missing from todayView");
+// -- todayView() rendered behaviourally: todayView + revealBlock ride in the same bundle as
+// the classifier (so they close over const D / EV_TIP); the non-triage deps are stubbed and
+// tvDesk is overridden per render to control the split. These assert on the RENDERED HTML —
+// the actual header count, empty-state block, and disclosure wiring — not on index.html source
+// text (which passed even when the runtime behaviour it purported to cover had drifted). --
+Object.assign(CE, {
+  tvFeed: () => [], auditSummary: () => null, daysAgo: () => 0, FRESH: { live: 3 },
+  dayLabel: x => String(x), isoDate: () => "2026-09-02", relDay: () => "",
+  spark: () => "", ICO: { check: "", shield: "", refresh: "" },
+  TODAY: new Date("2026-09-02T00:00:00Z"), _sinceDate: null, _rvSeq: 0,
 });
-test("header count reflects only ripe items (parked never inflate it)", () => {
-  assert.ok(/Needs you <span class="ct">· \$\{ripe\.length\|\|'clear'\}/.test(TODAYVIEW_SRC),
-    "header must count ripe.length, not the whole desk");
+function renderToday(desk) { CE.tvDesk = () => desk; return CE.todayView(); }
+
+// finding 3: isolate these render tests from live data.js. todayView also renders the Movement and
+// "since your last check-in" bands over D.projects — but the injected desk is the only thing under
+// test here, so pin D.projects to an empty set for the duration (the other bands render empty and
+// depend on nothing that data.js edits can move) and restore the real projects before the flagship
+// tests below, which legitimately assert on the real computed headline.
+const _realProjects = CE.window.DASHBOARD_DATA.projects;
+CE.window.DASHBOARD_DATA.projects = [];
+
+test("empty state: todayView renders the clear-desk block + 'clear' header when nothing is ripe", () => {
+  const html = renderToday([
+    { kind: "reminder", text: "weekly backup check", pid: "a", pname: "A" },       // parked by kind
+    { kind: "blocker", text: "awaiting CI to go green", pid: "b", pname: "B" },     // parked (waiting on CI)
+    { kind: "decision", text: "gated on the P11 spike; blocks nothing", pid: "c", pname: "C" }, // parked
+  ]);
+  assert.ok(/Nothing needs a decision today\./.test(html), "clear-desk copy must render when ripe is empty");
+  assert.ok(/class="tv-clear"/.test(html), "the ripe list is replaced by the clear-desk block");
+  assert.ok(/Needs you <span class="ct">· clear<\/span>/.test(html), "header must read 'clear', not a count");
 });
-test("parked items fold into a recoverable disclosure, are never discarded", () => {
-  assert.ok(/revealBlock\([^]*tv-parked[^]*parked\.length[^]*'parked item'\)/.test(TODAYVIEW_SRC),
-    "parked list must be wrapped in a revealBlock disclosure, not dropped");
+test("header count reflects only ripe items, never the parked ones (rendered)", () => {
+  const html = renderToday([
+    { kind: "decision", text: "Xyzzy frobnicate the wibble grommet", pid: "a", pname: "A" }, // unknown -> ripe
+    { kind: "decision", text: "needs owner approval", pid: "b", pname: "B" },                 // ripe
+    { kind: "blocker", text: "awaiting CI to go green", pid: "c", pname: "C" },               // parked
+    { kind: "reminder", text: "weekly backup", pid: "d", pname: "D" },                        // parked by kind
+  ]);
+  assert.ok(/Needs you <span class="ct">· 2<\/span>/.test(html), "header must count the 2 ripe, not all 4");
+  assert.ok(/Show 2 more parked items/.test(html), "the 2 parked fold into the disclosure, counted separately");
 });
+test("parked items fold into a recoverable disclosure (hidden + expandable), never dropped", () => {
+  const html = renderToday([
+    { kind: "decision", text: "needs owner approval", pid: "a", pname: "A" },                 // ripe
+    { kind: "blocker", text: "awaiting upstream release note-XYZ", pid: "b", pname: "B" },    // parked
+  ]);
+  assert.ok(/aria-expanded="false"/.test(html), "disclosure starts collapsed");
+  assert.ok(/<div id="rv\d+" hidden><div class="tv-desk tv-parked">/.test(html), "parked list sits in a hidden, recoverable container");
+  assert.ok(/note-XYZ/.test(html), "the parked item text is retained in the DOM, not discarded");
+});
+CE.window.DASHBOARD_DATA.projects = _realProjects; // restore live data for the computed-headline tests
 
 // -- ref humanising: PR/issue citations rendered secondary, not deleted --
 test("tvHumanize keeps #-refs but wraps them in the dimmed .tv-ref span", () => {
@@ -334,6 +394,14 @@ test("tvHumanize keeps #-refs but wraps them in the dimmed .tv-ref span", () => 
   assert.ok(/#115/.test(out) && /#12\/#13/.test(out), "refs must survive, not be stripped");
   assert.ok(/<span class="tv-ref">#115<\/span>/.test(out), "ref must be wrapped for dimming");
   assert.ok(!/<script/i.test(out), "must stay escaped");
+  // finding 7: a fully-parenthesised citation dims as one unit; a stray ')' after a lone ref
+  // must stay OUTSIDE the dim span (the old unbalanced /\(?...\)?/ pulled the stray paren in).
+  const bal = CE.tvHumanize("see (#12/#13) for context");
+  assert.ok(/<span class="tv-ref">\(#12\/#13\)<\/span>/.test(bal), "balanced (#12/#13) dims as one unit");
+  const stray = CE.tvHumanize("done #115) later");
+  assert.ok(/<span class="tv-ref">#115<\/span>\) later/.test(stray), "a stray ')' after a lone ref stays outside the dim span");
+  const lead = CE.tvHumanize("(#12 done");
+  assert.ok(/\(<span class="tv-ref">#12<\/span> done/.test(lead), "a stray leading '(' (no closing paren) stays outside the dim span");
 });
 
 // -- Part D: the flagship headline numbers are COMPUTED, never hardcoded --
