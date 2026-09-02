@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-09-01T06:11:12.261493Z",
- "count": 377,
+ "generated_at": "2026-09-02T06:15:02.141214Z",
+ "count": 379,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"1d871447f6b78606e90340340370be80-gzip\"",
+   "etag": "\"410c2ffb35f6eafed980318cca369dfe-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Mon, 31 Aug 2026 18:45:57 GMT",
+   "last_modified": "Tue, 01 Sep 2026 14:29:27 GMT",
    "last_status": 200,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": true,
-   "stale_reason": "no new items in 27 days (expects ~7)"
+   "stale_reason": "no new items in 28 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,17 +19,17 @@
    "last_item_published": "2026-08-21T08:12:58Z",
    "last_modified": "Fri, 21 Aug 2026 08:12:58 GMT",
    "last_status": 304,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": true,
-   "stale_reason": "no new items in 10 days (expects ~3)"
+   "stale_reason": "no new items in 11 days (expects ~3)"
   },
   "aps-blog": {
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-08-26T20:10:30Z",
+   "last_item_published": "2026-09-01T14:44:49Z",
    "last_status": 200,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,60 +41,60 @@
    "last_item_published": "2026-08-25T14:15:28Z",
    "last_modified": "Mon, 31 Aug 2026 12:01:42 GMT",
    "last_status": 200,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"da6e0865d494afabe5ac22dde3fb1610\"",
+   "etag": "W/\"b15a85455108bd3881b9c257ec46be2e\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 31 Aug 2026 15:29:00 GMT",
+   "last_modified": "Wed, 02 Sep 2026 04:04:58 GMT",
    "last_status": 200,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
    "etag": "W/\"0c81868f5b524c1482d684f266e55d17\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-31T16:58:32Z",
-   "last_status": 200,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_status": 304,
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-01T01:11:00Z",
-   "last_modified": "Tue, 1 Sep 2026 02:22:43 GMT",
+   "last_item_published": "2026-09-02T00:32:00Z",
+   "last_modified": "Wed, 2 Sep 2026 02:34:43 GMT",
    "last_status": 200,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 46,
+   "consecutive_failures": 47,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-01T06:11:12.261493Z",
+   "last_failure": "2026-09-02T06:15:02.141214Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "46 consecutive failures: HTTP 403"
+   "stale_reason": "47 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
    "etag": "W/\"444ce5d64f650c6cb161ee9b82c49367\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-08-31T10:00:00Z",
-   "last_status": 200,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_status": 304,
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"bd769cd22ad6b7d00678944b2c5097b2\"",
+   "etag": "W/\"8baefe794499b2e04e6ae790ce708bbd\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,52 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-01T06:11:12.261493Z",
+   "last_success": "2026-09-02T06:15:02.141214Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Tagitize: Tag All Across Multiple Views Without Overlaps, Plus Much More",
+   "url": "http://revitaddons.blogspot.com/2026/09/tagitize-tag-all-across-views-without.html",
+   "source": "revit-addons",
+   "published": "2026-09-02T00:32:00Z",
+   "summary": "Summary Tagitize is an Autodesk Revit add-in designed to automate tagging and simplify dimensioning workflows in Revit documentation. Its main purpose is to reduce the manual effort required to place, adjust, audit, and maintain tags across views and sheets, while improving drawing clarity, consistency, and documentation quality. Primary Purpose The add-in acts as a more capable alternative to Revit’s native Tag All command. While Tag All is limited to the active view and often requires substantial cleanup, Tagitize extends tagging automation to multiple views and sheets, applies user-defined tagging styles, reduces overlapping tags, and supports conditional tagging based on project-specific rules. Key Tagging Capabilities Batch tagging across views and sheets: Tagitize can apply tags to several Revit views or sheets at once, reducing the repetitive work of tagging each view individually. Overlap reduction: The add-in is designed to place tags in cleaner positions so that tags do not overlap each other or obscure the documentation. Custom tagging styles: Users can configure tagging preferences, including leader behavior, tag positioning, and style settings, then reuse those…",
+   "id": "35e173a199564b80",
+   "fetched_at": "2026-09-02T06:15:02.141214Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A tagging automation add-in; useful to know exists but no API, technique, or architecture detail to learn from.",
+    "topics": [
+     "revit-addins",
+     "annotation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-02T06:15:02.141214Z"
+   }
+  },
+  {
+   "title": "BuildingConnected API Enhancements: Bid Leveling, Other Costs, and Workflow Improvements",
+   "url": "https://aps.autodesk.com/blog/buildingconnected-api-enhancements-bid-leveling-other-costs-and-workflow-improvements",
+   "source": "aps-blog",
+   "published": "2026-09-01T14:44:49Z",
+   "summary": "BuildingConnected API Enhancements: Bid Leveling, Other Costs, and Workflow Improvements naveen.kumar.t… 1 Sep 2026 Naveen Kumar Thalaivirichan Xiaodong Liang Share We're excited to announce the second-round enhancements to BuildingConnected API has been released which covers quite a few areas: bid leveling (plugs, highlights, and notes), custom other-cost tracking, expanded ACC-linked-project visibility for bid forms, multi-value filtering across bid package resources, and a simplified way to clear a project's linked ACC Docs folder. All changes are backward compatible, so existing integrations continue to work without any required code changes. The full list of updates is available in the BuildingConnected v2 changelog . This blog highlights selected key updates Bid Leveling The Plugs, highlights, and notes work together to help teams normalize and compare bids line by line. Plugs adjust the value, quantity, or unit cost of a line item for apples-to-apples comparison; highlights flag a line item with a color; and notes attach commentary. All of the sections in Bid Leveling has to be a manual work in UI, This release delivers significant enhancements to features within the Bid…",
+   "id": "b010e3cf289553dd",
+   "fetched_at": "2026-09-02T06:15:02.141214Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "BuildingConnected API updates; not your domain (procurement/bidding), but good to track Autodesk Platform Services expansion.",
+    "topics": [
+     "aps-api",
+     "platform-services"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-02T06:15:02.141214Z"
+   }
+  },
   {
    "title": "Product Roundup: W7k",
    "url": "http://revitaddons.blogspot.com/2026/08/product-roundup-w7k.html",
