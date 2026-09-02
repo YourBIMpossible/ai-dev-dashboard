@@ -16,8 +16,8 @@ window.DASHBOARD_DATA = {
       icon: "layers",
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
-      phase: "main synced with origin (tip ~#505; HEAD 9682546b, #503). The 56-finding cross-repo audit estate is CLOSED (56->0, 2026-08-26) -- no open Critical or live-exploitable High. Active fronts since: Phase 17 -- App Integrations moved from planned to first code, with the Integration Control Plane foundation landed (#500) and its registry status values constrained (#503, P17-0.1); Slack/Teams (17a/17b) remain built-dark, flags off. Phase 15d shipped its first local Revit write slice -- before/after approval, typed result, revert (#495) -- then unblocked writes past row 500 and on unset parameters (#498); these are the product's first AI-assisted local Revit writes through the pane, supervised and gated. Phase 3.8 slice-2 reader gating landed (#499, owner-only is_draft reads), closing the enforcement gap the 08-27 closeout ledger flagged. Also live: P6 Client-Mgmt F (multi-firm tenancy, verified by a 2026-08-30 synthetic two-firm smoke), the firm-alias backend, RESOLVE-BIND-1 durable model_guid->project binding (#496), and a run of PDP performance hardening (#502/#504/#505).",
-      focus: "Audit estate CLOSED (56->0, 2026-08-26) and the 2026-08-31 weekly full audit is fully closed out (1 High / 6 Medium / 10 Low -> 0 open, 17 closures across #514/#518/#522/#523 + AddIns #116, final delivery 2026-09-01); no Critical or live-exploitable High anywhere. Current active development is Phase 17.0 (Integration Control Plane foundation, #500/#503) and Phase 15d's first supervised local Revit writes through the pane (#495: before/after approval + revert; #498: writes past row 500 / unset params). P6 Client-Mgmt F went live on a 2026-08-30 two-firm smoke; P3.8 slice-2 owner-only draft reads shipped (#499). Remaining forward work is largely owner-gated -- see nextActions.",
+      phase: "main synced with origin (tip #548 8cad22b5, 2026-09-02; local checkout one commit behind at 2cc7bdf8). Audit estate stays closed: the 2026-08-31 weekly full audit was driven to 0 open (17 closures across #514/#518/#522/#523 + AddIns #116, final delivery 2026-09-01). 2026-09-01/02 was the busiest merge window yet (#509-#548, ~40 PRs in two days). New fronts: Phase 4 model routing -- 1A registry/resolver/request builder (#537) + per-kind model defaults (#542) LIVE, 1B usage ledger (#548, migration 3aa734cda334) merged but not yet deployed; Phase 15c pane context -- typed injection-safe Revit context (#517), live-read contracts + broker + tool/response endpoint (#519/#521, inert, flag-off), AUTH-INH ENFORCE keystone + 15c T5 under the shared enforced path (#530); CKA (Phase 18) firm-docs document model on AUTH-INH (#534) + Documents placement/management UI (#540), with the live smoke surfacing and fixing two prod defects (#515 proxy rewrite, #516 volume chown, #520 atomic upload); Phase 13 Write Engine Increment 2 per-type Apply attribution fix (#544, live smoke still owner-gated); Phase 3.6 spatial engine row marked LIVE 2026-09-02. Big CI runtime-reduction push (#531-#543: xdist pilot, vitest 2 workers, semgrep to weekly lane, local semgrep BIM-rules gate #538). Still live from 08-30: Phase 17.0 control plane (#500/#503), P15d supervised local writes (#495/#498), P6 Client-Mgmt F, RESOLVE-BIND-1 (#496), P3.8 slice-2 (#499).",
+      focus: "Audit estate closed (2026-08-31 weekly: 1 High / 6 Medium / 10 Low -> 0 open, final delivery 2026-09-01); no Critical or live-exploitable High anywhere. Active development has fanned out across three assistant-adjacent fronts in the 09-01/02 window: Phase 4 model routing (1A + per-kind defaults LIVE; 1B usage ledger #548 merged, deploy pending), Phase 15c Revit-pane context + live-read broker (#517/#519/#521 inert flag-off, keystone test #530), and CKA firm-docs document model + Documents UI (#534/#540). Phase 13 Write Engine Increment 2 got its per-type attribution fix (#544) and now awaits the owner-gated live smoke. Phase 17.0 control plane (#500/#503) and P15d supervised local writes (#495/#498) unchanged since 08-30. Parallel CI runtime-reduction campaign closed out (#536).",
       progress: {
         label: "Program phases",
         phases: [
@@ -298,8 +298,23 @@ window.DASHBOARD_DATA = {
       git: {
         warn: "Many merged feature branches still on origin (audit/*, refactor/data-tab-*, wip/phase5-*); prune retired remotes. Local fix/perp-audit-* may also be stale (content merged via PR)."
       },
-      nextActions: ["Phase 15d: continue AI-assisted local-write slices past the first (#495/#498), each under the supervised before->approve->apply gate; APS/cloud writes stay hard-gated on explicit owner approval","AUTHZ-AUDIT-ROW-SIGNING (owner-gated): owner picks the signing scheme (server-held key, sign at record time), then build tamper-evident authz audit rows to match the syncAuth attestation leg","P13 Write Engine: build Increment 2 (type-param targeting, String-only) -- entry-gate cleared but unbuilt -- then Increment 3","P14-14g (owner-gated): owner reconciles the proposal §6 staged table + ratifies, then wire data-residency + redaction policy flags","P6 Client-Mgmt E: build self-serve client onboarding (provision a never-seen firm without a hand-seeded DB row)"],
-      pendingDecisions: ["Schedule-push: staleness cadence, classifier rules, fidelity-degradation list, SPF ship location -- still direction-only, no code. The write-spine role SPF anticipated is now filled by the Phase 13 Write Engine; re-scope SPF against it before building.","Ceilings/Flooring dedicated shapers (Wave 16 placeholders) vs. Wave 15 Civil shapers (also pending) -- build now or batch them? Neither built; no demand signal forcing it. Furniture shaper already shipped.","D-5 (AKP): provider routing for local LLM inference -- gated on C-2 (provider runtime abstraction), which is not built (only 'anthropic' is runtime_supported). Cannot be decided until C-2 lands.","D-8 (AKP): where the audit hash-chain tip anchors outside the DB -- dormant until a B-6 STEP-0 trigger fires (2nd DB-writer, or a client/contract/insurer record on file). None has: single-operator deployment.","Phase 15 has no PhaseDefinition / ratification doc -- unlike Phase 13 (ACTIVE 2026-07-16) and Phase 14 (ACTIVE 2026-08-17), it entered build with no proposal; the PHASE-STATUS row carries its own flag. Owner still owes the definition doc."],
+      nextActions: [
+        "Phase 4 model routing 1B: deploy #548 (migration 3aa734cda334) and confirm usage_events / model_denial_events rows populate in prod",
+        "P13 Write Engine Increment 2: owner-gated live smoke of type-param targeting now that the #544 attribution fix is merged; then Increment 3",
+        "Phase 15c: flip the live-read broker on (#519/#521 flag-off) once 15c T5 passes under the AUTH-INH enforced path (#530); 15d continues supervised local-write slices past #495/#498",
+        "CKA firm-docs: follow-on after #534/#540 (reclassify flow, multi-project placement) -- prod smoke found and fixed #515/#516/#520; verify no stranded upload rows remain",
+        "AUTHZ-AUDIT-ROW-SIGNING (owner-gated): owner picks the signing scheme, then build tamper-evident authz audit rows to match the syncAuth attestation leg",
+        "P14-14g (owner-gated): owner reconciles the proposal §6 staged table + ratifies, then wire data-residency + redaction policy flags",
+        "P6 Client-Mgmt E: build self-serve client onboarding (provision a never-seen firm without a hand-seeded DB row)"
+      ],
+      pendingDecisions: [
+        "Schedule-push: staleness cadence, classifier rules, fidelity-degradation list, SPF ship location -- still direction-only, no code. The write-spine role SPF anticipated is now filled by the Phase 13 Write Engine; re-scope SPF against it before building.",
+        "Ceilings/Flooring dedicated shapers (Wave 16 placeholders) vs. Wave 15 Civil shapers (also pending) -- build now or batch them? Neither built; no demand signal forcing it. Furniture shaper already shipped.",
+        "D-5 (AKP): provider routing for local LLM inference -- gated on C-2 (provider runtime abstraction). Model routing 1A (#537) now gives a compiled registry + resolver, but only 'anthropic' is runtime_supported; re-check whether C-2 is now partially satisfied before deciding.",
+        "D-8 (AKP): where the audit hash-chain tip anchors outside the DB -- dormant until a B-6 STEP-0 trigger fires (2nd DB-writer, or a client/contract/insurer record on file). None has: single-operator deployment.",
+        "Phase 15 has no PhaseDefinition / ratification doc -- unlike Phase 13 (ACTIVE 2026-07-16) and Phase 14 (ACTIVE 2026-08-17), it entered build with no proposal; the PHASE-STATUS row carries its own flag. Owner still owes the definition doc.",
+        "P13 Write Engine open owner decisions #1 (staged-unit veto guard) and #3 (BuildSummary bucket-exhaustiveness) were meant to be decided before/with Increment 2 -- Increment 2 is now built + deployed (#273/#544); decide before the live smoke."
+      ],
       blockers: [],
       reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item."],
       links: [
@@ -310,7 +325,15 @@ window.DASHBOARD_DATA = {
         { label: "Build log", path: "F:\\BIMpossible-Workspace\\01_BuildLog" },
         { label: "Code", path: "F:\\BIMpossible" }
       ],
-      recent: ["2026-08-30 - Phase 17 integration control-plane foundation landed: a governed registry for third-party app integrations with constrained status values (#500, #503)","2026-08-30 - Phase 15d first local Revit write slice: before/after approval, typed result, revert; writes unblocked past row 500 and on unset parameters (#495, #498)","2026-08-30 - Durable model_guid->project binding for /model/resolve; owner-only gating of draft-membership reads (#496, #499)","2026-08-25 - Phase 7 Revit Link supervised sync cutover PASSED and went live (flag ON) - remote sync_with_central is now the live write engine","2026-08-25 - Phase 7 relay hardening: session lifecycle (versioned health, DPAPI secret file, parent-PID watch) + typed relay errors (#486, #487)","2026-08-24 - Model History & QA Regression Intelligence foundation (P11 AC7): universal history capture, tombstone purge, honest history UI states (#476, #478)","2026-08-24 - Search integrity: tombstone reconcile demotes stale/deleted/renamed APS lineages so /search/models stops surfacing gone models (#466, #474)","2026-08-22 - Multi-tenant hardening + cross-firm read-only sharing (Client-Mgmt F, flag OFF): existence-oracle closed, inactive-firm bootstrap blocked, PDP G1 proxy staged (#447-#456)"],
+      recent: [
+        "2026-09-02 - Phase 4 model routing: 1A registry/resolver/request builder + per-kind model defaults LIVE; 1B usage ledger merged, deploy pending (#537, #542, #548)",
+        "2026-09-02 - CKA firm-docs document model on AUTH-INH + Documents placement/management UI; prod smoke fixes for proxy rewrite, volume chown, atomic upload (#534, #540, #515/#516/#520)",
+        "2026-09-02 - Phase 15c: typed injection-safe Revit pane context, live-read contracts/broker/endpoint (inert, flag-off), AUTH-INH ENFORCE keystone + T5 test (#517, #519, #521, #530)",
+        "2026-09-02 - Write Engine Increment 2: Apply outcomes attributed per family type + router tests for type targets (#544); CI runtime-reduction campaign closed out (#531-#543)",
+        "2026-09-01 - 2026-08-31 weekly audit closed out 17->0 open: SEC-1, ARCH-1, CQ-1, SEC-CI-LOCAL-1, FE-2/3 etc. fixed with proving tests (#514, #518, #522, #523)",
+        "2026-08-30 - Phase 17 integration control-plane foundation landed: a governed registry for third-party app integrations with constrained status values (#500, #503)",
+        "2026-08-30 - Phase 15d first local Revit write slice: before/after approval, typed result, revert; writes unblocked past row 500 and on unset parameters (#495, #498)"
+      ],
       audit: {
         lastRun: "2026-08-31",
         runType: "Weekly full audit 2026-08-31 (evening re-run, all seven lenses + slop fold + breach-chain overlay across BIMpossible, Workspace and AddIns) -- 0 Critical / 1 High / 6 Medium / 10 Low / 16+ Info as originally rated, then driven to a terminal state by the same-evening closeout and the 2026-09-01 final delivery run. Fixed with code + proving tests: RE-01 (High, mis-pick capture no longer claims success on a swallowed log write -- ship-gate A4 counter integrity; AddIns #116), RE-02/RE-04/CQ-03/CQ-05 (AddIns #116), SEC-1 (all 5 membership mutation branches now audited with a server-sourced actor; #514 + #522), ARCH-1 (#518), SEC-CI-LOCAL-1 + SLOP-LOW-1 (push hook fails closed; #522), CQ-1 (live-write confirm seam pinned; #522/#523), FE-2/FE-3/CQ-DOC-1/ARCH-CI-1 (#522, AddIns #116), SLOP-LOW-2 (Workspace c71aa12). Already fixed before the run, label corrected: RE-1/CQ-4 (#514). Accepted, no change: RE-2 (relay close-time swallow). Reconciled as a stale carry-forward: WSR17/SEC-WIZ-HUB-1 (firm-scoped hub check shipped in #397; breach-chain CHAIN-1 retired). Breach-chain overlay: 0/0/0/1 Low (CHAIN-2 unsigned add-in delivery; production code-signing ON HOLD by owner decision, not an open blocker). 0 open.",
@@ -587,8 +610,8 @@ window.DASHBOARD_DATA = {
       icon: "wrench",
       oneLiner: "Revit ribbon add-ins - BIMpossible.RevitLink (default-shipped: Family Fixer + pairing/relay + sheet/callout/Key-Plan tools); the 6 discipline QA add-ins are built but parked (RevitLink ships alone by default).",
       status: "active",
-      phase: "origin/main at 60ebeb1 (#111); the local F:\\BIMpossible-AddIns checkout is 9 commits behind origin (dashboard reads origin). ARCH-BIMP-PARAMSET landed (#111) -- BIMP_IsDeliverable v1 parameter setup + diagnostics. Key Plan (Tool 20) shipped its composite resolver + dry-run preview + freeze fix (#110); its live write is owner-gated (flags A-C, then a first supervised write). M-30 -- the last held audit finding across the whole estate -- closed for real (#107) with genuine live-Revit Place Callout Sheets captures, and the remaining AddIns audit residuals closed alongside (#106: HYG-12 CI subsystem, M-33, L-21, CQ-TEST-PAIR-1, ...). Relay hardening advanced: add-in-owned relay session lifecycle (#105, P7-RELAY-SESSION-LIFECYCLE) and file-backed DPAPI JTI replay persistence (#104). Build-output hygiene: _cc_build_check snapshot untracked + policy doc (#108). Last scored /audit remains the 07-14 baseline (its findings now fully closed via the cross-repo estate); the 08-22 Link-PDF phase-0 review is narrative-only and un-scored -- see the audit card.",
-      focus: "ARCH-BIMP-PARAMSET (#111) and Key Plan Tool 20 (#110) are the freshest landings; Key Plan's live write is owner-gated -- flags A-C then a first supervised write (ADDINS-KEYPLAN-LIVE-WRITE). Audit estate fully closed (M-30 retired via genuine live-Revit captures #107; residuals #106). Still owed live: Family Fixer's ribbon click-through + go_single_panel (its one destructive op, never run live), and the first-use DPAPI pre-warm to kill cold-start attestation latency (ADDINS-DPAPI-PREWARM). Note: the local main checkout is 9 behind origin/main (#111).",
+      phase: "origin/main at 9f6f3c4 (#117); the local F:\\BIMpossible-AddIns checkout (e0f23bb, 08-24) is 12 commits behind origin (dashboard reads origin). Since #111: #113 P15-15B firm-document source citations in the Assistant Pane; #116 closed seven 2026-08-31 weekly-audit findings in real code (RE-01 High, RE-02 Medium, CHAIN-2 Medium, CQ-03/CQ-05/RE-04/ARCH-CI-1 Low) incl. the recovered signing-hardening files from the closed #112 lane; #117 PipeServer pipe-busy exponential backoff (fixes a 27,000 s CPU runaway with two Revit processes) + pairing-confirmation null-owner crash. ARCH-BIMP-PARAMSET landed (#111). Key Plan (Tool 20) shipped composite resolver + dry-run preview + freeze fix (#110); the full rebuild (sector-mapping dialog + hardened live Apply) is OPEN as PR #115 -- live ACCC Apply remains a separate owner-run step. Audit estate: the 07-14 baseline findings fully closed (M-30 via #107, residuals #106); the 08-31 weekly audit (Workspace-hosted, cross-repo) found RE-01 High + RE-02 Medium in AddIns, all closed by #116 except RE-2(relay) Low accepted-as-designed. No AddIns-local scored /audit since 07-12.",
+      focus: "#116/#117 are the freshest landings: 2026-08-31 weekly-audit closure (RE-01 ship-gate A4 measurement-integrity fix via SetupRunLog.TryEmit; RE-02 cross-process Mutex on prefill deltas; CQ-03 AtomicFileIo; CHAIN-2 signtool verify + SHA256SUMS manifest + signing runbook) and the PipeServer pipe-busy backoff. Key Plan Tool 20 rebuild (sector-mapping dialog + hardened live Apply) is open as PR #115 -- merge, then owner-run live ACCC Apply (ADDINS-KEYPLAN-LIVE-WRITE). CHAIN-2 residual: Authenticode certificate purchase is owner-only (docs/ops-dist-signing-runbook.md section 1/7). Still owed live: Family Fixer's ribbon click-through + go_single_panel, and ADDINS-DPAPI-PREWARM. Local main checkout is 12 behind origin/main (#117).",
       progress: {
         label: "Tracks",
         phases: [
@@ -609,8 +632,17 @@ window.DASHBOARD_DATA = {
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
-      nextActions: ["Key Plan (Tool 20) live write: owner sets flags A-C, then run the first supervised write (ADDINS-KEYPLAN-LIVE-WRITE)","Family Fixer: live-Revit click-through + icon sign-off + one live go_single_panel execution -- the one destructive op never yet run live","ADDINS-DPAPI-PREWARM: first-use DPAPI pre-warm in the verifier to remove first-attestation cold-start latency after Revit launch","Fast-forward the local F:\\BIMpossible-AddIns checkout to origin/main (#111) -- it is 9 commits behind","Write Engine Increment 2 (type-param targeting) Add-Ins half, lockstep with backend, when Increment 2 starts"],
-      pendingDecisions: [],
+      nextActions: [
+        "Merge PR #115 (Tool 20 Key Plan rebuild: sector-mapping dialog + hardened live Apply), then owner-run the first supervised live ACCC Apply (ADDINS-KEYPLAN-LIVE-WRITE)",
+        "CHAIN-2 residual: owner purchases the Authenticode code-signing certificate and runs the signed-release runbook (docs/ops-dist-signing-runbook.md, [OWNER] steps)",
+        "Family Fixer: live-Revit click-through + icon sign-off + one live go_single_panel execution -- the one destructive op never yet run live",
+        "ADDINS-DPAPI-PREWARM: first-use DPAPI pre-warm in the verifier to remove first-attestation cold-start latency after Revit launch",
+        "Fast-forward the local F:\\BIMpossible-AddIns checkout to origin/main (#117) -- 12 commits behind; local also holds 3 unpushed branches (claude/blue-beam-update-error-495bd1, claude/evidence-hook-python, claude/p7relay-probe-timeout-fix) and 10 unpushed feat/link-pdf-source-reuse commits (Features A/B1/C1/D1/D2 of NORTHSTAR.link-pdf-roadmap.md) that exist nowhere on origin"
+      ],
+      pendingDecisions: [
+        "PR #115 Tool 20 Key Plan rebuild (sector-mapping dialog + hardened live Apply, CI green): merge or hold?",
+        "Push or discard the 10 local-only feat/link-pdf-source-reuse commits (Features A-D2 of the Link-PDF post-merge roadmap, last 08-24) -- not on origin, and the local NORTHSTAR.link-pdf-roadmap.md still says status: active"
+      ],
       blockers: ["POWER_SYSTEM deletion-list ruling (prep_to_standard.py, decision-log 2026-07-24) - open owner sign-off, but its own decision doc says it blocks nothing else; soft, non-gating."],
       reminders: ["Deploy-Local.ps1 writes to a SHARED %APPDATA% Revit Addins folder — hash-check before deploying, never deploy while Revit is open (the 07-25 forensic audit found this exact guard skipped once)","\"Backed up to origin\" is not \"safe to overwrite at runtime\" — the 07-25 postmortem's core lesson; a clean worktree means committed, not complete","Core.dll co-loads in one Revit process: redeploy ALL add-ins together when Core changes"],
       links: [
@@ -619,19 +651,58 @@ window.DASHBOARD_DATA = {
         { label: "T4 live-smoke results", path: "F:\\BIMpossible-Workspace\\01_BuildLog\\2026-07-25__T4-live-smoke_RESULTS.md" },
         { label: "Tool backlog", path: "F:\\BIMpossible-AddIns\\TOOL_BACKLOG.md" }
       ],
-      recent: ["2026-08-30 - #111 ARCH-BIMP-PARAMSET: BIMP_IsDeliverable v1 setup + diagnostics","2026-08-30 - #110 Key Plan (Tool 20): composite resolver, dry-run preview, freeze fix","2026-08-28 - #109 ci: advisory Wave-Status PR-body check","2026-08-26 - #108 untrack _cc_build_check build-output snapshot; ignore + policy doc","2026-08-26 - #107 M-30 closed with genuine live-Revit Place Callout Sheets captures","2026-08-26 - #106 close AddIns audit residuals (HYG-12 CI subsystem, M-33, L-21, CQ-TEST-PAIR-1, ...)","2026-08-26 - #105 add-in-owned relay session lifecycle (P7-RELAY-SESSION-LIFECYCLE)","2026-08-25 - #104 file-backed DPAPI JTI replay persistence"],
+      recent: [
+        "2026-09-01 - #117 PipeServer pipe-busy exponential backoff (27,000 s CPU runaway with two Revit processes) + pairing confirmation null-owner crash",
+        "2026-09-01 - #116 close 2026-08-31 weekly-audit findings RE-01, RE-02, RE-04, CQ-03, CQ-05, CHAIN-2, ARCH-CI-1 (recovers signing hardening from closed #112)",
+        "2026-08-30 - #113 P15-15B firm-document source citations in the Assistant Pane",
+        "2026-08-30 - #111 ARCH-BIMP-PARAMSET: BIMP_IsDeliverable v1 setup + diagnostics",
+        "2026-08-30 - #110 Key Plan (Tool 20): composite resolver, dry-run preview, freeze fix"
+      ],
       audit: {
-        lastRun: "2026-08-26",
-        runType: "2026-08-25 audit-closure Phase-5 build-lane pass (branch claude/audit-closure, 6 commits; push + PR + merge HELD for owner go). Closed 4 carried findings in real code: M-14 (LevelSheetTitle red->green span fix, 81c06f8), MI-17 (SheetSortKey real extraction + test replacing the documented-mirror, 81c06f8), M-33 (dedicated Place Callout Sheets ribbon icon replacing the placeholder, 1d37070), I-08 (dead decision-log cite requalified + rerouted to the HYG-23 decision-log-root owner policy, 44585d5). Also shipped, tracked elsewhere: CQ-TEST-PAIR-1 delete-failure retry test (81c06f8, carried on the BIMpossible-web card) and HYG-12 doc-reference + docs-budget gate port (0b39bcf) -- a NEW CI subsystem shipped dormant; merging the branch activates it, owner go/no-go. M-30 PARTIAL: guide steps 1+2 render byte-stable (45d04bd), step 3 (built sheets in Project Browser) routed to a documented manual live-Revit capture in CAPTURE-LIST.md -- HELD, explicitly not fabricated. Residual 1: M-30 only (held live-Revit capture; no live instance reachable this session, NOT fabricated). L-03 / L-13 / L-19 / L-21 formally ratified accept-as-designed 2026-08-25 (closed, off the board; rationale + reconsideration triggers in audit-acceptance-records_2026-08-25.md). Prior 2026-08-25 reconciliation (MI-20 + MI-19 closed) stands. Freshness debt persists: no full /audit report since 2026-07-12 -- 100+ un-re-audited commits on main.",
-        cadence: "on-demand",
-        counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
-        closedLastRun: 11,
-        trend: "CLOSED -- all 11 carried findings now closed; M-30 retired 2026-08-26 with 3 genuine live-Revit Place Callout Sheets captures merged to AddIns origin/main (PR #107 -> squash fe94288e); 0 open. Full re-audit still owed since 2026-07-12",
-        reportPath: "F:\\BIMpossible-AddIns\\audits\\2026-08-22__link-pdf-to-sheets-phase0-audit.md",
-        reportFile: "addins/2026-08-22__link-pdf-to-sheets-phase0-audit.md",
+        lastRun: "2026-08-31",
+        runType: "2026-08-31 unattended weekly full audit (Workspace-hosted, cross-repo: BIMpossible + Workspace + AddIns; seven lenses + slop fold + breach-chain overlay; evening re-run superseding the morning pass that had passed AddIns as clean on a depth artifact). AddIns findings: RE-01 High (RecordMispickCommand reported Recorded/Succeeded while SetupRunLog.Emit swallowed the write -- under-counts ship-gate A4), RE-02 Medium (unlocked cross-process RMW on setup_prefill_deltas.json), CHAIN-2 Medium (unsigned add-in assemblies in user-writable load path), CQ-03 / CQ-05 / RE-04 / ARCH-CI-1 Low, RE-2(relay) Low. Closure PR #116 merged 2026-09-01 (ba4c3fa) closed 6 (RE-01, RE-02, RE-04, CQ-03, CQ-05, ARCH-CI-1): TryEmit + Result.Failed, named Mutex re-read, AtomicFileIo temp+Replace swap, per-placeholder try/catch, MispickAlreadyRecorded duplicate guard, signtool verify + SHA256SUMS manifest + signing runbook, innosetup pinned 6.7.1; 2048/2048 tests, Verify-AddIns-CI -Full/-IncludeSecurityLane/-IncludeInstaller green. 2 Low carried open: RE-2(relay) accepted-as-designed (pipe.close() swallow, close-time only) and CHAIN-2 (signtool verify + manifest + runbook shipped in #116, but the Authenticode certificate purchase is owner-only and production code-signing is ON HOLD by owner decision). No AddIns-local scored /audit report in audits/ since 2026-07-12; the newest AddIns-local artifacts remain the 08-22 Link-PDF phase-0 review and E020 drawing-area probe (narrative, unscored).",
+        cadence: "weekly (unattended bimpossible-weekly-full-audit, cross-repo) + on-demand /revit-functionality-audit",
+        counts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 2,
+          info: 0
+        },
+        closedLastRun: 6,
+        trend: "08-31 weekly audit surfaced 1 High + 1 Medium + 5 Low + 1 breach-chain Low in AddIns after the 07-14 estate had reached 0; 6 closed by PR #116 (ba4c3fa, 2026-09-01); 2 Low carried open (RE-2 relay accepted-as-designed, CHAIN-2 code-signing on hold). Full AddIns-local re-audit still owed since 2026-07-12",
+        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-08-31.md",
+        reportFile: "bimpossible/weekly-full-audit_2026-08-31.md",
         ledgerPath: "F:\\BIMpossible-AddIns\\audits",
-        open: [],
+        open: [
+          {
+            id: "RE-2",
+            severity: "low",
+            title: "relay pipe.close() swallow at close time -- accepted-as-designed 2026-08-31, carried open",
+            source: "weekly-full-audit_2026-08-31.md"
+          },
+          {
+            id: "CHAIN-2",
+            severity: "low",
+            title: "unsigned add-in delivery -- #116 added signtool verify + SHA256SUMS manifest + signing runbook; Authenticode certificate purchase is owner-only and production code-signing is ON HOLD by owner decision, carried open",
+            source: "breach-chains_2026-08-31.md"
+          }
+        ],
         history: [
+          {
+            date: "2026-09-01",
+            type: "Closure -- PR #116 (ba4c3fa) closed RE-01, RE-02, RE-04, CQ-03, CQ-05, ARCH-CI-1 from the 2026-08-31 weekly audit; CHAIN-2 hardened (signtool verify + manifest + runbook) but carried open pending the owner-only certificate.",
+            scope: "RecordMispickCommand, SetupRunLog(+Reader), SetupPrefillIo, new Shared/Setup/AtomicFileIo.cs, Tool2/Tool3/SetupProjectOrchestrator commands, Build-Installer.ps1, Verify-AddIns-CI.ps1, installer-build.yml, docs/ops-dist-signing-runbook.md; 7 new tests",
+            result: "Merged 2026-09-01T17:01Z; 2048/2048 RevitLink tests; Verify-AddIns-CI -Full, -IncludeSecurityLane, -IncludeInstaller all green. CHAIN-2 residual (cert purchase) owner-only.",
+            report: "weekly-full-audit_2026-08-31.md"
+          },
+          {
+            date: "2026-08-31",
+            type: "Cross-repo weekly full audit (Workspace-hosted) -- first scored findings against AddIns since 07-14",
+            scope: "F:\\BIMpossible-AddIns C# read (EventDispatcher non-sync handlers, SetupPrefillResolver/Diff internals, WPF windows, Inno [Code] sections out of budget) + relay + CI",
+            result: "AddIns: RE-01 High, RE-02 Medium, CHAIN-2 Medium (breach-chain, score 4/12), CQ-03 / CQ-05 / RE-04 / ARCH-CI-1 Low, RE-2(relay) Low accepted. Morning pass's AddIns-clean verdict superseded as a depth artifact.",
+            report: "weekly-full-audit_2026-08-31.md"
+          },
           {
             date: "2026-08-26",
             type: "Final closure -- M-30 (last held finding) retired with 3 genuine live-Revit Place Callout Sheets captures.",
@@ -639,16 +710,117 @@ window.DASHBOARD_DATA = {
             result: "PR #107 squash-merged fe94288e (2026-08-26T17:31:08Z), required checks green (firm-literals, test, gitleaks, nuget-vulns). Card 0 open (already reflected); estate-wide 56 -> 0. Full record: BIMpossible-Workspace/02_Reference/Audit and Scan Info/audit-closure-COMPLETE_2026-08-26.md.",
             report: "audit-closure-COMPLETE_2026-08-26.md"
           },
-          { date: "2026-08-22", type: "Non-audit artifact -- Link PDF to Sheets Phase 0 current-state audit, a single-feature narrative engineering review with NO severity/ID scheme; NOT a scored /audit findings report", scope: "BIMpossible.RevitLink's Link-PDF-to-Sheets command only (drawing-area detection, grid packing, slot order, sheet targeting, ownership/persistence, rerun behavior) -- current-code + current-behavior read, no behavior changes made. Does not touch or re-examine any RevitLink command outside this one feature.", result: "6 gaps documented in prose (no IDs, no High/Med/Low tags): drawing-area detection can still misread internal geometry as an edge within its 0.40 ft cap; the grid packer is a reused generic panel/level packer with no PDF-specific engine; slot order is column-major top-to-bottom left-to-right, the exact opposite of the plan's required top-right-anchored right-to-left order; sheet targeting's reuse test is purely geometric with no ownership concept; there is zero persisted placement identity (no Extensible Storage schema, no owner tag) so the tool cannot tell its own prior placements from unrelated content; and a traced rerun scenario confirms silent duplication-by-overlap at the start sheet. Because none of this maps to the card's severity-scored ID scheme, it cannot be added to open[] or reflected in counts without inventing numbers that were never assigned -- see Strategy Decisions Ledger entry ops-1. lastRun points at this as the newest artifact on disk; the 2026-07-12 baseline's carried open[] findings (unchanged since 2026-07-14) remain untouched and still represent real freshness debt (41+ days since the last full scored code audit).", report: "2026-08-22__link-pdf-to-sheets-phase0-audit.md" },
-          { date: "2026-08-08", type: "Non-audit artifact — TDD-exclusion census (ADDINS-TDD-CENSUS), a narrow deterministic test-coverage metric, NOT a findings-style /audit report", scope: "Measured `/tdd`'s red-green practical reach across all non-test .cs on main (2026-08-08 @ 5160510): 38,339 non-test LOC total. Zero code findings produced; not a re-audit and does not close or add to the open[] list below.", result: "58% Revit-bound + 11% WPF/UI = ~70% of the codebase sits outside /tdd's practical reach by design. Of the 29% that is Revit-free logic, 86% (9,773/11,399 LOC) is already wired into test assemblies -- extraction is practiced, not aspirational. The 1,626 LOC uncovered remainder has two named files worth a look: RevitLink/Commands/FamilyFixerViewModel.cs (341 LOC, largest unwired extractable file) and RevitLink/Assistant/DpapiPaneTokenStore.cs (160 LOC, pairing-token persistence -- security-relevant code with no test wiring, the census's own words: 'the least defensible entry here'). Explicitly non-actionable: 'No fixes in this pass... No target percentage is set.'", report: "2026-08-08__tdd-exclusion-census.md" },
-          { date: "2026-07-25", type: "Session forensic reconstruction (NOT a /audit code report -- no scored findings)", scope: "Add-Ins + Families cleanup-stream session (2026-07-24 22:30 -> 07-25 00:10). By its own filing note this is not from the /audit pipeline and is not indexed in _audit-runs.md; it introduced zero code findings.", result: "Reconstructs a session that optimized for closure and briefly overwrote the deployed add-in with a 'main' build lacking the active glass work. Central failure: the shared single-slot %APPDATA% Revit-Addins deploy target was overwritten from 'main' for ~12 min (glass -> main -> glass), hash-verified restored (SHA-256 byte-identical); the documented hash-check-before-deploy safeguard had been skipped. Reusable lesson: 'backed up to origin' != 'safe to overwrite at runtime', and a clean worktree != complete work. No code-finding counts changed -- carried from the 2026-07-14 resolution. Canonical archived copy: BIMpossible_Workspace/02_Reference/Audit Reports/2026-07-25__session-audit-addins-cleanup-runtime-clobber.md.", report: "2026-07-25__session-audit-cleanup-stream.md" },
-          { date: "2026-07-14", type: "Resolution — 8 fix commits + owner-decision pass", scope: "Every one of the 106 findings from the 2026-07-12 audit got a real decision: fixed in code (~85), disproven as a false positive (3, including the sole CRITICAL), won't-fix as verified-safe (2), deferred design (2), gated on destructive git ops (2), or postponed pending dedicated owner/polish time (~10).", result: "C-01 (the only CRITICAL) was FALSE — Revit 2024's net48 API has both ElementId.Value and ElementId(long); the audit never ran the build that would have disproven it. All 10 HIGHs genuinely fixed and code-verified (not just commit-message-claimed): H-01/H-02 (Section Clip one-shot expiry, Room Data binding refuse), H-03/H-09/H-10 (testable extraction, rollback unit-test, 18-file dead-code sweep), H-04 (SetUniqueViewName sanitizes + reports), H-05/H-06 (ScopeBox collision fix + ranked substring match — both confirmed in code with explicit 'H-05'/'H-06' comments), H-07 (ViewRenamePreview literal-mode $ escaping), H-08 (PdfPageCounter returns null, never a false 1, on ambiguous PDFs). Two false-positive side-findings: M-30 (guide is accurate, only 3 screenshots stale) and MI-12-part (2 of 4 'unwired' commands are wired on the Trades > Electrical panel, which the audit's RevitLink-only search missed). Also fixed same-day, outside the audit: Retag All Rooms orphan-tag bug (owner-caught), oversized ribbon tooltips (owner-caught), 2 theme-blind popups. What the audit did NOT catch: 'reports success, quietly did nothing' surfaced 3 more times the same day (panel-schedule legend cell, Section Clip selection path, Retag All Rooms) — the pattern the audit itself named is still live in the codebase.", report: "2026-07-12__audit-resolution.md" },
-          { date: "2026-07-12", type: "Full (7 parallel review agents)", scope: "Complete top-to-bottom re-read of all active projects — RevitLink (Commands + ModelHealth + Scaffold + Shared) + ModelQA.Core + 6 discipline add-ins + 7 test suites + docs/CI; 114 commits since the 2026-06-14 baseline, ~90% of them in RevitLink.", result: "1 CRITICAL + 10 HIGH + 53 MEDIUM + 24 LOW + 18 INFO. Headline C-01: the net48 (Revit 2024) build is very likely broken (net8-only ElementId APIs unguarded in ReloadLinksCommand) and CI never builds the shipping add-in for either TFM. Recurring themes: silent-failure-reported-as-success, tested-but-dead code (3 files still certified green while unreachable in production), spec/doc-vs-code drift. Prior audit: 13 of the 2026-06-14 findings verified genuinely fixed (H-02/H-04/M-11/M-12/M-17/M-18/M-20-23 et al.). NOTE: the dashboard's earlier '2026-06-14 all-clear' was itself wrong — those findings were open then too and never ingested. Audit tab surfaces C-01 + the 10 highs as cards; the 53 medium / 24 low / 18 info are in the full report (local monitor expands them per-severity).", report: "2026-07-12__audit-report-full.md" },
-          { date: "2026-07-10", type: "Code-level re-verification (not a full audit re-run)", scope: "C-01, checked against current source + build output", result: "FIXED — was actually fixed same-day back on 2026-06-14 (commit aa9e65e, Directory.Build.props sets AssemblyVersion 1.1.0.0, confirmed in build output), but the dashboard never got updated to reflect it until now. Caveat carried from the fix itself: diagnostic only (assembly isn't strong-named, so a stale DLL still isn't load-time BLOCKED, just detectable) — real mitigation is coordinated add-in redeploy, tracked separately as M-19, still open", report: "2026-06-14__audit-report-full.md" },
-          { date: "2026-06-14", type: "Full (3 agents)", scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests", result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption", report: "2026-06-14__audit-report-full.md" },
-          { date: "2026-06-13", type: "Tools 8-33 sweep", scope: "Tools 8-33 + punchlist", result: "Punchlist sweep across the tool suite", report: "2026-06-13__tools-8-33-audit-sweep.md" },
-          { date: "2026-06-09", type: "Triple audit (google / perf / perp)", scope: "Add-Ins repo", result: "9 findings closed in remediation — CSV-injection guards ×7, culture-invariant formatting, rolling log", report: "2026-06-09__perp-audit.md" }
-        ]
+          {
+            date: "2026-08-22",
+            type: "Non-audit artifact -- Link PDF to Sheets Phase 0 current-state audit, a single-feature narrative engineering review with NO severity/ID scheme; NOT a scored /audit findings report",
+            scope: "BIMpossible.RevitLink's Link-PDF-to-Sheets command only (drawing-area detection, grid packing, slot order, sheet targeting, ownership/persistence, rerun behavior) -- current-code + current-behavior read, no behavior changes made. Does not touch or re-examine any RevitLink command outside this one feature.",
+            result: "6 gaps documented in prose (no IDs, no High/Med/Low tags): drawing-area detection can still misread internal geometry as an edge within its 0.40 ft cap; the grid packer is a reused generic panel/level packer with no PDF-specific engine; slot order is column-major top-to-bottom left-to-right, the exact opposite of the plan's required top-right-anchored right-to-left order; sheet targeting's reuse test is purely geometric with no ownership concept; there is zero persisted placement identity (no Extensible Storage schema, no owner tag) so the tool cannot tell its own prior placements from unrelated content; and a traced rerun scenario confirms silent duplication-by-overlap at the start sheet. Because none of this maps to the card's severity-scored ID scheme, it cannot be added to open[] or reflected in counts without inventing numbers that were never assigned -- see Strategy Decisions Ledger entry ops-1. lastRun points at this as the newest artifact on disk; the 2026-07-12 baseline's carried open[] findings (unchanged since 2026-07-14) remain untouched and still represent real freshness debt (41+ days since the last full scored code audit).",
+            report: "2026-08-22__link-pdf-to-sheets-phase0-audit.md"
+          },
+          {
+            date: "2026-08-08",
+            type: "Non-audit artifact — TDD-exclusion census (ADDINS-TDD-CENSUS), a narrow deterministic test-coverage metric, NOT a findings-style /audit report",
+            scope: "Measured `/tdd`'s red-green practical reach across all non-test .cs on main (2026-08-08 @ 5160510): 38,339 non-test LOC total. Zero code findings produced; not a re-audit and does not close or add to the open[] list below.",
+            result: "58% Revit-bound + 11% WPF/UI = ~70% of the codebase sits outside /tdd's practical reach by design. Of the 29% that is Revit-free logic, 86% (9,773/11,399 LOC) is already wired into test assemblies -- extraction is practiced, not aspirational. The 1,626 LOC uncovered remainder has two named files worth a look: RevitLink/Commands/FamilyFixerViewModel.cs (341 LOC, largest unwired extractable file) and RevitLink/Assistant/DpapiPaneTokenStore.cs (160 LOC, pairing-token persistence -- security-relevant code with no test wiring, the census's own words: 'the least defensible entry here'). Explicitly non-actionable: 'No fixes in this pass... No target percentage is set.'",
+            report: "2026-08-08__tdd-exclusion-census.md"
+          },
+          {
+            date: "2026-07-25",
+            type: "Session forensic reconstruction (NOT a /audit code report -- no scored findings)",
+            scope: "Add-Ins + Families cleanup-stream session (2026-07-24 22:30 -> 07-25 00:10). By its own filing note this is not from the /audit pipeline and is not indexed in _audit-runs.md; it introduced zero code findings.",
+            result: "Reconstructs a session that optimized for closure and briefly overwrote the deployed add-in with a 'main' build lacking the active glass work. Central failure: the shared single-slot %APPDATA% Revit-Addins deploy target was overwritten from 'main' for ~12 min (glass -> main -> glass), hash-verified restored (SHA-256 byte-identical); the documented hash-check-before-deploy safeguard had been skipped. Reusable lesson: 'backed up to origin' != 'safe to overwrite at runtime', and a clean worktree != complete work. No code-finding counts changed -- carried from the 2026-07-14 resolution. Canonical archived copy: BIMpossible_Workspace/02_Reference/Audit Reports/2026-07-25__session-audit-addins-cleanup-runtime-clobber.md.",
+            report: "2026-07-25__session-audit-cleanup-stream.md"
+          },
+          {
+            date: "2026-07-14",
+            type: "Resolution — 8 fix commits + owner-decision pass",
+            scope: "Every one of the 106 findings from the 2026-07-12 audit got a real decision: fixed in code (~85), disproven as a false positive (3, including the sole CRITICAL), won't-fix as verified-safe (2), deferred design (2), gated on destructive git ops (2), or postponed pending dedicated owner/polish time (~10).",
+            result: "C-01 (the only CRITICAL) was FALSE — Revit 2024's net48 API has both ElementId.Value and ElementId(long); the audit never ran the build that would have disproven it. All 10 HIGHs genuinely fixed and code-verified (not just commit-message-claimed): H-01/H-02 (Section Clip one-shot expiry, Room Data binding refuse), H-03/H-09/H-10 (testable extraction, rollback unit-test, 18-file dead-code sweep), H-04 (SetUniqueViewName sanitizes + reports), H-05/H-06 (ScopeBox collision fix + ranked substring match — both confirmed in code with explicit 'H-05'/'H-06' comments), H-07 (ViewRenamePreview literal-mode $ escaping), H-08 (PdfPageCounter returns null, never a false 1, on ambiguous PDFs). Two false-positive side-findings: M-30 (guide is accurate, only 3 screenshots stale) and MI-12-part (2 of 4 'unwired' commands are wired on the Trades > Electrical panel, which the audit's RevitLink-only search missed). Also fixed same-day, outside the audit: Retag All Rooms orphan-tag bug (owner-caught), oversized ribbon tooltips (owner-caught), 2 theme-blind popups. What the audit did NOT catch: 'reports success, quietly did nothing' surfaced 3 more times the same day (panel-schedule legend cell, Section Clip selection path, Retag All Rooms) — the pattern the audit itself named is still live in the codebase.",
+            report: "2026-07-12__audit-resolution.md"
+          },
+          {
+            date: "2026-07-12",
+            type: "Full (7 parallel review agents)",
+            scope: "Complete top-to-bottom re-read of all active projects — RevitLink (Commands + ModelHealth + Scaffold + Shared) + ModelQA.Core + 6 discipline add-ins + 7 test suites + docs/CI; 114 commits since the 2026-06-14 baseline, ~90% of them in RevitLink.",
+            result: "1 CRITICAL + 10 HIGH + 53 MEDIUM + 24 LOW + 18 INFO. Headline C-01: the net48 (Revit 2024) build is very likely broken (net8-only ElementId APIs unguarded in ReloadLinksCommand) and CI never builds the shipping add-in for either TFM. Recurring themes: silent-failure-reported-as-success, tested-but-dead code (3 files still certified green while unreachable in production), spec/doc-vs-code drift. Prior audit: 13 of the 2026-06-14 findings verified genuinely fixed (H-02/H-04/M-11/M-12/M-17/M-18/M-20-23 et al.). NOTE: the dashboard's earlier '2026-06-14 all-clear' was itself wrong — those findings were open then too and never ingested. Audit tab surfaces C-01 + the 10 highs as cards; the 53 medium / 24 low / 18 info are in the full report (local monitor expands them per-severity).",
+            report: "2026-07-12__audit-report-full.md"
+          },
+          {
+            date: "2026-07-10",
+            type: "Code-level re-verification (not a full audit re-run)",
+            scope: "C-01, checked against current source + build output",
+            result: "FIXED — was actually fixed same-day back on 2026-06-14 (commit aa9e65e, Directory.Build.props sets AssemblyVersion 1.1.0.0, confirmed in build output), but the dashboard never got updated to reflect it until now. Caveat carried from the fix itself: diagnostic only (assembly isn't strong-named, so a stale DLL still isn't load-time BLOCKED, just detectable) — real mitigation is coordinated add-in redeploy, tracked separately as M-19, still open",
+            report: "2026-06-14__audit-report-full.md"
+          },
+          {
+            date: "2026-06-14",
+            type: "Full (3 agents)",
+            scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests",
+            result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption",
+            report: "2026-06-14__audit-report-full.md"
+          },
+          {
+            date: "2026-06-13",
+            type: "Tools 8-33 sweep",
+            scope: "Tools 8-33 + punchlist",
+            result: "Punchlist sweep across the tool suite",
+            report: "2026-06-13__tools-8-33-audit-sweep.md"
+          },
+          {
+            date: "2026-06-09",
+            type: "Triple audit (google / perf / perp)",
+            scope: "Add-Ins repo",
+            result: "9 findings closed in remediation — CSV-injection guards ×7, culture-invariant formatting, rolling log",
+            report: "2026-06-09__perp-audit.md"
+          }
+        ],
+        reportDate: "2026-08-31",
+        reconciledAt: "2026-09-02 09:07:50",
+        reconciliationHeads: [
+          {
+            repo: "BIMpossible-AddIns",
+            head: "e0f23bb137",
+            inspected: true
+          }
+        ],
+        rawCounts: {
+          critical: 0,
+          high: 1,
+          medium: 1,
+          low: 6,
+          info: 0
+        },
+        openCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 2,
+          info: 0
+        },
+        unknownCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        resolvedCounts: {
+          critical: 0,
+          high: 1,
+          medium: 1,
+          low: 4,
+          info: 0
+        },
+        publishedCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 2,
+          info: 0
+        },
+        ingestStatus: "success",
+        ingestDetail: "reconciled against BIMpossible-AddIns; 0 of 8 closed by implementation-backed finding-ID evidence, 8 open (0 insufficient-evidence citation(s) rejected); AddIns-scoped subset of the cross-repo 2026-08-31 weekly audit; closures the git rule could not prove were verified by hand against merged PR #116 ba4c3fa (2026-09-01)",
+        unknown: []
       }
     },
     /* PROJECT:addins:END */
@@ -659,7 +831,7 @@ window.DASHBOARD_DATA = {
       icon: "globe",
       oneLiner: "yourbimpossible.com — LIVE at M3. Astro 4 + Cloudflare Pages + Tailwind. Lighthouse 100/100/100/100 across all 6 pages.",
       status: "active",
-      phase: "M3 LIVE: yourbimpossible.com on Cloudflare Pages; M4 SEO hardening COMPLETE (structured data, OG/Twitter cards, sitemap, CI broken-link check; Lighthouse Perf/BP/SEO/A11y 100 across all 6 pages after the 07-10 a11y remediation). All 2026-06-09 + 07-10 audit findings cleared. LinkedIn Company Page live (linkedin.com/company/bimpossible). Remaining pre-launch gaps: business infra (email aliases, social handles, LLC) and real product imagery on interior pages; M5-M6 (pricing + commercial launch) not started. HEAD 335c210 (2026-08-27).",
+      phase: "M3 LIVE: yourbimpossible.com on Cloudflare Pages; M4 SEO hardening COMPLETE (structured data, OG/Twitter cards, sitemap, CI broken-link check; Lighthouse Perf/BP/SEO/A11y 100 across all 6 pages after the 07-10 a11y remediation). All 2026-06-09 + 07-10 audit findings cleared; 2026-08-31 slop-audit MEDIUM-1 (contact form treated a provider 200/success:false as delivered) fixed same day (1dbbd72). LinkedIn Company Page live (linkedin.com/company/bimpossible). Remaining pre-launch gaps: business infra (email aliases, social handles, LLC) and real product imagery on interior pages; M5-M6 (pricing + commercial launch) not started. HEAD 1dbbd72 (2026-08-31).",
       focus: "Post-launch hardening + policy/compliance publishing - closing audit findings and shipping legal/data-policy pages. No active feature front.",
       progress: {
         label: "Milestones",
@@ -687,11 +859,17 @@ window.DASHBOARD_DATA = {
         { label: "Build log", path: "F:\\BIMpossible-Site\\01_BuildLog" },
         { label: "Site code", path: "F:\\BIMpossible-Site\\site" }
       ],
-      recent: ["2026-08-27 - Correct planning-docs path (AI-Dev -> BIMpossible-Site)","2026-08-25 - Publish /data-policy: ratified Data Residency & Retention Policy","2026-08-25 - Close 2026-07-10 audit residuals (CONTACT-RL, TURNSTILE-HOST, CSP-STYLE) + restore nav/theme contrast","2026-06-13 - Close M1/M2/M3 + L2/L3/L6/L8 from the 2026-06-13 full site audit"],
+      recent: [
+        "2026-08-31 - fix(contact): treat provider 2xx with failure body as undelivered (slop-audit MEDIUM-1; +7 tests, 27/27)",
+        "2026-08-31 - First weekly slop-audit report published (audits/2026-08-31__slop-audit.md): 1 MEDIUM, 0 other",
+        "2026-08-27 - Correct planning-docs path (AI-Dev -> BIMpossible-Site)",
+        "2026-08-25 - Publish /data-policy: ratified Data Residency & Retention Policy",
+        "2026-08-25 - Close 2026-07-10 audit residuals (CONTACT-RL, TURNSTILE-HOST, CSP-STYLE) + restore nav/theme contrast"
+      ],
       audit: {
-        lastRun: "2026-07-10",
-        runType: "Full code audit (marketing site, /audit complete) — top-to-bottom re-read of site/ + live Lighthouse across all 6 pages; verified all 13 findings from 2026-06-13 closed, then caught and same-day-fixed an a11y regression (100→95/96) from the 709f352 theme-toggle/logo change",
-        cadence: "on-demand",
+        lastRun: "2026-08-31",
+        runType: "Weekly slop-audit (first full pass over site/: silent-catch census, counter-integrity, tested-but-dead). 1 MEDIUM (contact form trusted HTTP 200 without reading Web3Forms' success:false body) -- fixed same day in 1dbbd72 with 7 regression tests (27/27). All 13 findings from the 2026-07-10 full code audit remain closed.",
+        cadence: "weekly slop-audit (scheduled) + full code audit on demand",
         counts: {
           critical: 0,
           high: 0,
@@ -700,11 +878,74 @@ window.DASHBOARD_DATA = {
           info: 0
         },
         trend: "stable",
-        reportPath: "F:\\BIMpossible-Site\\01_BuildLog\\2026-07-10__audit-report-full.md",
-        reportFile: "site/2026-07-10__audit-report-full.md",
-        ledgerPath: "F:\\BIMpossible-Site\\01_BuildLog",
-        closedLastRun: 13,
-        open: []
+        reportPath: "F:\\BIMpossible-Site\\audits\\2026-08-31__slop-audit.md",
+        reportFile: "site/2026-08-31__slop-audit.md",
+        ledgerPath: "F:\\BIMpossible-Site\\audits",
+        closedLastRun: 1,
+        open: [],
+        reportDate: "2026-08-31",
+        reconciledAt: "2026-09-02 09:07:50",
+        reconciliationHeads: [
+          {
+            repo: "site",
+            head: "1dbbd722ea",
+            inspected: true
+          }
+        ],
+        rawCounts: {
+          critical: 0,
+          high: 0,
+          medium: 1,
+          low: 0,
+          info: 0
+        },
+        openCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        unknownCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        resolvedCounts: {
+          critical: 0,
+          high: 0,
+          medium: 1,
+          low: 0,
+          info: 0
+        },
+        publishedCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        ingestStatus: "success",
+        ingestDetail: "reconciled against site; 1 of 1 closed by implementation-backed finding-ID evidence, 0 open (0 insufficient-evidence citation(s) rejected)",
+        unknown: [],
+        history: [
+          {
+            date: "2026-08-31",
+            type: "Weekly slop-audit -- first scheduled pass over site/.",
+            scope: "site/ (Astro pages, functions/api/contact.ts, tests).",
+            result: "1 MEDIUM (MEDIUM-1 provider 200 with failure body reported as delivered) -> fixed same day, 1dbbd72, +7 tests. 0 open.",
+            report: "2026-08-31__slop-audit.md"
+          },
+          {
+            date: "2026-07-10",
+            type: "Full code audit -- top-to-bottom re-read of site/ + live Lighthouse across all 6 pages.",
+            scope: "site/ + Lighthouse.",
+            result: "All 13 findings from 2026-06-13 verified closed; a11y regression from 709f352 caught and fixed same day. 0 open.",
+            report: "2026-07-10__audit-report-full.md"
+          }
+        ]
       }
     },
     /* PROJECT:site:END */
@@ -713,10 +954,10 @@ window.DASHBOARD_DATA = {
       id: "pickem",
       name: "Preseason Pick'em",
       icon: "trophy",
-      oneLiner: "Next.js pick'em app (PreseasonPickem-app), deployed to www.preseason-pickem.com. Auth (magic-link + passkeys), scoring, and leaderboard all shipped as of 06-01 — dormant since, not \"just started.\"",
+      oneLiner: "Next.js pick'em app (PreseasonPickem-app) at www.preseason-pickem.com. Auth (magic-link + passkeys), scoring, leaderboard, draft-kit and perf/audit2 hardening all shipped on main 2026-06-01; one scoring-reconciliation fix waits in open PR #1 (08-06). Dormant.",
       status: "dormant",
-      phase: "Shipped Next.js pick'em app (preseason-pickem.com; 26thLetter/preseason-pickem). Post-launch: audit2 hardening complete through 2026-08-04; the 2026 NFL preseason cycle has wound down. Season auto-year handling is in place for the next cycle. (Prior card text 'Dormant since 2026-06-01' was wrong - 25+ commits June->Aug.)",
-      focus: "Reliability/perf polish on a shipped app (self-healing scoring, rate-limited passkey routes, font/render perf). No open feature front as of the last commit (2026-08-04); now off-season.",
+      phase: "Shipped Next.js pick'em app (preseason-pickem.com; 26thLetter/preseason-pickem). All feature/perf/audit2 work landed on main in one 2026-06-01 batch (passkeys, perf phases 1-4, audit2 phases 1-4, draft-kit stats); main has not moved since. One post-launch fix (self-healing scoring, 8a5fcdc, 2026-08-04) sits on branch fix/scoring-reconciliation as PR #1, OPEN since 2026-08-06 - never merged. 2026 NFL preseason cycle is over.",
+      focus: "Off-season. Only open item: merge-or-close PR #1 (scoring reconciliation fix, open since 2026-08-06) so the self-healing scoring path is actually deployed before the 2027 cycle.",
       progress: {
         label: "Build",
         phases: [
@@ -729,16 +970,29 @@ window.DASHBOARD_DATA = {
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: { date: "2026-06-01", summary: "rankings (sleeper/stats/sync) + scoring (engine/leaderboard/manual-tiebreak) libs added" },
       branch: null, git: null,
-      nextActions: ["Off-season maintenance only; prep for the 2027 preseason cycle (season auto-year already handled)","No work in flight - revisit before the next NFL preseason"],
-      pendingDecisions: [],
+      nextActions: [
+        "Merge or close PR #1 (fix/scoring-reconciliation, 8a5fcdc) - the self-healing scoring fix is not on main/prod",
+        "Decide whether to commit audits/2026-08-10__slop-audit.md (untracked in the app repo)",
+        "Off-season otherwise; revisit before the 2027 preseason (season auto-year already handled)"
+      ],
+      pendingDecisions: [
+        "PR #1 (scoring self-heal): merge to main or close - open 4 weeks with no review"
+      ],
       blockers: [],
-      reminders: ["NFL-preseason deadline now reached (end of Aug); the app was actively built through 2026-08-04 (draft-kit stats, audit2, self-healing scoring fix) -- confirm whether it shipped / was used for the 2026 preseason and can now go dormant."],
+      reminders: [
+        "2026 preseason is over; confirm the app was used and whether prod still lacks the PR #1 scoring fix. Prior card dates (07/08 for perf/passkeys/audit2) were wrong - all landed 2026-06-01."
+      ],
       links: [
         { label: "PRD", path: "F:\\AI-Dev\\Preseason Pick'em\\PRD.md" },
         { label: "Workspace index", path: "F:\\AI-Dev\\Preseason Pick'em\\WORKSPACE_INDEX.md" },
         { label: "App", path: "F:\\AI-Dev\\Preseason Pick'em\\PreseasonPickem-app" }
       ],
-      recent: ["2026-08-04 - Self-healing scoring: reconcile unscored picks so a failed scoring pass recovers","2026-08-04 - audit2 hardening (phases 1-4): single Sleeper fetch + cache, rate-limited passkey routes, dead-code purge, font/render perf","2026-08-04 - Draft-kit: last-season stats in the player popup","2026-07 - Passkeys / WebAuthn login (Face ID / Touch ID / Windows Hello)","2026-07 - Perf phases 1-4: DB indexes, N+1 batching, virtualized draft-kit list"]
+      recent: [
+        "2026-08-10 - Slop audit of the app (audits/2026-08-10__slop-audit.md): clean, one LOW hypothesis (sync.ts upserted counter over-counts on onConflictDoNothing) - file untracked",
+        "2026-08-06 - PR #1 opened: self-healing scoring (reconcile unscored picks) - still OPEN, not merged",
+        "2026-08-04 - fix(scoring): reconcile unscored picks so a failed scoring pass self-heals (8a5fcdc, branch fix/scoring-reconciliation)",
+        "2026-06-01 - audit2 hardening phases 1-4 + draft-kit last-season stats + passkeys/WebAuthn + perf phases 1-4 (da2d48b..705609b, 70ddeb1, a90af18..dd2b824) - all on main"
+      ]
     },
     /* PROJECT:pickem:END */
     /* PROJECT:laundry:START */
@@ -748,14 +1002,16 @@ window.DASHBOARD_DATA = {
       icon: "box",
       oneLiner: "Next.js demo app 'Lazy' (laundry-finder): Leaflet WasherMap (OSM pins + route), commute-corridor matching, one-click demo launcher.",
       status: "dormant",
-      phase: "Lazy laundry-finder demo: WasherMap (Leaflet/OSM) + matchAlongRoute commute-corridor + map-aware /dashboard/washers + one-click launcher scripts. Name locked 'Lazy' (FreshSpin scrubbed) 06-03. Local git (master), in sync with origin. Idle since 06-03.",
+      phase: "Lazy laundry-finder demo: WasherMap (Leaflet/OSM) + matchAlongRoute commute-corridor + map-aware /dashboard/washers + one-click launcher scripts. Name locked 'Lazy' (FreshSpin scrubbed) 06-03. Local git (master) in sync with origin YourBIMpossible/lazy-laundry-app, no PRs. No commits since 06-03; only node_modules/package-lock touched 06-30 (reinstall, tree clean). Idle 3 months.",
       focus: "Decide: resume the Lazy demo or park it explicitly. No state doc yet — git + folder only.",
       progress: null,
       activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: { date: "2026-06-04", summary: "CLAUDE-CODE-PROMPT.md added (06-04); app scaffold (package/prisma/scripts) touched 06-01" },
       branch: null, git: null,
       nextActions: [ "Write a status note for Lazy (laundry-finder); decide resume vs explicit park" ],
-      pendingDecisions: [],
+      pendingDecisions: [
+        "Resume vs explicit park - idle since 2026-06-03 with no status note"
+      ],
       blockers: [],
       reminders: ["No state doc yet — tracked via git (master) + folder mtime. Real app exists (Lazy laundry-finder); write a status note to track it properly."],
       links: [
@@ -776,7 +1032,7 @@ window.DASHBOARD_DATA = {
       oneLiner: "AI-assisted Revit family workflow (multi-repo: Families-by-BIMpossible \"brain\" + BIMpossible-AddIns \"hands\"). Single source of truth is ROADMAP.md: 3 numbered phases (close the RevitLink gap / family-creation geometry primitives / MCP copilot) + a 4th ribbon-button thread + the independent per-family rollout.",
       status: "active",
       phase: "Multi-repo AI-assisted Revit family workflow: Families-by-BIMpossible (Python 'brain' - planner/verifier/harness) + BIMpossible.RevitLink (C# 'hands'). Phase 1 (family-editing pipe ops) ~90%: the Family Fixer ribbon button shipped (AddIns #25, 2026-07-25, additive-only v1). Phases 2 (family-creation geometry, Option B) and 3 (wrap RevitLink as an MCP server, Option C) not started. ROADMAP.md (repo root) is the source of truth; last substantive roadmap move ~2026-07-26.",
-      focus: "No active family-workflow dev front right now - commits since late July are cross-repo path modernization (anchoring to F:\\BIMpossible*), not phase-moving. The live frontier when work resumes is closing Phase 1: port wire_nested_params and live-rehearse go_single_panel (the one destructive op never run against a real .rfa).",
+      focus: "No active family-workflow dev front - commits since late July are cross-repo path modernization and Evidence Compiler hook hardening (#11 launcher migration, #12 degraded-hook stderr notice from slop-audit LOW-1), not phase-moving. The live frontier when work resumes is closing Phase 1: port wire_nested_params and live-rehearse go_single_panel (the one destructive op never run against a real .rfa).",
       progress: {
         label: "Roadmap (ROADMAP.md)",
         phases: [
@@ -796,12 +1052,22 @@ window.DASHBOARD_DATA = {
       nextActions: ["Close Phase 1: port wire_nested_params; live-rehearse go_single_panel","Resolve the 5 ROADMAP open questions gating Phase 2/3 start","Reconcile the two overlapping MCP efforts (this roadmap's Phase 3 vs the AddIns Desktop Orchestration Hub proposal) before ratifying either","Owner sign-off on the prep_to_standard.py Power-System deletion list (shared with the addins card)"],
       pendingDecisions: [],
       blockers: [],
-      reminders: ["ROADMAP.md (repo root) is the single source of truth for this whole multi-repo effort — update its status lines whenever a phase moves, in whichever repo/session does the moving","Multiple sessions/worktrees can work this roadmap in parallel for source edits, but Deploy-Local.ps1 writes to a SHARED %APPDATA% Revit Addins folder, last-writer-wins — only one session may hold the deploy target (mid-rehearsal/mid-deploy) at a time"],
+      reminders: [
+        "ROADMAP.md (repo root) is the single source of truth for this whole multi-repo effort — update its status lines whenever a phase moves, in whichever repo/session does the moving",
+        "Multiple sessions/worktrees can work this roadmap in parallel for source edits, but Deploy-Local.ps1 writes to a SHARED %APPDATA% Revit Addins folder, last-writer-wins — only one session may hold the deploy target (mid-rehearsal/mid-deploy) at a time",
+        ".claude/scripts/evidence_hook.py must stay byte-identical with F:\\BIMpossible-Workspace's copy (md5 af8996536aa8b442fa2093023a99567a as of #12) — fix one, fix both"
+      ],
       links: [
         { label: "Roadmap (single source of truth)", path: "F:\\BIMpossible-Families\\ROADMAP.md" },
         { label: "Tool README", path: "F:\\BIMpossible-Families\\README.md" }
       ],
-      recent: ["2026-08-24 - Migrate Evidence Compiler hook to a Python-native hardened launcher","2026-08-22 - chore(paths): batch B5 - tool scripts + Family-Fixer How-To -> F:\\BIMpossible-Families","2026-08-22 - chore(paths): final-root cutover, anchor to F:\\BIMpossible* (Phase D)","2026-07-26 - docs(roadmap): add Autodesk MCP/Assistant platform findings to Phase 3","2026-07-25 - Family Fixer ribbon button merged (AddIns #25); rehearsal partial"]
+      recent: [
+        "2026-08-31 - audit: publish 2026-08-31 weekly slop-audit report (#13): 1 LOW, fixed by #12",
+        "2026-08-31 - fix(evidence-hook): degraded hook now prints a once-per-day stderr notice, still fail-open (#12, slop-audit LOW-1; 10 tests)",
+        "2026-08-24 - Migrate Evidence Compiler hook to a Python-native hardened launcher (#11)",
+        "2026-08-24 - fix(tool): --promote exits non-zero when nothing was promoted (#10)",
+        "2026-08-22 - chore(paths): batch B5 + final-root cutover, anchor to F:\\BIMpossible* (#9)"
+      ]
     },
     /* PROJECT:families:END */
     /* PROJECT:aiserver:START */
@@ -811,8 +1077,8 @@ window.DASHBOARD_DATA = {
       icon: "cube",
       oneLiner: "Portable, fully-local LLM inference + automation platform. Dev on the RTX 5080 now; relocates to a dedicated RTX 3090 box by one .env line (OLLAMA_HOST).",
       status: "active",
-      phase: "Platform build past scaffold: Waves 1-3 landed (WP-A core lib, WP-B RAG/sqlite-vec, WP-C automation suite, WP-D1 status helper, WP-F eval harness; PRs #1-#9). Repo live + private (YourBIMpossible/AI-Server); main at 6ff31ad (2026-08-22). Now a config/docs-tuning phase - no new subsystem code since June; recent commits are spec + config only. Dev on the RTX 5080; WP-E serving/ops + WP-G advanced deferred to the 3090-box relocation.",
-      focus: "PDF pickup checker (Milestone 1) - design spec + implementation plan written 2026-07-25, not yet built. RAG source roots repointed at F:\\BIMpossible-Workspace.",
+      phase: "Platform build past scaffold: Waves 1-3 landed (WP-A core lib, WP-B RAG/sqlite-vec, WP-C automation suite, WP-D1 status helper, WP-F eval harness; PRs #1-#9). Repo live + private (YourBIMpossible/AI-Server); main at 6ff31ad (2026-08-22), config/docs-only since June. Two unmerged local worktree branches hold real code: worktree-pickup-checker (13 commits, 2026-07-26, PDF pickup checker M1 built as a standalone package) and worktree-harness (10 commits, 2026-07-12, on-demand tool-using agent loop). Neither pushed. Dev on the RTX 5080; WP-E serving/ops + WP-G advanced deferred to the 3090-box relocation.",
+      focus: "PDF pickup checker M1 is BUILT on local branch worktree-pickup-checker (13 commits 2026-07-26: data model, rotation-canonical coords, markup extraction x3 modes, region compare, verdict scoring, gate evaluator, CLI, golden-set dashboard) -- unpushed, unmerged, no PR. Golden set is empty (README only). RAG source roots repointed at F:\\BIMpossible-Workspace.",
       progress: {
         label: "Work packages",
         phases: [
@@ -833,17 +1099,37 @@ window.DASHBOARD_DATA = {
         summary: "chore(rag): rag_sources Workspace root → F:\\BIMpossible-Workspace (census 19 B8) (6ff31ad)"
       },
       branch: "main at f37d165",
-      nextActions: ["Build the PDF pickup checker M1 (spec + plan committed 2026-07-25)","WP-E serving/ops + WP-G advanced - deferred to the 3090-box relocation","Rework the opencode launcher onto the .env contract (hard-coded host/model breaks the portability contract) before relocating"],
-      pendingDecisions: ["3090 box OS (Ubuntu Server vs Windows) still undecided; runtime-now settled on Ollama (validated), vLLM deferred. Box unassembled -- gated on WP-A/B/C validating on the 5080."],
+      nextActions: [
+        "Push + open PR for worktree-pickup-checker (M1 code done 2026-07-26; still local-only, no PR)",
+        "Populate the pickup-checker golden set and run run_golden_eval.py against the spec gates (golden_set/ holds only a README)",
+        "Decide fate of worktree-harness (10 commits 2026-07-12, agent loop + knowledge skill; plan doc docs/superpowers/plans/2026-07-12-harness.md is untracked on main) - merge, push, or drop",
+        "WP-E serving/ops + WP-G advanced - deferred to the 3090-box relocation",
+        "Rework the opencode launcher onto the .env contract (hard-coded host/model breaks the portability contract) before relocating"
+      ],
+      pendingDecisions: [
+        "3090 box OS (Ubuntu Server vs Windows) still undecided; runtime-now settled on Ollama (validated), vLLM deferred. Box unassembled -- gated on WP-A/B/C validating on the 5080.",
+        "worktree-harness (agent loop, 2026-07-12) has sat unmerged for 7 weeks -- ship it or delete it?"
+      ],
       blockers: [],
-      reminders: ["3090 box not assembled yet -- dev on the 5080; relocates via one .env line (OLLAMA_HOST).","Full code-audit PR #9 (06-18) findings closed; the 07-12 incremental audit is also fully closed, suite green (07-12 committed report: 83 passed; count higher now, not re-pinned in a committed report)."],
+      reminders: [
+        "3090 box not assembled yet -- dev on the 5080; relocates via one .env line (OLLAMA_HOST).",
+        "Full code-audit PR #9 (06-18) findings closed; the 07-12 incremental audit is also fully closed, suite green (07-12 committed report: 83 passed; count higher now, not re-pinned in a committed report).",
+        "Two local-only branches (pickup-checker 13 commits, harness 10 commits) exist ONLY on this machine -- no remote copy. Loss risk until pushed.",
+        "docs/superpowers/plans/2026-07-12-harness.md is untracked on main (the 07-25 pickup-checker plan IS committed)."
+      ],
       links: [
         { label: "Program plan", path: "F:\\AI-Dev\\AI-Server\\PROGRAM_PLAN.md" },
         { label: "Handoffs (WP-A..G)", path: "F:\\AI-Dev\\AI-Server\\handoffs" },
         { label: "Build/hardware plan", path: "F:\\AI-Brain-Data\\_status\\AI-Server_Build_and_Integration_Plan.md" },
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
-      recent: ["2026-08-22 - RAG rag_sources.txt root repointed to F:\\BIMpossible-Workspace","2026-08-18 - Gate PR CI on draft status for cost control (#10)","2026-08-08 - Document the opencode local coding-agent (WP-G piece)","2026-07-25 - PDF pickup checker: design spec + implementation plan","2026-07-12 - Resolve the 2026-07-12 audit findings + carried mediums (suite green)","2026-07-10 - OpenWhispr dictation-cleanup reliability proxy"],
+      recent: [
+        "2026-08-22 - RAG rag_sources.txt root repointed to F:\\BIMpossible-Workspace (6ff31ad); PDF pickup checker spec + plan committed to main (e68efa9, 75b9395, ec99e6d)",
+        "2026-08-18 - Gate PR CI on draft status for cost control (#10, merged 08-19)",
+        "2026-08-08 - Document the opencode local coding-agent (WP-G piece)",
+        "2026-07-26 - PDF pickup checker M1 implemented - 13 commits on local worktree-pickup-checker (standalone package, own venv, not wired into aiserver/); never pushed",
+        "2026-07-12 - Resolve the 2026-07-12 audit findings + carried mediums (suite green); harness agent-loop branch built same day (10 commits, local worktree-harness)"
+      ],
       audit: {
         lastRun: "2026-07-12",
         runType: "Incremental (regression-check on the four claimed high fixes + fresh review of the new OpenWhispr dictation-cleanup proxy) then same-day remediation — the 11 findings it raised were all fixed in f37d165; pytest 131 passed post-fix",
@@ -882,8 +1168,8 @@ window.DASHBOARD_DATA = {
       icon: "brain",
       oneLiner: "Personal knowledge base and context store for AI/BIM work — Obsidian vault, Revit-AI context logs, decision records, and the source corpus for AI-Server's RAG pipeline.",
       status: "active",
-      phase: "Local-only git repo (no GitHub remote). HEAD advanced 8e8b564 -> 7d1b22b (2026-08-22): first Revit-AI journal-pipeline data commit - raw journals, processed daily/weekly summaries, context store, plus collect_revit_journals.py. Working tree dirty (untracked raw-logs through 2026-08-29).",
-      focus: "Revit-AI journal pipeline: automated journal collection -> daily/weekly summaries -> context store, staged 'pre AI-Dev extraction' before moving into the AI-Dev estate.",
+      phase: "Local-only git repo (no GitHub remote), branch master. HEAD 7d1b22b (2026-08-22): first Revit-AI journal-pipeline data commit - raw journals, processed daily/weekly summaries, context store, plus collect_revit_journals.py. Live location is F:\\AI-Brain-Data since the 2026-08-23 AI-Dev extraction; F:\\AI-Dev\\AI-Brain-Data is a FROZEN rollback copy (read-only files, same HEAD, marker _FROZEN-ROLLBACK-ROOT.md). Working tree dirty (4 paths: context/copy-log + copy-state modified, untracked raw-logs/2026-08-29).",
+      focus: "Revit-AI journal pipeline: automated journal collection -> daily/weekly summaries -> context store. Collector still running (raw-logs through 2026-08-29 present, uncommitted). The 'AI-Dev extraction' is DONE - the repo was moved OUT of F:\\AI-Dev to F:\\AI-Brain-Data on 2026-08-23.",
       progress: {
         label: "Workstreams",
         phases: [
@@ -898,17 +1184,30 @@ window.DASHBOARD_DATA = {
       },
       branch: "master (local-only, no remote)",
       git: { warn: "No GitHub remote — local-only git. Confirm whether this should stay private or get a private remote for backup." },
-      nextActions: ["Extract the Revit-AI pipeline out into AI-Dev (the intended next move per the commit message)","Commit or clear the dirty tree (untracked 2026-08-29 raw-logs)","Decide remote posture - still no GitHub remote / no offsite backup"],
+      nextActions: [
+        "Commit or clear the dirty tree (context/copy-log.txt, copy-state.json, untracked raw-logs/2026-08-29)",
+        "Decide remote posture - still no GitHub remote / no offsite backup",
+        "Retire the frozen rollback copy at F:\\AI-Dev\\AI-Brain-Data once tooling burn-in is over (evidence dir: F:\\BIMpossible-Workspace\\01_BuildLog\\migration-2026-08\\_evidence-ai-dev-extract\\)"
+      ],
       pendingDecisions: [
         "Should AI-Brain-Data get a private GitHub remote for offsite backup?"
       ],
       blockers: [],
-      reminders: ["Churn resolved -- committed 2026-08-22 (data through 08-23), only ~4 files uncommitted now. The live risk is now that the repo is still local-only (no remote); the offsite-backup gap in the pending decision is the real exposure."],
+      reminders: [
+        "Churn resolved -- committed 2026-08-22 (data through 08-23); 4 paths uncommitted now (raw-logs through 08-29). The live risk is that the repo is still local-only (no remote); the offsite-backup gap in the pending decision is the real exposure.",
+        "Two full copies on disk: live F:\\AI-Brain-Data and frozen F:\\AI-Dev\\AI-Brain-Data (same HEAD, read-only, rollback only). Do not edit the frozen one; AI-Server rag_sources / any tooling must point at F:\\AI-Brain-Data."
+      ],
       links: [
         { label: "Local vault", path: "F:\\AI-Brain-Data" },
         { label: "Revit-AI context", path: "F:\\AI-Brain-Data\\Revit-AI\\context" }
       ],
-      recent: ["2026-08-22 - Revit-AI pipeline data through 2026-08-23 (raw-logs, processed, daily-summaries, context); adds collect_revit_journals.py","2026-06-28 - Normalize line endings","2026-06-28 - Remove Zai-brain embedded repo, add to gitignore","2026-06-28 - Post-graphify baseline: 70 notes enriched, 12 MOCs created"]
+      recent: [
+        "2026-08-23 - AI-Dev extraction: live repo moved to F:\\AI-Brain-Data; F:\\AI-Dev\\AI-Brain-Data frozen as read-only rollback copy (filesystem op, not a commit)",
+        "2026-08-22 - Revit-AI pipeline data through 2026-08-23 (raw-logs, processed, daily-summaries, context); adds collect_revit_journals.py (7d1b22b)",
+        "2026-06-28 - Normalize line endings",
+        "2026-06-28 - Remove Zai-brain embedded repo, add to gitignore",
+        "2026-06-28 - Post-graphify baseline: 70 notes enriched, 12 MOCs created"
+      ]
     },
     /* PROJECT:ai-brain-data:END */
 
@@ -919,8 +1218,8 @@ window.DASHBOARD_DATA = {
       icon: "folder",
       oneLiner: "Strategy docs, build logs, prompts, diagrams, and the cross-repo /next state store that drive and reconcile the BIMpossible platform build.",
       status: "active",
-      phase: "main synced with origin (through PR #104, e6b0684, 2026-08-30). Recent work is audit-estate closeout and ops records, not feature code: the 56-finding cross-repo estate closed 56->0 (audit-closure-COMPLETE + closeout evidence ledger, 2026-08-26/27), the authz-enforcement rollout recorded COMPLETE, out-of-estate closeout COMPLETE, and continuous /next queue reconciliation (watermarks bimpossible #498, addins #111). Several 2026-08-26 audit/decision docs sit untracked in 03_Audits / 01_BuildLog pending an intentional commit. Sources of truth unchanged: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md.",
-      focus: "Cross-repo /next state store as source of truth: reconciling the queue against BIMpossible + Add-Ins landings, promoting items landed->live with runtime evidence, and closing the estate-56 audit arc. Heavy state-sync + audit-record cadence.",
+      phase: "main synced with origin (c433b87, 2026-09-02 08:55; PR #112 merged 2026-09-01, PR #111 scope-control remediation still OPEN). Since 08-30 the repo has been almost entirely state-mirror + ledger traffic: ~60 commits of /next mirror snapshots promoting items landed->live with runtime evidence (P3-6-SPATIAL, WRITE-ENGINE-INC2, P11 QA-history set, AUTHZ-AUDIT items, P7-SYNC-REJECTION-AUDIT), PHASE-STATUS re-scores (Phase 4 model routing 1A/#542 live + 1B #548 merged; row 13 Increment 2 built+deployed; Phase 3.6 LIVE 2026-09-02), and the 2026-08-31 weekly audit publication + evening re-run + 2026-09-01 owner-authorized closeout records. Also landed: docs-hygiene hardening (HYG-2 header enforcement, PR-time gating #106/#109), gitleaks triage/allowlist of 18 migration-evidence findings (#107), a redacted live temp_clone_token flagged for owner rotation review (ecd6072), production code-signing reclassified ON HOLD (9a8afb8), CKA Decision-0=0A integration plan (ab49443). The 2026-08-26/27 authz-enforcement + out-of-estate closeout docs are now committed (9a18cba); working tree clean except one settings backup. Sources of truth unchanged: 00_Strategy/BIMpossible_PHASE-STATUS.md, WAVE-STATUS.md, STATE-LIVE.md, .tools/state/QUEUE.md.",
+      focus: "Cross-repo /next state store as source of truth, now under heavy per-item mirror-snapshot cadence (one commit per promoted item): reconciling the queue against BIMpossible (#548) + Add-Ins (#117) landings, promoting landed->live with runtime evidence, keeping PHASE-STATUS re-scored the same day PRs merge, and holding the 2026-08-31 audit closeout records. Open: PR #111 (scope-control remediation: dormancy enforcement + commit-index fix + record integrity) and the owner rotation review for the redacted temp_clone_token.",
       progress: {
         label: "Content areas",
         phases: [
@@ -937,17 +1236,36 @@ window.DASHBOARD_DATA = {
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
-      nextActions: ["Work the queue items surfaced 2026-08-30: KEYPLAN-LIVE-WRITE, CI-LOCALFIRST, CCBUILD-UNTRACK","Commit/settle the ~8 untracked authz-enforcement + out-of-estate closeout docs in 01_BuildLog/ and 03_Audits/ (incl. one .draft.md)","Deploy the Wave-Status PR-body-check handoff (advisory-only, deploy pending)","Resolve the flagged Add-Ins/RevitLink audit-reconciliation gap (ops-1)"],
-      pendingDecisions: ["Ratify eco-5 (Phase 10 portfolio guardrail) -- Speckle comparison done 2026-07-25, the ledger still marks it \"researching\"; awaiting owner ratification."],
+      nextActions: [
+        "Merge or close PR #111 (scope-control remediation: dormancy enforcement + commit-index fix + record integrity)",
+        "Owner rotation review of the live temp_clone_token redacted from breach-chain evidence JSON (ecd6072; 658018d records it as contained)",
+        "Resolve OPS-1-ADDINS-AUDIT-GAP (Add-Ins audit card stuck stale: newer report lacks a severity/ID scheme) -- CLAIMED 2026-08-31, still in Blocked-on-you",
+        "ADDINS-KEYPLAN-LIVE-WRITE: owner flags A-C then first supervised Key Plan write (AddIns #110 built, VERIFIED 2026-08-31, owner-gated)",
+        "Prune the ~10 merged local-only branches (docs/wavestatus-handoff-package, claude/audit-closure-final, claude/next-steps-c523ad, ...) and drop the stray .claude/settings.local.json.bak"
+      ],
+      pendingDecisions: [
+        "Ratify eco-5 (Phase 10 portfolio guardrail) -- Speckle comparison done 2026-07-25, the ledger still marks it \"researching\"; awaiting owner ratification.",
+        "FAMILIES-DORMANT-REASSESS: Families project marked dormant 2026-08-31 (probes suspended, items parked); owner to decide when/whether to reassess."
+      ],
       blockers: [],
-      reminders: ["2026-07-25 session forensic audit (`02_Reference/Audit Reports/2026-07-25__session-audit-addins-cleanup-runtime-clobber.md`) is a process/custody postmortem, not a code-quality `/audit` report — it won't appear in `_audit-runs.md` and its findings live in narrative fields on the addins/families cards, not in any audit finding-count","Decision ledger for ecosystem research: 00_Strategy/Dashboard/strategy_decisions_ledger.md (eco-N items)"],
+      reminders: [
+        "2026-07-25 session forensic audit (`02_Reference/Audit Reports/2026-07-25__session-audit-addins-cleanup-runtime-clobber.md`) is a process/custody postmortem, not a code-quality `/audit` report — it won't appear in `_audit-runs.md` and its findings live in narrative fields on the addins/families cards, not in any audit finding-count",
+        "Decision ledger for ecosystem research: 00_Strategy/Dashboard/strategy_decisions_ledger.md (eco-N items)",
+        ".tools/state/QUEUE.md is GENERATED (canonical producer F:\\Claude-Profile\\skills\\next; regenerate via render_queue.py from queue.yaml) -- never hand-edit; a stale-base clobber already dropped 5 items once (c1bdc55, restored in 4734bd4)"
+      ],
       links: [
         { label: "Local workspace", path: "F:\\BIMpossible-Workspace" },
         { label: "Phase status", path: "F:\\BIMpossible-Workspace\\00_Strategy\\BIMpossible_PHASE-STATUS.md" },
         { label: "Wave status", path: "F:\\BIMpossible-Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md" },
         { label: "GitHub", path: "https://github.com/YourBIMpossible/BIMpossible_Workspace" }
       ],
-      recent: ["2026-08-30 - Add-Ins sync: PARAMSET landed (#111 -> 60ebeb1); watermark bump + 3 new queue items","2026-08-30 - Queue promotions to live: FIRM-ALIAS-BACKEND, P6-CLIENTMGMT-F (two-firm synthetic smoke), RESOLVE-BIND-1","2026-08-30 - P15D live-write demo closeout (#103)","2026-08-27 - Audit closeout: app.yourbimpossible.com availability resolved (#98/#100)","2026-08-26 - M-30 closed, estate 56->0, final closure COMPLETE (#96)","2026-08-25 - Phase 7 row -> LIVE (supervised cutover PASS)","2026-08-24 - Evidence Compiler hook migrated to a Python-native launcher (#90)"]
+      recent: [
+        "2026-09-02 - PHASE-STATUS: Phase 4 re-scored for model routing 1A/#542 (live) + 1B #548 (merged, deploy pending); queue watermark bimpossible 2cc7bdf8/PR#548 (c433b87, 8359606)",
+        "2026-09-01 - Mirror snapshot burst: ~15 items promoted landed->live with runtime evidence (P3-6-SPATIAL, WRITE-ENGINE-INC2, P11 QA-history x3, AUTHZ-AUDIT x2, P13-T6-REASON-TAG); Phase 3.6 row -> LIVE",
+        "2026-09-01 - 2026-08-31 audit closeout finalized: CQ-1 resolved, temp_clone_token redacted + contained, owner-authorized closeout recorded, code-signing reclassified ON HOLD (658018d, 724ea80, 9a8afb8)",
+        "2026-08-31 - Weekly full audit published + evening re-run reconciliation; gitleaks 18 migration-evidence findings triaged/allowlisted; docs-hygiene gated at PR time (#106, #107, #108, 39f25bf)",
+        "2026-08-30 - Add-Ins sync: PARAMSET landed (#111 -> 60ebeb1); queue promotions to live: FIRM-ALIAS-BACKEND, P6-CLIENTMGMT-F, RESOLVE-BIND-1; P15D live-write demo closeout (#102, #103)"
+      ]
     },
     /* PROJECT:bimpossible-workspace:END */
 
@@ -958,7 +1276,7 @@ window.DASHBOARD_DATA = {
       icon: "refresh",
       oneLiner: "Automation-dedicated clone of the ai-dev-dashboard repo. The scheduled refresh pipeline (sync_*.py scripts, GitHub Actions sync) commits directly here; F:\\AI-Dashboard\\Dashboard is the human-edit copy.",
       status: "active",
-      phase: "main branch, same remote as Dashboard (YourBIMpossible/ai-dev-dashboard) — both clones now in sync with origin (confirmed 2026-07-23, HEAD a571627). The 2026-06-28 10-commit fast-forward lag is long resolved; the scheduler runs the 06:00 daily refresh from THIS clone via Task Scheduler, confirmed landing pushes 07-19 through 07-23. The local dashboard monitor (:8081 live-server + 2min loop) was REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan state — refresh is now scheduled-or-on-demand only (Refresh-Now.cmd).",
+      phase: "main branch, same remote as Dashboard (YourBIMpossible/ai-dev-dashboard). Automation clone HEAD dc694c6 (2026-09-02 07:49 refresh, pushed manually); working tree clean, nothing unpushed. 2026-08-31 PRs #8/#11 made this clone run origin's code and refuse to default away curated phase fields after a stale-clone refresh wiped them (repaired by PR #12, a439b19, 09-02). The local :8081 monitor was removed 2026-07-21 (e1aae72); refresh is scheduled-or-on-demand only (Refresh-Now.cmd).",
       focus: "Running the scheduled dashboard refresh + live billing sync + bimwatch daily collection on cadence.",
       progress: {
         label: "Automation pipeline",
@@ -975,15 +1293,26 @@ window.DASHBOARD_DATA = {
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
-      nextActions: ["None manual - automation self-drives; uncommitted changes fold into the next scheduled commit"],
+      nextActions: [
+        "Verify the 06:00 Task Scheduler refresh fires: no scheduled refresh commit on 2026-09-01 or 09-02 (the 09-02 07:49 run was manual)",
+        "Pull PR #13 (9bc9870) into this clone before the next refresh so it runs origin's current code"
+      ],
       pendingDecisions: [],
       blockers: [],
-      reminders: ["Two independently-live copies of this dashboard exist: Cloudflare Pages (deliberate, deploy.yml) and GitHub Pages (incidental, unconfigured default for a public repo) — both served identical content as of 2026-07-23"],
+      reminders: [
+        "Two live copies: Cloudflare Pages (canonical, deploy.yml) and GitHub Pages (incidental) - now recorded in docs by PR #6 (d656a44, 08-31)",
+        "Human clone F:\\AI-Dashboard\\Dashboard is 10 behind origin/main with uncommitted graphify-health.js + untracked Refresh-GitStaging.ps1 - do not refresh from it"
+      ],
       links: [
         { label: "Auto clone folder", path: "F:\\AI-Dashboard\\Dashboard-auto" },
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/ai-dev-dashboard" }
       ],
-      recent: ["2026-08-30 - Scheduled refresh ran twice (06:00 + 17:15) + live billing sync + bimwatch collection","2026-08-26 - M-30 audit milestone closed on the board (estate 56->0, add-ins 1->0 open)","2026-08-25 - Phase-7 acceptance ratified on the board","2026-06-28 - Harden the automation refresh path"]
+      recent: [
+        "2026-09-02 - Manual refresh pushed dc694c6; PR #12 restored curated completion-model fields wiped by the stale clone (a439b19); PR #13 ingested the 08-31 weekly audit (0 open)",
+        "2026-08-31 - PRs #8/#9/#10/#11: automation clone now runs origin's code, commits PHASE_DAG.md, refuses to default away curated fields or render over untracked shadow files",
+        "2026-08-31 - PR #5 Phase Completion Model v1 + PR #7 Mission Control UX rework merged; 06:00 scheduled refresh c16a1ee + billing/bimwatch syncs",
+        "2026-08-30 - Scheduled refresh ran twice (06:00 + 17:15) + live billing sync + bimwatch collection"
+      ]
     },
     /* PROJECT:dashboard-auto:END */
 
@@ -994,8 +1323,8 @@ window.DASHBOARD_DATA = {
       icon: "monitor",
       oneLiner: "Fully-local workstation monitoring stack for the Ryzen 9 9950X3D + RTX 5080 rig. Python collector → SQLite; zero-dependency web dashboard with live view + historical scrubbing. No cloud, no telemetry.",
       status: "dormant",
-      phase: "Git-initialized as of 2026-07-12 (3 commits, dd1bb9d baseline → bb97b0c) — the \"no git\" era ended. Python collector (collector.py) + Flask web app (app.py) + SQLite (db.py). Actively logging: metrics.db-shm mtime 2026-07-22. Packaged as a Windows-native install (install-task.ps1 → Task Scheduler; desktop shortcut at http://127.0.0.1:8787).",
-      focus: "Idle since audit-resolution. No active thread; last work closed the 2026-07-12 audit.",
+      phase: "Git-initialized as of 2026-07-12 (3 commits, dd1bb9d baseline -> bb97b0c on master, no remote) -- the \"no git\" era ended. Python collector (collector.py) + Flask web app (app.py) + SQLite (db.py). Logging appears STOPPED: metrics.db / -wal last written 2026-08-19 17:02, nothing since (14 days). Packaged as a Windows-native install (install-task.ps1 -> Task Scheduler; desktop shortcut at http://127.0.0.1:8787).",
+      focus: "Idle since audit-resolution (2026-07-12). Collector has not written metrics since 2026-08-19 -- check whether the scheduled task is still running.",
       progress: {
         label: "Features",
         phases: [
@@ -1011,10 +1340,18 @@ window.DASHBOARD_DATA = {
       },
       branch: "main",
       git: { latestCommit: "bb97b0c" },
-      nextActions: ["Rebuild the packaged .exe/.zip from post-audit source - current artifacts (2026-06-17) predate all 3 commits","No open code work otherwise"],
+      nextActions: [
+        "Check why metrics.db stopped updating on 2026-08-19 (scheduled task dead? machine change?) and restart the collector",
+        "Rebuild the packaged .exe/.zip from post-audit source - current artifacts (2026-06-17) predate all 3 commits",
+        "No open code work otherwise"
+      ],
       pendingDecisions: ["PC-Monitor git-init is done (3 commits); pushing to a private remote is not -- no remote configured."],
       blockers: [],
-      reminders: ["Git exists (since 07-12, 3 commits) -- update any doc/dashboard text still saying \"no git\".","A packaged build now exists but lives OUTSIDE the repo (F:\\PC-Monitor\\PC-Monitor.exe + _internal\\, and F:\\PC-Monitor-app.zip) -- not committed or tracked in the source repo."],
+      reminders: [
+        "Git exists (since 07-12, 3 commits, branch master) -- update any doc/dashboard text still saying \"no git\".",
+        "A packaged build now exists but lives OUTSIDE the repo (F:\\PC-Monitor\\PC-Monitor.exe + _internal\\, F:\\PC-Monitor-app.zip, and F:\\AI-Dev\\PC-Monitor-app\\) -- all dated 2026-06-17, not committed or tracked in the source repo.",
+        "metrics.db (~95 MB) sits inside the repo's data/ dir; last write 2026-08-19."
+      ],
       links: [
         { label: "Local app", path: "F:\\AI-Dev\\PC-Monitor" },
         { label: "Live dashboard", path: "http://127.0.0.1:8787" },
@@ -1066,7 +1403,7 @@ window.DASHBOARD_DATA = {
       icon: "check",
       oneLiner: "Personal testing vault (Obsidian) for manually walking through BIMpossible phase/wave smoke tests. Human-executed verification checklist organized per project and phase.",
       status: "dormant",
-      phase: "No git — local Obsidian vault (~12 files). One note per project under Projects/, each with ## Phase headings and checkbox steps. Dashboard view (_Dashboard.md) surfaces only unchecked next steps. Last modified 2026-06-24.",
+      phase: "No git - local Obsidian vault (8 files: 3 project notes under Projects/, _Dashboard, _Start-Here, _Phase-Test-Template, Projects/_README, _scripts/refresh-tests.py). One note per project with ## Phase headings and checkbox steps; _Dashboard.md surfaces only unchecked next steps via the Tasks plugin. Notes last modified 2026-06-24; refresh-tests.py touched 2026-08-22.",
       focus: "Run manual smoke tests after each BIMpossible deployment. Refresh vault by re-reading per-repo runbooks after any major merge.",
       progress: {
         label: "Coverage",
@@ -1082,7 +1419,10 @@ window.DASHBOARD_DATA = {
       },
       branch: "N/A — local only, no git",
       git: null,
-      nextActions: ["Refresh test notes against current shipped work: P8 Wizard (LIVE 07-22), P11 QA (SHIPPED LIVE), P11.1 Coordination Report (SHIPPED LIVE, 95%) — vault has zero coverage of any of these"],
+      nextActions: [
+        "Refresh test notes against current shipped work: P8 Wizard, P11 QA, P11.1 Coordination Report, M-30 audit closeout - vault has zero coverage (grep P11|Wizard|Coordination Report finds nothing)",
+        "Decide what refresh-tests.py (edited 2026-08-22) is now for - _Start-Here still calls it superseded"
+      ],
       pendingDecisions: [],
       blockers: [],
       reminders: [
@@ -1094,7 +1434,8 @@ window.DASHBOARD_DATA = {
         { label: "Dashboard view", path: "F:\\BIMpossible-Tests\\_Dashboard.md" }
       ],
       recent: [
-        "2026-06-24 — last local modification"
+        "2026-08-22 - _scripts/refresh-tests.py modified (docstring: generates the Web-App note from the Verification Checklist, preserves check marks by item ID)",
+        "2026-06-24 - Last modification of the vault notes (_Dashboard, _Start-Here, Projects/*)"
       ]
     },
     /* PROJECT:bimpossible-tests:END */
