@@ -219,7 +219,7 @@ test("real data.js via renderer: bimpossible = 63% active / 92% computed baselin
 // by kind; blockers/decisions are ripe unless their text is parked; unknown
 // wording fails safe to ripe; every eligible item lands in exactly one bucket.
 // ============================================================================
-const CHECKIN_CONSTS = ["DESK_PARK", "DESK_WAIT", "DESK_DONE", "DESK_ASK", "EV_TIP"]
+const CHECKIN_CONSTS = ["DESK_PARK", "DESK_WAIT", "DESK_DONE", "DESK_UNDONE", "DESK_ASK", "EV_TIP"]
   .map(n => extractConstLine(HTML, n)).join("\n");
 const CHECKIN_FNS = ["deskSegments", "deskRipe", "tvPartition", "tvHumanize", "tvDesk", "cohortHeadlinePct",
   "flagshipMetric", "revealBlock", "todayView"]
@@ -341,6 +341,14 @@ test("segment 7: ';' and newline separate clauses too (both occur in the real de
   // ...but a genuine ask in that second clause still wins outright
   assert.ok(isRipe("decision", "Awaiting CI; owner to ratify the release"));
   assert.ok(isRipe("decision", "Resolved; owner to pick a successor."));
+  // ...and so does OWNER WORK stated in that clause, whose verb is no decision at all. Scoping the
+  // wait must not hide it just because 'update'/'rerun'/'file'/'own' are not choices.
+  assert.ok(isRipe("blocker", "Awaiting CI; you must update the changelog"));
+  assert.ok(isRipe("blocker", "Awaiting CI; owner needs to rerun the migration"));
+  assert.ok(isRipe("blocker", "Blocked on upstream\nyou still have to file the RFI"));
+  assert.ok(isRipe("blocker", "Waiting on vendor; your action item is the site visit"));
+  assert.ok(isRipe("blocker", "Depends on Wave 16; you own the rollout plan"));
+  assert.ok(isRipe("blocker", "Blocked on vendor; owner is responsible for the resubmit"));
 });
 test("segment 8: a terminal cue closing an item with no trailing punctuation still parks", () => {
   // 'complete/closed/resolved' used to require a literal '.' or ';' — exactly what the segmenter
@@ -348,6 +356,20 @@ test("segment 8: a terminal cue closing an item with no trailing punctuation sti
   assert.ok(!isRipe("decision", "Migration complete"));
   assert.ok(!isRipe("decision", "Rollout closed"));
   assert.ok(!isRipe("blocker", "Ceilings shaper not built"));
+});
+test("segment 8b: a NEGATED terminal is unfinished work and must stay Needs you", () => {
+  // the end-of-segment anchor above matches "...not complete" just as readily as "...complete",
+  // so the negation lookbehind is what keeps explicitly-unfinished work out of the parked fold.
+  assert.ok(isRipe("blocker", "Deployment not complete"));
+  assert.ok(isRipe("blocker", "Migration is not yet complete"));
+  assert.ok(isRipe("blocker", "Merge conflict not resolved"));
+  assert.ok(isRipe("blocker", "Ticket not closed"));
+  assert.ok(isRipe("blocker", "Wave 16 is far from complete"));
+  assert.ok(isRipe("decision", "Retro isn't complete"));
+  assert.ok(isRipe("blocker", "Cannot complete")); // no word boundary before "not" — still negated
+  assert.ok(isRipe("blocker", "Handoff not complete\nBlocker stands"));
+  // the guard is clause-bounded, so a negator far from the terminal word still reads as done
+  assert.ok(!isRipe("decision", "Not gating - the migration is complete"));
 });
 test("segment 9: the owner-ask override is NOT segment-scoped, so scoping cannot narrow it", () => {
   // owner word and verb in DIFFERENT clauses of one sentence: still a live ask, still ripe
@@ -373,6 +395,15 @@ test("segment 11: partition invariant holds across a mixed segment-scoped set", 
   items.forEach(d => assert.ok(p.ripe.some(x => x.pid === d.pid) !== p.parked.some(x => x.pid === d.pid),
     "each item must land in exactly one bucket: " + d.pid));
   assert.deepStrictEqual(Array.from(p.ripe, d => d.pid).sort(), ["a", "d"]);
+});
+test("segment 12: widening the ask to obligation verbs does NOT un-park settled wording", () => {
+  // the obligation stems are anchored so they cannot fire on the parked-by-design phrases: "owner"
+  // must not satisfy own(?:s|ed)?\b, and "needed"/"informed" must not satisfy need(?:s|ed)?\s+to\b.
+  assert.ok(!isRipe("blocker", "Awaiting CI; owner already informed"));
+  assert.ok(!isRipe("blocker", "Awaiting CI. No owner action needed."));
+  assert.ok(!isRipe("blocker", "No owner action needed"));
+  assert.ok(!isRipe("blocker", "Waiting on the vendor"));
+  assert.ok(!isRipe("decision", "Owner action needed: none. Resolved."));
 });
 
 // -- partition invariants on the REAL desk --
