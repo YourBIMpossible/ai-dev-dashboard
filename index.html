@@ -3955,6 +3955,18 @@ const DESK_WAIT=/\b(?:await(?:s|ing)?|waiting (?:on|for)|blocked (?:on|by)|depen
 // used to prove that is precisely what the segmenter strips, so the anchor is now (?=[.;]|$) —
 // end-of-segment — which also finally catches a terminal cue closing an item with no punctuation.
 const DESK_DONE=/\b(?:no (?:action|owner action|decision|call|approval)\s*(?:needed|required)|already (?:done|merged|closed|shipped|resolved|handled)|nothing (?:to do|needed|left)|complete[d]?(?=[.;]|$)|closed(?=[.;]|$)|resolved(?=[.;]|$))/i;
+// (3b) ...but a NEGATED terminal — "not complete", "not yet resolved", "cannot close", "far from
+// complete" — is the OPPOSITE of done, and the (?=[.;]|$) anchor above matches it just as readily
+// as the affirmative form, which would fold explicitly-UNFINISHED work into the parked list. This
+// is a forward-matching guard rather than a lookbehind on DESK_DONE on purpose: variable-length
+// lookbehind is unsupported on Safari < 16.4, and a SyntaxError in a regex LITERAL takes this
+// whole inline script down, not just the classifier — too high a price for one cue. No leading \b,
+// so "cannot complete" (no boundary before "not") is caught too; [^.;]{0,24} keeps the negator
+// inside the terminal word's own clause, so a distant "not gating - the migration is complete"
+// still reads, correctly, as done. It suppresses the whole DONE cue for that segment rather than
+// just the bare-word alternative: prose self-contradictory enough to need the distinction should
+// fail toward VISIBLE, which is the direction this classifier owes the reader.
+const DESK_UNDONE=/(?:not|never|far from|yet to be|no longer|n['’]t)[^.;]{0,24}\b(?:complete[d]?|closed|resolved)(?=[.;]|$)/i;
 // (4) OVERRIDE: an explicit, still-OPEN ask directed at the owner keeps the item ripe even when a
 // PARK/WAIT/DONE cue also appears in the prose — "Closed. Owner to ratify." is a live decision, not
 // a closed one. This restores the fail-safe direction (surface, never hide) for genuine owner asks.
@@ -3972,7 +3984,15 @@ const DESK_DONE=/\b(?:no (?:action|owner action|decision|call|approval)\s*(?:nee
 // a match to one sentence while spanning ';' and newlines, so a clause-level ask is still caught,
 // whereas splitting it further could only ever HIDE an ask — "Owner has the final say; merge or
 // close." would stop matching once the owner word and its verb landed in separate segments.
-const DESK_ASK=/(?:^|[.?!]\s*)(?=[^.?!]*\b(?:owner|you|your)\b)[^.?!]*\b(?:decid|decision|choos|chos|choice|pick|keep|kept|remov|kill|drop|merg|ship|approv|ratif|sign(?:ed)?[-\s]?off|review|confirm)|\b(?:keep|merge|ship) it or \w+ it\b/i;
+// The verb set also carries OBLIGATION phrasing — "must", "needs to", "has to", "action item",
+// "responsible for", "on the hook", "own(s)" — because segment-scoping DESK_WAIT stopped an owner
+// word in a ';'- or newline-separated clause from un-parking the wait. That is right for "Awaiting
+// CI; owner already informed" and wrong for "Awaiting CI; you must update the changelog": the work
+// is the owner's, and none of the decision verbs above name it — update / rerun / file / own are
+// not choices. These stems are anchored rather than bare — own(?:s|ed)?\b so "owner" itself cannot
+// match, need/have require a following "to" — so the parked-by-design wording ("no owner action
+// needed", "owner already informed") matches none of them and still parks.
+const DESK_ASK=/(?:^|[.?!]\s*)(?=[^.?!]*\b(?:owner|you|your)\b)[^.?!]*\b(?:decid|decision|choos|chos|choice|pick|keep|kept|remov|kill|drop|merg|ship|approv|ratif|sign(?:ed)?[-\s]?off|review|confirm|must\b|need(?:s|ed)?\s+to\b|ha(?:s|ve)\s+to\b|action item|responsible for|on the hook|own(?:s|ed)?\b)|\b(?:keep|merge|ship) it or \w+ it\b/i;
 // An owner ask anywhere in the item wins outright; otherwise a park/wait/done cue in ANY SINGLE
 // SEGMENT parks it; prose carrying no recognised cue at all stays ripe. Scoping the root cues
 // matters in both directions: a terminal "Closed." can no longer bury a live "Owner to ratify."
@@ -3982,7 +4002,7 @@ function deskRipe(d){
   if(DESK_ASK.test(t))return true;
   const segs=deskSegments(t);
   if(!segs.length)return true;
-  return !segs.some(s=>DESK_PARK.test(s)||DESK_WAIT.test(s)||DESK_DONE.test(s));
+  return !segs.some(s=>DESK_PARK.test(s)||DESK_WAIT.test(s)||(DESK_DONE.test(s)&&!DESK_UNDONE.test(s)));
 }
 // The whole contract in one pure function: reminders are context (park by kind); blockers and
 // decisions are ripe only when their text is not parked. Every eligible item lands in exactly
