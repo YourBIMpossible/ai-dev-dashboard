@@ -994,7 +994,9 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .ov-ev i{width:1px;height:14px;background:var(--border);display:inline-block;}
 
 /* Movement */
+.tv-move-cap{font-size:var(--ts-xs);color:var(--dim);margin:-2px 0 var(--sp-3);line-height:1.45;max-width:62ch;}
 .tv-move{display:flex;flex-direction:column;gap:1px;}
+.tv-row .pctv{cursor:help;}
 .tv-row{
   display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:var(--sp-3);align-items:center;
   padding:10px var(--sp-3);border-radius:9px;border:1px solid transparent;
@@ -3907,17 +3909,32 @@ function tvDesk(){
   });
   return out.sort((a,b)=>a.rank-b.rank);
 }
-// ── Check-in triage helpers ─────────────────────────────────────────────────
-// A desk item "needs a call today" unless its own text says it is parked: gated on an
-// unfinished prerequisite, explicitly soft / non-gating, dormant until a trigger fires, or
-// still direction-only. This only PARTITIONS a list that is always shown in full (parked
-// items fold, they are never dropped), so a misread changes ordering, never visibility. Cues
-// are taken from the real blockers/decisions/reminders strings already in data.js.
-const DESK_PARK=/\b(dormant|non-?gating|blocks nothing|no demand|gated on|deferred|on hold|direction-only|single-operator|before (?:building|deciding|you)\b|re-?check\b|until\b[^.]*\b(?:fires?|lands?|ships?|exists?)\b|no (?:trigger|demand)|soft,?\s*non|not built[;,]|none (?:has|yet))/i;
-// "awaiting X" parks only when X is NOT the owner: "awaiting owner ratification / your sign-off"
-// is the ripest state there is — it is waiting on YOU — so it must stay in the queue.
-const DESK_AWAIT=/\bawait(?:s|ing)?\b(?![^.]*\b(?:owner|your|you|ratif|sign-?off|decision|call)\b)/i;
-function deskRipe(d){ const t=String(d.text||''); return !DESK_PARK.test(t)&&!DESK_AWAIT.test(t); }
+// ── Check-in triage contract ────────────────────────────────────────────────
+// The desk splits into RIPE ("Needs you" — an owner decision/approval/ratification/choice or
+// an owner-resolvable blocker) and PARKED (waiting on CI/upstream/vendor/dependency; dormant /
+// future / placeholder / conditional / gated; reminders and context; already done/closed). The
+// split only PARTITIONS a list shown in full — parked items fold, they are never dropped — so a
+// misread changes ordering, never visibility. It fails safe: anything the cues do not recognise
+// stays RIPE, never silently hidden. Cues come from the real desk strings already in data.js.
+//
+// (1) Gated / dormant / soft-non-gating / placeholder / conditional prerequisites → parked.
+const DESK_PARK=/\b(dormant|non-?gating|blocks nothing|no demand|gated on|deferred|on hold|direction-only|single-operator|placeholder|conditional on|before (?:building|deciding|you)\b|re-?check\b|until\b[^.]*\b(?:fires?|lands?|ships?|exists?)\b|no (?:trigger|demand)|soft,?\s*non|not built[;,]|none (?:has|yet))/i;
+// (2) "awaiting / waiting on / blocked on / depends on X" parks ONLY when X is not the owner.
+// "awaiting owner ratification / your sign-off / needs your decision" is the ripest state there
+// is — it is waiting on YOU — so the owner-cue lookahead keeps it in the queue.
+const DESK_WAIT=/\b(?:await(?:s|ing)?|waiting (?:on|for)|blocked (?:on|by)|depend(?:s|ent)? on)\b(?![^.]*\b(?:owner|your\b|you\b|ratif|sign-?off|approv|decision|decide|choice|call)\b)/i;
+// (3) Already resolved — no owner action remains. Terminal-completion wording only, so an OPEN
+// owner choice like "merge or close" / "ship it or delete it" is NOT caught (those stay ripe).
+const DESK_DONE=/\b(?:no (?:action|owner action|decision|call|approval)\s*(?:needed|required)|already (?:done|merged|closed|shipped|resolved|handled)|nothing (?:to do|needed|left)|complete[d]?[.;]|closed[.;]|resolved[.;])/i;
+function deskRipe(d){ const t=String(d.text||''); return !DESK_PARK.test(t)&&!DESK_WAIT.test(t)&&!DESK_DONE.test(t); }
+// The whole contract in one pure function: reminders are context (park by kind); blockers and
+// decisions are ripe only when their text is not parked. Every eligible item lands in exactly
+// one bucket, so folded `parked` + visible `ripe` always reconcile to the whole desk — nothing
+// is dropped between them. Shared by todayView and the behavioural tests so both see one contract.
+function tvPartition(desk){
+  const isRipe=d=>(d.kind==='blocker'||d.kind==='decision')&&deskRipe(d);
+  return {ripe:desk.filter(isRipe), parked:desk.filter(d=>!isRipe(d))};
+}
 
 // Feed / desk copy is ledger prose carrying (#123) PR-and-issue citations. Dim those refs so the
 // sentence reads first and the trail-back citation sits quietly after it — kept, never deleted.
@@ -3971,8 +3988,7 @@ function todayView(){
   // (47 rows). Here the top band is only what genuinely needs a decision today; everything
   // parked or waiting on a trigger folds away (never dropped), so an empty band honestly means
   // "you're clear to build", not "we hid the rest". Reminders are context, so they park too.
-  const isRipe=d=>(d.kind==='blocker'||d.kind==='decision')&&deskRipe(d);
-  const ripe=desk.filter(isRipe), parked=desk.filter(d=>!isRipe(d));
+  const {ripe,parked}=tvPartition(desk);
   const item=d=>`<button type="button" class="tv-item" onclick="show('${esc(d.pid)}')">`
     +`<span class="tv-kind k-${d.kind}">${d.kind}</span>`
     +`<span class="body"><span class="who">${esc(d.pname)}</span><p>${tvHumanize(d.text)}</p></span></button>`;
@@ -4020,14 +4036,20 @@ function todayView(){
   const ranked=D.projects.slice().sort((a,b)=>commits14(b)-commits14(a));
   const moving=ranked.filter(p=>commits14(p)>0);
   const quiet=ranked.filter(p=>commits14(p)===0);
-  h+=`<section class="tv-sec"><h3>Movement <span class="ct">· 14 days</span></h3><div class="tv-move">`;
+  // The per-row percent is a QUICK unweighted phase average, not an authoritative completion
+  // figure — the two-number headline at the top owns that. Label it plainly ("current phase
+  // average") and never as overall/progress, so a glance here can't be mistaken for the earned
+  // value. Ordering is by 14-day commits (movement), deliberately not by this percent.
+  h+=`<section class="tv-sec"><h3>Movement <span class="ct">· 14 days</span></h3>`
+    +`<div class="tv-move-cap">Percent = current phase average — a quick unweighted signal. The completion headline up top is the authority for active scope &amp; delivery cohort.</div>`
+    +`<div class="tv-move">`;
   moving.forEach(p=>{
     const pc=overallPct(p), c=commits14(p);
     h+=`<button type="button" class="tv-row" onclick="show('${esc(p.id)}')">`
       +`<span class="nm">${esc(p.name)}<small>${esc((p.lastActivity&&p.lastActivity.summary)||p.oneLiner||'')}</small></span>`
       +spark(p.activity)
       +`<span class="commits">${c}<em> c</em></span>`
-      +`<span class="pctv">${pc!==null?pc+'%':'—'}</span></button>`;
+      +`<span class="pctv" title="Current phase average — a quick unweighted phase signal; use the completion headline above for active scope and delivery-cohort status.">${pc!==null?pc+'%':'—'}</span></button>`;
   });
   if(quiet.length){
     h+=`<div class="tv-quiet"><span class="lbl">Quiet</span>`
