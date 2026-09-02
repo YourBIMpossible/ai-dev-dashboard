@@ -1067,7 +1067,88 @@ window.DASHBOARD_DATA = {
         "2026-08-24 - Migrate Evidence Compiler hook to a Python-native hardened launcher (#11)",
         "2026-08-24 - fix(tool): --promote exits non-zero when nothing was promoted (#10)",
         "2026-08-22 - chore(paths): batch B5 + final-root cutover, anchor to F:\\BIMpossible* (#9)"
-      ]
+      ],
+      audit: {
+        lastRun: "2026-08-31",
+        runType: "Weekly slop-audit (second pass; first was 2026-08-24). 1 LOW (LOW-1: a broken interpreter made the fail-open evidence hook indistinguishable from a working one) -- fixed by PR #12 9e0a23d (once-per-day stderr notice, still fail-open, 10 tests). The report's 'pin an absolute interpreter path' suggestion was deliberately declined as machine-specific.",
+        cadence: "weekly slop-audit (scheduled)",
+        trend: "stable",
+        reportPath: "F:\\BIMpossible-Families\\audits\\2026-08-31__slop-audit.md",
+        reportFile: "families/2026-08-31__slop-audit.md",
+        ledgerPath: "F:\\BIMpossible-Families\\audits",
+        history: [
+          {
+            date: "2026-08-31",
+            type: "Weekly slop-audit (published by PR #13).",
+            scope: ".claude/settings.json, .claude/scripts/evidence_hook.py, tools/.",
+            result: "1 LOW (LOW-1) -> fixed by PR #12 9e0a23d. 0 open.",
+            report: "2026-08-31__slop-audit.md"
+          },
+          {
+            date: "2026-08-24",
+            type: "Weekly slop-audit (first pass).",
+            scope: "Repo-wide.",
+            result: "Report on disk (audits/2026-08-24__slop-audit.md); findings folded into the 08-31 pass.",
+            report: "2026-08-24__slop-audit.md"
+          }
+        ],
+        reportDate: "2026-08-31",
+        reconciledAt: "2026-09-02 09:15:55",
+        reconciliationHeads: [
+          {
+            repo: "BIMpossible-Families",
+            head: "7d56ecbdc5",
+            inspected: true
+          }
+        ],
+        rawCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 1,
+          info: 0
+        },
+        openCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        unknownCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        resolvedCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 1,
+          info: 0
+        },
+        publishedCounts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        ingestStatus: "success",
+        ingestDetail: "reconciled against BIMpossible-Families; 1 of 1 closed by implementation-backed finding-ID evidence, 0 open (1 insufficient-evidence citation(s) rejected)",
+        counts: {
+          critical: 0,
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
+        },
+        closedLastRun: 1,
+        open: [],
+        unknown: []
+      },
     },
     /* PROJECT:families:END */
     /* PROJECT:aiserver:START */
