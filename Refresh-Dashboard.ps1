@@ -32,6 +32,7 @@
 
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
+. (Join-Path $PSScriptRoot "Refresh-GitStaging.ps1")   # Invoke-GitStage, Get-StagingDisposition
 
 $backups  = Join-Path $PSScriptRoot "_backups"
 # _backups is runtime-only (not tracked), so a fresh clone won't have it. Create it
@@ -343,8 +344,15 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     # Exit 1 here means "stale card(s) detected", which is the NORMAL signal on an
     # active card between manual sweeps, NOT a run failure - so it is logged but does
     # NOT increment $degraded (that would falsely mark the whole refresh partial).
-    if ((Invoke-Logged $python @("$PSScriptRoot\check_narrative_freshness.py")) -ne 0) {
+    # Exit 2 is different: one or more cards could not be EVALUATED at all (missing or
+    # unparseable lastActivity.date, or data.js unreadable). That is an unmeasured
+    # check, not a clean one, so it degrades the attempt (2026-08-31 slop audit, LOW-1).
+    $narrativeRc = Invoke-Logged $python @("$PSScriptRoot\check_narrative_freshness.py")
+    if ($narrativeRc -eq 1) {
         "NOTE: check_narrative_freshness.py flagged stale narrative card(s) - a manual /dashboard-update sweep is owed (see narrative-freshness.js)." | Add-Content -Path $log -Encoding utf8
+    } elseif ($narrativeRc -ne 0) {
+        "WARN: check_narrative_freshness.py exit $narrativeRc - narrative freshness UNKNOWN for one or more cards (see the lines above and narrative-freshness.js)." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
 
     # 1e. Re-bundle the graphify artifacts the Codebase tab iframes (GRAPH_REPORT.md,
@@ -399,9 +407,16 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #    PHASE_DAG.md is the second output of phase_dag.py alongside phase_dag.js; staging
     #    only the .js left the .md permanently dirty, which step 0b now reverts on every
     #    run - so it must be committed here or it can never update.
-    Invoke-Logged "git" @("add","data.js","graph-metrics.js","phase_dag.js","PHASE_DAG.md","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","codebase") | Out-Null
-    $staged = (& git diff --cached --name-only) -join "`n"
-    if (-not $staged.Trim()) { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
+    #    A FAILED add is fatal, never "already current": git aborts the whole add on a
+    #    single unmatched pathspec, and the empty index it leaves behind is
+    #    indistinguishable from a genuinely unchanged tree. Staging status therefore
+    #    comes back explicitly from Invoke-GitStage and is never inferred from the
+    #    index (2026-08-31 slop audit, MEDIUM-1).
+    $stage = Invoke-GitStage -Paths @("data.js","graph-metrics.js","phase_dag.js","PHASE_DAG.md","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","codebase") `
+                             -Log { param($Message) $Message | Add-Content -Path $log -Encoding utf8 }
+    $disposition = Get-StagingDisposition $stage
+    if ($disposition -eq 'fail')     { Alert-Failure "$($stage.Reason) - dashboard NOT updated."; $result = 1; break }
+    if ($disposition -eq 'nochange') { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }
 
     # 5. Commit (parent = origin/main) + push. Fast-forward unless the bot advanced
     #    origin during our render; on rejection, loop onto the new tip and re-render.
