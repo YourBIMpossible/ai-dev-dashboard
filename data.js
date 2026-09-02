@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-08-31",
+  generated: "2026-09-01",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-18",
+  activitySince: "2026-08-19",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [9,3,12,17,18,18,30,12,5,6,0,0,31,13],
+      activity: [3,12,17,18,18,30,12,5,6,0,0,31,59,0],
       lastActivity: {
         date: "2026-08-31",
-        summary: "fix(security-scan): run docs-hygiene at PR time and size its ceilings to match (#513) (efe78a2)"
+        summary: "security: redact live temp_clone_token captured in breach-chain evidence JSON; flag for owner rotation review (b7a2928)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -590,7 +590,7 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [3,1,1,3,7,15,1,4,2,1,0,0,3,0],
+      activity: [1,1,3,7,15,1,4,2,1,0,0,3,0,0],
       lastActivity: {
         date: "2026-08-30",
         summary: "feat(pane): P15-15B firm-document source citations in the Assistant Pane (#113) (d09204e)"
@@ -659,10 +659,10 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,2,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,2,0,0,0,1,0],
       lastActivity: {
-        date: "2026-08-27",
-        summary: "docs(site): correct planning-docs path AI-Dev -> F:\\BIMpossible-Site (335c210)"
+        date: "2026-08-31",
+        summary: "fix(contact): treat a provider 2xx with a failure body as undelivered (1dbbd72)"
       },
       branch: null, git: { latestCommit: "709f352" },
       nextActions: ["Email routing aliases: hello@/support@/legal@/billing@/zeriah@ -> Gmail (recipe in IP-Lockdown-Checklist.md Phase 1.5)","Product screenshots: get real app screenshots into Leaders + BIM Managers pages"],
@@ -775,10 +775,10 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [1,0,0,0,1,0,2,0,0,0,0,0,0,0],
+      activity: [0,0,0,1,0,2,0,0,0,0,0,0,2,0],
       lastActivity: {
-        date: "2026-08-24",
-        summary: "Migrate Evidence Compiler hook to Python-native hardened launcher (#11) (72e53d5)"
+        date: "2026-08-31",
+        summary: "audit: publish the 2026-08-31 weekly slop-audit report (#13) (7d56ecb)"
       },
       branch: "main",
       nextActions: ["Close Phase 1: port wire_nested_params; live-rehearse go_single_panel","Resolve the 5 ROADMAP open questions gating Phase 2/3 start","Reconcile the two overlapping MCP efforts (this roadmap's Phase 3 vs the AddIns Desktop Orchestration Hub proposal) before ratifying either","Owner sign-off on the prep_to_standard.py Power-System deletion list (shared with the addins card)"],
@@ -815,7 +815,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [1,0,0,0,4,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,4,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "chore(rag): rag_sources Workspace root → F:\\BIMpossible-Workspace (census 19 B8) (6ff31ad)"
@@ -879,7 +879,7 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,1,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "Revit-AI pipeline data through 2026-08-23 (raw-logs, processed, daily-summaries, context) — pre AI-Dev extraction (7d1b22b)"
@@ -918,10 +918,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [3,0,9,8,7,5,13,5,2,5,0,0,15,10],
+      activity: [0,9,8,7,5,13,5,2,5,0,0,15,49,0],
       lastActivity: {
         date: "2026-08-31",
-        summary: "state(queue): queue the two gitleaks findings surfaced by the 2026-08-31 mirror push (dff02ea)"
+        summary: "security: redact live temp_clone_token captured in breach-chain evidence JSON; flag for owner rotation review (b7a2928)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -956,10 +956,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,3,3,8,11,4,5,20,6,3,4,3,17,10],
+      activity: [3,3,8,11,4,5,20,6,3,4,3,17,14,1],
       lastActivity: {
-        date: "2026-08-31",
-        summary: "Mission Control UX rework: Today-first check-in, persistent disclosures, project reading column + action rail (#7) (e4905c2)"
+        date: "2026-09-01",
+        summary: "chore: live billing sync 2026-09-01 (63cf2ed)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
