@@ -1287,6 +1287,13 @@ function cohortResults(p){
   if(!p||!Array.isArray(p.baselineCohorts)||!p.baselineCohorts.length)return[];
   return p.baselineCohorts.map(co=>({co:co,r:PhaseMetrics.getCohortCompletion(p,co)}));
 }
+// The single delivery-cohort headline percent, shared by the Today flagship and the Overview hero
+// so the two-number earned-value line can never drift between them. baselineCohorts[0] is the
+// declared delivery cohort by the same positional convention scopeCaption uses; null when no
+// cohort is declared or PhaseMetrics is absent.
+function cohortHeadlinePct(p){ const co=cohortResults(p), r=co.length?co[0].r:null; return (r&&r.pct!=null)?r.pct:null; }
+// One canonical tooltip for that two-number headline, reused verbatim in both call sites.
+const EV_TIP='Delivery cohort = the frozen July scope; its membership is fixed, so scope growth cannot move it. Active scope = mean of every active ratified phase and can read lower purely because newer early-stage phases were admitted — not because work regressed.';
 function scopeCaption(p,cohorts){
   if(!p||!p.progress||!p.progress.phases)return'';
   const ins=inScopePhases(p);
@@ -1746,8 +1753,7 @@ function overview(){
   const bp=D.projects.find(p=>p.id==='bimpossible');
   if(bp){
     const pct=overallPct(bp);
-    const ovCo=cohortResults(bp);
-    const ovCoPct=(ovCo.length&&ovCo[0].r&&ovCo[0].r.pct!=null)?ovCo[0].r.pct:null;
+    const ovCoPct=cohortHeadlinePct(bp);
     h+=`<div class="card glow fade" style="margin-bottom:18px;cursor:pointer;animation-delay:.04s" data-id="${bp.id}">`;
     // Header: icon + name + status + %
     h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">`;
@@ -1755,7 +1761,7 @@ function overview(){
     h+=`<span style="font-family:Sora;font-size:var(--ts-md);font-weight:700;flex:1">${esc(bp.name)}</span>`;
     h+=`<span class="pill ${PILL[bp.status]}">${bp.status}</span>`;
     if(pct!==null)h+=ovCoPct!=null
-      ? `<span class="ov-ev" title="Delivery cohort (the frozen July scope, immune to scope growth) vs active ratified scope. Active reads lower mainly because newer early-stage phases were admitted, not because work regressed."><b>${ovCoPct}%</b><small>cohort</small><i></i><b class="dim">${pct}%</b><small>scope</small></span>`
+      ? `<span class="ov-ev" title="${esc(EV_TIP)}"><b>${ovCoPct}%</b><small>cohort</small><i></i><b class="dim">${pct}%</b><small>scope</small></span>`
       : `<span style="font-family:Sora;font-size:var(--ts-base);font-weight:700;color:var(--w)">${pct}%</span>`;
     h+=`</div>`;
     // Focus block — PRIMARY content slot
@@ -3926,7 +3932,22 @@ const DESK_WAIT=/\b(?:await(?:s|ing)?|waiting (?:on|for)|blocked (?:on|by)|depen
 // (3) Already resolved — no owner action remains. Terminal-completion wording only, so an OPEN
 // owner choice like "merge or close" / "ship it or delete it" is NOT caught (those stay ripe).
 const DESK_DONE=/\b(?:no (?:action|owner action|decision|call|approval)\s*(?:needed|required)|already (?:done|merged|closed|shipped|resolved|handled)|nothing (?:to do|needed|left)|complete[d]?[.;]|closed[.;]|resolved[.;])/i;
-function deskRipe(d){ const t=String(d.text||''); return !DESK_PARK.test(t)&&!DESK_WAIT.test(t)&&!DESK_DONE.test(t); }
+// (4) OVERRIDE: an explicit, still-OPEN ask directed at the owner keeps the item ripe even when a
+// PARK/DONE cue also appears in the prose — DESK_PARK/DESK_DONE match on substrings ("completed.",
+// "closed.", "resolved.", "already merged", "no demand", "blocks nothing", "none has/yet"), so a
+// sentence like "Scoring self-heal completed. Owner: keep the fallback or remove it?" would
+// otherwise be parked despite carrying a live decision. This restores the fail-safe direction
+// (surface, never hide) for genuine owner asks. Two rules make the match reliable: (a) the verbs are
+// bare STEMS with NO trailing \b (as DESK_WAIT already does), so "ratify/ratification", "approved",
+// "merged", "reviewed", "signed off" all match — a trailing \b would make "ratif" (always followed
+// by y/ied/ication) unmatchable and drop every inflected form. (b) The owner word and the verb may
+// appear in EITHER order within one sentence: we anchor at a sentence start ((?:^|[.?!]\s*)),
+// assert an owner word somewhere in that sentence (lookahead), then reach a verb in it — so both
+// "Owner: keep or drop it" and "Merge or drop it — owner's call" are caught, while an owner mention
+// in a *different* sentence can't borrow a verb (the [^.?!]* runs stay inside one sentence). The
+// final alternative catches a bare binary choice ("keep it or kill it") that names no owner word.
+const DESK_ASK=/(?:^|[.?!]\s*)(?=[^.?!]*\b(?:owner|you|your)\b)[^.?!]*\b(?:decid|decision|choos|chos|choice|pick|keep|kept|remov|kill|drop|merg|ship|approv|ratif|sign(?:ed)?[-\s]?off|review|confirm)|\b(?:keep|merge|ship) it or \w+ it\b/i;
+function deskRipe(d){ const t=String(d.text||''); if(DESK_ASK.test(t))return true; return !DESK_PARK.test(t)&&!DESK_WAIT.test(t)&&!DESK_DONE.test(t); }
 // The whole contract in one pure function: reminders are context (park by kind); blockers and
 // decisions are ripe only when their text is not parked. Every eligible item lands in exactly
 // one bucket, so folded `parked` + visible `ripe` always reconcile to the whole desk — nothing
@@ -3939,7 +3960,10 @@ function tvPartition(desk){
 // Feed / desk copy is ledger prose carrying (#123) PR-and-issue citations. Dim those refs so the
 // sentence reads first and the trail-back citation sits quietly after it — kept, never deleted.
 function tvHumanize(t){
-  return esc(String(t||'')).replace(/\(?#\d+(?:[,/]\s*#?\d+)*\)?/g,m=>`<span class="tv-ref">${m}</span>`);
+  // Match either a FULLY-parenthesised citation "(#12/#13)" as one unit, or a bare "#12" run —
+  // the two alternatives are balanced, so a stray ')' after a lone ref (or a '(' before one) is
+  // left OUTSIDE the dim span instead of being pulled in by an unbalanced optional paren.
+  return esc(String(t||'')).replace(/\(#\d+(?:[,/]\s*#?\d+)*\)|#\d+(?:[,/]\s*#?\d+)*/g,m=>`<span class="tv-ref">${m}</span>`);
 }
 
 // The flagship's two honest numbers, for the top of the check-in. Delivery cohort = the frozen
@@ -3951,14 +3975,11 @@ function flagshipMetric(){
   if(!bp)return'';
   const pct=overallPct(bp);
   if(pct===null)return'';
-  const co=cohortResults(bp), first=co.length?co[0]:null;
-  const coPct=(first&&first.r&&first.r.pct!=null)?first.r.pct:null;
+  const coPct=cohortHeadlinePct(bp);
   const nums=coPct!=null
     ? `<span class="fm-n">${coPct}%</span><span class="fm-l">delivery cohort</span><span class="fm-sep"></span><span class="fm-n dim">${pct}%</span><span class="fm-l">active scope</span>`
     : `<span class="fm-n">${pct}%</span><span class="fm-l">active scope</span>`;
-  const tip=coPct!=null
-    ? 'Delivery cohort = the frozen July scope; its membership is fixed, so scope growth cannot move it. Active scope = mean of every active ratified phase and can read lower purely because newer early-stage phases were admitted — not because work regressed.'
-    : 'Mean completion across active ratified phases.';
+  const tip=coPct!=null?EV_TIP:'Mean completion across active ratified phases.';
   return `<button type="button" class="tv-fm" title="${esc(tip)}" onclick="show('bimpossible')">`
     +`<span class="fm-hd">${esc(bp.name)}</span>${nums}<span class="fm-go">open →</span></button>`;
 }
