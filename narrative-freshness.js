@@ -1,31 +1,31 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-08-31 15:21:13",
+  "checked": "2026-09-02 07:49:38",
   "staleDays": 14,
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-08-31",
+      "lastActivity": "2026-09-02",
       "newestRecent": "2026-08-30",
-      "lagDays": 1,
+      "lagDays": 3,
       "stale": false,
       "reason": null
     },
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-08-30",
+      "lastActivity": "2026-09-01",
       "newestRecent": "2026-08-30",
-      "lagDays": 0,
+      "lagDays": 2,
       "stale": false,
       "reason": null
     },
     "site": {
       "name": "BIMpossible Site",
       "status": "active",
-      "lastActivity": "2026-08-27",
+      "lastActivity": "2026-08-31",
       "newestRecent": "2026-08-27",
-      "lagDays": 0,
+      "lagDays": 4,
       "stale": false,
       "reason": null
     },
@@ -50,9 +50,9 @@ window.NARRATIVE_FRESHNESS = {
     "families": {
       "name": "Families by BIMpossible",
       "status": "active",
-      "lastActivity": "2026-08-24",
+      "lastActivity": "2026-08-31",
       "newestRecent": "2026-08-24",
-      "lagDays": 0,
+      "lagDays": 7,
       "stale": false,
       "reason": null
     },
@@ -77,18 +77,18 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-08-31",
+      "lastActivity": "2026-09-01",
       "newestRecent": "2026-08-30",
-      "lagDays": 1,
+      "lagDays": 2,
       "stale": false,
       "reason": null
     },
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-08-31",
+      "lastActivity": "2026-09-02",
       "newestRecent": "2026-08-30",
-      "lagDays": 1,
+      "lagDays": 3,
       "stale": false,
       "reason": null
     },
