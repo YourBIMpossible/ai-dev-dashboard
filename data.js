@@ -17,7 +17,7 @@ window.DASHBOARD_DATA = {
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
       phase: "main synced with origin (tip ~#505; HEAD 9682546b, #503). The 56-finding cross-repo audit estate is CLOSED (56->0, 2026-08-26) -- no open Critical or live-exploitable High. Active fronts since: Phase 17 -- App Integrations moved from planned to first code, with the Integration Control Plane foundation landed (#500) and its registry status values constrained (#503, P17-0.1); Slack/Teams (17a/17b) remain built-dark, flags off. Phase 15d shipped its first local Revit write slice -- before/after approval, typed result, revert (#495) -- then unblocked writes past row 500 and on unset parameters (#498); these are the product's first AI-assisted local Revit writes through the pane, supervised and gated. Phase 3.8 slice-2 reader gating landed (#499, owner-only is_draft reads), closing the enforcement gap the 08-27 closeout ledger flagged. Also live: P6 Client-Mgmt F (multi-firm tenancy, verified by a 2026-08-30 synthetic two-firm smoke), the firm-alias backend, RESOLVE-BIND-1 durable model_guid->project binding (#496), and a run of PDP performance hardening (#502/#504/#505).",
-      focus: "Audit estate CLOSED (56->0, 2026-08-26) -- 0 open, no Critical or live-exploitable High; that work is done. Current active development is Phase 17.0 (Integration Control Plane foundation, #500/#503) and Phase 15d's first supervised local Revit writes through the pane (#495: before/after approval + revert; #498: writes past row 500 / unset params). P6 Client-Mgmt F went live on a 2026-08-30 two-firm smoke; P3.8 slice-2 owner-only draft reads shipped (#499). Remaining forward work is largely owner-gated -- see nextActions.",
+      focus: "Audit estate CLOSED (56->0, 2026-08-26) and the 2026-08-31 weekly full audit is fully closed out (1 High / 6 Medium / 10 Low -> 0 open, 17 closures across #514/#518/#522/#523 + AddIns #116, final delivery 2026-09-01); no Critical or live-exploitable High anywhere. Current active development is Phase 17.0 (Integration Control Plane foundation, #500/#503) and Phase 15d's first supervised local Revit writes through the pane (#495: before/after approval + revert; #498: writes past row 500 / unset params). P6 Client-Mgmt F went live on a 2026-08-30 two-firm smoke; P3.8 slice-2 owner-only draft reads shipped (#499). Remaining forward work is largely owner-gated -- see nextActions.",
       progress: {
         label: "Program phases",
         phases: [
@@ -312,8 +312,8 @@ window.DASHBOARD_DATA = {
       ],
       recent: ["2026-08-30 - Phase 17 integration control-plane foundation landed: a governed registry for third-party app integrations with constrained status values (#500, #503)","2026-08-30 - Phase 15d first local Revit write slice: before/after approval, typed result, revert; writes unblocked past row 500 and on unset parameters (#495, #498)","2026-08-30 - Durable model_guid->project binding for /model/resolve; owner-only gating of draft-membership reads (#496, #499)","2026-08-25 - Phase 7 Revit Link supervised sync cutover PASSED and went live (flag ON) - remote sync_with_central is now the live write engine","2026-08-25 - Phase 7 relay hardening: session lifecycle (versioned health, DPAPI secret file, parent-PID watch) + typed relay errors (#486, #487)","2026-08-24 - Model History & QA Regression Intelligence foundation (P11 AC7): universal history capture, tombstone purge, honest history UI states (#476, #478)","2026-08-24 - Search integrity: tombstone reconcile demotes stale/deleted/renamed APS lineages so /search/models stops surfacing gone models (#466, #474)","2026-08-22 - Multi-tenant hardening + cross-firm read-only sharing (Client-Mgmt F, flag OFF): existence-oracle closed, inactive-firm bootstrap blocked, PDP G1 proxy staged (#447-#456)"],
       audit: {
-        lastRun: "2026-08-26",
-        runType: "FINAL reconciliation + publication (2026-08-25). Of the original 45-item BIMpossible-web backlog, all 45 are now dispositioned+closed — 0 remain open. The final 6 (accept-as-designed) were formally ratified under the owner's 2026-08-25 publication mandate (durable rationale + reconsideration triggers in audit-acceptance-records_2026-08-25.md); no undone engineering work. Phase 5 closed 10 beyond the Phase-1 pass: HYG-6 (dead guard.py refs fixed, 0 residual cites), HYG-13 (docs-hygiene fixed upstream via #483; PR-non-gating is a documented deliberate ratchet), HYG-16 (promote-approved.md self-flags DORMANT-by-design), HYG-8 (hook DOES fire — core premise refuted), HYG-19 (no factually-wrong claim survives), HYG-3 (false-authoritative core fixed; snapshot frozen by owner decision D6), HYG-1 (historical gap, forward-prevention shipped), SEC-DIST-1 (FIXED: installer signing is now a hard-gate — an unsigned build errors unless -AllowUnsigned is explicit and stamps -UNSIGNED into the setup filename; Build-Installer.ps1:62-67, AddIns d0ce4e9/#69 — the prior 'unactionable' label was wrong, the finding named Build-Installer.ps1 concretely), CQ-TEST-PAIR-1 (delete-failure retry test added, AddIns 81c06f8), and SEC-AUTHZLOG-RETENTION-1/WSR22 (finding-prover red->green: the request path opens NO DB session — structurally supersedes the p99 load test; waiver ratified with evidence; .env SHADOW->ENFORCE is a SEPARATE owner rollout gate, not this finding). Closed in the 2026-08-25 publication run: HYG-12 (AddIns doc-reference + docs-budget gate subsystem activated on merge of PR #106, c03ef5c), and HYG-2 + HYG-7 (SKILL.amended-candidate.md applied over the live G:\\ weekly-audit task — dead F:\\AI-Dev root corrected to the live F:\\BIMpossible / F:\\BIMpossible-Workspace roots; Slop + Hygiene lenses and _backups retirement confirmed already present since 2026-08-17). Accept-as-designed formally ratified 2026-08-25 (now closed, off the board): RE-2, ARCH-NEW-2, FE-3, FE-1, FE-2, SEC-cloud-1 — each with a durable rationale + reconsideration trigger in audit-acceptance-records_2026-08-25.md. Correction pass (post-Phase-5, evidence-verified): SEC-PAIR-2 + RE-PAIR-1 were already FIXED in AddIns PR #68 (fcfa484 — DeleteClaimedWithRetry + SweepOrphanedClaims startup sweep; OnWatcherError dispose/restart + 10s liveness poll on both watchers; PendingPairWatcherTests), so the prior 'owner scope' label was wrong and both are off the board. HYG-23 canonical decision-log root is owner-ratified in committed governance docs (docs/decision-log/INDEX.md:24, decision-log/README.md) with the frozen R1 archive kept valid by design; its folded I-08 cross-repo cite is requalified (AddIns 44585d5) — resolved, off the board. No open Critical or live-exploitable Security-High. Full record: audit-closure-FINAL_2026-08-25.md; per-finding evidence: audit-findings-validation_2026-08-25.md.",
+        lastRun: "2026-08-31",
+        runType: "Weekly full audit 2026-08-31 (evening re-run, all seven lenses + slop fold + breach-chain overlay across BIMpossible, Workspace and AddIns) -- 0 Critical / 1 High / 6 Medium / 10 Low / 16+ Info as originally rated, then driven to a terminal state by the same-evening closeout and the 2026-09-01 final delivery run. Fixed with code + proving tests: RE-01 (High, mis-pick capture no longer claims success on a swallowed log write -- ship-gate A4 counter integrity; AddIns #116), RE-02/RE-04/CQ-03/CQ-05 (AddIns #116), SEC-1 (all 5 membership mutation branches now audited with a server-sourced actor; #514 + #522), ARCH-1 (#518), SEC-CI-LOCAL-1 + SLOP-LOW-1 (push hook fails closed; #522), CQ-1 (live-write confirm seam pinned; #522/#523), FE-2/FE-3/CQ-DOC-1/ARCH-CI-1 (#522, AddIns #116), SLOP-LOW-2 (Workspace c71aa12). Already fixed before the run, label corrected: RE-1/CQ-4 (#514). Accepted, no change: RE-2 (relay close-time swallow). Reconciled as a stale carry-forward: WSR17/SEC-WIZ-HUB-1 (firm-scoped hub check shipped in #397; breach-chain CHAIN-1 retired). Breach-chain overlay: 0/0/0/1 Low (CHAIN-2 unsigned add-in delivery; production code-signing ON HOLD by owner decision, not an open blocker). 0 open.",
         cadence: "weekly Sun 11:45pm + incremental Sun/Tue + on-demand",
         counts: {
           critical: 0,
@@ -322,13 +322,20 @@ window.DASHBOARD_DATA = {
           low: 0,
           info: 0
         },
-        closedLastRun: 45,
+        closedLastRun: 17,
         trend: "improving",
-        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\audit-closure-COMPLETE_2026-08-26.md",
-        reportFile: "bimpossible/audit-closure-COMPLETE_2026-08-26.md",
+        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-08-31.md",
+        reportFile: "bimpossible/weekly-full-audit_2026-08-31.md",
         ledgerPath: "F:\\BIMpossible-Workspace\\02_Reference\\_audit-runs.md",
         open: [],
         history: [
+          {
+            date: "2026-08-31",
+            type: "Weekly full audit (seven lenses + slop fold + breach-chain overlay) -- evening re-run superseding the 08:37 morning pass; closeout the same evening, final delivery 2026-09-01.",
+            scope: "F:\\BIMpossible, F:\\BIMpossible-Workspace, F:\\BIMpossible-AddIns -- all three roots reachable, full lens coverage, no RUN DEGRADED banner.",
+            result: "0 Critical / 1 High / 6 Medium / 10 Low as originally rated -> 0 open. 17 closures new to this cycle (16 fixed with proving tests across BIMpossible #514/#518/#522/#523, AddIns #116, Workspace c71aa12; RE-1/CQ-4 confirmed already fixed), RE-2 (relay) accepted as designed, WSR17/SEC-WIZ-HUB-1 reconciled as a stale carry-forward (CHAIN-1 retired). Breach chains: 0/0/0/1 Low (CHAIN-2, code-signing on hold by owner decision).",
+            report: "weekly-full-audit_2026-08-31.md"
+          },
           {
             date: "2026-08-26",
             type: "Final closure record -- M-30 (the last held finding, tracked on the AddIns card) retired via a genuine live-Revit capture merge; supersedes the 2026-08-25 resolution record for the estate as a whole.",
@@ -498,33 +505,38 @@ window.DASHBOARD_DATA = {
             report: "2026-06-10__audit-report-full.md"
           }
         ],
-        reportDate: "2026-08-17",
-        reconciledAt: "2026-08-22 01:23:04",
+        reportDate: "2026-08-31",
+        reconciledAt: "2026-09-02 08:03:55",
         reconciliationHeads: [
           {
             repo: "BIMpossible",
-            head: "de7901375c",
+            head: "2cc7bdf86d",
             inspected: true
           },
           {
-            repo: "BIMpossible_Workspace",
-            head: "0c9bcb2abc",
+            repo: "BIMpossible-Workspace",
+            head: "6c1f9ead76",
+            inspected: true
+          },
+          {
+            repo: "BIMpossible-AddIns",
+            head: "e0f23bb137",
             inspected: true
           }
         ],
         rawCounts: {
           critical: 0,
-          high: 10,
-          medium: 39,
-          low: 24,
-          info: 4
+          high: 1,
+          medium: 6,
+          low: 10,
+          info: 0
         },
         openCounts: {
           critical: 0,
-          high: 4,
-          medium: 25,
-          low: 13,
-          info: 3
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
         },
         unknownCounts: {
           critical: 0,
@@ -535,20 +547,20 @@ window.DASHBOARD_DATA = {
         },
         resolvedCounts: {
           critical: 0,
-          high: 6,
-          medium: 14,
-          low: 11,
-          info: 1
+          high: 1,
+          medium: 6,
+          low: 10,
+          info: 0
         },
         publishedCounts: {
           critical: 0,
-          high: 4,
-          medium: 25,
-          low: 13,
-          info: 3
+          high: 0,
+          medium: 0,
+          low: 0,
+          info: 0
         },
         ingestStatus: "success",
-        ingestDetail: "reconciled against BIMpossible, BIMpossible_Workspace; 32 of 77 closed by implementation-backed finding-ID evidence, 45 open (32 insufficient-evidence citation(s) rejected)",
+        ingestDetail: "reconciled against BIMpossible, BIMpossible-Workspace, BIMpossible-AddIns; 10 of 17 closed by implementation-backed finding-ID evidence, 7 open (1 insufficient-evidence citation(s) rejected); the 7 the git rule could not prove were verified by hand against merged diffs (AddIns #116 ba4c3fa, BIMpossible #518 a6bf06c4, Workspace c71aa12) and the report's own 2026-09-01 closeout rows; RE-2 (relay close-time swallow) is accepted-as-designed, not counted as a closure",
         unknown: []
       },
       waves: {
