@@ -19,6 +19,17 @@ Writes narrative-freshness.js (for an optional badge, mirroring
 audit-freshness.js); never touches data.js. Prints a STALE/OK summary. A
 non-empty STALE list means /dashboard-update is not "done" - the flagged cards
 still need their narrative fields swept.
+
+A card whose lastActivity.date is missing or unparseable cannot be judged either
+way: that date is the whole basis of the comparison. Such a card is UNEVALUATED
+- excluded from the evaluated count, named with its raw bad value, and it forces
+exit 2. It is never folded into a "checked N card(s); all current" total
+(2026-08-31 slop audit, LOW-1).
+
+Exit codes:
+  0  every card evaluated, none stale
+  1  every card evaluated, one or more stale (the normal /dashboard-update signal)
+  2  one or more cards could not be evaluated, or data.js could not be loaded
 """
 import json
 import pathlib
@@ -47,12 +58,18 @@ _DUMP_JS = (
 )
 
 
+class InputError(RuntimeError):
+    """data.js could not be read - nothing can be evaluated."""
+
+
 def load_projects():
     result = subprocess.run(["node", "-e", _DUMP_JS], capture_output=True, text=True)
     if result.returncode != 0:
-        print(f"ERROR: could not load data.js via node - {result.stderr.strip()}", file=sys.stderr)
-        sys.exit(1)
-    return json.loads(result.stdout)
+        raise InputError(f"could not load data.js via node - {result.stderr.strip()}")
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError as exc:
+        raise InputError(f"data.js dump was not valid JSON - {exc}") from exc
 
 
 def parse_date(text):
@@ -76,10 +93,16 @@ def newest_recent_date(recent):
     return max(dates) if dates else None
 
 
-def main():
-    projects = load_projects()
+def evaluate(projects):
+    """-> (results, stale_ids, unevaluated_ids).
+
+    A card counts as EVALUATED only when its lastActivity.date parses. Without
+    that reference point there is no comparison to make, so the card gets no
+    verdict at all rather than a default-clean one.
+    """
     results = {}
     stale_ids = []
+    unevaluated_ids = []
     for p in projects:
         la = (p.get("lastActivity") or {}).get("date")
         la_date = parse_date(la) if la else None
@@ -89,13 +112,17 @@ def main():
         lag = None
         is_stale = False
         reason = None
-        if la_date and rec_date:
+        evaluated = la_date is not None
+        if not evaluated:
+            reason = (f"no parseable lastActivity.date (raw: {la!r}) - "
+                      "staleness cannot be judged")
+        elif rec_date:
             lag = (la_date - rec_date).days
             if lag > STALE_DAYS:
                 is_stale = True
                 reason = (f"git activity ({la_date}) is {lag} days ahead of the "
                           f"newest recent[] entry ({rec_date})")
-        elif la_date and not rec_date:
+        else:
             is_stale = True
             reason = "no parseable date in the recent[] feed"
 
@@ -105,18 +132,39 @@ def main():
             "lastActivity": la,
             "newestRecent": rec_date.isoformat() if rec_date else None,
             "lagDays": lag,
+            "evaluated": evaluated,
             "stale": is_stale,
             "reason": reason,
         }
-        if is_stale:
+        if not evaluated:
+            unevaluated_ids.append(p["id"])
+        elif is_stale:
             stale_ids.append(p["id"])
+
+    return results, stale_ids, unevaluated_ids
+
+
+def main(load=load_projects, out_path=OUT):
+    try:
+        projects = load()
+    except InputError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        print("[narrative-freshness] narrative freshness UNKNOWN - no card was "
+              f"evaluated; {out_path.name} left unchanged.", file=sys.stderr)
+        return 2
+
+    results, stale_ids, unevaluated_ids = evaluate(projects)
+    evaluated_count = len(results) - len(unevaluated_ids)
 
     payload = {
         "checked": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "staleDays": STALE_DAYS,
+        "cards": len(results),
+        "evaluated": evaluated_count,
+        "unevaluated": unevaluated_ids,
         "projects": results,
     }
-    OUT.write_text(
+    out_path.write_text(
         "window.NARRATIVE_FRESHNESS = " + json.dumps(payload, indent=2) + ";\n",
         encoding="utf-8",
     )
@@ -129,7 +177,22 @@ def main():
         print("[narrative-freshness] these cards' hand-maintained fields "
               "(phase/focus/nextActions/recent/pendingDecisions/reminders) need a "
               "sweep before /dashboard-update is done.")
+
+    if unevaluated_ids:
+        print(f"[narrative-freshness] {len(unevaluated_ids)} of {len(results)} "
+              f"card(s) could NOT be evaluated: {', '.join(unevaluated_ids)}",
+              file=sys.stderr)
+        for pid in unevaluated_ids:
+            print(f"[narrative-freshness]   {pid} ({results[pid]['name']}): "
+                  f"{results[pid]['reason']}", file=sys.stderr)
+        print("[narrative-freshness] narrative freshness UNKNOWN for those "
+              f"card(s); {evaluated_count} card(s) evaluated, {len(stale_ids)} stale.",
+              file=sys.stderr)
+        return 2
+
+    if stale_ids:
         return 1
+
     print(f"[narrative-freshness] checked {len(results)} card(s); "
           f"all narrative feeds current within {STALE_DAYS} days of git activity")
     return 0
