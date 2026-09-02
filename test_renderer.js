@@ -221,7 +221,7 @@ test("real data.js via renderer: bimpossible = 63% active / 92% computed baselin
 // ============================================================================
 const CHECKIN_CONSTS = ["DESK_PARK", "DESK_WAIT", "DESK_DONE", "DESK_ASK", "EV_TIP"]
   .map(n => extractConstLine(HTML, n)).join("\n");
-const CHECKIN_FNS = ["deskRipe", "tvPartition", "tvHumanize", "tvDesk", "cohortHeadlinePct",
+const CHECKIN_FNS = ["deskSegments", "deskRipe", "tvPartition", "tvHumanize", "tvDesk", "cohortHeadlinePct",
   "flagshipMetric", "revealBlock", "todayView"]
   .map(n => extractFn(HTML, n)).join("\n");
 const D_ALIAS = extractConstLine(HTML, "D");
@@ -238,6 +238,10 @@ function checkinEnv() {
 const CE = checkinEnv();
 const part1 = (kind, text) => CE.tvPartition([{ kind, text, pid: "x", pname: "X" }]);
 const isRipe = (kind, text) => part1(kind, text).ripe.length === 1;
+// deskSegments/tvPartition return arrays built inside the vm realm, so their prototype is that
+// realm's Array.prototype and deepStrictEqual's prototype check would fail on identical contents.
+// Array.from re-homes them here, keeping the assertions about VALUES rather than realms.
+const segsOf = t => Array.from(CE.deskSegments(t));
 
 // -- the classifier's semantic contract, case by case --
 test("triage 1: 'awaiting owner ratification' -> Needs you (waiting on YOU)", () => {
@@ -289,6 +293,86 @@ test("triage 12d: soft-demand park cues do NOT hide an open owner kill/keep choi
   // DESK_PARK matches 'no demand' / 'blocks nothing' as substrings; an open choice stays ripe.
   assert.ok(isRipe("decision", "Feature X sees no demand yet - owner, kill it or keep it?"));
   assert.ok(isRipe("decision", "The shim blocks nothing, but you must choose: keep it or drop it before P12"));
+});
+
+// -- sentence/clause scoping: the root done/park/wait cues are read PER SEGMENT, so a terminal cue
+// in one clause cannot speak for the whole item, and an owner word in another clause cannot un-park
+// a plain external wait. The owner-ask override deliberately stays whole-item (the widest, fail-safe
+// test in the set) so scoping can never hide an ask that the previous classifier surfaced. --
+test("segment 1: deskSegments splits on sentence enders, ';' and newlines", () => {
+  assert.deepStrictEqual(segsOf("Closed. Owner to ratify."), ["Closed", "Owner to ratify"]);
+  assert.deepStrictEqual(segsOf("Awaiting CI; no owner action needed"),
+    ["Awaiting CI", "no owner action needed"]);
+  assert.deepStrictEqual(segsOf("Awaiting CI\nReview complete"), ["Awaiting CI", "Review complete"]);
+  assert.deepStrictEqual(segsOf("Ship it?  Or drop it!"), ["Ship it", "Or drop it"]);
+});
+test("segment 2: a dot inside an identifier or a version does NOT split the clause", () => {
+  // the separator requires trailing whitespace (or end-of-string), which is what keeps these intact
+  assert.deepStrictEqual(segsOf("prep_to_standard.py is the ruling doc"),
+    ["prep_to_standard.py is the ruling doc"]);
+  assert.deepStrictEqual(segsOf("pin v1.2 before the release"), ["pin v1.2 before the release"]);
+});
+test("segment 3: deskSegments is pure and total; empty prose reads as unrecognised -> ripe", () => {
+  assert.deepStrictEqual(segsOf(""), []);
+  assert.deepStrictEqual(segsOf("   "), []);
+  assert.deepStrictEqual(segsOf(null), []);
+  assert.deepStrictEqual(segsOf(undefined), []);
+  assert.ok(CE.deskRipe({ text: "" }), "no recognised cue at all must fail safe to ripe");
+});
+test("segment 4: a terminal cue in one sentence cannot bury a live owner ask in another", () => {
+  assert.ok(isRipe("decision", "Closed. Owner to ratify."));
+  assert.ok(isRipe("decision", "Completed implementation. Owner decision required."));
+  assert.ok(isRipe("decision", "Dormant until review. Keep it or kill it."));
+});
+test("segment 5: a live owner ask FOLLOWED by terminal context stays Needs you", () => {
+  assert.ok(isRipe("decision", "Owner to ratify the rollback. Closed."));
+  assert.ok(isRipe("decision", "Owner: keep the shim or drop it. Already merged upstream."));
+});
+test("segment 6: an item whose every clause is parked/done/waiting stays Parked", () => {
+  assert.ok(!isRipe("blocker", "Awaiting CI. No owner action needed."));
+  assert.ok(!isRipe("blocker", "Waiting on vendor. Review complete."));
+  assert.ok(!isRipe("decision", "Completed. Closed."));
+});
+test("segment 7: ';' and newline separate clauses too (both occur in the real desk prose)", () => {
+  // an 'owner' in the SECOND clause must not lend itself to the WAIT lookahead in the first — the
+  // old [^.]* run crossed ';' and '\n' (neither is a '.') and wrongly held these ripe.
+  assert.ok(!isRipe("blocker", "Awaiting CI; owner already informed"));
+  assert.ok(!isRipe("blocker", "Awaiting CI\nowner already informed"));
+  // ...but a genuine ask in that second clause still wins outright
+  assert.ok(isRipe("decision", "Awaiting CI; owner to ratify the release"));
+  assert.ok(isRipe("decision", "Resolved; owner to pick a successor."));
+});
+test("segment 8: a terminal cue closing an item with no trailing punctuation still parks", () => {
+  // 'complete/closed/resolved' used to require a literal '.' or ';' — exactly what the segmenter
+  // strips — so end-of-segment is now the anchor and these no longer leak into Needs you.
+  assert.ok(!isRipe("decision", "Migration complete"));
+  assert.ok(!isRipe("decision", "Rollout closed"));
+  assert.ok(!isRipe("blocker", "Ceilings shaper not built"));
+});
+test("segment 9: the owner-ask override is NOT segment-scoped, so scoping cannot narrow it", () => {
+  // owner word and verb in DIFFERENT clauses of one sentence: still a live ask, still ripe
+  assert.ok(isRipe("decision", "Owner has the final say; merge or close. Already merged upstream."));
+  // 'call' sits in the DESK_WAIT owner-cue list but NOT in DESK_ASK, so that lookahead is still
+  // load-bearing on its own — this case is what makes it non-redundant.
+  assert.ok(isRipe("blocker", "blocked on your call"));
+});
+test("segment 10: unknown wording still fails safe to Needs you after scoping", () => {
+  assert.ok(isRipe("decision", "Xyzzy frobnicate the wibble grommet"));
+  assert.ok(isRipe("blocker", "Frobnicate the widget"));
+});
+test("segment 11: partition invariant holds across a mixed segment-scoped set", () => {
+  const items = [
+    { kind: "decision", text: "Closed. Owner to ratify.", pid: "a", pname: "A" },
+    { kind: "blocker", text: "Awaiting CI. No owner action needed.", pid: "b", pname: "B" },
+    { kind: "decision", text: "Completed. Closed.", pid: "c", pname: "C" },
+    { kind: "decision", text: "Xyzzy frobnicate", pid: "d", pname: "D" },
+    { kind: "reminder", text: "Owner: decide the release date", pid: "e", pname: "E" },
+  ];
+  const p = CE.tvPartition(items);
+  assert.strictEqual(p.ripe.length + p.parked.length, items.length, "buckets must total the input");
+  items.forEach(d => assert.ok(p.ripe.some(x => x.pid === d.pid) !== p.parked.some(x => x.pid === d.pid),
+    "each item must land in exactly one bucket: " + d.pid));
+  assert.deepStrictEqual(Array.from(p.ripe, d => d.pid).sort(), ["a", "d"]);
 });
 
 // -- partition invariants on the REAL desk --
@@ -385,6 +469,26 @@ test("parked items fold into a recoverable disclosure (hidden + expandable), nev
   assert.ok(/aria-expanded="false"/.test(html), "disclosure starts collapsed");
   assert.ok(/<div id="rv\d+" hidden><div class="tv-desk tv-parked">/.test(html), "parked list sits in a hidden, recoverable container");
   assert.ok(/note-XYZ/.test(html), "the parked item text is retained in the DOM, not discarded");
+});
+test("rendered: an owner ask beside a terminal clause lands in Needs you, not the parked fold", () => {
+  const html = renderToday([
+    { kind: "decision", text: "Closed. Owner to ratify.", pid: "a", pname: "A" },
+    { kind: "decision", text: "Completed implementation. Owner decision required.", pid: "b", pname: "B" },
+    { kind: "blocker", text: "Awaiting CI. No owner action needed.", pid: "c", pname: "C" },
+    { kind: "decision", text: "Completed. Closed.", pid: "d", pname: "D" },
+  ]);
+  assert.ok(/Needs you <span class="ct">· 2<\/span>/.test(html), "the 2 owner asks must be counted ripe");
+  assert.ok(/Show 2 more parked items/.test(html), "the 2 fully-terminal items fold away");
+  // split the document at the parked container: everything before it is the visible Needs-you list,
+  // everything from it on is inside the collapsed disclosure. An ask must never be on the wrong side.
+  const cut = html.indexOf("tv-parked");
+  assert.ok(cut > 0, "the parked fold must render");
+  const visible = html.slice(0, cut), folded = html.slice(cut);
+  assert.ok(/Owner to ratify/.test(visible) && !/Owner to ratify/.test(folded),
+    "'Closed. Owner to ratify.' must be visible, never hidden in the parked fold");
+  assert.ok(/Owner decision required/.test(visible) && !/Owner decision required/.test(folded),
+    "'Owner decision required' must be visible, never hidden in the parked fold");
+  assert.ok(/No owner action needed/.test(folded), "the terminal items are retained inside the fold");
 });
 CE.window.DASHBOARD_DATA.projects = _realProjects; // restore live data for the computed-headline tests
 

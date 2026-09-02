@@ -3923,31 +3923,67 @@ function tvDesk(){
 // misread changes ordering, never visibility. It fails safe: anything the cues do not recognise
 // stays RIPE, never silently hidden. Cues come from the real desk strings already in data.js.
 //
+// Desk prose is plain generated ledger text, so clause segmentation is a split, not a parser:
+// break on sentence enders (. ? !) and ';' when followed by whitespace or end-of-string, and on
+// any newline. Requiring that trailing whitespace is what keeps "prep_to_standard.py" and "v1.2"
+// intact — a bare /[.]/ split would shred identifiers and could strand a cue's own qualifier in a
+// neighbouring fragment. Pure and allocation-light; returns [] for empty prose, which deskRipe
+// reads as "nothing recognised" and therefore ripe.
+function deskSegments(t){
+  return String(t||'').split(/[.?!;]+(?:\s+|$)|\n+/).map(s=>s.trim()).filter(Boolean);
+}
+// Root cues (1)-(3) below are matched against ONE SEGMENT AT A TIME, never the concatenated item,
+// so a terminal or external-wait cue in one clause cannot speak for the whole desk entry. Cue (4),
+// the owner-ask override, deliberately keeps running against the WHOLE item — see its note.
+//
 // (1) Gated / dormant / soft-non-gating / placeholder / conditional prerequisites → parked.
-const DESK_PARK=/\b(dormant|non-?gating|blocks nothing|no demand|gated on|deferred|on hold|direction-only|single-operator|placeholder|conditional on|before (?:building|deciding|you)\b|re-?check\b|until\b[^.]*\b(?:fires?|lands?|ships?|exists?)\b|no (?:trigger|demand)|soft,?\s*non|not built[;,]|none (?:has|yet))/i;
+// The "until X fires/lands" run is now a plain .* because the segment boundary already ends it,
+// and "not built" is terminal at the end of its clause — which is exactly the ';' the segmenter
+// has just consumed, hence (?=[;,]|$) rather than a literal [;,].
+const DESK_PARK=/\b(dormant|non-?gating|blocks nothing|no demand|gated on|deferred|on hold|direction-only|single-operator|placeholder|conditional on|before (?:building|deciding|you)\b|re-?check\b|until\b.*\b(?:fires?|lands?|ships?|exists?)\b|no (?:trigger|demand)|soft,?\s*non|not built(?=[;,]|$)|none (?:has|yet))/i;
 // (2) "awaiting / waiting on / blocked on / depends on X" parks ONLY when X is not the owner.
 // "awaiting owner ratification / your sign-off / needs your decision" is the ripest state there
-// is — it is waiting on YOU — so the owner-cue lookahead keeps it in the queue.
-const DESK_WAIT=/\b(?:await(?:s|ing)?|waiting (?:on|for)|blocked (?:on|by)|depend(?:s|ent)? on)\b(?![^.]*\b(?:owner|your\b|you\b|ratif|sign-?off|approv|decision|decide|choice|call)\b)/i;
+// is — it is waiting on YOU — so the owner-cue lookahead keeps it in the queue. That lookahead is
+// retained and is NOT redundant with DESK_ASK: DESK_ASK carries no "call" verb, so "blocked on
+// your call" is held ripe by this lookahead alone. It now scans .* instead of [^.]* because it
+// runs inside a single segment: the segment boundary does the scoping the character class only
+// approximated, and got wrong across ';' and newlines, which [^.] happily crossed.
+const DESK_WAIT=/\b(?:await(?:s|ing)?|waiting (?:on|for)|blocked (?:on|by)|depend(?:s|ent)? on)\b(?!.*\b(?:owner|your\b|you\b|ratif|sign-?off|approv|decision|decide|choice|call)\b)/i;
 // (3) Already resolved — no owner action remains. Terminal-completion wording only, so an OPEN
 // owner choice like "merge or close" / "ship it or delete it" is NOT caught (those stay ripe).
-const DESK_DONE=/\b(?:no (?:action|owner action|decision|call|approval)\s*(?:needed|required)|already (?:done|merged|closed|shipped|resolved|handled)|nothing (?:to do|needed|left)|complete[d]?[.;]|closed[.;]|resolved[.;])/i;
+// "complete/closed/resolved" are terminal only at the END of their clause; the '.' or ';' that
+// used to prove that is precisely what the segmenter strips, so the anchor is now (?=[.;]|$) —
+// end-of-segment — which also finally catches a terminal cue closing an item with no punctuation.
+const DESK_DONE=/\b(?:no (?:action|owner action|decision|call|approval)\s*(?:needed|required)|already (?:done|merged|closed|shipped|resolved|handled)|nothing (?:to do|needed|left)|complete[d]?(?=[.;]|$)|closed(?=[.;]|$)|resolved(?=[.;]|$))/i;
 // (4) OVERRIDE: an explicit, still-OPEN ask directed at the owner keeps the item ripe even when a
-// PARK/DONE cue also appears in the prose — DESK_PARK/DESK_DONE match on substrings ("completed.",
-// "closed.", "resolved.", "already merged", "no demand", "blocks nothing", "none has/yet"), so a
-// sentence like "Scoring self-heal completed. Owner: keep the fallback or remove it?" would
-// otherwise be parked despite carrying a live decision. This restores the fail-safe direction
-// (surface, never hide) for genuine owner asks. Two rules make the match reliable: (a) the verbs are
-// bare STEMS with NO trailing \b (as DESK_WAIT already does), so "ratify/ratification", "approved",
-// "merged", "reviewed", "signed off" all match — a trailing \b would make "ratif" (always followed
-// by y/ied/ication) unmatchable and drop every inflected form. (b) The owner word and the verb may
-// appear in EITHER order within one sentence: we anchor at a sentence start ((?:^|[.?!]\s*)),
-// assert an owner word somewhere in that sentence (lookahead), then reach a verb in it — so both
-// "Owner: keep or drop it" and "Merge or drop it — owner's call" are caught, while an owner mention
-// in a *different* sentence can't borrow a verb (the [^.?!]* runs stay inside one sentence). The
-// final alternative catches a bare binary choice ("keep it or kill it") that names no owner word.
+// PARK/WAIT/DONE cue also appears in the prose — "Closed. Owner to ratify." is a live decision, not
+// a closed one. This restores the fail-safe direction (surface, never hide) for genuine owner asks.
+// Two rules make the match reliable: (a) the verbs are bare STEMS with NO trailing \b (as DESK_WAIT
+// already does), so "ratify/ratification", "approved", "merged", "reviewed", "signed off" all match
+// — a trailing \b would make "ratif" (always followed by y/ied/ication) unmatchable and drop every
+// inflected form. (b) The owner word and the verb may appear in EITHER order within one sentence:
+// we anchor at a sentence start ((?:^|[.?!]\s*)), assert an owner word somewhere in that sentence
+// (lookahead), then reach a verb in it — so both "Owner: keep or drop it" and "Merge or drop it —
+// owner's call" are caught, while an owner mention in a *different* sentence can't borrow a verb.
+// The final alternative catches a bare binary choice ("keep it or kill it") naming no owner word.
+//
+// This one cue is deliberately NOT segment-scoped, and the asymmetry is the point. It is the
+// fail-safe direction, so it must stay the WIDEST test in the set: its [^.?!]* runs already confine
+// a match to one sentence while spanning ';' and newlines, so a clause-level ask is still caught,
+// whereas splitting it further could only ever HIDE an ask — "Owner has the final say; merge or
+// close." would stop matching once the owner word and its verb landed in separate segments.
 const DESK_ASK=/(?:^|[.?!]\s*)(?=[^.?!]*\b(?:owner|you|your)\b)[^.?!]*\b(?:decid|decision|choos|chos|choice|pick|keep|kept|remov|kill|drop|merg|ship|approv|ratif|sign(?:ed)?[-\s]?off|review|confirm)|\b(?:keep|merge|ship) it or \w+ it\b/i;
-function deskRipe(d){ const t=String(d.text||''); if(DESK_ASK.test(t))return true; return !DESK_PARK.test(t)&&!DESK_WAIT.test(t)&&!DESK_DONE.test(t); }
+// An owner ask anywhere in the item wins outright; otherwise a park/wait/done cue in ANY SINGLE
+// SEGMENT parks it; prose carrying no recognised cue at all stays ripe. Scoping the root cues
+// matters in both directions: a terminal "Closed." can no longer bury a live "Owner to ratify."
+// beside it, and an "owner" in a later clause can no longer un-park a plain "Awaiting CI".
+function deskRipe(d){
+  const t=String(d.text||'');
+  if(DESK_ASK.test(t))return true;
+  const segs=deskSegments(t);
+  if(!segs.length)return true;
+  return !segs.some(s=>DESK_PARK.test(s)||DESK_WAIT.test(s)||DESK_DONE.test(s));
+}
 // The whole contract in one pure function: reminders are context (park by kind); blockers and
 // decisions are ripe only when their text is not parked. Every eligible item lands in exactly
 // one bucket, so folded `parked` + visible `ripe` always reconcile to the whole desk — nothing
