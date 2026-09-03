@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-09-02T06:15:02.141214Z",
- "count": 379,
+ "generated_at": "2026-09-03T06:11:23.558247Z",
+ "count": 382,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"410c2ffb35f6eafed980318cca369dfe-gzip\"",
+   "etag": "\"45126e2705f7f1bde36f5d37a9c595d4-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Tue, 01 Sep 2026 14:29:27 GMT",
+   "last_modified": "Thu, 03 Sep 2026 01:34:58 GMT",
    "last_status": 200,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": true,
-   "stale_reason": "no new items in 28 days (expects ~7)"
+   "stale_reason": "no new items in 29 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,39 +19,39 @@
    "last_item_published": "2026-08-21T08:12:58Z",
    "last_modified": "Fri, 21 Aug 2026 08:12:58 GMT",
    "last_status": 304,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": true,
-   "stale_reason": "no new items in 11 days (expects ~3)"
+   "stale_reason": "no new items in 12 days (expects ~3)"
   },
   "aps-blog": {
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-01T14:44:49Z",
+   "last_item_published": "2026-09-02T20:20:21Z",
    "last_status": 200,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"09b7621465c21b10abcab54e26a275f8\"",
+   "etag": "W/\"340f280a9a6595262f18bf19f04a6043\"",
    "last_failure": "2026-08-25T06:08:32.200298Z",
    "last_item_count": 10,
-   "last_item_published": "2026-08-25T14:15:28Z",
-   "last_modified": "Mon, 31 Aug 2026 12:01:42 GMT",
+   "last_item_published": "2026-09-02T11:51:05Z",
+   "last_modified": "Wed, 02 Sep 2026 13:11:18 GMT",
    "last_status": 200,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"b15a85455108bd3881b9c257ec46be2e\"",
+   "etag": "W/\"0bf5a612c7acd04941532e57049c767f\"",
    "last_item_count": 8,
-   "last_modified": "Wed, 02 Sep 2026 04:04:58 GMT",
+   "last_modified": "Thu, 03 Sep 2026 06:00:31 GMT",
    "last_status": 200,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -61,32 +61,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-31T16:58:32Z",
    "last_status": 304,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-02T00:32:00Z",
-   "last_modified": "Wed, 2 Sep 2026 02:34:43 GMT",
+   "last_item_published": "2026-09-03T01:11:00Z",
+   "last_modified": "Thu, 3 Sep 2026 02:14:33 GMT",
    "last_status": 200,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 47,
+   "consecutive_failures": 48,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-02T06:15:02.141214Z",
+   "last_failure": "2026-09-03T06:11:23.558247Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "47 consecutive failures: HTTP 403"
+   "stale_reason": "48 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-31T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"8baefe794499b2e04e6ae790ce708bbd\"",
+   "etag": "W/\"b5758c352d69625ac759f6b393c2e60f\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,74 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-02T06:15:02.141214Z",
+   "last_success": "2026-09-03T06:11:23.558247Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Kobi Toolkit for Autodesk Revit: A Broad All-in-One Productivity Suite",
+   "url": "http://revitaddons.blogspot.com/2026/09/kobi-toolkit-for-autodesk-revit-broad.html",
+   "source": "revit-addons",
+   "published": "2026-09-03T01:11:00Z",
+   "summary": "Summary Kobi Toolkit for Autodesk Revit is a productivity add-in from KobiLabs designed to enhance BIM workflows, reduce repetitive tasks, and extend Revit’s native capabilities. According to KobiLabs and the Autodesk App Store listing, the toolkit includes nine toolsets and more than 40 individual tools focused on BIM management, QA/QC, analysis, reinforcement, annotation, modification, view control, selection, and content administration. Purpose and Positioning The toolkit is intended for Revit users who need practical utilities that save time during model setup, documentation, model checking, data editing, and content management. Rather than focusing on one narrow workflow, it functions as a broad all-in-one productivity suite for design and BIM teams. Its strongest value is in helping users complete common model-management tasks faster and with fewer manual steps. Main Toolsets Kobi Toolkit is organized into nine toolsets: BIM Manager, QA & QC, Analysis, Reinforcement, Annotate, Modify, View, Selection, and Content Admin Kit. This organization makes the toolkit applicable to multiple stages of a Revit project, including project setup, model production, coordination review,…",
+   "id": "a681948a6b171f48",
+   "fetched_at": "2026-09-03T06:11:23.558247Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Broad productivity add-in with 40+ tools; worth knowing it exists, but no technique or API detail to learn from.",
+    "topics": [
+     "revit-addons",
+     "productivity"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-03T06:11:23.558247Z"
+   }
+  },
+  {
+   "title": "Build Event-Driven Workflows with AEC Data Model Subscriptions",
+   "url": "https://aps.autodesk.com/blog/build-event-driven-workflows-aec-data-model-subscriptions",
+   "source": "aps-blog",
+   "published": "2026-09-02T20:20:21Z",
+   "summary": "Build Event-Driven Workflows with AEC Data Model Subscriptions zhong.wu@autod… 2 Sep 2026 Zhong Wu Xiaodong Liang Share We’re excited to announce a new Subscription capability for the Autodesk AEC Data Model API, now available in Public Beta. With subscriptions, applications can receive real-time notifications when new AEC Data Model data becomes available, enabling developers to build more responsive, event-driven workflows without repeatedly polling the API for updates. Whether you are building automated model analysis, data synchronization, dashboards, quality checks, or downstream integrations, subscriptions can help your application react to model changes as they happen. Why subscriptions? Until now, applications that needed to know when new AEC Data Model data became available typically had to periodically query the API and check whether a new version had been extracted. Subscriptions introduce a more event-driven approach. Instead of continuously polling for changes, your application can establish a subscription and receive a notification when the extraction of a newly published model version has completed successfully. Your application can then use the AEC Data Model API…",
+   "id": "59e52a8788b02944",
+   "fetched_at": "2026-09-03T06:11:23.558247Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "New AEC Data Model API subscriptions enable event-driven workflows; relevant for building responsive audit and integration tooling outside the Revit API.",
+    "topics": [
+     "aps",
+     "aec-data-model",
+     "api-feature"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-03T06:11:23.558247Z"
+   }
+  },
+  {
+   "title": "BIM Data Validation: The Three-Step Method to Validate Your Data",
+   "url": "https://bimcorner.com/the-three-step-method-to-validate-your-data/",
+   "source": "bim-corner",
+   "published": "2026-09-02T11:51:05Z",
+   "summary": "It is Friday afternoon and a new model revision lands on the CDE. You know roughly what the client asked for. Fire ratings on doors, classification codes on everything, material data somebody downstream will use for ordering. You also know nobody has opened the requirements document since the kick-off meeting. So what do you do? You run the clash test, click through a few hundred issues, group them, export the report. The data part? You scroll a bit. Spot-check a few doors. Hope. That is what BIM data validation looks like on most projects, and on plenty I have seen myself. block. Captions are , not , for the same reason. The at the bottom only adds a hover colour to the button and is safe to lose. ============================================================ --> We have become digital janitors You were hired as an engineer. Somebody pays you an engineer's rate. Now think honestly about last week: how many of those hours went into work a machine should have done? I mean the mechanical part. Clicking through a model to check it. Copying errors into a report nobody fixes. Uploading and downloading models on the CDE. Fixing tags and typos, then doing it again two weeks later. The BIM…",
+   "id": "97de2297c00f8f22",
+   "fetched_at": "2026-09-03T06:11:23.558247Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 70,
+    "why": "Concrete methodology for data validation audits at scale; directly applicable to your model-checking and content-repair tooling.",
+    "topics": [
+     "audit-tooling",
+     "data-validation",
+     "bim-process"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-03T06:11:23.558247Z"
+   }
+  },
   {
    "title": "Tagitize: Tag All Across Multiple Views Without Overlaps, Plus Much More",
    "url": "http://revitaddons.blogspot.com/2026/09/tagitize-tag-all-across-views-without.html",
