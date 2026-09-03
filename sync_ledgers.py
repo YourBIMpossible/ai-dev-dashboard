@@ -432,6 +432,47 @@ def _wave_drift(waves: list[dict]) -> list[str]:
 # --------------------------------------------------------------------------- #
 # Main
 # --------------------------------------------------------------------------- #
+# Ledger-derived per-phase fields (everything else on a phase is curated and preserved
+# verbatim by build_progress, so it can never appear in a change summary).
+_LEDGER_PHASE_FIELDS = ("name", "note", "pct")
+_LEDGER_WAVE_FIELDS = ("summary", "updated", "current", "lastCompleted", "drift")
+
+
+def summarize_changes(old_bim: dict, new_progress: dict, new_waves: dict) -> list[str]:
+    """Name every ledger-derived field the render would rewrite, one line each.
+
+    Operator-facing: `--check` prints this list so an OUT OF DATE verdict says WHICH
+    phase/wave field lags the ledgers (a regenerated note, a renamed phase, a new wave
+    summary) instead of the bare "(field-level changes in progress/waves)". Curated
+    completion-model fields (id/bucket/weight/...) are never listed here because
+    build_progress preserves them; their loss aborts the render earlier as
+    CuratedFieldLoss, so a non-empty summary is pending regeneration, not corruption.
+    """
+    changes: list[str] = []
+    old_phases = (old_bim.get("progress") or {}).get("phases", [])
+    new_phases = new_progress["phases"]
+    for old, new in zip(old_phases, new_phases):
+        label = new.get("id") or new.get("name") or old.get("name") or "?"
+        for field in _LEDGER_PHASE_FIELDS:
+            if old.get(field) != new.get(field):
+                if field == "name":
+                    changes.append(f"phase name: {old.get('name')!r} -> {new.get('name')!r}")
+                else:
+                    changes.append(f"phase {label}: {field} changed")
+    if len(old_phases) != len(new_phases):
+        changes.append(f"phase count: {len(old_phases)} -> {len(new_phases)}")
+    old_waves = old_bim.get("waves") or {}
+    for field in _LEDGER_WAVE_FIELDS:
+        if old_waves.get(field) != new_waves.get(field):
+            if field == "summary":
+                changes.append(f"wave summary: {old_waves.get('summary')} -> {new_waves['summary']}")
+            elif field == "updated":
+                changes.append(f"wave ledger date: {old_waves.get('updated')} -> {new_waves['updated']}")
+            else:
+                changes.append(f"wave {field} changed")
+    return changes
+
+
 def render(data_path: Path, phase_ledger: Path, wave_ledger: Path,
            *, allow_defaults: bool = False) -> tuple[str, str, list[str]]:
     """Return (current_data_js, new_data_js, change_summary)."""
@@ -454,20 +495,7 @@ def render(data_path: Path, phase_ledger: Path, wave_ledger: Path,
                                   allow_defaults=allow_defaults)
     new_waves = build_waves(waves, updated, wave_ledger)
 
-    # change summary (for the operator / commit message)
-    changes: list[str] = []
-    old_phase_names = [p.get("name") for p in (bim.get("progress") or {}).get("phases", [])]
-    new_phase_names = [p["name"] for p in new_progress["phases"]]
-    for old, new in zip(old_phase_names, new_phase_names):
-        if old != new:
-            changes.append(f"phase name: {old!r} -> {new!r}")
-    if len(old_phase_names) != len(new_phase_names):
-        changes.append(f"phase count: {len(old_phase_names)} -> {len(new_phase_names)}")
-    old_waves = bim.get("waves") or {}
-    if old_waves.get("summary") != new_waves["summary"]:
-        changes.append(f"wave summary: {old_waves.get('summary')} -> {new_waves['summary']}")
-    if old_waves.get("updated") != new_waves["updated"]:
-        changes.append(f"wave ledger date: {old_waves.get('updated')} -> {new_waves['updated']}")
+    changes = summarize_changes(bim, new_progress, new_waves)
 
     new_block = apply_patch(block, {"progress": new_progress, "waves": new_waves},
                             serialize=compact_to_js)
