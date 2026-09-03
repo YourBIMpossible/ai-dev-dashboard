@@ -1,13 +1,17 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-02 07:49:38",
+  "checked": "2026-09-03 06:00:17",
   "staleDays": 14,
+  "cards": 12,
+  "evaluated": 12,
+  "unevaluated": [],
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
       "lastActivity": "2026-09-02",
-      "newestRecent": "2026-08-30",
-      "lagDays": 3,
+      "newestRecent": "2026-09-02",
+      "lagDays": 0,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -15,8 +19,9 @@ window.NARRATIVE_FRESHNESS = {
       "name": "Add-Ins / RevitLink",
       "status": "active",
       "lastActivity": "2026-09-01",
-      "newestRecent": "2026-08-30",
-      "lagDays": 2,
+      "newestRecent": "2026-09-01",
+      "lagDays": 0,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -24,8 +29,9 @@ window.NARRATIVE_FRESHNESS = {
       "name": "BIMpossible Site",
       "status": "active",
       "lastActivity": "2026-08-31",
-      "newestRecent": "2026-08-27",
-      "lagDays": 4,
+      "newestRecent": "2026-08-31",
+      "lagDays": 0,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -33,8 +39,9 @@ window.NARRATIVE_FRESHNESS = {
       "name": "Preseason Pick'em",
       "status": "dormant",
       "lastActivity": "2026-06-01",
-      "newestRecent": "2026-08-04",
-      "lagDays": -64,
+      "newestRecent": "2026-08-10",
+      "lagDays": -70,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -44,6 +51,7 @@ window.NARRATIVE_FRESHNESS = {
       "lastActivity": "2026-06-04",
       "newestRecent": "2026-06-03",
       "lagDays": 1,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -51,8 +59,9 @@ window.NARRATIVE_FRESHNESS = {
       "name": "Families by BIMpossible",
       "status": "active",
       "lastActivity": "2026-08-31",
-      "newestRecent": "2026-08-24",
-      "lagDays": 7,
+      "newestRecent": "2026-08-31",
+      "lagDays": 0,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -62,6 +71,7 @@ window.NARRATIVE_FRESHNESS = {
       "lastActivity": "2026-08-22",
       "newestRecent": "2026-08-22",
       "lagDays": 0,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -69,26 +79,29 @@ window.NARRATIVE_FRESHNESS = {
       "name": "AI Brain Data",
       "status": "active",
       "lastActivity": "2026-08-22",
-      "newestRecent": "2026-08-22",
-      "lagDays": 0,
+      "newestRecent": "2026-08-23",
+      "lagDays": -1,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-09-01",
-      "newestRecent": "2026-08-30",
-      "lagDays": 2,
+      "lastActivity": "2026-09-02",
+      "newestRecent": "2026-09-02",
+      "lagDays": 0,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-09-02",
-      "newestRecent": "2026-08-30",
-      "lagDays": 3,
+      "lastActivity": "2026-09-03",
+      "newestRecent": "2026-09-02",
+      "lagDays": 1,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -98,6 +111,7 @@ window.NARRATIVE_FRESHNESS = {
       "lastActivity": "2026-07-12",
       "newestRecent": "2026-07-12",
       "lagDays": 0,
+      "evaluated": true,
       "stale": false,
       "reason": null
     },
@@ -105,8 +119,9 @@ window.NARRATIVE_FRESHNESS = {
       "name": "BIMpossible Tests",
       "status": "dormant",
       "lastActivity": "2026-06-24",
-      "newestRecent": "2026-06-24",
-      "lagDays": 0,
+      "newestRecent": "2026-08-22",
+      "lagDays": -59,
+      "evaluated": true,
       "stale": false,
       "reason": null
     }
