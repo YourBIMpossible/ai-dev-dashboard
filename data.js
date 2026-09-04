@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-03",
+  generated: "2026-09-04",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-21",
+  activitySince: "2026-08-22",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -65,7 +65,7 @@ window.DASHBOARD_DATA = {
             weight: 1,
             name: "P4 Embedded Intelligent Assistant (4a/4b)",
             pct: 96,
-            note: "CLOSED — 4a read-only + 4b HITL action assistant; live-smoked 2026-07-01 (4a: EL+STR, 4b: confirm+cancel verified, audit rows ok+denied/cancelled). Model routing: 1A #537 (b2a24b00) compiled registry + resolver + single request builder replace the SONNET_MODEL/HAIKU_MODEL literals, bad model requests denied, unusable BYOK fails closed; per-kind defaults #542 (90cea91f) — both LIVE 2026-09-02; 1B usage ledger #548 merged 8cad22b5 2026-09-02 (migration `3aa734cda334` applied, LIVE 2026-09-02 16:08Z): one `usage_events` row per provider call with model/route/kind/cost attribution, `model_denial_events`, conversation `last_*` columns; 1C (PR #550 MERGED 2026-09-02 -> e3ce9120, LIVE, no migration): Opus 5 registered BYOK-only for chat + chat_resume (platform route denies, never downgrades), refusal category surfaced on the `final` SSE event (refusal never hops), one stateless fallback hop (title/Slack/Teams, Sonnet 5 → Haiku 4.5) on narrow model-not-found 404 only — 529/5xx never hop — disclosed on the ledger row; `ASSISTANT_PLATFORM_TIERS` is a spend ceiling; slice 2 (PR #556 MERGED 2026-09-02 -> 9605199d, LIVE, migration `a4c123b1612d` applied): firm-scoped model policy (`firm_model_policy` table — admin-set default + member allowlist), `GET /assistant/models` server-authoritative list scoped to the firm's live credential route, `GET`/`PUT /account/model-policy` admin endpoints (D-2 tier) wired into `aec/assistant.py`'s resume/stream paths, admin `ModelPolicyCard` UI + composer model selector; the PUT endpoint's `_check_model_id` also enforces the platform-tier ceiling at save time (422, mirrors `_gate`'s `within_platform_ceiling`) so a future tier narrowing can't silently override or deny a saved policy at serve time. slice 3 (branch `feat/ai-model-routing-slice3` @ 62555a31 — PR NOT YET OPENED, NOT MERGED, NOT LIVE; migration `b5d234c2723e` (firms.billing_timezone, additive, NULL=UTC) NOT YET APPLIED): platform cost controls — per-plan tier entitlement (Starter fast / Professional + Business fast+balanced / Advanced firm-BYOK-only) and independent firm-month + user-month USD budgets rolled up live from the 1B `usage_events` ledger (no new counter table), calendar month in the firm's own billing timezone; soft warning at 80% of either scope; at exhaustion an explicit, announced downgrade to the lowest request-kind-compatible model — `selection_code=budget_exhausted` with `requested_model_id`/`effective_model_id`/`fallback_reason` on the resolution, the `model_routed` SSE opener and the usage row — never a pause and never a silent quality substitution (no safe lower tier -> deny, as the platform path already does); firm BYOK is exempt at the source (rollup filters `credential_route='platform'`) and again at the decision. Concurrency stays ledger-derived: the measured overshoot is bounded by in-flight turns x per-turn cost and converges on the next read (`backend/tests/test_model_budget_rollup.py`), so no atomic reservation was added. UI: one budget banner in the assistant panel + a per-message footnote on a downgraded answer. Behavior change to call out at merge: an `advanced` firm now gets PLAN_BYOK_ONLY on the platform route. This annotation must be finalized with the PR number and merge sha when it lands. Status CLOSED (100%) — slice 3 is additive, no pct change",
+            note: "CLOSED — 4a read-only + 4b HITL action assistant; live-smoked 2026-07-01 (4a: EL+STR, 4b: confirm+cancel verified, audit rows ok+denied/cancelled). Model routing: 1A #537 (b2a24b00) compiled registry + resolver + single request builder replace the SONNET_MODEL/HAIKU_MODEL literals, bad model requests denied, unusable BYOK fails closed; per-kind defaults #542 (90cea91f) — both LIVE 2026-09-02; 1B usage ledger #548 merged 8cad22b5 2026-09-02 (migration `3aa734cda334` applied, LIVE 2026-09-02 16:08Z): one `usage_events` row per provider call with model/route/kind/cost attribution, `model_denial_events`, conversation `last_*` columns; 1C (PR #550 MERGED 2026-09-02 -> e3ce9120, LIVE, no migration): Opus 5 registered BYOK-only for chat + chat_resume (platform route denies, never downgrades), refusal category surfaced on the `final` SSE event (refusal never hops), one stateless fallback hop (title/Slack/Teams, Sonnet 5 → Haiku 4.5) on narrow model-not-found 404 only — 529/5xx never hop — disclosed on the ledger row; `ASSISTANT_PLATFORM_TIERS` is a spend ceiling; slice 2 (PR #556 MERGED 2026-09-02 -> 9605199d, LIVE, migration `a4c123b1612d` applied): firm-scoped model policy (`firm_model_policy` table — admin-set default + member allowlist), `GET /assistant/models` server-authoritative list scoped to the firm's live credential route, `GET`/`PUT /account/model-policy` admin endpoints (D-2 tier) wired into `aec/assistant.py`'s resume/stream paths, admin `ModelPolicyCard` UI + composer model selector; the PUT endpoint's `_check_model_id` also enforces the platform-tier ceiling at save time (422, mirrors `_gate`'s `within_platform_ceiling`) so a future tier narrowing can't silently override or deny a saved policy at serve time. slice 3 (branch `feat/ai-model-routing-slice3` @ 2dfb878f — PR #557 (draft), NOT MERGED, NOT LIVE; migration `b5d234c2723e` (firms.billing_timezone, additive, NULL=UTC) NOT YET APPLIED): platform cost controls — per-plan tier entitlement (Starter fast / Professional + Business fast+balanced / Advanced firm-BYOK-only) and independent firm-month + user-month USD budgets rolled up live from the 1B `usage_events` ledger (no new counter table), calendar month in the firm's own billing timezone; soft warning at 80% of either scope; at exhaustion an explicit, announced downgrade to the lowest request-kind-compatible model — `selection_code=budget_exhausted` with `requested_model_id`/`effective_model_id`/`fallback_reason` on the resolution, the `model_routed` SSE opener and the usage row — never a pause and never a silent quality substitution (no safe lower tier -> deny, as the platform path already does); firm BYOK is exempt at the source (rollup filters `credential_route='platform'`) and again at the decision. Concurrency stays ledger-derived: the measured overshoot is bounded by in-flight turns x per-turn cost and converges on the next read (`backend/tests/test_model_budget_rollup.py`), so no atomic reservation was added. UI: one budget banner in the assistant panel + a per-message footnote on a downgraded answer. Behavior change to call out at merge: an `advanced` firm now gets PLAN_BYOK_ONLY on the platform route. This annotation must be finalized with the merge sha when it lands (PR #557). Status CLOSED (100%) — slice 3 is additive, no pct change",
             tasks: [
               { label: "B2 rate-limit hardening", status: "done" },
               { label: "B2 byte-cap + deadline handling", status: "done" },
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [17,18,18,30,12,5,6,0,0,31,59,62,18,0],
+      activity: [18,18,30,12,5,6,0,0,31,59,62,19,3,0],
       lastActivity: {
-        date: "2026-09-02",
-        summary: "docs(phase-status): model routing slice 2 (#556) merged and live (7b53cc2)"
+        date: "2026-09-03",
+        summary: "feat(assistant): model routing slice 3 — platform cost controls (#557) (9ed31ef)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -625,7 +625,7 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [3,7,15,1,4,2,1,0,0,3,0,2,0,0],
+      activity: [7,15,1,4,2,1,0,0,3,0,2,0,0,0],
       lastActivity: {
         date: "2026-09-01",
         summary: "fix(relay,pane): PipeServer pipe-busy backoff + pairing confirmation null-owner crash (#117) (9f6f3c4)"
@@ -843,7 +843,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,0,2,0,0,0,1,0,0,0],
+      activity: [0,0,0,0,0,2,0,0,0,1,0,0,0,0],
       lastActivity: {
         date: "2026-08-31",
         summary: "fix(contact): treat a provider 2xx with a failure body as undelivered (1dbbd72)"
@@ -1043,7 +1043,7 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,1,0,2,0,0,0,0,0,0,2,0,0,0],
+      activity: [1,0,2,0,0,0,0,0,0,2,0,0,0,0],
       lastActivity: {
         date: "2026-08-31",
         summary: "audit: publish the 2026-08-31 weekly slop-audit report (#13) (7d56ecb)"
@@ -1174,7 +1174,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [0,4,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [4,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "chore(rag): rag_sources Workspace root → F:\\BIMpossible-Workspace (census 19 B8) (6ff31ad)"
@@ -1258,7 +1258,7 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,1,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [1,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "Revit-AI pipeline data through 2026-08-23 (raw-logs, processed, daily-summaries, context) — pre AI-Dev extraction (7d1b22b)"
@@ -1310,10 +1310,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [8,7,5,13,5,2,5,0,0,15,49,37,7,0],
+      activity: [7,5,13,5,2,5,0,0,15,49,37,8,2,0],
       lastActivity: {
-        date: "2026-09-02",
-        summary: "docs(phase-status): model routing slice 2 (#556) merged and live (7b53cc2)"
+        date: "2026-09-03",
+        summary: "state(mirror): refresh from canonical 6d23ed5; bimpossible watermark 9605199d/#556 (1387389)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1367,10 +1367,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [8,11,4,5,20,6,3,4,3,17,14,3,16,1],
+      activity: [11,4,5,20,6,3,4,3,17,14,3,16,3,1],
       lastActivity: {
-        date: "2026-09-03",
-        summary: "chore: live billing sync 2026-09-03 (e3edf1a)"
+        date: "2026-09-04",
+        summary: "chore: live billing sync 2026-09-04 (d52d301)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
