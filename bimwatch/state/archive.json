@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-04T06:10:13.935124Z",
- "count": 384,
+ "generated_at": "2026-09-05T06:09:03.172745Z",
+ "count": 386,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,19 +9,19 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 03 Sep 2026 01:34:58 GMT",
    "last_status": 200,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": true,
-   "stale_reason": "no new items in 30 days (expects ~7)"
+   "stale_reason": "no new items in 31 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-08-21T08:12:58Z",
-   "last_modified": "Fri, 21 Aug 2026 08:12:58 GMT",
-   "last_status": 304,
-   "last_success": "2026-09-04T06:10:13.935124Z",
-   "stale": true,
-   "stale_reason": "no new items in 13 days (expects ~3)"
+   "last_item_count": 200,
+   "last_item_published": "2026-09-04T13:11:16Z",
+   "last_modified": "Fri, 04 Sep 2026 16:13:04 GMT",
+   "last_status": 200,
+   "last_success": "2026-09-05T06:09:03.172745Z",
+   "stale": false,
+   "stale_reason": ""
   },
   "aps-blog": {
    "consecutive_failures": 0,
@@ -29,65 +29,64 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-02T20:20:21Z",
    "last_status": 200,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
-   "consecutive_failures": 1,
+   "consecutive_failures": 0,
    "etag": "W/\"340f280a9a6595262f18bf19f04a6043\"",
    "last_failure": "2026-09-04T06:10:13.935124Z",
    "last_item_count": 10,
    "last_item_published": "2026-09-02T11:51:05Z",
    "last_modified": "Wed, 02 Sep 2026 13:11:18 GMT",
    "last_status": 200,
-   "last_success": "2026-09-03T06:11:23.558247Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
-   "stale_reason": "",
-   "last_error": "HTTP 403"
+   "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"c69608c40f62071525f8179736404702\"",
+   "etag": "W/\"9df66d565b392183644691bf201727a1\"",
    "last_item_count": 8,
-   "last_modified": "Thu, 03 Sep 2026 16:34:43 GMT",
+   "last_modified": "Fri, 04 Sep 2026 15:56:54 GMT",
    "last_status": 200,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"0c81868f5b524c1482d684f266e55d17\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-08-31T16:58:32Z",
-   "last_status": 304,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "etag": "W/\"c56ed46cb18e9e58741ccf9074555d49\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-04T07:00:15Z",
+   "last_status": 200,
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-04T01:16:00Z",
-   "last_modified": "Fri, 4 Sep 2026 02:39:50 GMT",
+   "last_item_published": "2026-09-05T00:35:00Z",
+   "last_modified": "Sat, 5 Sep 2026 02:09:30 GMT",
    "last_status": 200,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 49,
+   "consecutive_failures": 50,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-04T06:10:13.935124Z",
+   "last_failure": "2026-09-05T06:09:03.172745Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "49 consecutive failures: HTTP 403"
+   "stale_reason": "50 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -95,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-31T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -105,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"e85a4e88491704f47b6df75afc1d4618\"",
+   "etag": "W/\"62a21c1c1c736fd20c77f392e72166d6\"",
    "last_item_count": 10,
    "last_item_published": "2026-07-05T11:05:33Z",
    "last_status": 200,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -125,14 +124,55 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-04T06:10:13.935124Z",
+   "last_success": "2026-09-05T06:09:03.172745Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
   {
-   "title": "Free Get Linked IDs: Get Element IDs for Linked Elements and Export Them to Excel",
+   "title": "Free ScheduleLink: Round-Trip Element Information Between Revit Schedules and Excel",
+   "url": "http://revitaddons.blogspot.com/2026/09/free-schedulelink-round-trip-element.html",
+   "source": "revit-addons",
+   "published": "2026-09-05T00:35:00Z",
+   "summary": "Summary ScheduleLink is a free Autodesk Revit add-in from IB-BIM that creates a round-trip connection between Revit schedules and Microsoft Excel. It allows users to export Revit schedules to professionally formatted Excel workbooks, edit schedule values in Excel, and import the changes back into Revit so that the underlying Revit elements are updated directly. Purpose and Design Intent The add-in is designed for Revit users who prefer to review, edit, and coordinate schedule data in Excel while still keeping the Revit model as the source of truth. Instead of manually changing many parameter values inside Revit schedules, users can use Excel’s familiar editing environment for bulk changes, then use ScheduleLink to validate and synchronize those edits back to model elements. Core Workflow ScheduleLink works through a simple export-edit-import process. Users launch the tool from an open Revit project, choose any schedule from the project list, preview the schedule parameters with color-coded editability indicators, export the schedule to Excel, make edits in the workbook, and then import the modified file back into Revit. During import, the add-in checks the workbook, applies only…",
+   "id": "dd3b73e5d2818902",
+   "fetched_at": "2026-09-05T06:09:03.172745Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 62,
+    "why": "Round-trip schedule sync to Excel is a common workflow pain; understanding how it's solved shows a technique for bulk parameter updates without GUI friction.",
+    "topics": [
+     "revit-api",
+     "automation",
+     "schedules"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-05T06:09:03.172745Z"
+   }
+  },
+  {
+   "title": "CRAFT Engineering Studio",
+   "url": "https://aecmag.com/sponsored-content/craft-engineering-studio/",
+   "source": "aec-magazine",
+   "published": "2026-09-04T13:11:16Z",
+   "summary": "How a small firm building big-firm infrastructure made its Revit details and families accessible across teams and offices. Founded in 2010 by Nathaniel Stanton, SE AIA, CRAFT Engineering Studio has grown into a close-knit practice of engineers whose backgrounds span product design, architecture, computation, and structural engineering. From the beginning, the firm set out to work at the intersection of structure and design, not at its edge. Recent years have brought rapid growth in the range and complexity of CRAFT’s projects. The firm now spans four offices, in New York, Denver, Paris, and Athens, with work running from the Northeast to the mountain west and overseas. To support that growth, the studio has deliberately built infrastructure to keep its institutional knowledge live beyond any one person’s memory and available to engineers across offices and time zones. That intent showed up early. Long before most small structural practices invest in it, CRAFT had built a Revit model template loaded with the studio’s standard details, so every new project began with the firm’s standards already in place. As Carl Fosholt PE, an engineer at CRAFT, puts it, “Many small firms have no…",
+   "id": "92428609858228ea",
+   "fetched_at": "2026-09-05T06:09:03.172745Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 28,
+    "why": "A firm's practice management and library strategy is contextual; worth knowing their direction but unlikely to change how you work or what you build.",
+    "topics": [
+     "families",
+     "practice"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-05T06:09:03.172745Z"
+   }
+  },
+  {
+   "title": "Free Get Linked IDs: Get Element IDs for Linked Elements & Export Them to Excel",
    "url": "http://revitaddons.blogspot.com/2026/09/free-get-linked-ids-get-element-ids-for.html",
    "source": "revit-addons",
    "published": "2026-09-04T01:16:00Z",
