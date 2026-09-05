@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-04",
+  generated: "2026-09-05",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-22",
+  activitySince: "2026-08-23",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -42,7 +42,7 @@ window.DASHBOARD_DATA = {
             weight: 1,
             name: "P3 Read-Only Data Dashboard (+ 3.x family)",
             pct: 93,
-            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — 3.10a FUNCTIONALLY PROVEN 2026-07-15 (warm pipeline ran for real: 1,239 footprints + 14,873 origins from 0; join resolves real rooms through the real endpoint; AC-1/2/3 ALL PASS after the p50 perf fix, 215→18ms; flags still OFF — only the owner go-live flip remains, see §sub-phase notes); 3.10b Furniture slice SHIPPED (`4bb6497`); Doors design validated + now unblocked, not built; Ducts/Pipes awaits a product decision. Phase 3.8: minimal wedge DECIDED 2026-07-15, slice 1 shipped + prod-migrated (is_draft = membership-scoped per owner); slices 2-3 pending — see §sub-phase notes. Phase 3.12 (RATIFIED 2026-08-18): tenancy call for multi-firm project sharing = extend row-level isolation — keep per-row `firm_id` scoping and add a project-membership join for shared projects; no move to a separate ACL store. Closes the `BIMpossible_OpenQuestions.md` #4 revisit. The \"full onboarding documentation\" half of #5 remains open (see Phase 8 runbook item). Unblocks Client-Mgmt F (Phase 6).",
+            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — 3.10a FUNCTIONALLY PROVEN 2026-07-15 (warm pipeline ran for real: 1,239 footprints + 14,873 origins from 0; join resolves real rooms through the real endpoint; AC-1/2/3 ALL PASS after the p50 perf fix, 215→18ms; backend flag `BIMPOSSIBLE_PHASE3_10_ENABLED` REMOVED 2026-08-04 (join now unconditional for in-scope instance-grain categories, self-limited by room-cache warmth), frontend display flag `NEXT_PUBLIC_BIMPOSSIBLE_PHASE3_10_ENABLED` still OFF (strips the columns), room cache = 0 rows as of 2026-09-04 so the feature is inert in practice; user-facing display still needs a fresh supervised warm run (re-confirm AC-1/2/3) + the frontend flag flip, see §sub-phase notes); 3.10b Furniture slice SHIPPED (`4bb6497`); Doors SHIPPED as a 3.10b slice 2026-08-04 (pair-resolver `resolve_linked_rooms_for_doors`; door-schedule endpoint `get_architectural_door_schedule`) — inert in practice like the rest of 3.10; Ducts/Pipes awaits a product decision. Phase 3.8: minimal wedge DECIDED 2026-07-15, slice 1 shipped + prod-migrated (is_draft = membership-scoped per owner); slices 2-3 updated 2026-09-04 — slice 2 SHIPPED (is_draft now read via `membership_visible_clause`, PR #499 — slice 1 no longer inert); slice 3 endpoint BUILT but flag-gated + unexercised (`BIMPOSSIBLE_ACC_ROLE_SYNC_ENABLED`; needs a real ACC admin token) — see §sub-phase notes. Phase 3.12 (RATIFIED 2026-08-18): tenancy call for multi-firm project sharing = extend row-level isolation — keep per-row `firm_id` scoping and add a project-membership join for shared projects; no move to a separate ACL store. Closes the `BIMpossible_OpenQuestions.md` #4 revisit. The \"full onboarding documentation\" half of #5 remains open (see Phase 8 runbook item). Unblocks Client-Mgmt F (Phase 6).",
             tasks: [
               { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
               { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
@@ -103,7 +103,7 @@ window.DASHBOARD_DATA = {
             weight: 1,
             name: "P6 Platform / Billing + Client-Management",
             pct: 88,
-            note: "PARTIAL — original scope shipped + live; Client-Mgmt E and F open (reopened 2026-07-27, PLACED not ratified) — Access tiers, usage metering, BYO keys; Client-Mgmt A/B/C/D; shipped via Wave 20 / PR #112; live-smoked 2026-07-01 (usage_logger wired e97fa1f, admin dashboard: 241 queries / $4.04 MTD / 58.3k output tokens confirmed). Status corrected CLOSED → PARTIAL 2026-08-17 — the original-scope work is closed, but the note has described two real unbuilt sub-items (E, F) since 2026-07-27, so the CLOSED column was misleading a status-only reader. New 2026-07-27, following the existing Client-Mgmt A/B/C/D lettered pattern (letters avoid the integer-collision risk the Canonical Guide flags for this phase): Client-Mgmt E — Self-serve onboarding (absorbs watchlist `FG-G4`) — provision a BIMpossible org/tenant for a firm BIMpossible has never seen, without a hand-seeded DB row, closing the same class of gap PR #227 closed for known firms. Client-Mgmt F — Multi-firm / project-level tenancy (absorbs the account-model half of watchlist `FG-C8`) — a project can have participants from more than one BIMpossible org, each with its own billing/BYOK identity, with shared-project visibility scoped by whoever administers the project; likely a small extension of the existing `org_id`-scoped, three-path billing schema (2026-06-23 inference-billing research) rather than new schema. Depends on Phase 3's 3.12 tenancy re-decision (RATIFIED 2026-08-18 — extend row-level isolation; F is now unblocked on this axis). ⚠️ Re-check F's remaining scope against live tenancy work before writing a build plan (2026-08-17): the firm→hub binding + project-enrollment + hub-isolation infrastructure shipped and went live 2026-08-14/16 (`firm_allowed_hubs`, `FirmAllowedProject`, `aec/hub_tenancy.py`; retired the old `ALLOWED_PROJECT_IDS` rail). That is real, live, and adjacent — but it does NOT deliver a large chunk of F. Verified against the shipped schema: it scopes one firm's access into one hub's projects (`access_scope` all/selected + enrollment rows), i.e. \"can Firm X reach Project Y.\" Client-Mgmt F is a different axis — multiple firms as differently-scoped participants on the same project with admin-scoped visibility (\"can Firms X and Z both have participants on Project Y\"). Nothing shipped associates more than one firm with a single project. So the tenancy shipment does not reduce F's remaining scope; still re-read F against it before speccing, but don't assume it's mostly done. Phase 13's proposed cross-firm-approval T5 explicitly depends on F and is itself still unbuilt. The hub-cutover / tenancy test-gate content formerly filed under \"Phase 15c\" now lives here (moved 2026-08-17) — see §Phase 6 — hub-cutover / tenancy test gate below.",
+            note: "PARTIAL — original scope shipped + live; Client-Mgmt E: RATIFIED 2026-09-04, implemented + landed, verified-nonprod, ops-ready pending owner launch (NOT live — both flags off in prod); Client-Mgmt F open (PLACED not ratified) — Access tiers, usage metering, BYO keys; Client-Mgmt A/B/C/D; shipped via Wave 20 / PR #112; live-smoked 2026-07-01 (usage_logger wired e97fa1f, admin dashboard: 241 queries / $4.04 MTD / 58.3k output tokens confirmed). Client-Mgmt E re-score 2026-09-04: self-serve firm onboarding (authenticated claim → DNS-TXT domain verification → firm activation → bootstrap admin; flag `BIMPOSSIBLE_CLIENT_ONBOARDING_ENABLED`, anti-discovery mount) landed #566 + Next rewrite fix #570 + trusted-proxy client-IP primitive/durable flag mechanism/runbook (#574, merge sha 7a29dcb9). Verified-nonprod: full on/on lifecycle + negatives (collision, rotate, expiry, provider failure, authz, cross-firm) through a disposable edge → Next → backend topology, four flag states, migration replay. Status ladder used here: implemented/landed ✓ → verified-nonprod ✓ → ops-ready pending launch ✓ → production live ✗ (owner-only enablement; residual steps in the WBS §Residual). Evidence: code-repo `docs/ops/2026-09-04-p6-clientmgmt-e-launch-readiness.md`; WBS `2026-09-04__Phase6_ClientMgmtE_WorkBreakdown_and_ImplementationPlan.md`. The 2026-07-27 \"PLACED not ratified\" wording no longer applies to E. Status corrected CLOSED → PARTIAL 2026-08-17 — the original-scope work is closed, but the note has described two real unbuilt sub-items (E, F) since 2026-07-27, so the CLOSED column was misleading a status-only reader. New 2026-07-27, following the existing Client-Mgmt A/B/C/D lettered pattern (letters avoid the integer-collision risk the Canonical Guide flags for this phase): Client-Mgmt E — Self-serve onboarding (absorbs watchlist `FG-G4`) — provision a BIMpossible org/tenant for a firm BIMpossible has never seen, without a hand-seeded DB row, closing the same class of gap PR #227 closed for known firms. Client-Mgmt F — Multi-firm / project-level tenancy (absorbs the account-model half of watchlist `FG-C8`) — a project can have participants from more than one BIMpossible org, each with its own billing/BYOK identity, with shared-project visibility scoped by whoever administers the project; likely a small extension of the existing `org_id`-scoped, three-path billing schema (2026-06-23 inference-billing research) rather than new schema. Depends on Phase 3's 3.12 tenancy re-decision (RATIFIED 2026-08-18 — extend row-level isolation; F is now unblocked on this axis). ⚠️ Re-check F's remaining scope against live tenancy work before writing a build plan (2026-08-17): the firm→hub binding + project-enrollment + hub-isolation infrastructure shipped and went live 2026-08-14/16 (`firm_allowed_hubs`, `FirmAllowedProject`, `aec/hub_tenancy.py`; retired the old `ALLOWED_PROJECT_IDS` rail). That is real, live, and adjacent — but it does NOT deliver a large chunk of F. Verified against the shipped schema: it scopes one firm's access into one hub's projects (`access_scope` all/selected + enrollment rows), i.e. \"can Firm X reach Project Y.\" Client-Mgmt F is a different axis — multiple firms as differently-scoped participants on the same project with admin-scoped visibility (\"can Firms X and Z both have participants on Project Y\"). Nothing shipped associates more than one firm with a single project. So the tenancy shipment does not reduce F's remaining scope; still re-read F against it before speccing, but don't assume it's mostly done. Phase 13's proposed cross-firm-approval T5 explicitly depends on F and is itself still unbuilt. The hub-cutover / tenancy test-gate content formerly filed under \"Phase 15c\" now lives here (moved 2026-08-17) — see §Phase 6 — hub-cutover / tenancy test gate below.",
             tasks: [
               { label: "Wave 6 thin permissions (SEC-M4 + identity coverage)", status: "done", note: "PR #110 06-11" },
               { label: "Phase 6 access tiers + billing guardrails", status: "done", note: "PR #112 06-12; client_keys Fernet-encrypted" },
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [18,18,30,12,5,6,0,0,31,59,62,19,3,0],
+      activity: [18,30,12,5,6,0,0,31,59,62,19,3,36,0],
       lastActivity: {
-        date: "2026-09-03",
-        summary: "feat(assistant): model routing slice 3 — platform cost controls (#557) (9ed31ef)"
+        date: "2026-09-04",
+        summary: "Backlog: reconcile P3/P4 Needs-Attention with firsthand runtime evidence (26654b7)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -625,7 +625,7 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [7,15,1,4,2,1,0,0,3,0,2,0,0,0],
+      activity: [15,1,4,2,1,0,0,3,0,2,0,0,0,0],
       lastActivity: {
         date: "2026-09-01",
         summary: "fix(relay,pane): PipeServer pipe-busy backoff + pairing confirmation null-owner crash (#117) (9f6f3c4)"
@@ -843,7 +843,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,2,0,0,0,1,0,0,0,0],
+      activity: [0,0,0,0,2,0,0,0,1,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-31",
         summary: "fix(contact): treat a provider 2xx with a failure body as undelivered (1dbbd72)"
@@ -1043,7 +1043,7 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [1,0,2,0,0,0,0,0,0,2,0,0,0,0],
+      activity: [0,2,0,0,0,0,0,0,2,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-31",
         summary: "audit: publish the 2026-08-31 weekly slop-audit report (#13) (7d56ecb)"
@@ -1174,7 +1174,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [4,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "chore(rag): rag_sources Workspace root → F:\\BIMpossible-Workspace (census 19 B8) (6ff31ad)"
@@ -1258,7 +1258,7 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [1,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-22",
         summary: "Revit-AI pipeline data through 2026-08-23 (raw-logs, processed, daily-summaries, context) — pre AI-Dev extraction (7d1b22b)"
@@ -1310,10 +1310,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [7,5,13,5,2,5,0,0,15,49,37,8,2,0],
+      activity: [5,13,5,2,5,0,0,15,49,37,8,2,15,0],
       lastActivity: {
-        date: "2026-09-03",
-        summary: "state(mirror): refresh from canonical 6d23ed5; bimpossible watermark 9605199d/#556 (1387389)"
+        date: "2026-09-04",
+        summary: "Backlog: reconcile P3/P4 Needs-Attention with firsthand runtime evidence (26654b7)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1367,10 +1367,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [11,4,5,20,6,3,4,3,17,14,3,16,3,1],
+      activity: [4,5,20,6,3,4,3,17,14,3,16,3,3,1],
       lastActivity: {
-        date: "2026-09-04",
-        summary: "chore: live billing sync 2026-09-04 (d52d301)"
+        date: "2026-09-05",
+        summary: "chore: live billing sync 2026-09-05 (d91f42c)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,

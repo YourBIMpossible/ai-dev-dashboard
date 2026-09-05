@@ -40,7 +40,7 @@ window.PHASE_DAG = {
 {
 "id": "6",
 "name": "Platform / Billing + Client-Management",
-"status": "PARTIAL — original scope shipped + live; Client-Mgmt E and F open (reopened 2026-07-27, PLACED not ratified)",
+"status": "PARTIAL — original scope shipped + live; Client-Mgmt E: RATIFIED 2026-09-04, implemented + landed, verified-nonprod, ops-ready pending owner launch (NOT live — both flags off in prod); Client-Mgmt F open (PLACED not ratified)",
 "dependsOn": [],
 "gates": [
 "17"
@@ -199,7 +199,7 @@ window.PHASE_DAG = {
 {
 "id": "6",
 "name": "Platform / Billing + Client-Management",
-"status": "PARTIAL — original scope shipped + live; Client-Mgmt E and F open (reopened 2026-07-27, PLACED not ratified)"
+"status": "PARTIAL — original scope shipped + live; Client-Mgmt E: RATIFIED 2026-09-04, implemented + landed, verified-nonprod, ops-ready pending owner launch (NOT live — both flags off in prod); Client-Mgmt F open (PLACED not ratified)"
 },
 {
 "id": "7",
@@ -415,5 +415,5 @@ window.PHASE_DAG = {
 "to": "17"
 }
 ],
-"generated": "2026-09-04"
+"generated": "2026-09-05"
 };
