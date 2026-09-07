@@ -184,28 +184,34 @@ function Update-GraphMetricsFromLedger {
     # entries implicitly represents exactly 1 push (one entry per raw row then).
     $incomingPushes = ($entries | Measure-Object -Property pushes -Sum).Sum
 
-    $existingPushes = -1   # -1 = no prior series to protect (missing/unparseable file)
+    $existingPushes = -1   # -1 = no prior series to protect (file absent)
     if (Test-Path $OutPath) {
+        # A file that is PRESENT but cannot be read or parsed is not "nothing to
+        # protect" -- it may be a longer good series in a shape this reader does not
+        # expect, and rendering over it would bypass the no-shrink invariant with no
+        # trace (2026-09-07 slop audit LOW-1). Refuse instead, same posture as the
+        # shrink refusal below: the caller logs the reason and counts it degraded.
         try {
             $text  = [System.IO.File]::ReadAllText($OutPath)
             $start = $text.IndexOf('['); $end = $text.LastIndexOf(']')
-            if ($start -ge 0 -and $end -gt $start) {
-                # Two statements, not one: @(ConvertFrom-Json -InputObject $x) in a
-                # SINGLE statement still returns a 1-element wrapper in PS 5.1 even
-                # without a pipe -- @() must wrap an already-assigned variable, not
-                # fuse with the call itself. Caught by this function's own test suite
-                # (a refusal-should-fire case silently didn't fire): a sharper version
-                # of the "assign before @() counts it" trap this codebase already knew
-                # about, which only covered the piped form.
-                $parsed = ConvertFrom-Json -InputObject $text.Substring($start, $end - $start + 1)
-                $arr = @($parsed)
-                $sum = 0
-                foreach ($e in $arr) {
-                    $sum += if ($e.PSObject.Properties.Name -contains 'pushes') { $e.pushes } else { 1 }
-                }
-                $existingPushes = $sum
+            if ($start -lt 0 -or $end -le $start) { throw "no JSON array between '[' and ']'" }
+            # Two statements, not one: @(ConvertFrom-Json -InputObject $x) in a
+            # SINGLE statement still returns a 1-element wrapper in PS 5.1 even
+            # without a pipe -- @() must wrap an already-assigned variable, not
+            # fuse with the call itself. Caught by this function's own test suite
+            # (a refusal-should-fire case silently didn't fire): a sharper version
+            # of the "assign before @() counts it" trap this codebase already knew
+            # about, which only covered the piped form.
+            $parsed = ConvertFrom-Json -InputObject $text.Substring($start, $end - $start + 1) -ErrorAction Stop
+            $arr = @($parsed)
+            $sum = 0
+            foreach ($e in $arr) {
+                $sum += if ($e.PSObject.Properties.Name -contains 'pushes') { $e.pushes } else { 1 }
             }
-        } catch {}
+            $existingPushes = $sum
+        } catch {
+            return @{ ok = $false; reason = "existing $OutPath is unreadable or unparseable ($($_.Exception.Message)) - refusing to overwrite a series the no-shrink guard cannot verify" }
+        }
     }
     if ($existingPushes -ge 0 -and $incomingPushes -lt $existingPushes) {
         return @{ ok = $false; reason = "rendered $incomingPushes push(es) < existing $existingPushes - refusing to shrink the series" }
