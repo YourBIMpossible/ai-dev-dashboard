@@ -1171,10 +1171,10 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,13],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,27],
       lastActivity: {
         date: "2026-09-07",
-        summary: "Merge pull request #12 from YourBIMpossible/worktree-harness (2f3dfb1)"
+        summary: "Merge pull request #13 from YourBIMpossible/worktree-pickup-checker (218c899)"
       },
       branch: "main at f37d165",
       nextActions: [
@@ -1364,10 +1364,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [20,6,3,4,3,17,14,3,16,3,3,3,5,12],
+      activity: [20,6,3,4,3,17,14,3,16,3,3,3,5,13],
       lastActivity: {
         date: "2026-09-07",
-        summary: "dashboard refresh 2026-09-07 14:16 (fd5f2c1)"
+        summary: "dashboard refresh 2026-09-07 14:18 (d6c8046)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
