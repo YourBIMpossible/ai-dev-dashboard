@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [12,5,6,0,0,31,59,62,19,3,36,8,50,1],
+      activity: [12,5,6,0,0,31,59,62,19,3,36,8,50,22],
       lastActivity: {
         date: "2026-09-07",
-        summary: "authz: share-authority pass-8 + review-all pass-9 (F1-F13) (#617) (3a9dab6)"
+        summary: "Merge pull request #141 from YourBIMpossible/claude/weekly-audit-docs-20260907 (110d883)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -625,10 +625,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [4,2,1,0,0,3,0,2,0,0,0,0,3,4],
+      activity: [4,2,1,0,0,3,0,2,0,0,0,0,3,5],
       lastActivity: {
         date: "2026-09-07",
-        summary: "Merge pull request #121 from YourBIMpossible/claude/docs-hygiene-required-gate (111e241)"
+        summary: "fix(relay): retry health probe on timeout; re-evaluate launch config per spawn attempt (#123) (79915cd)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -1307,10 +1307,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [5,2,5,0,0,15,49,37,8,2,15,4,19,0],
+      activity: [5,2,5,0,0,15,49,37,8,2,15,4,19,20],
       lastActivity: {
-        date: "2026-09-06",
-        summary: "Merge pull request #133 from YourBIMpossible/claude/r12-tombstone-manifest (7429d25)"
+        date: "2026-09-07",
+        summary: "Merge pull request #141 from YourBIMpossible/claude/weekly-audit-docs-20260907 (110d883)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1364,10 +1364,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [20,6,3,4,3,17,14,3,16,3,3,3,5,3],
+      activity: [20,6,3,4,3,17,14,3,16,3,3,3,5,10],
       lastActivity: {
         date: "2026-09-07",
-        summary: "chore(dashboard): drop retired F:\\AI-Dev path links from project data (81f34fa)"
+        summary: "fix: wire usage/agents sync into the daily refresh, kill hardcoded clone path (5cf5be4)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
