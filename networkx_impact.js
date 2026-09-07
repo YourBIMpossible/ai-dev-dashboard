@@ -1,27 +1,27 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-09-06T13:00:13Z",
+  "generated": "2026-09-07T13:00:13Z",
   "stats": {
     "repos": 4,
     "tools": 3,
     "algorithms": 6,
-    "totalNodes": 14525,
+    "totalNodes": 16936,
     "missingCount": 0
   },
   "codebase": {
     "graph": {
-      "nodes": 14525,
-      "edges": 33874,
-      "commit": "cc40768c",
-      "commitsBehind": 70,
-      "builtAt": "2026-08-30",
-      "stale": true
+      "nodes": 16936,
+      "edges": 40301,
+      "commit": "85e8208b",
+      "commitsBehind": 0,
+      "builtAt": "2026-09-07",
+      "stale": false
     },
     "cycles": {
       "count": 0,
       "baseline": 0,
       "delta": 0,
       "rootCauses": [],
-      "excludedExternal": 13,
+      "excludedExternal": 12,
       "examples": []
     },
     "hubs": [
@@ -29,97 +29,97 @@ window.NETWORKX_IMPACT = {
         "label": "aec/router.py",
         "file": "aec/router.py",
         "kind": "file",
-        "degree": 176,
-        "churn": 63,
-        "risk": 111.4
+        "degree": 174,
+        "churn": 64,
+        "risk": 97.6
       },
       {
         "label": "db/models.py",
         "file": "db/models.py",
         "kind": "file",
-        "degree": 169,
+        "degree": 189,
         "churn": 67,
-        "risk": 60.8
-      },
-      {
-        "label": "_serve_pool_schedule()",
-        "file": "aec/router.py",
-        "kind": "symbol",
-        "degree": 54,
-        "churn": 63,
-        "risk": 49.2
-      },
-      {
-        "label": "Base",
-        "file": "db/models.py",
-        "kind": "symbol",
-        "degree": 77,
-        "churn": 67,
-        "risk": 44.3
+        "risk": 55.1
       },
       {
         "label": "assistant.py",
         "file": "aec/assistant.py",
         "kind": "file",
-        "degree": 89,
-        "churn": 44,
-        "risk": 40.3
+        "degree": 147,
+        "churn": 45,
+        "risk": 48.0
+      },
+      {
+        "label": "_serve_pool_schedule()",
+        "file": "aec/router.py",
+        "kind": "symbol",
+        "degree": 53,
+        "churn": 64,
+        "risk": 41.0
+      },
+      {
+        "label": "Base",
+        "file": "db/models.py",
+        "kind": "symbol",
+        "degree": 84,
+        "churn": 67,
+        "risk": 39.9
       },
       {
         "label": "_by_category()",
         "file": "aec/router.py",
         "kind": "symbol",
         "degree": 34,
-        "churn": 63,
-        "risk": 39.7
+        "churn": 64,
+        "risk": 33.3
       },
       {
         "label": "admin_router.py",
         "file": "admin_router.py",
         "kind": "file",
-        "degree": 91,
-        "churn": 19,
-        "risk": 30.6
+        "degree": 99,
+        "churn": 20,
+        "risk": 28.7
       },
       {
         "label": "aps/router.py",
         "file": "aps/router.py",
         "kind": "file",
-        "degree": 71,
-        "churn": 24,
-        "risk": 29.0
+        "degree": 73,
+        "churn": 25,
+        "risk": 26.3
       },
       {
         "label": "_require_auth()",
         "file": "aec/router.py",
         "kind": "symbol",
         "degree": 47,
-        "churn": 63,
-        "risk": 26.3
-      },
-      {
-        "label": "assistant_tools.py",
-        "file": "aec/assistant_tools.py",
-        "kind": "file",
-        "degree": 59,
-        "churn": 22,
-        "risk": 24.6
-      },
-      {
-        "label": "main.py",
-        "file": "main.py",
-        "kind": "file",
-        "degree": 82,
-        "churn": 35,
-        "risk": 23.7
+        "churn": 64,
+        "risk": 23.6
       },
       {
         "label": "account_router.py",
         "file": "account_router.py",
         "kind": "file",
-        "degree": 69,
+        "degree": 88,
         "churn": 17,
-        "risk": 22.7
+        "risk": 23.3
+      },
+      {
+        "label": "main.py",
+        "file": "main.py",
+        "kind": "file",
+        "degree": 89,
+        "churn": 36,
+        "risk": 21.5
+      },
+      {
+        "label": "assistant_tools.py",
+        "file": "aec/assistant_tools.py",
+        "kind": "file",
+        "degree": 60,
+        "churn": 22,
+        "risk": 21.5
       }
     ],
     "baseline": {
@@ -137,7 +137,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 0,
-      "finding": "No circular imports. 13 third-party symbols excluded (graphify credits them to the importing file).",
+      "finding": "No circular imports. 12 third-party symbols excluded (graphify credits them to the importing file).",
       "category": "clear"
     },
     {
@@ -147,7 +147,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "degree \u00d7 90d churn",
       "nodes": 12,
-      "finding": "aec/router.py is the hotspot \u2014 176 dependents, 63 commits in 90d",
+      "finding": "aec/router.py is the hotspot \u2014 174 dependents, 64 commits in 90d",
       "category": "watch"
     },
     {

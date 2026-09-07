@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-06",
+  generated: "2026-09-07",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-24",
+  activitySince: "2026-08-25",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [30,12,5,6,0,0,31,59,62,19,3,36,8,0],
+      activity: [12,5,6,0,0,31,59,62,19,3,36,8,50,1],
       lastActivity: {
-        date: "2026-09-05",
-        summary: "docs(#574): frontend deployment-readiness checklist (#584) (29b4651)"
+        date: "2026-09-07",
+        summary: "authz: share-authority pass-8 + review-all pass-9 (F1-F13) (#617) (3a9dab6)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -587,9 +587,9 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       waves: {
-        updated: "2026-08-26",
+        updated: "2026-09-06",
         source: "F:\\BIMpossible-Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 30, built: 6, inFlight: 1, ahead: 3 },
+        summary: { done: 30, built: 7, inFlight: 1, ahead: 3 },
         current: [
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
           { id: "26", title: "Phase 3.10a Cross-Model Room Join", status: "BUILT", date: "2026-07-13", note: "Code merged `dd5adb1` (2026-07-12); warm-time writer gap found+fixed `c72f647`/`09cb66b` (2026-07-13); migration genuinely applied to prod (confirmed live). No…" },
@@ -625,10 +625,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [1,4,2,1,0,0,3,0,2,0,0,0,0,0],
+      activity: [4,2,1,0,0,3,0,2,0,0,0,0,3,4],
       lastActivity: {
-        date: "2026-09-01",
-        summary: "fix(relay,pane): PipeServer pipe-busy backoff + pairing confirmation null-owner crash (#117) (9f6f3c4)"
+        date: "2026-09-07",
+        summary: "Merge pull request #121 from YourBIMpossible/claude/docs-hygiene-required-gate (111e241)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -843,7 +843,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,2,0,0,0,1,0,0,0,0,0,0],
+      activity: [0,0,2,0,0,0,1,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-31",
         summary: "fix(contact): treat a provider 2xx with a failure body as undelivered (1dbbd72)"
@@ -1040,10 +1040,10 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [2,0,0,0,0,0,0,2,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,2,0,0,0,0,0,2,0],
       lastActivity: {
-        date: "2026-08-31",
-        summary: "audit: publish the 2026-08-31 weekly slop-audit report (#13) (7d56ecb)"
+        date: "2026-09-06",
+        summary: "Merge pull request #14 from YourBIMpossible/claude/ec-config-timeouts (57b63e6)"
       },
       branch: "main",
       nextActions: ["Close Phase 1: port wire_nested_params; live-rehearse go_single_panel","Resolve the 5 ROADMAP open questions gating Phase 2/3 start","Reconcile the two overlapping MCP efforts (this roadmap's Phase 3 vs the AddIns Desktop Orchestration Hub proposal) before ratifying either","Owner sign-off on the prep_to_standard.py Power-System deletion list (shared with the addins card)"],
@@ -1171,10 +1171,10 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,1],
       lastActivity: {
-        date: "2026-08-22",
-        summary: "chore(rag): rag_sources Workspace root → F:\\BIMpossible-Workspace (census 19 B8) (6ff31ad)"
+        date: "2026-09-07",
+        summary: "chore(migration): purge retired F:\\AI-Dev root from config + docs (#11) (51fdc25)"
       },
       branch: "main at f37d165",
       nextActions: [
@@ -1307,10 +1307,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [13,5,2,5,0,0,15,49,37,8,2,15,4,0],
+      activity: [5,2,5,0,0,15,49,37,8,2,15,4,19,0],
       lastActivity: {
-        date: "2026-09-05",
-        summary: "docs(backlog): sharpen R9/R11/NA-3.10a single-approval prep with in-container recon (c0896ef)"
+        date: "2026-09-06",
+        summary: "Merge pull request #133 from YourBIMpossible/claude/r12-tombstone-manifest (7429d25)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1364,10 +1364,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [5,20,6,3,4,3,17,14,3,16,3,3,3,1],
+      activity: [20,6,3,4,3,17,14,3,16,3,3,3,5,3],
       lastActivity: {
-        date: "2026-09-06",
-        summary: "chore: live billing sync 2026-09-06 (9235f0b)"
+        date: "2026-09-07",
+        summary: "chore(dashboard): drop retired F:\\AI-Dev path links from project data (81f34fa)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
