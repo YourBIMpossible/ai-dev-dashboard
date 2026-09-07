@@ -86,9 +86,23 @@ def parse_date(text):
         return None
 
 
+def recent_entry_text(entry):
+    """The dated text of one recent[] entry: a bare string, or a dict's `text`.
+
+    Any other shape (null, number, list) carries no narrative date and is treated
+    exactly like an undated string - it contributes nothing, so a card whose feed
+    holds only such entries is honestly STALE, not a crash that aborts the run.
+    """
+    if isinstance(entry, str):
+        return entry
+    if isinstance(entry, dict):
+        return entry.get("text", "")
+    return ""
+
+
 def newest_recent_date(recent):
     """Max parseable date across the recent feed (don't assume it's sorted)."""
-    dates = [parse_date(x if isinstance(x, str) else x.get("text", "")) for x in recent]
+    dates = [parse_date(recent_entry_text(x)) for x in recent]
     dates = [d for d in dates if d]
     return max(dates) if dates else None
 
