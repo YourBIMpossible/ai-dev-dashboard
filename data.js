@@ -1199,8 +1199,8 @@ window.DASHBOARD_DATA = {
         "docs/superpowers/plans/2026-07-12-harness.md is untracked on main (the 07-25 pickup-checker plan IS committed)."
       ],
       links: [
-        { label: "Program plan", path: "F:\\AI-Dev\\AI-Server\\PROGRAM_PLAN.md" },
-        { label: "Handoffs (WP-A..G)", path: "F:\\AI-Dev\\AI-Server\\handoffs" },
+        { label: "Program plan", path: "F:\\AI-Server\\PROGRAM_PLAN.md" },
+        { label: "Handoffs (WP-A..G)", path: "F:\\AI-Server\\handoffs" },
         { label: "Build/hardware plan", path: "F:\\AI-Brain-Data\\_status\\AI-Server_Build_and_Integration_Plan.md" },
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
@@ -1218,9 +1218,9 @@ window.DASHBOARD_DATA = {
         counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
         closedLastRun: 11,
         trend: "improving",
-        reportPath: "F:\\AI-Dev\\AI-Server\\audits\\2026-07-12__audit-report.md",
+        reportPath: "F:\\AI-Server\\audits\\2026-07-12__audit-report.md",
         reportFile: "aiserver/2026-07-12__audit-report.md",
-        ledgerPath: "F:\\AI-Dev\\AI-Server\\audits",
+        ledgerPath: "F:\\AI-Server\\audits",
         open: [],
         history: [
           {

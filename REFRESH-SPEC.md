@@ -112,12 +112,12 @@ explicit decision.
 - `F:\BIMpossible-Families\README.md` + folder mtimes (repo: YourBIMpossible/Families-by-BIMpossible)
 
 ### aiserver - AI-Server (local LLM + automation)
-- `git -C F:\AI-Dev\AI-Server log --oneline --all --since="7 days ago"` + branches + unpushed check (rule 9). Repo: `YourBIMpossible/AI-Server` (private, branch-protected: PR + CI gate).
-- `F:\AI-Dev\AI-Server\PROGRAM_PLAN.md` - the work-package map (Foundation + WP-A..G); drives `progress.phases`. `handoffs\WP-*.md` - one per work package; when a WP's PR merges (CI green), flip its phase tasks to `done` and raise the phase pct.
+- `git -C F:\AI-Server log --oneline --all --since="7 days ago"` + branches + unpushed check (rule 9). Repo: `YourBIMpossible/AI-Server` (private, branch-protected: PR + CI gate).
+- `F:\AI-Server\PROGRAM_PLAN.md` - the work-package map (Foundation + WP-A..G); drives `progress.phases`. `handoffs\WP-*.md` - one per work package; when a WP's PR merges (CI green), flip its phase tasks to `done` and raise the phase pct.
 - Build/hardware plan: `F:\AI-Brain-Data\_status\AI-Server_Build_and_Integration_Plan.md` (the dedicated 3090 box). Keep its open OS/runtime choices in `pendingDecisions` until locked.
 - CI: GitHub Actions `ci.yml` (pytest matrix 3.10-3.12). If the newest run is failing, add a `reminders` line. Minutes show in the Actions panel (AI-Server is in `github_actions_sync.mjs` REPOS).
 - **Live status snapshot (WP-D1) — run the helper, read-only LAN poll:**
-  `python F:\AI-Dev\AI-Server\scripts\aiserver_status.py` prints JSON with `endpoint`
+  `python F:\AI-Server\scripts\aiserver_status.py` prints JSON with `endpoint`
   (`up`, `host`, `models_available` from `/api/tags`, `models_loaded` from `/api/ps`) and
   `jobs` (newest **digest / weekly-rollup / decision-drift**, each `{file, modified, summary}`
   or `null`). The dashboard is a static site, so this is a point-in-time snapshot captured at
