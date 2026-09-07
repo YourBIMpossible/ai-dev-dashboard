@@ -1985,7 +1985,7 @@ function project(p){
     else au+=`<p class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of the last run.</p>`;
     au+=`<p style="font-size:var(--ts-sm);color:var(--dim);margin-top:10px"><span class="trend ${a.trend||'flat'}">${a.trend||'flat'}</span> · ${a.closedLastRun||0} closed last run${a.cadence?' · '+esc(a.cadence):''}</p>`;
     au+=auditHistory(p);
-    au+=`<div class="links" style="margin-top:8px">${pathLink(a.reportPath,'Full report')}${a.ledgerPath?pathLink(a.ledgerPath,'Audit ledger'):''}</div></div>`;
+    au+=`<div class="links" style="margin-top:8px">${a.reportPath?pathLink(a.reportPath,'Full report'):''}${a.ledgerPath?pathLink(a.ledgerPath,'Audit ledger'):''}</div></div>`;
     rail.push(au);
   }
 
@@ -2250,7 +2250,7 @@ function auditView(){
         if(p.audit.history.length>2)h+=`<div style="font-size:var(--ts-xs);color:var(--dim);padding-top:4px">+${p.audit.history.length-2} earlier runs — see project detail</div>`;
         h+=`</div>`;
       }
-      h+=`<div class="links" style="margin-top:10px">${pathLink(p.audit.reportPath,'Latest report')}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Run ledger'):''}</div>`;
+      h+=`<div class="links" style="margin-top:10px">${p.audit.reportPath?pathLink(p.audit.reportPath,'Latest report'):''}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Run ledger'):''}</div>`;
       h+=`</div>`;
     });
     h+=`</div>`;
@@ -2276,7 +2276,7 @@ function auditView(){
     h+=`<h3>${esc(p.name)} — run history</h3>`;
     h+=`<div class="au-latest" style="margin-bottom:10px">Last run <b>${esc(p.audit.lastRun)}</b> · ${esc(p.audit.runType||'')}</div>`;
     h+=auditHistory(p);
-    h+=`<div class="links" style="margin-top:11px">${pathLink(p.audit.reportPath,'Latest report')}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Run ledger'):''}</div>`;
+    h+=`<div class="links" style="margin-top:11px">${p.audit.reportPath?pathLink(p.audit.reportPath,'Latest report'):''}${p.audit.ledgerPath?pathLink(p.audit.ledgerPath,'Run ledger'):''}</div>`;
     h+=`</div>`;
   });
 

@@ -980,13 +980,10 @@ window.DASHBOARD_DATA = {
       ],
       blockers: [],
       reminders: [
-        "2026 preseason is over; confirm the app was used and whether prod still lacks the PR #1 scoring fix. Prior card dates (07/08 for perf/passkeys/audit2) were wrong - all landed 2026-06-01."
+        "2026 preseason is over; confirm the app was used and whether prod still lacks the PR #1 scoring fix. Prior card dates (07/08 for perf/passkeys/audit2) were wrong - all landed 2026-06-01.",
+        "Legacy / location-pending: PRD.md, WORKSPACE_INDEX.md and the PreseasonPickem-app previously lived under F:\\AI-Dev\\Preseason Pick'em (now a preserved rollback/archive root). No canonical relocation assigned yet - path links intentionally removed so nothing resolves into the retired AI-Dev root."
       ],
-      links: [
-        { label: "PRD", path: "F:\\AI-Dev\\Preseason Pick'em\\PRD.md" },
-        { label: "Workspace index", path: "F:\\AI-Dev\\Preseason Pick'em\\WORKSPACE_INDEX.md" },
-        { label: "App", path: "F:\\AI-Dev\\Preseason Pick'em\\PreseasonPickem-app" }
-      ],
+      links: [],
       recent: [
         "2026-08-10 - Slop audit of the app (audits/2026-08-10__slop-audit.md): clean, one LOW hypothesis (sync.ts upserted counter over-counts on onConflictDoNothing) - file untracked",
         "2026-08-06 - PR #1 opened: self-healing scoring (reconcile unscored picks) - still OPEN, not merged",
@@ -1013,11 +1010,11 @@ window.DASHBOARD_DATA = {
         "Resume vs explicit park - idle since 2026-06-03 with no status note"
       ],
       blockers: [],
-      reminders: ["No state doc yet — tracked via git (master) + folder mtime. Real app exists (Lazy laundry-finder); write a status note to track it properly."],
-      links: [
-        { label: "README", path: "F:\\AI-Dev\\Laundry Gig\\README.md" },
-        { label: "Docs", path: "F:\\AI-Dev\\Laundry Gig\\docs" }
+      reminders: [
+        "No state doc yet — tracked via git (master) + folder mtime. Real app exists (Lazy laundry-finder); write a status note to track it properly.",
+        "Legacy / location-pending: README.md and docs/ previously lived under F:\\AI-Dev\\Laundry Gig (now a preserved rollback/archive root). No canonical relocation assigned yet - path links intentionally removed so nothing resolves into the retired AI-Dev root."
       ],
+      links: [],
       recent: [
         "2026-06-03 - Locked 'Lazy' as the real name (FreshSpin placeholder scrubbed); one-click demo launcher scripts (9a8defd)",
         "2026-06-01 - Map-aware /dashboard/washers with commute filter; Leaflet WasherMap (OSM pins + route line); matchAlongRoute corridor matching"
@@ -1431,12 +1428,12 @@ window.DASHBOARD_DATA = {
       reminders: [
         "Git exists (since 07-12, 3 commits, branch master) -- update any doc/dashboard text still saying \"no git\".",
         "A packaged build now exists but lives OUTSIDE the repo (F:\\PC-Monitor\\PC-Monitor.exe + _internal\\, F:\\PC-Monitor-app.zip, and F:\\AI-Dev\\PC-Monitor-app\\) -- all dated 2026-06-17, not committed or tracked in the source repo.",
-        "metrics.db (~95 MB) sits inside the repo's data/ dir; last write 2026-08-19."
+        "metrics.db (~95 MB) sits inside the repo's data/ dir; last write 2026-08-19.",
+        "Legacy / location-pending: the source README.md and the audit/ ledger + 2026-07-12 report exist only under the preserved F:\\AI-Dev\\PC-Monitor archive copy; there is no canonical home at the live F:\\PC-Monitor app root, so those path links were removed. The 'Local app' link now points at the live F:\\PC-Monitor build."
       ],
       links: [
-        { label: "Local app", path: "F:\\AI-Dev\\PC-Monitor" },
-        { label: "Live dashboard", path: "http://127.0.0.1:8787" },
-        { label: "README", path: "F:\\AI-Dev\\PC-Monitor\\README.md" }
+        { label: "Local app", path: "F:\\PC-Monitor" },
+        { label: "Live dashboard", path: "http://127.0.0.1:8787" }
       ],
       recent: ["2026-07-12 - Git-initialized (3 commits): baseline + resolve all HIGH/MEDIUM/LOW findings from the 2026-07-12 audit + record resolution","2026-06-25 - Last pre-git local modification"],
       audit: {
@@ -1446,9 +1443,9 @@ window.DASHBOARD_DATA = {
         counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
         closedLastRun: 6,
         trend: "improving",
-        reportPath: "F:\\AI-Dev\\PC-Monitor\\audit\\2026-07-12__audit-report.md",
+        reportPath: "",
         reportFile: "pc-monitor/2026-07-12__audit-report.md",
-        ledgerPath: "F:\\AI-Dev\\PC-Monitor\\audit",
+        ledgerPath: "",
         open: [],
         history: [
           {
