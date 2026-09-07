@@ -390,6 +390,29 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
         $degraded++
     }
 
+    # 1g. Refresh usage.js / agents.js from local ccusage + ~/.claude session data.
+    #     Both scripts resolve their own output path from $PSScriptRoot (not a hardcoded
+    #     clone path — 2026-09-07 fix), so running them here writes into THIS clone's
+    #     working tree and step 4 below stages the result; --no-push so this script's own
+    #     fetch->reset->commit->push owns the git side, same pattern as 1e's codebase_sync.
+    #     Non-fatal: these previously had NO scheduled runner at all (manual-only, per
+    #     their own header comments) and silently went 48+ days stale on the live board
+    #     before anyone noticed - the daily refresh is now the runner, but a ccusage
+    #     hiccup (npx/network) must not block the rest of the data refresh.
+    if (-not $node) {
+        "WARN: node not on PATH - usage.js/agents.js not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
+    } else {
+        if ((Invoke-Logged $node @("$PSScriptRoot\usage_sync.mjs","--no-push")) -ne 0) {
+            "WARN: usage_sync.mjs failed - usage.js not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+            $degraded++
+        }
+        if ((Invoke-Logged $node @("$PSScriptRoot\agents_sync.mjs","--no-push")) -ne 0) {
+            "WARN: agents_sync.mjs failed - agents.js not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+            $degraded++
+        }
+    }
+
     # 2. Stamp the generated date (UTF-8 no BOM via .NET; only two lines change).
     #    A degraded run says so on the board itself, not just in the log: the sidefoot
     #    renders generatedBy's "(partial: ...)" marker as a warning.
@@ -418,7 +441,7 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #    indistinguishable from a genuinely unchanged tree. Staging status therefore
     #    comes back explicitly from Invoke-GitStage and is never inferred from the
     #    index (2026-08-31 slop audit, MEDIUM-1).
-    $stage = Invoke-GitStage -Paths @("data.js","graph-metrics.js","phase_dag.js","PHASE_DAG.md","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","codebase") `
+    $stage = Invoke-GitStage -Paths @("data.js","graph-metrics.js","phase_dag.js","PHASE_DAG.md","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","usage.js","agents.js","codebase") `
                              -Log { param($Message) $Message | Add-Content -Path $log -Encoding utf8 }
     $disposition = Get-StagingDisposition $stage
     if ($disposition -eq 'fail')     { Alert-Failure "$($stage.Reason) - dashboard NOT updated."; $result = 1; break }

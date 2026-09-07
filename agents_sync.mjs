@@ -20,9 +20,13 @@ import { execSync } from "node:child_process";
 import { writeFileSync, readFileSync, existsSync, readdirSync, createReadStream, statSync } from "node:fs";
 import { createInterface } from "node:readline";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const REPO = "F:/AI-Dashboard/Dashboard";
+// Resolve to whatever clone this script is running from (Dashboard or
+// Dashboard-auto), not a hardcoded path — the automation clone's scheduled
+// refresh invokes this in-place and must write/commit its own working tree.
+const REPO = dirname(fileURLToPath(import.meta.url));
 const OUT = `${REPO}/agents.js`;
 const PUSH = !process.argv.includes("--no-push");
 const RECENT_LIMIT = 30;

@@ -15,8 +15,13 @@
  */
 import { execSync } from "node:child_process";
 import { writeFileSync, readFileSync, existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
 
-const REPO = "F:/AI-Dashboard/Dashboard";
+// Resolve to whatever clone this script is running from (Dashboard or
+// Dashboard-auto), not a hardcoded path — the automation clone's scheduled
+// refresh invokes this in-place and must write/commit its own working tree.
+const REPO = dirname(fileURLToPath(import.meta.url));
 const OUT = `${REPO}/usage.js`;
 const PUSH = !process.argv.includes("--no-push");
 
