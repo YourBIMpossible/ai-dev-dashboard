@@ -42,7 +42,7 @@ window.DASHBOARD_DATA = {
             weight: 1,
             name: "P3 Read-Only Data Dashboard (+ 3.x family)",
             pct: 93,
-            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — 3.10a FUNCTIONALLY PROVEN 2026-07-15 (warm pipeline ran for real: 1,239 footprints + 14,873 origins from 0; join resolves real rooms through the real endpoint; AC-1/2/3 ALL PASS after the p50 perf fix, 215→18ms; backend flag `BIMPOSSIBLE_PHASE3_10_ENABLED` REMOVED 2026-08-04 (join now unconditional for in-scope instance-grain categories, self-limited by room-cache warmth), frontend display flag `NEXT_PUBLIC_BIMPOSSIBLE_PHASE3_10_ENABLED` still OFF (strips the columns), room cache = 0 rows as of 2026-09-04 so the feature is inert in practice; user-facing display still needs a fresh supervised warm run (re-confirm AC-1/2/3) + the frontend flag flip, see §sub-phase notes); 3.10b Furniture slice SHIPPED (`4bb6497`); Doors SHIPPED as a 3.10b slice 2026-08-04 (pair-resolver `resolve_linked_rooms_for_doors`; door-schedule endpoint `get_architectural_door_schedule`) — inert in practice like the rest of 3.10; Ducts/Pipes awaits a product decision. Phase 3.8: minimal wedge DECIDED 2026-07-15, slice 1 shipped + prod-migrated (is_draft = membership-scoped per owner); slices 2-3 updated 2026-09-04 — slice 2 SHIPPED (is_draft now read via `membership_visible_clause`, PR #499 — slice 1 no longer inert); slice 3 endpoint BUILT but flag-gated + unexercised (`BIMPOSSIBLE_ACC_ROLE_SYNC_ENABLED`; needs a real ACC admin token) — see §sub-phase notes. Phase 3.12 (RATIFIED 2026-08-18): tenancy call for multi-firm project sharing = extend row-level isolation — keep per-row `firm_id` scoping and add a project-membership join for shared projects; no move to a separate ACL store. Closes the `BIMpossible_OpenQuestions.md` #4 revisit. The \"full onboarding documentation\" half of #5 remains open (see Phase 8 runbook item). Unblocks Client-Mgmt F (Phase 6).",
+            note: "ACTIVE — Permanent, never-closing data substrate. Phase 3.10 Cross-Model Joins: IN PROGRESS — 3.10a FUNCTIONALLY PROVEN 2026-07-15 (warm pipeline ran for real: 1,239 footprints + 14,873 origins from 0; join resolves real rooms through the real endpoint; AC-1/2/3 ALL PASS after the p50 perf fix, 215→18ms; backend flag `BIMPOSSIBLE_PHASE3_10_ENABLED` REMOVED 2026-08-04 (join now unconditional for in-scope instance-grain categories, self-limited by room-cache warmth), frontend display flag `NEXT_PUBLIC_BIMPOSSIBLE_PHASE3_10_ENABLED` still OFF (strips the columns), room cache = 0 rows as of 2026-09-04 so the feature is inert in practice; user-facing display still needs a fresh supervised warm run (re-confirm AC-1/2/3) + the frontend flag flip, see §sub-phase notes); 3.10b Furniture slice SHIPPED (`4bb6497`); Doors SHIPPED as a 3.10b slice 2026-08-04 (pair-resolver `resolve_linked_rooms_for_doors`; door-schedule endpoint `get_architectural_door_schedule`) — inert in practice like the rest of 3.10; single-room doors render \"(no second room)\" since [#611](https://github.com/YourBIMpossible/BIMpossible/pull/611) `408af85b`, frontend deployed 2026-09-07 per [#612](https://github.com/YourBIMpossible/BIMpossible/pull/612); Ducts/Pipes awaits a product decision. Phase 3.8: minimal wedge DECIDED 2026-07-15, slice 1 shipped + prod-migrated (is_draft = membership-scoped per owner); slices 2-3 updated 2026-09-04 — slice 2 SHIPPED (is_draft now read via `membership_visible_clause`, PR #499 — slice 1 no longer inert); slice 3 endpoint BUILT but flag-gated + unexercised (`BIMPOSSIBLE_ACC_ROLE_SYNC_ENABLED`; needs a real ACC admin token) — see §sub-phase notes. Phase 3.12 (RATIFIED 2026-08-18): tenancy call for multi-firm project sharing = extend row-level isolation — keep per-row `firm_id` scoping and add a project-membership join for shared projects; no move to a separate ACL store. Closes the `BIMpossible_OpenQuestions.md` #4 revisit. The \"full onboarding documentation\" half of #5 remains open (see Phase 8 runbook item). Unblocks Client-Mgmt F (Phase 6).",
             tasks: [
               { label: "Electrical schedules - 7 Tier-1 shipped", status: "done", note: "All 7 deployed 06-05" },
               { label: "Schedule quick-access bar (auto-width, drag-resize, persist)", status: "done", note: "06-07" },
@@ -587,9 +587,9 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       waves: {
-        updated: "2026-09-06",
+        updated: "2026-09-07",
         source: "F:\\BIMpossible-Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 30, built: 7, inFlight: 1, ahead: 3 },
+        summary: { done: 31, built: 8, inFlight: 1, ahead: 3 },
         current: [
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
           { id: "26", title: "Phase 3.10a Cross-Model Room Join", status: "BUILT", date: "2026-07-13", note: "Code merged `dd5adb1` (2026-07-12); warm-time writer gap found+fixed `c72f647`/`09cb66b` (2026-07-13); migration genuinely applied to prod (confirmed live). No…" },
@@ -598,7 +598,7 @@ window.DASHBOARD_DATA = {
           { id: "30", title: "Phase 17 (17a Slack + 17b Teams) chat assistant gateways", status: "BUILT", date: "2026-08-08", note: "Slack `dd89889` (#262, merged 2026-08-07), Teams `879e857` (#276, merged 2026-08-08). Read-only Q&A against a bound project + model from a channel, fronting `a…" },
           { id: "31", title: "Phase 15c — In-Revit Assistant Pane, Revit-context injection", status: "BUILT", date: "2026-08-18", note: "Add-Ins [PR #74](https://github.com/YourBIMpossible/BIMpossible-AddIns/pull/74) \"feat(15c): live document reads in the Assistant pane\", merged 2026-08-18. Buil…" }
         ],
-        lastCompleted: { id: "13.1", title: "Phase 13 Increment 1 — Write Engine Typed Values (INSTANCE-scoped) + unit-aware Double", date: "2026-08-04" },
+        lastCompleted: { id: "33", title: "Per-window exactly-once release gate for the scheduled synthetic-concurrency audit", date: "2026-09-07" },
         drift: []
       }
     },
@@ -1364,10 +1364,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [20,6,3,4,3,17,14,3,16,3,3,3,5,11],
+      activity: [20,6,3,4,3,17,14,3,16,3,3,3,5,12],
       lastActivity: {
         date: "2026-09-07",
-        summary: "dashboard refresh 2026-09-07 14:15 (8d4fb99)"
+        summary: "dashboard refresh 2026-09-07 14:16 (fd5f2c1)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
