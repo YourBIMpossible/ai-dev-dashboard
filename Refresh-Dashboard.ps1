@@ -226,6 +226,105 @@ function Update-GraphMetricsFromLedger {
     return @{ ok = $true; reason = "rendered $($entries.Count) point(s) / $incomingPushes push(es)$(if ($existingPushes -ge 0) { " (existing represented $existingPushes)" })" }
 }
 
+# REFRESH-SPEC.md rule 11 ("Graph-metrics staleness"): read-only comparison of
+# graph-metrics.js's newest snapshot against today, surfaced as ONE reminder on the
+# bimpossible project when the newest snapshot is >7 days old (or the file is
+# missing/empty) - never as a badge this script invents, and never by running graphify
+# itself (that binary is Windows-local-only and not part of this pipeline). This was
+# spec'd 2026-07-10 as a manual/on-demand step; wiring it here makes the daily refresh
+# do it too, same posture as 1f rendering the file it reads. Idempotent: re-running
+# with an unchanged snapshot age reproduces the identical reminder text, so it merges
+# cleanly with the "remove stale text, then re-add" logic below rather than duplicating.
+function Sync-GraphStalenessReminder {
+    param([Parameter(Mandatory)][string]$DataPath, [Parameter(Mandatory)][string]$GraphMetricsPath, [Parameter(Mandatory)][string]$Today)
+
+    if (-not (Test-Path $DataPath)) { return @{ ok = $false; reason = "data.js not found" } }
+
+    $newestDate = $null
+    if (Test-Path $GraphMetricsPath) {
+        try {
+            $text = [System.IO.File]::ReadAllText($GraphMetricsPath)
+            $start = $text.IndexOf('['); $end = $text.LastIndexOf(']')
+            if ($start -ge 0 -and $end -gt $start) {
+                # Two statements, not one: @(ConvertFrom-Json -InputObject $x) fused into a
+                # single statement still returns a 1-element wrapper in PS 5.1 even with a
+                # real JSON array - the same trap Update-GraphMetricsFromLedger's own
+                # no-shrink guard above documents and works around identically.
+                $parsed = ConvertFrom-Json -InputObject $text.Substring($start, $end - $start + 1) -ErrorAction Stop
+                $arr = @($parsed)
+                if ($arr.Count -and $arr[$arr.Count - 1].ts) {
+                    $newestDate = ([string]$arr[$arr.Count - 1].ts).Substring(0, 10)
+                }
+            }
+        } catch {}
+    }
+
+    $ageDays = $null
+    if ($newestDate) {
+        try { $ageDays = ([datetime]$Today - [datetime]$newestDate).Days } catch { $newestDate = $null }
+    }
+    $stale = ($null -eq $newestDate) -or ($ageDays -gt 7)
+    $reminderText = if ($newestDate) {
+        "Codebase graph stale - newest graphify snapshot $newestDate (${ageDays}d old); push or run a wave to refresh"
+    } else {
+        "Codebase graph stale - graph-metrics.js is missing, empty, or unparseable; push or run a wave to refresh"
+    }
+
+    $dataText = [System.IO.File]::ReadAllText($DataPath)
+    $bStart = $dataText.IndexOf('id: "bimpossible"')
+    if ($bStart -lt 0) { return @{ ok = $false; reason = "bimpossible project block not found in data.js" } }
+    # bimpossible is the first project; the next top-level project id anchors the block's
+    # end (phase ids like "P0-2" never match this literal, six-space-indented pattern).
+    $nextIdx = $dataText.IndexOf("`n      id: `"", $bStart + 1)
+    if ($nextIdx -lt 0) { $nextIdx = $dataText.Length }
+    $block = $dataText.Substring($bStart, $nextIdx - $bStart)
+
+    # reminders: [...] always immediately precedes links: in this schema (see the v4
+    # schema block in REFRESH-SPEC.md) - a reliable, narrow anchor without needing a
+    # full JS parser for a file this script otherwise only touches via targeted regex
+    # (same posture as the generated/generatedBy stamp below).
+    $remRe = [regex]'reminders:\s*\[([\s\S]*?)\]\s*,(\r?\n\s*)links:'
+    $m = $remRe.Match($block)
+    if (-not $m.Success) { return @{ ok = $false; reason = "bimpossible reminders array not found (expected immediately before links:)" } }
+
+    # Split on top-level commas only, honouring escaped quotes inside each JS string
+    # literal (reminder text legitimately contains commas and, elsewhere in data.js,
+    # literal ']' inside markdown links - a naive split or greedy bracket match would
+    # both mis-parse that).
+    $inner = $m.Groups[1].Value
+    $items = New-Object System.Collections.Generic.List[string]
+    $sb = New-Object System.Text.StringBuilder
+    $inStr = $false
+    $i = 0
+    while ($i -lt $inner.Length) {
+        $c = $inner[$i]
+        if ($inStr) {
+            [void]$sb.Append($c)
+            if ($c -eq '\') { $i++; if ($i -lt $inner.Length) { [void]$sb.Append($inner[$i]) } }
+            elseif ($c -eq '"') { $inStr = $false }
+        } else {
+            if ($c -eq '"') { $inStr = $true; [void]$sb.Append($c) }
+            elseif ($c -eq ',') { $items.Add($sb.ToString().Trim()); [void]$sb.Clear() }
+            else { [void]$sb.Append($c) }
+        }
+        $i++
+    }
+    if ($sb.ToString().Trim()) { $items.Add($sb.ToString().Trim()) }
+    $items = @($items | Where-Object { $_ -ne '' })
+
+    $kept = @($items | Where-Object { $_ -notmatch '^"Codebase graph stale' })
+    if ($stale) { $kept += ('"' + ($reminderText -replace '\\', '\\\\' -replace '"', '\"') + '"') }
+
+    $newInner = $kept -join ','
+    $newBlock = $block.Substring(0, $m.Index) + "reminders: [$newInner]," + $m.Groups[2].Value + "links:" + $block.Substring($m.Index + $m.Length)
+    $newDataText = $dataText.Substring(0, $bStart) + $newBlock + $dataText.Substring($nextIdx)
+
+    if ($newDataText -ne $dataText) {
+        [System.IO.File]::WriteAllText($DataPath, $newDataText)
+    }
+    return @{ ok = $true; reason = if ($stale) { "reminder present - $reminderText" } else { "snapshot fresh ($newestDate, ${ageDays}d old) - no reminder" } }
+}
+
 $python = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $python) { $python = (Get-Command py -ErrorAction SilentlyContinue).Source }
 if (-not $python) { Alert-Failure "python not found on PATH - cannot refresh."; exit 1 }
@@ -390,6 +489,20 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
         $degraded++
     }
 
+    # 1f2. REFRESH-SPEC rule 11: reconcile the ">7 days stale" reminder against
+    #      whatever graph-metrics.js now holds (the copy 1f just rendered, or origin's
+    #      if 1f warned). Runs against data.js directly (not through sync_ledgers.py,
+    #      which never touches reminders) - non-fatal, same as 1f: a parse hiccup here
+    #      must not block the rest of the data refresh, and data.js is left unchanged
+    #      on failure.
+    $gsr = Sync-GraphStalenessReminder -DataPath (Join-Path $PSScriptRoot "data.js") -GraphMetricsPath (Join-Path $PSScriptRoot "graph-metrics.js") -Today $today
+    if ($gsr.ok) {
+        "graph staleness reminder: $($gsr.reason)" | Add-Content -Path $log -Encoding utf8
+    } else {
+        "WARN: graph staleness reminder not synced - $($gsr.reason)" | Add-Content -Path $log -Encoding utf8
+        $degraded++
+    }
+
     # 1g. Refresh usage.js / agents.js from local ccusage + ~/.claude session data.
     #     Both scripts resolve their own output path from $PSScriptRoot (not a hardcoded
     #     clone path — 2026-09-07 fix), so running them here writes into THIS clone's
@@ -411,6 +524,20 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
             "WARN: agents_sync.mjs failed - agents.js not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
             $degraded++
         }
+    }
+
+    # 1h. Refresh github_actions.js (local CSV import, if any, + live per-run billing via
+    #     the GitHub API). Same --no-push pattern as 1e/1g: this script's own
+    #     fetch->reset->commit->push owns the git side. Token comes from `gh auth token`
+    #     when GH_TOKEN/GITHUB_TOKEN are unset (see github_actions_sync.mjs resolveToken);
+    #     no token just means live billing is skipped, which is non-fatal here too - the
+    #     CSV-derived rows (or the preserved existing rows) still write.
+    if (-not $node) {
+        "WARN: node not on PATH - github_actions.js not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
+    } elseif ((Invoke-Logged $node @("$PSScriptRoot\github_actions_sync.mjs","--no-push")) -ne 0) {
+        "WARN: github_actions_sync.mjs failed - github_actions.js not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
     }
 
     # 2. Stamp the generated date (UTF-8 no BOM via .NET; only two lines change).
@@ -441,7 +568,7 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #    indistinguishable from a genuinely unchanged tree. Staging status therefore
     #    comes back explicitly from Invoke-GitStage and is never inferred from the
     #    index (2026-08-31 slop audit, MEDIUM-1).
-    $stage = Invoke-GitStage -Paths @("data.js","graph-metrics.js","phase_dag.js","PHASE_DAG.md","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","usage.js","agents.js","codebase") `
+    $stage = Invoke-GitStage -Paths @("data.js","graph-metrics.js","phase_dag.js","PHASE_DAG.md","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","usage.js","agents.js","github_actions.js","codebase") `
                              -LogSink { param($Message) $Message | Add-Content -Path $log -Encoding utf8 }
     $disposition = Get-StagingDisposition $stage
     if ($disposition -eq 'fail')     { Alert-Failure "$($stage.Reason) - dashboard NOT updated."; $result = 1; break }

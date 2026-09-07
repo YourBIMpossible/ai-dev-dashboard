@@ -77,12 +77,13 @@ explicit decision.
     `Codebase graph stale - newest graphify snapshot <YYYY-MM-DD> (<N>d old); push or run a wave to refresh`.
     If <=7 days, add no reminder. Surfaces a lagging graph as a normal `reminders[]` entry without ever
     writing `graph-metrics.js`.
-    **Implementation status (2026-07-10):** this comparison is not yet coded into
-    `Refresh-Dashboard.ps1` — confirmed by reading it end to end, it only checks out and stages
-    `graph-metrics.js`, no age check. Today the Codebase tab's own command bar carries a
-    `freshTag()` staleness badge instead (`index.html`, `FRESH.live` threshold). This rule
-    remains the spec for a human/Claude on-demand pass (§ rule 3) until/unless someone wires
-    the reminder-generation behavior into the scripted pipeline too.
+    **Implementation status (2026-09-07):** wired into `Refresh-Dashboard.ps1` (step 1f2,
+    `Sync-GraphStalenessReminder`) — every scheduled/on-demand run reconciles this reminder
+    against `graph-metrics.js`'s newest snapshot automatically; a human/Claude on-demand pass
+    no longer needs to add or remove it by hand. The Codebase tab's own command bar still
+    carries a separate `freshTag()` staleness badge (`index.html`, `FRESH.live` threshold) —
+    that stays as-is, this reminder is the `reminders[]`-surface equivalent the ledger rule
+    always asked for.
 
 ## Per-project sources
 

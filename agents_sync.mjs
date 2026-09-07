@@ -75,8 +75,13 @@ function configInventory() {
   };
 }
 
+// Pinned, same as usage_sync.mjs: an unannounced ccusage release changing its JSON
+// shape would silently break parsing here with no diff to review. Bump deliberately,
+// in step with usage_sync.mjs's CCUSAGE_VERSION.
+const CCUSAGE_VERSION = "20.0.20";
+
 function ccusage(cmd) {
-  return JSON.parse(execSync(`npx -y ccusage@latest ${cmd} --json`, {
+  return JSON.parse(execSync(`npx -y ccusage@${CCUSAGE_VERSION} ${cmd} --json`, {
     encoding: "utf8", maxBuffer: 128 * 1024 * 1024, stdio: ["ignore", "pipe", "ignore"],
   }));
 }
