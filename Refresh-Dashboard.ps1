@@ -442,7 +442,7 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
     #    comes back explicitly from Invoke-GitStage and is never inferred from the
     #    index (2026-08-31 slop audit, MEDIUM-1).
     $stage = Invoke-GitStage -Paths @("data.js","graph-metrics.js","phase_dag.js","PHASE_DAG.md","networkx_impact.js","audit-freshness.js","narrative-freshness.js","graphify-health.js","usage.js","agents.js","codebase") `
-                             -Log { param($Message) $Message | Add-Content -Path $log -Encoding utf8 }
+                             -LogSink { param($Message) $Message | Add-Content -Path $log -Encoding utf8 }
     $disposition = Get-StagingDisposition $stage
     if ($disposition -eq 'fail')     { Alert-Failure "$($stage.Reason) - dashboard NOT updated."; $result = 1; break }
     if ($disposition -eq 'nochange') { "Already current - nothing to push." | Add-Content -Path $log -Encoding utf8; $result = 2; break }

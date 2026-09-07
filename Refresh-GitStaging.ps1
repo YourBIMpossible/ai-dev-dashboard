@@ -24,7 +24,14 @@ function Invoke-GitStage {
     param(
         [Parameter(Mandatory)][string[]]$Paths,
         # Log sink for git's own output. Default discards; the refresh passes its logger.
-        [scriptblock]$Log = { param($Message) }
+        # Named LogSink, not Log: PowerShell variable names are case-insensitive, and a
+        # caller's scriptblock referencing an outer `$log` (the log FILE PATH) would
+        # otherwise resolve to THIS parameter when invoked from inside this function's
+        # scope - passing a scriptblock where -Path expects a string, which PowerShell
+        # "resolves" by invoking it again -> infinite self-recursion -> call depth
+        # overflow. Latent for months because git add rarely wrote to stderr; surfaced
+        # 2026-09-07 once usage.js/agents.js triggered LF/CRLF warnings.
+        [scriptblock]$LogSink = { param($Message) }
     )
 
     # Same stderr guard Invoke-Logged uses: under EAP=Stop, PS 5.1 turns git's
@@ -34,7 +41,7 @@ function Invoke-GitStage {
     try {
         $addOut = & git add @Paths 2>&1 | ForEach-Object { "$_" }
         $addRc  = $LASTEXITCODE
-        foreach ($line in $addOut) { & $Log $line }
+        foreach ($line in $addOut) { & $LogSink $line }
         if ($addRc -ne 0) {
             # The Reason is what Alert-Failure surfaces, so it has to be actionable on
             # its own: the exact command, the exit code, and git's own words (which
@@ -52,7 +59,7 @@ function Invoke-GitStage {
         $diffOut = & git diff --cached --name-only 2>&1 | ForEach-Object { "$_" }
         $diffRc  = $LASTEXITCODE
         if ($diffRc -ne 0) {
-            foreach ($line in $diffOut) { & $Log $line }
+            foreach ($line in $diffOut) { & $LogSink $line }
             return [pscustomobject]@{
                 Ok = $false; ExitCode = $diffRc; Staged = $null
                 Reason = "git diff --cached failed (exit $diffRc) - staged set unknown"

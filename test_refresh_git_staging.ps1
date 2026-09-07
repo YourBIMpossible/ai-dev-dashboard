@@ -49,7 +49,7 @@ try {
     "case 3: one missing pathspec -> whole add fails, staged set is NOT reported"
     "three" | Set-Content -Path (Join-Path $repo "tracked.txt") -Encoding utf8
     $logged = New-Object System.Collections.ArrayList
-    $r = Invoke-GitStage -Paths @("tracked.txt", "does-not-exist.js") -Log { param($Message) [void]$logged.Add($Message) }
+    $r = Invoke-GitStage -Paths @("tracked.txt", "does-not-exist.js") -LogSink { param($Message) [void]$logged.Add($Message) }
     Assert-True ($r.Ok -eq $false)                       "Ok is false"
     Assert-True ($r.ExitCode -ne 0)                      "ExitCode is non-zero (git add exit $($r.ExitCode))"
     Assert-True ($null -eq $r.Staged)                    "Staged is null - callers cannot infer 'already current'"
