@@ -186,7 +186,7 @@
   }
 
   // ── Search ────────────────────────────────────────────────────────────────
-  const state = { query: '', tier: 'all', archive: null, loading: false };
+  const state = { query: '', tier: 'all', archive: null, loading: false, archiveError: null };
 
   function matches(item, query, tier) {
     if (tier !== 'all' && (item.tier || 'unsorted') !== tier) return false;
@@ -205,12 +205,17 @@
     const deep = state.archive
       ? `<span class="bw-rel">searching all ${pool.length}</span>`
       : (bw.archive_count > pool.length
-        ? `<button class="bw-chip" data-bw-deep="1">Search all ${bw.archive_count} →</button>`
+        ? `<button class="bw-chip" data-bw-deep="1">${state.archiveError ? 'Retry' : 'Search all'} ${bw.archive_count} →</button>`
         : '');
+    // A failed archive load must not read as a thin archive (2026-09-07 slop
+    // audit LOW-3): name the failure and scope the result count to the recent pool.
+    const archiveNote = state.archiveError
+      ? `<div class="bw-empty">Could not load the full archive (${esc(state.archiveError)}). Results below cover the ${pool.length} recent items only.</div>`
+      : '';
 
     return `
       <input class="bw-search" id="bw-q" placeholder="Search titles, summaries, topics…" value="${esc(state.query)}" autocomplete="off">
-      <div class="bw-filters">${chips}${deep}</div>
+      <div class="bw-filters">${chips}${deep}</div>${archiveNote}
       <div class="bw-rel" style="margin-bottom:var(--sp-3)">${hits.length} result${hits.length === 1 ? '' : 's'}${state.loading ? ' · loading archive…' : ''}</div>
       ${hits.length ? hits.slice(0, 120).map(itemRow).join('') : '<div class="bw-empty">No matches.</div>'}
     `;
@@ -219,6 +224,7 @@
   async function loadArchive(bw) {
     if (state.archive || state.loading) return;
     state.loading = true;
+    state.archiveError = null;
     render();
     try {
       const res = await fetch(bw.archive_url || 'bimwatch-archive.json', { cache: 'no-cache' });

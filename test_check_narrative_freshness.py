@@ -119,6 +119,19 @@ class NarrativeFreshnessTest(unittest.TestCase):
         self.assertEqual(r.payload["evaluated"], 2)
         self.assertEqual(r.payload["unevaluated"], ["beta"])
 
+    def test_non_text_recent_entries_carry_no_date_and_do_not_abort(self):
+        # 2026-09-07 slop audit LOW-2: a null/number/list entry used to raise
+        # AttributeError and abort the whole run. It is simply undated.
+        r = self.run_main([project("alpha", "2026-08-30",
+                                   [None, 123, ["x"], {"text": "2026-08-29 note"}])])
+        self.assertEqual(r.code, 0)
+        self.assertFalse(r.payload["projects"]["alpha"]["stale"])
+        # ...and a feed made ONLY of such entries is stale, not a crash.
+        r = self.run_main([project("alpha", "2026-08-30", [None, 123])])
+        self.assertEqual(r.code, 1)
+        self.assertTrue(r.payload["projects"]["alpha"]["evaluated"])
+        self.assertTrue(r.payload["projects"]["alpha"]["stale"])
+
     def test_empty_recent_feed_is_stale_not_unevaluated(self):
         # A card with a git date but no dated narrative IS measurable: the
         # narrative is missing, which is precisely what stale means here.
