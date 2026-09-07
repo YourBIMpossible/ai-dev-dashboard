@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-09-06T06:09:21.919604Z",
- "count": 387,
+ "generated_at": "2026-09-07T06:13:24.245388Z",
+ "count": 389,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"45126e2705f7f1bde36f5d37a9c595d4-gzip\"",
+   "etag": "\"f5896b2abe1d12fd1478397f26dd79ed-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Thu, 03 Sep 2026 01:34:58 GMT",
+   "last_modified": "Sun, 06 Sep 2026 09:36:58 GMT",
    "last_status": 200,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": true,
-   "stale_reason": "no new items in 32 days (expects ~7)"
+   "stale_reason": "no new items in 33 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-09-04T13:11:16Z",
    "last_modified": "Fri, 04 Sep 2026 16:13:04 GMT",
    "last_status": 304,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-02T20:20:21Z",
    "last_status": 200,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-09-02T11:51:05Z",
    "last_modified": "Wed, 02 Sep 2026 13:11:18 GMT",
    "last_status": 200,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"9df66d565b392183644691bf201727a1\"",
+   "etag": "W/\"9c8843054fda8524d2e0026bf218b3b9\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 04 Sep 2026 15:56:54 GMT",
+   "last_modified": "Sun, 06 Sep 2026 14:58:31 GMT",
    "last_status": 200,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
    "etag": "W/\"2f6581d02ad42ca23cabf44044276f39\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-09-05T11:06:35Z",
-   "last_status": 200,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_status": 304,
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-05T19:20:00Z",
-   "last_modified": "Sat, 5 Sep 2026 21:20:16 GMT",
+   "last_item_published": "2026-09-06T19:39:00Z",
+   "last_modified": "Mon, 7 Sep 2026 01:09:29 GMT",
    "last_status": 200,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 51,
+   "consecutive_failures": 52,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-06T06:09:21.919604Z",
+   "last_failure": "2026-09-07T06:13:24.245388Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "51 consecutive failures: HTTP 403"
+   "stale_reason": "52 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-08-31T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"98b520814750d8e441210761c835af3f\"",
+   "etag": "W/\"32dd0459e1e9844eb6e2ae608501c136\"",
    "last_item_count": 10,
-   "last_item_published": "2026-07-05T11:05:33Z",
+   "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,52 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-06T06:09:21.919604Z",
+   "last_success": "2026-09-07T06:13:24.245388Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "RevitLookup releases 2027.0.4",
+   "url": "https://github.com/lookup-foundation/RevitLookup/releases/tag/2027.0.4",
+   "source": "revitlookup-releases",
+   "published": "2026-09-06T20:58:32Z",
+   "summary": "A new minor release with installer fixes and improvements. Improved enumeration performance for categories, phases, and family parameters. Deferred the Autodesk Parameters Service members ParameterUtils.DownloadParameter , DownloadCompanyName and DownloadParameterOptions . Replaced Serilog with Microsoft.Extensions.Logging . Fixed the addin startup under a multi-user installation #438 Fixed the missing DLL error on installation while Revit is running #464 That's all for now. Next up: CLI, NuGet, MCP tools, and Avalonia UI Full changelog : 2027.0.3...2027.0.4",
+   "id": "8fb425b7c8f96bb7",
+   "fetched_at": "2026-09-07T06:13:24.245388Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 72,
+    "why": "Breaking change: ParameterUtils members deferred; logging replaced. Affects add-in compatibility and tooling builds if you depend on those APIs.",
+    "topics": [
+     "revit-api",
+     "breaking-change",
+     "deprecation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-07T06:13:24.245388Z"
+   }
+  },
+  {
+   "title": "Visibility Manager: Manage View Filters and V/G Overrides Across Views, View Templates, and Projects",
+   "url": "http://revitaddons.blogspot.com/2026/09/visibility-manager-manage-view-filters.html",
+   "source": "revit-addons",
+   "published": "2026-09-06T19:39:00Z",
+   "summary": "Summary Visibility Manager is a professional Autodesk Revit add-in developed by IB-BIM / Itzik Bejarano for managing view filters and Visibility/Graphics overrides across Revit views, view templates, and projects. It is designed to reduce the manual effort required to copy, remove, export, and import view-filter settings and category-based V/G overrides, especially in large models with many views, templates, disciplines, and documentation standards. Purpose and Design Intent The add-in addresses a common Revit production challenge: keeping visibility settings consistent across many views and templates. Native Revit tools can manage filters and V/G overrides, but applying the same settings repeatedly across many targets can be slow and error-prone. Visibility Manager provides a structured interface for bulk operations, allowing BIM teams to standardize project appearance, streamline coordination views, and manage template-driven graphics more efficiently. Core Workflow Visibility Manager works from the currently active Revit view. Users launch the tool from the IB-BIM ribbon tab or the Add-Ins tab, choose whether to work in Filters Mode or V/G Overrides Mode, select source settings…",
+   "id": "4ecba7641a2f2815",
+   "fetched_at": "2026-09-07T06:13:24.245388Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Product announcement with no technique or API detail. Visibility/filter work is often solved client-side; not actionable learning.",
+    "topics": [
+     "revit-addons"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-07T06:13:24.245388Z"
+   }
+  },
   {
    "title": "Type Manager Pro: Batch Rename Revit Types",
    "url": "http://revitaddons.blogspot.com/2026/09/type-manager-pro-batch-rename-revit.html",
