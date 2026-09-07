@@ -970,6 +970,48 @@ code{background:var(--panel2);border:1px solid var(--border);padding:1px 6px;bor
 .tv-parked .tv-item{opacity:.6;}
 .tv-parked .tv-item:hover{opacity:1;}
 
+/* Delta-first: new items lead (accent edge + tag), standing backlog dims below a divider. */
+.tv-item.tv-new{border-color:rgba(110,168,255,.45);background:rgba(110,168,255,.06);}
+.tv-newtag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;
+  font-size:9px;font-weight:800;letter-spacing:.06em;color:var(--accent,#6ea8ff);
+  border:1px solid rgba(110,168,255,.5);vertical-align:1px;}
+.tv-newct{color:var(--accent,#6ea8ff)!important;font-weight:700;}
+.tv-backlog-lbl{font-size:var(--ts-xs);color:var(--dim);text-transform:uppercase;
+  letter-spacing:.1em;font-weight:700;margin:8px 2px 2px;}
+.tv-desk .tv-item:not(.tv-new){opacity:.82;}
+.tv-desk .tv-item:not(.tv-new):hover{opacity:1;}
+
+/* Data-health readout — one line, one chip per ingested source. */
+.tv-health{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:var(--sp-4);}
+.tv-health .dh-head{font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--dim);margin-right:4px;}
+.tv-health.has-stale .dh-head{color:var(--status-warn);}
+.dh-chip{display:inline-flex;align-items:baseline;gap:5px;padding:3px 9px;border-radius:999px;
+  border:1px solid var(--border);background:var(--panel3);font:inherit;font-size:var(--ts-xs);
+  color:var(--muted);cursor:pointer;transition:border-color .15s;}
+button.dh-chip:hover{border-color:var(--border-hi);}
+.dh-chip .dh-l{font-weight:600;color:var(--w);}
+.dh-chip .dh-n{font-size:10px;color:var(--dim);}
+.dh-chip.stale{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.08);}
+.dh-chip.stale .dh-n{color:var(--status-warn);font-weight:700;}
+.dh-chip.unknown{border-style:dashed;}
+.dh-chip.unknown .dh-n{color:var(--dim);font-style:italic;}
+
+/* Portfolio pulse */
+.tv-pulse-sum{font-size:var(--ts-sm);color:var(--muted);margin:-2px 0 6px;}
+.tv-pulse-sum b{color:var(--status-warn);}
+.tv-need{display:inline-block;padding:1px 7px;border-radius:999px;font-size:10px;font-weight:700;
+  color:var(--status-warn);border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.07);
+  white-space:nowrap;}
+.tv-need.sm{padding:0 5px;margin-left:3px;}
+.tv-row .tv-need{margin-left:6px;}
+
+/* Portfolio (reference) secondary banner */
+.ov-secondary{font-size:var(--ts-sm);color:var(--dim);margin:-6px 0 16px;}
+.ov-today-link{font:inherit;color:var(--accent,#6ea8ff);font-weight:700;background:none;border:none;
+  padding:0;cursor:pointer;}
+.ov-today-link:hover{text-decoration:underline;}
+
 /* Needs-you: clear state + flagship metric */
 .tv-clear{display:flex;gap:var(--sp-3);align-items:center;padding:15px var(--sp-4);border-radius:12px;
   border:1px solid rgba(52,211,153,.28);background:rgba(52,211,153,.06);}
@@ -1160,7 +1202,7 @@ const SEVLBL={critical:'Critical',high:'High',medium:'Medium',low:'Low',info:'In
 // Canonical list of non-project views — the router, the init whitelist and the command
 // palette all read from this instead of each keeping its own hardcoded copy.
 const VIEWS=[
-  {id:'today',name:'Today'},{id:'overview',name:'Overview'},{id:'audit',name:'Audit'},
+  {id:'today',name:'Today'},{id:'overview',name:'Portfolio'},{id:'audit',name:'Audit'},
   {id:'graph',name:'Codebase'},{id:'roadmap',name:'Roadmap'},{id:'strategy',name:'Strategy'},
   {id:'usage',name:'Usage'},{id:'toolkit',name:'Toolkit'},{id:'bimwatch',name:'BIM Watch'},
 ];
@@ -1646,7 +1688,7 @@ function buildSide(){
   // Today first: the check-in surface. Everything below it is reference.
   const _deskN=tvDesk().length;
   h+=navI('today',ICO.sun,'Today',_deskN?_deskN+'':'',_deskN?'color:var(--status-warn)':'');
-  h+=navI('overview',ICO.grid,'Overview');
+  h+=navI('overview',ICO.grid,'Portfolio');
   h+='<div class="grp-lbl">BIMpossible Work</div>';
   WORK.forEach(id=>{const p=D.projects.find(q=>q.id===id);if(p)h+=navI(p.id,ICO[p.icon]||ICO.cube,p.name,pctStr(p),null,p.status,false);});
   h+='<div class="grp-sep"></div><div class="grp-lbl">Reference</div>';
@@ -1723,7 +1765,10 @@ function overview(){
   if(allDec)hItems.push(`<span class="badge st-warn sevpill" role="button" tabindex="0" aria-expanded="false" data-kind="decisions" title="${allDec} pending decision${allDec>1?'s':''} across ${decProjs.length} project${decProjs.length!==1?'s':''} — click for a breakdown" onclick="ovBreak('decisions')" onkeydown="ovBreakKey(event,'decisions')">${allDec} pending decision${allDec>1?'s':''}<span class="caret">▾</span></span>`);
   const hLine=hItems.length?hItems.join(' '):`<span style="color:var(--status-ok);font-weight:600">Portfolio clear</span>`;
 
-  let h='<div class="crumbs">Overview</div><h2 class="page">Mission Control</h2>';
+  let h='<div class="crumbs">Portfolio</div><h2 class="page">Mission Control</h2>';
+  // Today is the daily home; this view is the full portfolio reference. Say so, and point back,
+  // so the two surfaces don't read as competing check-in screens.
+  h+=`<div class="ov-secondary">Your daily check-in lives in <button type="button" class="ov-today-link" onclick="show('today')">Today →</button> · this is the full portfolio reference.</div>`;
 
   // 1. Command bar — health + counters (replaces abstract stat strip)
   h+=`<div class="ov-cmd ${hCls} fade">`;
@@ -4012,6 +4057,29 @@ function tvPartition(desk){
   const isRipe=d=>(d.kind==='blocker'||d.kind==='decision')&&deskRipe(d);
   return {ripe:desk.filter(isRipe), parked:desk.filter(d=>!isRipe(d))};
 }
+// ── Delta-first: what's new on the desk since the last check-in ──────────────
+// Desk items (blockers/decisions) carry no per-item date, so "new" is a real last-visit
+// comparison, never an invented freshness claim: an item is new iff its identity key was absent
+// from the desk snapshot taken at the PREVIOUS check-in day. Keys and the split are pure and
+// tested; the snapshot is persisted in localStorage (dash.deskBaseline) by todayView.
+function deskItemKey(d){
+  return String(d.pid)+'|'+d.kind+'|'+String(d.text||'').trim().toLowerCase().replace(/\s+/g,' ');
+}
+function deskDeltaKeys(curKeys,compareKeys){
+  const seen=new Set(compareKeys||[]);
+  return (curKeys||[]).filter(k=>!seen.has(k));
+}
+// Given today's ripe keys, the stored baseline, and today's date, return the baseline to store
+// back and the keys that count as new. The comparison set is FROZEN for the whole day (so a
+// mid-day reload doesn't clear the NEW markers) and only advances when the day rolls over. First
+// visit (no prior) marks nothing new — there's no earlier check-in to compare against.
+function deskBaseline(curKeys,prev,today){
+  let compareKeys;
+  if(!prev)compareKeys=curKeys||[];                         // first ever: nothing is "new"
+  else if(prev.day!==today)compareKeys=prev.keys||[];       // new check-in day: yesterday's desk
+  else compareKeys=prev.compareKeys||prev.keys||[];         // same day: keep the frozen baseline
+  return {store:{day:today,keys:curKeys||[],compareKeys},newKeys:deskDeltaKeys(curKeys,compareKeys)};
+}
 
 // Feed / desk copy is ledger prose carrying (#123) PR-and-issue citations. Dim those refs so the
 // sentence reads first and the trail-back citation sits quietly after it — kept, never deleted.
@@ -4047,6 +4115,37 @@ function spark(series){
     s.map(v=>`<i class="${v?'':'z'}" style="height:${v?Math.max(12,Math.round(v/max*100)):6}%"></i>`).join('')+
     '</span>';
 }
+// One truthful data-health readout for Today: every ingested source with its real timestamp and
+// a current/stale/unknown flag, reusing daysAgoAny + FRESH. These are the SAME globals the deep
+// views already read (DASHBOARD_USAGE/AGENTS/GH_ACTIONS/BIMWATCH, GRAPHIFY_HEALTH) — no new
+// ingestion. A source with no parseable timestamp reads "unknown", never a fabricated "live".
+function dataHealthSources(){
+  return [
+    {label:'Facts',      v:D.generated,                                  limit:FRESH.live,     go:null},
+    {label:'Usage',      v:(window.DASHBOARD_USAGE||{}).generated,       limit:FRESH.live,     go:'usage'},
+    {label:'Agents',     v:(window.DASHBOARD_AGENTS||{}).generated,      limit:FRESH.live,     go:'usage'},
+    {label:'GitHub',     v:(window.DASHBOARD_GH_ACTIONS||{}).generated,  limit:FRESH.ci,       go:'usage'},
+    {label:'BIM Watch',  v:(window.DASHBOARD_BIMWATCH||{}).generated_at, limit:FRESH.periodic, go:'bimwatch'},
+    {label:'Graphify',   v:(window.GRAPHIFY_HEALTH||{}).checked_at,      limit:FRESH.periodic, go:'graph'},
+  ];
+}
+function dataHealthLine(){
+  const srcs=dataHealthSources();
+  const state=s=>{const n=daysAgoAny(s.v);
+    if(n===null)return{cls:'unknown',note:'unknown',n};
+    return{cls:n>s.limit?'stale':'ok',note:n<=0?'today':n+'d',n};};
+  const chip=s=>{const st=state(s);
+    const title=st.cls==='unknown'?`${s.label} — no source timestamp available`:`${s.label} — last refreshed ${st.note==='today'?'today':st.note+' ago'}${st.cls==='stale'?' (stale)':''}`;
+    const inner=`<span class="dh-l">${esc(s.label)}</span><span class="dh-n">${st.note}</span>`;
+    return s.go
+      ?`<button type="button" class="dh-chip ${st.cls}" onclick="show('${s.go}')" title="${esc(title)}">${inner}</button>`
+      :`<span class="dh-chip ${st.cls}" title="${esc(title)}">${inner}</span>`;};
+  const anyStale=srcs.some(s=>state(s).cls==='stale');
+  const anyUnknown=srcs.some(s=>state(s).cls==='unknown');
+  const head=anyStale?'Some data is stale':anyUnknown?'Some sources unknown':'All sources current';
+  return `<div class="tv-health ${anyStale?'has-stale':anyUnknown?'has-unknown':'ok'}">`
+    +`<span class="dh-head">${head}</span>`+srcs.map(chip).join('')+`</div>`;
+}
 function todayView(){
   const feed=tvFeed(), desk=tvDesk();
   const commits14=p=>(p.activity||[]).reduce((a,b)=>a+b,0);
@@ -4060,25 +4159,49 @@ function todayView(){
   // Flagship earned-value line — two honest numbers, not the diluted flat average.
   h+=flagshipMetric();
 
+  // One data-health readout — real source timestamps, honestly flagged stale/unknown.
+  h+=dataHealthLine();
+
   // ── 1. Needs you — the clearable triage queue ───────────────────────────
   // The old surface dumped every blocker/decision/reminder under one "On your desk" heading
   // (47 rows). Here the top band is only what genuinely needs a decision today; everything
   // parked or waiting on a trigger folds away (never dropped), so an empty band honestly means
   // "you're clear to build", not "we hid the rest". Reminders are context, so they park too.
   const {ripe,parked}=tvPartition(desk);
-  const item=d=>`<button type="button" class="tv-item" onclick="show('${esc(d.pid)}')">`
+  // Delta-first ordering: items new since your last check-in lead; standing backlog follows,
+  // dimmer but fully present. Nothing is hidden — header count is every ripe item, "N new" is a
+  // subset of it (new + backlog === ripe). Owner asks stay visible in whichever band they land.
+  const ripeKeys=ripe.map(deskItemKey);
+  let newSet=new Set();
+  try{
+    const raw=localStorage.getItem('dash.deskBaseline');
+    const bl=deskBaseline(ripeKeys,raw?JSON.parse(raw):null,isoDate(TODAY));
+    newSet=new Set(bl.newKeys);
+    localStorage.setItem('dash.deskBaseline',JSON.stringify(bl.store));
+  }catch(e){}
+  const ripeFresh=ripe.filter(d=>newSet.has(deskItemKey(d)));
+  const ripeOld=ripe.filter(d=>!newSet.has(deskItemKey(d)));
+  const item=(d,isNew)=>`<button type="button" class="tv-item${isNew?' tv-new':''}" onclick="show('${esc(d.pid)}')">`
     +`<span class="tv-kind k-${d.kind}">${d.kind}</span>`
-    +`<span class="body"><span class="who">${esc(d.pname)}</span><p>${tvHumanize(d.text)}</p></span></button>`;
-  h+=`<section class="tv-sec" id="tv-desk"><h3>Needs you <span class="ct">· ${ripe.length||'clear'}</span></h3>`;
+    +`<span class="body"><span class="who">${esc(d.pname)}${isNew?' <span class="tv-newtag">new</span>':''}</span><p>${tvHumanize(d.text)}</p></span></button>`;
+  h+=`<section class="tv-sec" id="tv-desk"><h3>Needs you <span class="ct">· ${ripe.length||'clear'}</span>${ripeFresh.length?`<span class="ct tv-newct">${ripeFresh.length} new</span>`:''}</h3>`;
   if(auHot||stale){
     h+=`<div class="tv-alert">`;
     if(auHot)h+=`<button type="button" class="tv-chip danger" onclick="show('audit')">${ICO.shield}<span class="n">${auHot}</span> urgent audit</button>`;
     if(stale)h+=`<button type="button" class="tv-chip warn" onclick="doReload(this)">${ICO.refresh}Data ${dataAge}d old — refresh</button>`;
     h+=`</div>`;
   }
-  if(ripe.length)h+=`<div class="tv-desk">`+ripe.map(item).join('')+`</div>`;
+  if(ripe.length){
+    h+=`<div class="tv-desk">`;
+    h+=ripeFresh.map(d=>item(d,true)).join('');
+    if(ripeOld.length){
+      if(ripeFresh.length)h+=`<div class="tv-backlog-lbl">Standing backlog · ${ripeOld.length}</div>`;
+      h+=ripeOld.map(d=>item(d,false)).join('');
+    }
+    h+=`</div>`;
+  }
   else h+=`<div class="tv-clear">${ICO.check}<div><b>Nothing needs a decision today.</b><span>No ripe blockers or decisions — clear to build.</span></div></div>`;
-  if(parked.length)h+=revealBlock(`<div class="tv-desk tv-parked">`+parked.map(item).join('')+`</div>`,parked.length,'parked item');
+  if(parked.length)h+=revealBlock(`<div class="tv-desk tv-parked">`+parked.map(d=>item(d,false)).join('')+`</div>`,parked.length,'parked item');
   h+=`</section>`;
 
   // ── 2. Since your last check-in ─────────────────────────────────────────
@@ -4109,28 +4232,35 @@ function todayView(){
   }
   h+=`</section>`;
 
-  // ── 3. Movement ─────────────────────────────────────────────────────────
+  // ── 3. Portfolio pulse ──────────────────────────────────────────────────
   const ranked=D.projects.slice().sort((a,b)=>commits14(b)-commits14(a));
   const moving=ranked.filter(p=>commits14(p)>0);
   const quiet=ranked.filter(p=>commits14(p)===0);
+  // Per-project action-need count from the same ripe desk items shown in "Needs you" above —
+  // not a new score, just where the existing triage attributes each ripe item.
+  const needByProj={};ripe.forEach(d=>{needByProj[d.pid]=(needByProj[d.pid]||0)+1;});
+  const needProjCount=Object.keys(needByProj).length;
+  const needChip=p=>needByProj[p.id]?`<span class="tv-need">${needByProj[p.id]} needs you</span>`:'';
   // The per-row percent is a QUICK unweighted phase average, not an authoritative completion
   // figure — the two-number headline at the top owns that. Label it plainly ("current phase
   // average") and never as overall/progress, so a glance here can't be mistaken for the earned
   // value. Ordering is by 14-day commits (movement), deliberately not by this percent.
-  h+=`<section class="tv-sec"><h3>Movement <span class="ct">· 14 days</span></h3>`
+  h+=`<section class="tv-sec"><h3>Portfolio pulse <span class="ct">· 14 days</span></h3>`
+    +`<div class="tv-pulse-sum">${D.projects.length} projects · <b>${needProjCount||'0'}</b> need you · ${moving.length} moving · ${quiet.length} quiet</div>`
     +`<div class="tv-move-cap">Percent = current phase average — a quick unweighted signal. The completion headline up top is the authority for active scope &amp; delivery cohort.</div>`
     +`<div class="tv-move">`;
   moving.forEach(p=>{
     const pc=overallPct(p), c=commits14(p);
     h+=`<button type="button" class="tv-row" onclick="show('${esc(p.id)}')">`
       +`<span class="nm">${esc(p.name)}<small>${esc((p.lastActivity&&p.lastActivity.summary)||p.oneLiner||'')}</small></span>`
+      +needChip(p)
       +spark(p.activity)
       +`<span class="commits">${c}<em> c</em></span>`
       +`<span class="pctv" title="Current phase average — a quick unweighted phase signal; use the completion headline above for active scope and delivery-cohort status.">${pc!==null?pc+'%':'—'}</span></button>`;
   });
   if(quiet.length){
     h+=`<div class="tv-quiet"><span class="lbl">Quiet</span>`
-      +quiet.map(p=>`<button type="button" onclick="show('${esc(p.id)}')">${esc(p.name)}</button>`).join('')
+      +quiet.map(p=>`<button type="button" onclick="show('${esc(p.id)}')">${esc(p.name)}${needByProj[p.id]?` <span class="tv-need sm">${needByProj[p.id]}</span>`:''}</button>`).join('')
       +`<span>· no commits in 14 days</span></div>`;
   }
   h+=`</div></section>`;
@@ -4189,9 +4319,22 @@ function closeCP(){
   if(_cpEsc){document.removeEventListener('keydown',_cpEsc);_cpEsc=null;}
 }
 
+// Landing decision — pure and tested. Priority: an explicit deep link wins; else a
+// same-session, same-day stored tab is restored; else Today (the daily home). This is what
+// stops a stale historical tab from silently bypassing the daily check-in: the stored tab is
+// consulted only when it belongs to THIS browser session and THIS calendar day.
+function pickInitialView(o){
+  const valid=id=>(o.validIds||[]).indexOf(id)>=0;
+  const hash=String(o.hash||'').replace(/^#/,'').toLowerCase();
+  if(hash&&valid(hash))return{view:hash,src:'deep-link'};
+  if(o.sessionTab&&o.sessionSameDay&&valid(o.sessionTab))return{view:o.sessionTab,src:'session'};
+  return{view:'today',src:'default'};
+}
 function show(id){
   closePP();
-  try{localStorage.setItem('dash.tab',id);}catch(e){}
+  // Same-session restoration only: stamped with the day so a next-morning reload of a tab left
+  // open overnight still lands on Today. The old localStorage 'dash.tab' landing key is retired.
+  try{sessionStorage.setItem('dash.tab',JSON.stringify({day:isoDate(TODAY),id}));}catch(e){}
   document.querySelectorAll('.nav').forEach(el=>{
     const on=el.dataset.id===id;
     el.classList.toggle('active',on);
@@ -4247,7 +4390,7 @@ document.addEventListener('keydown',e=>{
 });
 function openHelp(){
   if(document.querySelector('.cp-bg'))return;
-  const rows=[['Ctrl/⌘ K','Search everything'],['g t','Today'],['g o','Overview'],['g a','Audit'],
+  const rows=[['Ctrl/⌘ K','Search everything'],['g t','Today'],['g o','Portfolio'],['g a','Audit'],
     ['g c','Codebase'],['g r','Roadmap'],['g s','Strategy'],['g u','Usage'],['g k','Toolkit'],
     ['g b','BIM Watch'],['?','This sheet'],['esc','Close']];
   const bg=document.createElement('div');
@@ -4264,16 +4407,24 @@ function openHelp(){
 
 // ── Init ──────────────────────────────────────────────────────────────────
 buildSide();
-let init='today';
 try{
-  let s=localStorage.getItem('dash.tab');
   window._mtab=localStorage.getItem('dash.mtab')||'usage';
   const _savedCtab=localStorage.getItem('dash.ctab');
   window._ctab=(_savedCtab==='network'||_savedCtab==='dashboard'||_savedCtab==='report')?_savedCtab:null;
-  if(s==='agents'||s==='health'){window._mtab=s;s='usage';}
-  if(s&&(VIEWS.some(v=>v.id===s)||D.projects.some(p=>p.id===s)))init=s;
 }catch(e){}
-show(init);
+(function(){
+  const validIds=VIEWS.map(v=>v.id).concat(D.projects.map(p=>p.id));
+  let hash='',sessionTab=null,sessionSameDay=false;
+  try{hash=location.hash||'';}catch(e){}
+  // agents/health are subtabs of Usage, not standalone views — fold an old deep link onto Usage.
+  const hraw=hash.replace(/^#/,'').toLowerCase();
+  if(hraw==='agents'||hraw==='health'){window._mtab=hraw;hash='#usage';}
+  try{
+    const raw=sessionStorage.getItem('dash.tab');
+    if(raw){const o=JSON.parse(raw);if(o&&o.id){sessionTab=o.id;sessionSameDay=o.day===isoDate(TODAY);}}
+  }catch(e){}
+  show(pickInitialView({hash,sessionTab,sessionSameDay,validIds}).view);
+})();
 </script>
 </body>
 </html>

@@ -222,7 +222,8 @@ test("real data.js via renderer: bimpossible = 63% active / 92% computed baselin
 const CHECKIN_CONSTS = ["DESK_PARK", "DESK_WAIT", "DESK_DONE", "DESK_UNDONE", "DESK_ASK", "EV_TIP"]
   .map(n => extractConstLine(HTML, n)).join("\n");
 const CHECKIN_FNS = ["deskSegments", "deskRipe", "tvPartition", "tvHumanize", "tvDesk", "cohortHeadlinePct",
-  "flagshipMetric", "revealBlock", "todayView"]
+  "flagshipMetric", "revealBlock", "daysAgoAny", "deskItemKey", "deskDeltaKeys", "deskBaseline",
+  "dataHealthSources", "dataHealthLine", "todayView"]
   .map(n => extractFn(HTML, n)).join("\n");
 const D_ALIAS = extractConstLine(HTML, "D");
 
@@ -457,10 +458,15 @@ test("empty state: an all-parked desk yields zero ripe (band goes empty)", () =>
 // the actual header count, empty-state block, and disclosure wiring — not on index.html source
 // text (which passed even when the runtime behaviour it purported to cover had drifted). --
 Object.assign(CE, {
-  tvFeed: () => [], auditSummary: () => null, daysAgo: () => 0, FRESH: { live: 3 },
+  tvFeed: () => [], auditSummary: () => null, daysAgo: () => 0, FRESH: { live: 3, periodic: 14, ci: 3 },
   dayLabel: x => String(x), isoDate: () => "2026-09-02", relDay: () => "",
-  spark: () => "", ICO: { check: "", shield: "", refresh: "" },
+  spark: () => "", ICO: { check: "", shield: "", refresh: "", warnI: "" },
   TODAY: new Date("2026-09-02T00:00:00Z"), _sinceDate: null, _rvSeq: 0,
+  // deskBaseline + dataHealthLine touch a persistence layer; an in-memory Storage stub keeps the
+  // render deterministic (a fresh desk each test → nothing marked "new") without a DOM.
+  localStorage: (() => { const m = {}; return {
+    getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); },
+    removeItem: k => { delete m[k]; } }; })(),
 });
 function renderToday(desk) { CE.tvDesk = () => desk; return CE.todayView(); }
 
