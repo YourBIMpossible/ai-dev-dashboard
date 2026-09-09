@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-08T06:10:27.901305Z",
- "count": 391,
+ "generated_at": "2026-09-09T06:10:49.218530Z",
+ "count": 396,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Sun, 06 Sep 2026 09:36:58 GMT",
    "last_status": 200,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": true,
-   "stale_reason": "no new items in 34 days (expects ~7)"
+   "stale_reason": "no new items in 35 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-09-07T09:26:19Z",
-   "last_modified": "Mon, 07 Sep 2026 09:27:39 GMT",
+   "last_item_published": "2026-09-08T15:00:36Z",
+   "last_modified": "Tue, 08 Sep 2026 16:12:15 GMT",
    "last_status": 200,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,72 +29,72 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-02T20:20:21Z",
    "last_status": 200,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"340f280a9a6595262f18bf19f04a6043\"",
+   "etag": "W/\"83fd0ebd62a0645f44d77492e2937112\"",
    "last_failure": "2026-09-04T06:10:13.935124Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-02T11:51:05Z",
-   "last_modified": "Wed, 02 Sep 2026 13:11:18 GMT",
+   "last_item_published": "2026-09-08T10:29:14Z",
+   "last_modified": "Tue, 08 Sep 2026 10:32:00 GMT",
    "last_status": 200,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"8a1524756fa7f27ea156ca9729725b25\"",
+   "etag": "W/\"fe2b09530f38a6c099e752995d7421ac\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 08 Sep 2026 06:07:59 GMT",
+   "last_modified": "Tue, 08 Sep 2026 17:21:44 GMT",
    "last_status": 200,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"2f6581d02ad42ca23cabf44044276f39\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-09-05T11:06:35Z",
-   "last_status": 304,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "etag": "W/\"131fe5fd053e5a3731a9235e4bf6dec5\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-08T18:39:12Z",
+   "last_status": 200,
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-07T19:58:00Z",
-   "last_modified": "Mon, 7 Sep 2026 20:34:37 GMT",
+   "last_item_published": "2026-09-09T00:31:00Z",
+   "last_modified": "Wed, 9 Sep 2026 03:36:33 GMT",
    "last_status": 200,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 54,
+   "consecutive_failures": 55,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-08T06:10:27.901305Z",
+   "last_failure": "2026-09-09T06:10:49.218530Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "54 consecutive failures: HTTP 403"
+   "stale_reason": "55 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
-   "etag": "W/\"444ce5d64f650c6cb161ee9b82c49367\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-08-31T10:00:00Z",
-   "last_status": 304,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "etag": "W/\"bb53906ea3dd87038368c797c405c2c0\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-08T10:00:00Z",
+   "last_status": 200,
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"3b22941cfefd763d2c7d9f45a55343ff\"",
+   "etag": "W/\"16bcf56c95d59da47a0d02e5dabe6765\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,113 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-08T06:10:27.901305Z",
+   "last_success": "2026-09-09T06:10:49.218530Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Free Cupix Reality Importer: Import Standard Point Cloud Files Directly into Revit",
+   "url": "http://revitaddons.blogspot.com/2026/09/free-cupix-reality-importer-import.html",
+   "source": "revit-addons",
+   "published": "2026-09-09T00:31:00Z",
+   "summary": "Summary Cupix Reality Importer is a free Autodesk Revit plug-in developed by Cupix Inc. that allows users to import standard point cloud files directly into Revit. It is designed to simplify scan-to-BIM workflows by removing the need to convert point cloud data into Autodesk ReCap format before bringing it into a Revit project. Purpose and Design Intent The main purpose of Cupix Reality Importer is to make reality-capture data easier to use inside Revit. Native Revit workflows typically rely on indexed point cloud files created through Autodesk ReCap, which can add extra conversion steps to a scan-to-BIM process. Cupix Reality Importer addresses this by supporting direct import of several standard or Cupix-specific point cloud formats, helping users move reality-capture data into Revit more quickly. Supported File Formats The Autodesk Marketplace listing states that the add-in supports PLY, XYZ, E57, and CPC files. CPC is Cupix’s own Cupix Point Cloud format. The plug-in imports coordinate data and color attributes when those attributes are present in the source file, helping preserve the visual and spatial usefulness of the point cloud inside Revit. CupixWorks Alignment Data…",
+   "id": "0b17b898ecfa7c85",
+   "fetched_at": "2026-09-09T06:10:49.218530Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 45,
+    "why": "Free point-cloud importer for Revit bypasses ReCap conversion; worth knowing if scan-to-BIM is part of your workflow or client deliverables.",
+    "topics": [
+     "revit-plugins",
+     "point-cloud",
+     "interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-09T06:10:49.218530Z"
+   }
+  },
+  {
+   "title": "Inside Motif: the agent-native BIM platform",
+   "url": "https://aecmag.com/bim/inside-motif-the-agent-native-bim-platform/",
+   "source": "aec-magazine",
+   "published": "2026-09-08T15:00:36Z",
+   "summary": "In the race to create the next generation of BIM, many firms, including Snaptrude, Qonic, Arcol, and Hypar, have opted to develop their software in public. Motif has taken a more old-school approach, opting for secrecy followed by a big reveal. Today, we finally get to see what Amar Hanspal and his ex-Autodesk team have been building For three years the question hanging over $46 million start-up Motif , has been what, precisely, Amar Hanspal and his ex-Autodesk leadership team were building. The early releases, a collaborative whiteboard with model viewing and redlining, invited the suspicion that this was another companion product, a satellite orbiting Revit rather than a replacement for the mature BIM authoring tool. They also flew in the face of our February 2025 interview with Hanspal , who agreed that taking on Revit was like climbing the North Face of the Eiger, and that too many start-ups got lost in the foothills delivering side projects. That suspicion can now be retired as Motif launches its BIM authoring platform. It’s browser-native, multi-threaded, cloud native and built on the assumption that AI agents are first-class users of the model, rather than a chat window or…",
+   "id": "6870a9d9bb71f5e9",
+   "fetched_at": "2026-09-09T06:10:49.218530Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Motif is a funded competitor platform, not a technique or API change; worth tracking the direction but no immediate action for your tooling.",
+    "topics": [
+     "market",
+     "competitor"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-09T06:10:49.218530Z"
+   }
+  },
+  {
+   "title": "BIM 2.0: unfinished business",
+   "url": "https://aecmag.com/bim/bim-2-0-unfinished-business/",
+   "source": "aec-magazine",
+   "published": "2026-09-08T14:59:22Z",
+   "summary": "Motif and its BIM 2.0 rivals can’t yet do everything that Revit does. Neither could Revit when it first launched, and neither will whatever Autodesk builds to replace it. Martyn Day on why ‘come back when it’s finished’ is the wrong test For years, architects have complained about Revit. It is slow, expensive, awkward to automate and built on computer science conceived in the late 1990s. Practices buy workstations with 16, 32 or 64 cores, then spend much of the working day inside an application that makes limited use of them. Now there is a new complaint, highlighted by the launch of Motif’s BIM platform today (read our exclusive in-depth article) . The alternatives aren’t yet finished. Of course they aren’t. Nothing that sets out to challenge 26 years of software development is going to be finished at launch, and nothing ever will be, if the entry requirement is doing everything that Revit already does. Motif joins a growing group of what this magazine has called BIM 2.0 applications: Snaptrude , Qonic , Arcol , Hypar and others, each rethinking BIM around cloud computing, modern data architectures and, latterly, AI. None has Revit’s breadth and none can replicate every family,…",
+   "id": "5255b18b5efc2e2c",
+   "fetched_at": "2026-09-09T06:10:49.218530Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Opinion piece on Revit's limitations and alternatives; context but no concrete technical detail or API change affecting your add-ins.",
+    "topics": [
+     "market",
+     "revit-critique"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-09T06:10:49.218530Z"
+   }
+  },
+  {
+   "title": "Grasshopper for structural analysis: stop building the same project twice",
+   "url": "https://bimcorner.com/grasshopper-structural-analysis-bim-fem/",
+   "source": "bim-corner",
+   "published": "2026-09-08T10:29:14Z",
+   "summary": "Most structural engineers still create two separate models: one detailed model for BIM and another simplified model for structural analysis. This article explains how Grasshopper can connect both workflows through one central model. You will learn how to reduce repeated work, avoid coordination errors, manage FEM simplifications, and create reliable links between BIM and structural analysis software. For years, I built the same project twice. I created the BIM model first, then rebuilt the same structure in analysis software. The workflow seemed manageable only while the design stayed still. Of course, it never stayed still. A column moved. A slab edge changed. An opening grew. The architect issued another model. We adjusted the analysis assumptions. Each change meant checking two models and trying to remember what had already been updated. The double work was annoying. The quiet differences between the models were the real danger. Eventually, I understood that the main problem was not Revit, Tekla, or the analysis software. It was the way I had organised the information. I was maintaining two separate descriptions of the same structure and expecting them to remain aligned. Table…",
+   "id": "3c1ec76852b41ff5",
+   "fetched_at": "2026-09-09T06:10:49.218530Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 35,
+    "why": "Grasshopper workflow for structural sync reduces dual-modeling; technique transferable to Revit automation for data sync between disciplines.",
+    "topics": [
+     "interop",
+     "automation",
+     "workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-09T06:10:49.218530Z"
+   }
+  },
+  {
+   "title": "Enrolment Open: Claude for BIM Live Course",
+   "url": "https://www.bimpure.com/blog/announcement-claude-for-bim-live-course",
+   "source": "revit-pure",
+   "published": "2026-09-08T10:00:00Z",
+   "summary": "We are launching a course called Claude for BIM. It includes 6 live sessions with brilliant masters of BIM and AI. Watch the video: These are real practitioners who will help you implement Claude and AI in your BIM practices. Claude for BIM also includes a pre-recorded segment on how to master pyRevit MCP + Claude Code with Nicolas Catellier. This course is included in the BIM Pure membership. Enrolment has just opened! Click here to join this live course",
+   "id": "67a1e71e59a9875e",
+   "fetched_at": "2026-09-09T06:10:49.218530Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Training course promotion; no technical content, API detail, or technique described.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-09T06:10:49.218530Z"
+   }
+  },
   {
    "title": "Product Roundup: IB-BIM",
    "url": "http://revitaddons.blogspot.com/2026/09/product-roundup-ib-bim.html",
@@ -452,7 +553,7 @@
    }
   },
   {
-   "title": "Extra: Free Tools to Measure Total Lengths, Perimeters and Areas of Elements",
+   "title": "Free Extra: Tools to Measure Total Lengths, Perimeters and Areas of Elements",
    "url": "http://revitaddons.blogspot.com/2026/08/extra-free-tools-to-measure-total.html",
    "source": "revit-addons",
    "published": "2026-08-30T23:09:00Z",
