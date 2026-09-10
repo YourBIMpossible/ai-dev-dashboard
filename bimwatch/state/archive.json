@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-09-09T06:10:49.218530Z",
- "count": 396,
+ "generated_at": "2026-09-10T06:11:04.444822Z",
+ "count": 400,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"f5896b2abe1d12fd1478397f26dd79ed-gzip\"",
+   "etag": "\"c3dc028072608eada6c250cc53d5ff40-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Sun, 06 Sep 2026 09:36:58 GMT",
+   "last_modified": "Wed, 09 Sep 2026 18:16:40 GMT",
    "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": true,
-   "stale_reason": "no new items in 35 days (expects ~7)"
+   "stale_reason": "no new items in 36 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-09-08T15:00:36Z",
-   "last_modified": "Tue, 08 Sep 2026 16:12:15 GMT",
+   "last_item_published": "2026-09-09T09:09:19Z",
+   "last_modified": "Wed, 09 Sep 2026 09:12:01 GMT",
    "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-02T20:20:21Z",
+   "last_item_published": "2026-09-08T19:33:57Z",
    "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,60 +41,60 @@
    "last_item_published": "2026-09-08T10:29:14Z",
    "last_modified": "Tue, 08 Sep 2026 10:32:00 GMT",
    "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"fe2b09530f38a6c099e752995d7421ac\"",
+   "etag": "W/\"8a2724eea6d60df4bd5ed14635e43e09\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 08 Sep 2026 17:21:44 GMT",
+   "last_modified": "Wed, 09 Sep 2026 13:49:29 GMT",
    "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"131fe5fd053e5a3731a9235e4bf6dec5\"",
+   "etag": "W/\"547133a00236f78c360a9a6577161159\"",
    "last_item_count": 10,
-   "last_item_published": "2026-09-08T18:39:12Z",
+   "last_item_published": "2026-09-10T05:41:40Z",
    "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-09T00:31:00Z",
-   "last_modified": "Wed, 9 Sep 2026 03:36:33 GMT",
+   "last_item_published": "2026-09-10T00:47:00Z",
+   "last_modified": "Thu, 10 Sep 2026 04:23:28 GMT",
    "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 55,
+   "consecutive_failures": 56,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-09T06:10:49.218530Z",
+   "last_failure": "2026-09-10T06:11:04.444822Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "55 consecutive failures: HTTP 403"
+   "stale_reason": "56 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
    "etag": "W/\"bb53906ea3dd87038368c797c405c2c0\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-09-08T10:00:00Z",
-   "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_status": 304,
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"16bcf56c95d59da47a0d02e5dabe6765\"",
+   "etag": "W/\"1683dca84731cfcb4c7401363c69b8a9\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,53 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-09T06:10:49.218530Z",
+   "last_success": "2026-09-10T06:11:04.444822Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Autotag: MEP Tagging",
+   "url": "http://revitaddons.blogspot.com/2026/09/autotag-mep-tagging-annotation-and.html",
+   "source": "revit-addons",
+   "published": "2026-09-10T00:47:00Z",
+   "summary": "Summary Autotag by Bimrock AI is a Revit-native add-in designed to automate MEP tagging and annotation workflows in Autodesk Revit. Its primary purpose is to replace repetitive, manual tag placement with reusable, rule-based tagging profiles that can be applied across views, sheets, levels, disciplines, and documentation sets. The add-in focuses on ducts, pipes, cable trays, conduits, electrical equipment, and other MEP-related elements, while also noting support for some general architectural elements. Purpose and Core Value The add-in addresses one of the most time-consuming production tasks in Revit MEP documentation: placing, moving, aligning, and cleaning up tags by hand. In dense mechanical, electrical, and plumbing views, teams may need to tag hundreds or thousands of elements, then adjust leaders and elbows to avoid overlapping annotation. Autotag is intended to reduce that manual effort, improve consistency, and help teams produce cleaner documentation with fewer redlines. Workflow Autotag uses a profile-based workflow. Users create a tagging profile by selecting the Revit categories to tag, choosing the appropriate tag families, defining filtering criteria, and setting…",
+   "id": "e97eca69cd2753a4",
+   "fetched_at": "2026-09-10T06:11:04.444822Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A Revit add-in product for MEP tagging; useful to know it exists, but no API or technique detail for your own tooling.",
+    "topics": [
+     "revit-addins",
+     "mep"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-10T06:11:04.444822Z"
+   }
+  },
+  {
+   "title": "Giving AI actual write access in Revit",
+   "url": "https://aecmag.com/bim/giving-ai-actual-write-access-in-revit/",
+   "source": "aec-magazine",
+   "published": "2026-09-09T09:09:19Z",
+   "summary": "Can AI move past querying Revit models and start actually building inside them? Chun-Lin Peng, Associate AIA and architectural designer at Leuterio Thomas Architects & Engineers, tests Claude + MCP + pyRevit to find out Ask most architectural firms what “AI in Revit” means right now and you’ll get some version of: faster tags, cleaner schedules, maybe a chatbot that explains what a parameter does. This is useful but also falls short of what the phrase truly promises. I wanted to test the promise directly and explore whether AI can actually write to a model, not just read it. What follows isn’t a success story. It’s a record of what that chain got right (ceilings, walls, windows, creating worksets), what it got wrong (stair dimensioning, a rebuild of Mies van der Rohe’s Farnsworth House that’s recognisable but not usable), and what the gap between those two tells us about where this is actually headed. I started where most people testing AI in Revit start: with what Autodesk ships. Revit 2027’s built-in Autodesk Assistant is fine for a narrow band of tasks — creating schedules, tagging rooms, doors, windows. But it can’t touch anything that already exists in the model. In my…",
+   "id": "a965efc940ae5fc0",
+   "fetched_at": "2026-09-10T06:11:04.444822Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 72,
+    "why": "Documents a concrete technique: Claude + MCP + pyRevit for model write access; failure cases are instructive for what add-in automation can and cannot do.",
+    "topics": [
+     "pyrevit",
+     "ai-integration",
+     "api-techniques"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-10T06:11:04.444822Z"
+   }
+  },
   {
    "title": "Free Cupix Reality Importer: Import Standard Point Cloud Files Directly into Revit",
    "url": "http://revitaddons.blogspot.com/2026/09/free-cupix-reality-importer-import.html",
@@ -149,6 +190,27 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-09-09T06:10:49.218530Z"
+   }
+  },
+  {
+   "title": "Autodesk® Data Exchange .NET SDK reaches general availability",
+   "url": "https://aps.autodesk.com/blog/autodeskr-data-exchange-net-sdk-reaches-general-availability",
+   "source": "aps-blog",
+   "published": "2026-09-08T19:33:57Z",
+   "summary": "Autodesk® Data Exchange .NET SDK reaches general availability Tyler Gester 9 Sep 2026 Tyler Gester Share What is Autodesk Data Exchange .NET SDK? Autodesk Data Exchange .NET SDK is a developer toolkit for building custom interoperability workflows that share your design data across Autodesk products and third-party applications. It gives .NET developers APIs to create, read, update, and synchronize Data Exchanges, work with structured element data and geometry, and connect those workflows to their own applications and services. For teams that are new to Autodesk Data Exchange, the core idea is simple: Autodesk Data Exchanges facilitate applications to share curated, granular design data instead of moving an entire design model every time. The SDK gives developers programmatic control over that exchange workflow so they can build integrations around the data their users actually need. What can you build with the Data Exchange SDK? The Data Exchange SDK is designed for developers who need more flexibility than an out-of-the-box connector can provide. You can use it to build custom connectors, automate model-data workflows, enrich exchange data, and move information into downstream…",
+   "id": "ced44a5a4233ee5c",
+   "fetched_at": "2026-09-10T06:11:04.444822Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Data Exchange .NET SDK now GA; relevant for interop workflows from your add-ins into Autodesk products and third-party tools.",
+    "topics": [
+     "aps",
+     "interoperability",
+     "sdk"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-10T06:11:04.444822Z"
    }
   },
   {
@@ -229,6 +291,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-09-09T06:10:49.218530Z"
+   }
+  },
+  {
+   "title": "Civil 3D Data Exchange Directly from Autodesk Forma - Now Generally Available",
+   "url": "https://aps.autodesk.com/blog/civil-3d-data-exchange-directly-autodesk-forma-now-generally-available",
+   "source": "aps-blog",
+   "published": "2026-09-08T08:13:39Z",
+   "summary": "Civil 3D Data Exchange Directly from Autodesk Forma - Now Generally Available Gaurav Bhamre 9 Sep 2026 Gaurav Bhamre Share Bringing infrastructure data into the connected Autodesk ecosystem, Directly from Forma Back in May, we opened the Civil 3D Data Exchange connector to public beta, giving infrastructure teams a direct path from Civil 3D into Forma, Revit, and the broader Autodesk Data Exchange ecosystem. Today, we're excited to announce that the Civil 3D Cloud Connector is now Generally Available. Over the beta period, hundreds of AEC and infrastructure teams used the connector to move corridor, pipe network, and surface data out of siloed DWG files and into cross-discipline workflows, without needing a Civil 3D license or desktop install to do it. GA means this is no longer an early-access preview. It's a supported, production-ready part of your Data Exchange Ecosystem. Check out this video to see how the connector works! What Carried Over From Beta Geolocation-aware exchanges. Civil 3D and Revit models align on real-world coordinates, so infrastructure and building teams stay in the same spatial context without manual georeferencing. Check out our details of how to align the…",
+   "id": "fd21f392ae33ca8a",
+   "fetched_at": "2026-09-10T06:11:04.444822Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Civil 3D connector GA; useful to know the Data Exchange ecosystem is expanding, but Civil 3D is outside your current scope.",
+    "topics": [
+     "aps",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-10T06:11:04.444822Z"
    }
   },
   {
