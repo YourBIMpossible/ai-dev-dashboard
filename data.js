@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-09",
+  generated: "2026-09-10",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-08-27",
+  activitySince: "2026-08-28",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,7 +289,7 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [6,0,0,31,59,62,19,3,36,8,50,28,0,0],
+      activity: [0,0,31,59,62,19,3,36,8,50,28,0,0,0],
       lastActivity: {
         date: "2026-09-07",
         summary: "test(r12): close PR 137 review findings (#142) (2123819)"
@@ -316,7 +316,7 @@ window.DASHBOARD_DATA = {
         "P13 Write Engine open owner decisions #1 (staged-unit veto guard) and #3 (BuildSummary bucket-exhaustiveness) were meant to be decided before/with Increment 2 -- Increment 2 is now built + deployed (#273/#544); decide before the live smoke."
       ],
       blockers: [],
-      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Codebase graph stale - newest graphify snapshot 2026-08-07 (33d old); push or run a wave to refresh"],
+      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Codebase graph stale - newest graphify snapshot 2026-08-07 (34d old); push or run a wave to refresh"],
       links: [
         { label: "STATE doc (canonical, 06-12, archived)", path: "F:\\BIMpossible-Workspace\\99_Archive\\00_Strategy\\state-snapshots\\BIMpossible_STATE_2026-06-12.md" },
         { label: "True-prod deploy runbook (06-12)", path: "F:\\BIMpossible-Workspace\\02_Reference\\2026-06-12__true-prod-deploy-runbook.md" },
@@ -625,7 +625,7 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [1,0,0,3,0,2,0,0,0,0,3,5,0,0],
+      activity: [0,0,3,0,2,0,0,0,0,3,5,0,0,0],
       lastActivity: {
         date: "2026-09-07",
         summary: "fix(relay): retry health probe on timeout; re-evaluate launch config per spawn attempt (#123) (79915cd)"
@@ -843,7 +843,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [2,0,0,0,1,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,1,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-08-31",
         summary: "fix(contact): treat a provider 2xx with a failure body as undelivered (1dbbd72)"
@@ -1040,7 +1040,7 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,0,0,0,2,0,0,0,0,0,2,0,0,0],
+      activity: [0,0,0,2,0,0,0,0,0,2,0,0,0,0],
       lastActivity: {
         date: "2026-09-06",
         summary: "Merge pull request #14 from YourBIMpossible/claude/ec-config-timeouts (57b63e6)"
@@ -1171,7 +1171,7 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,29,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,29,0,0,0],
       lastActivity: {
         date: "2026-09-07",
         summary: "Merge pull request #14 from YourBIMpossible/chore/gitignore-claude-worktrees (02c2856)"
@@ -1307,7 +1307,7 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [5,0,0,15,49,37,8,2,15,4,19,26,0,0],
+      activity: [0,0,15,49,37,8,2,15,4,19,26,0,0,0],
       lastActivity: {
         date: "2026-09-07",
         summary: "test(r12): close PR 137 review findings (#142) (2123819)"
@@ -1364,10 +1364,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,4,3,17,14,3,16,3,3,3,5,18,3,1],
+      activity: [4,3,17,14,3,16,3,3,3,5,18,3,3,1],
       lastActivity: {
-        date: "2026-09-09",
-        summary: "chore: live billing sync 2026-09-09 (2324e13)"
+        date: "2026-09-10",
+        summary: "chore: live billing sync 2026-09-10 (b85bdee)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
