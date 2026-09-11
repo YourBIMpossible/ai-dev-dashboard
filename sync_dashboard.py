@@ -42,8 +42,13 @@ import tempfile
 #                             (gh api). The model must not invent or stale-overwrite
 #                             the freshness signal. (Added 2026-06-27 with the activity
 #                             scan, which fixed cards sitting ~2 weeks stale.)
+#   - personal                : a human-only curation flag (marks a personal side project so its
+#                             desk items stay off the Today feed). No deterministic source and no
+#                             prose meaning — the bot has nothing to say about it, so it must never
+#                             write or drop it. apply_patch already preserves it (never in a patch);
+#                             listing it here keeps the "bot never writes" set canonical.
 # See REFRESH-SPEC.md "Phase status ingestion".
-PROTECTED_FIELDS = {"progress", "waves", "activity", "lastActivity"}
+PROTECTED_FIELDS = {"progress", "waves", "activity", "lastActivity", "personal"}
 
 
 def extract_block(data_js: str, project_id: str) -> tuple[int, int, str]:

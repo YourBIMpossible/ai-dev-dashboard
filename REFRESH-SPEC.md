@@ -205,6 +205,10 @@ window.DASHBOARD_DATA = {
     id, name, icon,                    // icon: layers|wrench|globe|trophy|box|cube (shell's set)
     oneLiner,
     status: "active"|"gated"|"paused"|"dormant",
+    personal?: true,                   // CURATED, human-only. Marks a personal side project so its
+                                       //   blockers/decisions/reminders/recent stay off the Today desk
+                                       //   (tvDesk/tvFeed filter `!p.personal`). Bot MUST NOT write or
+                                       //   drop it; apply_patch preserves it since it is never in a patch.
     phase,                             // one line: where we are
     focus,                             // THE one thing to do next (single sentence)
     progress: {                        // null if unknowable
