@@ -3943,7 +3943,7 @@ function dayLabel(iso){
 // Every project's `recent` entries carry a leading ISO date; merge them into one portfolio feed.
 function tvFeed(){
   const out=[];
-  D.projects.forEach(p=>(p.recent||[]).forEach(r=>{
+  D.projects.filter(p=>!p.personal).forEach(p=>(p.recent||[]).forEach(r=>{
     const s=String(r);
     const m=s.match(/^(\d{4}-\d{2}-\d{2})\s*[-–—]?\s*(.*)$/);
     if(!m)return; // undated entries have no place on a chronological feed
@@ -3953,7 +3953,7 @@ function tvFeed(){
 }
 function tvDesk(){
   const out=[];
-  D.projects.forEach(p=>{
+  D.projects.filter(p=>!p.personal).forEach(p=>{
     (p.blockers||[]).forEach(t=>out.push({kind:'blocker',rank:0,pid:p.id,pname:p.name,text:t}));
     (p.pendingDecisions||[]).forEach(t=>out.push({kind:'decision',rank:1,pid:p.id,pname:p.name,text:t}));
     (p.reminders||[]).forEach(t=>out.push({kind:'reminder',rank:2,pid:p.id,pname:p.name,text:t}));

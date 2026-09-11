@@ -952,6 +952,7 @@ window.DASHBOARD_DATA = {
     /* PROJECT:pickem:START */
     {
       id: "pickem",
+      personal: true,
       name: "Preseason Pick'em",
       icon: "trophy",
       oneLiner: "Next.js pick'em app (PreseasonPickem-app) at www.preseason-pickem.com. Auth (magic-link + passkeys), scoring, leaderboard, draft-kit and perf/audit2 hardening all shipped on main 2026-06-01; one scoring-reconciliation fix waits in open PR #1 (08-06). Dormant.",
@@ -995,6 +996,7 @@ window.DASHBOARD_DATA = {
     /* PROJECT:laundry:START */
     {
       id: "laundry",
+      personal: true,
       name: "Laundry Gig",
       icon: "box",
       oneLiner: "Next.js demo app 'Lazy' (laundry-finder): Leaflet WasherMap (OSM pins + route), commute-corridor matching, one-click demo launcher.",
@@ -1397,6 +1399,7 @@ window.DASHBOARD_DATA = {
     /* PROJECT:pc-monitor:START */
     {
       id: "pc-monitor",
+      personal: true,
       name: "PC Monitor",
       icon: "monitor",
       oneLiner: "Fully-local workstation monitoring stack for the Ryzen 9 9950X3D + RTX 5080 rig. Python collector → SQLite; zero-dependency web dashboard with live view + historical scrubbing. No cloud, no telemetry.",
