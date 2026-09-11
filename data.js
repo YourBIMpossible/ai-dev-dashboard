@@ -1244,6 +1244,7 @@ window.DASHBOARD_DATA = {
     /* PROJECT:ai-brain-data:START */
     {
       id: "ai-brain-data",
+      personal: true,
       name: "AI Brain Data",
       icon: "brain",
       oneLiner: "Personal knowledge base and context store for AI/BIM work — Obsidian vault, Revit-AI context logs, decision records, and the source corpus for AI-Server's RAG pipeline.",
@@ -1480,6 +1481,7 @@ window.DASHBOARD_DATA = {
     /* PROJECT:bimpossible-tests:START */
     {
       id: "bimpossible-tests",
+      personal: true,
       name: "BIMpossible Tests",
       icon: "check",
       oneLiner: "Personal testing vault (Obsidian) for manually walking through BIMpossible phase/wave smoke tests. Human-executed verification checklist organized per project and phase.",
