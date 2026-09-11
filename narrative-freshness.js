@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-10 06:00:16",
+  "checked": "2026-09-11 06:00:15",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -8,9 +8,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-09-07",
+      "lastActivity": "2026-09-10",
       "newestRecent": "2026-09-02",
-      "lagDays": 5,
+      "lagDays": 8,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -18,9 +18,9 @@ window.NARRATIVE_FRESHNESS = {
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-09-07",
+      "lastActivity": "2026-09-10",
       "newestRecent": "2026-09-01",
-      "lagDays": 6,
+      "lagDays": 9,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -58,9 +58,9 @@ window.NARRATIVE_FRESHNESS = {
     "families": {
       "name": "Families by BIMpossible",
       "status": "active",
-      "lastActivity": "2026-09-06",
+      "lastActivity": "2026-09-10",
       "newestRecent": "2026-08-31",
-      "lagDays": 6,
+      "lagDays": 10,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -88,9 +88,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-09-07",
+      "lastActivity": "2026-09-10",
       "newestRecent": "2026-09-02",
-      "lagDays": 5,
+      "lagDays": 8,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-09-10",
+      "lastActivity": "2026-09-11",
       "newestRecent": "2026-09-02",
-      "lagDays": 8,
+      "lagDays": 9,
       "evaluated": true,
       "stale": false,
       "reason": null
