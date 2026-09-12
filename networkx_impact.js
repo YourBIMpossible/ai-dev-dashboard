@@ -1,19 +1,19 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-09-11T13:00:15Z",
+  "generated": "2026-09-12T13:00:14Z",
   "stats": {
     "repos": 4,
     "tools": 3,
     "algorithms": 6,
-    "totalNodes": 16936,
+    "totalNodes": 17189,
     "missingCount": 0
   },
   "codebase": {
     "graph": {
-      "nodes": 16936,
-      "edges": 40301,
-      "commit": "85e8208b",
-      "commitsBehind": 6,
-      "builtAt": "2026-09-07",
+      "nodes": 17189,
+      "edges": 40693,
+      "commit": "a3d32a92",
+      "commitsBehind": 19,
+      "builtAt": "2026-09-11",
       "stale": false
     },
     "cycles": {
@@ -29,65 +29,57 @@ window.NETWORKX_IMPACT = {
         "label": "aec/router.py",
         "file": "aec/router.py",
         "kind": "file",
-        "degree": 174,
+        "degree": 163,
         "churn": 38,
-        "risk": 75.6
+        "risk": 72.6
       },
       {
         "label": "db/models.py",
         "file": "db/models.py",
         "kind": "file",
-        "degree": 189,
-        "churn": 61,
-        "risk": 59.5
+        "degree": 190,
+        "churn": 62,
+        "risk": 61.6
       },
       {
         "label": "assistant.py",
         "file": "aec/assistant.py",
         "kind": "file",
         "degree": 147,
-        "churn": 35,
-        "risk": 47.1
+        "churn": 36,
+        "risk": 47.2
       },
       {
         "label": "Base",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 84,
-        "churn": 61,
-        "risk": 43.5
+        "churn": 62,
+        "risk": 45.3
       },
       {
         "label": "_serve_pool_schedule()",
         "file": "aec/router.py",
         "kind": "symbol",
-        "degree": 53,
+        "degree": 52,
         "churn": 38,
-        "risk": 31.6
+        "risk": 32.3
       },
       {
         "label": "admin_router.py",
         "file": "admin_router.py",
         "kind": "file",
         "degree": 99,
-        "churn": 16,
-        "risk": 28.7
+        "churn": 17,
+        "risk": 27.7
       },
       {
         "label": "aps/router.py",
         "file": "aps/router.py",
         "kind": "file",
-        "degree": 73,
-        "churn": 20,
-        "risk": 25.7
-      },
-      {
-        "label": "account_router.py",
-        "file": "account_router.py",
-        "kind": "file",
-        "degree": 88,
-        "churn": 15,
-        "risk": 25.1
+        "degree": 72,
+        "churn": 21,
+        "risk": 26.5
       },
       {
         "label": "_by_category()",
@@ -95,31 +87,39 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 34,
         "churn": 38,
-        "risk": 24.8
+        "risk": 25.8
+      },
+      {
+        "label": "account_router.py",
+        "file": "account_router.py",
+        "kind": "file",
+        "degree": 88,
+        "churn": 15,
+        "risk": 24.1
+      },
+      {
+        "label": "_require_auth()",
+        "file": "aec/router.py",
+        "kind": "symbol",
+        "degree": 47,
+        "churn": 38,
+        "risk": 21.0
       },
       {
         "label": "main.py",
         "file": "main.py",
         "kind": "file",
-        "degree": 89,
-        "churn": 32,
-        "risk": 22.7
+        "degree": 83,
+        "churn": 34,
+        "risk": 20.9
       },
       {
         "label": "assistant_tools.py",
         "file": "aec/assistant_tools.py",
         "kind": "file",
         "degree": 60,
-        "churn": 19,
-        "risk": 22.2
-      },
-      {
-        "label": "Firm",
-        "file": "db/models.py",
-        "kind": "symbol",
-        "degree": 189,
-        "churn": 61,
-        "risk": 21.4
+        "churn": 18,
+        "risk": 20.9
       }
     ],
     "baseline": {
@@ -147,7 +147,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "degree \u00d7 90d churn",
       "nodes": 12,
-      "finding": "aec/router.py is the hotspot \u2014 174 dependents, 38 commits in 90d",
+      "finding": "aec/router.py is the hotspot \u2014 163 dependents, 38 commits in 90d",
       "category": "watch"
     },
     {
