@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-11T06:10:03.379806Z",
- "count": 402,
+ "generated_at": "2026-09-12T06:08:59.061202Z",
+ "count": 403,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 10 Sep 2026 21:43:56 GMT",
    "last_status": 200,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": true,
-   "stale_reason": "no new items in 37 days (expects ~7)"
+   "stale_reason": "no new items in 38 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
    "last_item_published": "2026-09-09T09:09:19Z",
-   "last_modified": "Thu, 10 Sep 2026 13:55:41 GMT",
+   "last_modified": "Fri, 11 Sep 2026 07:40:59 GMT",
    "last_status": 200,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-08T19:33:57Z",
    "last_status": 200,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-09-08T10:29:14Z",
    "last_modified": "Tue, 08 Sep 2026 10:32:00 GMT",
    "last_status": 200,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"ed67945a788ec212f30d13f2d2cccd5d\"",
+   "etag": "W/\"75813e737521e9e7bf0dd0c6be6f28f1\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 11 Sep 2026 02:03:00 GMT",
+   "last_modified": "Fri, 11 Sep 2026 09:05:38 GMT",
    "last_status": 200,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"0ff19a8ed890cd786056fa35a3208ed4\"",
+   "etag": "W/\"e2c68931b1ebf19c9b92d44f3d0b3bd1\"",
    "last_item_count": 10,
-   "last_item_published": "2026-09-10T18:33:49Z",
+   "last_item_published": "2026-09-11T20:13:25Z",
    "last_status": 200,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-11T01:12:00Z",
-   "last_modified": "Fri, 11 Sep 2026 02:55:39 GMT",
+   "last_item_published": "2026-09-12T00:47:00Z",
+   "last_modified": "Sat, 12 Sep 2026 05:04:47 GMT",
    "last_status": 200,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 57,
+   "consecutive_failures": 58,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-11T06:10:03.379806Z",
+   "last_failure": "2026-09-12T06:08:59.061202Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "57 consecutive failures: HTTP 403"
+   "stale_reason": "58 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-08T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"2248f987c2b2d7cbde09c97d28fddd25\"",
+   "etag": "W/\"9337a5169736c46c85b210ed5278d120\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,33 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-11T06:10:03.379806Z",
+   "last_success": "2026-09-12T06:08:59.061202Z",
    "stale": false,
    "stale_reason": ""
   }
  },
  "items": [
+  {
+   "title": "Orkestra: An Automation Deployment and Governance Platform",
+   "url": "http://revitaddons.blogspot.com/2026/09/orkestra-automation-deployment-and.html",
+   "source": "revit-addons",
+   "published": "2026-09-12T00:47:00Z",
+   "summary": "Summary A Revit-integrated automation deployment platform for managing, securing, and scaling Dynamo, Grasshopper, and OkPy tools across AEC teams. Overview Orkestra is an AEC automation platform with a dedicated Revit add-in that brings firmwide script and tool deployment directly into the Revit interface. Rather than functioning as a single-purpose modeling utility, Orkestra acts as an automation management layer: it helps teams organize, distribute, document, secure, and run DynamoBIM, Grasshopper, and OkPy tools from a controlled library. Based on current online information, Orkestra is positioned for firms that have already invested in visual programming or custom automation and now need a scalable way to deliver those tools to production users. The Revit add-in is especially relevant for BIM managers, computational designers, design technologists, and application engineers who need to make automation accessible without requiring every user to open, understand, or maintain the underlying scripts. Primary Purpose The primary purpose of Orkestra for Revit is to replace informal script-sharing workflows with a managed automation environment. In many firms, Dynamo graphs and…",
+   "id": "0f40ab1630211b65",
+   "fetched_at": "2026-09-12T06:08:59.061202Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "A deployment platform for Dynamo/Grasshopper; relevant to your tooling ecosystem but not to your C# add-in or API work.",
+    "topics": [
+     "automation-platforms",
+     "dynamo",
+     "deployment"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-12T06:08:59.061202Z"
+   }
+  },
   {
    "title": "Free Eazy Struct: Coordination Accelerator for Concrete-Heavy Architectural/Structural Workflows",
    "url": "http://revitaddons.blogspot.com/2026/09/free-eazy-struct-coordination.html",
