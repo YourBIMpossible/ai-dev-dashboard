@@ -632,7 +632,7 @@ window.DASHBOARD_DATA = {
         "PR #115 Tool 20 Key Plan rebuild (sector-mapping dialog + hardened live Apply, CI green): merge or hold?",
         "Push or discard the 10 local-only feat/link-pdf-source-reuse commits (Features A-D2 of the Link-PDF post-merge roadmap, last 08-24) -- not on origin, and the local NORTHSTAR.link-pdf-roadmap.md still says status: active"
       ],
-      blockers: ["POWER_SYSTEM deletion-list ruling (prep_to_standard.py, decision-log 2026-07-24) - open owner sign-off, but its own decision doc says it blocks nothing else; soft, non-gating."],
+      blockers: [],
       reminders: ["Deploy-Local.ps1 writes to a SHARED %APPDATA% Revit Addins folder — hash-check before deploying, never deploy while Revit is open (the 07-25 forensic audit found this exact guard skipped once)","\"Backed up to origin\" is not \"safe to overwrite at runtime\" — the 07-25 postmortem's core lesson; a clean worktree means committed, not complete","Core.dll co-loads in one Revit process: redeploy ALL add-ins together when Core changes"],
       links: [
         { label: "Runtime slot ledger", path: "F:\\BIMpossible-AddIns\\decision-log\\2026-07-25__runtime-slot-handoff.md" },
