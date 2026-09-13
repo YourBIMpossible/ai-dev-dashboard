@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-13 02:34:43",
+  "checked": "2026-09-13 06:00:15",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -18,9 +18,9 @@ window.NARRATIVE_FRESHNESS = {
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-09-12",
+      "lastActivity": "2026-09-13",
       "newestRecent": "2026-09-01",
-      "lagDays": 11,
+      "lagDays": 12,
       "evaluated": true,
       "stale": false,
       "reason": null

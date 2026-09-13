@@ -625,10 +625,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [0,2,0,0,0,0,3,6,0,0,29,12,2,0],
+      activity: [0,2,0,0,0,0,3,6,0,0,29,12,2,1],
       lastActivity: {
-        date: "2026-09-12",
-        summary: "chore(hygiene): HYG-12 re-sync check-doc-references from canonical + port test suite (AddIns) (#140) (7516d36)"
+        date: "2026-09-13",
+        summary: "fix(sheets): height-aware ordering ahead of panel-schedule row alignment (#142) (bcf5fee)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -1413,10 +1413,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [14,3,16,3,3,3,5,18,3,3,6,3,5,4],
+      activity: [14,3,16,3,3,3,5,18,3,3,6,3,5,5],
       lastActivity: {
         date: "2026-09-13",
-        summary: "WP-D1: wire AI-Server card live snapshot into the refresh (#24) (f14f764)"
+        summary: "dashboard refresh 2026-09-13 02:34 (c2d89b3)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
