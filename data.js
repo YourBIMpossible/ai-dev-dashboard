@@ -17,7 +17,7 @@ window.DASHBOARD_DATA = {
       oneLiner: "Discipline-neutral BIM data platform above Autodesk's tools (reads ACC, custom interface, write-back later).",
       status: "active",
       phase: "main synced with origin (tip #548 8cad22b5, 2026-09-02; local checkout one commit behind at 2cc7bdf8). Audit estate stays closed: the 2026-08-31 weekly full audit was driven to 0 open (17 closures across #514/#518/#522/#523 + AddIns #116, final delivery 2026-09-01). 2026-09-01/02 was the busiest merge window yet (#509-#548, ~40 PRs in two days). New fronts: Phase 4 model routing -- 1A registry/resolver/request builder (#537) + per-kind model defaults (#542) LIVE, 1B usage ledger (#548, migration 3aa734cda334) merged but not yet deployed; Phase 15c pane context -- typed injection-safe Revit context (#517), live-read contracts + broker + tool/response endpoint (#519/#521, inert, flag-off), AUTH-INH ENFORCE keystone + 15c T5 under the shared enforced path (#530); CKA (Phase 18) firm-docs document model on AUTH-INH (#534) + Documents placement/management UI (#540), with the live smoke surfacing and fixing two prod defects (#515 proxy rewrite, #516 volume chown, #520 atomic upload); Phase 13 Write Engine Increment 2 per-type Apply attribution fix (#544, live smoke still owner-gated); Phase 3.6 spatial engine row marked LIVE 2026-09-02. Big CI runtime-reduction push (#531-#543: xdist pilot, vitest 2 workers, semgrep to weekly lane, local semgrep BIM-rules gate #538). Still live from 08-30: Phase 17.0 control plane (#500/#503), P15d supervised local writes (#495/#498), P6 Client-Mgmt F, RESOLVE-BIND-1 (#496), P3.8 slice-2 (#499).",
-      focus: "Audit estate closed (2026-08-31 weekly: 1 High / 6 Medium / 10 Low -> 0 open, final delivery 2026-09-01); no Critical or live-exploitable High anywhere. Active development has fanned out across three assistant-adjacent fronts in the 09-01/02 window: Phase 4 model routing (1A + per-kind defaults LIVE; 1B usage ledger #548 merged, deploy pending), Phase 15c Revit-pane context + live-read broker (#517/#519/#521 inert flag-off, keystone test #530), and CKA firm-docs document model + Documents UI (#534/#540). Phase 13 Write Engine Increment 2 got its per-type attribution fix (#544) and now awaits the owner-gated live smoke. Phase 17.0 control plane (#500/#503) and P15d supervised local writes (#495/#498) unchanged since 08-30. Parallel CI runtime-reduction campaign closed out (#536).",
+      focus: "Audit estate: 09-12 confirmatory run closed every net-new finding inline (905895de/c0bb6995), and separately confirmed the 09-07 DEGRADED run's 12 High findings fully remediated by the 09-11 wave; 4 architecture/reliability items from 09-11 (tenancy-enforcement inconsistency, no URN-keyed hub helper, no persisted write-approval record, failed-provisioning rollback) are tracked open, owner-decision-pending -- not resolvable from a sandbox session. Active development has fanned out across three assistant-adjacent fronts in the 09-01/02 window: Phase 4 model routing (1A + per-kind defaults LIVE; 1B usage ledger #548 merged, deploy pending), Phase 15c Revit-pane context + live-read broker (#517/#519/#521 inert flag-off, keystone test #530), and CKA firm-docs document model + Documents UI (#534/#540). Phase 13 Write Engine Increment 2 got its per-type attribution fix (#544) and now awaits the owner-gated live smoke. Phase 17.0 control plane (#500/#503) and P15d supervised local writes (#495/#498) unchanged since 08-30. Parallel CI runtime-reduction campaign closed out (#536).",
       progress: {
         label: "Program phases",
         phases: [
@@ -335,23 +335,69 @@ window.DASHBOARD_DATA = {
         "2026-08-30 - Phase 15d first local Revit write slice: before/after approval, typed result, revert; writes unblocked past row 500 and on unset parameters (#495, #498)"
       ],
       audit: {
-        lastRun: "2026-08-31",
-        runType: "Weekly full audit 2026-08-31 (evening re-run, all seven lenses + slop fold + breach-chain overlay across BIMpossible, Workspace and AddIns) -- 0 Critical / 1 High / 6 Medium / 10 Low / 16+ Info as originally rated, then driven to a terminal state by the same-evening closeout and the 2026-09-01 final delivery run. Fixed with code + proving tests: RE-01 (High, mis-pick capture no longer claims success on a swallowed log write -- ship-gate A4 counter integrity; AddIns #116), RE-02/RE-04/CQ-03/CQ-05 (AddIns #116), SEC-1 (all 5 membership mutation branches now audited with a server-sourced actor; #514 + #522), ARCH-1 (#518), SEC-CI-LOCAL-1 + SLOP-LOW-1 (push hook fails closed; #522), CQ-1 (live-write confirm seam pinned; #522/#523), FE-2/FE-3/CQ-DOC-1/ARCH-CI-1 (#522, AddIns #116), SLOP-LOW-2 (Workspace c71aa12). Already fixed before the run, label corrected: RE-1/CQ-4 (#514). Accepted, no change: RE-2 (relay close-time swallow). Reconciled as a stale carry-forward: WSR17/SEC-WIZ-HUB-1 (firm-scoped hub check shipped in #397; breach-chain CHAIN-1 retired). Breach-chain overlay: 0/0/0/1 Low (CHAIN-2 unsigned add-in delivery; production code-signing ON HOLD by owner decision, not an open blocker). 0 open.",
+        lastRun: "2026-09-12",
+        runType: "Confirmatory final verification run 2026-09-12 (non-degraded), closing out a three-report arc since 08-31: the 09-07 weekly full audit (RUN DEGRADED -- Track A backend/db/docker parent agent never delivered) surfaced 12 High findings cross-repo (CHAIN-1 unreviewed-merge, HYG-2/3/4 CI-gate blind spots, SLOP-RL-1/2 write-integrity); the 09-11 re-run (non-degraded) confirmed those fully remediated (code #644-650, AddIns #139/140, Workspace #149/150; ledger fully adjudicated 0 open of 92; CHAIN-1 retired 2026-09-10 as a PR-review policy change) and separately surfaced 4 new architecture/reliability findings (ARCH-1A/2A/3A, RE-2A) plus a re-scored breach-chain pair; this 09-12 run then found 6 net-new findings (0C/0H/3M/3L) and resolved every one of them inline via the Auto-Fix Pass (905895de) plus a post-review hardening pass (c0bb6995) -- nothing on a branch, nothing pending merge, zero open net-new findings. The 4 architecture/reliability items from 09-11 remain owner-scoped (not resolvable from a sandbox session) and are carried open below at forced-low severity.",
         cadence: "weekly Sun 11:45pm + incremental Sun/Tue + on-demand",
         counts: {
           critical: 0,
           high: 0,
           medium: 0,
-          low: 0,
+          low: 4,
           info: 0
         },
-        closedLastRun: 17,
-        trend: "improving",
-        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-08-31.md",
-        reportFile: "bimpossible/weekly-full-audit_2026-08-31.md",
+        closedLastRun: 7,
+        trend: "improving -- 7 findings resolved same-day this run (905895de/c0bb6995); the 09-07 DEGRADED run's 12 High findings are separately confirmed fully remediated by the 09-11 re-run. 4 architecture/reliability items surfaced 09-11 are now tracked open for the first time (owner-decision-pending, forced-low; not new regressions)",
+        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\audit-resolution_2026-09-12__confirmatory-run.md",
+        reportFile: "bimpossible/audit-resolution_2026-09-12__confirmatory-run.md",
         ledgerPath: "F:\\BIMpossible-Workspace\\02_Reference\\_audit-runs.md",
-        open: [],
+        open: [
+          {
+            id: "ARCH-1A",
+            severity: "low",
+            title: "two competing tenancy-enforcement idioms coexist across routers -- most routes use declarative dependency injection, a few implement the check by hand; owner architecture decision pending, carried open",
+            source: "weekly-full-audit_2026-09-11.md"
+          },
+          {
+            id: "ARCH-2A",
+            severity: "low",
+            title: "no URN-keyed project-hub resolution helper exists yet -- current resolution path is project-ID-only; owner architecture decision pending, carried open",
+            source: "weekly-full-audit_2026-09-11.md"
+          },
+          {
+            id: "ARCH-3A",
+            severity: "low",
+            title: "write-approval lifecycle has no persisted approval record -- currently implicit; owner architecture decision pending, carried open",
+            source: "weekly-full-audit_2026-09-11.md"
+          },
+          {
+            id: "RE-2A",
+            severity: "low",
+            title: "a failed provisioning attempt marks state but never rolls it back; owner architecture decision pending, carried open",
+            source: "weekly-full-audit_2026-09-11.md"
+          }
+        ],
         history: [
+          {
+            date: "2026-09-12",
+            type: "Confirmatory final verification run (non-degraded) -- resolved every net-new finding inline.",
+            scope: "Full cross-repo re-check (code, Workspace) following the 09-11 remediation wave.",
+            result: "6 net-new (0C/0H/3M/3L) + 1 post-review hardening item, all resolved (905895de Auto-Fix Pass; c0bb6995 post-review hardening). 5 advisory/accepted items (hypothesis or pre-existing, not counted open). 4 architecture/reliability items from 09-11 (ARCH-1A/2A/3A, RE-2A) remain owner-scoped, carried open. Verify-Local-CI green on both receipts; ctxcheck 70/10/0.",
+            report: "audit-resolution_2026-09-12__confirmatory-run.md"
+          },
+          {
+            date: "2026-09-11",
+            type: "Weekly full audit (non-degraded, seven lenses + breach-chain re-score) -- confirmed the 09-07 DEGRADED run's findings fully remediated and surfaced new architecture/reliability findings.",
+            scope: "F:\\BIMpossible, F:\\BIMpossible-Workspace, F:\\BIMpossible-AddIns.",
+            result: "09-07's 12 High findings + carried items: ledger fully adjudicated, 0 open of 92 (code #644-650, AddIns #139/140, Workspace #149/150; CHAIN-1 retired 2026-09-10 as a PR-review policy change, not a code fix). New this run: ARCH-1A/2A/3A, RE-2A (architecture/reliability, owner-decision-pending). Breach chains re-scored against widened evidence: the unsigned-add-in-delivery chain (tracked as CHAIN-2 through 09-07, carried on the addins card) renamed CHAIN-3 as its precondition widened from the owner's own account to any local account; a new CHAIN-2 (relay secret written in plaintext to a machine-wide registry key) was found and fixed the same day.",
+            report: "weekly-full-audit_2026-09-11.md"
+          },
+          {
+            date: "2026-09-07",
+            type: "Weekly full audit -- RUN DEGRADED (Track A's direct-scope parent agent for backend/database/docker never delivered a final report; per standing rule, a lens that did not run produced no evidence, not a pass).",
+            scope: "Tracks B/C, a 7-way Slop lens, and a first 6-sub-lens Hygiene lens all ran to completion across all three repo roots; Track A's direct scope (outside its two nested children) is a permanent gap for this run.",
+            result: "0 Critical / 12 High / 15 Medium / 10 Low / 3 Info across all lenses. Top findings: CHAIN-1 (unreviewed merge onto either repo's main, composed with two CI gate blind spots), HYG-2/3/4 (APS-write-approval and firm-literal/raw-SQL CI gates have blind spots), SLOP-RL-1/2 (AddIns RevitLink write-integrity: discarded commit status, unconditional success dialog). All confirmed fully remediated by the 09-11 re-run.",
+            report: "weekly-full-audit_2026-09-07.md"
+          },
           {
             date: "2026-08-31",
             type: "Weekly full audit (seven lenses + slop fold + breach-chain overlay) -- evening re-run superseding the 08:37 morning pass; closeout the same evening, final delivery 2026-09-01.",
@@ -527,64 +573,7 @@ window.DASHBOARD_DATA = {
             result: "CORE-1 (High): refresh never invalidates the durable category cache → stale sidebar on republish",
             report: "2026-06-10__audit-report-full.md"
           }
-        ],
-        reportDate: "2026-08-31",
-        reconciledAt: "2026-09-02 08:03:55",
-        reconciliationHeads: [
-          {
-            repo: "BIMpossible",
-            head: "2cc7bdf86d",
-            inspected: true
-          },
-          {
-            repo: "BIMpossible-Workspace",
-            head: "6c1f9ead76",
-            inspected: true
-          },
-          {
-            repo: "BIMpossible-AddIns",
-            head: "e0f23bb137",
-            inspected: true
-          }
-        ],
-        rawCounts: {
-          critical: 0,
-          high: 1,
-          medium: 6,
-          low: 10,
-          info: 0
-        },
-        openCounts: {
-          critical: 0,
-          high: 0,
-          medium: 0,
-          low: 0,
-          info: 0
-        },
-        unknownCounts: {
-          critical: 0,
-          high: 0,
-          medium: 0,
-          low: 0,
-          info: 0
-        },
-        resolvedCounts: {
-          critical: 0,
-          high: 1,
-          medium: 6,
-          low: 10,
-          info: 0
-        },
-        publishedCounts: {
-          critical: 0,
-          high: 0,
-          medium: 0,
-          low: 0,
-          info: 0
-        },
-        ingestStatus: "success",
-        ingestDetail: "reconciled against BIMpossible, BIMpossible-Workspace, BIMpossible-AddIns; 10 of 17 closed by implementation-backed finding-ID evidence, 7 open (1 insufficient-evidence citation(s) rejected); the 7 the git rule could not prove were verified by hand against merged diffs (AddIns #116 ba4c3fa, BIMpossible #518 a6bf06c4, Workspace c71aa12) and the report's own 2026-09-01 closeout rows; RE-2 (relay close-time swallow) is accepted-as-designed, not counted as a closure",
-        unknown: []
+        ]
       },
       waves: {
         updated: "2026-09-07",
@@ -659,8 +648,8 @@ window.DASHBOARD_DATA = {
         "2026-08-30 - #110 Key Plan (Tool 20): composite resolver, dry-run preview, freeze fix"
       ],
       audit: {
-        lastRun: "2026-08-31",
-        runType: "2026-08-31 unattended weekly full audit (Workspace-hosted, cross-repo: BIMpossible + Workspace + AddIns; seven lenses + slop fold + breach-chain overlay; evening re-run superseding the morning pass that had passed AddIns as clean on a depth artifact). AddIns findings: RE-01 High (RecordMispickCommand reported Recorded/Succeeded while SetupRunLog.Emit swallowed the write -- under-counts ship-gate A4), RE-02 Medium (unlocked cross-process RMW on setup_prefill_deltas.json), CHAIN-2 Medium (unsigned add-in assemblies in user-writable load path), CQ-03 / CQ-05 / RE-04 / ARCH-CI-1 Low, RE-2(relay) Low. Closure PR #116 merged 2026-09-01 (ba4c3fa) closed 6 (RE-01, RE-02, RE-04, CQ-03, CQ-05, ARCH-CI-1): TryEmit + Result.Failed, named Mutex re-read, AtomicFileIo temp+Replace swap, per-placeholder try/catch, MispickAlreadyRecorded duplicate guard, signtool verify + SHA256SUMS manifest + signing runbook, innosetup pinned 6.7.1; 2048/2048 tests, Verify-AddIns-CI -Full/-IncludeSecurityLane/-IncludeInstaller green. 2 Low carried open: RE-2(relay) accepted-as-designed (pipe.close() swallow, close-time only) and CHAIN-2 (signtool verify + manifest + runbook shipped in #116, but the Authenticode certificate purchase is owner-only and production code-signing is ON HOLD by owner decision). No AddIns-local scored /audit report in audits/ since 2026-07-12; the newest AddIns-local artifacts remain the 08-22 Link-PDF phase-0 review and E020 drawing-area probe (narrative, unscored).",
+        lastRun: "2026-09-11",
+        runType: "2026-08-31 unattended weekly full audit (Workspace-hosted, cross-repo: BIMpossible + Workspace + AddIns; seven lenses + slop fold + breach-chain overlay; evening re-run superseding the morning pass that had passed AddIns as clean on a depth artifact). AddIns findings: RE-01 High (RecordMispickCommand reported Recorded/Succeeded while SetupRunLog.Emit swallowed the write -- under-counts ship-gate A4), RE-02 Medium (unlocked cross-process RMW on setup_prefill_deltas.json), a breach chain (unsigned add-in assemblies in a user-writable load path) Medium, CQ-03 / CQ-05 / RE-04 / ARCH-CI-1 Low, RE-2(relay) Low. Closure PR #116 merged 2026-09-01 (ba4c3fa) closed 6 (RE-01, RE-02, RE-04, CQ-03, CQ-05, ARCH-CI-1): TryEmit + Result.Failed, named Mutex re-read, AtomicFileIo temp+Replace swap, per-placeholder try/catch, MispickAlreadyRecorded duplicate guard, signtool verify + SHA256SUMS manifest + signing runbook, innosetup pinned 6.7.1; 2048/2048 tests, Verify-AddIns-CI -Full/-IncludeSecurityLane/-IncludeInstaller green. 2 Low carried open: RE-2(relay) accepted-as-designed (pipe.close() swallow, close-time only) and the unsigned-add-in breach chain (signtool verify + manifest + runbook shipped in #116, but the Authenticode certificate purchase is owner-only and production code-signing is ON HOLD by owner decision). The 2026-09-11 breach-chain re-score (evidence widened from the owner's own account to any local account with write access to the machine-wide add-in directory) renumbered this chain from CHAIN-2 to CHAIN-3 -- disposition and owner-gating unchanged, ID only. No AddIns-local scored /audit report in audits/ since 2026-07-12; the newest AddIns-local artifacts remain the 08-22 Link-PDF phase-0 review and E020 drawing-area probe (narrative, unscored).",
         cadence: "weekly (unattended bimpossible-weekly-full-audit, cross-repo) + on-demand /revit-functionality-audit",
         counts: {
           critical: 0,
@@ -669,10 +658,10 @@ window.DASHBOARD_DATA = {
           low: 2,
           info: 0
         },
-        closedLastRun: 6,
-        trend: "08-31 weekly audit surfaced 1 High + 1 Medium + 5 Low + 1 breach-chain Low in AddIns after the 07-14 estate had reached 0; 6 closed by PR #116 (ba4c3fa, 2026-09-01); 2 Low carried open (RE-2 relay accepted-as-designed, CHAIN-2 code-signing on hold). Full AddIns-local re-audit still owed since 2026-07-12",
-        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-08-31.md",
-        reportFile: "bimpossible/weekly-full-audit_2026-08-31.md",
+        closedLastRun: 0,
+        trend: "stable -- no new AddIns-scoped findings or closures since 08-31/PR #116; the 09-11 cross-repo audit re-scored the unsigned-add-in breach chain against widened evidence (any local account, not just the owner's) and renumbered it CHAIN-2 -> CHAIN-3, but its disposition (owner-gated code-signing) is unchanged",
+        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-09-11.md",
+        reportFile: "bimpossible/weekly-full-audit_2026-09-11.md",
         ledgerPath: "F:\\BIMpossible-AddIns\\audits",
         open: [
           {
@@ -682,13 +671,20 @@ window.DASHBOARD_DATA = {
             source: "weekly-full-audit_2026-08-31.md"
           },
           {
-            id: "CHAIN-2",
+            id: "CHAIN-3",
             severity: "low",
-            title: "unsigned add-in delivery -- #116 added signtool verify + SHA256SUMS manifest + signing runbook; Authenticode certificate purchase is owner-only and production code-signing is ON HOLD by owner decision, carried open",
-            source: "breach-chains_2026-08-31.md"
+            title: "unsigned add-in in a machine-wide, user-writable directory allows in-process inheritance of a live Revit session's tokens -- #116 added signtool verify + SHA256SUMS manifest + signing runbook; removing the directory's non-admin write access and the Authenticode certificate purchase are both owner-only, carried open. Renumbered from CHAIN-2 on 2026-09-11 as evidence widened (any local account, not just the owner's own).",
+            source: "breach-chains_2026-09-11.md"
           }
         ],
         history: [
+          {
+            date: "2026-09-11",
+            type: "Cross-repo weekly full audit -- breach-chain re-score only, no new AddIns findings.",
+            scope: "Breach-chain overlay re-run against widened evidence (44 manifest dirs + 11 third-party assembly dirs confirmed BUILTIN\\Users:Write, inherited).",
+            result: "The unsigned-add-in-delivery chain's precondition widened from the owner's own account to any local account; renumbered CHAIN-2 -> CHAIN-3 (a new, unrelated CHAIN-2 -- a relay-secret registry finding -- was introduced this run and tracked/fixed on the bimpossible card, not this one). Disposition unchanged: owner-gated (ACL removal + code-signing).",
+            report: "breach-chains_2026-09-11.md"
+          },
           {
             date: "2026-09-01",
             type: "Closure -- PR #116 (ba4c3fa) closed RE-01, RE-02, RE-04, CQ-03, CQ-05, ARCH-CI-1 from the 2026-08-31 weekly audit; CHAIN-2 hardened (signtool verify + manifest + runbook) but carried open pending the owner-only certificate.",
@@ -773,54 +769,7 @@ window.DASHBOARD_DATA = {
             result: "9 findings closed in remediation — CSV-injection guards ×7, culture-invariant formatting, rolling log",
             report: "2026-06-09__perp-audit.md"
           }
-        ],
-        reportDate: "2026-08-31",
-        reconciledAt: "2026-09-02 09:07:50",
-        reconciliationHeads: [
-          {
-            repo: "BIMpossible-AddIns",
-            head: "e0f23bb137",
-            inspected: true
-          }
-        ],
-        rawCounts: {
-          critical: 0,
-          high: 1,
-          medium: 1,
-          low: 6,
-          info: 0
-        },
-        openCounts: {
-          critical: 0,
-          high: 0,
-          medium: 0,
-          low: 2,
-          info: 0
-        },
-        unknownCounts: {
-          critical: 0,
-          high: 0,
-          medium: 0,
-          low: 0,
-          info: 0
-        },
-        resolvedCounts: {
-          critical: 0,
-          high: 1,
-          medium: 1,
-          low: 4,
-          info: 0
-        },
-        publishedCounts: {
-          critical: 0,
-          high: 0,
-          medium: 0,
-          low: 2,
-          info: 0
-        },
-        ingestStatus: "success",
-        ingestDetail: "reconciled against BIMpossible-AddIns; 0 of 8 closed by implementation-backed finding-ID evidence, 8 open (0 insufficient-evidence citation(s) rejected); AddIns-scoped subset of the cross-repo 2026-08-31 weekly audit; closures the git rule could not prove were verified by hand against merged PR #116 ba4c3fa (2026-09-01)",
-        unknown: []
+        ]
       }
     },
     /* PROJECT:addins:END */
@@ -867,8 +816,8 @@ window.DASHBOARD_DATA = {
         "2026-08-25 - Close 2026-07-10 audit residuals (CONTACT-RL, TURNSTILE-HOST, CSP-STYLE) + restore nav/theme contrast"
       ],
       audit: {
-        lastRun: "2026-08-31",
-        runType: "Weekly slop-audit (first full pass over site/: silent-catch census, counter-integrity, tested-but-dead). 1 MEDIUM (contact form trusted HTTP 200 without reading Web3Forms' success:false body) -- fixed same day in 1dbbd72 with 7 regression tests (27/27). All 13 findings from the 2026-07-10 full code audit remain closed.",
+        lastRun: "2026-09-07",
+        runType: "Weekly slop-audit -- second pass over site/ (contact.ts + its test file only). Zero Critical/High/Medium findings. One LOW (HYPOTHESIS): providerRejection treats a malformed/truncated provider response body as delivered rather than failed -- an intentional documented tradeoff (plain-text webhook acks are legitimately non-JSON), not a confirmed defect; the report itself says to dismiss it if once-per-day-scope behavior is acceptable. The 08-31 MEDIUM-1 fix (1dbbd72) reconfirmed holding by 6 dedicated tests; npm test 27/27.",
         cadence: "weekly slop-audit (scheduled) + full code audit on demand",
         counts: {
           critical: 0,
@@ -878,13 +827,13 @@ window.DASHBOARD_DATA = {
           info: 0
         },
         trend: "stable",
-        reportPath: "F:\\BIMpossible-Site\\audits\\2026-08-31__slop-audit.md",
-        reportFile: "site/2026-08-31__slop-audit.md",
+        reportPath: "F:\\BIMpossible-Site\\audits\\2026-09-07__slop-audit.md",
+        reportFile: "site/2026-09-07__slop-audit.md",
         ledgerPath: "F:\\BIMpossible-Site\\audits",
-        closedLastRun: 1,
+        closedLastRun: 0,
         open: [],
-        reportDate: "2026-08-31",
-        reconciledAt: "2026-09-02 09:07:50",
+        reportDate: "2026-09-07",
+        reconciledAt: "2026-09-13 11:49:14",
         reconciliationHeads: [
           {
             repo: "site",
@@ -895,8 +844,8 @@ window.DASHBOARD_DATA = {
         rawCounts: {
           critical: 0,
           high: 0,
-          medium: 1,
-          low: 0,
+          medium: 0,
+          low: 1,
           info: 0
         },
         openCounts: {
@@ -916,7 +865,7 @@ window.DASHBOARD_DATA = {
         resolvedCounts: {
           critical: 0,
           high: 0,
-          medium: 1,
+          medium: 0,
           low: 0,
           info: 0
         },
@@ -928,9 +877,16 @@ window.DASHBOARD_DATA = {
           info: 0
         },
         ingestStatus: "success",
-        ingestDetail: "reconciled against site; 1 of 1 closed by implementation-backed finding-ID evidence, 0 open (0 insufficient-evidence citation(s) rejected)",
+        ingestDetail: "reconciled against site; LOW-1 is a documented HYPOTHESIS-status tradeoff (not a confirmed defect, no fix required per the report's own dismissal criterion) -- not counted resolved or open. 0 open.",
         unknown: [],
         history: [
+          {
+            date: "2026-09-07",
+            type: "Weekly slop-audit -- second scheduled pass, scoped to the 2 files touched since 08-31.",
+            scope: "site/functions/api/contact.ts, site/tests/contact.test.mjs.",
+            result: "0C/0H/0M. 1 LOW (LOW-1, HYPOTHESIS): providerRejection may treat a malformed/truncated provider body as delivered -- documented tradeoff, dismissable if once-per-day scope is acceptable. 08-31 MEDIUM-1 fix reconfirmed holding. npm test 27/27.",
+            report: "2026-09-07__slop-audit.md"
+          },
           {
             date: "2026-08-31",
             type: "Weekly slop-audit -- first scheduled pass over site/.",
@@ -1068,14 +1024,21 @@ window.DASHBOARD_DATA = {
         "2026-08-22 - chore(paths): batch B5 + final-root cutover, anchor to F:\\BIMpossible* (#9)"
       ],
       audit: {
-        lastRun: "2026-08-31",
-        runType: "Weekly slop-audit (second pass; first was 2026-08-24). 1 LOW (LOW-1: a broken interpreter made the fail-open evidence hook indistinguishable from a working one) -- fixed by PR #12 9e0a23d (once-per-day stderr notice, still fail-open, 10 tests). The report's 'pin an absolute interpreter path' suggestion was deliberately declined as machine-specific.",
+        lastRun: "2026-09-07",
+        runType: "Weekly slop-audit -- scoped to the one commit (9e0a23d, fix#12 evidence-hook visibility) touching audited files since 08-31. Zero Critical/High/Medium findings. One LOW (HYPOTHESIS): the stderr degraded-notice throttle is per-repo-per-UTC-day, so only the first session of a day sees it -- an intentional documented tradeoff (the docstring justifies once-per-day to avoid spam from a month-long outage), not a confirmed defect; the report says to dismiss it if once-per-day is acceptable. No REAL (swallows-a-real-failure) sites found; fail-open posture intact.",
         cadence: "weekly slop-audit (scheduled)",
         trend: "stable",
-        reportPath: "F:\\BIMpossible-Families\\audits\\2026-08-31__slop-audit.md",
-        reportFile: "families/2026-08-31__slop-audit.md",
+        reportPath: "F:\\BIMpossible-Families\\audits\\2026-09-07__slop-audit.md",
+        reportFile: "families/2026-09-07__slop-audit.md",
         ledgerPath: "F:\\BIMpossible-Families\\audits",
         history: [
+          {
+            date: "2026-09-07",
+            type: "Weekly slop-audit -- scoped to the single commit touching audited files since 08-31.",
+            scope: ".claude/scripts/evidence_hook.py, tool/tests/test_evidence_hook.py (commit 9e0a23d only).",
+            result: "0C/0H/0M. 1 LOW (LOW-1, HYPOTHESIS): degraded-notice throttle is per-repo-per-UTC-day, not per-session -- documented tradeoff, dismissable if once-per-day is acceptable. No REAL swallow sites found.",
+            report: "2026-09-07__slop-audit.md"
+          },
           {
             date: "2026-08-31",
             type: "Weekly slop-audit (published by PR #13).",
@@ -1091,12 +1054,12 @@ window.DASHBOARD_DATA = {
             report: "2026-08-24__slop-audit.md"
           }
         ],
-        reportDate: "2026-08-31",
-        reconciledAt: "2026-09-02 09:15:55",
+        reportDate: "2026-09-07",
+        reconciledAt: "2026-09-13 11:49:14",
         reconciliationHeads: [
           {
             repo: "BIMpossible-Families",
-            head: "7d56ecbdc5",
+            head: "6f39c1cf03",
             inspected: true
           }
         ],
@@ -1125,7 +1088,7 @@ window.DASHBOARD_DATA = {
           critical: 0,
           high: 0,
           medium: 0,
-          low: 1,
+          low: 0,
           info: 0
         },
         publishedCounts: {
@@ -1136,7 +1099,7 @@ window.DASHBOARD_DATA = {
           info: 0
         },
         ingestStatus: "success",
-        ingestDetail: "reconciled against BIMpossible-Families; 1 of 1 closed by implementation-backed finding-ID evidence, 0 open (1 insufficient-evidence citation(s) rejected)",
+        ingestDetail: "reconciled against BIMpossible-Families; LOW-1 is a documented HYPOTHESIS-status tradeoff (not a confirmed defect, no fix required per the report's own dismissal criterion) -- not counted resolved or open. 0 open.",
         counts: {
           critical: 0,
           high: 0,
@@ -1144,7 +1107,7 @@ window.DASHBOARD_DATA = {
           low: 0,
           info: 0
         },
-        closedLastRun: 1,
+        closedLastRun: 0,
         open: [],
         unknown: []
       },
