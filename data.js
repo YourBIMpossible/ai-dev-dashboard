@@ -1181,7 +1181,7 @@ window.DASHBOARD_DATA = {
           {
             name: "PDF pickup checker (merged, ship-gate unmet)",
             pct: 60,
-            note: "Automates \"did every redline get addressed\" QA on reissued drawing sets -- compares only markup-anchored regions (not full-sheet diffing), and only ever claims a region changed/unchanged, never that a redline was \"addressed\" (a human judgment) -- enforced structurally via a MaxClaim field. M1 detection core: 14/14 planned tasks built, 67/67 tests pass, CLI works end-to-end. MERGED to main via PR #13 (2026-09-07). BUT the spec's own ship gate (4/4 golden-set gates on real labeled data, §13) is still unmet -- golden_set/ holds only a README, 3/4 gates report \"no data.\""
+            note: "Automates \"did every redline get addressed\" QA on reissued drawing sets -- compares only markup-anchored regions (not full-sheet diffing), and only ever claims a region changed/unchanged, never that a redline was \"addressed\" (a human judgment) -- enforced structurally via a MaxClaim field. M1 detection core: 14/14 planned tasks built, 67/67 tests pass, CLI works end-to-end. MERGED to main via PR #13 (2026-09-07). BUT the spec's own ship gate (4/4 golden-set gates on real labeled data, Â§13) is still unmet -- golden_set/ holds only a README, 3/4 gates report \"no data.\""
           },
           {
             name: "3090 box relocation",
@@ -1192,6 +1192,11 @@ window.DASHBOARD_DATA = {
             name: "WP-E/G Ops, advanced",
             pct: 20,
             note: "advanced/ still absent on main; no Caddy / Tailscale-as-service / docker healthcheck running as a service yet (compose healthcheck fixed, Tailscale install step added). The worktree-harness agent loop is now MERGED (PR #12, 2026-09-07). WP-G's local-coding-agent landed earlier (07-25): opencode wired to this box's Ollama endpoint, verified end-to-end on qwen3-coder:30b-a3b. Standalone tool (host/model hard-coded, not .env-driven); manual start/stop, no autostart -- owes a rework onto the INFERENCE_* contract."
+          },
+          {
+            name: "AI-Server UI",
+            pct: 0,
+            note: "No dedicated status widget yet -- only this generic phase-progress row exists. Needs an aiserver.js panel + card in index.html, sourced via data.js per REFRESH-SPEC.md's pattern, backed by the already-merged F:\\AI-Server\\scripts\\aiserver_status.py (PR #5, a7c8724). Endpoint up/down, loaded models, last digest/rollup/drift summaries. Confirmed 2026-09-13: no work in flight."
           }
         ]
       },
