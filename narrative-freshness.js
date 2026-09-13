@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-13 01:18:39",
+  "checked": "2026-09-13 02:34:43",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -78,12 +78,12 @@ window.NARRATIVE_FRESHNESS = {
     "ai-brain-data": {
       "name": "AI Brain Data",
       "status": "active",
-      "lastActivity": "2026-08-22",
+      "lastActivity": "2026-09-13",
       "newestRecent": "2026-08-23",
-      "lagDays": -1,
+      "lagDays": 21,
       "evaluated": true,
-      "stale": false,
-      "reason": null
+      "stale": true,
+      "reason": "git activity (2026-09-13) is 21 days ahead of the newest recent[] entry (2026-08-23)"
     },
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
