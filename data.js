@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [31,59,62,19,3,36,8,50,28,0,0,6,39,13],
+      activity: [31,59,62,19,3,36,8,50,28,0,0,6,39,43],
       lastActivity: {
         date: "2026-09-12",
-        summary: "fix(docker): mount the sessions volume on backend-migrate so SEC-5A :ro boots (#648) (e2f6567)"
+        summary: "feat(sharing): fail closed on cross-firm sharing ON + proxy OFF (R18-PROXY-MODE-FAIL-CLOSED) (#655) (9c50c19)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -625,10 +625,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [3,0,2,0,0,0,0,3,6,0,0,29,12,1],
+      activity: [3,0,2,0,0,0,0,3,6,0,0,29,12,2],
       lastActivity: {
         date: "2026-09-12",
-        summary: "fix(audit): WFA 2026-09-11 AddIns remediation - SEC-1C, CQ-1C..4C, ARCH-1C/2C/6C, SLOP RL/KP/TRD (#139) (6ada9a5)"
+        summary: "chore(hygiene): HYG-12 re-sync check-doc-references from canonical + port test suite (AddIns) (#140) (7516d36)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -1173,10 +1173,10 @@ window.DASHBOARD_DATA = {
           { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,29,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,29,0,0,1,6,2],
       lastActivity: {
-        date: "2026-09-07",
-        summary: "Merge pull request #14 from YourBIMpossible/chore/gitignore-claude-worktrees (02c2856)"
+        date: "2026-09-12",
+        summary: "Merge pull request #15 from YourBIMpossible/claude/linux-installation-setup-017d5a (d7e5140)"
       },
       branch: "main at f37d165",
       nextActions: [
@@ -1310,10 +1310,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [15,49,37,8,2,15,4,19,26,0,0,3,16,7],
+      activity: [15,49,37,8,2,15,4,19,26,0,0,3,16,25],
       lastActivity: {
         date: "2026-09-12",
-        summary: "docs(audit): close WFA 2026-09-11 lanes L0-L5 in ledger + Checklist (WSR39-63) (80468a8)"
+        summary: "docs(audit): nl-filter monitor review hardening + closure (addenda 4-5) (f4f9fb2)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1367,10 +1367,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [17,14,3,16,3,3,3,5,18,3,3,6,3,1],
+      activity: [17,14,3,16,3,3,3,5,18,3,3,6,3,2],
       lastActivity: {
         date: "2026-09-12",
-        summary: "chore: live billing sync 2026-09-12 (4bb1f16)"
+        summary: "dashboard refresh 2026-09-12 06:00 (263142c)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,

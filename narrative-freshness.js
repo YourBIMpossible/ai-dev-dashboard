@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-12 06:00:15",
+  "checked": "2026-09-12 19:49:17",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -68,12 +68,12 @@ window.NARRATIVE_FRESHNESS = {
     "aiserver": {
       "name": "AI-Server",
       "status": "active",
-      "lastActivity": "2026-09-07",
+      "lastActivity": "2026-09-12",
       "newestRecent": "2026-08-22",
-      "lagDays": 16,
+      "lagDays": 21,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-09-07) is 16 days ahead of the newest recent[] entry (2026-08-22)"
+      "reason": "git activity (2026-09-12) is 21 days ahead of the newest recent[] entry (2026-08-22)"
     },
     "ai-brain-data": {
       "name": "AI Brain Data",
