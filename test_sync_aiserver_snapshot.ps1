@@ -130,6 +130,36 @@ try {
     [System.IO.File]::WriteAllText($noBlock, 'window.DATA = {};')
     $r = Sync-AiServerSnapshot -DataPath $noBlock -StatusJson $upNoJobs -SnapshotHHMM '14:00'
     Assert-True ((-not $r.ok) -and $r.reason -match 'block not found') 'missing block: reported, not thrown'
+
+    # 8. Key match must anchor to the field, not a substring: a lastActivity.summary that
+    #    contains the literal "recent:" must not steer the endpoint line into reminders[].
+    $trap = $fixture -replace 'summary: "Merge pull request #18 \(6f9bad0\)"', 'summary: "box migration, most recent: done"'
+    [System.IO.File]::WriteAllText($data, $trap)
+    $r = Sync-AiServerSnapshot -DataPath $data -StatusJson $upNoJobs -SnapshotHHMM '15:00'
+    $t = [System.IO.File]::ReadAllText($data)
+    $remBody = ([regex]::Match($t, '(?s)reminders:\s*\[(.*?)\]')).Groups[1].Value
+    Assert-True ($t -match 'Endpoint up') 'anchored-key: endpoint line was written'
+    Assert-True ($remBody -notmatch 'Endpoint') 'anchored-key: endpoint line landed in recent[], not reminders[]'
+
+    # 9. Malformed job.modified must be skipped, not throw (call site has no try): the good
+    #    endpoint line still lands, lastActivity is left intact, and the step stays ok=true.
+    [System.IO.File]::WriteAllText($data, $fixture)
+    $badMod = '{ "endpoint": { "up": true, "models_available": ["a"], "models_loaded": ["m"], "models_loaded_supported": true }, "jobs": { "daily-digest": { "file": "x.md", "modified": "2026", "summary": "Half date" }, "weekly-rollup": null, "decision-drift": null } }'
+    $r = Sync-AiServerSnapshot -DataPath $data -StatusJson $badMod -SnapshotHHMM '15:30'
+    $t = [System.IO.File]::ReadAllText($data)
+    Assert-True ($r.ok) 'bad-modified: ok=true (job skipped, not thrown)'
+    Assert-True ($t -match 'Endpoint up' -and $t -notmatch 'Half date') 'bad-modified: endpoint line kept, malformed job dropped'
+    Assert-True ($t -match 'summary: "Merge pull request #18 \(6f9bad0\)"') 'bad-modified: lastActivity untouched (no valid job)'
+
+    # 10. Structurally-drifted JSON with no endpoint key must degrade (ok=false, reminder,
+    #     previous data kept) rather than masquerade as a down endpoint.
+    [System.IO.File]::WriteAllText($data, $fixture)
+    $noEp = '{ "jobs": { "daily-digest": null, "weekly-rollup": null, "decision-drift": null } }'
+    $r = Sync-AiServerSnapshot -DataPath $data -StatusJson $noEp -SnapshotHHMM '16:00'
+    $t = [System.IO.File]::ReadAllText($data)
+    Assert-True (-not $r.ok) 'no-endpoint: ok=false (degrades, not false-down)'
+    Assert-True ($t -notmatch 'Endpoint down' -and $t -match '"inference endpoint unreachable at refresh \(16:00\)"') 'no-endpoint: reminder added, no bogus down line'
+    Assert-True ($t -match '"2026-09-12 - Box powered on"') 'no-endpoint: previous recent kept'
 } finally {
     Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue
 }

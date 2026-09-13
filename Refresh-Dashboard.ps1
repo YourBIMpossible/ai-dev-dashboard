@@ -357,7 +357,17 @@ function Sync-AiServerSnapshot {
     $DASH = [char]0x2014   # em dash, matches "Digest <date> — <summary>"
 
     # --- local helpers (kept inside so the AST-lifted function stays self-contained) ---
-    $esc = { param([string]$s) '"' + (($s -replace '\\', '\\\\') -replace '"', '\"') + '"' }
+    $esc = {
+        param([string]$s)
+        # A safe JS string literal: escape the backslash first, then the quote, then the
+        # line/tab terminators (a raw newline or U+2028/U+2029 is a hard syntax error inside
+        # a JS string and would make the whole data.js fail to parse). Inputs are single-line
+        # today (model ids, stripped headings), so this is defence against a future source.
+        $e = ($s -replace '\\', '\\\\') -replace '"', '\"'
+        $e = (($e -replace "`r", '\r') -replace "`n", '\n') -replace "`t", '\t'
+        $e = ($e -replace ([char]0x2028), ' ') -replace ([char]0x2029), ' '
+        '"' + $e + '"'
+    }
     # Inner bounds of the JS array whose '[' is at $Open, tracking string state and bracket
     # depth so a ']' or ',' inside a string literal never ends it early.
     $arrayBounds = {
@@ -403,9 +413,18 @@ function Sync-AiServerSnapshot {
     }
 
     # --- parse the helper output ---
+    # Wrapped so ANY unexpected shape throws into a clean degrade rather than out of the
+    # refresh loop: the call site (step 1i) is not inside a try, so an uncaught throw here
+    # would abort the whole refresh - the exact opposite of spec rule 6.
+    try {
     $failed = $true; $st = $null
     if ($StatusJson -and $StatusJson.Trim()) {
-        try { $st = $StatusJson | ConvertFrom-Json; $failed = ($null -eq $st) } catch { $failed = $true }
+        try {
+            $st = $StatusJson | ConvertFrom-Json
+            # No object, or output missing the endpoint contract, is a helper/structural
+            # failure: degrade and keep previous data, don't masquerade as a "down" endpoint.
+            $failed = ($null -eq $st) -or ($null -eq $st.endpoint)
+        } catch { $failed = $true }
     }
 
     $recentInject = @()   # quoted JS strings to prepend: job lines first, then the endpoint line
@@ -417,7 +436,7 @@ function Sync-AiServerSnapshot {
         $newestMod = $null
         foreach ($jn in $jobLabels.Keys) {
             $j = $st.jobs.$jn
-            if ($null -ne $j -and $j.modified) {
+            if ($null -ne $j -and ([string]$j.modified) -match '^\d{4}-\d{2}-\d{2}') {
                 $date = ([string]$j.modified).Substring(0, 10)
                 $summary = [string]$j.summary
                 $recentInject += (& $esc "$($jobLabels[$jn]) $date $DASH $summary")
@@ -448,9 +467,12 @@ function Sync-AiServerSnapshot {
     $orig = $block
 
     # reminders[]: strip any prior unreachable line, then re-add on helper failure OR endpoint down.
-    $remIdx = $block.IndexOf('reminders:')
-    if ($remIdx -ge 0) {
-        $b = & $arrayBounds $block ($block.IndexOf('[', $remIdx))
+    # Anchor the key to line-start+indent, not a bare IndexOf: lastActivity.summary (which
+    # precedes both arrays and is overwritten from a job heading) could otherwise contain the
+    # literal "recent:"/"reminders:" and steer the splice into the wrong array.
+    $remKey = [regex]::Match($block, '(?m)^[ \t]*reminders:\s*\[')
+    if ($remKey.Success) {
+        $b = & $arrayBounds $block ($block.IndexOf('[', $remKey.Index))
         if ($b) {
             $items = @(& $split $block.Substring($b.Start, $b.End - $b.Start) |
                 Where-Object { $_ -notmatch '^"inference endpoint unreachable at refresh' })
@@ -461,9 +483,9 @@ function Sync-AiServerSnapshot {
 
     # recent[] + lastActivity: only when the helper ran (a failure keeps previous data intact).
     if (-not $failed) {
-        $recIdx = $block.IndexOf('recent:')
-        if ($recIdx -ge 0) {
-            $b = & $arrayBounds $block ($block.IndexOf('[', $recIdx))
+        $recKey = [regex]::Match($block, '(?m)^[ \t]*recent:\s*\[')
+        if ($recKey.Success) {
+            $b = & $arrayBounds $block ($block.IndexOf('[', $recKey.Index))
             if ($b) {
                 # Strip prior snapshot-generated lines so re-runs (and the daily rebase onto
                 # origin, which already carries yesterday's lines) don't accumulate them.
@@ -489,6 +511,12 @@ function Sync-AiServerSnapshot {
               elseif ($downReminder) { "endpoint DOWN - snapshot line + reminder written" }
               else { "endpoint up - snapshot written ($($recentInject.Count) recent line(s))" }
     return @{ ok = (-not $failed); reason = $reason }
+    } catch {
+        # Never let a snapshot problem throw out of the refresh loop: no write has committed
+        # on this path (the single WriteAllText is the last statement), so previous card data
+        # stands; ok=$false makes step 1i count it toward $degraded.
+        return @{ ok = $false; reason = "snapshot error - previous data kept: $($_.Exception.Message)" }
+    }
 }
 
 $python = (Get-Command python -ErrorAction SilentlyContinue).Source
