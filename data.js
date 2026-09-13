@@ -1155,22 +1155,68 @@ window.DASHBOARD_DATA = {
       id: "aiserver",
       name: "AI-Server",
       icon: "cube",
-      oneLiner: "Portable, fully-local LLM inference + automation platform. Dev on the RTX 5080 now; relocates to a dedicated RTX 3090 box by one .env line (OLLAMA_HOST).",
+      oneLiner: "Portable, headless, always-on OpenAI-compatible local inference endpoint (clients know only INFERENCE_BASE_URL/API_KEY/MODEL) -- runner chosen by evidence, not inertia. Dedicated RTX 3090 box powered on; relocation off the RTX 5080 rides one env contract.",
       status: "active",
-      phase: "Platform build past scaffold: Waves 1-3 landed (WP-A core lib, WP-B RAG/sqlite-vec, WP-C automation suite, WP-D1 status helper, WP-F eval harness; PRs #1-#9). Repo live + private (YourBIMpossible/AI-Server); main at 6ff31ad (2026-08-22), config/docs-only since June. Two unmerged local worktree branches hold real code: worktree-pickup-checker (13 commits, 2026-07-26, PDF pickup checker M1 built as a standalone package) and worktree-harness (10 commits, 2026-07-12, on-demand tool-using agent loop). Neither pushed. Dev on the RTX 5080; WP-E serving/ops + WP-G advanced deferred to the 3090-box relocation.",
-      focus: "PDF pickup checker M1 is BUILT on local branch worktree-pickup-checker (13 commits 2026-07-26: data model, rotation-canonical coords, markup extraction x3 modes, region compare, verdict scoring, gate evaluator, CLI, golden-set dashboard) -- unpushed, unmerged, no PR. Golden set is empty (README only). RAG source roots repointed at F:\\BIMpossible-Workspace.",
+      phase: "Reframed + relocating. North star LOCKED 2026-09-11: the mission is one measurable, headless, always-on OpenAI-compatible local endpoint -- not the June RAG-for-customers framing (owner ruled 2026-07-27 that local models won't land with clients). Client contract decoupled from Ollama (INFERENCE_BASE_URL/API_KEY/MODEL, 156a0a7); the runner is now an open bakeoff (WP-H: Ollama vs llama.cpp, vLLM excluded on Ampere). Waves 1-3 shipped (WP-A..F, PRs #1-#9). The two long-unmerged local branches are now IN: worktree-harness (PR #12) and worktree-pickup-checker (PR #13) both merged to main 2026-09-07. 3090 box powered on for the first time (2026-09-10), OS install imminent -- headless Ubuntu chosen; Ubuntu install-USB writer + Tailscale setup + compose healthcheck fix shipped. main at d7e5140 (2026-09-12).",
+      focus: "Standing up the dedicated 3090 box: powered on, OS install imminent, headless Ubuntu chosen. Ubuntu install-USB writer/verifier (scripts/make-install-usb.ps1) + a Tailscale box-setup step + a compose healthcheck fix shipped. The next real gate is WP-H runner bakeoff (Ollama vs llama.cpp) once the box is operational and Phase 0 re-runs on it. Pickup-checker M1 is merged (PR #13) but its ship gate is still unmet -- golden_set/ holds only a README, 3/4 gates report \"no data.\"",
       progress: {
         label: "Work packages",
         phases: [
-          { name: "Foundation", pct: 100, note: "Repo + CI (pytest 3.10-3.12 green) + branch protection (PR+CI gate) + portable scaffold + smoke + first automation." },
-          { name: "WP-A Core library (aiserver)", pct: 100, note: "Merged PR #1 (06-17); hardened (CLIENT-2, CONFIG-1/2) in f37d165 (07-12); covered by the 131-pass suite." },
-          { name: "WP-B RAG / knowledge", pct: 100, note: "Merged PR #2 (06-17); ingest/query/drift/store/chunk shipped; hardened (RAG-1,2,4,5,6) in f37d165." },
-          { name: "WP-C Automation suite", pct: 100, note: "Merged PR #3 (06-17); framework + daily_digest + weekly_rollup + decision_drift + Windows task registration shipped; hardened (AUTO-2,6) in f37d165." },
-          { name: "WP-D Dashboard + integration", pct: 90, note: "D1 live (this card, merged PR #5, 06-17). D2 built + enabled in PC-Monitor. D3 --engine flag built in AI-Brain-Data; only the owner's G:-hosted SKILL.md cutover remains." },
-          { name: "WP-F Eval harness", pct: 100, note: "Merged PR #4 (06-16); cases/run/report/baseline/scoring shipped; hardened (EVAL-1..5) in f37d165." },
-          { name: "Dictation-cleanup proxy", pct: 90, note: "OpenWhispr dictation-cleanup proxy shipped (3c4d4e6) and hardened (DP-1..7 in f37d165). No activity since 07-10." },
-          { name: "PDF pickup checker (new, unmerged)", pct: 60, note: "Automates \"did every redline get addressed\" QA on reissued drawing sets — compares only markup-anchored regions (not full-sheet diffing), and only ever claims a region changed/unchanged, never that a redline was \"addressed\" (a human judgment) — enforced structurally via a MaxClaim field. M1 detection core: 14/14 planned tasks built, 67/67 tests pass, CLI works end-to-end for annotation-form markups. BUT the spec's own ship gate (4/4 golden-set gates pass on real labeled data, §13) is unmet — zero labeled golden-set jobs exist, 3/4 gates report \"no data.\" Code sits on an unmerged worktree-pickup-checker branch, not main." },
-          { name: "WP-E/G Ops, advanced", pct: 15, note: "No Caddy/tailscale/docker-healthcheck yet; advanced/ absent on main. A separate worktree-harness branch (7/8 WP-G2-adjacent tasks done) remains unmerged, unchanged since 07-12. WP-G's local-coding-agent line item landed for real (07-25, docs still uncommitted on main): opencode wired to this box's Ollama endpoint, verified end-to-end (Glob->Read->Edit, file change hash-confirmed on disk) on qwen3-coder:30b-a3b — qwen2.5-coder:14b can't drive an agent loop (returns tool calls as text, tool_calls stays empty). Standalone tool outside the aiserver/ package (host/model hard-coded, not .env-driven); manual desktop-shortcut start/stop only, no autostart." }
+          {
+            name: "Foundation",
+            pct: 100,
+            note: "Repo + CI (pytest 3.10-3.12 green) + branch protection (PR+CI gate) + portable scaffold + smoke + first automation."
+          },
+          {
+            name: "WP-A Core library (aiserver)",
+            pct: 100,
+            note: "Merged PR #1 (06-17); hardened (CLIENT-2, CONFIG-1/2) in f37d165 (07-12); covered by the 131-pass suite."
+          },
+          {
+            name: "WP-B RAG / knowledge",
+            pct: 100,
+            note: "Merged PR #2 (06-17); ingest/query/drift/store/chunk shipped; hardened (RAG-1,2,4,5,6) in f37d165."
+          },
+          {
+            name: "WP-C Automation suite",
+            pct: 100,
+            note: "Merged PR #3 (06-17); framework + daily_digest + weekly_rollup + decision_drift + Windows task registration shipped; hardened (AUTO-2,6) in f37d165."
+          },
+          {
+            name: "WP-D Dashboard + integration",
+            pct: 90,
+            note: "D1 live (this card, merged PR #5, 06-17). D2 built + enabled in PC-Monitor. D3 --engine flag built in AI-Brain-Data; only the owner's G:-hosted SKILL.md cutover remains."
+          },
+          {
+            name: "WP-F Eval harness",
+            pct: 100,
+            note: "Merged PR #4 (06-16); cases/run/report/baseline/scoring shipped; hardened (EVAL-1..5) in f37d165. Feeds WP-H: Phase 0 re-runs on the box to score runners."
+          },
+          {
+            name: "Client contract decoupled from runner",
+            pct: 100,
+            note: "156a0a7 (09-11): application code/config/automations know only INFERENCE_BASE_URL / INFERENCE_API_KEY / INFERENCE_MODEL -- no runner name anywhere. Locked by the north star."
+          },
+          {
+            name: "Dictation-cleanup proxy",
+            pct: 90,
+            note: "OpenWhispr dictation-cleanup proxy shipped (3c4d4e6) and hardened (DP-1..7 in f37d165). No activity since 07-10."
+          },
+          {
+            name: "PDF pickup checker (merged, ship-gate unmet)",
+            pct: 60,
+            note: "Automates \"did every redline get addressed\" QA on reissued drawing sets -- compares only markup-anchored regions (not full-sheet diffing), and only ever claims a region changed/unchanged, never that a redline was \"addressed\" (a human judgment) -- enforced structurally via a MaxClaim field. M1 detection core: 14/14 planned tasks built, 67/67 tests pass, CLI works end-to-end. MERGED to main via PR #13 (2026-09-07). BUT the spec's own ship gate (4/4 golden-set gates on real labeled data, §13) is still unmet -- golden_set/ holds only a README, 3/4 gates report \"no data.\""
+          },
+          {
+            name: "3090 box relocation",
+            pct: 35,
+            note: "Box powered on for the first time (2026-09-10), OS install imminent; headless Ubuntu chosen. Ubuntu install-USB writer/verifier (scripts/make-install-usb.ps1) + a Tailscale box-setup step + a compose healthcheck fix all shipped 09-11/09-12 (PR #15). Runner not yet chosen (WP-H). Every 5080 failure -- 66% residency, 56-75s cold loads, missed latency gate -- is a shared-Windows-desktop failure a dedicated headless box fixes structurally."
+          },
+          {
+            name: "WP-E/G Ops, advanced",
+            pct: 20,
+            note: "advanced/ still absent on main; no Caddy / Tailscale-as-service / docker healthcheck running as a service yet (compose healthcheck fixed, Tailscale install step added). The worktree-harness agent loop is now MERGED (PR #12, 2026-09-07). WP-G's local-coding-agent landed earlier (07-25): opencode wired to this box's Ollama endpoint, verified end-to-end on qwen3-coder:30b-a3b. Standalone tool (host/model hard-coded, not .env-driven); manual start/stop, no autostart -- owes a rework onto the INFERENCE_* contract."
+          }
         ]
       },
       activity: [0,0,0,0,0,0,0,0,29,0,0,1,6,2],
@@ -1178,24 +1224,23 @@ window.DASHBOARD_DATA = {
         date: "2026-09-12",
         summary: "Merge pull request #15 from YourBIMpossible/claude/linux-installation-setup-017d5a (d7e5140)"
       },
-      branch: "main at f37d165",
+      branch: "main at d7e5140",
       nextActions: [
-        "Push + open PR for worktree-pickup-checker (M1 code done 2026-07-26; still local-only, no PR)",
-        "Populate the pickup-checker golden set and run run_golden_eval.py against the spec gates (golden_set/ holds only a README)",
-        "Decide fate of worktree-harness (10 commits 2026-07-12, agent loop + knowledge skill; plan doc docs/superpowers/plans/2026-07-12-harness.md is untracked on main) - merge, push, or drop",
-        "WP-E serving/ops + WP-G advanced - deferred to the 3090-box relocation",
-        "Rework the opencode launcher onto the .env contract (hard-coded host/model breaks the portability contract) before relocating"
+        "Finish the 3090 box OS install (headless Ubuntu) -- box powered on 2026-09-10, install imminent; then re-run the Phase 0 eval on the box",
+        "Run WP-H runner bakeoff (Ollama vs llama.cpp) on the box -- settle the runner on evidence, not inertia (vLLM excluded on Ampere: no FP8, single-user workload)",
+        "Push the 4 local-only commits on claude/linux-installation-setup (Lian Li LCD/fan hardware notes + 2nd-GPU roadmap + paste-ready box-handoff prompt, 2026-09-12) -- local-only, loss risk",
+        "Populate the pickup-checker golden set and run run_golden_eval.py against the spec gates (golden_set/ still holds only a README -- merged code, unmet ship gate)",
+        "Rework the opencode launcher onto the INFERENCE_* .env contract (hard-coded host/model breaks the portability contract) before relocating"
       ],
       pendingDecisions: [
-        "3090 box OS (Ubuntu Server vs Windows) still undecided; runtime-now settled on Ollama (validated), vLLM deferred. Box unassembled -- gated on WP-A/B/C validating on the 5080.",
-        "worktree-harness (agent loop, 2026-07-12) has sat unmerged for 7 weeks -- ship it or delete it?"
+        "Runner is undecided by design -- WP-H bakeoff (Ollama vs llama.cpp) settles it once the box is operational; Ollama is the baseline, not the winner. vLLM excluded on Ampere (no FP8 hardware, single-user workload has nothing for continuous batching to bite on).",
+        "Second GPU + Lian Li fan/LCD control (GPU-temp-on-LCD) logged to the roadmap (local-only notes, 2026-09-12) -- not yet decided."
       ],
       blockers: [],
       reminders: [
-        "3090 box not assembled yet -- dev on the 5080; relocates via one .env line (OLLAMA_HOST).",
-        "Full code-audit PR #9 (06-18) findings closed; the 07-12 incremental audit is also fully closed, suite green (07-12 committed report: 83 passed; count higher now, not re-pinned in a committed report).",
-        "Two local-only branches (pickup-checker 13 commits, harness 10 commits) exist ONLY on this machine -- no remote copy. Loss risk until pushed.",
-        "docs/superpowers/plans/2026-07-12-harness.md is untracked on main (the 07-25 pickup-checker plan IS committed)."
+        "3090 box powered on (first boot 2026-09-10); OS install imminent (headless Ubuntu). Relocation from the 5080 rides the INFERENCE_* env contract.",
+        "4 commits on branch claude/linux-installation-setup are local-only / unpushed (Lian Li hardware notes, 2nd-GPU roadmap, box-handoff prompt, 2026-09-12) -- loss risk until pushed.",
+        "Full code-audit PR #9 (06-18) findings closed; the 07-12 incremental audit is also fully closed, suite green (07-12 committed report: 83 passed; count higher now, not re-pinned in a committed report)."
       ],
       links: [
         { label: "Program plan", path: "F:\\AI-Server\\PROGRAM_PLAN.md" },
@@ -1204,11 +1249,11 @@ window.DASHBOARD_DATA = {
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
-        "2026-08-22 - RAG rag_sources.txt root repointed to F:\\BIMpossible-Workspace (6ff31ad); PDF pickup checker spec + plan committed to main (e68efa9, 75b9395, ec99e6d)",
-        "2026-08-18 - Gate PR CI on draft status for cost control (#10, merged 08-19)",
-        "2026-08-08 - Document the opencode local coding-agent (WP-G piece)",
-        "2026-07-26 - PDF pickup checker M1 implemented - 13 commits on local worktree-pickup-checker (standalone package, own venv, not wired into aiserver/); never pushed",
-        "2026-07-12 - Resolve the 2026-07-12 audit findings + carried mediums (suite green); harness agent-loop branch built same day (10 commits, local worktree-harness)"
+        "2026-09-12 - Box powered on; Tailscale install step (9cd0c7a) + Ubuntu install-USB writer/verifier make-install-usb.ps1 (1ceddf0) shipped; PR #15 (Linux install setup) merged (d7e5140). Lian Li LCD/fan + 2nd-GPU roadmap notes local-only (4 commits, unpushed)",
+        "2026-09-11 - North star LOCKED: mission reframed to one measurable OpenAI-compatible endpoint; client contract decoupled from Ollama (INFERENCE_BASE_URL/API_KEY/MODEL, 156a0a7); compose healthcheck fixed (f6b01ab)",
+        "2026-09-10 - Box-build reassessed against 3 months of evidence (decisions/2026-09-10__box-build-reassessment.md); headless Linux box chosen to fix the 5080's residency/cold-load failures structurally; box powered on for the first time",
+        "2026-09-07 - worktree-pickup-checker (PR #13) and worktree-harness (PR #12) both MERGED to main; .claude/worktrees/ gitignored (PR #14)",
+        "2026-08-22 - RAG rag_sources.txt root repointed to F:\\BIMpossible-Workspace (6ff31ad); PDF pickup checker spec + plan committed to main (e68efa9, 75b9395, ec99e6d)"
       ],
       audit: {
         lastRun: "2026-07-12",
