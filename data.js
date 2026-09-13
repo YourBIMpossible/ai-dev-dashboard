@@ -648,20 +648,20 @@ window.DASHBOARD_DATA = {
         "2026-08-30 - #110 Key Plan (Tool 20): composite resolver, dry-run preview, freeze fix"
       ],
       audit: {
-        lastRun: "2026-09-11",
-        runType: "2026-08-31 unattended weekly full audit (Workspace-hosted, cross-repo: BIMpossible + Workspace + AddIns; seven lenses + slop fold + breach-chain overlay; evening re-run superseding the morning pass that had passed AddIns as clean on a depth artifact). AddIns findings: RE-01 High (RecordMispickCommand reported Recorded/Succeeded while SetupRunLog.Emit swallowed the write -- under-counts ship-gate A4), RE-02 Medium (unlocked cross-process RMW on setup_prefill_deltas.json), a breach chain (unsigned add-in assemblies in a user-writable load path) Medium, CQ-03 / CQ-05 / RE-04 / ARCH-CI-1 Low, RE-2(relay) Low. Closure PR #116 merged 2026-09-01 (ba4c3fa) closed 6 (RE-01, RE-02, RE-04, CQ-03, CQ-05, ARCH-CI-1): TryEmit + Result.Failed, named Mutex re-read, AtomicFileIo temp+Replace swap, per-placeholder try/catch, MispickAlreadyRecorded duplicate guard, signtool verify + SHA256SUMS manifest + signing runbook, innosetup pinned 6.7.1; 2048/2048 tests, Verify-AddIns-CI -Full/-IncludeSecurityLane/-IncludeInstaller green. 2 Low carried open: RE-2(relay) accepted-as-designed (pipe.close() swallow, close-time only) and the unsigned-add-in breach chain (signtool verify + manifest + runbook shipped in #116, but the Authenticode certificate purchase is owner-only and production code-signing is ON HOLD by owner decision). The 2026-09-11 breach-chain re-score (evidence widened from the owner's own account to any local account with write access to the machine-wide add-in directory) renumbered this chain from CHAIN-2 to CHAIN-3 -- disposition and owner-gating unchanged, ID only. No AddIns-local scored /audit report in audits/ since 2026-07-12; the newest AddIns-local artifacts remain the 08-22 Link-PDF phase-0 review and E020 drawing-area probe (narrative, unscored).",
+        lastRun: "2026-09-12",
+        runType: "Cross-repo confirmatory/final-verification run (2026-09-12, non-degraded). No new AddIns-specific findings; the run's breach-chain overlay restated AddIns' two owner-scoped residual chains under corrected numbering -- CHAIN-2 (unsigned add-in / in-process token inheritance, code-signing owner-gated) and a previously untracked CHAIN-3 (relay secret stored DPAPI-LocalMachine, machine-decryptable -- the 2026-09-11 same-day relay-secret fix (PR #646, 637a64c2) moved the secret off the registry but left it machine-scoped rather than user-scoped; earliest break is an elevated secret reinstall, owner Packet 1). CHAIN-1 (unreviewed-merge-path) is retired estate-wide as a finding: the 2026-09-10 solo-owner workflow restoration intentionally removed required-review gates.",
         cadence: "weekly (unattended bimpossible-weekly-full-audit, cross-repo) + on-demand /revit-functionality-audit",
         counts: {
           critical: 0,
           high: 0,
           medium: 0,
-          low: 2,
+          low: 3,
           info: 0
         },
         closedLastRun: 0,
-        trend: "stable -- no new AddIns-scoped findings or closures since 08-31/PR #116; the 09-11 cross-repo audit re-scored the unsigned-add-in breach chain against widened evidence (any local account, not just the owner's) and renumbered it CHAIN-2 -> CHAIN-3, but its disposition (owner-gated code-signing) is unchanged",
-        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-09-11.md",
-        reportFile: "bimpossible/weekly-full-audit_2026-09-11.md",
+        trend: "stable -- two owner-scoped residual chains carried, both previously known individually but not both correctly tracked on this card until now; no code-level AddIns finding this run.",
+        reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-09-12.md",
+        reportFile: "bimpossible/weekly-full-audit_2026-09-12.md",
         ledgerPath: "F:\\BIMpossible-AddIns\\audits",
         open: [
           {
@@ -671,13 +671,26 @@ window.DASHBOARD_DATA = {
             source: "weekly-full-audit_2026-08-31.md"
           },
           {
+            id: "CHAIN-2",
+            severity: "low",
+            title: "unsigned add-in in a machine-wide, user-writable directory allows in-process inheritance of a live Revit session's tokens -- #116 added signtool verify + SHA256SUMS manifest + signing runbook; removing the directory's non-admin write access and the Authenticode certificate purchase are both owner-only, carried open. Renumbered back to CHAIN-2 in the 2026-09-12 confirmatory run's authoritative restatement.",
+            source: "weekly-full-audit_2026-09-12.md"
+          },
+          {
             id: "CHAIN-3",
             severity: "low",
-            title: "unsigned add-in in a machine-wide, user-writable directory allows in-process inheritance of a live Revit session's tokens -- #116 added signtool verify + SHA256SUMS manifest + signing runbook; removing the directory's non-admin write access and the Authenticode certificate purchase are both owner-only, carried open. Renumbered from CHAIN-2 on 2026-09-11 as evidence widened (any local account, not just the owner's own).",
-            source: "breach-chains_2026-09-11.md"
+            title: "relay shared secret is protected with DPAPI at machine scope (LocalMachine), so it remains decryptable by any process on the same machine rather than scoped to the owning user account -- earliest break is an elevated secret reinstall at user (CurrentUser) DPAPI scope, owner Packet 1.",
+            source: "weekly-full-audit_2026-09-12.md"
           }
         ],
         history: [
+          {
+            date: "2026-09-12",
+            type: "Cross-repo confirmatory/final-verification run -- breach-chain residuals restated under corrected numbering; no new AddIns-specific findings.",
+            scope: "revit-relay/*, breach-chain overlay (cross-repo).",
+            result: "CHAIN-2 (unsigned add-in, owner-gated) and CHAIN-3 (relay secret DPAPI-LocalMachine, owner Packet 1) both carried open, low severity. 0 closures this cycle.",
+            report: "weekly-full-audit_2026-09-12.md"
+          },
           {
             date: "2026-09-11",
             type: "Cross-repo weekly full audit -- breach-chain re-score only, no new AddIns findings.",
