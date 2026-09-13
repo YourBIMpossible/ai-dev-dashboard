@@ -325,6 +325,200 @@ function Sync-GraphStalenessReminder {
     return @{ ok = $true; reason = if ($stale) { "reminder present - $reminderText" } else { "snapshot fresh ($newestDate, ${ageDays}d old) - no reminder" } }
 }
 
+# WP-D1 live snapshot (REFRESH-SPEC.md §120-131): fold a point-in-time AI-Server status into
+# the aiserver card. $StatusJson is the raw stdout of scripts/aiserver_status.py (an
+# OpenAI-compatible /models liveness poll, best-effort /api/ps loaded-models, and the newest
+# digest/rollup/drift output); pass $null when the helper could not be run at all.
+#
+# Read-only upstream, degrades cleanly (spec rule 6). A failed helper OR unparseable JSON adds
+# ONE reminder ("inference endpoint unreachable at refresh (HH:MM)") and leaves the card's
+# previous recent/lastActivity untouched - it NEVER fails the refresh. When the helper ran,
+# recent[] is refreshed with one terse line per non-null job plus an endpoint up/down line
+# (previous snapshot lines are stripped first so re-runs don't stack them), and lastActivity is
+# set from the newest non-null job (left as-is when every job is null). An endpoint reported
+# DOWN also adds the reminder; a recovered endpoint clears any stale one.
+#
+# Ownership note: sync_activity.py (step 1b) writes lastActivity from git truth; per the D1
+# spec this step overrides it from the newest job when one exists. Today all jobs are null, so
+# the git value is left intact - no contention until a job output first appears.
+#
+# Self-contained by design: the test harness lifts this function out via the parser AST and
+# runs it in isolation, so it leans on no outer-scope helper. Same JS-string comma-splitter and
+# PS 5.1 @()/ConvertFrom-Json care as Sync-GraphStalenessReminder above.
+function Sync-AiServerSnapshot {
+    param(
+        [Parameter(Mandatory)][string]$DataPath,
+        [AllowNull()][string]$StatusJson,
+        [Parameter(Mandatory)][string]$SnapshotHHMM
+    )
+    if (-not (Test-Path $DataPath)) { return @{ ok = $false; reason = "data.js not found" } }
+
+    $MID  = [char]0x00B7   # middle dot, matches the spec's "Endpoint up · models:" literal
+    $DASH = [char]0x2014   # em dash, matches "Digest <date> — <summary>"
+
+    # --- local helpers (kept inside so the AST-lifted function stays self-contained) ---
+    $esc = {
+        param([string]$s)
+        # A safe JS string literal: escape the backslash first, then the quote, then the
+        # line/tab terminators (a raw newline or U+2028/U+2029 is a hard syntax error inside
+        # a JS string and would make the whole data.js fail to parse). Inputs are single-line
+        # today (model ids, stripped headings), so this is defence against a future source.
+        $e = ($s -replace '\\', '\\\\') -replace '"', '\"'
+        $e = (($e -replace "`r", '\r') -replace "`n", '\n') -replace "`t", '\t'
+        $e = ($e -replace ([char]0x2028), ' ') -replace ([char]0x2029), ' '
+        '"' + $e + '"'
+    }
+    # Inner bounds of the JS array whose '[' is at $Open, tracking string state and bracket
+    # depth so a ']' or ',' inside a string literal never ends it early.
+    $arrayBounds = {
+        param([string]$Text, [int]$Open)
+        $i = $Open + 1; $depth = 1; $inStr = $false; $start = $i
+        while ($i -lt $Text.Length) {
+            $c = $Text[$i]
+            if ($inStr) {
+                if ($c -eq '\') { $i++ } elseif ($c -eq '"') { $inStr = $false }
+            } else {
+                if ($c -eq '"') { $inStr = $true }
+                elseif ($c -eq '[') { $depth++ }
+                elseif ($c -eq ']') { $depth--; if ($depth -eq 0) { return @{ Start = $start; End = $i } } }
+            }
+            $i++
+        }
+        return $null
+    }
+    # Split array inner on top-level commas, honouring escaped quotes inside each string.
+    $split = {
+        param([string]$inner)
+        $items = New-Object System.Collections.Generic.List[string]
+        $sb = New-Object System.Text.StringBuilder
+        $inStr = $false; $i = 0
+        while ($i -lt $inner.Length) {
+            $c = $inner[$i]
+            if ($inStr) {
+                [void]$sb.Append($c)
+                if ($c -eq '\') { $i++; if ($i -lt $inner.Length) { [void]$sb.Append($inner[$i]) } }
+                elseif ($c -eq '"') { $inStr = $false }
+            } else {
+                if ($c -eq '"') { $inStr = $true; [void]$sb.Append($c) }
+                elseif ($c -eq ',') { [void]$items.Add($sb.ToString().Trim()); [void]$sb.Clear() }
+                else { [void]$sb.Append($c) }
+            }
+            $i++
+        }
+        if ($sb.ToString().Trim()) { [void]$items.Add($sb.ToString().Trim()) }
+        @($items | Where-Object { $_ -ne '' })
+    }
+    $emit = { param([string[]]$Items)   # 8-space-indented multi-line array inner, or '' when empty
+        if (@($Items).Count) { "`n" + ((@($Items) | ForEach-Object { '        ' + $_ }) -join ",`n") + "`n      " } else { '' }
+    }
+
+    # --- parse the helper output ---
+    # Wrapped so ANY unexpected shape throws into a clean degrade rather than out of the
+    # refresh loop: the call site (step 1i) is not inside a try, so an uncaught throw here
+    # would abort the whole refresh - the exact opposite of spec rule 6.
+    try {
+    $failed = $true; $st = $null
+    if ($StatusJson -and $StatusJson.Trim()) {
+        try {
+            $st = $StatusJson | ConvertFrom-Json
+            # No object, or output missing the endpoint contract, is a helper/structural
+            # failure: degrade and keep previous data, don't masquerade as a "down" endpoint.
+            $failed = ($null -eq $st) -or ($null -eq $st.endpoint)
+        } catch { $failed = $true }
+    }
+
+    $recentInject = @()   # quoted JS strings to prepend: job lines first, then the endpoint line
+    $downReminder = $false
+    $newLastActivity = $null
+    if (-not $failed) {
+        $ep = $st.endpoint
+        $jobLabels = [ordered]@{ 'daily-digest' = 'Digest'; 'weekly-rollup' = 'Rollup'; 'decision-drift' = 'Drift' }
+        $newestMod = $null
+        foreach ($jn in $jobLabels.Keys) {
+            $j = $st.jobs.$jn
+            if ($null -ne $j -and ([string]$j.modified) -match '^\d{4}-\d{2}-\d{2}') {
+                $date = ([string]$j.modified).Substring(0, 10)
+                $summary = [string]$j.summary
+                $recentInject += (& $esc "$($jobLabels[$jn]) $date $DASH $summary")
+                if ($null -eq $newestMod -or ([string]$j.modified) -gt $newestMod) {
+                    $newestMod = [string]$j.modified
+                    $newLastActivity = @{ date = $date; summary = $summary }
+                }
+            }
+        }
+        if ($ep.up) {
+            $loaded = @($ep.models_loaded | Where-Object { $_ })
+            # The spec line lists loaded models; fall back to available so "models:" is never
+            # blank on a runner that doesn't expose /api/ps (models_loaded_supported = false).
+            $modelList = if ($loaded.Count) { $loaded } else { @($ep.models_available | Where-Object { $_ }) }
+            $modelStr = if ($modelList.Count) { $modelList -join ', ' } else { 'none' }
+            $recentInject += (& $esc "Endpoint up $MID models: $modelStr (snapshot $SnapshotHHMM)")
+        } else {
+            $recentInject += (& $esc "Endpoint down (snapshot $SnapshotHHMM)")
+            $downReminder = $true
+        }
+    }
+
+    $dataText = [System.IO.File]::ReadAllText($DataPath)
+    $mStart = $dataText.IndexOf('/* PROJECT:aiserver:START */')
+    $mEnd   = $dataText.IndexOf('/* PROJECT:aiserver:END */')
+    if ($mStart -lt 0 -or $mEnd -le $mStart) { return @{ ok = $false; reason = "aiserver project block not found in data.js" } }
+    $block = $dataText.Substring($mStart, $mEnd - $mStart)
+    $orig = $block
+
+    # reminders[]: strip any prior unreachable line, then re-add on helper failure OR endpoint down.
+    # Anchor the key to line-start+indent, not a bare IndexOf: lastActivity.summary (which
+    # precedes both arrays and is overwritten from a job heading) could otherwise contain the
+    # literal "recent:"/"reminders:" and steer the splice into the wrong array.
+    $remKey = [regex]::Match($block, '(?m)^[ \t]*reminders:\s*\[')
+    if ($remKey.Success) {
+        $b = & $arrayBounds $block ($block.IndexOf('[', $remKey.Index))
+        if ($b) {
+            $items = @(& $split $block.Substring($b.Start, $b.End - $b.Start) |
+                Where-Object { $_ -notmatch '^"inference endpoint unreachable at refresh' })
+            if ($failed -or $downReminder) { $items += (& $esc "inference endpoint unreachable at refresh ($SnapshotHHMM)") }
+            $block = $block.Substring(0, $b.Start) + (& $emit $items) + $block.Substring($b.End)
+        }
+    }
+
+    # recent[] + lastActivity: only when the helper ran (a failure keeps previous data intact).
+    if (-not $failed) {
+        $recKey = [regex]::Match($block, '(?m)^[ \t]*recent:\s*\[')
+        if ($recKey.Success) {
+            $b = & $arrayBounds $block ($block.IndexOf('[', $recKey.Index))
+            if ($b) {
+                # Strip prior snapshot-generated lines so re-runs (and the daily rebase onto
+                # origin, which already carries yesterday's lines) don't accumulate them.
+                $kept = @(& $split $block.Substring($b.Start, $b.End - $b.Start) | Where-Object {
+                    $_ -notmatch '^"Endpoint (up|down)\b' -and
+                    $_ -notmatch ("^`"(Digest|Rollup|Drift) \d{4}-\d{2}-\d{2} " + $DASH + " ")
+                })
+                $block = $block.Substring(0, $b.Start) + (& $emit (@($recentInject) + $kept)) + $block.Substring($b.End)
+            }
+        }
+        if ($newLastActivity) {
+            $laRe = [regex]'lastActivity:\s*\{\s*date:\s*"[^"]*",\s*summary:\s*"(?:[^"\\]|\\.)*"\s*,?\s*\}'
+            $laText = "lastActivity: {`n        date: $(& $esc $newLastActivity.date),`n        summary: $(& $esc $newLastActivity.summary)`n      }"
+            $block = $laRe.Replace($block, [System.Text.RegularExpressions.MatchEvaluator] { param($m) $laText }, 1)
+        }
+    }
+
+    if ($block -eq $orig) {
+        return @{ ok = (-not $failed); reason = if ($failed) { "helper unavailable - reminder already present, previous data kept" } else { "no change" } }
+    }
+    [System.IO.File]::WriteAllText($DataPath, $dataText.Substring(0, $mStart) + $block + $dataText.Substring($mEnd))
+    $reason = if ($failed) { "helper unavailable - unreachable reminder added, previous data kept" }
+              elseif ($downReminder) { "endpoint DOWN - snapshot line + reminder written" }
+              else { "endpoint up - snapshot written ($($recentInject.Count) recent line(s))" }
+    return @{ ok = (-not $failed); reason = $reason }
+    } catch {
+        # Never let a snapshot problem throw out of the refresh loop: no write has committed
+        # on this path (the single WriteAllText is the last statement), so previous card data
+        # stands; ok=$false makes step 1i count it toward $degraded.
+        return @{ ok = $false; reason = "snapshot error - previous data kept: $($_.Exception.Message)" }
+    }
+}
+
 $python = (Get-Command python -ErrorAction SilentlyContinue).Source
 if (-not $python) { $python = (Get-Command py -ErrorAction SilentlyContinue).Source }
 if (-not $python) { Alert-Failure "python not found on PATH - cannot refresh."; exit 1 }
@@ -537,6 +731,42 @@ for ($attempt = 1; $attempt -le $MAX_ATTEMPTS; $attempt++) {
         $degraded++
     } elseif ((Invoke-Logged $node @("$PSScriptRoot\github_actions_sync.mjs","--no-push")) -ne 0) {
         "WARN: github_actions_sync.mjs failed - github_actions.js not refreshed this attempt." | Add-Content -Path $log -Encoding utf8
+        $degraded++
+    }
+
+    # 1i. WP-D1 live snapshot: fold a point-in-time AI-Server status into the aiserver card
+    #     (REFRESH-SPEC.md §120-131). The dashboard is a static site refreshed locally, so it
+    #     cannot poll the LAN/Tailscale-only inference endpoint from the cloud - this captures
+    #     it here, at refresh. Read-only upstream and non-fatal (spec rule 6): a helper that
+    #     cannot execute, or an unreachable/down endpoint, yields a reminder and keeps previous
+    #     card data rather than aborting. Endpoint + helper path are env-overridable
+    #     (portability/relocation), same pattern as 1f's BIMPOSSIBLE_LEDGER; the default targets
+    #     the 3090 box, NOT the localhost 5080 rig (which serves nothing). A helper that cannot
+    #     RUN at all degrades the attempt; an endpoint merely down does not (that is a reminder,
+    #     not a pipeline fault) - aiserver_status.py exits 0 and reports up:false when the box is
+    #     off, so only a genuine tooling failure trips $degraded.
+    $aiStatusScript = if ($env:AISERVER_STATUS_SCRIPT) { $env:AISERVER_STATUS_SCRIPT } else { "F:\AI-Server\scripts\aiserver_status.py" }
+    $aiBaseUrl      = if ($env:AISERVER_INFERENCE_BASE_URL) { $env:AISERVER_INFERENCE_BASE_URL } else { "http://192.168.1.128:11434/v1" }
+    $aiJson = $null
+    if (Test-Path $aiStatusScript) {
+        $prevBase = $env:INFERENCE_BASE_URL
+        $env:INFERENCE_BASE_URL = $aiBaseUrl   # aiserver.load_config reads the process env over .env
+        try {
+            $aiQ = Invoke-CaptureChecked $python @($aiStatusScript)
+        } finally {
+            if ($null -eq $prevBase) { Remove-Item Env:\INFERENCE_BASE_URL -ErrorAction SilentlyContinue }
+            else { $env:INFERENCE_BASE_URL = $prevBase }
+        }
+        if ($aiQ.Ok) { $aiJson = ($aiQ.Out -join "`n") }
+        else { "WARN: aiserver_status.py exit $($aiQ.Code): $($aiQ.Err -join ' | ')" | Add-Content -Path $log -Encoding utf8 }
+    } else {
+        "WARN: aiserver_status.py not found at $aiStatusScript - AI-Server snapshot skipped." | Add-Content -Path $log -Encoding utf8
+    }
+    $ai = Sync-AiServerSnapshot -DataPath (Join-Path $PSScriptRoot "data.js") -StatusJson $aiJson -SnapshotHHMM (Get-Date -Format 'HH:mm')
+    if ($ai.ok) {
+        "aiserver snapshot: $($ai.reason)" | Add-Content -Path $log -Encoding utf8
+    } else {
+        "WARN: aiserver snapshot degraded - $($ai.reason)" | Add-Content -Path $log -Encoding utf8
         $degraded++
     }
 
