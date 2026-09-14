@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-13 11:59:57",
+  "checked": "2026-09-13 17:18:38",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -8,9 +8,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-09-12",
+      "lastActivity": "2026-09-13",
       "newestRecent": "2026-09-02",
-      "lagDays": 10,
+      "lagDays": 11,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -88,9 +88,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-09-12",
+      "lastActivity": "2026-09-13",
       "newestRecent": "2026-09-02",
-      "lagDays": 10,
+      "lagDays": 11,
       "evaluated": true,
       "stale": false,
       "reason": null
