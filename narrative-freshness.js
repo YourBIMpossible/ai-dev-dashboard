@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-13 17:18:38",
+  "checked": "2026-09-14 06:00:20",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-09-13",
+      "lastActivity": "2026-09-14",
       "newestRecent": "2026-09-02",
-      "lagDays": 11,
+      "lagDays": 12,
       "evaluated": true,
       "stale": false,
       "reason": null
