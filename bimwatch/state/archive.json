@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-09-14T07:18:16.470823Z",
- "count": 405,
+ "generated_at": "2026-09-15T06:10:35.372694Z",
+ "count": 411,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"6b8b9cddc469a268faa5085096bd680b-gzip\"",
+   "etag": "\"5427a43a919110ba203d5414ddaef903-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Thu, 10 Sep 2026 21:43:56 GMT",
+   "last_modified": "Mon, 14 Sep 2026 23:27:42 GMT",
    "last_status": 200,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": true,
-   "stale_reason": "no new items in 40 days (expects ~7)"
+   "stale_reason": "no new items in 41 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-09-09T09:09:19Z",
    "last_modified": "Fri, 11 Sep 2026 07:40:59 GMT",
    "last_status": 304,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,74 +27,74 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-08T19:33:57Z",
+   "last_item_published": "2026-09-15T01:28:22Z",
    "last_status": 200,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"83fd0ebd62a0645f44d77492e2937112\"",
+   "etag": "W/\"92e2a53ec9af031d35b3071d17822d4c\"",
    "last_failure": "2026-09-04T06:10:13.935124Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-08T10:29:14Z",
-   "last_modified": "Tue, 08 Sep 2026 10:32:00 GMT",
+   "last_item_published": "2026-09-14T17:14:22Z",
+   "last_modified": "Mon, 14 Sep 2026 17:15:15 GMT",
    "last_status": 200,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"0a40f1fbc148f508451091f784668afe\"",
+   "etag": "W/\"37a3e67c32ed5425e024b1b58e2eebf4\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 14 Sep 2026 06:46:20 GMT",
+   "last_modified": "Mon, 14 Sep 2026 15:53:32 GMT",
    "last_status": 200,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"904ad8341749329bde5885e0262c918b\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-09-13T22:16:09Z",
-   "last_status": 304,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "etag": "W/\"bd13417a904b20466be4efa8f7e0d654\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-14T20:58:52Z",
+   "last_status": 200,
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-13T21:32:00Z",
-   "last_modified": "Sun, 13 Sep 2026 22:45:16 GMT",
+   "last_item_published": "2026-09-15T00:26:00Z",
+   "last_modified": "Tue, 15 Sep 2026 02:14:41 GMT",
    "last_status": 200,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 61,
+   "consecutive_failures": 62,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-14T07:18:16.470823Z",
+   "last_failure": "2026-09-15T06:10:35.372694Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "61 consecutive failures: HTTP 403"
+   "stale_reason": "62 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
-   "etag": "W/\"bb53906ea3dd87038368c797c405c2c0\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-09-08T10:00:00Z",
-   "last_status": 304,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "etag": "W/\"91eabb42c24aa9b0bb730deeace0b493\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-14T10:00:00Z",
+   "last_status": 200,
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"4af44b5e7c23cc5ccb6544450b00651d\"",
+   "etag": "W/\"0d03f71ce096a4ea2295b018131c2426\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-14T07:18:16.470823Z",
+   "last_success": "2026-09-15T06:10:35.372694Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,90 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-14T07:18:16.470823Z",
-   "stale": false,
-   "stale_reason": ""
+   "last_success": "2026-09-15T06:10:35.372694Z",
+   "stale": true,
+   "stale_reason": "no new items in 91 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "The new APS: A developer platform for the AI era",
+   "url": "https://aps.autodesk.com/blog/new-aps-developer-platform-ai-era",
+   "source": "aps-blog",
+   "published": "2026-09-15T01:28:22Z",
+   "summary": "The new APS: A developer platform for the AI era Yvette Gong 14 Sep 2026 Tulika Garg Emily Scherbenski Share This blog may contain forward-looking statements about our products and product capabilities, and strategies. Statements regarding planned or future development efforts for our products merely reflect our current plans and based on factors currently known to us. Purchasing decisions should not be made based upon reliance on these statements. We're at a breakthrough moment. AI has changed the world around us. And with that how you build on Autodesk Platform Services just got a much higher ceiling. At this year's Platform Leadership Forum at AU, we shared how APS is transforming to become AI-native, working with you at every stage of your development journey, from your first idea to the moment a customer finds your app. Think of it as having a master builder partnering with you at each step, helping you explore what's possible, build better products, manage what you've shipped, and get it in front of the people, and agents, who need it. Below, we walk through each stage of the journey and what's new. Explore: from problem statement to validated idea Every build starts with a…",
+   "id": "a72a2a90aaa1cc9a",
+   "fetched_at": "2026-09-15T06:10:35.372694Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 45,
+    "why": "APS evolving for AI-native development may open new capabilities for desktop add-ins, but post lacks concrete technical details or API changes.",
+    "topics": [
+     "aps",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-15T06:10:35.372694Z"
+   }
+  },
+  {
+   "title": "Free SVS Accessibility Checker: Review Modeled Accessibility Conditions for the UAE",
+   "url": "http://revitaddons.blogspot.com/2026/09/free-svs-accessibility-checker-review.html",
+   "source": "revit-addons",
+   "published": "2026-09-15T00:26:00Z",
+   "summary": "Summary SVS Accessibility Checker is a free standalone Autodesk Revit add-in developed by SVS Team for reviewing modeled accessibility conditions inside Revit. It is aimed primarily at UAE accessibility design review and uses selectable municipality or authority profiles, linked-model scanning, editable TXT rule files, focused navigation, and CSV/HTML reporting to help project teams identify potential accessibility issues during design coordination. Primary Purpose The add-in is designed as a model-based accessibility review assistant rather than a legal compliance or permit approval tool. Its purpose is to help users check whether modeled conditions appear to align with selected accessibility requirements, based on the available Revit geometry, family parameters, adopted rule profile, and project-specific rule settings. Key Accessibility Checks Door clear-width and threshold checks. Door maneuvering-clearance screening. Corridor width and pinch-point checks. Turning-circle checks for accessible maneuvering space. Ramp slope and ramp clear-width checks. Room-to-room accessible-route connectivity review. Rule Profiles and Regional Focus The tool includes built-in profiles for Abu…",
+   "id": "3bb574f34e94c3e2",
+   "fetched_at": "2026-09-15T06:10:35.372694Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "A regional accessibility add-in; note its audit/scanning pattern, but not directly relevant to your tooling practice unless you work in UAE.",
+    "topics": [
+     "revit-addins",
+     "model-audit"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-15T06:10:35.372694Z"
+   }
+  },
+  {
+   "title": "Your Road Is Living in a Building Storey",
+   "url": "https://bimcorner.com/your-road-is-living-in-a-building-storey/",
+   "source": "bim-corner",
+   "published": "2026-09-14T17:14:22Z",
+   "summary": ".bc-box{ --bc-navy:#0B2A4A; --bc-green:#10B981; --bc-amber:#F59E0B; --bc-grey:#666; font-family:'Montserrat',system-ui,sans-serif; border-radius:10px; padding:24px 26px; margin:32px 0; } .bc-box p{margin:0 0 12px} .bc-box p:last-child{margin:0} .bc-box h3{margin:0 0 14px !important} /* checklista */ .bc-check{background:#F4F6F9; border-left:5px solid var(--bc-green)} .bc-check ol{margin:0; padding-left:22px} .bc-check li{margin:0 0 12px; line-height:1.6} .bc-check li:last-child{margin:0} .bc-check li b{color:var(--bc-navy)} /* zastrzezenie */ .bc-note{background:#FFF8EC; border-left:5px solid var(--bc-amber)} /* zaproszenie na webinar */ .bc-cta{background:var(--bc-navy); color:#dfe9f3; text-align:center; padding:34px 26px} .bc-cta .bc-kicker{ font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--bc-amber); margin:0 0 10px} .bc-cta h3{color:#fff !important; font-size:26px !important; line-height:1.25 !important; margin:0 0 14px !important} .bc-cta p{color:#dfe9f3; line-height:1.6} .bc-cta .bc-when{color:#fff; font-weight:700; margin:18px 0} .bc-cta a.bc-btn{ display:inline-block; background:var(--bc-green); color:#fff !important;…",
+   "id": "c671029968ab236c",
+   "fetched_at": "2026-09-15T06:10:35.372694Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "HTML boilerplate with no visible content; cannot assess substance from summary alone.",
+    "topics": [],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-15T06:10:35.372694Z"
+   }
+  },
+  {
+   "title": "Revit AI Tutorial: Image to Model with ChatGPT 6 Astra",
+   "url": "https://www.bimpure.com/blog/revit-ai-tutorial-image-to-model-with-chatgpt-6-astra",
+   "source": "revit-pure",
+   "published": "2026-09-14T10:00:00Z",
+   "summary": "OpenAI just released a new model called ChatGPT 6 Astra. They claim it is AGI. Users are having great results with Astra alongside open-source modeling tools such as Blender. How does it fare with Revit? That's what we're about to test. Watch the video: Setup First, download the ChatGPT desktop app here: Ensure you have a paid account, else you you won't have access to GPT-6. Then, install a Revit MCP server. You can use the pyRevit MCP or a C# based one, such as BIMwright. Test 1 - Apartment Layout In the first test, we ask ChatGPT to create an apartment layout from scratch. This is based on a real project called Franky by Quinzhee Architects. The first attempt is bad, with the fridge blocking the path. After increasing the effort level and giving a few extra instructions, the second layout is better, although not as good as the real layout. Test 2 - Cozy Cabin Revit model from Image In the second test, we provide a few images of a cozy modern cabin called Repère Boréal , located near Quebec City. This one is quite impressive: the model is very accurate. It even managed to model the furniture and elements around the cabin itself: chairs, the fireplace, shelves, plates, and more.…",
+   "id": "de5820c8cd891cc3",
+   "fetched_at": "2026-09-15T06:10:35.372694Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Concrete test of LLM-to-Revit workflow via MCP servers (pyRevit and BIMwright); technique worth exploring if you integrate AI into add-in automation.",
+    "topics": [
+     "ai",
+     "llm",
+     "pyrevit"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-15T06:10:35.372694Z"
+   }
+  },
   {
    "title": "SVS Exporter: A Revit Productivity Suite and Export Utility",
    "url": "http://revitaddons.blogspot.com/2026/09/svs-exporter-revit-productivity-suite.html",
@@ -148,6 +226,45 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-09-14T06:13:56.555210Z"
+   }
+  },
+  {
+   "title": "Autodesk DevCon 2027",
+   "url": "https://aps.autodesk.com/event/autodesk-devcon-2027",
+   "source": "aps-blog",
+   "published": "2026-09-13T20:10:43Z",
+   "summary": "Autodesk DevCon 2027 whitney.lawrence 14 Sep 2026 Save the date 14-15, April 2027 Barcelona, Spain CCIB Save the date April 14 April 15",
+   "id": "e66f89ddf29997d9",
+   "fetched_at": "2026-09-15T06:10:35.372694Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Event announcement with no detail; pure calendar item.",
+    "topics": [
+     "event"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-15T06:10:35.372694Z"
+   }
+  },
+  {
+   "title": "Save the date: Autodesk DevCon 2027 is coming to Barcelona",
+   "url": "https://aps.autodesk.com/blog/save-date-autodesk-devcon-2027-coming-barcelona",
+   "source": "aps-blog",
+   "published": "2026-09-13T19:57:23Z",
+   "summary": "Save the date: Autodesk DevCon 2027 is coming to Barcelona whitney.lawrence 14 Sep 2026 Whitney Lawrence Share Where AI unlocks the future of Design and Make AI has changed how technology and software solutions are designed, built, and used. For Design and Make industries, the opportunity now is to put that technology to work—applying AI to specialized data, industry workflows, and the tools people use every day. Autodesk Platform Services (APS) is evolving to be AI-native. Developers, Autodesk software users, and domain experts can increasingly use AI to discover, interact with, execute, and manage APS capabilities. Whether through Autodesk Assistant or the LLM of your choice, APS is creating new ways to build with Autodesk technology, APIs, data, and Model Context Protocols (MCPs). Autodesk DevCon 2027, taking place April 14–15 at the CCIB in Barcelona, is where you can explore what that means in practice. Build, customize, automate, and innovate with AI Autodesk DevCon brings together software developers, Autodesk software users, technology innovators, and business decision makers working across architecture, construction, engineering, operations, design and manufacturing. More…",
+   "id": "73e8b3c5a25e8dbf",
+   "fetched_at": "2026-09-15T06:10:35.372694Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "DevCon 2027 coming to Barcelona; worth knowing about for networking and learning direction, but low urgency and no technical content.",
+    "topics": [
+     "event",
+     "aps"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-15T06:10:35.372694Z"
    }
   },
   {
