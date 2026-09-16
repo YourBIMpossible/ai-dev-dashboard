@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-09-15T06:10:35.372694Z",
- "count": 411,
+ "generated_at": "2026-09-16T06:10:30.903558Z",
+ "count": 422,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"5427a43a919110ba203d5414ddaef903-gzip\"",
+   "etag": "\"93297e07c8863d04823e3dfdaad428be-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Mon, 14 Sep 2026 23:27:42 GMT",
+   "last_modified": "Wed, 16 Sep 2026 01:00:14 GMT",
    "last_status": 200,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": true,
-   "stale_reason": "no new items in 41 days (expects ~7)"
+   "stale_reason": "no new items in 42 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-09-09T09:09:19Z",
-   "last_modified": "Fri, 11 Sep 2026 07:40:59 GMT",
-   "last_status": 304,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-09-15T16:00:49Z",
+   "last_modified": "Tue, 15 Sep 2026 16:08:54 GMT",
+   "last_status": 200,
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-15T01:28:22Z",
    "last_status": 200,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,60 +41,60 @@
    "last_item_published": "2026-09-14T17:14:22Z",
    "last_modified": "Mon, 14 Sep 2026 17:15:15 GMT",
    "last_status": 200,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"37a3e67c32ed5425e024b1b58e2eebf4\"",
+   "etag": "W/\"149e5aab73308c37762a5dc8fdabc872\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 14 Sep 2026 15:53:32 GMT",
+   "last_modified": "Tue, 15 Sep 2026 15:09:37 GMT",
    "last_status": 200,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"bd13417a904b20466be4efa8f7e0d654\"",
+   "etag": "W/\"c6403066537d79967be9c0fcd27e38d9\"",
    "last_item_count": 10,
-   "last_item_published": "2026-09-14T20:58:52Z",
+   "last_item_published": "2026-09-15T10:10:56Z",
    "last_status": 200,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-15T00:26:00Z",
-   "last_modified": "Tue, 15 Sep 2026 02:14:41 GMT",
+   "last_item_published": "2026-09-16T02:17:00Z",
+   "last_modified": "Wed, 16 Sep 2026 02:38:05 GMT",
    "last_status": 200,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 62,
+   "consecutive_failures": 63,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-15T06:10:35.372694Z",
+   "last_failure": "2026-09-16T06:10:30.903558Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "62 consecutive failures: HTTP 403"
+   "stale_reason": "63 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
    "etag": "W/\"91eabb42c24aa9b0bb730deeace0b493\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-09-14T10:00:00Z",
-   "last_status": 200,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_status": 304,
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"0d03f71ce096a4ea2295b018131c2426\"",
+   "etag": "W/\"6431192e8f97ac2c32a9673f35bef770\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,193 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-15T06:10:35.372694Z",
+   "last_success": "2026-09-16T06:10:30.903558Z",
    "stale": true,
-   "stale_reason": "no new items in 91 days (expects ~30)"
+   "stale_reason": "no new items in 92 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "My 3Dconnexion Setup Review",
+   "url": "http://revitaddons.blogspot.com/2026/09/my-3dconnexion-setup-review.html",
+   "source": "revit-addons",
+   "published": "2026-09-16T02:17:00Z",
+   "summary": "This is a review of the 3Dconnexion devices I bought recently, The CadMouse Pad, CadMouse Pro Wireless, Keyboard Pro with Numpad, and SpaceMouse Enterprise. Let's start small with the CadMouse Pad. 3Dconnexion CadMouse Pad Review The 3Dconnexion CadMouse Pad is a purpose-built mouse surface aimed at CAD, engineering, architecture, and design professionals who want smoother, more predictable cursor control than a generic desk surface or low-cost mouse pad can provide. It is designed as a companion to 3Dconnexion’s CadMouse line, but its core benefits—consistent tracking, low-friction movement, and a stable base—can apply to other high-quality professional mice as well. Design and Build Quality The pad uses a three-layer construction: a micro-textured top surface for precise movement, a rigid middle layer for flatness and stability, and a non-slip silicone base to keep the pad from shifting during use. This gives it a more engineered feel than a soft fabric mouse pad. The result is a firm, uniform surface that should appeal to users who work long hours in CAD or 3D modeling environments where small cursor movements matter. I will note that, while engineered not to slip on the…",
+   "id": "ce024d06a342056c",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Hardware review unrelated to Revit API, add-in development, or BIM workflow.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "Free SVS Smart Vision Suite: A Productivity and Model-Quality Toolkit",
+   "url": "http://revitaddons.blogspot.com/2026/09/free-svs-smart-vision-suite.html",
+   "source": "revit-addons",
+   "published": "2026-09-16T00:20:00Z",
+   "summary": "Summary SVS Smart Vision Suite is a free productivity and model-quality toolkit for Autodesk Revit developed by SVS Team. According to its Autodesk Marketplace listing, it is intended to bring common project setup, sheet creation, parameter exchange, model-health review, and grid-dimensioning workflows together under one consistent SVS ribbon for Revit 2022 through Revit 2027. Primary Purpose The add-in is designed to streamline repetitive Revit production and coordination tasks that are commonly performed by BIM coordinators, model managers, and project teams. Instead of focusing on a single task, Smart Vision Suite combines several utilities into one toolkit: project setup automation, batch sheet creation, sheet renumbering, parameter export/import, model health reporting, and automated grid dimensioning. One-Click Project Setup One of the suite’s central tools is One-Click Project Setup. It can apply Architecture, MEP, Coordination, or saved setup profiles for project information, worksets, levels, views, and sheets. The tool is described as opening with a safe Empty profile, with no default rows and every creation option disabled, which helps prevent unintended project…",
+   "id": "7a0ec1019bc38a12",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Free toolkit covering sheet automation, batch operations, model health—directly overlaps your core tooling practice areas.",
+    "topics": [
+     "revit-addin",
+     "automation",
+     "model-audit"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "Autodesk confirms Forma will replace Revit ‘over time’",
+   "url": "https://aecmag.com/bim/autodesk-confirms-forma-will-replace-revit-over-time/",
+   "source": "aec-magazine",
+   "published": "2026-09-15T16:00:49Z",
+   "summary": "More and more of the work that happens in Revit today will happen directly in Forma Autodesk has used AU to say more plainly than at any point since Forma launched where Revit is heading. Asked in its own press release FAQ whether Forma will replace Revit, the company’s answer is “over time, yes”. Design, analysis, coordination, and documentation will move progressively into the Forma industry cloud, while Revit continues as a “Forma Connected Client” and a bridge to what comes next. Autodesk promises no sudden transition and says investment in Revit will continue, but the direction is now on the record rather than buried in a roadmap. Amy Bunszel groups the announcements under the heading of “project intelligence”. The pitch is that commodity AI trained on the open internet cannot clear the high bar set by the built environment because it lacks the data and context needed to understand a project. Autodesk wants the project history, decisions, and current information connected inside Forma, where its AI can reach them. The practical result is that more of the AEC workflow passes through Autodesk’s cloud. The biggest product moves are on the civil side. Civil 3D becomes a Forma…",
+   "id": "33173e87ed0eb48e",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 85,
+    "why": "Autodesk confirms Forma will replace Revit over time; critical strategic shift for future add-in development targets.",
+    "topics": [
+     "revit-roadmap",
+     "forma",
+     "product-strategy"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "Autodesk puts updated AI Transparency Cards inside Assistant",
+   "url": "https://aecmag.com/ai/autodesk-puts-updated-ai-transparency-cards-inside-assistant/",
+   "source": "aec-magazine",
+   "published": "2026-09-15T16:00:37Z",
+   "summary": "Designed to help customers understand what an AI feature does and its limitations, what kind of data it is trained on, and the protections in place Autodesk has updated its AI Transparency Cards and made them available through Autodesk Assistant. Customers can question Assistant in natural language about an AI feature and receive an answer linked to the relevant card. Introduced in 2024 and modelled on nutrition labels, the cards explain what each AI feature does, which models sit behind it, how it was trained, and what limitations apply. Customers previously accessed them through the Autodesk Trust Center. The original cards had two sections covering feature information and “trust ingredients”. The updated cards provide more detail on data handling, customer choice, safeguards, and model providers. Autodesk ’s Sebastian Goodwin says customers had asked for more information about training and data protection. The company worked with Deloitte to test the cards using the Trust ID framework, which divides trust into humanity, transparency, capability, and reliability. Customers answered questions about Autodesk and its AI features before and after reading a card. Autodesk reports…",
+   "id": "cbf6246a70294753",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "AI transparency documentation update; tangential to add-in work unless you integrate Autodesk Assistant into tooling.",
+    "topics": [
+     "ai",
+     "transparency"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "Autodesk extends reach of AI with standalone Assistant",
+   "url": "https://aecmag.com/ai/autodesk-extends-reach-of-ai-with-standalone-assistant/",
+   "source": "aec-magazine",
+   "published": "2026-09-15T16:00:34Z",
+   "summary": "Agent-first Assistant spans products, projects and teams to understand entire workflows Autodesk is extending its agentic AI technology beyond individual tools to span products, projects and teams, while drawing on connected project data in platforms like Autodesk Forma to understand not just the question being asked, but the project behind it. At the same time, the company’s research division is testing something more radical: software with no fixed interface at all. Speaking at the Autodesk University press briefing, Mike Haley, who leads AI and research at Autodesk, unveiled a new agent-first standalone Autodesk Assistant planned for 2027, and described a vision for the future where dynamic, AI-assembled experiences replace fixed interfaces, driven by speech and sketches. Autodesk’s AI strategy is built around the idea that AI is only as good as the context it’s grounded in. According to the company, that means understanding the specialised constraints of real-world projects such as buildings, infrastructure, products, and manufacturing processes. “It’s not just a pile of text,” said Haley. “It’s geometry. It’s engineering intent. It’s the project history. It’s the…",
+   "id": "24bdc8f6a45a4d3d",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Standalone Agent-first Assistant planned for 2027; worth monitoring for potential integration into desktop add-in workflows.",
+    "topics": [
+     "ai",
+     "assistant",
+     "aps"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "Anagnost pitches ‘project intelligence’ across Autodesk",
+   "url": "https://aecmag.com/ai/anagnost-pitches-project-intelligence-across-autodesk/",
+   "source": "aec-magazine",
+   "published": "2026-09-15T16:00:31Z",
+   "summary": "A “connected brain” at the centre of each project brings together data and decisions across Autodesk’s industry clouds Autodesk CEO Andrew Anagnost has opened AU26 with a company-wide pitch built around “project intelligence”. His argument is that AI has widened what can be imagined faster than money, labour, and resources allow companies to deliver. Autodesk ’s answer is a “connected brain” at the centre of each project, bringing together data and decisions across its industry clouds – Forma, Fusion, and Flow. Autodesk presents the capacity gain at three levels. Individuals become more productive and creative, companies more profitable and competitive, and project teams able to take on more work with fewer resources. Whether customers receive that economic benefit, or pay Autodesk more to access it, is left unanswered. A standalone Autodesk Assistant The main product announcement is the next generation of Autodesk Assistant, a standalone, agent-first experience spanning Autodesk products and projects. It does not replace the Assistant already embedded in individual applications. Users describe what they want to accomplish, and Assistant uses the project context to call the…",
+   "id": "7b02cd3d27217756",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Strategic vision on project intelligence; no concrete API or technical changes actionable now.",
+    "topics": [
+     "strategy",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "Autodesk pushes Forma upstream and connects Civil 3D",
+   "url": "https://aecmag.com/civil-engineering/autodesk-pushes-forma-upstream-and-connects-civil-3d/",
+   "source": "aec-magazine",
+   "published": "2026-09-15T16:00:03Z",
+   "summary": "Autodesk launches Forma Street Design and makes Civil 3D a “Forma Connected Client” Autodesk is expanding its Forma industry cloud across more of the AEC lifecycle, making Civil 3D a Forma Connected Client, launching Forma Street Design, a parametric tool for urban roads, and introducing new infrastructure workflows to help teams move from early planning into detailed engineering. Speaking at a pre-Autodesk University press briefing, Theo Agelopoulos, who leads AEC design strategy at Autodesk, framed the announcements against a familiar industry backdrop. Customers, he said, are “being asked to deliver better projects with less people,” on projects that are only getting more complex. The question Autodesk is trying to answer, he said, is how to give architects, engineers and builders more capacity while also improving the quality of their decisions. His answer: AI alone won’t do it. “AI also needs data and context” — environment, design intent, owner requirements, risks, resourcing — and today “too much of that information is fragmented across different files, different products, in some cases not even Autodesk products, and humans.” Expanding Forma across more of the AEC…",
+   "id": "d81aad214b3fe528",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Forma expansion and Civil 3D integration; contextual for future interop but no immediate Revit API implications.",
+    "topics": [
+     "forma",
+     "civil3d"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "HP improves automation in SitePrint and Build Workspace",
+   "url": "https://aecmag.com/construction/hp-improves-automation-in-siteprint-and-build-workspace/",
+   "source": "aec-magazine",
+   "published": "2026-09-15T12:00:57Z",
+   "summary": "Robotic layout system gains cloud CAD editing and ‘Smart Navigation’ while cloud platform improves drawing management and AI vectorisation At Autodesk University today HP introduced new capabilities to its SitePrint robotic layout system and Build Workspace construction drawing management and collaboration platform, with a focus on speeding document workflows and reducing on-site rework. For HP SitePrint, the headline addition is a new cloud-based CAD editor built directly into the SitePrint platform and accessed through a browser. Previously, layout jobs had to be prepared in a separate CAD application like AutoCAD or Revit and then uploaded into the robot’s workflow. Now, users can edit and prepare layout files in the cloud, using dedicated tools and automations to streamline pre‑layout setup. This allows operators on site to make last‑minute changes or corrections themselves, without having to send files back to the office for revision. On the construction site, SitePrint gains a new Smart Navigation feature. Using its depth cameras and sensors, the robot can detect unexpected, unmapped obstacles on the floor and automatically re‑plan and adapt its route around them without…",
+   "id": "dec56073bbfe50d6",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "HP SitePrint and Build Workspace improvements; not relevant to your Revit add-in and model audit practice.",
+    "topics": [
+     "construction-tech"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "HP ZBook Ultra G3a brings local AI to Revit",
+   "url": "https://aecmag.com/workstations/hp-zbook-ultra-g3a-brings-local-ai-to-revit/",
+   "source": "aec-magazine",
+   "published": "2026-09-15T12:00:09Z",
+   "summary": "16-inch AMD Ryzen AI-powered mobile workstation pairs 192 GB of unified memory with Perplexity’s agentic platform to run substantial LLMs and AI agents locally alongside desktop tools like Revit. The HP ZBook Ultra G3a, unveiled today at Autodesk University, isn’t just another high-spec slimline 16-inch mobile workstation. In the age of generative and agentic AI HP, in partnership with Perplexity, is attempting to redefine what a pro laptop is for. Rather than positioning the Ultra G3a as a traditional mobile workstation for CAD, BIM, visualisation and simulation work alone, HP is pitching it as a “personal mobile token factory” – a device designed to run serious AI workloads and agents locally, cutting cloud token costs while giving firms more control over their data and workflows. Underpinning this approach is the Ultra G3a’s defining hardware feature: a unified memory architecture built around the AMD Ryzen AI Max Pro processor, which integrates the CPU, GPU and NPU on a single chip, which each having direct and fast access to a shared pool of high-bandwidth memory. The machine can be configured with up to 192 GB, but this is soldered onto the chip, so whatever capacity is…",
+   "id": "5acfb89695ec0f87",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "HP workstation with local LLM capability for Revit; interesting for future AI agents in add-ins, but product announcement only.",
+    "topics": [
+     "hardware",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
   {
    "title": "The new APS: A developer platform for the AI era",
    "url": "https://aps.autodesk.com/blog/new-aps-developer-platform-ai-era",
@@ -151,7 +332,7 @@
    }
   },
   {
-   "title": "Free SVS Accessibility Checker: Review Modeled Accessibility Conditions for the UAE",
+   "title": "Free SVS Accessibility Checker: Review Modeled Accessibility Conditions",
    "url": "http://revitaddons.blogspot.com/2026/09/free-svs-accessibility-checker-review.html",
    "source": "revit-addons",
    "published": "2026-09-15T00:26:00Z",
@@ -929,6 +1110,48 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-08-28T09:06:35.158405Z"
+   }
+  },
+  {
+   "title": "Autodesk Assistant: Built for the way you Design & Make",
+   "url": "https://aps.autodesk.com/blog/autodesk-assistant-built-way-you-design-make",
+   "source": "aps-blog",
+   "published": "2026-08-27T23:31:04Z",
+   "summary": "Autodesk Assistant: Built for the way you Design & Make Abby El-Asmar 15 Sep 2026 Abby El-Asmar Share AI is getting better quickly. But for those in the Design & Make industries, a capable model is only part of the equation. To be genuinely useful, AI needs to understand the work behind a request: the project, the data and tools involved, the decisions already made, and how they connect. It needs to work with the specialized technology and expertise organizations already rely on. And it needs to draw on different AI models for different tasks. At Autodesk University 2026, we shared how we’re addressing those challenges as we continue to evolve Autodesk Assistant. Autodesk Assistant starts with what you’re trying to achieve and helps you move the work forward. Rather than requiring you to navigate products, workflows, and commands on your own, Assistant brings forward the right Autodesk capabilities to help turn your intent into work you can review, refine, and use. This year, we’re expanding what makes that possible: giving Assistant more context about the work, connecting it to a broader range of AI and specialized capabilities, and bringing the right AI to each task. Autodesk…",
+   "id": "4ef11f773d4cdd6e",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Autodesk Assistant design philosophy for specialized tools and workflows; relevant if planning Assistant integration into add-ins.",
+    "topics": [
+     "ai",
+     "assistant",
+     "aps"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
+   }
+  },
+  {
+   "title": "AU 2026: Autodesk is building AI for Design and Make",
+   "url": "https://aps.autodesk.com/blog/au-2026-autodesk-building-ai-design-and-make",
+   "source": "aps-blog",
+   "published": "2026-08-27T23:29:59Z",
+   "summary": "AU 2026: Autodesk is building AI for Design and Make Abby El-Asmar 15 Sep 2026 Abby El-Asmar Share AI is changing how people design and make. At Autodesk University 2026, we’re showing what comes next: AI that doesn’t just understand a prompt, but understands the data, relationships, decisions, and workflows behind real projects. For developers, there’s an equally important part of this story. We’re building this future to be open and extensible. That means giving developers new ways to connect their own agents, tools, data, and domain expertise with Autodesk, and build AI-powered workflows that span applications, disciplines, and organizations. Here’s what you should know. AI gets more useful when it understands the work General-purpose AI knows a lot about the world. But design and make workflows require something additional: an understanding of geometry, models, schedules, materials, project relationships, and the decisions people make along the way. Autodesk Assistant can draw on context from Autodesk design and make data to better interpret those workflows and generate more relevant, explainable responses. The context graph maps how information, people, decisions, and…",
+   "id": "7e3ec90bfda349e8",
+   "fetched_at": "2026-09-16T06:10:30.903558Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 60,
+    "why": "AU26 AI strategy emphasizes open extensibility for developers; watch for new APIs and agent-connection patterns.",
+    "topics": [
+     "ai",
+     "aps",
+     "developer-platform"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-16T06:10:30.903558Z"
    }
   },
   {
