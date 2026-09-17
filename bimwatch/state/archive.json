@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-09-16T06:10:30.903558Z",
- "count": 422,
+ "generated_at": "2026-09-17T06:10:47.875262Z",
+ "count": 424,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"93297e07c8863d04823e3dfdaad428be-gzip\"",
+   "etag": "\"199d8a16815d8135e5f896e9916e1e52-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Wed, 16 Sep 2026 01:00:14 GMT",
+   "last_modified": "Wed, 16 Sep 2026 23:55:18 GMT",
    "last_status": 200,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": true,
-   "stale_reason": "no new items in 42 days (expects ~7)"
+   "stale_reason": "no new items in 43 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 200,
+   "last_item_count": 0,
    "last_item_published": "2026-09-15T16:00:49Z",
    "last_modified": "Tue, 15 Sep 2026 16:08:54 GMT",
-   "last_status": 200,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_status": 304,
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-15T01:28:22Z",
    "last_status": 200,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,60 +41,60 @@
    "last_item_published": "2026-09-14T17:14:22Z",
    "last_modified": "Mon, 14 Sep 2026 17:15:15 GMT",
    "last_status": 200,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"149e5aab73308c37762a5dc8fdabc872\"",
+   "etag": "W/\"d8adb168763acbc52e4ebefc386f00f5\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 15 Sep 2026 15:09:37 GMT",
+   "last_modified": "Wed, 16 Sep 2026 10:51:20 GMT",
    "last_status": 200,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"c6403066537d79967be9c0fcd27e38d9\"",
+   "etag": "W/\"18ee14140d38557eec56dde8593d1249\"",
    "last_item_count": 10,
-   "last_item_published": "2026-09-15T10:10:56Z",
+   "last_item_published": "2026-09-17T05:07:20Z",
    "last_status": 200,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-16T02:17:00Z",
-   "last_modified": "Wed, 16 Sep 2026 02:38:05 GMT",
+   "last_item_published": "2026-09-17T00:37:00Z",
+   "last_modified": "Thu, 17 Sep 2026 01:17:01 GMT",
    "last_status": 200,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 63,
+   "consecutive_failures": 64,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-16T06:10:30.903558Z",
+   "last_failure": "2026-09-17T06:10:47.875262Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "63 consecutive failures: HTTP 403"
+   "stale_reason": "64 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
-   "etag": "W/\"91eabb42c24aa9b0bb730deeace0b493\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-09-14T10:00:00Z",
-   "last_status": 304,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "etag": "W/\"a4fb2faebdfeb6a2c99371ab7f6c13ef\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-16T09:30:00Z",
+   "last_status": 200,
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"6431192e8f97ac2c32a9673f35bef770\"",
+   "etag": "W/\"7e6c4b46b0882de9de4dfa20335e4061\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,53 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-16T06:10:30.903558Z",
+   "last_success": "2026-09-17T06:10:47.875262Z",
    "stale": true,
-   "stale_reason": "no new items in 92 days (expects ~30)"
+   "stale_reason": "no new items in 93 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Free SVS MEP Room Sync: Copy Room and Space Information onto MEP Elements",
+   "url": "http://revitaddons.blogspot.com/2026/09/free-svs-mep-room-sync-copy-room-and.html",
+   "source": "revit-addons",
+   "published": "2026-09-17T00:37:00Z",
+   "summary": "Summary SVS MEP Room Sync is a free Autodesk Revit add-in from SVS Tools/SVS Team that helps MEP teams copy room and space information from linked Revit models onto supported MEP elements. It is designed to keep spatial coordination data connected to the model elements that need it, making room-based schedules, review workflows, and coordination tasks easier to manage. Primary Purpose The add-in addresses a common Revit MEP coordination problem: room and space data often resides in an architectural linked model, while many MEP components exist in the host MEP model and may not automatically inherit useful room information. SVS MEP Room Sync helps bridge that gap by reading spatial information from rooms or spaces and writing selected values to MEP elements for scheduling, tagging, checking, and review. Room and Space Data Synced Room or space number. Room or space name. Room or space description, where supported by the workflow. Source link information used for the lookup, supporting traceability back to the linked model. Supported Scope Options The tool allows users to choose the scope that fits the task. Based on the available SVS public description, users can sync across the…",
+   "id": "d4d7bf6169903261",
+   "fetched_at": "2026-09-17T06:10:47.875262Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Free tool for MEP coordination; useful to know exists, but not your core automation or API work.",
+    "topics": [
+     "revit-addins",
+     "mep-coordination"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-17T06:10:47.875262Z"
+   }
+  },
+  {
+   "title": "Hand-Drawn Sketch to Revit Detail with GPT-6 Astra",
+   "url": "https://www.bimpure.com/blog/hand-drawn-sketch-to-revit-detail-with-gpt-6-astra",
+   "source": "revit-pure",
+   "published": "2026-09-16T09:30:00Z",
+   "summary": "In this video, learn how to create a Revit detail from a hand-drawn sketch by using GPT-6 Astra. 1- Initial attempt The first test asked GPT-6 Astra to recreate an existing detail image directly inside Revit using the BIM Pure Revit MCP. It worked, but took around 20 minutes, used a lot of tokens, and still made a few mistakes. The next test used a rough hand-drawn sketch instead, which is closer to a real office workflow. 2- Notion Context The AI also needs office context: drafting standards, preferred components, and rules to follow. A Notion page was created to explain the BIM Pure detailing procedure, including a requirement to clearly mark AI-generated details for review. With the ChatGPT Notion integration, you don't need to paste the text or link to the page; it can just fetch it. 3- Prompting The prompt asked Astra to read the Notion procedure, analyze the sketch, and recreate it using existing Revit detail components. Before starting, it asked useful questions about dimensions, wall assemblies, insulation thickness, and scale. 4- Cleaning up The first result was quite close, but had several obvious issues: incorrect furring, duplicated framing, missing components, and a…",
+   "id": "a73b6b4015ac86ab",
+   "fetched_at": "2026-09-17T06:10:47.875262Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Concrete LLM+Revit API technique for detail generation via MCP; shows viable workflow for sketch-to-model automation.",
+    "topics": [
+     "ai-revit",
+     "automation",
+     "revit-mcp"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-17T06:10:47.875262Z"
+   }
+  },
   {
    "title": "My 3Dconnexion Setup Review",
    "url": "http://revitaddons.blogspot.com/2026/09/my-3dconnexion-setup-review.html",
