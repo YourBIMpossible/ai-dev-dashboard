@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-17 06:00:17",
+  "checked": "2026-09-18 06:00:20",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -98,12 +98,12 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-09-17",
+      "lastActivity": "2026-09-18",
       "newestRecent": "2026-09-02",
-      "lagDays": 15,
+      "lagDays": 16,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-09-17) is 15 days ahead of the newest recent[] entry (2026-09-02)"
+      "reason": "git activity (2026-09-18) is 16 days ahead of the newest recent[] entry (2026-09-02)"
     },
     "pc-monitor": {
       "name": "PC Monitor",
