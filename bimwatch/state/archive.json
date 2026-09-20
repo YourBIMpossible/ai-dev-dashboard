@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-19T06:09:29.399416Z",
- "count": 432,
+ "generated_at": "2026-09-20T06:09:35.811650Z",
+ "count": 433,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,9 +9,9 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 16 Sep 2026 23:55:18 GMT",
    "last_status": 200,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": true,
-   "stale_reason": "no new items in 45 days (expects ~7)"
+   "stale_reason": "no new items in 46 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-09-17T15:01:25Z",
    "last_modified": "Thu, 17 Sep 2026 15:01:25 GMT",
    "last_status": 304,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-17T16:21:46Z",
    "last_status": 200,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,7 +41,7 @@
    "last_item_published": "2026-09-14T17:14:22Z",
    "last_modified": "Mon, 14 Sep 2026 17:15:15 GMT",
    "last_status": 200,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,42 +51,42 @@
    "last_item_count": 10,
    "last_modified": "Fri, 18 Sep 2026 15:00:50 GMT",
    "last_status": 200,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
    "etag": "W/\"3f30f6bb8ab79c758d8f969083750e76\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-09-18T17:30:34Z",
-   "last_status": 200,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_status": 304,
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-19T00:45:00Z",
-   "last_modified": "Sat, 19 Sep 2026 02:11:22 GMT",
+   "last_item_published": "2026-09-19T23:14:00Z",
+   "last_modified": "Sun, 20 Sep 2026 00:51:04 GMT",
    "last_status": 200,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 66,
+   "consecutive_failures": 67,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-19T06:09:29.399416Z",
+   "last_failure": "2026-09-20T06:09:35.811650Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "66 consecutive failures: HTTP 403"
+   "stale_reason": "67 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-16T09:30:00Z",
    "last_status": 304,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"32660c0421fa87a055ab484e0a556b48\"",
+   "etag": "W/\"7b6de3466c94d8fee9c5dad33fcbd824\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-19T06:09:29.399416Z",
+   "last_success": "2026-09-20T06:09:35.811650Z",
    "stale": true,
-   "stale_reason": "no new items in 95 days (expects ~30)"
+   "stale_reason": "no new items in 96 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Draftmate: AI for Sketch or CAD Plan to Revit Model",
+   "url": "http://revitaddons.blogspot.com/2026/09/draftmate-ai-for-sketch-or-cad-plan-to.html",
+   "source": "revit-addons",
+   "published": "2026-09-19T23:14:00Z",
+   "summary": "Editor's Note: whenever I check Linkedin, which is several times a day, there are new posts about AI and Revit (or related product) modeling. It's impossible to keep up. Ironically, almost all of these modeling examples are of recreating existing buildings or details. Draftmate stands out as an AI tool tailored for converting sketches or CAD plans into new design BIM models. Read on for details. Summary Civly Draftmate AI, based on information available from its website, is best understood as an AI-powered BIM drafting and coordination platform. Civly positions the product around moving from sketches, CAD files, or early design intent into editable, coordinated BIM outputs while keeping human professionals in control of approvals. Primary Product Positioning Civly describes itself as a BIM drafting and coordination platform for engineering teams. Its public messaging emphasizes moving from drafting to designing, creating one source of truth, and helping architecture, structure, MEP, engineering calculations, and local compliance checks stay coordinated within a shared BIM baseline. Relationship to Revit The civly.dev website describes a workflow that creates full editable,…",
+   "id": "6943e7e07ef176e3",
+   "fetched_at": "2026-09-20T06:09:35.811650Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A product built on Revit API; no technique described, no concrete integration details or API surface changes relevant to your work.",
+    "topics": [
+     "revit-integrations",
+     "ai-bim"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-20T06:09:35.811650Z"
+   }
+  },
   {
    "title": "Product Roundup: SVS Team",
    "url": "http://revitaddons.blogspot.com/2026/09/product-roundup-svs-team.html",
