@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-20",
+  generated: "2026-09-21",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-09-07",
+  activitySince: "2026-09-08",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,7 +289,7 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [28,0,0,6,39,49,20,1,0,12,0,0,0,0],
+      activity: [0,0,6,39,49,20,1,0,12,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-16",
         summary: "state: mirror evidence-compiler reconcile plus canonical catch-up through 2026-09-16 (647c6b1)"
@@ -316,7 +316,7 @@ window.DASHBOARD_DATA = {
         "P13 Write Engine open owner decisions #1 (staged-unit veto guard) and #3 (BuildSummary bucket-exhaustiveness) were meant to be decided before/with Increment 2 -- Increment 2 is now built + deployed (#273/#544); decide before the live smoke."
       ],
       blockers: [],
-      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item."],
+      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Codebase graph stale - newest graphify snapshot 2026-09-13 (8d old); push or run a wave to refresh"],
       links: [
         { label: "STATE doc (canonical, 06-12, archived)", path: "F:\\BIMpossible-Workspace\\99_Archive\\00_Strategy\\state-snapshots\\BIMpossible_STATE_2026-06-12.md" },
         { label: "True-prod deploy runbook (06-12)", path: "F:\\BIMpossible-Workspace\\02_Reference\\2026-06-12__true-prod-deploy-runbook.md" },
@@ -614,7 +614,7 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [6,0,0,29,12,2,6,0,0,3,0,0,0,0],
+      activity: [0,0,29,12,2,6,0,0,3,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-16",
         summary: "fix(wfa-0914): L5 reliability - RE-4/CQ-2, RE-5, SEC-5, HYG-3, RE-7, FE-7 + Deploy-Local tree guard (#155) (baa9efe)"
@@ -1011,7 +1011,7 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,0,0,1,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,1,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-10",
         summary: "docs: close Power-System deletion-list ruling (option 1 — stays hardcoded) (#15) (97847ae)"
@@ -1200,7 +1200,7 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [29,0,0,1,6,19,12,0,0,0,0,0,0,0],
+      activity: [0,0,1,6,19,12,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-13",
         summary: "Merge pull request #20 from YourBIMpossible/claude/northstar-closeout (c578e69)"
@@ -1285,7 +1285,7 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,0,0,0,0,0,2,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,2,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-13",
         summary: "Stop tracking compiled bytecode under Revit-AI/__pycache__ (9f101f4)"
@@ -1337,7 +1337,7 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [26,0,0,3,16,26,14,1,0,4,0,0,0,0],
+      activity: [0,0,3,16,26,14,1,0,4,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-16",
         summary: "state: mirror evidence-compiler reconcile plus canonical catch-up through 2026-09-16 (647c6b1)"
@@ -1394,10 +1394,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [18,3,3,6,3,5,12,4,3,3,3,3,3,1],
+      activity: [3,3,6,3,5,12,4,3,3,3,3,3,3,2],
       lastActivity: {
-        date: "2026-09-20",
-        summary: "chore: live billing sync 2026-09-20 (134cd99)"
+        date: "2026-09-21",
+        summary: "chore: live billing sync 2026-09-21 (6c6d6c0)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
