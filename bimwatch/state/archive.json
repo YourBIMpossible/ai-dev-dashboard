@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-21T06:13:56.048705Z",
- "count": 434,
+ "generated_at": "2026-09-21T07:20:35.262963Z",
+ "count": 435,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,7 +9,7 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 16 Sep 2026 23:55:18 GMT",
    "last_status": 200,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": true,
    "stale_reason": "no new items in 47 days (expects ~7)"
   },
@@ -19,7 +19,7 @@
    "last_item_published": "2026-09-17T15:01:25Z",
    "last_modified": "Thu, 17 Sep 2026 15:01:25 GMT",
    "last_status": 304,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,19 +29,19 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-17T16:21:46Z",
    "last_status": 200,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"92e2a53ec9af031d35b3071d17822d4c\"",
+   "etag": "W/\"52b88f2cfa8d7e7e3f11e4967200425a\"",
    "last_failure": "2026-09-04T06:10:13.935124Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-14T17:14:22Z",
-   "last_modified": "Mon, 14 Sep 2026 17:15:15 GMT",
+   "last_item_published": "2026-09-21T07:05:57Z",
+   "last_modified": "Mon, 21 Sep 2026 07:19:59 GMT",
    "last_status": 200,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,7 +51,7 @@
    "last_item_count": 10,
    "last_modified": "Fri, 18 Sep 2026 15:00:50 GMT",
    "last_status": 200,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -61,7 +61,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-18T17:30:34Z",
    "last_status": 304,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -71,22 +71,22 @@
    "last_item_published": "2026-09-20T17:39:00Z",
    "last_modified": "Sun, 20 Sep 2026 19:10:34 GMT",
    "last_status": 200,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 68,
+   "consecutive_failures": 69,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-21T06:13:56.048705Z",
+   "last_failure": "2026-09-21T07:20:35.262963Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "68 consecutive failures: HTTP 403"
+   "stale_reason": "69 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-16T09:30:00Z",
    "last_status": 304,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"bd338ef10dfa9347896ced245561b7d4\"",
+   "etag": "W/\"7626eef8521104dcb3590288a4ecbf8a\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-21T06:13:56.048705Z",
+   "last_success": "2026-09-21T07:20:35.262963Z",
    "stale": true,
    "stale_reason": "no new items in 97 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "You Bought a CDE. Your Team Is Using It Like a Network Drive.",
+   "url": "https://bimcorner.com/you-bought-a-cde-your-team-is-using-it-like-a-network-drive/",
+   "source": "bim-corner",
+   "published": "2026-09-21T07:05:57Z",
+   "summary": "Buying a common data environment does not give you a common data environment. The licence is paid. The platform is live. Everyone has a login, the folder structure looks reasonable, and somewhere in your office right now, someone is emailing a drawing to a colleague because it is faster than explaining where to find it. That last part is the tell. I spent ten years doing this before I started teaching it. I worked as a BIM coordinator and Manager on various AEC projects from hospitals to metro lines. I hold the Information Management Practitioner certification, which mostly taught me how wide the gap is between what ISO 19650 says and what companies actually do. Then I did something more useful than any of that. I sat down with 20 BIM managers, information managers and digital leads and asked one narrow question: why doesn’t your CDE work? They gave me 240+ separate problems. When I sorted them, 116 had nothing to do with software features. They were about who decides, who approves, who is allowed, and what happens when nobody checks. This article is about those 116. Six questions that tell you what you actually have Here is a test you can run in the next ten minutes. Pick a live…",
+   "id": "68f471c951aa428f",
+   "fetched_at": "2026-09-21T07:20:35.262963Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 12,
+    "why": "Management and process piece; no technical content, API impact, or tooling details relevant to add-in work.",
+    "topics": [
+     "bim-coordination",
+     "cde"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-21T07:20:35.262963Z"
+   }
+  },
   {
    "title": "Free SheetEX: Batch Export to Popular Formats, Plus DWG Merge & Image Binding",
    "url": "http://revitaddons.blogspot.com/2026/09/free-sheetex-batch-export-to-popular.html",
