@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-21T07:20:35.262963Z",
- "count": 435,
+ "generated_at": "2026-09-22T06:10:26.789954Z",
+ "count": 438,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,9 +9,9 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 16 Sep 2026 23:55:18 GMT",
    "last_status": 200,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": true,
-   "stale_reason": "no new items in 47 days (expects ~7)"
+   "stale_reason": "no new items in 48 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-09-17T15:01:25Z",
    "last_modified": "Thu, 17 Sep 2026 15:01:25 GMT",
    "last_status": 304,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,29 +29,29 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-17T16:21:46Z",
    "last_status": 200,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"52b88f2cfa8d7e7e3f11e4967200425a\"",
+   "etag": "W/\"55c458e135165371fb481d277214285d\"",
    "last_failure": "2026-09-04T06:10:13.935124Z",
    "last_item_count": 10,
    "last_item_published": "2026-09-21T07:05:57Z",
-   "last_modified": "Mon, 21 Sep 2026 07:19:59 GMT",
+   "last_modified": "Mon, 21 Sep 2026 07:47:00 GMT",
    "last_status": 200,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"87e3c23bff5804787e5243cb77ecfb70\"",
-   "last_item_count": 10,
-   "last_modified": "Fri, 18 Sep 2026 15:00:50 GMT",
+   "etag": "W/\"b03a7a58591083a880945e4d78eca974\"",
+   "last_item_count": 8,
+   "last_modified": "Mon, 21 Sep 2026 11:44:15 GMT",
    "last_status": 200,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -61,40 +61,40 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-18T17:30:34Z",
    "last_status": 304,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-20T17:39:00Z",
-   "last_modified": "Sun, 20 Sep 2026 19:10:34 GMT",
+   "last_item_published": "2026-09-22T00:31:00Z",
+   "last_modified": "Tue, 22 Sep 2026 05:12:04 GMT",
    "last_status": 200,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 69,
+   "consecutive_failures": 70,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-21T07:20:35.262963Z",
+   "last_failure": "2026-09-22T06:10:26.789954Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "69 consecutive failures: HTTP 403"
+   "stale_reason": "70 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
-   "etag": "W/\"a4fb2faebdfeb6a2c99371ab7f6c13ef\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-09-16T09:30:00Z",
-   "last_status": 304,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "etag": "W/\"285a0d9f27dae50b1e4768571ee41e56\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-21T10:00:00Z",
+   "last_status": 200,
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"7626eef8521104dcb3590288a4ecbf8a\"",
+   "etag": "W/\"ba2544fe53fbc355cb061023d79d9518\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,70 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-21T07:20:35.262963Z",
+   "last_success": "2026-09-22T06:10:26.789954Z",
    "stale": true,
-   "stale_reason": "no new items in 97 days (expects ~30)"
+   "stale_reason": "no new items in 98 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Free DimGen: An Intelligent Annotation Tool for Structural Workflows",
+   "url": "http://revitaddons.blogspot.com/2026/09/free-dimgen.html",
+   "source": "revit-addons",
+   "published": "2026-09-22T00:31:00Z",
+   "summary": "Summary DimGen is an Autodesk Revit add-in published by Revix on the Autodesk Design and Make Marketplace. Public descriptions position it as an intelligent automation tool for structural engineers, BIM modelers, architects, and draftsmen who need to automate repetitive structural dimensioning and tagging tasks in Revit. Primary Purpose The add-in is designed to reduce the manual effort required to dimension structural drawings. Instead of placing repeated strings of dimensions and tags by hand, users can run task-specific tools that identify structural elements, relate them to grids or axes, and generate dimensions and related annotation automatically in the active Revit view. Core Dimensioning Capabilities Automatic column and grid/axis dimensioning in the active view. Dimensioning for floors, slabs, isolated foundations, and continuous foundations. Support for walls, foundations, axes, and linked models. Smart offset controls for dimension-line placement. Automatic column tagging as part of the column-and-axis workflow. Detailed summary reports after running supported tools. Linked Model and Rotated Element Support One of the notable claims on the Autodesk Marketplace is…",
+   "id": "753101353b96323d",
+   "fetched_at": "2026-09-22T06:10:26.789954Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A structural dimensioning add-in exists; useful to know the category of automation tooling being built, but not your direct work.",
+    "topics": [
+     "revit-addins",
+     "annotation-automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-22T06:10:26.789954Z"
+   }
+  },
+  {
+   "title": "Revit Add-ons Has Competition: Introducing RVT Plugins!",
+   "url": "http://revitaddons.blogspot.com/2026/09/revit-add-ons-has-competition.html",
+   "source": "revit-addons",
+   "published": "2026-09-21T19:10:00Z",
+   "summary": "So, somebody's stealing food from our babies' mouths... 😉 RVT Plugins is a competing site that bills itself as \"your guide to the best Revit add-ins.\" We thought, perhaps, that the site was started during one of our fallow periods to fill the resulting void. However, the site was established in 2018, while Revit Add-ons was in full swing, so we're not sure what the impetus was. (Revit Add-ons was itself established in 2011, and we made 500 posts in 2018.) What's the difference? At first blush, RVT Plugins seems to have more product reviews. However, upon closer inspection, these are generic enough that they could have been AI generated. Microsoft Copilot will do it for you from available standard Internet sources, just build \"format as a review\" into the prompt. While we don't have the time it takes to do many reviews here on Revit Add-ons, our reviews are strictly hands-on, and therefore, we hope, worth your valuable time. We will give props to RVT Plugins for using a very modern blog template, though I think we'll keep our more traditional blog roll format. While our host Blogger is the venerated grandaddy of blog hosting sites, RVT Plugins may be using a more modern hosting…",
+   "id": "02f28083c045c3ff",
+   "fetched_at": "2026-09-22T06:10:26.789954Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Competitor site review; no technical content or changes affecting your add-in development or shipping work.",
+    "topics": [
+     "meta"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-22T06:10:26.789954Z"
+   }
+  },
+  {
+   "title": "Beginner Tutorial: Forma Site Design",
+   "url": "https://www.bimpure.com/blog/beginner-tutorial-forma-site-design",
+   "source": "revit-pure",
+   "published": "2026-09-21T10:00:00Z",
+   "summary": "In this video, you will go through the basics of Autodesk Forma Site Design . You'll start by creating a project and bringing in site data such as buildings, roads, property lines, and satellite imagery. From there, create a simple redevelopment proposal with residential, commercial, and office space. You'll also look at some of the main analysis tools, including: Sun hours Wind Noise and carbon analysis Site metrics Finally, you'll learn how to generate multiple proposals, Revit and Rhino workflows, Forma Building Design, and Forma Boards. If you’re new to Forma Site Design, this is a quick overview of the main workflow from site setup to early design analysis. This video is made in partnership with Autodesk. Join Forma Futures Challenge: https://autodeskformaverse.com/forma-futures 30-day Free Forma Trial: https://www.autodesk.com/ca-en/products/forma/free-trial",
+   "id": "c6c692b48a0d771b",
+   "fetched_at": "2026-09-22T06:10:26.789954Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Tutorial for Forma, a site/early-design tool outside your core Revit production and add-in work scope.",
+    "topics": [
+     "training"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-22T06:10:26.789954Z"
+   }
+  },
   {
    "title": "You Bought a CDE. Your Team Is Using It Like a Network Drive.",
    "url": "https://bimcorner.com/you-bought-a-cde-your-team-is-using-it-like-a-network-drive/",
@@ -230,7 +288,7 @@
    }
   },
   {
-   "title": "Using Microsoft Copilot AI to Generate Content on Revit Add-ons",
+   "title": "Using Microsoft Copilot AI to Generate Content for Revit Add-ons",
    "url": "http://revitaddons.blogspot.com/2026/09/using-microsoft-copilot-ai-to-generate.html",
    "source": "revit-addons",
    "published": "2026-09-18T00:12:00Z",
