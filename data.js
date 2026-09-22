@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-21",
+  generated: "2026-09-22",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-09-08",
+  activitySince: "2026-09-09",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [0,0,6,39,49,20,1,0,12,0,0,0,0,0],
+      activity: [0,6,39,49,20,1,0,12,0,0,0,0,7,0],
       lastActivity: {
-        date: "2026-09-16",
-        summary: "state: mirror evidence-compiler reconcile plus canonical catch-up through 2026-09-16 (647c6b1)"
+        date: "2026-09-21",
+        summary: "docs: add pending 2026-09-21 decisions packet and review (#683) (f6e6f5e)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -316,7 +316,7 @@ window.DASHBOARD_DATA = {
         "P13 Write Engine open owner decisions #1 (staged-unit veto guard) and #3 (BuildSummary bucket-exhaustiveness) were meant to be decided before/with Increment 2 -- Increment 2 is now built + deployed (#273/#544); decide before the live smoke."
       ],
       blockers: [],
-      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Codebase graph stale - newest graphify snapshot 2026-09-13 (8d old); push or run a wave to refresh"],
+      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Codebase graph stale - newest graphify snapshot 2026-09-13 (9d old); push or run a wave to refresh"],
       links: [
         { label: "STATE doc (canonical, 06-12, archived)", path: "F:\\BIMpossible-Workspace\\99_Archive\\00_Strategy\\state-snapshots\\BIMpossible_STATE_2026-06-12.md" },
         { label: "True-prod deploy runbook (06-12)", path: "F:\\BIMpossible-Workspace\\02_Reference\\2026-06-12__true-prod-deploy-runbook.md" },
@@ -576,9 +576,9 @@ window.DASHBOARD_DATA = {
         ]
       },
       waves: {
-        updated: "2026-09-07",
+        updated: "2026-09-21",
         source: "F:\\BIMpossible-Workspace\\00_Strategy\\BIMpossible_WAVE-STATUS.md",
-        summary: { done: 31, built: 8, inFlight: 1, ahead: 3 },
+        summary: { done: 31, built: 14, inFlight: 1, ahead: 3 },
         current: [
           { id: "15", title: "Civil schedules", status: "PARTIAL", date: "2026-06-13", note: "Civil probe-config + model-discovery work merged (`cf3b8ee` Merge feat/wave15-civil-probe-config; model-discovery (local merge c7ac2d5; feat 9145f88)). Adds `b…" },
           { id: "26", title: "Phase 3.10a Cross-Model Room Join", status: "BUILT", date: "2026-07-13", note: "Code merged `dd5adb1` (2026-07-12); warm-time writer gap found+fixed `c72f647`/`09cb66b` (2026-07-13); migration genuinely applied to prod (confirmed live). No…" },
@@ -614,10 +614,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [0,0,29,12,2,6,0,0,3,0,0,0,0,0],
+      activity: [0,29,12,2,6,0,0,3,0,0,0,0,2,0],
       lastActivity: {
-        date: "2026-09-16",
-        summary: "fix(wfa-0914): L5 reliability - RE-4/CQ-2, RE-5, SEC-5, HYG-3, RE-7, FE-7 + Deploy-Local tree guard (#155) (baa9efe)"
+        date: "2026-09-21",
+        summary: "docs(reviews): add 2026-09-13 panel-schedules sheet-index architecture audit (#156) (1181136)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -805,10 +805,10 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,1,0],
       lastActivity: {
-        date: "2026-08-31",
-        summary: "fix(contact): treat a provider 2xx with a failure body as undelivered (1dbbd72)"
+        date: "2026-09-21",
+        summary: "fix(contact): fail closed on a truncated/unparseable provider body (9c6f7dc)"
       },
       branch: null, git: { latestCommit: "709f352" },
       nextActions: ["Email routing aliases: hello@/support@/legal@/billing@/zeriah@ -> Gmail (recipe in IP-Lockdown-Checklist.md Phase 1.5)","Product screenshots: get real app screenshots into Leaders + BIM Managers pages"],
@@ -1011,7 +1011,7 @@ window.DASHBOARD_DATA = {
           { name: "Family Fixer per-family rollout (independent of the 3 phases)", pct: 20, note: "Unchanged this window — PHASE1_FAMILY_CHECKLIST.md untouched since before 07-24. PANEL done (gold master); CB/MTR/DISC SW/XFMR+ALT1 mid-flight; MV CB blocked on a scope decision; ~40 annotation-only symbols queued for batch rename." }
         ]
       },
-      activity: [0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,1,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-10",
         summary: "docs: close Power-System deletion-list ruling (option 1 — stays hardcoded) (#15) (97847ae)"
@@ -1200,10 +1200,10 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,0,1,6,19,12,0,0,0,0,0,0,0,0],
+      activity: [0,1,6,19,12,0,0,0,0,0,0,0,6,0],
       lastActivity: {
-        date: "2026-09-13",
-        summary: "Merge pull request #20 from YourBIMpossible/claude/northstar-closeout (c578e69)"
+        date: "2026-09-21",
+        summary: "Merge pull request #24 from YourBIMpossible/claude/librechat-ufw (0899b43)"
       },
       branch: "main at d7e5140",
       nextActions: [
@@ -1230,7 +1230,7 @@ window.DASHBOARD_DATA = {
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
-        "Endpoint up · models: nemotron-3.5-lightning:30b-a3b-q4_K_M, gemma4:31b-it-q4_K_M, qwen3.8:27b-q4_K_M, gemma4:26b-a4b-it-q4_K_M, qwen3.5:9b, qwen3-coder:30b-a3b-q4_K_M, nomic-embed-text:latest, qwen2.5-coder:14b (snapshot 06:02)",
+        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 06:03)",
         "2026-09-12 - Box powered on; Tailscale install step (9cd0c7a) + Ubuntu install-USB writer/verifier make-install-usb.ps1 (1ceddf0) shipped; PR #15 (Linux install setup) merged (d7e5140). Lian Li LCD/fan + 2nd-GPU roadmap notes local-only (4 commits, unpushed)",
         "2026-09-11 - North star LOCKED: mission reframed to one measurable OpenAI-compatible endpoint; client contract decoupled from Ollama (INFERENCE_BASE_URL/API_KEY/MODEL, 156a0a7); compose healthcheck fixed (f6b01ab)",
         "2026-09-10 - Box-build reassessed against 3 months of evidence (decisions/2026-09-10__box-build-reassessment.md); headless Linux box chosen to fix the 5080's residency/cold-load failures structurally; box powered on for the first time",
@@ -1285,7 +1285,7 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,0,0,0,0,2,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,2,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-13",
         summary: "Stop tracking compiled bytecode under Revit-AI/__pycache__ (9f101f4)"
@@ -1337,10 +1337,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [0,0,3,16,26,14,1,0,4,0,0,0,0,0],
+      activity: [0,3,16,26,14,1,0,4,0,0,0,0,6,0],
       lastActivity: {
-        date: "2026-09-16",
-        summary: "state: mirror evidence-compiler reconcile plus canonical catch-up through 2026-09-16 (647c6b1)"
+        date: "2026-09-21",
+        summary: "docs(audit): add 2026-09-16 incremental audit report (d4b9f1d)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1394,10 +1394,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,3,6,3,5,12,4,3,3,3,3,3,3,2],
+      activity: [3,6,3,5,12,4,3,3,3,3,3,3,4,1],
       lastActivity: {
-        date: "2026-09-21",
-        summary: "chore: live billing sync 2026-09-21 (6c6d6c0)"
+        date: "2026-09-22",
+        summary: "chore: live billing sync 2026-09-22 (a4e0c9f)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,

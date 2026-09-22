@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-21 06:00:14",
+  "checked": "2026-09-22 06:00:14",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -8,32 +8,32 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-09-16",
+      "lastActivity": "2026-09-21",
       "newestRecent": "2026-09-02",
-      "lagDays": 14,
+      "lagDays": 19,
       "evaluated": true,
-      "stale": false,
-      "reason": null
+      "stale": true,
+      "reason": "git activity (2026-09-21) is 19 days ahead of the newest recent[] entry (2026-09-02)"
     },
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-09-16",
+      "lastActivity": "2026-09-21",
       "newestRecent": "2026-09-01",
-      "lagDays": 15,
+      "lagDays": 20,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-09-16) is 15 days ahead of the newest recent[] entry (2026-09-01)"
+      "reason": "git activity (2026-09-21) is 20 days ahead of the newest recent[] entry (2026-09-01)"
     },
     "site": {
       "name": "BIMpossible Site",
       "status": "active",
-      "lastActivity": "2026-08-31",
+      "lastActivity": "2026-09-21",
       "newestRecent": "2026-08-31",
-      "lagDays": 0,
+      "lagDays": 21,
       "evaluated": true,
-      "stale": false,
-      "reason": null
+      "stale": true,
+      "reason": "git activity (2026-09-21) is 21 days ahead of the newest recent[] entry (2026-08-31)"
     },
     "pickem": {
       "name": "Preseason Pick'em",
@@ -68,9 +68,9 @@ window.NARRATIVE_FRESHNESS = {
     "aiserver": {
       "name": "AI-Server",
       "status": "active",
-      "lastActivity": "2026-09-13",
+      "lastActivity": "2026-09-21",
       "newestRecent": "2026-09-12",
-      "lagDays": 1,
+      "lagDays": 9,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -88,22 +88,22 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-09-16",
-      "newestRecent": "2026-09-02",
-      "lagDays": 14,
-      "evaluated": true,
-      "stale": false,
-      "reason": null
-    },
-    "dashboard-auto": {
-      "name": "Dashboard (Auto Clone)",
-      "status": "active",
       "lastActivity": "2026-09-21",
       "newestRecent": "2026-09-02",
       "lagDays": 19,
       "evaluated": true,
       "stale": true,
       "reason": "git activity (2026-09-21) is 19 days ahead of the newest recent[] entry (2026-09-02)"
+    },
+    "dashboard-auto": {
+      "name": "Dashboard (Auto Clone)",
+      "status": "active",
+      "lastActivity": "2026-09-22",
+      "newestRecent": "2026-09-02",
+      "lagDays": 20,
+      "evaluated": true,
+      "stale": true,
+      "reason": "git activity (2026-09-22) is 20 days ahead of the newest recent[] entry (2026-09-02)"
     },
     "pc-monitor": {
       "name": "PC Monitor",
