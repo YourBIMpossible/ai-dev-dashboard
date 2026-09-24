@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-23 06:00:12",
+  "checked": "2026-09-23 20:12:47",
   "staleDays": 14,
   "cards": 12,
   "evaluated": 12,
@@ -18,12 +18,12 @@ window.NARRATIVE_FRESHNESS = {
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-09-21",
+      "lastActivity": "2026-09-23",
       "newestRecent": "2026-09-01",
-      "lagDays": 20,
+      "lagDays": 22,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-09-21) is 20 days ahead of the newest recent[] entry (2026-09-01)"
+      "reason": "git activity (2026-09-23) is 22 days ahead of the newest recent[] entry (2026-09-01)"
     },
     "site": {
       "name": "BIMpossible Site",
@@ -78,12 +78,12 @@ window.NARRATIVE_FRESHNESS = {
     "ai-brain-data": {
       "name": "AI Brain Data",
       "status": "active",
-      "lastActivity": "2026-09-22",
+      "lastActivity": "2026-09-23",
       "newestRecent": "2026-08-23",
-      "lagDays": 30,
+      "lagDays": 31,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-09-22) is 30 days ahead of the newest recent[] entry (2026-08-23)"
+      "reason": "git activity (2026-09-23) is 31 days ahead of the newest recent[] entry (2026-08-23)"
     },
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",

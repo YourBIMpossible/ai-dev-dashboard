@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [6,39,49,20,1,0,12,0,0,0,0,7,25,1],
+      activity: [6,39,49,20,1,0,12,0,0,0,0,7,25,11],
       lastActivity: {
         date: "2026-09-23",
-        summary: "chore(nl-filter): weekly live drift monitor run 2026-09-23 (c3523b6)"
+        summary: "fix(admin-host): run root redirect on prefetch, fix stale comments, pin tests (#706 review) (#709) (57bc344)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -614,10 +614,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [29,12,2,6,0,0,3,0,0,0,0,2,0,0],
+      activity: [29,12,2,6,0,0,3,0,0,0,0,2,0,3],
       lastActivity: {
-        date: "2026-09-21",
-        summary: "docs(reviews): add 2026-09-13 panel-schedules sheet-index architecture audit (#156) (1181136)"
+        date: "2026-09-23",
+        summary: "fix(scripts): harden docref collision scanner and record review closeout (#161) (52500e0)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -1230,7 +1230,7 @@ window.DASHBOARD_DATA = {
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
-        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 06:03)",
+        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 20:14)",
         "2026-09-12 - Box powered on; Tailscale install step (9cd0c7a) + Ubuntu install-USB writer/verifier make-install-usb.ps1 (1ceddf0) shipped; PR #15 (Linux install setup) merged (d7e5140). Lian Li LCD/fan + 2nd-GPU roadmap notes local-only (4 commits, unpushed)",
         "2026-09-11 - North star LOCKED: mission reframed to one measurable OpenAI-compatible endpoint; client contract decoupled from Ollama (INFERENCE_BASE_URL/API_KEY/MODEL, 156a0a7); compose healthcheck fixed (f6b01ab)",
         "2026-09-10 - Box-build reassessed against 3 months of evidence (decisions/2026-09-10__box-build-reassessment.md); headless Linux box chosen to fix the 5080's residency/cold-load failures structurally; box powered on for the first time",
@@ -1285,10 +1285,10 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,0,0,2,0,0,0,0,0,0,0,0,15,0],
+      activity: [0,0,0,2,0,0,0,0,0,0,0,0,15,2],
       lastActivity: {
-        date: "2026-09-22",
-        summary: "B-6R: AI-server 1 TB drive reconciliation (5 reports, read-only) (c859327)"
+        date: "2026-09-23",
+        summary: "docs(preservation): record B-7 first private-library migration (117cca3)"
       },
       branch: "master (local-only, no remote)",
       git: { warn: "No GitHub remote — local-only git. Confirm whether this should stay private or get a private remote for backup." },
@@ -1337,10 +1337,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [3,16,26,14,1,0,4,0,0,0,0,6,8,1],
+      activity: [3,16,26,14,1,0,4,0,0,0,0,6,8,4],
       lastActivity: {
         date: "2026-09-23",
-        summary: "chore(nl-filter): weekly live drift monitor run 2026-09-23 (c3523b6)"
+        summary: "docs(option-c): reconcile admin-host root 404 → 307 /admin (#706) (#158) (44177fe)"
       },
       branch: "main at ae4b7af; synced with origin",
       git: null,
@@ -1394,10 +1394,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [6,3,5,12,4,3,3,3,3,3,3,4,3,1],
+      activity: [6,3,5,12,4,3,3,3,3,3,3,4,3,2],
       lastActivity: {
         date: "2026-09-23",
-        summary: "chore: live billing sync 2026-09-23 (99df33e)"
+        summary: "dashboard refresh 2026-09-23 06:00 (47b28fb)"
       },
       branch: "main at a571627; both Dashboard and Dashboard-auto in sync with origin",
       git: null,
