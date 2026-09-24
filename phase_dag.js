@@ -50,7 +50,7 @@ window.PHASE_DAG = {
 {
 "id": "7",
 "name": "Model Write-back — DA4R + Revit Link (two engines)",
-"status": "LIVE — supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); flag ON in .env",
+"status": "LIVE — Revit Link engine only; supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); `BIMPOSSIBLE_REVIT_LINK_*` flags ON in .env. DA4R is NOT live: inert scaffold, `BIMPOSSIBLE_DA4R_ENABLED` absent/off by owner decision 2026-09-23 (env contract: supported-inactive)",
 "dependsOn": [],
 "gates": [
 "5",
@@ -204,7 +204,7 @@ window.PHASE_DAG = {
 {
 "id": "7",
 "name": "Model Write-back — DA4R + Revit Link (two engines)",
-"status": "LIVE — supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); flag ON in .env"
+"status": "LIVE — Revit Link engine only; supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); `BIMPOSSIBLE_REVIT_LINK_*` flags ON in .env. DA4R is NOT live: inert scaffold, `BIMPOSSIBLE_DA4R_ENABLED` absent/off by owner decision 2026-09-23 (env contract: supported-inactive)"
 },
 {
 "id": "8",
@@ -281,7 +281,7 @@ window.PHASE_DAG = {
 {
 "id": "7",
 "name": "Model Write-back — DA4R + Revit Link (two engines)",
-"status": "LIVE — supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); flag ON in .env"
+"status": "LIVE — Revit Link engine only; supervised cutover PASS 2026-08-25 (audit row id=28, decision-log 2026-08-25); `BIMPOSSIBLE_REVIT_LINK_*` flags ON in .env. DA4R is NOT live: inert scaffold, `BIMPOSSIBLE_DA4R_ENABLED` absent/off by owner decision 2026-09-23 (env contract: supported-inactive)"
 },
 {
 "id": "9",

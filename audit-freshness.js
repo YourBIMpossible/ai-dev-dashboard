@@ -1,24 +1,24 @@
 window.AUDIT_FRESHNESS = {
-  "checked": "2026-09-23 20:12:47",
+  "checked": "2026-09-24 06:00:18",
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
-      "lastRun": "2026-09-12",
+      "lastRun": "2026-09-22",
       "newestOnDisk": "2026-09-21",
-      "stale": true,
-      "action": "new audit report detected; manual reconciled ingest required"
+      "stale": false,
+      "action": null
     },
     "addins": {
       "name": "Add-Ins / RevitLink",
-      "lastRun": "2026-09-12",
+      "lastRun": "2026-09-21",
       "newestOnDisk": "2026-09-21",
-      "stale": true,
-      "action": "new audit report detected; manual reconciled ingest required"
+      "stale": false,
+      "action": null
     },
     "site": {
       "name": "BIMpossible Site",
-      "lastRun": "2026-09-07",
-      "newestOnDisk": "2026-09-07",
+      "lastRun": "2026-09-21",
+      "newestOnDisk": null,
       "stale": false,
       "action": null
     },
@@ -31,8 +31,43 @@ window.AUDIT_FRESHNESS = {
     },
     "aiserver": {
       "name": "AI-Server",
-      "lastRun": "2026-07-12",
-      "newestOnDisk": "2026-07-12",
+      "lastRun": "2026-09-13",
+      "newestOnDisk": null,
+      "stale": false,
+      "action": null
+    },
+    "claude-profile": {
+      "name": "Claude Profile",
+      "lastRun": "2026-09-21",
+      "newestOnDisk": "2026-09-21",
+      "stale": false,
+      "action": null
+    },
+    "claude-tools": {
+      "name": "Claude-Tools",
+      "lastRun": "2026-09-23",
+      "newestOnDisk": "2026-09-21",
+      "stale": false,
+      "action": null
+    },
+    "evidence-compiler": {
+      "name": "Evidence Compiler",
+      "lastRun": "2026-09-06",
+      "newestOnDisk": null,
+      "stale": false,
+      "action": null
+    },
+    "local-intel": {
+      "name": "Local Intel",
+      "lastRun": "2026-09-06",
+      "newestOnDisk": null,
+      "stale": false,
+      "action": null
+    },
+    "personal-ocr": {
+      "name": "Personal OCR",
+      "lastRun": "2026-09-13",
+      "newestOnDisk": null,
       "stale": false,
       "action": null
     }
