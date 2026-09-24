@@ -48,6 +48,7 @@ WINDOW_DAYS = 14
 # relocate a clone without editing source - same pattern as sync_ledgers.py's WS/BIM_REPO.
 AI_BRAIN_DATA_REPO = Path(os.environ.get("AI_BRAIN_DATA_REPO", r"F:\AI-Brain-Data"))
 PC_MONITOR_REPO = Path(os.environ.get("PC_MONITOR_REPO", r"F:\PC-Monitor"))
+REVIT_OPS_REPO = Path(os.environ.get("REVIT_OPS_REPO", r"F:\Revit-Ops"))
 
 # project id (data.js marker) -> source repo(s). A project may span repos (the
 # platform card counts both the code repo and the strategy workspace). Each entry is
@@ -66,6 +67,13 @@ PROJECT_REPOS = {
     "dashboard-auto":        ["YourBIMpossible/ai-dev-dashboard"],
     "ai-brain-data": [AI_BRAIN_DATA_REPO],
     "pc-monitor":    [PC_MONITOR_REPO],
+    "claude-tools":      ["YourBIMpossible/claude-tools"],
+    "claude-profile":    ["YourBIMpossible/claude-profile"],
+    "claude-next-state": ["YourBIMpossible/claude-next-state"],
+    "evidence-compiler": ["YourBIMpossible/evidence-compiler"],
+    "personal-ocr":      ["YourBIMpossible/Personal-OCR"],
+    "local-intel":       ["YourBIMpossible/local-intel"],
+    "revit-ops":         [REVIT_OPS_REPO],
 }
 
 
