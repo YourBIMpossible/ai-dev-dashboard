@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-09-23T06:10:24.355183Z",
- "count": 439,
+ "generated_at": "2026-09-24T06:10:54.076651Z",
+ "count": 440,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"199d8a16815d8135e5f896e9916e1e52-gzip\"",
+   "etag": "\"76ea9767e05d11bbde5c1d7b9a72f0f2-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Wed, 16 Sep 2026 23:55:18 GMT",
+   "last_modified": "Thu, 24 Sep 2026 04:50:09 GMT",
    "last_status": 200,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": true,
-   "stale_reason": "no new items in 49 days (expects ~7)"
+   "stale_reason": "no new items in 50 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-09-17T15:01:25Z",
    "last_modified": "Thu, 17 Sep 2026 15:01:25 GMT",
    "last_status": 304,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,41 +27,41 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-17T16:21:46Z",
+   "last_item_published": "2026-09-23T08:02:11Z",
    "last_status": 200,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"55c458e135165371fb481d277214285d\"",
+   "etag": "W/\"2f2d73ce19e8dfa6c4055d975a287464\"",
    "last_failure": "2026-09-04T06:10:13.935124Z",
    "last_item_count": 10,
    "last_item_published": "2026-09-21T07:05:57Z",
-   "last_modified": "Mon, 21 Sep 2026 07:47:00 GMT",
+   "last_modified": "Wed, 23 Sep 2026 06:26:25 GMT",
    "last_status": 200,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"9fdcea846b4040645c1a733466764f24\"",
+   "etag": "W/\"054899888424a555e138dddaf115c611\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 22 Sep 2026 14:11:07 GMT",
+   "last_modified": "Wed, 23 Sep 2026 13:24:52 GMT",
    "last_status": 200,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"3f30f6bb8ab79c758d8f969083750e76\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-09-18T17:30:34Z",
-   "last_status": 304,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "etag": "W/\"3afd02199b722839e4a8161add62adf7\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-24T06:05:01Z",
+   "last_status": 200,
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -69,24 +69,24 @@
    "consecutive_failures": 0,
    "last_item_count": 25,
    "last_item_published": "2026-09-23T00:16:00Z",
-   "last_modified": "Wed, 23 Sep 2026 01:33:05 GMT",
+   "last_modified": "Wed, 23 Sep 2026 18:12:03 GMT",
    "last_status": 200,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 71,
+   "consecutive_failures": 72,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-23T06:10:24.355183Z",
+   "last_failure": "2026-09-24T06:10:54.076651Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "71 consecutive failures: HTTP 403"
+   "stale_reason": "72 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"290576367efc4a964d5fb23bd2b36a12\"",
+   "etag": "W/\"df9c0dcdabb61299c0156e8f6ebaada6\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-23T06:10:24.355183Z",
+   "last_success": "2026-09-24T06:10:54.076651Z",
    "stale": true,
-   "stale_reason": "no new items in 99 days (expects ~30)"
+   "stale_reason": "no new items in 100 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "BuildingConnected API Enhancements: Bid Leveling Controls, Private Attachments, and Bid Package Organizational Attributes",
+   "url": "https://aps.autodesk.com/blog/buildingconnected-api-enhancements-bid-leveling-controls-private-attachments-and-bid-package",
+   "source": "aps-blog",
+   "published": "2026-09-23T08:02:11Z",
+   "summary": "BuildingConnected API Enhancements: Bid Leveling Controls, Private Attachments, and Bid Package Organizational Attributes naveen.kumar.t… 23 Sep 2026 Naveen Kumar Thalaivirichan Xiaodong Liang Share We’re excited to announce the third-round enhancements of year 2026 to BuildingConnected API. This release covers several areas: bid leveling (line item toggle states, and plugs carried forward from a previous revision), private bid attachments, new V3 endpoints for bid attachment and project NDA downloads, bid package organizational attributes, batch retrieval for bid packages and projects, AI bid extraction opt-in on projects, and invite search and filtering. The full list of updates is available in the BuildingConnected change log . All of the enhancements in this release are additive. However, the introduction of the new V3 attachment download endpoints means that the corresponding V2 endpoints will be deprecated. The Transitioning to the New Version API section below provides more details. In addition, a separate set of operations is also being deprecated as part of this release. For more information, see our companion post, BuildingConnected API Deprecations(Coming Soon), for…",
+   "id": "f7acd9e27fe1c64e",
+   "fetched_at": "2026-09-24T06:10:54.076651Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "BuildingConnected API updates are tangential to your Revit add-in and model work; useful only if you integrate bidding data into dashboards.",
+    "topics": [
+     "aps-api",
+     "integration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-24T06:10:54.076651Z"
+   }
+  },
   {
    "title": "Product Roundup: Revix",
    "url": "http://revitaddons.blogspot.com/2026/09/product-roundup-revix.html",
