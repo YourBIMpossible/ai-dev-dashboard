@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-24",
+  generated: "2026-09-25",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-09-11",
+  activitySince: "2026-09-12",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -160,7 +160,7 @@ window.DASHBOARD_DATA = {
             weight: 1,
             name: "P9 Product Data Ingestion",
             pct: 10,
-            note: "ACTIVE — Supersedes Phase 3.X Manufacturer Data Ingestion. Reopened ACTIVE 2026-08-17 (owner) — not a pivot, a scope growth. Original scope (manufacturer cutsheet extraction, frozen at parser 0.3.2 as the reference implementation) is retained unchanged. Scope grown 2026-08-17 to include linking extracted cutsheet data to specific things inside a project — not just extracting spec values in isolation. Open design question to settle first thing in the reopened phase (flagged, not decided): what does a cutsheet link *to* — individual elements, a category, a named deliverable, a schedule row? That answer sets the data model, so nail it down before build starts. Audit gate: all 5 new tables have `created_at`/`updated_at`; `product_type_binding_status_history` + `extraction_review_queue_status_history` tables present (per Audit & History Pattern §4). Spike status (2026-07-21): v1.0.1 label spot-check SIGNED OFF (8/8 blessed); GoldenSet v1.1 generalization corpus ASSEMBLED (30 fresh docs, 10 unregistered brands, 17-doc model population, owner-authorized web sourcing) + labeled; cold run 1 (0.3.1) NOT clean — one failure category: invalid values committed @ 0.95 for want of a validation layer (prose-as-manufacturer, accessory-codes-as-model ×3, prose-as-voltage). Owner-directed fix same day → parser 0.3.2 (single validation layer: candidate → validate → surface; invalid = forced abstain): all 4 wrong-value commits eliminated, model precision 1.00/fp 0.00, 45/45 spike tests, v1.0 golden regression numerically identical PASS. Run 2 (0.3.2) = CLEAN run #1; owner then ruled JC-1 (labels v1.1.1: COR1/COR2 → `Cooper Lighting Solutions`) + blessed JC-2…7, and run 3 (0.3.2 on v1.1.1) = CLEAN run #2 → STOP RULE SATISFIED 2026-07-21: manufacturer AND model precision 1.00 / fp 0.00 — zero wrong-value commits on a corpus where 22/30 docs are brands the registry has never seen. Raw table still FAILs f1/abstain by construction (correct abstains on unregistered brands; pre-registered reading: `_inbox/phase9-cutsheets/v1.1/GoldenSet_v1.1_labels_evidence.md`). Run 4 (confirmatory parity, zero code+label delta) established a frozen-labels clean pair (3+4), closing the run-2/3 relabel caveat. Gate reading — the raw f1/abstain FAIL is a PASS by construction (22/30 docs are unregistered brands where abstain IS truth); the criteria that decide it are stated explicitly as A1–A4 in `GoldenSet_v1.1_Plan.md` §\"What release-gate quality MEANS\": zero wrong-value commits on either field across both corpora ✓, zero false-accepts on unregistered brands (0/22) ✓, all registered brands present detected (6/6) ✓, two consecutive clean runs ✓. 🔒 SPIKE FROZEN at parser 0.3.2 (terminal state, owner decision 2026-07-21) — `extract.py` is now the reference implementation + acceptance tests, closed to further development; all future extractor work goes into the production reimplementation gated by the v1.0+v1.1 acceptance harness, with measured recall headroom enumerated as tickets P9-R1…R5 (each carrying a no-fp-regression constraint). Wiring still gated: Phase 7 + 6 owner decisions. Nothing wired into backend. New 2026-07-27 (PLACED not ratified) — a second `SourceParser` target, distinct from `PdfCutsheetParser` and from `FG-C14`'s manufacturer-parameter reader: ingest a firm's *own* design-standards/criteria documents (the `spec_library`/`spec_docs` material already sitting in the workspace) using the same stable, frozen extraction pipeline. This is the first concrete step toward the long-horizon \"design with a prompt\" direction discussed 2026-07-27 — capturing a firm's actual design decisions and standards in structured, queryable form, since that data has no retroactive substitute and only compounds if capture starts now. Not urgent, not blocking anything — genuinely small, same caveat as the frozen spike itself: production work waits on real demand.",
+            note: "ACTIVE — Re-scored 2026-09-24: 10% → 35% (curated). Backend and review UI are merged and deployed on the local dev stack with the flag OFF. They are not live, and no ingest writer exists yet. [#713](https://github.com/YourBIMpossible/BIMpossible/pull/713) `715fc28c`: element-keyed firm-owned bindings, the product-records registry with ingestion provenance and exact-replay identity, the production extractor 0.6.1, per-firm review decisions and the review/bindings API. Seven migrations reach head `e6b2d8f1a9c3`. Workspace #160/#161 retire `product_type_bindings`. [#745](https://github.com/YourBIMpossible/BIMpossible/pull/745) `2dc55668`: the product review page `/project/[id]/products`, with queue, evidence, decisions, bulk actions and help. The migration ran on local dev 2026-09-24. The frontend is refreshed and flag-off checks V1–V5, V13 and V14 pass (runbook `docs/ops/2026-09-24-phase9-activation-runbook.md` §11, [#746](https://github.com/YourBIMpossible/BIMpossible/pull/746)). Open: (a) The owner sets `BIMPOSSIBLE_PRODUCT_INGESTION_ENABLED=1`, then A6/A7. (b) No production caller writes `product_records` (`store_ingestion_result` has no caller outside tests), so the queue stays empty until an ingest trigger ships. That is an owner call. (c) The flag-on smoke and live UI are unverified. The older \"Nothing wired into backend\" line below is superseded. Supersedes Phase 3.X Manufacturer Data Ingestion. Reopened ACTIVE 2026-08-17 (owner) — not a pivot, a scope growth. Original scope (manufacturer cutsheet extraction, frozen at parser 0.3.2 as the reference implementation) is retained unchanged. Scope grown 2026-08-17 to include linking extracted cutsheet data to specific things inside a project — not just extracting spec values in isolation. Link-target RULED 2026-09-24 (owner, final; first raised in chat 2026-08-17): a cutsheet links to an individual Revit element, keyed by the element's stable identity (AEC-DM `unique_id`, never `ElementId`) for sync/upsert. The element's family type is the configuration/grouping anchor — retained as context for defaults, grouping and audit — not the cutsheet's ownership identity. Consequence for §4 of `Phase9_BuildSpec.md`: `product_type_bindings` keyed on `type_unique_id` is superseded by an element-keyed binding carrying `type_unique_id` as context; schedule joins resolve element-first, type-defaults second. Missing/deleted elements keep their binding flagged, never silently dropped. Audit gate: all 5 new tables have `created_at`/`updated_at`; `product_type_binding_status_history` + `extraction_review_queue_status_history` tables present (per Audit & History Pattern §4). Spike status (2026-07-21): v1.0.1 label spot-check SIGNED OFF (8/8 blessed); GoldenSet v1.1 generalization corpus ASSEMBLED (30 fresh docs, 10 unregistered brands, 17-doc model population, owner-authorized web sourcing) + labeled; cold run 1 (0.3.1) NOT clean — one failure category: invalid values committed @ 0.95 for want of a validation layer (prose-as-manufacturer, accessory-codes-as-model ×3, prose-as-voltage). Owner-directed fix same day → parser 0.3.2 (single validation layer: candidate → validate → surface; invalid = forced abstain): all 4 wrong-value commits eliminated, model precision 1.00/fp 0.00, 45/45 spike tests, v1.0 golden regression numerically identical PASS. Run 2 (0.3.2) = CLEAN run #1; owner then ruled JC-1 (labels v1.1.1: COR1/COR2 → `Cooper Lighting Solutions`) + blessed JC-2…7, and run 3 (0.3.2 on v1.1.1) = CLEAN run #2 → STOP RULE SATISFIED 2026-07-21: manufacturer AND model precision 1.00 / fp 0.00 — zero wrong-value commits on a corpus where 22/30 docs are brands the registry has never seen. Raw table still FAILs f1/abstain by construction (correct abstains on unregistered brands; pre-registered reading: `_inbox/phase9-cutsheets/v1.1/GoldenSet_v1.1_labels_evidence.md`). Run 4 (confirmatory parity, zero code+label delta) established a frozen-labels clean pair (3+4), closing the run-2/3 relabel caveat. Gate reading — the raw f1/abstain FAIL is a PASS by construction (22/30 docs are unregistered brands where abstain IS truth); the criteria that decide it are stated explicitly as A1–A4 in `GoldenSet_v1.1_Plan.md` §\"What release-gate quality MEANS\": zero wrong-value commits on either field across both corpora ✓, zero false-accepts on unregistered brands (0/22) ✓, all registered brands present detected (6/6) ✓, two consecutive clean runs ✓. 🔒 SPIKE FROZEN at parser 0.3.2 (terminal state, owner decision 2026-07-21) — `extract.py` is now the reference implementation + acceptance tests, closed to further development; all future extractor work goes into the production reimplementation gated by the v1.0+v1.1 acceptance harness, with measured recall headroom enumerated as tickets P9-R1…R5 (each carrying a no-fp-regression constraint). Wiring still gated: Phase 7 + 6 owner decisions. Nothing wired into backend. New 2026-07-27 (PLACED not ratified) — a second `SourceParser` target, distinct from `PdfCutsheetParser` and from `FG-C14`'s manufacturer-parameter reader: ingest a firm's *own* design-standards/criteria documents (the `spec_library`/`spec_docs` material already sitting in the workspace) using the same stable, frozen extraction pipeline. This is the first concrete step toward the long-horizon \"design with a prompt\" direction discussed 2026-07-27 — capturing a firm's actual design decisions and standards in structured, queryable form, since that data has no retroactive substitute and only compounds if capture starts now. Not urgent, not blocking anything — genuinely small, same caveat as the frozen spike itself: production work waits on real demand.",
             tasks: [
               { label: "Build spec: full-product foundation (SourceParser + ExtractionProfile registries; 5-table schema)", status: "done", note: "06-14 — Phase9_BuildSpec.md; discipline-neutral, write-back first-class (no MVP framing)" },
               { label: "Parser spike: pdfplumber extractor w/ per-field provenance + confidence + eval harness", status: "done", note: "06-14 — isolated venv, 17 tests green; pdfplumber (MIT) chosen over PyMuPDF (AGPL)" },
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [39,49,20,1,0,12,0,0,0,0,7,25,20,4],
+      activity: [49,20,1,0,12,0,0,0,0,7,25,20,34,2],
       lastActivity: {
-        date: "2026-09-24",
-        summary: "feat(integrations): internal readiness snapshot over the redacted config contract (#719) (3ae48c2)"
+        date: "2026-09-25",
+        summary: "feat(phase9): ingest trigger — firm-docs upload to review queue (flag-gated) (#748) (93e7efa)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -301,7 +301,7 @@ window.DASHBOARD_DATA = {
       nextActions: ["Autodesk-first rollout: complete the per-user authority model (entitlement resolution, capability enrollment, cross-instance invalidation), wire FE canDownload control-hiding, then enable BIMPOSSIBLE_AUTODESK_FIRST_ACCESS (boot interlock requires redis shared state)","Deploy + record evidence for BUILT-not-SHIPPED waves 37-39 (durable budget reservations, R18 sharing download scope, fail-closed AI-context policy) so they can move to SHIPPED","P13 Write Engine Increment 2: owner-gated live smoke of type-param targeting (#544 attribution fix merged); then Increment 3","Phase 15c: flip the live-read broker on (#519/#521 flag-off) once 15c T5 passes under the AUTH-INH enforced path (#530); 15d continues supervised local-write slices past #495/#498","P6 Client-Mgmt E: owner launch of self-serve onboarding (#566 landed flag-dark, verified non-prod; both flags off in prod)","Owner git hygiene: dispose superseded local-only commits (pin-split 8898611a, #671 follow-ups, consolidation residue) and stale worktrees (wave5 w5/p1f4 with uncommitted Autodesk-first cache WIP; launch-readiness untracked deploy-evidence scripts)","AUTHZ-AUDIT-ROW-SIGNING (owner-gated): owner picks the signing scheme, then build tamper-evident authz audit rows","P14-14g (owner-gated): owner reconciles the proposal staged table + ratifies, then wire data-residency + redaction policy flags"],
       pendingDecisions: ["Schedule-push: staleness cadence, classifier rules, fidelity-degradation list, SPF ship location -- still direction-only, no code. The write-spine role SPF anticipated is now filled by the Phase 13 Write Engine; re-scope SPF against it before building.","Ceilings/Flooring dedicated shapers (Wave 16 placeholders) vs. Wave 15 Civil shapers (also pending) -- build now or batch them? Neither built; no demand signal forcing it. Furniture shaper already shipped.","D-5 (AKP): provider routing for local LLM inference -- gated on C-2 (provider runtime abstraction). Model routing 1A (#537) now gives a compiled registry + resolver, but only 'anthropic' is runtime_supported; re-check whether C-2 is now partially satisfied before deciding.","D-8 (AKP): where the audit hash-chain tip anchors outside the DB -- dormant until a B-6 STEP-0 trigger fires (2nd DB-writer, or a client/contract/insurer record on file). None has: single-operator deployment.","Phase 15 has no PhaseDefinition / ratification doc -- unlike Phase 13 (ACTIVE 2026-07-16) and Phase 14 (ACTIVE 2026-08-17), it entered build with no proposal; the PHASE-STATUS row carries its own flag. Owner still owes the definition doc.","P13 Write Engine open owner decisions #1 (staged-unit veto guard) and #3 (BuildSummary bucket-exhaustiveness) were meant to be decided before/with Increment 2 -- Increment 2 is now built + deployed (#273/#544); decide before the live smoke.","Owner architecture calls on the 4 deferred 09-11 audit items: single tenancy-enforcement idiom (ARCH-1A), URN-keyed hub resolution helper (ARCH-2A), persisted write-approval record (ARCH-3A), failed-provisioning rollback (RE-2A)","Autodesk-first authority model (D1): ratify the target model before the auth swarm builds B4+ and the flag is enabled"],
       blockers: [],
-      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Codebase graph stale - newest graphify snapshot 2026-09-13 (11d old); push or run a wave to refresh"],
+      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Codebase graph stale - newest graphify snapshot 2026-09-13 (12d old); push or run a wave to refresh"],
       links: [
         { label: "STATE doc (canonical, 06-12, archived)", path: "F:\\BIMpossible-Workspace\\99_Archive\\00_Strategy\\state-snapshots\\BIMpossible_STATE_2026-06-12.md" },
         { label: "True-prod deploy runbook (06-12)", path: "F:\\BIMpossible-Workspace\\02_Reference\\2026-06-12__true-prod-deploy-runbook.md" },
@@ -401,7 +401,7 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [12,2,6,0,0,3,0,0,0,0,2,0,3,0],
+      activity: [2,6,0,0,3,0,0,0,0,2,0,3,0,0],
       lastActivity: {
         date: "2026-09-23",
         summary: "fix(scripts): harden docref collision scanner and record review closeout (#161) (52500e0)"
@@ -481,7 +481,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,1,1,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,1,1,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "docs(audit): close 2026-09-21 audit (44b159b)"
@@ -801,7 +801,7 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [6,19,12,0,0,0,0,0,0,0,8,7,0,0],
+      activity: [19,12,0,0,0,0,0,0,0,8,7,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "WORKLOG: box WORKSPACE set to a real path (#29) (cc22569)"
@@ -824,7 +824,7 @@ window.DASHBOARD_DATA = {
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
-        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 06:03)",
+        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 06:02)",
         "2026-09-22 - Box WORKSPACE set to a real path (#29); Open WebUI 0.11.4 + 'pilot' naming removed from box paths (#27); OpenCode-setup, MyBuddy strategy and reconciliation-plan reviews merged (#25/#26/#28)",
         "2026-09-21 - MyBuddy personal plan adopted; steps 2-5 done: 3 UIs pinned to gemma4, status script + Windows launcher, qwen3.5:9b scored 26/27 and rejected (#22/#23); LibreChat UFW rule (#24)",
         "2026-09-16 - Box state check + owner MyBuddy handoff validated against the box",
@@ -891,10 +891,10 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,0,2,0,0,0,0,0,0,0,0,15,18,1],
+      activity: [0,2,0,0,0,0,0,0,0,0,15,18,13,0],
       lastActivity: {
         date: "2026-09-24",
-        summary: "Pilot Corpus 001: admit openwhispr-10530 via versioned overlay (Lab only) (336b415)"
+        summary: "bdc-001: owner-present sitting plan, AnythingLLM/LibreChat readiness, preservation refresh, finishing journal (7fab889)"
       },
       branch: "master (local-only, no remote)",
       git: { warn: "No GitHub remote — local-only git. Confirm whether this should stay private or get a private remote for backup." },
@@ -928,10 +928,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [16,26,14,1,0,4,0,0,0,0,6,8,8,1],
+      activity: [26,14,1,0,4,0,0,0,0,6,8,8,4,0],
       lastActivity: {
         date: "2026-09-24",
-        summary: "ledger(phase-13): wording — local rebuild done, core browser-smoked (pct unchanged) (f464513)"
+        summary: "ledger(phase9): re-score 10% -> 35% - backend #713 + review UI #745 on local dev, flag off (09c101b)"
       },
       branch: "main at fd1b2fe on origin; local checkout 3 behind, clean",
       git: null,
@@ -970,10 +970,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,5,12,4,3,3,3,3,3,3,4,3,5,1],
+      activity: [5,12,4,3,3,3,3,3,3,4,3,5,3,1],
       lastActivity: {
-        date: "2026-09-24",
-        summary: "chore: live billing sync 2026-09-24 (7804c43)"
+        date: "2026-09-25",
+        summary: "chore: live billing sync 2026-09-25 (ca225cc)"
       },
       branch: "main at 8ff4c67; Dashboard-auto in sync with origin; human clone Dashboard in sync with 1 uncommitted file (narrative-freshness.js)",
       git: null,
@@ -1153,7 +1153,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-23",
         summary: "state: bimpossible sync through #710 (57bc3445) — fold #698/#700/#705 into VERIFY-ADMIN-FOCUS-LIVE (4d51a0f)"
       },
-      activity: [1,4,0,0,0,4,0,0,0,0,0,7,14,0]
+      activity: [4,0,0,0,4,0,0,0,0,0,7,14,0,0]
     },
     /* PROJECT:claude-next-state:END */
 
@@ -1216,7 +1216,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-22",
         summary: "docs: Revit-Assistant renamed to Revit-Ops (ab30c51)"
       },
-      activity: [6,3,0,0,0,0,0,0,0,0,12,1,0,0]
+      activity: [3,0,0,0,0,0,0,0,0,12,1,0,0,0]
     },
     /* PROJECT:claude-profile:END */
 
@@ -1276,10 +1276,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-23",
-        summary: "docs(publication): record PR #7 merge and post-merge verification (#8) (5e548a5)"
+        date: "2026-09-25",
+        summary: "Merge pull request #10 from YourBIMpossible/feat/evidence-packet-evacuate (0167545)"
       },
-      activity: [1,13,0,0,0,5,0,0,0,0,1,1,4,0]
+      activity: [13,0,0,0,5,0,0,0,0,1,1,4,9,2]
     },
     /* PROJECT:claude-tools:END */
 
@@ -1342,7 +1342,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-21",
         summary: "Merge pull request #20 from YourBIMpossible/fix/stem-respect-deadline (479571e)"
       },
-      activity: [0,0,0,0,0,6,0,0,0,0,2,0,0,0]
+      activity: [0,0,0,0,6,0,0,0,0,2,0,0,0,0]
     },
     /* PROJECT:evidence-compiler:END */
 
@@ -1464,7 +1464,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-13",
         summary: "Add .gitattributes to normalize text to LF (c3cbe9c)"
       },
-      activity: [0,0,9,0,0,0,0,0,0,0,0,0,0,0]
+      activity: [0,9,0,0,0,0,0,0,0,0,0,0,0,0]
     },
     /* PROJECT:personal-ocr:END */
 
@@ -1516,10 +1516,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-23",
-        summary: "worklogs: HR north arrows off, T.I. details/legend fix, duplicate list (1aeea5d)"
+        date: "2026-09-24",
+        summary: "worklogs: HR sheets 100% CD + Sheet Order HIGHRISE (3e670c2)"
       },
-      activity: [0,0,0,0,0,0,0,0,0,0,4,2,9,0]
+      activity: [0,0,0,0,0,0,0,0,0,4,2,9,1,0]
     },
     /* PROJECT:revit-ops:END */
   ]

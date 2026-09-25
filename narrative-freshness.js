@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-24 06:00:18",
+  "checked": "2026-09-25 06:00:24",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -8,9 +8,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-09-24",
+      "lastActivity": "2026-09-25",
       "newestRecent": "2026-09-23",
-      "lagDays": 1,
+      "lagDays": 2,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-09-24",
+      "lastActivity": "2026-09-25",
       "newestRecent": "2026-09-23",
-      "lagDays": 1,
+      "lagDays": 2,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -148,9 +148,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-tools": {
       "name": "Claude-Tools",
       "status": "active",
-      "lastActivity": "2026-09-23",
+      "lastActivity": "2026-09-25",
       "newestRecent": "2026-09-23",
-      "lagDays": 0,
+      "lagDays": 2,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -188,9 +188,9 @@ window.NARRATIVE_FRESHNESS = {
     "revit-ops": {
       "name": "Revit-Ops",
       "status": "active",
-      "lastActivity": "2026-09-23",
+      "lastActivity": "2026-09-24",
       "newestRecent": "2026-09-23",
-      "lagDays": 0,
+      "lagDays": 1,
       "evaluated": true,
       "stale": false,
       "reason": null
