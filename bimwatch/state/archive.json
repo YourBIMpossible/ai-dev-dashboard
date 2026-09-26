@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-25T06:10:39.870945Z",
- "count": 441,
+ "generated_at": "2026-09-26T06:09:56.191279Z",
+ "count": 444,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,9 +9,9 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 24 Sep 2026 04:50:09 GMT",
    "last_status": 200,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": true,
-   "stale_reason": "no new items in 51 days (expects ~7)"
+   "stale_reason": "no new items in 52 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-09-17T15:01:25Z",
    "last_modified": "Thu, 17 Sep 2026 15:01:25 GMT",
    "last_status": 304,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-23T08:02:11Z",
+   "last_item_published": "2026-09-26T01:35:44Z",
    "last_status": 200,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-09-21T07:05:57Z",
    "last_modified": "Wed, 23 Sep 2026 06:26:25 GMT",
    "last_status": 200,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"98e119bca647c72fe1dec627f6284495\"",
+   "etag": "W/\"76cefd592082bd133be3d1c92ce9cf09\"",
    "last_item_count": 8,
-   "last_modified": "Thu, 24 Sep 2026 13:14:37 GMT",
+   "last_modified": "Fri, 25 Sep 2026 13:24:55 GMT",
    "last_status": 200,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"f81848e4fffe8283c70ae625a79df9e5\"",
+   "etag": "W/\"93fbbbbc0fc066c8aea9af08890185ce\"",
    "last_item_count": 10,
-   "last_item_published": "2026-09-24T19:33:41Z",
+   "last_item_published": "2026-09-25T18:41:14Z",
    "last_status": 200,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-25T00:35:00Z",
-   "last_modified": "Fri, 25 Sep 2026 03:16:23 GMT",
+   "last_item_published": "2026-09-26T00:47:00Z",
+   "last_modified": "Sat, 26 Sep 2026 01:54:53 GMT",
    "last_status": 200,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 73,
+   "consecutive_failures": 74,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-25T06:10:39.870945Z",
+   "last_failure": "2026-09-26T06:09:56.191279Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "73 consecutive failures: HTTP 403"
+   "stale_reason": "74 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"cbf85294c79c52824588389a81a53b23\"",
+   "etag": "W/\"a374db1239015bdefeef689189202e0e\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,14 +124,74 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-25T06:10:39.870945Z",
+   "last_success": "2026-09-26T06:09:56.191279Z",
    "stale": true,
-   "stale_reason": "no new items in 101 days (expects ~30)"
+   "stale_reason": "no new items in 102 days (expects ~30)"
   }
  },
  "items": [
   {
-   "title": "Free Drafted: AI House Generator—Five Complete Editable Model Alternatives w/Documentation in “45 Seconds”",
+   "title": "Everything you missed at AU 2026: Autodesk Platform Services edition",
+   "url": "https://aps.autodesk.com/blog/everything-you-missed-au-2026-autodesk-platform-services-edition",
+   "source": "aps-blog",
+   "published": "2026-09-26T01:35:44Z",
+   "summary": "Everything you missed at AU 2026: Autodesk Platform Services edition Yvette Gong 25 Sep 2026 Yvette Gong Share AU 2026 took place in Las Vegas from September 15–17, bringing together Autodesk software users, business leaders, innovators across a wide variety of Design and Make industries. Autodesk AI was a central theme this year, with Autodesk Assistant showing how AI grounded in industry data and context can support real-world workflows . For developers, APS extends that vision through APIs, services, automation, and Model Context Protocol (MCP) servers – providing the tools to connect Autodesk data and capabilities with their own applications, workflows, and AI agents. Watch AU 2026 keynotes on demand The new APS: A developer platform for the AI era One of our biggest announcements at AU was also one of our most important: APS is evolving to become an AI-native developer platform. APS is changing the way you discover, build, manage, and distribute your solutions rooted in AI. From using Autodesk Assistant to puzzle out what you can build and how you can build it, to using APS Workflow MCP to create solutions and the Design and Make Marketplace to distribute them at scale, it’s…",
+   "id": "ee8697324581c36e",
+   "fetched_at": "2026-09-26T06:09:56.191279Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 45,
+    "why": "APS extensions and Model Context Protocol servers could integrate with your add-ins; worth understanding what Autodesk shipped for developers.",
+    "topics": [
+     "autodesk-platform-services",
+     "api",
+     "ai-agents"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-26T06:09:56.191279Z"
+   }
+  },
+  {
+   "title": "Free Bimroom: Thousands of High-Quality BIM Objects w/Seamless Drag-and-Drop Integration",
+   "url": "http://revitaddons.blogspot.com/2026/09/free-bimroom-thousands-of-high-quality.html",
+   "source": "revit-addons",
+   "published": "2026-09-26T00:47:00Z",
+   "summary": "Overview bimroom is a free Windows add-in from Bimform AG that embeds the bimroom cloud library inside Autodesk Revit. Its primary purpose is to reduce the time designers spend leaving Revit, searching manufacturer websites, downloading family files, organizing local folders, loading content, and later replacing temporary objects. Users can search, filter, preview, place, find, and replace BIM objects from within the Revit workflow. The library combines generic objects for early design with quality-controlled manufacturer objects for later specification, making the add-in both a content-delivery platform and an object-management utility. Typical Revit Workflow Open bimroom inside Revit. The integrated interface provides access to the online catalog without requiring a separate download-and-load sequence. Search and refine. Locate content by keyword, then narrow results with filters and facets. Preview information before committing an object to the project. Place content. Drag an object into the model; the add-in handles content delivery into Revit, avoiding manual file browsing and family loading. Develop from generic to specified. Use uniform generic objects during concept and…",
+   "id": "184da0ce20f35cb4",
+   "fetched_at": "2026-09-26T06:09:56.191279Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "A competitor add-in solving family library workflow; useful to know the space, not actionable for your tooling practice.",
+    "topics": [
+     "add-in-ecosystem",
+     "family-library"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-26T06:09:56.191279Z"
+   }
+  },
+  {
+   "title": "Got a Free Add-in? Get a Free Ad!",
+   "url": "http://revitaddons.blogspot.com/2026/09/got-free-add-in-get-free-ad.html",
+   "source": "revit-addons",
+   "published": "2026-09-25T19:41:54.995000Z",
+   "summary": "Do you have a free add-in? Wouldn't you like to advertise it for free? On Revit Add-ons, publishers of free add-ins can get a free Saver Sidebar ad. Simply save your artwork in a 16:9 aspect ratio and email it to us , along with the web address you’d like it linked to. For image format, PNG is great for still images, GIF for animated. Have multiple free add-ins? Send us artwork for each and we’ll set your ad space to rotate on page load. Or you could do something similar with an animated GIF. Need professional artwork? We’ve got a great, inexpensive referral for you! Just ask... It’s all a part of the service here at Revit Add-ons! var now = new Date(); var start = new Date(now.getFullYear(), 0, 0); var diff = now - start; var oneDay = 1000 * 60 * 60 * 24; var dayOfYear = Math.floor(diff / oneDay); var arraylength = 1; var numadvertisers = arraylength + 1; var numoffset = dayOfYear % numadvertisers; var indx = new Array(arraylength); for (i = 0; i = numadvertisers) { indx[index] = indx[index] - numadvertisers; } if (index === arraylength) { break; } } var images = new Array(arraylength); images[indx[0]] = \" \"; images[indx[1]] = \" \"; var currentdate = new Date(); var numSeconds =…",
+   "id": "e9bd0a85aed55a13",
+   "fetched_at": "2026-09-26T06:09:56.191279Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Marketing and ad-placement promotion; not technical content or a development announcement.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-26T06:09:56.191279Z"
+   }
+  },
+  {
+   "title": "Free Drafted: AI House Generator—Five Complete Editable Model Alternatives w/Documentation “in 45 Seconds”",
    "url": "http://revitaddons.blogspot.com/2026/09/free-drafted-ai-house-generatorfive.html",
    "source": "revit-addons",
    "published": "2026-09-25T00:35:00Z",
