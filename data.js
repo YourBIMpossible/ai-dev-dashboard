@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [20,1,0,12,0,0,0,0,7,25,20,34,12,4],
+      activity: [20,1,0,12,0,0,0,0,7,25,20,34,12,6],
       lastActivity: {
         date: "2026-09-26",
-        summary: "fix(reviews): correct stale line citations in deploy-evidence retrospective (a20b58b)"
+        summary: "chore(workflow): restore solo-owner delivery authority + proportionate verification (#768) (943af02)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -824,7 +824,7 @@ window.DASHBOARD_DATA = {
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
-        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 06:02)",
+        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 13:31)",
         "2026-09-22 - Box WORKSPACE set to a real path (#29); Open WebUI 0.11.4 + 'pilot' naming removed from box paths (#27); OpenCode-setup, MyBuddy strategy and reconciliation-plan reviews merged (#25/#26/#28)",
         "2026-09-21 - MyBuddy personal plan adopted; steps 2-5 done: 3 UIs pinned to gemma4, status script + Windows launcher, qwen3.5:9b scored 26/27 and rejected (#22/#23); LibreChat UFW rule (#24)",
         "2026-09-16 - Box state check + owner MyBuddy handoff validated against the box",
@@ -970,10 +970,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [12,4,3,3,3,3,3,3,4,3,5,3,3,1],
+      activity: [12,4,3,3,3,3,3,3,4,3,5,3,3,2],
       lastActivity: {
         date: "2026-09-26",
-        summary: "chore: live billing sync 2026-09-26 (a5b74f4)"
+        summary: "dashboard refresh 2026-09-26 06:00 (43bd969)"
       },
       branch: "main at 8ff4c67; Dashboard-auto in sync with origin; human clone Dashboard in sync with 1 uncommitted file (narrative-freshness.js)",
       git: null,
@@ -1213,10 +1213,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-25",
-        summary: "docs(graphify): 0.9.67 skill version + lane closeout notes (3ce0869)"
+        date: "2026-09-26",
+        summary: "SYSTEM-RULES: subfolder-rule conflicts follow the specificity precedence rule (cf80336)"
       },
-      activity: [0,0,0,0,0,0,0,0,12,1,0,0,1,0]
+      activity: [0,0,0,0,0,0,0,0,12,1,0,0,2,3]
     },
     /* PROJECT:claude-profile:END */
 

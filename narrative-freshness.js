@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-26 06:00:28",
+  "checked": "2026-09-26 13:29:50",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -138,9 +138,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-profile": {
       "name": "Claude Profile",
       "status": "active",
-      "lastActivity": "2026-09-25",
+      "lastActivity": "2026-09-26",
       "newestRecent": "2026-09-22",
-      "lagDays": 3,
+      "lagDays": 4,
       "evaluated": true,
       "stale": false,
       "reason": null
