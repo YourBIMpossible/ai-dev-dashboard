@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-25",
+  generated: "2026-09-26",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-09-12",
+  activitySince: "2026-09-13",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -225,7 +225,7 @@ window.DASHBOARD_DATA = {
             weight: 1,
             name: "P13 Augmentation & Write-back Layer (incl. Write Engine — Typed Values + Type Params)",
             pct: 32,
-            note: "ACTIVE — RATIFIED ACTIVE 2026-07-16 (owner). Frozen direction line: `2026-07-16 — Phase 13 (Domain A + promotion gate) → ACTIVE. Direction: A-first, no overhaul. Preserve existing discipline schedule views, Element Preview, and assistant; introduce Change Sets as the staged-change primitive; add Review + Push Center; and rewire EditParameterDialog/assistant from \"write to Revit now\" to \"stage,\" so engines and the promotion gate meet in the middle once Domain A reaches approved-state.` Build plan: `design-docs/change-set_build-plan_2026-07-16.md` (Domain A Stage 1, A-first, TDD, internal-DB only). Direction docs: `design-docs/UX_Research_ChangeLifecycle_Direction_2026-07-16.md` (owner-reviewed) + `DataInput_Interface_Gap_Analysis_2026-07-16.md`. Phase 13 = the augmentation/edit/review/promotion layer on top of the Phase 7 write-back engines (System α drives System β); Phase 7 remains the canonical engine layer — not absorbed. Build detail: `2026-06-24__Phase13_ProductizedDataEditing_Review_Pushback_PhaseDefinition_PROPOSAL.md` + package Docs 1–4. Companion WAVE-STATUS row (Wave 23) still unplaced. T0–T3 MERGED + PROD-DEPLOYED + LIVE-VERIFIED 2026-07-25 via [PR #214](https://github.com/YourBIMpossible/BIMpossible/pull/214) (`0f17003`), migration `a13cd5e70f24` applied and confirmed at head. Live evidence: T0 legacy Sync-with-Central / Check-Conflicts hidden; T1 Save wrote change set `4251f228…` status `approved`, `created_by=KAKJ5MM3JMXTNCPY`, `model_id` = the DM item URN, with a `staged_change` row (`Centered-Normal` → `Centered-Normal-SMOKE13`, `staged_old_value` captured for T4's drift check) and full `draft→in_review→approved` history (reason `self-approval`) in ONE transaction; T2 pill read \"Saved changes: 1 · 1 to apply\"; the edit affordance works with Revit closed, proving the offline path. Test data deleted afterwards (queue back to 0). T3's apply endpoint is built but NOT exercised live (`applied_by`/`applied_at` still null — that is T4's job). ⚠️ The first live Save 403'd — `require_active_membership` is strict while the rest of the app env-falls-back, and `user_firm_memberships` had been empty since launch because `link_user_on_login()` was never wired to any live path. Unblocked by hand-seeding one membership row (`KAKJ5MM3JMXTNCPY` → firm `c0757b61…`, the same static firm every existing row already uses); the permanent fix is [PR #227](https://github.com/YourBIMpossible/BIMpossible/pull/227). T4 UNPARKED same day (both ADR gates satisfied) and its ADD-IN HALF is MERGED 2026-07-25: Add-Ins [PR #38](https://github.com/YourBIMpossible/BIMpossible-AddIns/pull/38) (`cfb4cc1`) — PaneSessionProvider (single paired-session channel, ADR §3.1-E/F), pure ApplyPlanner drift logic, change-set client methods, and the \"Apply BIMpossible Changes\" ribbon command. Landed only after two independent review passes recorded on the PR: the first was BLOCKING (4 criticals — worst: change sets promoted to terminal `pushed` with nothing written to the model) and all were fixed + regression-tested (1428 tests, both TFMs); the second returned SAFE TO MERGE and its 3 pre-live-run findings (discarded write-path diagnostics; a provably-false \"re-run to catch up\" recovery instruction; a dead 409 branch documented as live) were also fixed pre-merge. Plan of record: `design-docs/2026-07-25__phase13-T4_apply-bimpossible-changes_PLAN.md`. T4 LIVE-VERIFIED 2026-07-25 (agent-driven, owner-authorized). `cfb4cc1` deployed to all 4 slots; live Apply on `SAMPLE-C-ELEC-R26.rvt` applied the happy-path edit (`S&L_FEEDER TAG 1753AL → 1753AL-T4`, read back in Revit; set → `pushed` w/ `applied_by`), and the drift re-run correctly skipped and preserved a hand-edit while promoting nothing. Both predicted failure modes reproduced exactly: the web `name` column is a pseudo-column (`LookupParameter(\"name\")` → null) so it skips forever and its set stays `approved`; the review's #1 representation-mismatch risk did NOT materialize for text shared params. Full results + verbatim dialogs: `01_BuildLog/2026-07-25__T4-live-smoke_RESULTS.md`. T4 IS COMPLETE — Task 6 shipped + live-verified 2026-07-25. `edit_log` is now written by T4 at actual-apply time per the ADR. `POST /data/change-sets/{id}/edit-log` (BIMpossible PR #229, `b19674c`) is deliberately decoupled from `/apply`: an all-skipped run makes zero `/apply` calls, so a body on `/apply` would have silently lost every skip. Identity is 100% server-derived (user/firm/model/element/parameter/new_value); the client sends only status + the live value it observed. Closed 11-value vocabulary incl. `applied_record_failed` for the model-wrote-but-record-failed divergence. Migration `b24de6f81c35` adds `edit_log.change_set_id` (nullable, indexed, no FK — audit rows must outlive their set). Client half: AddIns PR #39 (`faf9475`), `EditLogStatus.For` mapping + one advisory POST per set per run, apply decision logic untouched. Live proof on SAMPLE-C (add-in built from main+`feat/glass-alerts` so Glass was preserved): a mixed run wrote `applied` (`1004AL`→`1004AL-T6`, set → `pushed`) and `skip_drift` (observed `1753AL-HANDEDIT` vs staged `1753AL`, hand-edit preserved, set stayed `approved`) as two rows in ONE batch — the skip row proving the decoupling was necessary. All 10 legacy Phase-0 rows untouched. Backend endpoint + migration each passed their mandatory review gate; local CI green (3137 backend), add-in suite 1443. Still un-run live: the refusal tests (local `.rvt`, expired pairing) — code-gated only. New 2026-07-27 (proposed T5, next in sequence after T4/Task 6; PLACED not ratified) — cross-firm change-set approval: extend the existing draft → in_review → approved lifecycle to be role/firm-aware, so a change proposed by one firm's user (e.g. a subcontractor) can be routed to and approved by a different firm's user (e.g. the architect or GC) on the same project, instead of assuming proposer and approver share an org. This is what makes the write-back safety model (the differentiator per `FG-P5`) work across company lines, not just within one firm. Depends on Phase 6's proposed Client-Mgmt F (multi-firm tenancy) — can't route an approval to \"the architect's user\" until the data model knows which users belong to which firm on which project. New 2026-07-27 (proposed T6 — this label collides with the existing \"Task 6\" edit-log item; same number space, different thing, reconcile the name not the intent): an optional reason/criteria tag captured at change-set approval — *why* this value, not just what it changed to. Deliberately free-text/loose now, not a designed schema — the eventual shape a generative-design system needs isn't known yet, and a wrong schema costs more to unwind than a missing one. First concrete step toward the long-horizon \"design with a prompt\" direction (2026-07-27 discussion): every approved change becomes a labeled (decision, rationale) pair grounded in a real project, compounding for free as normal Phase 13 usage continues. T6 RATIFIED 2026-08-18 — build it. Deliberately loose free-text tag per the 2026-07-27 placement; the label collision with the existing \"Task 6\" edit-log item is reconciled at build time (rename the label, keep the intent). Row-merge 2026-08-17 (owner decision): the former standalone row 13.1 — Write Engine — Typed Values + Type Params is folded in here. By the P3-vs-P11 line the 11/11.1 merge applied (a single staged sub-build does not warrant its own peer row), 13.1 is Phase 13's write-engine increment, not a peer phase. Full build detail preserved verbatim in §Phase 13 — Write Engine — Typed Values + Type Params below. Open items carried forward (not lost in the merge): Increment 1 (non-string, instance-scoped) SHIPPED + live-smoked 8/8 2026-08-04; Increment 2 (type-param targeting, String-only) BUILT + DEPLOYED — backend [PR #273](https://github.com/YourBIMpossible/BIMpossible/pull/273) `06f04da2` + Add-Ins [PR #54](https://github.com/YourBIMpossible/BIMpossible-AddIns/pull/54) `1a61342c`, both merged 2026-08-18; migration `c4e7a2b91d38` applied in the running DB, add-in half in the installed pane build; per-type outcome attribution fix + router regression suite merged 2026-09-02 ([PR #544](https://github.com/YourBIMpossible/BIMpossible/pull/544) `ce831f42`). Task 8 live APS write smoke remains OWNER-GATED, so Increment 2 is not live-verified; Increment 3 unbuilt; Increment 4 (ElementId) owner-ruled deliberately unimplemented; two open non-blocking owner decisions — #1 (staged-`unit` veto guard) and #3 (BuildSummary bucket-exhaustiveness) — to decide before/with Increment 2. 2026-09-24 — Review + Push Center landed on `main` (re-scored 32% → 40%): Stage 1 review controls [#715](https://github.com/YourBIMpossible/BIMpossible/pull/715) `3cd06f19` (submit / approve / reject from the model page; separate-approver rule behind `BIMPOSSIBLE_CHANGE_SET_REQUIRE_SEPARATE_APPROVER`), Push Center [#721](https://github.com/YourBIMpossible/BIMpossible/pull/721) `13ff242a` (`/project/[id]/changes`: change-set list with model/status filters, detail drill-down, apply outcomes, draft-only discard; backend `project_id` filter + `staged_count`; read-only shares resolved server-side via `useSharedProject`, never from the `?shared=1` hint alone), mutation hardening [#722](https://github.com/YourBIMpossible/BIMpossible/pull/722) `3b03d4ec` (36 DB-lane tests incl. real-Postgres race pins). `/review-all` 2026-09-24: 7 findings, all remediated pre-merge ([#723](https://github.com/YourBIMpossible/BIMpossible/pull/723) carries the report + handoff). Local dev stack rebuilt at `3cd06f19` + browser smoke same day (#723 handoff §6a: 8 checks PASS, 3 not verifiable from one account with the separate-approver flag on). No production or live claim. Promotion gate and Increment 3 unchanged (Inc 2 Task 8 record conflict still unreconciled).",
+            note: "ACTIVE — RATIFIED ACTIVE 2026-07-16 (owner). Frozen direction line: `2026-07-16 — Phase 13 (Domain A + promotion gate) → ACTIVE. Direction: A-first, no overhaul. Preserve existing discipline schedule views, Element Preview, and assistant; introduce Change Sets as the staged-change primitive; add Review + Push Center; and rewire EditParameterDialog/assistant from \"write to Revit now\" to \"stage,\" so engines and the promotion gate meet in the middle once Domain A reaches approved-state.` Build plan: `design-docs/change-set_build-plan_2026-07-16.md` (Domain A Stage 1, A-first, TDD, internal-DB only). Direction docs: `design-docs/UX_Research_ChangeLifecycle_Direction_2026-07-16.md` (owner-reviewed) + `DataInput_Interface_Gap_Analysis_2026-07-16.md`. Phase 13 = the augmentation/edit/review/promotion layer on top of the Phase 7 write-back engines (System α drives System β); Phase 7 remains the canonical engine layer — not absorbed. Build detail: `2026-06-24__Phase13_ProductizedDataEditing_Review_Pushback_PhaseDefinition_PROPOSAL.md` + package Docs 1–4. Companion WAVE-STATUS row (Wave 23) still unplaced. T0–T3 MERGED + PROD-DEPLOYED + LIVE-VERIFIED 2026-07-25 via [PR #214](https://github.com/YourBIMpossible/BIMpossible/pull/214) (`0f17003`), migration `a13cd5e70f24` applied and confirmed at head. Live evidence: T0 legacy Sync-with-Central / Check-Conflicts hidden; T1 Save wrote change set `4251f228…` status `approved`, `created_by=KAKJ5MM3JMXTNCPY`, `model_id` = the DM item URN, with a `staged_change` row (`Centered-Normal` → `Centered-Normal-SMOKE13`, `staged_old_value` captured for T4's drift check) and full `draft→in_review→approved` history (reason `self-approval`) in ONE transaction; T2 pill read \"Saved changes: 1 · 1 to apply\"; the edit affordance works with Revit closed, proving the offline path. Test data deleted afterwards (queue back to 0). T3's apply endpoint is built but NOT exercised live (`applied_by`/`applied_at` still null — that is T4's job). ⚠️ The first live Save 403'd — `require_active_membership` is strict while the rest of the app env-falls-back, and `user_firm_memberships` had been empty since launch because `link_user_on_login()` was never wired to any live path. Unblocked by hand-seeding one membership row (`KAKJ5MM3JMXTNCPY` → firm `c0757b61…`, the same static firm every existing row already uses); the permanent fix is [PR #227](https://github.com/YourBIMpossible/BIMpossible/pull/227). T4 UNPARKED same day (both ADR gates satisfied) and its ADD-IN HALF is MERGED 2026-07-25: Add-Ins [PR #38](https://github.com/YourBIMpossible/BIMpossible-AddIns/pull/38) (`cfb4cc1`) — PaneSessionProvider (single paired-session channel, ADR §3.1-E/F), pure ApplyPlanner drift logic, change-set client methods, and the \"Apply BIMpossible Changes\" ribbon command. Landed only after two independent review passes recorded on the PR: the first was BLOCKING (4 criticals — worst: change sets promoted to terminal `pushed` with nothing written to the model) and all were fixed + regression-tested (1428 tests, both TFMs); the second returned SAFE TO MERGE and its 3 pre-live-run findings (discarded write-path diagnostics; a provably-false \"re-run to catch up\" recovery instruction; a dead 409 branch documented as live) were also fixed pre-merge. Plan of record: `design-docs/2026-07-25__phase13-T4_apply-bimpossible-changes_PLAN.md`. T4 LIVE-VERIFIED 2026-07-25 (agent-driven, owner-authorized). `cfb4cc1` deployed to all 4 slots; live Apply on `SAMPLE-C-ELEC-R26.rvt` applied the happy-path edit (`S&L_FEEDER TAG 1753AL → 1753AL-T4`, read back in Revit; set → `pushed` w/ `applied_by`), and the drift re-run correctly skipped and preserved a hand-edit while promoting nothing. Both predicted failure modes reproduced exactly: the web `name` column is a pseudo-column (`LookupParameter(\"name\")` → null) so it skips forever and its set stays `approved`; the review's #1 representation-mismatch risk did NOT materialize for text shared params. Full results + verbatim dialogs: `01_BuildLog/2026-07-25__T4-live-smoke_RESULTS.md`. T4 IS COMPLETE — Task 6 shipped + live-verified 2026-07-25. `edit_log` is now written by T4 at actual-apply time per the ADR. `POST /data/change-sets/{id}/edit-log` (BIMpossible PR #229, `b19674c`) is deliberately decoupled from `/apply`: an all-skipped run makes zero `/apply` calls, so a body on `/apply` would have silently lost every skip. Identity is 100% server-derived (user/firm/model/element/parameter/new_value); the client sends only status + the live value it observed. Closed 11-value vocabulary incl. `applied_record_failed` for the model-wrote-but-record-failed divergence. Migration `b24de6f81c35` adds `edit_log.change_set_id` (nullable, indexed, no FK — audit rows must outlive their set). Client half: AddIns PR #39 (`faf9475`), `EditLogStatus.For` mapping + one advisory POST per set per run, apply decision logic untouched. Live proof on SAMPLE-C (add-in built from main+`feat/glass-alerts` so Glass was preserved): a mixed run wrote `applied` (`1004AL`→`1004AL-T6`, set → `pushed`) and `skip_drift` (observed `1753AL-HANDEDIT` vs staged `1753AL`, hand-edit preserved, set stayed `approved`) as two rows in ONE batch — the skip row proving the decoupling was necessary. All 10 legacy Phase-0 rows untouched. Backend endpoint + migration each passed their mandatory review gate; local CI green (3137 backend), add-in suite 1443. Still un-run live: the refusal tests (local `.rvt`, expired pairing) — code-gated only. New 2026-07-27 (proposed T5, next in sequence after T4/Task 6; PLACED not ratified) — cross-firm change-set approval: extend the existing draft → in_review → approved lifecycle to be role/firm-aware, so a change proposed by one firm's user (e.g. a subcontractor) can be routed to and approved by a different firm's user (e.g. the architect or GC) on the same project, instead of assuming proposer and approver share an org. This is what makes the write-back safety model (the differentiator per `FG-P5`) work across company lines, not just within one firm. Depends on Phase 6's proposed Client-Mgmt F (multi-firm tenancy) — can't route an approval to \"the architect's user\" until the data model knows which users belong to which firm on which project. New 2026-07-27 (proposed T6 — this label collides with the existing \"Task 6\" edit-log item; same number space, different thing, reconcile the name not the intent): an optional reason/criteria tag captured at change-set approval — *why* this value, not just what it changed to. Deliberately free-text/loose now, not a designed schema — the eventual shape a generative-design system needs isn't known yet, and a wrong schema costs more to unwind than a missing one. First concrete step toward the long-horizon \"design with a prompt\" direction (2026-07-27 discussion): every approved change becomes a labeled (decision, rationale) pair grounded in a real project, compounding for free as normal Phase 13 usage continues. T6 RATIFIED 2026-08-18 — build it. Deliberately loose free-text tag per the 2026-07-27 placement; the label collision with the existing \"Task 6\" edit-log item is reconciled at build time (rename the label, keep the intent). Row-merge 2026-08-17 (owner decision): the former standalone row 13.1 — Write Engine — Typed Values + Type Params is folded in here. By the P3-vs-P11 line the 11/11.1 merge applied (a single staged sub-build does not warrant its own peer row), 13.1 is Phase 13's write-engine increment, not a peer phase. Full build detail preserved verbatim in §Phase 13 — Write Engine — Typed Values + Type Params below. Open items carried forward (not lost in the merge): Increment 1 (non-string, instance-scoped) SHIPPED + live-smoked 8/8 2026-08-04; Increment 2 (type-param targeting, String-only) BUILT + DEPLOYED — backend [PR #273](https://github.com/YourBIMpossible/BIMpossible/pull/273) `06f04da2` + Add-Ins [PR #54](https://github.com/YourBIMpossible/BIMpossible-AddIns/pull/54) `1a61342c`, both merged 2026-08-18; migration `c4e7a2b91d38` applied in the running DB, add-in half in the installed pane build; per-type outcome attribution fix + router regression suite merged 2026-09-02 ([PR #544](https://github.com/YourBIMpossible/BIMpossible/pull/544) `ce831f42`). Task 8 live APS write smoke remains OWNER-GATED, so Increment 2 is not live-verified; Increment 3 unbuilt; Increment 4 (ElementId) owner-ruled deliberately unimplemented; two open non-blocking owner decisions — #1 (staged-`unit` veto guard) and #3 (BuildSummary bucket-exhaustiveness) — to decide before/with Increment 2. 2026-09-24 — Review + Push Center landed on `main` (re-scored 32% → 40%): Stage 1 review controls [#715](https://github.com/YourBIMpossible/BIMpossible/pull/715) `3cd06f19` (submit / approve / reject from the model page; separate-approver rule behind `BIMPOSSIBLE_CHANGE_SET_REQUIRE_SEPARATE_APPROVER`), Push Center [#721](https://github.com/YourBIMpossible/BIMpossible/pull/721) `13ff242a` (`/project/[id]/changes`: change-set list with model/status filters, detail drill-down, apply outcomes, draft-only discard; backend `project_id` filter + `staged_count`; read-only shares resolved server-side via `useSharedProject`, never from the `?shared=1` hint alone), mutation hardening [#722](https://github.com/YourBIMpossible/BIMpossible/pull/722) `3b03d4ec` (36 DB-lane tests incl. real-Postgres race pins). `/review-all` 2026-09-24: 7 findings, all remediated pre-merge ([#723](https://github.com/YourBIMpossible/BIMpossible/pull/723) carries the report + handoff). Local dev stack rebuilt at `3cd06f19` + browser smoke same day (#723 handoff §6a: 8 checks PASS, 3 not verifiable from one account with the separate-approver flag on). No production or live claim. Promotion gate and Increment 3 unchanged (Inc 2 Task 8 record conflict still unreconciled). 2026-09-25 — Push Center train rolled out and live browser-smoked (re-scored 40% → 48%): merged since the 40% score: review operations [#725](https://github.com/YourBIMpossible/BIMpossible/pull/725), history endpoint [#731](https://github.com/YourBIMpossible/BIMpossible/pull/731), server-derived Apply outcome summary [#732](https://github.com/YourBIMpossible/BIMpossible/pull/732), shared read decoders [#741](https://github.com/YourBIMpossible/BIMpossible/pull/741), Stage 3 Apply read-coherence tests [#742](https://github.com/YourBIMpossible/BIMpossible/pull/742), Change Intelligence panel [#743](https://github.com/YourBIMpossible/BIMpossible/pull/743), governed-Apply boundary contract tests [#728](https://github.com/YourBIMpossible/BIMpossible/pull/728), transactional lifecycle outbox [#735](https://github.com/YourBIMpossible/BIMpossible/pull/735) + outbox contract guard [#740](https://github.com/YourBIMpossible/BIMpossible/pull/740). Local dev rolled out at `52a4a907` (backend restart + `Refresh-Frontend.ps1`, no migration); green full-VLC receipt for that SHA. Live smoke on app.yourbimpossible.com: list/filters/sort/search, Load outcomes, readiness + outcome chips, history incl. an Apply run, empty-submit 422, model-page pill parity, reject-with-reason — PASS (BIMpossible handoff `reviews/2026-09-24__phase13-overnight-handoff.md` §18, `ddd8c70d`). Not verified live: approve/self-approval refusal this pass, separate-reviewer path, session expiry, Revit Apply through the new surfaces. No production claim; promotion gate and Increment 3 unchanged.",
             evidenceUpdatedAt: "2026-08-30",
             scoreBasis: "Domain-A staged-change spine merged and prod-deployed end-to-end: BIMpossible PRs #214 (T0-T3 Save-to-change-set; migration a13cd5e70f24), #227 (membership fix), #229 (T4 Task-6 edit-log endpoint; migration b24de6f81c35), and AddIns #38 (Apply command, cfb4cc1), #39 (edit-log client, faf9475) all merged to main; Write Engine Increment 1 via #232 + AddIns #49 merged. Ratified ACTIVE 2026-07-16 (owner, ledger). T4 live-verify recorded 2026-07-25 (01_BuildLog/2026-07-25__T4-live-smoke_RESULTS.md). Low pct reflects large remaining scope: Write Engine Increments 2-4, promotion orchestration 23D (blocked on the Phase 7 owner gate), 23E/23F, proposed T5/T6; refusal tests code-gated but un-run live.",
             tasks: [
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [49,20,1,0,12,0,0,0,0,7,25,20,34,2],
+      activity: [20,1,0,12,0,0,0,0,7,25,20,34,12,4],
       lastActivity: {
-        date: "2026-09-25",
-        summary: "feat(phase9): ingest trigger — firm-docs upload to review queue (flag-gated) (#748) (93e7efa)"
+        date: "2026-09-26",
+        summary: "fix(reviews): correct stale line citations in deploy-evidence retrospective (a20b58b)"
       },
       branch: "main at 751155f; 0 ahead of origin",
       git: {
@@ -301,7 +301,7 @@ window.DASHBOARD_DATA = {
       nextActions: ["Autodesk-first rollout: complete the per-user authority model (entitlement resolution, capability enrollment, cross-instance invalidation), wire FE canDownload control-hiding, then enable BIMPOSSIBLE_AUTODESK_FIRST_ACCESS (boot interlock requires redis shared state)","Deploy + record evidence for BUILT-not-SHIPPED waves 37-39 (durable budget reservations, R18 sharing download scope, fail-closed AI-context policy) so they can move to SHIPPED","P13 Write Engine Increment 2: owner-gated live smoke of type-param targeting (#544 attribution fix merged); then Increment 3","Phase 15c: flip the live-read broker on (#519/#521 flag-off) once 15c T5 passes under the AUTH-INH enforced path (#530); 15d continues supervised local-write slices past #495/#498","P6 Client-Mgmt E: owner launch of self-serve onboarding (#566 landed flag-dark, verified non-prod; both flags off in prod)","Owner git hygiene: dispose superseded local-only commits (pin-split 8898611a, #671 follow-ups, consolidation residue) and stale worktrees (wave5 w5/p1f4 with uncommitted Autodesk-first cache WIP; launch-readiness untracked deploy-evidence scripts)","AUTHZ-AUDIT-ROW-SIGNING (owner-gated): owner picks the signing scheme, then build tamper-evident authz audit rows","P14-14g (owner-gated): owner reconciles the proposal staged table + ratifies, then wire data-residency + redaction policy flags"],
       pendingDecisions: ["Schedule-push: staleness cadence, classifier rules, fidelity-degradation list, SPF ship location -- still direction-only, no code. The write-spine role SPF anticipated is now filled by the Phase 13 Write Engine; re-scope SPF against it before building.","Ceilings/Flooring dedicated shapers (Wave 16 placeholders) vs. Wave 15 Civil shapers (also pending) -- build now or batch them? Neither built; no demand signal forcing it. Furniture shaper already shipped.","D-5 (AKP): provider routing for local LLM inference -- gated on C-2 (provider runtime abstraction). Model routing 1A (#537) now gives a compiled registry + resolver, but only 'anthropic' is runtime_supported; re-check whether C-2 is now partially satisfied before deciding.","D-8 (AKP): where the audit hash-chain tip anchors outside the DB -- dormant until a B-6 STEP-0 trigger fires (2nd DB-writer, or a client/contract/insurer record on file). None has: single-operator deployment.","Phase 15 has no PhaseDefinition / ratification doc -- unlike Phase 13 (ACTIVE 2026-07-16) and Phase 14 (ACTIVE 2026-08-17), it entered build with no proposal; the PHASE-STATUS row carries its own flag. Owner still owes the definition doc.","P13 Write Engine open owner decisions #1 (staged-unit veto guard) and #3 (BuildSummary bucket-exhaustiveness) were meant to be decided before/with Increment 2 -- Increment 2 is now built + deployed (#273/#544); decide before the live smoke.","Owner architecture calls on the 4 deferred 09-11 audit items: single tenancy-enforcement idiom (ARCH-1A), URN-keyed hub resolution helper (ARCH-2A), persisted write-approval record (ARCH-3A), failed-provisioning rollback (RE-2A)","Autodesk-first authority model (D1): ratify the target model before the auth swarm builds B4+ and the flag is enabled"],
       blockers: [],
-      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Codebase graph stale - newest graphify snapshot 2026-09-13 (12d old); push or run a wave to refresh"],
+      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item."],
       links: [
         { label: "STATE doc (canonical, 06-12, archived)", path: "F:\\BIMpossible-Workspace\\99_Archive\\00_Strategy\\state-snapshots\\BIMpossible_STATE_2026-06-12.md" },
         { label: "True-prod deploy runbook (06-12)", path: "F:\\BIMpossible-Workspace\\02_Reference\\2026-06-12__true-prod-deploy-runbook.md" },
@@ -401,10 +401,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [2,6,0,0,3,0,0,0,0,2,0,3,0,0],
+      activity: [6,0,0,3,0,0,0,0,2,0,3,0,3,2],
       lastActivity: {
-        date: "2026-09-23",
-        summary: "fix(scripts): harden docref collision scanner and record review closeout (#161) (52500e0)"
+        date: "2026-09-26",
+        summary: "Build provenance: commit-stamped installer manifest, binary/manifest check, stale-output check, startup identity log (#163) (a815ee1)"
       },
       branch: "main at 7bdfa68; synced with origin",
       git: null,
@@ -481,7 +481,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,0,1,1,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,1,1,0,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "docs(audit): close 2026-09-21 audit (44b159b)"
@@ -801,7 +801,7 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [19,12,0,0,0,0,0,0,0,8,7,0,0,0],
+      activity: [12,0,0,0,0,0,0,0,8,7,0,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "WORKLOG: box WORKSPACE set to a real path (#29) (cc22569)"
@@ -891,10 +891,10 @@ window.DASHBOARD_DATA = {
           { name: "Revit-AI context pipeline", pct: 80, note: "Capture + parsing + daily/weekly summarization fully automated and running (raw-logs through 07-22; last processed run 07-18, 42 sessions, 0 issues). Collector rewritten to fix an overwrite/data-loss bug (collect_revit_journals.py, uncommitted). Ingestion into AI-Server still not built — blocked upstream: AI-Server hardware not yet assembled." }
         ]
       },
-      activity: [0,2,0,0,0,0,0,0,0,0,15,18,13,0],
+      activity: [2,0,0,0,0,0,0,0,0,15,18,13,11,7],
       lastActivity: {
-        date: "2026-09-24",
-        summary: "bdc-001: owner-present sitting plan, AnythingLLM/LibreChat readiness, preservation refresh, finishing journal (7fab889)"
+        date: "2026-09-26",
+        summary: "Open WebUI Pipe cut-over attempt 2: rc3 live, records, pin expected_live_version 4.0.0-rc3 (8c0ed9c)"
       },
       branch: "master (local-only, no remote)",
       git: { warn: "No GitHub remote — local-only git. Confirm whether this should stay private or get a private remote for backup." },
@@ -928,10 +928,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [26,14,1,0,4,0,0,0,0,6,8,8,4,0],
+      activity: [14,1,0,4,0,0,0,0,6,8,8,4,1,0],
       lastActivity: {
-        date: "2026-09-24",
-        summary: "ledger(phase9): re-score 10% -> 35% - backend #713 + review UI #745 on local dev, flag off (09c101b)"
+        date: "2026-09-25",
+        summary: "ledger(phase13): re-score 40% -> 48% - Push Center train rolled out at 52a4a907 and live browser-smoked (859d363)"
       },
       branch: "main at fd1b2fe on origin; local checkout 3 behind, clean",
       git: null,
@@ -970,10 +970,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [5,12,4,3,3,3,3,3,3,4,3,5,3,1],
+      activity: [12,4,3,3,3,3,3,3,4,3,5,3,3,1],
       lastActivity: {
-        date: "2026-09-25",
-        summary: "chore: live billing sync 2026-09-25 (ca225cc)"
+        date: "2026-09-26",
+        summary: "chore: live billing sync 2026-09-26 (a5b74f4)"
       },
       branch: "main at 8ff4c67; Dashboard-auto in sync with origin; human clone Dashboard in sync with 1 uncommitted file (narrative-freshness.js)",
       git: null,
@@ -1150,10 +1150,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-23",
-        summary: "state: bimpossible sync through #710 (57bc3445) — fold #698/#700/#705 into VERIFY-ADMIN-FOCUS-LIVE (4d51a0f)"
+        date: "2026-09-25",
+        summary: "queue: #693 owner-path live-verified on all 5 download routes; #697 deployed flag-dark, unit-tested only (03e32bd)"
       },
-      activity: [4,0,0,0,4,0,0,0,0,0,7,14,0,0]
+      activity: [0,0,0,4,0,0,0,0,0,7,18,0,4,0]
     },
     /* PROJECT:claude-next-state:END */
 
@@ -1213,10 +1213,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-22",
-        summary: "docs: Revit-Assistant renamed to Revit-Ops (ab30c51)"
+        date: "2026-09-25",
+        summary: "docs(graphify): 0.9.67 skill version + lane closeout notes (3ce0869)"
       },
-      activity: [3,0,0,0,0,0,0,0,0,12,1,0,0,0]
+      activity: [0,0,0,0,0,0,0,0,12,1,0,0,1,0]
     },
     /* PROJECT:claude-profile:END */
 
@@ -1279,7 +1279,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-25",
         summary: "Merge pull request #10 from YourBIMpossible/feat/evidence-packet-evacuate (0167545)"
       },
-      activity: [13,0,0,0,5,0,0,0,0,1,1,4,9,2]
+      activity: [0,0,0,5,0,0,0,0,1,1,4,9,2,0]
     },
     /* PROJECT:claude-tools:END */
 
@@ -1342,7 +1342,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-21",
         summary: "Merge pull request #20 from YourBIMpossible/fix/stem-respect-deadline (479571e)"
       },
-      activity: [0,0,0,0,6,0,0,0,0,2,0,0,0,0]
+      activity: [0,0,0,6,0,0,0,0,2,0,0,0,0,0]
     },
     /* PROJECT:evidence-compiler:END */
 
@@ -1464,7 +1464,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-13",
         summary: "Add .gitattributes to normalize text to LF (c3cbe9c)"
       },
-      activity: [0,9,0,0,0,0,0,0,0,0,0,0,0,0]
+      activity: [9,0,0,0,0,0,0,0,0,0,0,0,0,0]
     },
     /* PROJECT:personal-ocr:END */
 
@@ -1516,10 +1516,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-24",
-        summary: "worklogs: HR sheets 100% CD + Sheet Order HIGHRISE (3e670c2)"
+        date: "2026-09-25",
+        summary: "worklogs: 9.99 sort candidates list (review only) (72f6b70)"
       },
-      activity: [0,0,0,0,0,0,0,0,0,4,2,9,1,0]
+      activity: [0,0,0,0,0,0,0,0,4,2,9,1,3,0]
     },
     /* PROJECT:revit-ops:END */
   ]

@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-25 06:00:24",
+  "checked": "2026-09-26 06:00:28",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -8,9 +8,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-09-25",
+      "lastActivity": "2026-09-26",
       "newestRecent": "2026-09-23",
-      "lagDays": 2,
+      "lagDays": 3,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -18,9 +18,9 @@ window.NARRATIVE_FRESHNESS = {
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-09-23",
+      "lastActivity": "2026-09-26",
       "newestRecent": "2026-09-23",
-      "lagDays": 0,
+      "lagDays": 3,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -78,9 +78,9 @@ window.NARRATIVE_FRESHNESS = {
     "ai-brain-data": {
       "name": "AI Brain Data",
       "status": "active",
-      "lastActivity": "2026-09-24",
+      "lastActivity": "2026-09-26",
       "newestRecent": "2026-09-23",
-      "lagDays": 1,
+      "lagDays": 3,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -88,9 +88,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-09-24",
+      "lastActivity": "2026-09-25",
       "newestRecent": "2026-09-23",
-      "lagDays": 1,
+      "lagDays": 2,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-09-25",
+      "lastActivity": "2026-09-26",
       "newestRecent": "2026-09-23",
-      "lagDays": 2,
+      "lagDays": 3,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -128,9 +128,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-next-state": {
       "name": "/next State Store",
       "status": "active",
-      "lastActivity": "2026-09-23",
+      "lastActivity": "2026-09-25",
       "newestRecent": "2026-09-23",
-      "lagDays": 0,
+      "lagDays": 2,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -138,9 +138,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-profile": {
       "name": "Claude Profile",
       "status": "active",
-      "lastActivity": "2026-09-22",
+      "lastActivity": "2026-09-25",
       "newestRecent": "2026-09-22",
-      "lagDays": 0,
+      "lagDays": 3,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -188,9 +188,9 @@ window.NARRATIVE_FRESHNESS = {
     "revit-ops": {
       "name": "Revit-Ops",
       "status": "active",
-      "lastActivity": "2026-09-24",
+      "lastActivity": "2026-09-25",
       "newestRecent": "2026-09-23",
-      "lagDays": 1,
+      "lagDays": 2,
       "evaluated": true,
       "stale": false,
       "reason": null
