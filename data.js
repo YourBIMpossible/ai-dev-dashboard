@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-26",
+  generated: "2026-09-27",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-09-13",
+  activitySince: "2026-09-14",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [20,1,0,12,0,0,0,0,7,25,20,34,12,6],
+      activity: [1,0,12,0,0,0,0,7,25,20,34,12,12,0],
       lastActivity: {
         date: "2026-09-26",
-        summary: "chore(workflow): restore solo-owner delivery authority + proportionate verification (#768) (943af02)"
+        summary: "docs(reviews): control-gaps Phase 3 read-only audits (3a/3b/3d) (#753) (793d969)"
       },
       branch: "main at 943af02c; 0 ahead of origin",
       git: { warn: "21 worktrees, 233 local branches, ~200 local-only commits -- mostly squash residue of merged PRs (p13-*, env-variables-cleanup, phase-e-prep, deploy-evidence-inert). Genuinely local-only: AU 2026 competitive analysis (4 commits), arch/config familiarization map, control-gaps plan comparison; untracked env-candidates review folder in the main checkout (blocks deploy evidence). 48 origin branches incl. the draft ctl/* stack." },
@@ -400,7 +400,7 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [6,0,0,3,0,0,0,0,2,0,3,0,3,2],
+      activity: [0,0,3,0,0,0,0,2,0,3,0,3,2,0],
       lastActivity: {
         date: "2026-09-26",
         summary: "Build provenance: commit-stamped installer manifest, binary/manifest check, stale-output check, startup identity log (#163) (a815ee1)"
@@ -504,7 +504,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,0,0,0,1,1,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,1,1,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "docs(audit): close 2026-09-21 audit (44b159b)"
@@ -824,7 +824,7 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [12,0,0,0,0,0,0,0,8,7,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,8,7,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "WORKLOG: box WORKSPACE set to a real path (#29) (cc22569)"
@@ -833,14 +833,34 @@ window.DASHBOARD_DATA = {
       nextActions: ["MyBuddy plan step 6: run the three UIs in real use and pick a daily one (the 09-21 AI-server plan)","Land or drop 16ad24f (RAG data-scope WORKLOG note, 2026-09-26): it was pushed to claude/box-workspace-path after that branch merged as #29, so it is on no open PR and not on main","Finish plan step 1 cleanup: a 2026-09-24 read-only disposition review (kept in AI-Brain-Data) recommends preserving the linux-installation-setup worktree's untracked 2026-09-13 box work order and its 5-commit branch as history, then removing the worktree; the wonderful-agnesi-d062de worktree and claude/box-state-2026-09-16 (closed-unmerged PR #21 history) are still pending","Decide the 5 local-only commits on claude/linux-installation-setup-017d5a (Lian Li LCD/fan notes, 2nd-GPU roadmap, box-handoff prompt, Needs-your-call parking) and 6 more unique ones on claude/wonderful-agnesi-d062de (2026 tooling research, Personal-OCR spinout note) -- push/PR or discard; loss risk","Close WP-I follow-ups F1 (scout process-group kill on timeout) and F5 (GPU-lock PID reuse)","Populate the pickup-checker golden set and run run_golden_eval.py against the spec gates (golden_set/ still holds only a README)","Write RAG source governance (approved roots, exclusions, citation rule, re-index/delete) before any first index run -- WORKLOG roadmap item, facts gathered 09-26","Optional: install a persistent timer for daily-digest (closeout criterion 3 caveat); put digest source roots on the box (jobs still report workspace-roots-not-found)"],
       pendingDecisions: ["Which chat UI becomes the daily MyBuddy front-end (plan step 6).","Second GPU + Lian Li fan/LCD control (GPU-temp-on-LCD) -- notes sit only on local-only branches, not decided."],
       blockers: [],
-      reminders: ["Runner = Ollama is a deployment choice (WP-H tie), not a permanent verdict; reversal triggers are in decisions/2026-09-13__runner-and-model-pick.md. A client-side guard covers Ollama's silent >32k prompt truncation.","Raw :11434 answers without a key on LAN/tailnet by accepted decision (--enforce off for the private setup); revisit on the plan's listed triggers.","LibreChat->Ollama UFW rule is bound to the Docker bridge name -- if Docker recreates app_default, re-add the rule.","Rig .env INFERENCE_BASE_URL still uses the LAN address (home-only); switch to the tailnet address for away-from-home use.","11 unique local-only commits across 2 branches, plus 8 intentionally-unmerged PR #21 commits -- loss risk until pushed or discarded.","Open WebUI on the box now carries an admin-only project-truth Pipe (BDC-001, owned by AI-Brain-Data, live 2026-09-26), and that deployment requires the admin account's Memory setting to stay off -- so memory is also off in that account's gemma4 chats. Factor this into the step-6 daily-UI choice.","The linux-installation-setup worktree is reused across sessions by switching branches (now on the merged claude/box-workspace-path) and holds one untracked file found in no commit (a 2026-09-13 box work order)."],
+      reminders: [
+        "Runner = Ollama is a deployment choice (WP-H tie), not a permanent verdict; reversal triggers are in decisions/2026-09-13__runner-and-model-pick.md. A client-side guard covers Ollama's silent >32k prompt truncation.",
+        "Raw :11434 answers without a key on LAN/tailnet by accepted decision (--enforce off for the private setup); revisit on the plan's listed triggers.",
+        "LibreChat->Ollama UFW rule is bound to the Docker bridge name -- if Docker recreates app_default, re-add the rule.",
+        "Rig .env INFERENCE_BASE_URL still uses the LAN address (home-only); switch to the tailnet address for away-from-home use.",
+        "11 unique local-only commits across 2 branches, plus 8 intentionally-unmerged PR #21 commits -- loss risk until pushed or discarded.",
+        "Open WebUI on the box now carries an admin-only project-truth Pipe (BDC-001, owned by AI-Brain-Data, live 2026-09-26), and that deployment requires the admin account's Memory setting to stay off -- so memory is also off in that account's gemma4 chats. Factor this into the step-6 daily-UI choice.",
+        "The linux-installation-setup worktree is reused across sessions by switching branches (now on the merged claude/box-workspace-path) and holds one untracked file found in no commit (a 2026-09-13 box work order)."
+      ],
       links: [
         { label: "Program plan", path: "F:\\AI-Server\\PROGRAM_PLAN.md" },
         { label: "Handoffs (WP-A..G)", path: "F:\\AI-Server\\handoffs" },
         { label: "Build/hardware plan", path: "F:\\AI-Brain-Data\\_status\\AI-Server_Build_and_Integration_Plan.md" },
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
-      recent: ["Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 13:31)","2026-09-26 - WORKLOG: RAG data-scope facts recorded, no decision (rag/ ingests .md only, so roughly 800 of ~1,150 non-md AI-Brain-Data files are skipped; two unused ~954GB drives on the box). Pushed on the already-merged #29 branch, not on main (16ad24f)","2026-09-22 - Box WORKSPACE set to a real path (#29); Open WebUI 0.11.4 + 'pilot' naming removed from box paths (#27); OpenCode-setup, MyBuddy strategy and reconciliation-plan reviews merged (#25/#26/#28)","2026-09-21 - MyBuddy personal plan adopted; steps 2-5 done: 3 UIs pinned to gemma4, status script + Windows launcher, qwen3.5:9b scored 26/27 and rejected (#22/#23); LibreChat UFW rule (#24)","2026-09-16 - Box state check + owner MyBuddy handoff validated against the box","2026-09-13 - NORTHSTAR closeout: all 5 criteria met (#20); WP-H bakeoff tie -> keep Ollama; model pick gemma4:26b 27/27; box Phase 0 re-measured (#16-#18)","2026-09-13 - WP-I repo scout + GPU interlock merged (#19) after /review-all: 3 blockers fixed pre-merge (a2b9c4d), 288 tests passed","2026-09-12 - Box powered on; Tailscale install step (9cd0c7a) + Ubuntu install-USB writer/verifier make-install-usb.ps1 (1ceddf0) shipped; PR #15 (Linux install setup) merged (d7e5140). Lian Li LCD/fan + 2nd-GPU roadmap notes local-only (4 commits, unpushed)","2026-09-11 - North star LOCKED: mission reframed to one measurable OpenAI-compatible endpoint; client contract decoupled from Ollama (INFERENCE_BASE_URL/API_KEY/MODEL, 156a0a7); compose healthcheck fixed (f6b01ab)","2026-09-10 - Box-build reassessed against 3 months of evidence (decisions/2026-09-10__box-build-reassessment.md); headless Linux box chosen to fix the 5080's residency/cold-load failures structurally; box powered on for the first time","2026-09-07 - worktree-pickup-checker (PR #13) and worktree-harness (PR #12) both MERGED to main; .claude/worktrees/ gitignored (PR #14)"],
+      recent: [
+        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 06:02)",
+        "2026-09-26 - WORKLOG: RAG data-scope facts recorded, no decision (rag/ ingests .md only, so roughly 800 of ~1,150 non-md AI-Brain-Data files are skipped; two unused ~954GB drives on the box). Pushed on the already-merged #29 branch, not on main (16ad24f)",
+        "2026-09-22 - Box WORKSPACE set to a real path (#29); Open WebUI 0.11.4 + 'pilot' naming removed from box paths (#27); OpenCode-setup, MyBuddy strategy and reconciliation-plan reviews merged (#25/#26/#28)",
+        "2026-09-21 - MyBuddy personal plan adopted; steps 2-5 done: 3 UIs pinned to gemma4, status script + Windows launcher, qwen3.5:9b scored 26/27 and rejected (#22/#23); LibreChat UFW rule (#24)",
+        "2026-09-16 - Box state check + owner MyBuddy handoff validated against the box",
+        "2026-09-13 - NORTHSTAR closeout: all 5 criteria met (#20); WP-H bakeoff tie -> keep Ollama; model pick gemma4:26b 27/27; box Phase 0 re-measured (#16-#18)",
+        "2026-09-13 - WP-I repo scout + GPU interlock merged (#19) after /review-all: 3 blockers fixed pre-merge (a2b9c4d), 288 tests passed",
+        "2026-09-12 - Box powered on; Tailscale install step (9cd0c7a) + Ubuntu install-USB writer/verifier make-install-usb.ps1 (1ceddf0) shipped; PR #15 (Linux install setup) merged (d7e5140). Lian Li LCD/fan + 2nd-GPU roadmap notes local-only (4 commits, unpushed)",
+        "2026-09-11 - North star LOCKED: mission reframed to one measurable OpenAI-compatible endpoint; client contract decoupled from Ollama (INFERENCE_BASE_URL/API_KEY/MODEL, 156a0a7); compose healthcheck fixed (f6b01ab)",
+        "2026-09-10 - Box-build reassessed against 3 months of evidence (decisions/2026-09-10__box-build-reassessment.md); headless Linux box chosen to fix the 5080's residency/cold-load failures structurally; box powered on for the first time",
+        "2026-09-07 - worktree-pickup-checker (PR #13) and worktree-harness (PR #12) both MERGED to main; .claude/worktrees/ gitignored (PR #14)"
+      ],
       audit: {
         lastRun: "2026-09-13",
         runType: "/review-all (4 blind lenses: code-review, security-diff, concurrency/robustness, test-coverage) over WP-I repo scout + GPU interlock (30 files, +2751) before merge. 3 BLOCKERs (command execution from an inspected repo's own config, non-atomic GPU lock, denied-file content leaking through diffs) fixed pre-merge in a2b9c4d with proving regression tests, plus follow-ups F3/F6; 288 passed / 1 skipped. F1/F2/F4/F5 carried open as tracked follow-ups.",
@@ -897,7 +917,7 @@ window.DASHBOARD_DATA = {
           { name: "BDC-001 project truth across 3 chat UIs", pct: 33, note: "BIMpossible Decisions Corpus 001 (92 records, citation-backed, read-only release r1) served through one gateway. 1 of 3 UIs live: Open WebUI Project Truth Pipe 4.0.0-rc3, admin-only, cut over 2026-09-26 (8c0ed9c). AnythingLLM and LibreChat connectors built offline, not deployed." }
         ]
       },
-      activity: [2,0,0,0,0,0,0,0,0,15,18,13,11,7],
+      activity: [0,0,0,0,0,0,0,0,15,18,13,11,7,0],
       lastActivity: {
         date: "2026-09-26",
         summary: "Open WebUI Pipe cut-over attempt 2: rc3 live, records, pin expected_live_version 4.0.0-rc3 (8c0ed9c)"
@@ -934,10 +954,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [14,1,0,4,0,0,0,0,6,8,8,4,1,0],
+      activity: [1,0,4,0,0,0,0,6,8,8,4,1,1,0],
       lastActivity: {
-        date: "2026-09-25",
-        summary: "ledger(phase13): re-score 40% -> 48% - Push Center train rolled out at 52a4a907 and live browser-smoked (859d363)"
+        date: "2026-09-26",
+        summary: "feat(delivery): receipt schema 3 + Merge Evidence block (Workspace half) (#162) (307dbc1)"
       },
       branch: "main at 859d363 on origin; local main in sync, clean; worktree ctl-p1-receipt (ctl/p1-receipt-v3, pushed, draft PR #162); local-only commit 5312cfd on docs/review-all-gatea-canonical-filing",
       git: null,
@@ -976,10 +996,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [12,4,3,3,3,3,3,3,4,3,5,3,3,2],
+      activity: [4,3,3,3,3,3,3,4,3,5,3,3,6,1],
       lastActivity: {
-        date: "2026-09-26",
-        summary: "dashboard refresh 2026-09-26 06:00 (43bd969)"
+        date: "2026-09-27",
+        summary: "chore: live billing sync 2026-09-27 (6924ca8)"
       },
       branch: "main at 8557e4c; Dashboard-auto in sync with origin, clean; human clone Dashboard in sync and clean, with one stash (stash@{0}: superseded P13 pct 32->40 + audit-freshness.js, 09-24)",
       git: null,
@@ -1159,7 +1179,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-25",
         summary: "queue: #693 owner-path live-verified on all 5 download routes; #697 deployed flag-dark, unit-tested only (03e32bd)"
       },
-      activity: [0,0,0,4,0,0,0,0,0,7,18,0,4,0]
+      activity: [0,0,4,0,0,0,0,0,7,18,0,4,0,0]
     },
     /* PROJECT:claude-next-state:END */
 
@@ -1222,7 +1242,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-26",
         summary: "SYSTEM-RULES: subfolder-rule conflicts follow the specificity precedence rule (cf80336)"
       },
-      activity: [0,0,0,0,0,0,0,0,12,1,0,0,2,3]
+      activity: [0,0,0,0,0,0,0,12,1,0,0,2,3,0]
     },
     /* PROJECT:claude-profile:END */
 
@@ -1286,7 +1306,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-25",
         summary: "Merge pull request #10 from YourBIMpossible/feat/evidence-packet-evacuate (0167545)"
       },
-      activity: [0,0,0,5,0,0,0,0,1,1,4,9,2,0]
+      activity: [0,0,5,0,0,0,0,1,1,4,9,2,0,0]
     },
     /* PROJECT:claude-tools:END */
 
@@ -1350,7 +1370,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-21",
         summary: "Merge pull request #20 from YourBIMpossible/fix/stem-respect-deadline (479571e)"
       },
-      activity: [0,0,0,6,0,0,0,0,2,0,0,0,0,0]
+      activity: [0,0,6,0,0,0,0,2,0,0,0,0,0,0]
     },
     /* PROJECT:evidence-compiler:END */
 
@@ -1472,7 +1492,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-13",
         summary: "Add .gitattributes to normalize text to LF (c3cbe9c)"
       },
-      activity: [9,0,0,0,0,0,0,0,0,0,0,0,0,0]
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     },
     /* PROJECT:personal-ocr:END */
 
@@ -1527,7 +1547,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-25",
         summary: "worklogs: 9.99 sort candidates list (review only) (72f6b70)"
       },
-      activity: [0,0,0,0,0,0,0,0,4,2,9,1,3,0]
+      activity: [0,0,0,0,0,0,0,4,2,9,1,3,0,0]
     },
     /* PROJECT:revit-ops:END */
   ]

@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-09-26 13:47:30",
+  "checked": "2026-09-27 06:00:18",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -88,9 +88,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-09-25",
+      "lastActivity": "2026-09-26",
       "newestRecent": "2026-09-25",
-      "lagDays": 0,
+      "lagDays": 1,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-09-26",
+      "lastActivity": "2026-09-27",
       "newestRecent": "2026-09-26",
-      "lagDays": 0,
+      "lagDays": 1,
       "evaluated": true,
       "stale": false,
       "reason": null
