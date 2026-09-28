@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-27T06:10:29.550177Z",
- "count": 445,
+ "generated_at": "2026-09-28T06:14:54.114009Z",
+ "count": 446,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,9 +9,9 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 24 Sep 2026 04:50:09 GMT",
    "last_status": 200,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": true,
-   "stale_reason": "no new items in 53 days (expects ~7)"
+   "stale_reason": "no new items in 54 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,9 +19,9 @@
    "last_item_published": "2026-09-17T15:01:25Z",
    "last_modified": "Thu, 17 Sep 2026 15:01:25 GMT",
    "last_status": 304,
-   "last_success": "2026-09-27T06:10:29.550177Z",
-   "stale": false,
-   "stale_reason": ""
+   "last_success": "2026-09-28T06:14:54.114009Z",
+   "stale": true,
+   "stale_reason": "no new items in 10 days (expects ~3)"
   },
   "aps-blog": {
    "consecutive_failures": 0,
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-26T01:35:44Z",
    "last_status": 200,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,7 +41,7 @@
    "last_item_published": "2026-09-21T07:05:57Z",
    "last_modified": "Wed, 23 Sep 2026 06:26:25 GMT",
    "last_status": 200,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,42 +51,42 @@
    "last_item_count": 8,
    "last_modified": "Fri, 25 Sep 2026 13:24:55 GMT",
    "last_status": 200,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"4b0fdc28b3e82a3da9c0f4d5d0f9b1c5\"",
+   "etag": "W/\"ab6a060cfefbd24a368981199927a516\"",
    "last_item_count": 10,
-   "last_item_published": "2026-09-26T17:24:47Z",
+   "last_item_published": "2026-09-27T22:43:34Z",
    "last_status": 200,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-26T18:59:00Z",
-   "last_modified": "Sun, 27 Sep 2026 02:02:29 GMT",
+   "last_item_published": "2026-09-27T20:32:00Z",
+   "last_modified": "Mon, 28 Sep 2026 00:19:10 GMT",
    "last_status": 200,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 75,
+   "consecutive_failures": 76,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-27T06:10:29.550177Z",
+   "last_failure": "2026-09-28T06:14:54.114009Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "75 consecutive failures: HTTP 403"
+   "stale_reason": "76 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"e51ab8e681b954fcca59b50a05d4fb70\"",
+   "etag": "W/\"89aeeb5525fa609b290726a4e178a249\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-27T06:10:29.550177Z",
+   "last_success": "2026-09-28T06:14:54.114009Z",
    "stale": true,
-   "stale_reason": "no new items in 103 days (expects ~30)"
+   "stale_reason": "no new items in 104 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "BIM-IT Pipe: Practical Automation for Piping Workflows",
+   "url": "http://revitaddons.blogspot.com/2026/09/bim-it-pipe-practical-automation-for.html",
+   "source": "revit-addons",
+   "published": "2026-09-27T20:32:00Z",
+   "summary": "Executive Overview BIM-IT Pipe is a specialized Autodesk Revit add-in developed by BIM-IT for plumbing and piping modelers, MEP engineers, BIM technicians, and coordinators. Rather than attempting full system design or automated routing, it concentrates on recurring production tasks that routinely consume time in detailed modeling and shop-drawing workflows: tagging pipe banks, matching elevations, maintaining spacing and clearance, splitting branches, aligning sections, isolating systems, and applying or displaying insulation. The tools operate on native Revit pipes, annotations, views, and insulation, so their results remain part of the model and documentation set. The product’s core value proposition is practical automation. Each command addresses a narrow operation that can otherwise require repeated selection, measurement, movement, alignment, visibility adjustment, or annotation cleanup. This makes the add-in most relevant after basic systems and routes have been established, when a team is refining geometry, coordinating congested pipe runs, and preparing readable plans and sections. Annotation and Documentation Tools Pipe Size Tag Adds a pipe-size tag above a selected spot…",
+   "id": "163639c06808038d",
+   "fetched_at": "2026-09-28T06:14:54.114009Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A piping-specific add-in shows what production automation looks like, but targets MEP workflows outside your core audit and templating practice.",
+    "topics": [
+     "revit-addins",
+     "production-tooling"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-28T06:14:54.114009Z"
+   }
+  },
   {
    "title": "Electrical Panels Manager",
    "url": "http://revitaddons.blogspot.com/2026/09/electrical-panels-manager.html",
