@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-09-28T13:00:14Z",
+  "generated": "2026-09-29T13:00:17Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -31,31 +31,31 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 198,
         "churn": 32,
-        "risk": 53.8
+        "risk": 54.3
       },
       {
         "label": "db/models.py",
         "file": "db/models.py",
         "kind": "file",
         "degree": 260,
-        "churn": 62,
-        "risk": 44.4
+        "churn": 61,
+        "risk": 44.3
       },
       {
         "label": "assistant.py",
         "file": "aec/assistant.py",
         "kind": "file",
         "degree": 146,
-        "churn": 32,
-        "risk": 38.2
+        "churn": 31,
+        "risk": 37.6
       },
       {
         "label": "Base",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 92,
-        "churn": 62,
-        "risk": 29.8
+        "churn": 61,
+        "risk": 29.6
       },
       {
         "label": "aps/router.py",
@@ -63,7 +63,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 98,
         "churn": 24,
-        "risk": 28.8
+        "risk": 29.1
       },
       {
         "label": "admin_router.py",
@@ -71,7 +71,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 112,
         "churn": 22,
-        "risk": 28.2
+        "risk": 28.4
       },
       {
         "label": "account_router.py",
@@ -79,14 +79,14 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 105,
         "churn": 21,
-        "risk": 27.5
+        "risk": 27.8
       },
       {
         "label": "Firm",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 317,
-        "churn": 62,
+        "churn": 61,
         "risk": 22.8
       },
       {
@@ -95,15 +95,15 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 53,
         "churn": 32,
-        "risk": 22.5
+        "risk": 22.7
       },
       {
         "label": "main.py",
         "file": "main.py",
         "kind": "file",
         "degree": 133,
-        "churn": 39,
-        "risk": 21.9
+        "churn": 38,
+        "risk": 21.8
       },
       {
         "label": "change_set_router.py",
@@ -111,7 +111,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 53,
         "churn": 22,
-        "risk": 18.6
+        "risk": 18.8
       },
       {
         "label": "_by_category()",
@@ -119,7 +119,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 34,
         "churn": 32,
-        "risk": 17.5
+        "risk": 17.7
       }
     ],
     "baseline": {
