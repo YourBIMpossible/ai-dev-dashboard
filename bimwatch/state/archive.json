@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-29T06:11:09.721601Z",
- "count": 448,
+ "generated_at": "2026-09-30T06:11:06.113471Z",
+ "count": 457,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,84 +9,84 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Tue, 29 Sep 2026 02:30:42 GMT",
    "last_status": 200,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": true,
-   "stale_reason": "no new items in 55 days (expects ~7)"
+   "stale_reason": "no new items in 56 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-09-17T15:01:25Z",
-   "last_modified": "Thu, 17 Sep 2026 15:01:25 GMT",
-   "last_status": 304,
-   "last_success": "2026-09-29T06:11:09.721601Z",
-   "stale": true,
-   "stale_reason": "no new items in 11 days (expects ~3)"
+   "last_item_count": 200,
+   "last_item_published": "2026-09-29T19:07:22Z",
+   "last_modified": "Tue, 29 Sep 2026 19:08:01 GMT",
+   "last_status": 200,
+   "last_success": "2026-09-30T06:11:06.113471Z",
+   "stale": false,
+   "stale_reason": ""
   },
   "aps-blog": {
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-26T01:35:44Z",
+   "last_item_published": "2026-09-29T08:45:24Z",
    "last_status": 200,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"2f2d73ce19e8dfa6c4055d975a287464\"",
+   "etag": "W/\"534e886fe0f7809713f6b4c9257f9fcd\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-21T07:05:57Z",
-   "last_modified": "Wed, 23 Sep 2026 06:26:25 GMT",
+   "last_item_published": "2026-09-29T12:32:53Z",
+   "last_modified": "Tue, 29 Sep 2026 20:16:47 GMT",
    "last_status": 200,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"9459ccabb65f0ea3e10843421cd58929\"",
+   "etag": "W/\"785b037b2dc31c97e3e576c6f6eb0d58\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 29 Sep 2026 03:39:24 GMT",
+   "last_modified": "Tue, 29 Sep 2026 16:00:53 GMT",
    "last_status": 200,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"ab6a060cfefbd24a368981199927a516\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-09-27T22:43:34Z",
-   "last_status": 304,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "etag": "W/\"7cb3206dc4b7da00f11c01e8fee03726\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-09-29T21:06:17Z",
+   "last_status": 200,
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-09-29T00:42:00Z",
-   "last_modified": "Tue, 29 Sep 2026 01:41:14 GMT",
+   "last_item_published": "2026-09-30T00:56:00Z",
+   "last_modified": "Wed, 30 Sep 2026 03:49:38 GMT",
    "last_status": 200,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 78,
+   "consecutive_failures": 79,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-09-29T06:11:09.721601Z",
+   "last_failure": "2026-09-30T06:11:06.113471Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "78 consecutive failures: HTTP 403"
+   "stale_reason": "79 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"f2dcdede6ccf59fc98da67a15f8f85c4\"",
+   "etag": "W/\"4ca68eebb195d65e009b36731c9d48f7\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,194 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-09-29T06:11:09.721601Z",
+   "last_success": "2026-09-30T06:11:06.113471Z",
    "stale": true,
-   "stale_reason": "no new items in 105 days (expects ~30)"
+   "stale_reason": "no new items in 106 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Beam Finish Generator: Automatically Create Finish Walls and Ceilings Around Structural Beams",
+   "url": "http://revitaddons.blogspot.com/2026/09/beam-finish-generator-automatically.html",
+   "source": "revit-addons",
+   "published": "2026-09-30T00:56:00Z",
+   "summary": "Executive Overview Beam Finish Generator is a focused Revit productivity add-in developed by DesignLab for automatically creating finish walls and ceilings around structural beams. Its purpose is to eliminate the repetitive process of modeling beam encasement or finish surfaces one beam at a time. The user selects one or more structural beams, chooses an existing Revit wall or ceiling type, and runs one of two commands: Side Walls or Lower Ceiling. The add-in creates native Revit wall and ceiling elements rather than symbolic graphics. Because the results use project types already available in the model, they can participate in normal documentation, scheduling, material definition, visibility control, and downstream editing. The tool is best understood as a geometry-generation utility: it accelerates finish creation around modeled beams, but it does not design assemblies, determine required fire protection, or verify constructability. Core Commands and Workflow Side Walls The Side Walls command generates four finish walls for each selected structural beam: two walls along the beam’s long sides and two walls closing the ends. The generated walls are offset by half the selected wall…",
+   "id": "f6a22abf9a2c3a0f",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A product built on Revit API; useful to know the capability exists, not actionable for your add-in work.",
+    "topics": [
+     "revit-api",
+     "add-in-ecosystem"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
+  {
+   "title": "AI and the BIM workstation: what if the LLM lives on your laptop?",
+   "url": "https://aecmag.com/workstations/ai-and-the-bim-workstation-what-if-the-llm-lives-on-your-laptop/",
+   "source": "aec-magazine",
+   "published": "2026-09-29T19:07:22Z",
+   "summary": "At Autodesk University 2026, AEC Magazine’s Greg Corke caught up with AMD’s David McAfee to talk about the Ryzen AI Max Pro, the processor behind HP’s new ZBook Ultra G3a, and what it could mean for firms that want to run serious AI models alongside Revit, viz tools and the rest of the AEC design stack. For years, the AI conversation in AEC has been about cloud. The HP ZBook Ultra G3a , built around AMD’s Ryzen AI Max Pro, asks whether that has to be the case. With up to 192 GB of unified memory, of which a whopping 160 GB can be allocated to the GPU, it puts AI models once reserved for data centres onto a mobile workstation, and raises important questions about how design and engineering firms should buy, configure and plan their hardware. The interview goes well beyond the launch of the HP’s new mobile workstation . Up for discussion: Bringing AI on-device: How a unified memory pool of up to 192 GB could let users run large models locally on a mobile workstation, rather than depending entirely on the cloud. Sharing the silicon: What happens to performance when a local AI model competes for resources with Revit and visualisation software running at the same time. Ending the BIOS…",
+   "id": "47a2ed682e468f28",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 70,
+    "why": "Concrete hardware capability—local AI inference on AEC workstations—changes what you can embed in add-ins without cloud dependency.",
+    "topics": [
+     "ai-integration",
+     "performance",
+     "workstation-hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
+  {
+   "title": "4D in IFC for Beginners: from a bridge with no schedule to a construction animation",
+   "url": "https://bimcorner.com/4d-from-ifc-bonsai-blender-construction-animation/",
+   "source": "bim-corner",
+   "published": "2026-09-29T12:32:53Z",
+   "summary": ".bc-box{ --bc-navy:#0B2A4A; --bc-green:#10B981; --bc-amber:#F59E0B; --bc-red:#DC2626; --bc-grey:#666; font-family:'Montserrat',system-ui,sans-serif; border-radius:10px; padding:24px 26px; margin:32px 0; } .bc-box p{margin:0 0 12px} .bc-box p:last-child{margin:0} .bc-box h3{margin:0 0 14px !important} .bc-check{background:#F4F6F9; border-left:5px solid #10B981} .bc-check ol{margin:0; padding-left:22px} .bc-check li{margin:0 0 12px; line-height:1.6} .bc-check li:last-child{margin:0} .bc-check li b{color:#0B2A4A} .bc-note{background:#FFF8EC; border-left:5px solid #F59E0B} .bc-trap{background:#FEF2F2; border-left:5px solid #DC2626} .bc-tablewrap{overflow-x:auto; margin:28px 0} table.bc-table{ border-collapse:collapse; width:100%; min-width:520px; font-family:'Montserrat',system-ui,sans-serif; font-size:15px} table.bc-table th,table.bc-table td{ padding:11px 14px; border-bottom:1px solid #E2E8F0; text-align:left} table.bc-table thead th{ background:#0B2A4A; color:#fff; font-weight:700; font-size:13px; letter-spacing:.5px; text-transform:uppercase} table.bc-table tbody tr:nth-child(even){background:#F8FAFC} table.bc-table td.num{text-align:right; font-variant-numeric:tabular-nums}…",
+   "id": "e43092f9f08924de",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "IFC 4D technique for construction scheduling; relevant if you work with interoperability or model export pipelines.",
+    "topics": [
+     "ifc",
+     "interoperability",
+     "4d-scheduling"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
+  {
+   "title": "Rayon raises €10m for 3D and agentic AI",
+   "url": "https://aecmag.com/cad/rayon-raises-e10m-for-3d-and-agentic-ai/",
+   "source": "aec-magazine",
+   "published": "2026-09-29T11:13:38Z",
+   "summary": "Partech leads funding for the cloud CAD developer. Rayon plans to expand beyond its 2D roots with V4 later this year Rayon has raised €10 million in Series A funding led by Partech, with existing investors Northzone, Foundamental and Seedcamp also participating. The company says more than four million drawings have been created in its software, and its team now numbers 35. Founded in 2021 by Bastien Dolla and Stanislas Chaillou ( watch his NXT BLD presentation ), Rayon develops a cloud CAD application, accessed through a web browser, for interior designers, architects and space planners. It combines drawing, styling and presentation tools with simultaneous editing, comments and link sharing. Support for DWG, PDF and images allows users to bring existing material into the application and produce drawings for use elsewhere. The software has also been developing beyond basic 2D drafting. Its V3 release expanded the data that users can attach to objects, including prices, product references and calculated values, with tables that can filter and group that information into schedules. Rayon describes this as “light BIM”, bringing object data and drawing production together within a CAD…",
+   "id": "e4bd61112b077c82",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Competitor funding and product direction; useful context, not actionable to your Revit-centric practice.",
+    "topics": [
+     "competitor-movement",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
+  {
+   "title": "Autodesk Forma Naming Standards API is Now Generally Available",
+   "url": "https://aps.autodesk.com/blog/autodesk-forma-naming-standards-api-now-generally-available",
+   "source": "aps-blog",
+   "published": "2026-09-29T08:45:24Z",
+   "summary": "Autodesk Forma Naming Standards API is Now Generally Available eason.kangEDLV4 29 Sep 2026 Eason Kang Share Disclosure: parts of this post were produced with the assistance of AI tools, then reviewed and edited by the author. We are pleased to announce that the Autodesk Forma Naming Standards API is now generally available (GA)! The API has been in public beta for a long time, and we want to thank everyone who tried it out and sent feedback. With GA, the beta label is gone and the endpoint is ready for production use. What is the Naming Standards API? A file naming standard is a consistent set of rules for naming files, so team members can find and identify files without opening them. It is built on the ISO 19650 series of standards and consists of two kinds of attributes: Naming convention attributes : their values form the file name, and are always required. The ISO 19650 template, for example, uses Project, Originator, Volume/System, Level/Location, Type, Role and Number. Related attributes : details such as status, revision and classification, which don’t appear in the file name. You create naming standards in the Files tool ( Settings > Compliance > Naming Standards ) and…",
+   "id": "d2eadb58ede25ece",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Autodesk Forma API entering GA; relevant only if you integrate with Forma or APS platform services.",
+    "topics": [
+     "aps",
+     "api-availability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
+  {
+   "title": "Deprecation Notice: `isBasedOnAccountTree` in the Autodesk Forma Classifications API",
+   "url": "https://aps.autodesk.com/blog/deprecation-notice-isbasedonaccounttree-autodesk-forma-classifications-api",
+   "source": "aps-blog",
+   "published": "2026-09-29T08:20:09Z",
+   "summary": "Deprecation Notice: `isBasedOnAccountTree` in the Autodesk Forma Classifications API eason.kangEDLV4 29 Sep 2026 Eason Kang Share Disclosure: parts of this post were produced with the assistance of AI tools, then reviewed and edited by the author. We are deprecating the isBasedOnAccountTree response attribute in the Autodesk Forma Classifications API, in favor of treeConnectionType . The two attributes have been returned side by side since the initial public beta, so you can migrate today. The Classifications API itself, and all of its endpoints, are not being deprecated. isBasedOnAccountTree will continue to be returned until March 23, 2027 . After that date, please rely on treeConnectionType only. Why the change? isBasedOnAccountTree is a boolean, so it can only express two states. A classification tree actually has three: Standalone : created directly in the project, never derived from another tree. Connected : derived from another tree (for example, a hub-level tree) and still linked to it. Disconnected : derived from another tree, but the link has since been removed. With a boolean, standalone and disconnected both come back as false . You couldn’t tell a tree that was always…",
+   "id": "4578810eea5daaec",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 40,
+    "why": "Deprecation of an Autodesk Forma API attribute; act now if you use Classifications API, migrate before March 2027.",
+    "topics": [
+     "aps",
+     "deprecation",
+     "api-breaking-change"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
+  {
+   "title": "Meta unveils lightweight VR Glasses",
+   "url": "https://aecmag.com/vr-mr/meta-unveils-lightweight-vr-glasses/",
+   "source": "aec-magazine",
+   "published": "2026-09-29T07:46:31Z",
+   "summary": "Meta’s new headset weighs about 100g and moves compute and battery into a separate puck worn on the body. It is launched primarily as a media device, but PC connectivity, full-colour passthrough and holographic calling give it potential in the office and on the construction site Meta has announced Meta VR Glasses, a glasses-style virtual reality device that goes on sale in spring 2027, priced at $1,299.99. At around 100 g, Meta says it is five times lighter than the Meta Quest 3. Most of that saving comes from splitting the hardware in two: the glasses hold the sensors and displays, while compute, battery and storage sit in a separate puck, connected by an optical tether, which clips to a pocket or bag. The glasses have no head straps and are open at the sides, with a passthrough camera to keep the wearer aware of their surroundings. The frame is made from magnesium alloy, which Meta says provides rigidity and helps with cooling. Displays are micro-OLED panels with a combined 5K resolution and 37 pixels per degree, a figure Meta highlights for text legibility, viewed through compact pancake lenses designed specifically for the device. The puck runs on Qualcomm’s new Snapdragon…",
+   "id": "5c3ac4bf2926de2a",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Hardware announcement with speculative AEC potential; not a technique or capability you can use today.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
+  {
+   "title": "Accenture forms Accenture Construct",
+   "url": "https://aecmag.com/construction/accenture-forms-accenture-construct/",
+   "source": "aec-magazine",
+   "published": "2026-09-29T07:43:20Z",
+   "summary": "Accenture has combined its capital projects business, more than 5,000 staff and a number of specialist acquisitions into one entity. It is aimed at owners of large infrastructure projects and pitched as a single accountable partner, supported by AI and a shared data platform Accenture has launched Accenture Construct, a new global business that helps owners plan, deliver and manage large infrastructure and capital projects. Its target sectors include airports, rail networks, power grids, data centres and manufacturing facilities. The new entity combines Accenture’s existing capital projects business, which the company says has grown fourfold in three years across strategic advisory, engineering, project delivery and technology services. Accenture’s proposition is that owners deal with one accountable partner for the whole project lifecycle rather than many, using a common data foundation and AI-enabled workflows to reduce delays, cost overruns and execution risk. Accenture expects demand to come from three areas: data centre construction, the energy transition, and the replacement of ageing infrastructure. It estimates the total addressable market for integrated, owner-side…",
+   "id": "8939e3a8702f81ab",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Large contractor reorganization and market consolidation; know it happened, does not affect your tooling practice.",
+    "topics": [
+     "market",
+     "corporate"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
+  {
+   "title": "AMD to buy World Labs for $8.2bn",
+   "url": "https://aecmag.com/geospatial/amd-to-buy-world-labs-for-8-2bn/",
+   "source": "aec-magazine",
+   "published": "2026-09-29T07:36:06Z",
+   "summary": "Deal brings spatial AI research into AMD’s hardware business. For Autodesk, it raises questions about the future of its $200m investment and access to the technology AMD has agreed to acquire World Labs , the spatial AI company founded by a team led by Stanford researcher Fei-Fei Li, for approximately $8.2bn in a transaction paid entirely in shares. The deal is expected to close by the end of 2026, subject to regulatory approval and other closing conditions. Founded in 2024, World Labs develops AI models designed to understand, generate and simulate 3D environments, with applications in areas including design, gaming and robotics. Li will join AMD as executive vice president and chief scientist, reporting to chair and CEO Lisa Su. AMD says the acquisition will help it develop hardware and software around the demands of emerging AI models. “Building the compute platforms for the next generation of AI requires a deep understanding of how models are evolving,” said Su. The companies began a technical partnership last year , working on model training and inference optimisation on AMD GPUs. Li argues that closer integration with hardware is needed to improve the efficiency and scale of…",
+   "id": "13e3f9c77a5c82fe",
+   "fetched_at": "2026-09-30T06:11:06.113471Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Acquisition affects Autodesk's spatial AI strategy and your potential future API surface for 3D understanding tasks.",
+    "topics": [
+     "autodesk-strategy",
+     "ai-capability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-09-30T06:11:06.113471Z"
+   }
+  },
   {
    "title": "AutoJoin Manager: Automates Revit’s Join Geometry and Unjoin Geometry Workflows",
    "url": "http://revitaddons.blogspot.com/2026/09/autojoin-manager-automates-revits-join.html",
