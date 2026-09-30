@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-09-29",
+  generated: "2026-09-30",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-09-16",
+  activitySince: "2026-09-17",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [12,0,0,0,0,7,25,20,34,12,12,0,0,0],
+      activity: [0,0,0,0,7,25,20,34,12,12,0,2,35,0],
       lastActivity: {
-        date: "2026-09-26",
-        summary: "docs(reviews): control-gaps Phase 3 read-only audits (3a/3b/3d) (#753) (793d969)"
+        date: "2026-09-29",
+        summary: "Merge pull request #167 from YourBIMpossible/claude/g4-audit-reporting (d3101c9)"
       },
       branch: "main at 943af02c; 0 ahead of origin",
       git: { warn: "21 worktrees, 233 local branches, ~200 local-only commits -- mostly squash residue of merged PRs (p13-*, env-variables-cleanup, phase-e-prep, deploy-evidence-inert). Genuinely local-only: AU 2026 competitive analysis (4 commits), arch/config familiarization map, control-gaps plan comparison; untracked env-candidates review folder in the main checkout (blocks deploy evidence). 48 origin branches incl. the draft ctl/* stack." },
@@ -400,10 +400,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [3,0,0,0,0,2,0,3,0,3,2,0,0,0],
+      activity: [0,0,0,0,2,0,3,0,3,2,0,0,2,0],
       lastActivity: {
-        date: "2026-09-26",
-        summary: "Build provenance: commit-stamped installer manifest, binary/manifest check, stale-output check, startup identity log (#163) (a815ee1)"
+        date: "2026-09-29",
+        summary: "fix(installer): single commit-SHA rule, drop duplicate staging resolve, stale-output guard (WFA 2026-09-28 SLOP-C10 SLOP-C11 HYP-C1) (#166) (4cad042)"
       },
       branch: "main at ed27835 (clean, 2 behind origin/main a815ee1)",
       git: null,
@@ -504,7 +504,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [0,0,0,0,0,1,1,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,1,1,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "docs(audit): close 2026-09-21 audit (44b159b)"
@@ -824,7 +824,7 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [0,0,0,0,0,8,7,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,8,7,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "WORKLOG: box WORKSPACE set to a real path (#29) (cc22569)"
@@ -917,7 +917,7 @@ window.DASHBOARD_DATA = {
           { name: "BDC-001 project truth across 3 chat UIs", pct: 33, note: "BIMpossible Decisions Corpus 001 (92 records, citation-backed, read-only release r1) served through one gateway. 1 of 3 UIs live: Open WebUI Project Truth Pipe 4.0.0-rc3, admin-only, cut over 2026-09-26 (8c0ed9c). AnythingLLM and LibreChat connectors built offline, not deployed." }
         ]
       },
-      activity: [0,0,0,0,0,0,15,18,13,11,7,0,0,0],
+      activity: [0,0,0,0,0,15,18,13,11,7,0,0,0,0],
       lastActivity: {
         date: "2026-09-26",
         summary: "Open WebUI Pipe cut-over attempt 2: rc3 live, records, pin expected_live_version 4.0.0-rc3 (8c0ed9c)"
@@ -954,10 +954,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [4,0,0,0,0,6,8,8,4,1,1,0,0,0],
+      activity: [0,0,0,0,6,8,8,4,1,1,0,2,26,0],
       lastActivity: {
-        date: "2026-09-26",
-        summary: "feat(delivery): receipt schema 3 + Merge Evidence block (Workspace half) (#162) (307dbc1)"
+        date: "2026-09-29",
+        summary: "Merge pull request #167 from YourBIMpossible/claude/g4-audit-reporting (d3101c9)"
       },
       branch: "main at 859d363 on origin; local main in sync, clean; worktree ctl-p1-receipt (ctl/p1-receipt-v3, pushed, draft PR #162); local-only commit 5312cfd on docs/review-all-gatea-canonical-filing",
       git: null,
@@ -996,10 +996,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,3,3,3,3,4,3,5,3,3,6,3,4,1],
+      activity: [3,3,3,3,4,3,5,3,3,6,3,4,3,1],
       lastActivity: {
-        date: "2026-09-29",
-        summary: "chore: live billing sync 2026-09-29 (8c5c8ad)"
+        date: "2026-09-30",
+        summary: "chore: live billing sync 2026-09-30 (cacfd88)"
       },
       branch: "main at 8557e4c; Dashboard-auto in sync with origin, clean; human clone Dashboard in sync and clean, with one stash (stash@{0}: superseded P13 pct 32->40 + audit-freshness.js, 09-24)",
       git: null,
@@ -1179,7 +1179,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-25",
         summary: "queue: #693 owner-path live-verified on all 5 download routes; #697 deployed flag-dark, unit-tested only (03e32bd)"
       },
-      activity: [4,0,0,0,0,0,7,18,0,4,0,0,0,0]
+      activity: [0,0,0,0,0,7,18,0,4,0,0,0,0,0]
     },
     /* PROJECT:claude-next-state:END */
 
@@ -1239,10 +1239,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-26",
-        summary: "SYSTEM-RULES: subfolder-rule conflicts follow the specificity precedence rule (cf80336)"
+        date: "2026-09-29",
+        summary: "test(hooks): deterministic budget-hashing test; isolate in-process evidence cases (#21) (de847f2)"
       },
-      activity: [0,0,0,0,0,12,1,0,0,2,3,0,0,0]
+      activity: [0,0,0,0,12,1,0,0,2,3,0,0,11,0]
     },
     /* PROJECT:claude-profile:END */
 
@@ -1303,10 +1303,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-25",
-        summary: "Merge pull request #10 from YourBIMpossible/feat/evidence-packet-evacuate (0167545)"
+        date: "2026-09-29",
+        summary: "fix(evidence-archive): publish evacuated copies atomically via staging + link (#14) (e06a9de)"
       },
-      activity: [5,0,0,0,0,1,1,4,9,2,0,0,0,0]
+      activity: [0,0,0,0,1,1,4,9,2,0,0,0,6,0]
     },
     /* PROJECT:claude-tools:END */
 
@@ -1370,7 +1370,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-21",
         summary: "Merge pull request #20 from YourBIMpossible/fix/stem-respect-deadline (479571e)"
       },
-      activity: [6,0,0,0,0,2,0,0,0,0,0,0,0,0]
+      activity: [0,0,0,0,2,0,0,0,0,0,0,0,0,0]
     },
     /* PROJECT:evidence-compiler:END */
 
@@ -1544,10 +1544,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-25",
-        summary: "worklogs: 9.99 sort candidates list (review only) (72f6b70)"
+        date: "2026-09-29",
+        summary: "worklogs: TI sector viewports re-placed at saved positions (472) (3168e16)"
       },
-      activity: [0,0,0,0,0,4,2,9,1,3,0,0,0,0]
+      activity: [0,0,0,0,4,2,9,1,3,0,0,0,2,0]
     },
     /* PROJECT:revit-ops:END */
   ]
