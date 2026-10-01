@@ -6,17 +6,17 @@
   "last_item_published": "2026-08-04T16:30:13Z",
   "last_modified": "Tue, 29 Sep 2026 02:30:42 GMT",
   "last_status": 200,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": true,
-  "stale_reason": "no new items in 56 days (expects ~7)"
+  "stale_reason": "no new items in 57 days (expects ~7)"
  },
  "aec-magazine": {
   "consecutive_failures": 0,
   "last_item_count": 200,
-  "last_item_published": "2026-09-29T19:07:22Z",
-  "last_modified": "Tue, 29 Sep 2026 19:08:01 GMT",
+  "last_item_published": "2026-09-30T13:43:06Z",
+  "last_modified": "Wed, 30 Sep 2026 13:43:06 GMT",
   "last_status": 200,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -24,9 +24,9 @@
   "consecutive_failures": 0,
   "last_failure": "2026-08-21T06:09:01.488497Z",
   "last_item_count": 10,
-  "last_item_published": "2026-09-29T08:45:24Z",
+  "last_item_published": "2026-09-30T21:48:03Z",
   "last_status": 200,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -38,27 +38,27 @@
   "last_item_published": "2026-09-29T12:32:53Z",
   "last_modified": "Tue, 29 Sep 2026 20:16:47 GMT",
   "last_status": 200,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
  "graphisoft": {
   "consecutive_failures": 0,
-  "etag": "W/\"785b037b2dc31c97e3e576c6f6eb0d58\"",
+  "etag": "W/\"4c76cf77ee523059320af85910312717\"",
   "last_item_count": 8,
-  "last_modified": "Tue, 29 Sep 2026 16:00:53 GMT",
+  "last_modified": "Wed, 30 Sep 2026 18:22:05 GMT",
   "last_status": 200,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
  "pyrevit-releases": {
   "consecutive_failures": 0,
-  "etag": "W/\"7cb3206dc4b7da00f11c01e8fee03726\"",
+  "etag": "W/\"5bde1adaa6125629555ba90d84d6d662\"",
   "last_item_count": 10,
-  "last_item_published": "2026-09-29T21:06:17Z",
+  "last_item_published": "2026-10-01T05:46:43Z",
   "last_status": 200,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -66,24 +66,24 @@
   "consecutive_failures": 0,
   "last_item_count": 25,
   "last_item_published": "2026-09-30T00:56:00Z",
-  "last_modified": "Wed, 30 Sep 2026 03:49:38 GMT",
+  "last_modified": "Wed, 30 Sep 2026 22:25:31 GMT",
   "last_status": 200,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
  "revit-blog": {
-  "consecutive_failures": 79,
+  "consecutive_failures": 80,
   "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
   "last_error": "HTTP 403",
-  "last_failure": "2026-09-30T06:11:06.113471Z",
+  "last_failure": "2026-10-01T06:11:21.665992Z",
   "last_item_count": 0,
   "last_item_published": "2026-07-22T21:10:26Z",
   "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
   "last_status": 304,
   "last_success": "2026-07-25T19:27:39.918043Z",
   "stale": true,
-  "stale_reason": "79 consecutive failures: HTTP 403"
+  "stale_reason": "80 consecutive failures: HTTP 403"
  },
  "revit-pure": {
   "consecutive_failures": 0,
@@ -91,7 +91,7 @@
   "last_item_count": 0,
   "last_item_published": "2026-09-21T10:00:00Z",
   "last_status": 304,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -101,17 +101,17 @@
   "last_item_count": 0,
   "last_item_published": "2026-07-25T21:05:05Z",
   "last_status": 304,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
  "revitlookup-releases": {
   "consecutive_failures": 0,
-  "etag": "W/\"4ca68eebb195d65e009b36731c9d48f7\"",
+  "etag": "W/\"8ad2ef3c1e7bd6074be3750310ec747d\"",
   "last_item_count": 10,
   "last_item_published": "2026-09-06T20:58:32Z",
   "last_status": 200,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -121,8 +121,8 @@
   "last_item_count": 0,
   "last_item_published": "2026-06-15T16:47:47Z",
   "last_status": 304,
-  "last_success": "2026-09-30T06:11:06.113471Z",
+  "last_success": "2026-10-01T06:11:21.665992Z",
   "stale": true,
-  "stale_reason": "no new items in 106 days (expects ~30)"
+  "stale_reason": "no new items in 107 days (expects ~30)"
  }
 }
