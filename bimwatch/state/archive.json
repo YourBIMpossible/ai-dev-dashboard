@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-02T06:11:05.843964Z",
- "count": 461,
+ "generated_at": "2026-10-03T06:12:48.730725Z",
+ "count": 463,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Tue, 29 Sep 2026 02:30:42 GMT",
    "last_status": 200,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": true,
-   "stale_reason": "no new items in 58 days (expects ~7)"
+   "stale_reason": "no new items in 59 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-10-01T15:44:38Z",
-   "last_modified": "Thu, 01 Oct 2026 16:25:16 GMT",
+   "last_item_published": "2026-10-02T11:04:09Z",
+   "last_modified": "Fri, 02 Oct 2026 14:16:38 GMT",
    "last_status": 200,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-30T21:48:03Z",
    "last_status": 200,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,7 +41,7 @@
    "last_item_published": "2026-09-29T12:32:53Z",
    "last_modified": "Thu, 01 Oct 2026 13:03:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,42 +51,42 @@
    "last_item_count": 8,
    "last_modified": "Thu, 01 Oct 2026 14:01:27 GMT",
    "last_status": 200,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"73c490833313e42817fd91061b432db2\"",
+   "etag": "W/\"23e288bdd19f92f41be9b70aa4cdf13e\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-01T06:42:46Z",
+   "last_item_published": "2026-10-02T21:00:43Z",
    "last_status": 200,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-02T00:26:00Z",
-   "last_modified": "Fri, 2 Oct 2026 02:09:11 GMT",
+   "last_item_published": "2026-10-03T01:42:00Z",
+   "last_modified": "Sat, 3 Oct 2026 03:17:07 GMT",
    "last_status": 200,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 81,
+   "consecutive_failures": 82,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-02T06:11:05.843964Z",
+   "last_failure": "2026-10-03T06:12:48.730725Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "81 consecutive failures: HTTP 403"
+   "stale_reason": "82 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"89a00846d7afe627864073c04f00e719\"",
+   "etag": "W/\"be387b36474ea0d36291179eab98ad00\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,72 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-02T06:11:05.843964Z",
+   "last_success": "2026-10-03T06:12:48.730725Z",
    "stale": true,
-   "stale_reason": "no new items in 108 days (expects ~30)"
+   "stale_reason": "no new items in 109 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "ELLAH-M: A Structural-Production Toolkit",
+   "url": "http://revitaddons.blogspot.com/2026/09/ellah-m-structural-production-toolkit.html",
+   "source": "revit-addons",
+   "published": "2026-10-03T01:42:00Z",
+   "summary": "Executive Overview ELLAH-M is a Revit productivity add-in developed specifically for structural engineers and BIM teams. Its currently published core automates structural-column numbering, foundation and pile numbering, and two-way Excel exchange. Broader tools presented on the developer’s website extend the concept toward project setup, view and sheet creation, opening and recess modeling, and future automated pile layout. The add-in’s central design idea is continuity across the structural workflow: marks assigned to columns can drive the identification of supporting pile caps and individual piles; selected model data can move to Excel for coordination and return to the correct Revit elements; and office standards can be reused to establish views and sheets in new projects. This makes ELLAH-M less of a general-purpose utility collection and more of a structural-production toolkit centered on numbering, information consistency, and drawing setup. Product-status distinction: Autodesk Marketplace currently presents column numbering, foundation and pile numbering, and Excel export/import as the principal released capabilities. The developer’s version 1.3.1 website also advertises…",
+   "id": "109cf28377be6c88",
+   "fetched_at": "2026-10-03T06:12:48.730725Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "A Revit add-in for structural workflows; worth knowing the pattern, but your work is sheets/viewports/auditing, not structural automation.",
+    "topics": [
+     "revit-addins",
+     "structural-bim"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-03T06:12:48.730725Z"
+   }
+  },
+  {
+   "title": "Formas.AI unveils native agentic 3D modeller",
+   "url": "https://aecmag.com/cad/formas-ai-unveils-native-agentic-3d-modeller/",
+   "source": "aec-magazine",
+   "published": "2026-10-02T11:04:09Z",
+   "summary": "Cartesian by Formas brings AI models, editable geometry with physical properties into a workspace for creation and problem-solving in architecture and product design Formas.AI has unveiled Cartesian, an AI-assisted platform for early-stage architecture, interiors, furniture and product design that aims to turn AI-generated concepts into editable, physically meaningful geometry. The company argues that AI can already produce convincing images of buildings and objects, but turning those images into models raises harder questions about how parts fit together, which constraints matter and what should change as a design evolves. Cartesian lets designers start from photographs, sketches, written briefs or existing models, then refine individual components through conversation, carrying requirements and references into each revision. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here “The technology behind it can be incredibly complex. The experience should not be,” said Yiping Goh, co-founder and CEO. At the platform’s core is a proprietary CAD kernel layer and geometric toolkit built for AI…",
+   "id": "24e545d816d34898",
+   "fetched_at": "2026-10-03T06:12:48.730725Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "AI-assisted early-stage design platform unrelated to Revit, your API work, or interoperability with your tooling.",
+    "topics": [
+     "ai",
+     "design-tools"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-03T06:12:48.730725Z"
+   }
+  },
+  {
+   "title": "Lumion launches Axogram for architectural diagramming",
+   "url": "https://aecmag.com/visualisation/lumion-launches-axogram-for-architectural-diagramming/",
+   "source": "aec-magazine",
+   "published": "2026-10-02T07:42:47Z",
+   "summary": "Generates architectural diagrams that stay connected to your SketchUp, Revit or Archicad CAD / BIM model Lumion has launched Axogram, a new tool that lets architects build and update 3D diagrams directly from their CAD or BIM models, without exporting views and redrawing them elsewhere. Diagrams are a staple of architectural communication, used to show how a project works, how people move through it, and why key decisions were made. According to Lumion, producing them has been an inefficient process that usually meant exporting fixed views, rebuilding them in graphics software and repeating the whole process each time the model changes. Axogram is meant to remove that cycle. It runs alongside SketchUp , Revit and Archicad , so diagrams stay connected to the model as it evolves. Users can test conceptual styles without touching the original geometry or materials, and add arrows, labels, zones and styles directly around the model, in 3D. https://aecmag.com/wp-content/uploads/2026/10/Axogram_Feature_Hero_Arrow.mp4 Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here The software can be used to…",
+   "id": "44084ed5ecf2dc7f",
+   "fetched_at": "2026-10-03T06:12:48.730725Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Reads Revit models for diagram generation; adjacent to your viewport/view automation but solves a different problem downstream.",
+    "topics": [
+     "revit-integration",
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-03T06:12:48.730725Z"
+   }
+  },
   {
    "title": "Product Roundup: DesignLab",
    "url": "http://revitaddons.blogspot.com/2026/09/product-roundup-designlab.html",
@@ -9089,27 +9149,6 @@
     "topics": [
      "revit-2026",
      "revitlookup",
-     "toolchain"
-    ],
-    "model": "claude-haiku-4-5-20251001",
-    "classified_at": "2026-07-25T20:06:02.422958Z"
-   }
-  },
-  {
-   "title": "Revit add-in templates 5.0.0",
-   "url": "https://github.com/Nice3point/RevitTemplates/releases/tag/5.0.0",
-   "source": "revit-templates-releases",
-   "published": "2025-04-02T19:15:45Z",
-   "summary": "Solution template The release publishing pipeline has been completely redesigned. Publishing is now based on tags instead of automatic push to main branch. This is aimed at better control to avoid unexpected situations. Also improved pre-release publishing, and releases from any branch, e.g. it is now possible to release an Alpha version from the develop branch. See Wiki for more details. The installer now ignores all .pdb files. Improved Readme file, added all detailed documentation about building and publishing the project. Readme file is dynamic and depends on the settings specified when creating Solution. Code coverage with documentation. Reworked .yml files. Simplified some code. Added support for .NET 9. Added support for Revit 2026. Removed support for Revit 2020. For support, add it manually by guide . Solution migration from v4 to v5 Create a completely clean project with the same name based on v5 of the template. Copy the following folders and files to your working project with replacement: build folder. install folder. Readme.md file. .yml files. Review the Git Diff carefully: Keep your custom GUIDs and project names. Preserve any user-specific customizations. Roll back…",
-   "id": "54ca504c4dfb57aa",
-   "fetched_at": "2026-07-25T16:05:54.777547Z",
-   "classification": {
-    "tier": "alert",
-    "relevance": 75,
-    "why": "Add-in template 5.0.0 release with redesigned publishing pipeline and CI/CD improvements—directly impacts your C# project setup.",
-    "topics": [
-     "revit-api",
-     "add-in-templates",
      "toolchain"
     ],
     "model": "claude-haiku-4-5-20251001",
