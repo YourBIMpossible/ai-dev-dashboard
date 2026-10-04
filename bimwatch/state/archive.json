@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-03T06:12:48.730725Z",
+ "generated_at": "2026-10-04T08:00:40.258408Z",
  "count": 463,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"e62c6c4dbda6cf4df893a1437dc13a07-gzip\"",
+   "etag": "\"78e5f379687d3834e7fb44218ed48e1b-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Tue, 29 Sep 2026 02:30:42 GMT",
+   "last_modified": "Sun, 04 Oct 2026 02:57:35 GMT",
    "last_status": 200,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": true,
-   "stale_reason": "no new items in 59 days (expects ~7)"
+   "stale_reason": "no new items in 60 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 200,
+   "last_item_count": 0,
    "last_item_published": "2026-10-02T11:04:09Z",
    "last_modified": "Fri, 02 Oct 2026 14:16:38 GMT",
-   "last_status": 200,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_status": 304,
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-30T21:48:03Z",
    "last_status": 200,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,7 +41,7 @@
    "last_item_published": "2026-09-29T12:32:53Z",
    "last_modified": "Thu, 01 Oct 2026 13:03:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,42 +51,42 @@
    "last_item_count": 8,
    "last_modified": "Thu, 01 Oct 2026 14:01:27 GMT",
    "last_status": 200,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
    "etag": "W/\"23e288bdd19f92f41be9b70aa4cdf13e\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-10-02T21:00:43Z",
-   "last_status": 200,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_status": 304,
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-03T01:42:00Z",
-   "last_modified": "Sat, 3 Oct 2026 03:17:07 GMT",
+   "last_item_published": "2026-10-03T18:07:00Z",
+   "last_modified": "Sat, 3 Oct 2026 20:14:57 GMT",
    "last_status": 200,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 82,
+   "consecutive_failures": 83,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-03T06:12:48.730725Z",
+   "last_failure": "2026-10-04T08:00:40.258408Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "82 consecutive failures: HTTP 403"
+   "stale_reason": "83 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"be387b36474ea0d36291179eab98ad00\"",
+   "etag": "W/\"b1e573d8eced9485f97ae5d11c299343\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,33 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-03T06:12:48.730725Z",
+   "last_success": "2026-10-04T08:00:40.258408Z",
    "stale": true,
-   "stale_reason": "no new items in 109 days (expects ~30)"
+   "stale_reason": "no new items in 110 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Skema: A Web-Based Generative-Design and BIM-Automation Platform",
+   "url": "http://revitaddons.blogspot.com/2026/10/skema-web-based-generative-design-and.html",
+   "source": "revit-addons",
+   "published": "2026-10-03T18:07:00Z",
+   "summary": "Executive Overview Skema is a web-based generative-design and BIM-automation platform for architecture and AEC teams. Its Revit add-in is the interoperability layer that connects a firm’s existing BIM knowledge to Skema and returns developed designs to Revit. The workflow is unusual among generative tools because it begins with proven Revit content—such as repeatable units, assemblies, families, parameters, and office standards—rather than producing disconnected conceptual geometry that must later be rebuilt. Through the add-in, teams organize Revit model groups as reusable catalog units, validate and upload them to a cloud Design Catalog, update or remove catalog content, and synchronize Skema-generated layouts back into Revit as native BIM. The broader Skema application then lets designers compose and morph those units within new footprints, compare alternatives using live project metrics, and progress from early feasibility toward a detailed model. The key distinction is that Skema is not simply a ribbon utility running entirely inside Revit. The add-in handles catalog creation and BIM exchange; option generation, catalog configuration, and metric-driven design occur primarily…",
+   "id": "0dfa1b770daf2a85",
+   "fetched_at": "2026-10-04T08:00:40.258408Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "A Revit add-in product that uses your existing families and standards; worth knowing the approach, not actionable to your tooling practice.",
+    "topics": [
+     "revit-addins",
+     "generative-design",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-04T08:00:40.258408Z"
+   }
+  },
   {
    "title": "ELLAH-M: A Structural-Production Toolkit",
    "url": "http://revitaddons.blogspot.com/2026/09/ellah-m-structural-production-toolkit.html",
@@ -9129,27 +9150,6 @@
     "topics": [
      "revit-addons",
      "vendor-profile"
-    ],
-    "model": "claude-haiku-4-5-20251001",
-    "classified_at": "2026-07-25T20:06:02.422958Z"
-   }
-  },
-  {
-   "title": "RevitLookup releases 2026.0.0",
-   "url": "https://github.com/lookup-foundation/RevitLookup/releases/tag/2026.0.0",
-   "source": "revitlookup-releases",
-   "published": "2025-04-03T10:01:20Z",
-   "summary": "A new major RevitLookup update with official Revit 2026 support and a lot of enhancements 🎉 This release focuses on performance, a renewed UI, expanded functionality, redesigned application architecture, clearer separation of core components and user flow improvements. Let's move to the details. General Revit 2026 support. Added shortcuts . SS shortcut opens the Snoop Selection window. Unlocked Ribbon buttons for document-independent actions. Some dialogs can be opened without opening a document. Improved context actions . Now Delete command shows the number of deleted Elements from the document. Improved exception handling . Now shows more informational messages, added more supported error types. Fixed some application crashes. Fixed dependency conflicts for .NET Framework versions of RevitLookup, according to tests, you should no longer encounter startup issues. Added AppBundle , that can be installed with all available versions in the release. Added user manuals , visit the Wiki for RevitLookup features. Added digital signature . Thanks Kinship for providing cloud services! User Interface Dashboard page The Dashboard has been significantly redesigned to make it easier to…",
-   "id": "1a1d85d2dba594d6",
-   "fetched_at": "2026-07-25T16:05:54.777547Z",
-   "classification": {
-    "tier": "alert",
-    "relevance": 90,
-    "why": "Major RevitLookup release with Revit 2026 support, UI redesign, architecture changes—essential for your debugging and inspection workflows.",
-    "topics": [
-     "revit-2026",
-     "revitlookup",
-     "toolchain"
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-07-25T20:06:02.422958Z"
