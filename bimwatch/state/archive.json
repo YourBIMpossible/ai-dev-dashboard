@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-04T08:00:40.258408Z",
- "count": 463,
+ "generated_at": "2026-10-05T06:18:26.354272Z",
+ "count": 464,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,9 +9,9 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Sun, 04 Oct 2026 02:57:35 GMT",
    "last_status": 200,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": true,
-   "stale_reason": "no new items in 60 days (expects ~7)"
+   "stale_reason": "no new items in 61 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-10-02T11:04:09Z",
    "last_modified": "Fri, 02 Oct 2026 14:16:38 GMT",
    "last_status": 304,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-09-30T21:48:03Z",
    "last_status": 200,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,7 +41,7 @@
    "last_item_published": "2026-09-29T12:32:53Z",
    "last_modified": "Thu, 01 Oct 2026 13:03:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,42 +51,42 @@
    "last_item_count": 8,
    "last_modified": "Thu, 01 Oct 2026 14:01:27 GMT",
    "last_status": 200,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"23e288bdd19f92f41be9b70aa4cdf13e\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-10-02T21:00:43Z",
-   "last_status": 304,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "etag": "W/\"c1af500b9739cf9c86d6b6de5fd07fad\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-10-04T11:23:36Z",
+   "last_status": 200,
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-03T18:07:00Z",
-   "last_modified": "Sat, 3 Oct 2026 20:14:57 GMT",
+   "last_item_published": "2026-10-04T19:09:00Z",
+   "last_modified": "Sun, 4 Oct 2026 20:01:15 GMT",
    "last_status": 200,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 83,
+   "consecutive_failures": 84,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-04T08:00:40.258408Z",
+   "last_failure": "2026-10-05T06:18:26.354272Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "83 consecutive failures: HTTP 403"
+   "stale_reason": "84 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"b1e573d8eced9485f97ae5d11c299343\"",
+   "etag": "W/\"59a691a3b7c52a890b12ed10ddb78768\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-04T08:00:40.258408Z",
+   "last_success": "2026-10-05T06:18:26.354272Z",
    "stale": true,
-   "stale_reason": "no new items in 110 days (expects ~30)"
+   "stale_reason": "no new items in 111 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "SWAPP.AI: An Operational Intelligence Layer for Architecture",
+   "url": "http://revitaddons.blogspot.com/2026/10/swappai-operational-intelligence-layer.html",
+   "source": "revit-addons",
+   "published": "2026-10-04T19:09:00Z",
+   "summary": "Executive Overview SWAPP.AI is an enterprise architecture-production platform that applies firm-specific artificial intelligence directly inside Autodesk Revit and Graphisoft Archicad. Its Revit experience is centered on an agentic assistant called Frank, which can read and write the live BIM model rather than merely answer questions or generate instructions. SWAPP positions the system as an operational intelligence layer: it executes documentation, modeling, annotation, coordination, and quality-control work using the firm's established standards and prior production decisions. The platform's principal value is large-scale construction-document automation. Published capabilities include creating and organizing views and sheets, placing dimensions, tags, and callouts, generating schedules, modeling walls, doors, fixtures, finishes, and worksets, detecting collisions and annotation conflicts, checking accessibility conditions, and validating a model or drawing set against firm rules. SWAPP states that its automation can address up to 80% of repetitive documentation tasks, although actual scope and savings vary by project, onboarding, and encoded standards. SWAPP is not a…",
+   "id": "5608d75b95390dc0",
+   "fetched_at": "2026-10-05T06:18:26.354272Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "A commercial add-in using AI agents inside Revit; worth knowing the direction, but no technical detail on how it integrates with the API or what constraints it reveals.",
+    "topics": [
+     "revit-addins",
+     "ai-in-bim"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-05T06:18:26.354272Z"
+   }
+  },
   {
    "title": "Skema: A Web-Based Generative-Design and BIM-Automation Platform",
    "url": "http://revitaddons.blogspot.com/2026/10/skema-web-based-generative-design-and.html",
