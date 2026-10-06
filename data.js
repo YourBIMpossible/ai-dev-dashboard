@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-10-05",
+  generated: "2026-10-06",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-09-22",
+  activitySince: "2026-09-23",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,17 +289,17 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [25,20,34,12,12,0,2,38,1,2,0,0,0,0],
+      activity: [20,34,12,12,0,2,38,1,2,0,0,0,49,3],
       lastActivity: {
-        date: "2026-10-01",
-        summary: "docs(wfa0928): record 2026-09-30 live deploy pass (#169) (c05aa33)"
+        date: "2026-10-06",
+        summary: "docs(decisions): record the closed Docs Architecture mission; retire the North Star draft (#809) (317e827)"
       },
       branch: "main at 943af02c; 0 ahead of origin",
       git: { warn: "21 worktrees, 233 local branches, ~200 local-only commits -- mostly squash residue of merged PRs (p13-*, env-variables-cleanup, phase-e-prep, deploy-evidence-inert). Genuinely local-only: AU 2026 competitive analysis (4 commits), arch/config familiarization map, control-gaps plan comparison; untracked env-candidates review folder in the main checkout (blocks deploy evidence). 48 origin branches incl. the draft ctl/* stack." },
       nextActions: ["Revit end-user verification (owner-only, queue REVIT-END-USER-WORKFLOW-VERIFY): resolve the untracked env-candidates review folder in the deploy checkout (deploy evidence exit 3 -> 0), decide which add-in build to certify (installed DLL comes from unmerged AddIns claude/glass-linkpdf-deploy), then run Invoke-RevitLiveVerification on a Revit 2026/2027 cloud model","Phase 13: refresh the frontend for #762/#764/#765 (running frontend image still labelled 52a4a907), run the attended Apply live matrix (L1/L4/L7/L10/L12/L13 feasible; L6/L8 need an invite + read share), write the Increment 2 Task 8 reconciliation, then open Increment 3","Env contract (#724) owner step: review the secretless env candidates, run the owner-only live-env migration script (not yet run; live environment unchanged), then remove the candidates folder from the deploy checkout","Phase 17 (code-complete, dormant): owner closes the closeout C.1 policy decisions, runs the one-sitting operational gate (backup, migrate outbox/delivery tables, readiness check all DISABLED), then Slack-then-Teams pilot once the pilot firm/workspace/tenant exist","Phase 9: flag-on activation of product ingestion (A6/A7 + flag-on smoke) now that the flag-gated ingest trigger exists (#748); P9 ledger row still says no ingest writer","Autodesk-first rollout: complete the per-user authority model, wire FE canDownload control-hiding, then enable BIMPOSSIBLE_AUTODESK_FIRST_ACCESS (no movement since 09-16; w5/p1f4 worktree still holds 6 uncommitted cache files)","Delivery control: decide the draft stack #755 (receipt v3) -> #760 (PR readiness tool) -> #763 (gh pr merge interception) and plan #751 / audits #753 against #768's proportionate-verification reset; land or close #769","Ledger catch-up (owner-maintained): WAVE-STATUS unchanged since 09-21 -- waves 37-39 deployed + infrastructure-verified but still BUILT, and no wave rows for the Phase 13/17/9 trains","Owner git hygiene: 21 worktrees, 233 local branches, ~200 local-only commits (mostly squash residue of merged PRs); keep/push/discard the genuinely local-only docs (AU 2026 competitive analysis, arch/config familiarization map, control-gaps plan comparison) and the four Waves 1-9 follow-up lanes","Carried owner-gated: P6 Client-Mgmt E launch (flag-dark, verified non-prod); Phase 15c live-read broker flip after T5 under AUTH-INH; AUTHZ-AUDIT-ROW-SIGNING scheme; P14-14g residency/redaction ratification"],
       pendingDecisions: ["Phase 13 apply contract (decisions/2026-09-26__phase13-apply-contract-PROPOSED.md): owner rows 3a, 10b, 11a, 12a, 13a, 15a, 16a, 20a-c unratified; draft/in-review Apply refusal kept as current policy pending an owner call; Increment 3 stays closed until the Increment 2 Task 8 record conflict is reconciled in writing.","Phase 17 policy set (closeout C.1): outbox/delivery-ledger retention, composite change_set FK, kill-switch scope beyond the answer path, newer-schema outbox rows (hold vs close out), dispatch lock/send timeouts, deep-link host, backfill on enable, pilot-evidence model, notification routing, and key-management deprecation/vault/rotation ownership (encryption-domain packet).","Which installed add-in build the Revit end-user verification certifies: today's DLL is from the unmerged AddIns claude/glass-linkpdf-deploy branch, not a clean pipe-on build of AddIns main (decision belongs to the AddIns/Glass lane).","Delivery-control direction: #768 restored solo-owner merge authority + risk-proportionate verification; the draft control-gaps stack (#751 plan, #755/#760/#763 merge-readiness interception) and #753's 3c proposal (ratify a Status: live|closed doc marker) need keep/revise/close calls.","Waves 1-9 closeout open owner actions (decisions/2026-09-26__waves1-9-closeout-open-owner-actions.md): keep/merge/discard four local-only follow-up lanes, adopt strict truthiness for the 17 sensitive gates or keep the permissive design, branch/worktree pruning.","Schedule-push: staleness cadence, classifier rules, fidelity-degradation list, SPF ship location -- still direction-only, no code. The write-spine role SPF anticipated is now filled by the Phase 13 Write Engine; re-scope SPF against it before building.","Ceilings/Flooring dedicated shapers (Wave 16 placeholders) vs. Wave 15 Civil shapers (also pending) -- build now or batch them? Neither built; no demand signal forcing it. Furniture shaper already shipped.","D-5 (AKP): provider routing for local LLM inference -- gated on C-2 (provider runtime abstraction). Model routing 1A (#537) now gives a compiled registry + resolver, but only 'anthropic' is runtime_supported; re-check whether C-2 is now partially satisfied before deciding.","D-8 (AKP): where the audit hash-chain tip anchors outside the DB -- dormant until a B-6 STEP-0 trigger fires (2nd DB-writer, or a client/contract/insurer record on file). None has: single-operator deployment.","Phase 15 has no PhaseDefinition / ratification doc -- unlike Phase 13 (ACTIVE 2026-07-16) and Phase 14 (ACTIVE 2026-08-17), it entered build with no proposal; the PHASE-STATUS row carries its own flag. Owner still owes the definition doc.","Owner architecture calls on the 4 deferred 09-11 audit items: single tenancy-enforcement idiom (ARCH-1A), URN-keyed hub resolution helper (ARCH-2A), persisted write-approval record (ARCH-3A), failed-provisioning rollback (RE-2A)","Autodesk-first authority model (D1): ratify the target model before the auth swarm builds B4+ and the flag is enabled"],
       blockers: [],
-      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Status ladder is merged -> deployed on the local stack -> browser-smoked -> end-user (Revit) verified; the 09-23..09-26 Phase 13/17/9 work sits at the first three rungs only -- no production or end-user claim until the attended Revit run.","The backend serves source bind-mounted from the F:\\BIMpossible main checkout: anything untracked or dirty there fails deploy evidence (exit 3), and pulling main changes what the backend runs on its next restart.","Docs budget (G4) ceiling is 335,000 counted words and main sits at the line -- PRs relieve it by moving resolved reviews into reviews/_archive with ARCHIVED headers; the ceiling itself is not raised.","Codebase graph stale - newest graphify snapshot 2026-09-25 (10d old); push or run a wave to refresh"],
+      reminders: ["main branch protection now has enforce_admins=true + strict required checks (backend pytest, frontend vitest+tsc, security-scan-summary) + force-push disabled -- checks gate admins too, including Push-And-Verify.ps1. Residual gap: no required PR review (required_pull_request_reviews=null).","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Status ladder is merged -> deployed on the local stack -> browser-smoked -> end-user (Revit) verified; the 09-23..09-26 Phase 13/17/9 work sits at the first three rungs only -- no production or end-user claim until the attended Revit run.","The backend serves source bind-mounted from the F:\\BIMpossible main checkout: anything untracked or dirty there fails deploy evidence (exit 3), and pulling main changes what the backend runs on its next restart.","Docs budget (G4) ceiling is 335,000 counted words and main sits at the line -- PRs relieve it by moving resolved reviews into reviews/_archive with ARCHIVED headers; the ceiling itself is not raised.","Codebase graph stale - newest graphify snapshot 2026-09-25 (11d old); push or run a wave to refresh"],
       links: [
         { label: "STATE doc (canonical, 06-12, archived)", path: "F:\\BIMpossible-Workspace\\99_Archive\\00_Strategy\\state-snapshots\\BIMpossible_STATE_2026-06-12.md" },
         { label: "True-prod deploy runbook (06-12)", path: "F:\\BIMpossible-Workspace\\02_Reference\\2026-06-12__true-prod-deploy-runbook.md" },
@@ -400,10 +400,10 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [0,3,0,3,2,0,0,2,1,0,0,0,0,0],
+      activity: [3,0,3,2,0,0,2,1,0,0,0,0,10,1],
       lastActivity: {
-        date: "2026-09-30",
-        summary: "docs(claude): designated Revit test models are disposable fixtures (#165) (976c7ef)"
+        date: "2026-10-06",
+        summary: "docs-hygiene(G4): sync scope-guard hardening from BIMpossible 4cd76111 (#807) (#179) (472f671)"
       },
       branch: "main at ed27835 (clean, 2 behind origin/main a815ee1)",
       git: null,
@@ -504,7 +504,7 @@ window.DASHBOARD_DATA = {
           { name: "M5-M6 Pricing + commercial launch", pct: 0, note: "No pricing/waitlist/signup page exists in site/src/pages." }
         ]
       },
-      activity: [1,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "docs(audit): close 2026-09-21 audit (44b159b)"
@@ -824,7 +824,7 @@ window.DASHBOARD_DATA = {
           }
         ]
       },
-      activity: [7,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      activity: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       lastActivity: {
         date: "2026-09-22",
         summary: "WORKLOG: box WORKSPACE set to a real path (#29) (cc22569)"
@@ -849,7 +849,7 @@ window.DASHBOARD_DATA = {
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
-        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 06:01)",
+        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 06:00)",
         "2026-09-26 - WORKLOG: RAG data-scope facts recorded, no decision (rag/ ingests .md only, so roughly 800 of ~1,150 non-md AI-Brain-Data files are skipped; two unused ~954GB drives on the box). Pushed on the already-merged #29 branch, not on main (16ad24f)",
         "2026-09-22 - Box WORKSPACE set to a real path (#29); Open WebUI 0.11.4 + 'pilot' naming removed from box paths (#27); OpenCode-setup, MyBuddy strategy and reconciliation-plan reviews merged (#25/#26/#28)",
         "2026-09-21 - MyBuddy personal plan adopted; steps 2-5 done: 3 UIs pinned to gemma4, status script + Windows launcher, qwen3.5:9b scored 26/27 and rejected (#22/#23); LibreChat UFW rule (#24)",
@@ -917,10 +917,10 @@ window.DASHBOARD_DATA = {
           { name: "BDC-001 project truth across 3 chat UIs", pct: 33, note: "BIMpossible Decisions Corpus 001 (92 records, citation-backed, read-only release r1) served through one gateway. 1 of 3 UIs live: Open WebUI Project Truth Pipe 4.0.0-rc3, admin-only, cut over 2026-09-26 (8c0ed9c). AnythingLLM and LibreChat connectors built offline, not deployed." }
         ]
       },
-      activity: [15,18,13,11,7,0,0,0,0,0,0,0,0,0],
+      activity: [18,13,11,7,0,0,0,0,0,0,0,0,9,0],
       lastActivity: {
-        date: "2026-09-26",
-        summary: "Open WebUI Pipe cut-over attempt 2: rc3 live, records, pin expected_live_version 4.0.0-rc3 (8c0ed9c)"
+        date: "2026-10-05",
+        summary: "Review fixes: partial Revit runs, proof validator, filing conflicts (d88a267)"
       },
       branch: "master (local-only, no remote)",
       git: { warn: "No GitHub remote — local-only git. Confirm whether this should stay private or get a private remote for backup." },
@@ -954,10 +954,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 85, note: "Unchanged this window — zero .claude/ commits since 07-22. Flagging rather than silently correcting: on-disk today shows 3 skills / 5 agents / 7 commands, not the 6 skills this note previously claimed — that discrepancy's origin is unverified." }
         ]
       },
-      activity: [8,8,4,1,1,0,2,29,1,1,0,0,0,0],
+      activity: [8,4,1,1,0,2,29,1,1,0,0,0,31,1],
       lastActivity: {
-        date: "2026-10-01",
-        summary: "docs(wfa0928): record 2026-09-30 live deploy pass (#169) (c05aa33)"
+        date: "2026-10-06",
+        summary: "docs-hygiene(G4): sync scope-guard hardening from BIMpossible 4cd76111 (#807) (#192) (76e1009)"
       },
       branch: "main at 859d363 on origin; local main in sync, clean; worktree ctl-p1-receipt (ctl/p1-receipt-v3, pushed, draft PR #162); local-only commit 5312cfd on docs/review-all-gatea-canonical-filing",
       git: null,
@@ -996,10 +996,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor (120s loop, live-server) REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Now scheduled-only (Task Scheduler daily 06:00 → Dashboard-auto) + on-demand (Refresh-Now.cmd); 5/5 daily pushes confirmed landing 07-19..07-23." }
         ]
       },
-      activity: [3,5,3,3,6,3,4,3,3,3,3,2,4,2],
+      activity: [5,3,3,6,3,4,3,3,3,3,2,4,4,1],
       lastActivity: {
-        date: "2026-10-05",
-        summary: "chore: live billing sync 2026-10-05 (d6566f5)"
+        date: "2026-10-06",
+        summary: "chore: live billing sync 2026-10-06 (58b057f)"
       },
       branch: "main at 8557e4c; Dashboard-auto in sync with origin, clean; human clone Dashboard in sync and clean, with one stash (stash@{0}: superseded P13 pct 32->40 + audit-freshness.js, 09-24)",
       git: null,
@@ -1179,7 +1179,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-25",
         summary: "queue: #693 owner-path live-verified on all 5 download routes; #697 deployed flag-dark, unit-tested only (03e32bd)"
       },
-      activity: [7,18,0,4,0,0,0,0,0,0,0,0,0,0]
+      activity: [18,0,4,0,0,0,0,0,0,0,0,0,0,0]
     },
     /* PROJECT:claude-next-state:END */
 
@@ -1239,10 +1239,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-30",
-        summary: "fix(bootstrap): preserve existing settings.json instead of regenerating it (#22) (1d2d2e5)"
+        date: "2026-10-05",
+        summary: "docs(guidance): align durable-handoff rule across harness, closure audit, slop-audit (#28) (84b701c)"
       },
-      activity: [1,0,0,2,3,0,0,11,3,0,0,0,0,0]
+      activity: [0,0,2,3,0,0,11,4,0,0,0,0,6,0]
     },
     /* PROJECT:claude-profile:END */
 
@@ -1303,10 +1303,10 @@ window.DASHBOARD_DATA = {
         unknown: []
       },
       lastActivity: {
-        date: "2026-09-30",
-        summary: "docs(audits): 2026-09-28 slop audit + disposition ledger (#16) (1212bdc)"
+        date: "2026-10-05",
+        summary: "fix(graphify): funnel measures only timed latency and reports unread inputs (#17) (56b109c)"
       },
-      activity: [1,4,9,2,0,0,0,6,2,0,0,0,0,0]
+      activity: [4,9,2,0,0,0,6,2,0,0,0,0,1,0]
     },
     /* PROJECT:claude-tools:END */
 
@@ -1547,7 +1547,7 @@ window.DASHBOARD_DATA = {
         date: "2026-09-29",
         summary: "worklogs: TI sector viewports re-placed at saved positions (472) (3168e16)"
       },
-      activity: [2,9,1,3,0,0,0,2,0,0,0,0,0,0]
+      activity: [9,1,3,0,0,0,2,0,0,0,0,0,0,0]
     },
     /* PROJECT:revit-ops:END */
   ]
