@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-05T07:30:09.917980Z",
- "count": 464,
+ "generated_at": "2026-10-06T06:11:04.019104Z",
+ "count": 472,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Sun, 04 Oct 2026 02:57:35 GMT",
    "last_status": 200,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": true,
-   "stale_reason": "no new items in 61 days (expects ~7)"
+   "stale_reason": "no new items in 62 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-10-02T11:04:09Z",
-   "last_modified": "Fri, 02 Oct 2026 14:16:38 GMT",
-   "last_status": 304,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-10-05T15:34:31Z",
+   "last_modified": "Mon, 05 Oct 2026 15:55:31 GMT",
+   "last_status": 200,
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-30T21:48:03Z",
+   "last_item_published": "2026-10-05T17:03:31Z",
    "last_status": 200,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,7 +41,7 @@
    "last_item_published": "2026-09-29T12:32:53Z",
    "last_modified": "Thu, 01 Oct 2026 13:03:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,42 +51,42 @@
    "last_item_count": 8,
    "last_modified": "Thu, 01 Oct 2026 14:01:27 GMT",
    "last_status": 200,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"c1af500b9739cf9c86d6b6de5fd07fad\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-10-04T11:23:36Z",
-   "last_status": 304,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "etag": "W/\"ee05ced06aa119fe8dff9939a3673805\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-10-05T18:09:20Z",
+   "last_status": 200,
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-04T19:09:00Z",
-   "last_modified": "Sun, 4 Oct 2026 20:01:15 GMT",
+   "last_item_published": "2026-10-06T01:13:00Z",
+   "last_modified": "Tue, 6 Oct 2026 01:48:37 GMT",
    "last_status": 200,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 85,
+   "consecutive_failures": 86,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-05T07:30:09.917980Z",
+   "last_failure": "2026-10-06T06:11:04.019104Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "85 consecutive failures: HTTP 403"
+   "stale_reason": "86 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"078a6f0049f2f12a9ba67a2babcc1e35\"",
+   "etag": "W/\"1d4fee3fe268352688d5d4f0ceb60da8\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,131 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-05T07:30:09.917980Z",
+   "last_success": "2026-10-06T06:11:04.019104Z",
    "stale": true,
-   "stale_reason": "no new items in 111 days (expects ~30)"
+   "stale_reason": "no new items in 112 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "OkPy: An AI-Assisted Python Development Environment for Revit",
+   "url": "http://revitaddons.blogspot.com/2026/10/okpy-ai-assisted-revit-python.html",
+   "source": "revit-addons",
+   "published": "2026-10-06T01:13:00Z",
+   "summary": "Executive Overview OkPy is an automation-development environment and AI-assisted tool builder that runs inside Autodesk Revit through the Orkestra add-in. It is designed to let AEC professionals create working Revit utilities—including their user interfaces and back-end logic—without building and packaging a conventional compiled add-in from scratch. Users can write tools directly, ask the OkPy Agent to generate them from plain-language requirements, test them against a Revit model, save them as portable OkPy files, and deploy approved tools locally or through Orkestra. OkPy is broader than a fixed collection of commands. It combines three related offerings: a development environment for custom automation; an AI Agent that generates and revises tools; and a public library of ready-made Revit utilities. Orkestra supplies the host integration, ribbon access, tool distribution, analytics, permissions, and enterprise deployment layer. This makes OkPy most comparable to a low-code development platform, scripting environment, and AI coding assistant combined—not to a single-purpose Revit plug-in. The product's key promise is to shorten the path from an automation idea to a repeatable,…",
+   "id": "75690be813821393",
+   "fetched_at": "2026-10-06T06:11:04.019104Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 72,
+    "why": "AI-assisted Python environment inside Revit could replace some manual add-in development workflows; concrete technique worth exploring for your tooling practice.",
+    "topics": [
+     "revit-automation",
+     "python",
+     "ai-assisted-development"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
+  {
+   "title": "Join us in Silicon Valley to build a working integration between Autodesk and Microsoft technologies",
+   "url": "https://aps.autodesk.com/blog/join-us-silicon-valley-build-working-integration-between-autodesk-and-microsoft-technologies",
+   "source": "aps-blog",
+   "published": "2026-10-05T17:03:31Z",
+   "summary": "Join us in Silicon Valley to build a working integration between Autodesk and Microsoft technologies julia.brun@aut… 5 Oct 2026 Julia Brun Poyraz Yildirim Petr Broz Share Have an idea for a web application that brings Autodesk and Microsoft technologies together ? What if you could spend four days building it alongside engineers and experts from both companies? Join us for AI and Autodesk Platform Services developer accelerator From March 9–12, 2027 , Autodesk and Microsoft are bringing a small group of developers together in Silicon Valley for a hands-on Autodesk Platform Services (APS) developer accelerator. Bringing Autodesk and Microsoft experts into the same room creates an unusual opportunity. Modern applications rarely live inside a single technology ecosystem. A workflow might combine design and engineering data from Autodesk with collaboration, business processes, AI, or enterprise data from Microsoft. During this accelerator, you'll be able to explore those connections with people who know both sides of technology! What is the format of the developer accelerator An Autodesk Platform Services developer accelerator is a free, intensive development event for teams building…",
+   "id": "203dc56dd40f1f23",
+   "fetched_at": "2026-10-06T06:11:04.019104Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 28,
+    "why": "APS developer accelerator event; only relevant if you plan to build web integrations between Autodesk and Microsoft services at scale.",
+    "topics": [
+     "aps",
+     "events"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
+  {
+   "title": "BIMlogiq boosts Argus AI platform for Revit",
+   "url": "https://aecmag.com/bim/bimlogiq-argus-ai-platform-launches-for-revit/",
+   "source": "aec-magazine",
+   "published": "2026-10-05T15:34:31Z",
+   "summary": "Multi-agent platform designed to automate BIM workflows from the creation of Revit families to rebar modelling BIMlogiq has enhanced Argus, its AI platform for Revit that uses a team of specialist agents to automate a range of workflows directly within a Revit project. According to the developers, users give it a goal and it plans the steps, chains the tools, and executes end-to-end: placing families, checking the model, tagging and dimensioning, building views and sheets. Runs can be saved as a command for the whole team to reuse. Recent additions include a Family Creation Agent that can reportedly create fully parametric Revit families from scratch using native Revit components. A Bathroom Agent can design ADA-compliant bathrooms from scratch, automatically placing the required families and laying out the space to meet accessibility standards. A new MEP Systems Agent is designed to understand MEP systems through their connectors, even when parts of a system are not fully connected. It traces flows through the network, from equipment to terminals, to build an understanding of the system as a whole, while reconciling schedule values with what is actually modelled. Elsewhere, a…",
+   "id": "74adddc7b58de417",
+   "fetched_at": "2026-10-06T06:11:04.019104Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Argus is a competitor product automating BIM workflows; worth knowing the direction, but no API or technique to adopt for your work.",
+    "topics": [
+     "ai-bim",
+     "competitor-product"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
+  {
+   "title": "Cupix moves beyond construction into operations",
+   "url": "https://aecmag.com/reality-capture-modelling/cupix-moves-beyond-construction-into-operations/",
+   "source": "aec-magazine",
+   "published": "2026-10-05T14:44:07Z",
+   "summary": "CupixWorks 5.0 links reality, project and asset data to create “Enterprise Spatial Intelligence” Cupix is repositioning CupixWorks from a construction-focused 3D digital-twin platform into what the company calls Enterprise Spatial Intelligence (ESI). The upcoming version 5.0 is intended to extend the platform across the asset lifecycle, from construction into operations and maintenance. Until now, CupixWorks was primarily associated with reality capture and digital twins for construction: users record sites with widely available 360-degree cameras, and the platform reconstructs them as navigable 3D environments. Version 5.0 is intended to move beyond that record, linking it to the broader information that governs a project. That includes 360, drone, and laser scan data, BIM models and other data from Autodesk Forma, Procore and Revizto, schedules from Excel, Microsoft Project, Primavera P6, and Oracle Primavera Cloud and enterprise asset-management data from platforms such as SAP, IFS and IBM Maximo. Cupix says the combined dataset can help teams align design, schedule and site progress, automate comparison of actual conditions with project intent, and surface deviations for…",
+   "id": "39d535e7b124b040",
+   "fetched_at": "2026-10-06T06:11:04.019104Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 8,
+    "why": "Asset lifecycle and operations positioning; unrelated to Revit API, add-in development, or model authoring tooling you ship.",
+    "topics": [
+     "competitor-product"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
+  {
+   "title": "Kora Studio 1.0 launches for façade design",
+   "url": "https://aecmag.com/bim/kora-studio-1-0-launches-for-facade-design/",
+   "source": "aec-magazine",
+   "published": "2026-10-05T08:53:10Z",
+   "summary": "Revit plug-in said to enable junior architects to design complete façades in minutes Kora Studio is a new design and modelling plug-in for Revit that enables architects to design a façade and immediately check whether it can be manufactured, transported and installed, according to its developer. The software is used to design the façade panel directly, including its grid, cladding and windows. As the architect models, each façade panel is checked against production data. The company says a complex parametric family that would traditionally take two days to build can be created in about five minutes using Kora Studio, while compliance checks that can take nearly two months are carried out instantly. “Architects should be designing, not acting as engineers or doing busywork. Too often they only learn about a limitation months after the design is finished. Kora Studio tells them the moment they draw it,” said Aurimas Sabulis, CEO of Kora Studio. Cladding cells can only be split or merged into combinations that can be manufactured, while designs outside normal production limits are flagged immediately. The company says the finished model can then be sent directly to fabrication,…",
+   "id": "8bf29bdff2e7facb",
+   "fetched_at": "2026-10-06T06:11:04.019104Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 32,
+    "why": "Façade design plug-in ships parametric family automation; interesting technique but no API detail or architecture to apply to sheet/viewport work.",
+    "topics": [
+     "revit-plugin",
+     "family-authoring"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
+  {
+   "title": "OpenSpace AI to help firms make faster decisions on site",
+   "url": "https://aecmag.com/reality-capture-modelling/openspace-ai-to-help-firms-make-faster-decisions-on-site/",
+   "source": "aec-magazine",
+   "published": "2026-10-05T08:17:50Z",
+   "summary": "Reality capture platform includes AI agents that can see, understand, and act on job site data OpenSpace has enhanced its Visual Intelligence Platform adding new features to help construction teams understand, navigate and document jobsites in real time. The updates are said to move OpenSpace beyond traditional reality capture toward a broader vision where teams can use AI and spatial data not just to create a record of construction, but to make faster decisions while work is underway. “Construction doesn’t need another disconnected tool or system that asks teams to manually input information into a form,” said Jeevan Kalanithi, CEO and Co-Founder of OpenSpace. “The next phase of the industry will be defined by platforms that understand the physical world and make that intelligence available wherever teams already work.” New capabilities include AI Autolocation 2.0 with Live Location, which uses AI to pinpoint a user’s location inside buildings without GPS or additional wireless hardware, and AI Walk-and-Talk, which lets teams create daily logs by simply walking the site and describing what they see. Meanwhile Site Mode gives field teams a Google Maps-like experience inside a…",
+   "id": "7644d6cc0cad83e8",
+   "fetched_at": "2026-10-06T06:11:04.019104Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Reality capture and site decision-making; orthogonal to Revit add-in development, model audit, and family tooling you build.",
+    "topics": [
+     "competitor-product"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
   {
    "title": "SWAPP.AI: An Operational Intelligence Layer for Architecture",
    "url": "http://revitaddons.blogspot.com/2026/10/swappai-operational-intelligence-layer.html",
@@ -248,6 +367,48 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-02T06:11:05.843964Z"
+   }
+  },
+  {
+   "title": "Introducing passthrough billing: a more flexible way to manage API usage costs with APS",
+   "url": "https://aps.autodesk.com/blog/introducing-passthrough-billing-more-flexible-way-manage-api-usage-costs-aps",
+   "source": "aps-blog",
+   "published": "2026-10-01T21:49:33Z",
+   "summary": "Introducing passthrough billing: a more flexible way to manage API usage costs with APS Dwanill Mehta 5 Oct 2026 Dwanill Mehta Share As customers automate more workflows, connect more data, and use more applications powered by Autodesk Platform Services (APS), API consumption has accelerated. To support this growing usage and help users scale, we introduced included API capacity with eligible Autodesk subscriptions, giving customers more ways to explore APIs and automation at no additional cost. Until now, API usage generated through third-party applications has typically been the responsibility of the application developer, even when that usage is driven by an Autodesk customer. On October 14, 2026, we're introducing passthrough billing , which allows eligible API usage from third-party applications to be attributed to the customer and consumed against their available APS capacity. You still build, operate, price, and support your application. Passthrough billing simply gives you more flexibility in how APS API usage is funded behind the scenes. What is passthrough billing? Today, eligible APS API usage generated through third-party applications is typically billed to the app…",
+   "id": "43d590be4b623834",
+   "fetched_at": "2026-10-06T06:11:04.019104Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 78,
+    "why": "Passthrough billing changes APS cost model for third-party apps; directly affects how you price and distribute desktop add-ins using APS.",
+    "topics": [
+     "aps",
+     "licensing",
+     "billing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
+  {
+   "title": "Passthrough billing: A guide for ISVs",
+   "url": "https://aps.autodesk.com/blog/passthrough-billing-guide-isvs",
+   "source": "aps-blog",
+   "published": "2026-10-01T21:45:16Z",
+   "summary": "Passthrough billing: A guide for ISVs Dwanill Mehta 5 Oct 2026 Dwanill Mehta Share Beginning October 14, 2026 , independent software vendors (ISV) can start preparing their applications to implement Passthrough billing allowing API calls initiated by the application to attribute the API consumption directly to the customer. Passthrough affects both your business model and your application architecture. This guide helps you evaluate whether passthrough is the right model for your application and, if you choose to use it, understand the technical options for enabling it. This guide has two parts: Business considerations — understand the available options and what passthrough means for your business and customers. Technical enablement — choose an enablement path and understand the application and authentication changes required to implement passthrough. Part 1: Business considerations Understand the business implications API consumption costs moves to the customer For customers using passthrough, eligible API consumption is attributed to the customer's Autodesk Platform Services (APS) account rather than your own. This changes who is responsible for API payment without changing your…",
+   "id": "74a146903849b6d7",
+   "fetched_at": "2026-10-06T06:11:04.019104Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 85,
+    "why": "ISV technical guide for passthrough billing implementation; essential reading if any add-in uses APS to understand cost attribution and architecture changes.",
+    "topics": [
+     "aps",
+     "licensing",
+     "isv-guidance"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-06T06:11:04.019104Z"
    }
   },
   {
