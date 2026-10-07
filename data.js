@@ -733,7 +733,7 @@ window.DASHBOARD_DATA = {
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
-        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 21:00)",
+        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 21:01)",
         "2026-10-06 - Local, unpushed (claude/worker-routing-review, 07cb617): router couples to the evaluation GPU lock and fails closed when a configured lock path cannot be established (d706357, c3e59b4, 29d74d0, 7fc6a09); lock heartbeat + lock-aware GPU-window dead-man (0b86dc4, ff05596); start grace and brief-lock-absence tolerance (73ca19d, 494bd50); GPU-window apply/run/restore scripts + dedicated lock dir (07cb617). 380 passed / 1 skipped. Nothing deployed",
         "2026-10-05 - Worker-routing reviewed and repaired (local): 3 high, 3 medium, 1 low fixed with 10 regression tests, 347 passed (30be001, 54bb30b); publication lock set so no worktree can push",
         "2026-10-05 - Opt-in worker-routing foundation beside the one-endpoint contract (4ce3494, owner-directed, NORTHSTAR untouched); whole-repo RAG source roots disabled and shipped config pinned empty (5250eb4, local main, unpushed)",
@@ -918,10 +918,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Scheduled-only (Task Scheduler daily 06:00 -> Dashboard-auto) + on-demand (Refresh-Now.cmd). Confirmed 09-26..10-06: every run 'result 0', pushes landing on attempt 1." }
         ]
       },
-      activity: [5,3,3,6,3,4,3,3,3,3,2,4,4,20],
+      activity: [5,3,3,6,3,4,3,3,3,3,2,4,4,21],
       lastActivity: {
         date: "2026-10-06",
-        summary: "Dashboard closeout pass 2: accounting contract, reconcile ID fix, deploy boundary check (3835dca)"
+        summary: "dashboard refresh 2026-10-06 20:59 (e0450a8)"
       },
       branch: "main; Dashboard-auto and the human clone Dashboard were both in sync with origin/main when last verified (2026-10-06); the former human-clone stash was removed and a recovery tag is retained",
       git: null,
