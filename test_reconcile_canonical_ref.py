@@ -432,3 +432,19 @@ def test_cli_help_mentions_canonical_ref():
     out = subprocess.run(["python", str(Path(ra.__file__)), "--help"], check=True,
                          capture_output=True, encoding="utf-8").stdout
     assert "--canonical-ref" in out and "--replace-baseline" in out
+
+
+@pytest.mark.parametrize("fid", ["SEC-A40", "RE-C55", "CQ-B40", "HYG-C56", "RE-C1", "SEC-WIZ-HUB-1", "HYG-3", "ARCH-PROJGATE-INVARIANT-1"])
+def test_finding_id_re_matches_letter_prefixed_suffix(fid):
+    assert ra.FINDING_ID_RE.findall(f"fix({fid}): tighten guard") == [fid]
+
+
+def test_finding_id_re_is_exact_not_prefix():
+    # RE-C5 must not be reported from text that only says RE-C55, and vice versa
+    assert ra.FINDING_ID_RE.findall("closes RE-C55") == ["RE-C55"]
+    assert "RE-C5" not in ra.FINDING_ID_RE.findall("closes RE-C55")
+    assert ra.FINDING_ID_RE.findall("a -1 and lowercase sec-a40") == []
+    # no numeric suffix: no id at all, never the partial HYG-G4 (wrong closure)
+    assert ra.FINDING_ID_RE.findall("HYG-G4-TRIM") == []
+    assert ra.FINDING_ID_RE.findall("closes HYG-G4-TRIM and SEC-A40.") == ["SEC-A40"]
+    assert ra.FINDING_ID_RE.findall("WFA7-COMMITUNCONFIRMED") == []

@@ -239,3 +239,72 @@ def test_wrangler_ignore_mirror():
     assert not wrangler_would_skip("local/x.md")  # NOT ignored by wrangler: the known limitation
     assert not wrangler_would_skip(".github/workflows/deploy.yml")
     assert not wrangler_would_skip("reconcile_audit.py")  # .assetsignore does not apply to Pages
+
+
+# ------------------------------------------------- boundary documentation + topology ratchet
+
+# Tracked text may not carry private-network endpoints (policy: no hostnames/IPs/ports of internal
+# services). One known literal remains and is PENDING an owner decision (the scheduled task relies
+# on it today; see Refresh-Dashboard.ps1 step 1i). This is a ratchet: it may only shrink, and a new
+# literal anywhere, or a second one in the same file, fails the suite.
+PRIVATE_NET = re.compile(
+    r"\b(?:10\.\d{1,3}\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3}"
+    r"|172\.(?:1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}"
+    r"|100\.(?:6[4-9]|[7-9]\d|1[01]\d|12[0-7])\.\d{1,3}\.\d{1,3})\b|:11434\b"
+)
+KNOWN_PENDING_TOPOLOGY = {"Refresh-Dashboard.ps1": 2}  # one line: the IP and the port both match
+
+
+def private_net_hits(root: Path) -> dict[str, int]:
+    hits: dict[str, int] = {}
+    for f in _lines(_git(root, "ls-files")):
+        p = root / f
+        try:
+            if not p.is_file() or p.stat().st_size > MAX_SCAN_BYTES:
+                continue
+            n = len(PRIVATE_NET.findall(p.read_bytes().decode("utf-8", "ignore")))
+        except OSError:
+            continue
+        if n and f != "test_deploy_boundary.py":
+            hits[f] = n
+    return hits
+
+
+def test_tracked_files_hold_no_new_private_network_literals():
+    got = private_net_hits(REPO)
+    assert got in (KNOWN_PENDING_TOPOLOGY, {}), (
+        "private-network literal in tracked (publicly served) text; allowed only: "
+        f"{KNOWN_PENDING_TOPOLOGY} -> got {got}"
+    )
+
+
+def test_topology_ratchet_selftest(tmp_path):
+    root = _init_repo(tmp_path, "local/\n")
+    (root / "x.ps1").write_text('$u = "http://10.1.2.3:8080/v1"\n', encoding="utf-8")
+    (root / "y.ps1").write_text("endpoint localhost:11434\n", encoding="utf-8")
+    (root / "ok.txt").write_text("version 10.1.2 and 1.2.3.4\n", encoding="utf-8")
+    _track(root, "x.ps1", "y.ps1", "ok.txt")
+    assert private_net_hits(root) == {"x.ps1": 1, "y.ps1": 1}  # "10.1.2.3" and ":11434"
+
+
+def test_assetsignore_declares_itself_inert_for_pages():
+    text = (REPO / ".assetsignore").read_text(encoding="utf-8")
+    first = [ln for ln in text.splitlines() if ln.strip()][0]
+    assert first.startswith("#") and "INERT" in text, "dead .assetsignore must say it filters nothing"
+    assert "check_live_boundary.py" in text
+
+
+def test_deploy_workflow_and_policy_state_the_real_boundary():
+    wf = (REPO / ".github" / "workflows" / "deploy.yml").read_text(encoding="utf-8")
+    assert "CLEAN checkout" in wf and "check_live_boundary.py" in wf
+    pol = (REPO / "docs" / "COVERAGE-AND-DISCLOSURE-POLICY.md").read_text(encoding="utf-8")
+    assert "itself **public**" in pol and "check_live_boundary.py" in pol
+
+
+def test_real_upload_set_keeps_public_core_and_drops_wrangler_skipped():
+    upload = set(clean_checkout_upload_set(REPO))
+    assert {"index.html", "data.js"} <= upload
+    assert "_headers" not in upload
+    assert not [f for f in upload if f.startswith(("functions/", "local/"))]
+    tracked = set(_lines(_git(REPO, "ls-files")))
+    assert upload <= tracked, "upload set must be a subset of tracked files"

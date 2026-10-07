@@ -1,3 +1,11 @@
+# INERT for this project. `wrangler pages deploy` (Cloudflare Pages) does NOT read .assetsignore
+# or .gitignore; .assetsignore is a Workers static-assets mechanism. The rules below do not
+# filter the live site (tracked *.py, *.mjs, /*.md and .github/** are served). Kept only in case
+# the project ever moves to Workers assets; do NOT rely on it to hide anything.
+# Real boundary: the git-tracked set uploaded by the clean-checkout GitHub Actions deploy
+# (.github/workflows/deploy.yml), and the GitHub repo itself is PUBLIC, so tracked == public in
+# both places. See docs/COVERAGE-AND-DISCLOSURE-POLICY.md "How privacy is enforced";
+# verify a deploy with `python check_live_boundary.py`.
 .github
 repo-workflows
 *.py

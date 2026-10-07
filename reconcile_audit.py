@@ -130,8 +130,11 @@ SEVERITIES = ("critical", "high", "medium", "low", "info")
 
 # A finding ID is an uppercase, hyphen-joined token that ENDS in a number:
 #   SEC-WIZ-HUB-1  HYG-3  FE-CSS-1  ARCH-PROJGATE-INVARIANT-1  SLOP-FE-2
+# The final number may carry ONE letter prefix (sub-series): SEC-A40  RE-C55  CQ-B40  HYG-C56.
+# The letter form must END the token: HYG-G4-TRIM / WFA7-COMMITUNCONFIRMED (no numeric suffix)
+# yield NO id, and in particular never the partial id HYG-G4 (that would be a wrong closure).
 # Anchored on word boundaries so a bare "-1" or a lowercase word never matches.
-FINDING_ID_RE = re.compile(r"\b[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*-\d+\b")
+FINDING_ID_RE = re.compile(r"\b[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*-(?:[A-Z]\d+(?![-A-Z0-9])|\d+)\b")
 
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
 
@@ -631,7 +634,7 @@ class ReconcileResult:
         combined value is never mislabeled 'open'."""
         return self.open + self.unknown
 
-    def audit_fields(self) -> dict:
+    def audit_fields(self, prior: dict | None = None) -> dict:
         """The reconciliation fields to splice into the audit block. Contains NO
         exact fix evidence (that is local-only); only aggregate provenance.
 
@@ -654,12 +657,20 @@ class ReconcileResult:
                             The ONLY combined number, and it is NOT called 'open'.
           counts          - alias of openCounts, kept so the existing severity badge
                             (sum(counts) == len(open)) stays honest: strictly-open.
+          carriedClosedCounts
+                          - HISTORICAL closures (verified closed on the canonical branch
+                            in an earlier baseline). The reconciler cannot derive them
+                            from one report, so they are carried forward from `prior`
+                            (the stored audit block) verbatim and never dropped on
+                            regeneration. Outside the rawCounts partition; never added to
+                            resolvedCounts or closedLastRun (closedLastRun is this
+                            cycle's verified closures only).
         List contract: `open` is strictly-OPEN; `unknown` is its own labeled list."""
         self.assert_partition()
         open_counts = _counts(self.open)
         unknown_counts = _counts(self.unknown)
         published_counts = {s: open_counts[s] + unknown_counts[s] for s in SEVERITIES}
-        return {
+        fields = {
             "reportDate": self.report_date,
             "reconciledAt": self.reconciled_at,
             "reconciliationHeads": self.heads,
@@ -676,6 +687,10 @@ class ReconcileResult:
             "open": self.open,                  # strictly-open; never mixed with UNKNOWN
             "unknown": self.unknown,            # retained + labeled, counted separately
         }
+        carried = (prior or {}).get("carriedClosedCounts")
+        if isinstance(carried, dict):
+            fields["carriedClosedCounts"] = dict(carried)
+        return fields
 
     def assert_partition(self) -> None:
         """Every raw finding is in exactly one of open / awaiting / resolved / unknown, so
@@ -972,7 +987,7 @@ def write_back(result: ReconcileResult, data_path: Path = DATA_JS,
         raise ReconcileError(f"could not read existing audit block via node: {proc.stderr.strip()}")
     audit = json.loads(proc.stdout)
     _check_baseline(audit, result, replace_baseline)
-    audit.update(result.audit_fields())
+    audit.update(result.audit_fields(prior=audit))
 
     new_block = apply_patch(block, {"audit": audit}, serialize=to_js)
     spliced = data_js[:i] + "\n    " + new_block + ",\n    " + data_js[j:]

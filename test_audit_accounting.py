@@ -4,7 +4,7 @@ Rules under test (all hard failures in validate_dashboard.py):
   * every *Counts field is a severity histogram of non-negative ints;
   * rawCounts == open + awaitingIntegration + resolved + unknown, per severity;
   * counts == openCounts == the composition of open[];
-  * closedLastRun <= resolved + carriedClosed (cards with rawCounts);
+  * closedLastRun <= resolved (cards with rawCounts); carried closures are never added;
   * trend token in the vocabulary; `improving` needs verified closure when findings are
     awaiting integration (awaiting is not closure);
   * ingestStatus in the vocabulary; ingestDetail required for awaiting / partial / failed /
@@ -37,7 +37,7 @@ def card(**over):
         "resolvedCounts": H(low=1),
         "unknownCounts": H(low=1),
         "carriedClosedCounts": H(low=3),
-        "closedLastRun": 4,
+        "closedLastRun": 1,
         "trend": "improving",
         "ingestStatus": "success",
         "ingestDetail": "reconciled against origin/main abc1234.",
@@ -99,8 +99,10 @@ class RawIdentity(unittest.TestCase):
 
     def test_site_shape_raw_zero_with_carried_closure(self):
         a = card(rawCounts=H(), awaitingIntegrationCounts=H(), resolvedCounts=H(), unknownCounts=H(),
-                 counts=H(), openCounts=H(), carriedClosedCounts=H(low=1), closedLastRun=1, open=[])
+                 counts=H(), openCounts=H(), carriedClosedCounts=H(low=1), closedLastRun=0, open=[])
         self.assertEqual(problems(a), [])
+        a["closedLastRun"] = 1  # counting the carried closure as a current-cycle closure is rejected
+        self.assertTrue(any("closedLastRun=1" in m for m in problems(a)))
 
     def test_legacy_card_without_raw_is_not_subject_to_identity(self):
         self.assertEqual(problems({"counts": H(low=1), "open": [{"severity": "low"}], "trend": "improving"}), [])
@@ -117,20 +119,45 @@ class OpenComposition(unittest.TestCase):
         msgs = problems(card(open=[{"id": "X1", "severity": "medium"}]))
         self.assertTrue(any("open[] has 1 medium" in m for m in msgs))
 
+    def test_open_item_severity_spelled_sev_is_checked_too(self):
+        # reconcile_audit.py / REFRESH-SPEC.md spell it `sev`; data.js cards spell it `severity`.
+        msgs = problems(card(open=[{"id": "X1", "sev": "medium"}]))
+        self.assertTrue(any("open[] has 1 medium" in m for m in msgs))
+        self.assertEqual(problems(card(open=[{"id": "X1", "sev": "low"}])), [])
+
     def test_open_items_without_severity_checked_by_length_only(self):
         self.assertEqual(problems(card(open=[{"id": "X1"}])), [])
+
+
+class UnknownList(unittest.TestCase):
+    def test_matching_list_is_clean(self):
+        self.assertEqual(problems(card(unknown=[{"id": "U1", "severity": "low"}])), [])
+
+    def test_list_longer_than_counts(self):
+        msgs = problems(card(unknown=[{"id": "U1"}, {"id": "U2"}]))
+        self.assertTrue(any("unknown[] has 2 item(s)" in m for m in msgs))
+
+    def test_list_shorter_than_counts(self):
+        self.assertTrue(any("unknown[] has 0 item(s)" in m for m in problems(card(unknown=[]))))
+
+    def test_absent_list_is_not_checked(self):
+        self.assertEqual(problems(card()), [])
 
 
 class ClosedLastRun(unittest.TestCase):
     def test_exceeds_evidenced_closures(self):
         # resolved 1 + carried 3 = 4 evidenced
-        self.assertTrue(any("closedLastRun=5" in m for m in problems(card(closedLastRun=5))))
+        self.assertTrue(any("closedLastRun=2" in m for m in problems(card(closedLastRun=2))))
 
     def test_equal_to_evidenced_is_ok(self):
-        self.assertEqual(problems(card(closedLastRun=4)), [])
+        self.assertEqual(problems(card(closedLastRun=1)), [])
+
+    def test_carried_closures_are_not_current_cycle_closures(self):
+        c = card(closedLastRun=2, carriedClosedCounts=H(low=3))  # resolved 1 + carried 3 must not make 2 pass
+        self.assertTrue(any("closedLastRun=2" in m for m in problems(c)))
 
     def test_may_be_below_cumulative_resolved(self):
-        self.assertEqual(problems(card(closedLastRun=0, trend="stable")), [])
+        self.assertEqual(problems(card(closedLastRun=0, trend="flat")), [])
 
     def test_must_be_a_non_negative_int(self):
         self.assertTrue(any("closedLastRun must be" in m for m in problems(card(closedLastRun=-1))))
@@ -142,11 +169,15 @@ class ClosedLastRun(unittest.TestCase):
 
 class Trend(unittest.TestCase):
     def test_vocabulary(self):
-        for t in ("improving", "flat", "worsening", "stable", "unknown", "recovered"):
+        for t in ("improving", "flat", "worsening", "unknown"):
             self.assertEqual(problems(card(trend=t)), [], t)
 
-    def test_free_text_with_valid_leading_token(self):
-        self.assertEqual(problems(card(trend="improving -- 0 Critical for the fourth consecutive run")), [])
+    def test_legacy_and_free_text_rejected(self):
+        for t in ("stable", "recovered", "improving -- 0 Critical for the fourth consecutive run", 3):
+            self.assertTrue(any("trend" in m for m in problems(card(trend=t))), t)
+
+    def test_trend_note_is_not_validated_as_trend(self):
+        self.assertEqual(problems(card(trend="unknown", trendNote="any narrative -- text")), [])
 
     def test_invalid_token(self):
         self.assertTrue(any("trend" in m for m in problems(card(trend="soaring"))))

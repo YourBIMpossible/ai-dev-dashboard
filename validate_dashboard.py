@@ -66,11 +66,11 @@ def fail(msg: str) -> None:
 
 # --- audit-card accounting (policy section 1) --------------------------------------
 SEVERITIES = ("critical", "high", "medium", "low", "info")
-# Trend vocabulary. REFRESH-SPEC.md names improving | flat | worsening; `unknown` is the
-# established "no comparable evidence" state (index.html renders any other value dim);
-# `stable` is a legacy alias of `flat`; `recovered` is a legacy hand-written label on one
-# card. A free-text trend is allowed when its leading token (before " -- ") is in this set.
-TREND_TOKENS = {"improving", "flat", "worsening", "stable", "unknown", "recovered"}
+# Trend vocabulary (REFRESH-SPEC.md): exactly one of these tokens, nothing else. `unknown`
+# is the "no comparable evidence" state. Narrative belongs in the separate `trendNote`
+# field, never in `trend`. The legacy `stable` (alias of flat), `recovered` and free-text
+# forms are rejected; index.html still renders `stable` as flat for stale data.
+TREND_TOKENS = {"improving", "flat", "worsening", "unknown"}
 # Reconcile writes success | partial | failed; `none` = no audit on record;
 # `unverified` = hand-curated card whose evidence cannot be inspected (needs ingestDetail).
 INGEST_STATUSES = {"success", "partial", "failed", "none", "unverified"}
@@ -91,6 +91,13 @@ def _valid_hist(h) -> bool:
     return isinstance(h, dict) and all(k in SEVERITIES and _is_count(v) for k, v in h.items())
 
 
+def _item_sev(item: dict):
+    """An open[] item's severity. data.js cards use `severity`; reconcile_audit.py emits
+    (and REFRESH-SPEC.md / index.html name) `sev`. Accept both so neither spelling
+    silently skips the per-severity cross-check."""
+    return item.get("severity", item.get("sev"))
+
+
 def audit_accounting_problems(projects: list[dict]) -> list[str]:
     """Hard-failure messages for the audit-card accounting rules. Pure (no I/O).
 
@@ -99,11 +106,13 @@ def audit_accounting_problems(projects: list[dict]) -> list[str]:
       - every *Counts field is a severity histogram of non-negative integers.
       - rawCounts == openCounts + awaitingIntegrationCounts + resolvedCounts +
         unknownCounts, per severity (an absent histogram counts as zero).
+      - unknownCounts total == len(unknown[]) when the list is present.
       - counts == openCounts, and counts == the composition of open[] (by severity when
         every open item carries one; by length otherwise).
       - closedLastRun is a non-negative integer and, on cards with rawCounts, never
-        exceeds the closures the card can evidence: resolved + carriedClosed.
-      - trend: leading token in TREND_TOKENS; `improving` needs verified closure on the
+        exceeds resolved (this report's verified closures). carriedClosedCounts are
+        historical and are never added to closedLastRun.
+      - trend: exactly one TREND_TOKENS value (narrative lives in `trendNote`); `improving` needs verified closure on the
         canonical branch (closedLastRun > 0 or resolved > 0) when the card carries
         implemented-awaiting-integration findings. Awaiting is not closure.
       - ingestStatus in INGEST_STATUSES; ingestDetail is required when any finding is
@@ -144,11 +153,17 @@ def audit_accounting_problems(projects: list[dict]) -> list[str]:
         if isinstance(items, list) and base is not None:
             if len(items) != _hist_total(base):
                 bad(f"open[] has {len(items)} item(s) but counts total {_hist_total(base)}.")
-            elif items and all(isinstance(i, dict) and i.get("severity") in SEVERITIES for i in items):
+            elif items and all(isinstance(i, dict) and _item_sev(i) in SEVERITIES for i in items):
                 for sev in SEVERITIES:
-                    n = sum(1 for i in items if i["severity"] == sev)
+                    n = sum(1 for i in items if _item_sev(i) == sev)
                     if n != base.get(sev, 0):
                         bad(f"open[] has {n} {sev} item(s) but counts.{sev}={base.get(sev, 0)}.")
+
+        unk_items = a.get("unknown")
+        if isinstance(unk_items, list) and "unknownCounts" in hists:
+            if len(unk_items) != _hist_total(hists["unknownCounts"]):
+                bad(f"unknown[] has {len(unk_items)} item(s) but unknownCounts total "
+                    f"{_hist_total(hists['unknownCounts'])}.")
 
         raw = hists.get("rawCounts")
         if raw is not None:
@@ -159,17 +174,18 @@ def audit_accounting_problems(projects: list[dict]) -> list[str]:
                 if sum(parts.values()) != raw.get(sev, 0):
                     bad(f"rawCounts.{sev}={raw.get(sev, 0)} != open+awaiting+resolved+unknown {parts}.")
             if closed_ok:
-                evidenced = (_hist_total(hists.get("resolvedCounts"))
-                             + _hist_total(hists.get("carriedClosedCounts")))
+                evidenced = _hist_total(hists.get("resolvedCounts"))
                 if closed > evidenced:
-                    bad(f"closedLastRun={closed} exceeds evidenced verified closures "
-                        f"(resolved + carriedClosed = {evidenced}).")
+                    bad(f"closedLastRun={closed} exceeds this report's verified closures "
+                        f"(resolved = {evidenced}); carried closures are historical and "
+                        f"not recounted.")
 
         trend = a.get("trend")
         if trend is not None:
-            token = str(trend).split(" -- ", 1)[0].strip().lower()
+            token = trend if isinstance(trend, str) else None
             if token not in TREND_TOKENS:
-                bad(f"trend {trend!r} is not one of {sorted(TREND_TOKENS)}.")
+                bad(f"trend {trend!r} is not one of {sorted(TREND_TOKENS)} "
+                    f"(put narrative in trendNote).")
             elif token == "improving" and _hist_total(hists.get("awaitingIntegrationCounts")) > 0:
                 verified = (closed if closed_ok else 0) + _hist_total(hists.get("resolvedCounts"))
                 if verified == 0:

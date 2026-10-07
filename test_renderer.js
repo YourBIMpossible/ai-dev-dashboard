@@ -197,12 +197,16 @@ test("cohort label with a double-quote is attribute-escaped in the tooltip", () 
 });
 
 // ============ real data.js through the renderer path (module present) ============
-test("real data.js via renderer: bimpossible = 63% active / 92% computed baseline", () => {
+test("real data.js via renderer: bimpossible = flat mean of active phases / 92% computed baseline", () => {
   const E = buildEnv(true, true);
   const D = E.window.DASHBOARD_DATA;
   const bim = D.projects.find(p => p.id === "bimpossible");
   assert.strictEqual(E.activePhases(bim).length, 13, "13 active phases");
-  assert.strictEqual(E.overallPct(bim), 63, "active-ratified headline");
+  // The headline is refresh-owned live data, so it is derived from the data (flat mean of the
+  // active phases' pct), never pinned to a literal that goes stale on every phase update.
+  const act = bim.progress.phases.filter(p => p.bucket === "active" && typeof p.pct === "number");
+  assert.strictEqual(E.overallPct(bim), Math.round(act.reduce((s, p) => s + p.pct, 0) / act.length),
+    "active-ratified headline");
   const cr = E.cohortResults(bim);
   assert.ok(cr.length >= 1, "bimpossible declares a cohort");
   assert.strictEqual(cr[0].r.pct, 92, "July baseline computed = 92%");
@@ -546,13 +550,15 @@ test("tvHumanize keeps #-refs but wraps them in the dimmed .tv-ref span", () => 
 });
 
 // -- Part D: the flagship headline numbers are COMPUTED, never hardcoded --
-test("flagshipMetric renders computed 92% cohort / 63% active scope (not literals)", () => {
+test("flagshipMetric renders computed 92% cohort / active-scope % (not literals)", () => {
   const html = CE.flagshipMetric();
-  assert.ok(/>92%</.test(html) && /delivery cohort/.test(html), "computed cohort % + label:\n" + html);
-  assert.ok(/>63%</.test(html) && /active scope/.test(html), "computed active-scope % + label");
-  // prove it is derived: the same env's functions produce those very numbers
   const bim = CE.window.DASHBOARD_DATA.projects.find(p => p.id === "bimpossible");
-  assert.strictEqual(CE.overallPct(bim), 63);
+  const act = bim.progress.phases.filter(p => p.bucket === "active" && typeof p.pct === "number");
+  const activePct = Math.round(act.reduce((s, p) => s + p.pct, 0) / act.length); // live data: derived, not pinned
+  assert.ok(/>92%</.test(html) && /delivery cohort/.test(html), "computed cohort % + label:\n" + html);
+  assert.ok(html.includes(">" + activePct + "%<") && /active scope/.test(html), "computed active-scope % + label");
+  // prove it is derived: the same env's functions produce those very numbers
+  assert.strictEqual(CE.overallPct(bim), activePct);
   assert.strictEqual(CE.cohortResults(bim)[0].r.pct, 92);
 });
 

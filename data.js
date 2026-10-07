@@ -315,7 +315,7 @@ window.DASHBOARD_DATA = {
         cadence: "weekly Sun 11:45pm + incremental Sun/Tue + on-demand",
         counts: { critical: 0, high: 0, medium: 0, low: 4, info: 0 },
         closedLastRun: 108,
-        trend: "improving -- 0 Critical / 0 High for the fourth consecutive weekly cycle; the 09-28 run (2M/13L/7I) and 10-05 run (7M/24L/20I) were both closed within their cycles: 63 findings closed/resolved/disproven from the 09-28 ledger plus 45 from the 10-05 ledger = 108 closures this cycle (19 accepted-by-design and 2 gated rows excluded). Medium count rose 2 -> 7 week over week (new share-link, add-in and tooling surface), all fixed and deployed or tested. Only the 4 owner-deferred architecture Lows remain open; the signed-in ordinary-member share check is a pending live verification, not an open finding.",
+        trend: "unknown",
         reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-10-05.md",
         reportFile: "bimpossible/weekly-full-audit_2026-10-05.md",
         ledgerPath: "F:\\BIMpossible-Workspace\\02_Reference\\_audit-runs.md",
@@ -361,7 +361,8 @@ window.DASHBOARD_DATA = {
           { date: "2026-06-14", type: "Full (backend + frontend)", scope: "Phase 3 F-1…F-28, Phase 4a/5, expr-eval removal", result: "NM-1 (Medium): list_views checks project allowlist before auth — probe via differing error codes", report: "2026-06-14__audit-report-full.md" },
           { date: "2026-06-13", type: "Full", scope: "Whole tree @ 58fd53c (W10-17 merges)", result: "FEA-4 (Medium): 15 new Wave 10-17 schedule views ship with zero unit tests", report: "2026-06-13__audit-report-full.md" },
           { date: "2026-06-10", type: "Full (7 agents)", scope: "Whole tree @ 277e6d2 · re-verified 68 perp-audit fixes", result: "CORE-1 (High): refresh never invalidates the durable category cache → stale sidebar on republish", report: "2026-06-10__audit-report-full.md" }
-        ]
+        ],
+        trendNote: "Ledger-reported narrative, not independently derivable: the closure total (108) is not recoverable from retained evidence. Independent rerun of reconcile_audit.py over the 2026-10-05 report (29 findings, origin/main 37ce448 + Workspace af008a8): 24 closed, 5 open (HYG-40/41/42, HYG-G4-TRIM, SEC-A44). Trend left unknown: no verified before/after comparison on the canonical branch. Prior label: improving -- 0 Critical / 0 High for the fourth consecutive weekly cycle; the 09-28 run (2M/13L/7I) and 10-05 run (7M/24L/20I) were both closed within their cycles: 63 findings closed/resolved/disproven from the 09-28 ledger plus 45 from the 10-05 ledger = 108 closures this cycle (19 accepted-by-design and 2 gated rows excluded). Medium count rose 2 -> 7 week over week (new share-link, add-in and tooling surface), all fixed and deployed or tested. Only the 4 owner-deferred architecture Lows remain open; the signed-in ordinary-member share check is a pending live verification, not an open finding."
       },
       waves: {
         updated: "2026-10-06",
@@ -426,7 +427,7 @@ window.DASHBOARD_DATA = {
         cadence: "weekly (unattended bimpossible-weekly-full-audit, cross-repo) + on-demand /revit-functionality-audit",
         counts: { critical: 0, high: 0, medium: 0, low: 7, info: 1 },
         closedLastRun: 45,
-        trend: "recovered -- every actionable AddIns finding since 09-26 is fixed on main: 23 Link-PDF review findings (#164), 6 from the 09-28 audit (#164/#166), 3 Medium + 13 Low/Info from the 10-05 audit (#168/#171/#173/#178). The add-in directory ACL hole was closed by the owner 10-05 (chain downgraded Medium -> Low residual). What remains is accepted Lows, repo-branch hygiene and owner-gated code signing.",
+        trend: "unknown",
         reportPath: "F:\\BIMpossible-Workspace\\02_Reference\\Audit and Scan Info\\weekly-full-audit_2026-10-05.md",
         reportFile: "addins/weekly-full-audit_2026-10-05.md",
         ledgerPath: "F:\\BIMpossible-AddIns\\reviews",
@@ -463,7 +464,8 @@ window.DASHBOARD_DATA = {
           { date: "2026-06-14", type: "Full (3 agents)", scope: "29 ribbon commands + ModelQA.Core + 6 discipline add-ins + 74 tests", result: "C-01 (Critical): no AssemblyVersion in Core.csproj — stale co-loaded DLL risks silent rating corruption", report: "2026-06-14__audit-report-full.md" },
           { date: "2026-06-13", type: "Tools 8-33 sweep", scope: "Tools 8-33 + punchlist", result: "Punchlist sweep across the tool suite", report: "2026-06-13__tools-8-33-audit-sweep.md" },
           { date: "2026-06-09", type: "Triple audit (google / perf / perp)", scope: "Add-Ins repo", result: "9 findings closed in remediation — CSV-injection guards ×7, culture-invariant formatting, rolling log", report: "2026-06-09__perp-audit.md" }
-        ]
+        ],
+        trendNote: "Ledger-reported narrative, not independently derivable: the closure total (45) is not recoverable from retained evidence. Independent rerun of reconcile_audit.py over the 2026-10-05 report (16 findings, origin/main 8ac3ad2): 15 closed, 1 open (CQ-C54). Trend left unknown: no verified before/after comparison on the canonical branch. Prior label: recovered -- every actionable AddIns finding since 09-26 is fixed on main: 23 Link-PDF review findings (#164), 6 from the 09-28 audit (#164/#166), 3 Medium + 13 Low/Info from the 10-05 audit (#168/#171/#173/#178). The add-in directory ACL hole was closed by the owner 10-05 (chain downgraded Medium -> Low residual). What remains is accepted Lows, repo-branch hygiene and owner-gated code signing."
       }
     },
     /* PROJECT:addins:END */
@@ -512,7 +514,7 @@ window.DASHBOARD_DATA = {
         reportPath: "F:\\BIMpossible-Site\\site\\audits\\2026-09-21__slop-audit.md",
         reportFile: "site/2026-09-21__slop-audit.md",
         ledgerPath: "F:\\BIMpossible-Site\\audits",
-        closedLastRun: 1,
+        closedLastRun: 0,
         open: [],
         reportDate: "2026-09-21",
         reconciledAt: "2026-10-06 00:00:00",
@@ -526,7 +528,7 @@ window.DASHBOARD_DATA = {
         carriedClosedCounts: { critical: 0, high: 0, medium: 0, low: 1, info: 0 },
         publishedCounts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
         ingestStatus: "success",
-        ingestDetail: "reconciled against site origin/main 44b159b (canonical; equals local main). The 2026-09-21 report has 0 findings, so rawCounts is 0 and resolvedCounts is 0. closedLastRun = 1 is a carried closure from the prior 2026-09-07 baseline: its single LOW (a hypothesis that an unparseable provider body was counted as delivered) is verified closed on origin/main by 9c6f7dc. It is recorded in carriedClosedCounts, not in resolvedCounts, because it is not a finding of the current report. 0 open.",
+        ingestDetail: "reconciled against site origin/main 44b159b (canonical; equals local main). The 2026-09-21 report has 0 findings, so rawCounts is 0 and resolvedCounts is 0. closedLastRun = 0: closedLastRun counts only findings of the current report. The one closure in the window is a carried closure from the prior 2026-09-07 baseline (carriedClosedCounts, low 1): its single LOW (a hypothesis that an unparseable provider body was counted as delivered) is verified closed on origin/main by 9c6f7dc. It is recorded in carriedClosedCounts, not in resolvedCounts, because it is not a finding of the current report. 0 open.",
         unknown: [],
         history: [
           { date: "2026-09-21", type: "Slop-audit -- cross-repo zero-residual closeout pass.", scope: "functions/api/contact.ts, tests/contact.test.mjs (commit 9c6f7dc).", result: "CLEAN, 0 findings. 09-07 LOW-1 closed by 9c6f7dc (object-shaped unparseable body fails closed). npm test green.", report: "2026-09-21__slop-audit.md" },
@@ -647,7 +649,7 @@ window.DASHBOARD_DATA = {
         lastRun: "2026-09-07",
         runType: "Weekly slop-audit -- scoped to the one commit (9e0a23d, fix#12 evidence-hook visibility) touching audited files since 08-31. Zero Critical/High/Medium findings. One LOW (HYPOTHESIS): the stderr degraded-notice throttle is per-repo-per-UTC-day, so only the first session of a day sees it -- an intentional documented tradeoff (the docstring justifies once-per-day to avoid spam from a month-long outage), not a confirmed defect; the report says to dismiss it if once-per-day is acceptable. No REAL (swallows-a-real-failure) sites found; fail-open posture intact.",
         cadence: "weekly slop-audit (scheduled)",
-        trend: "stable",
+        trend: "unknown",
         reportPath: "F:\\BIMpossible-Families\\audits\\2026-09-07__slop-audit.md",
         reportFile: "families/2026-09-07__slop-audit.md",
         ledgerPath: "F:\\BIMpossible-Families\\audits",
@@ -673,7 +675,8 @@ window.DASHBOARD_DATA = {
         open: [],
         unknown: [
           { id: "LOW-1", severity: "low", title: "Degraded evidence-hook notice is shown once per day rather than once per session; an unconfirmed hypothesis the report itself calls a documented tradeoff, with no owner disposition recorded", source: "2026-09-07 slop-audit" }
-        ]
+        ],
+        trendNote: "Legacy label 'stable' retired. The single finding (LOW-1) is an unverified hypothesis and its source report is untracked, so no comparable evidence supports a direction."
       },
     },
     /* PROJECT:families:END */
@@ -749,7 +752,7 @@ window.DASHBOARD_DATA = {
         cadence: "on-demand",
         counts: { critical: 0, high: 0, medium: 2, low: 2, info: 0 },
         closedLastRun: 0,
-        trend: "stable",
+        trend: "unknown",
         reportPath: "F:\\AI-Server\\reviews\\2026-09-13__review-all_WP-I_repo-scout.md",
         reportFile: "aiserver/2026-09-13__review-all_WP-I_repo-scout.md",
         ledgerPath: "F:\\AI-Server\\reviews",
@@ -762,8 +765,8 @@ window.DASHBOARD_DATA = {
         history: [
           { date: "2026-10-05", type: "Review + repair of the opt-in worker-routing foundation (unmerged branch)", scope: "claude/worker-routing 4ce3494 vs merge-base with main; routing and worker-registry modules; 10 regression tests", result: "7 findings fixed on claude/worker-routing-review (3 high: silent fallback on an unknown task class, reservation check/claim gap, pinned run starting beside in-flight traffic; 3 medium; 1 low); 1 info (router ignored the evaluation GPU lock) resolved later by lock coupling 2026-10-06 (d706357..7fc6a09). The code is on unmerged, unpushed branches and not on main, so these 8 are implemented, awaiting integration: recorded in awaitingIntegrationCounts, not counted as open, resolved or closed. F1, F2, F4, F5 remain open.", report: "2026-10-05-t4-routing.md (tool-reports folder)" },
           { date: "2026-09-13", type: "/review-all pre-merge review of WP-I (repo scout + GPU interlock), + blocker-fix pass", scope: "claude/repo-scout vs main (base 6f9bad0), 30 files; merged as PR #19 (c135da1)", result: "3 blockers + F3/F6 fixed in a2b9c4d (5 closed); 288 passed / 1 skipped. 4 follow-ups open (2 medium, 2 low). No scout/gpulock commits since.", report: "2026-09-13__review-all_WP-I_repo-scout.md" },
-          { date: "2026-07-12", type: "Incremental (regression-check on the 4 claimed high fixes + fresh review of the new dictation-proxy subsystem) + same-day remediation", scope: "2 commits since the 2026-06-18 cutoff — c82c674 (high-fix) + 3c4d4e6 (new OpenWhispr dictation-cleanup proxy); the report was committed as 7c8a09c, then all 11 findings it raised were fixed in f37d165 the same session", result: "Raised 11 (0 crit / 0 high / 5 medium / 4 low / 2 nit), all remediated same-day in f37d165 — now HEAD, pushed, tree clean; suite green at 131 passed (up from 83). Regression check first confirmed CLIENT-1/RAG-1/XC-1 genuinely fixed (PCMON-1 fixed in the separate PC-Monitor repo). Then the fix pass closed everything this run raised: EVAL-3-REG (rubric term → the full 'ZeroDivisionError'), DP-1 (answer-detection now requires the text to have shed the input's own vocabulary, not a bare substring), DP-2 (except OSError → _fallback_response, + _forward_raw), DP-TESTS (proxy tests 17→33), CLIENT-2 (json.load wrapped ValueError→LLMError), plus the low/nit tail — EVAL-EMPTY empty-term guard, DP-3 port-bind probe, DP-4 Authorization forwarded, DP-6 DICTATION_PROXY_PORT in .env, DP-7 daemon_threads.", report: "2026-07-12__audit-report.md" },
-          { date: "2026-06-18", type: "Full (11 reviewers + adversarial verification, 105 agents)", scope: "AI-Server full codebase + PC-Monitor/AI-Brain-Data WP-D touchpoints — ~45 source/test files + 8 strategy/handoff docs across 3 repos", result: "Silent-wrong-output on error/misconfig edges (0 critical / 5 high): PCMON-1 topproc() reports the wrong process and can suppress GPU-VRAM alerts; XC-1 README's primary onboarding step installs a scheduled task that produces no digest; CLIENT-1 HTTP client masks real server errors behind a misleading endpoint-unreachable message", report: "2026-06-18__audit-report-full.md" }
+          { date: "2026-07-12", type: "Incremental (regression-check on the 4 claimed high fixes + fresh review of the new dictation-proxy subsystem) + same-day remediation", scope: "2 commits since the 2026-06-18 cutoff â€” c82c674 (high-fix) + 3c4d4e6 (new OpenWhispr dictation-cleanup proxy); the report was committed as 7c8a09c, then all 11 findings it raised were fixed in f37d165 the same session", result: "Raised 11 (0 crit / 0 high / 5 medium / 4 low / 2 nit), all remediated same-day in f37d165 â€” now HEAD, pushed, tree clean; suite green at 131 passed (up from 83). Regression check first confirmed CLIENT-1/RAG-1/XC-1 genuinely fixed (PCMON-1 fixed in the separate PC-Monitor repo). Then the fix pass closed everything this run raised: EVAL-3-REG (rubric term â†’ the full 'ZeroDivisionError'), DP-1 (answer-detection now requires the text to have shed the input's own vocabulary, not a bare substring), DP-2 (except OSError â†’ _fallback_response, + _forward_raw), DP-TESTS (proxy tests 17â†’33), CLIENT-2 (json.load wrapped ValueErrorâ†’LLMError), plus the low/nit tail â€” EVAL-EMPTY empty-term guard, DP-3 port-bind probe, DP-4 Authorization forwarded, DP-6 DICTATION_PROXY_PORT in .env, DP-7 daemon_threads.", report: "2026-07-12__audit-report.md" },
+          { date: "2026-06-18", type: "Full (11 reviewers + adversarial verification, 105 agents)", scope: "AI-Server full codebase + PC-Monitor/AI-Brain-Data WP-D touchpoints â€” ~45 source/test files + 8 strategy/handoff docs across 3 repos", result: "Silent-wrong-output on error/misconfig edges (0 critical / 5 high): PCMON-1 topproc() reports the wrong process and can suppress GPU-VRAM alerts; XC-1 README's primary onboarding step installs a scheduled task that produces no digest; CLIENT-1 HTTP client masks real server errors behind a misleading endpoint-unreachable message", report: "2026-06-18__audit-report-full.md" }
         ],
         reportDate: "2026-09-13",
         rawCounts: { critical: 0, high: 6, medium: 5, low: 5, info: 1 },
@@ -778,7 +781,8 @@ window.DASHBOARD_DATA = {
         ],
         ingestStatus: "success",
         ingestDetail: "reconciled against AI-Server origin/main cc22569 (canonical: the default branch at the remote). Convention: open = no fix implemented anywhere; resolved = verified closed on origin/main only; a fix that exists only on an unmerged branch is \"implemented, awaiting integration\" and counted only in awaitingIntegrationCounts (never in open, resolved or closedLastRun). Provenance: raw 17 combines two separate reports whose finding-ID sets are disjoint; it restates neither. (1) The 2026-09-13 WP-I review, raw 9 (B1-B3, F1-F6) = 4 open (F1, F2, F4, F5) + 5 verified closed on origin/main (B1-B3, F3, F6: fix a2b9c4d, merged as PR #19, squash c135da1; the blocker-fix report on main cites them). (2) The 2026-10-05 routing review, raw 8 (its numbered findings 1-8; a ninth item there is an accepted-as-documented note, not a finding) = 8 implemented-awaiting-integration: the fixes are on unmerged local branches (07cb617) and are not on origin/main. Per-report totals are 9 and 8; the combined card total is 17 = 4 open + 5 resolved + 8 awaiting + 0 unknown. No single total is preferred; use the per-report figures for a single-report view. closedLastRun = 0: no scout/lock commits since the 09-13 run, and no branch-only fix is counted.",
-        unknown: []
+        unknown: [],
+        trendNote: "Legacy label 'stable' retired. 4 open + 8 awaiting integration + 0 verified closed this cycle; the 09-13 and 10-05 snapshots use different baselines (combined 17), so no comparable closure or growth evidence exists for improving, flat or worsening."
       }
     },
     /* PROJECT:aiserver:END */
@@ -1139,9 +1143,9 @@ window.DASHBOARD_DATA = {
         carriedClosedCounts: { critical: 0, high: 0, medium: 1, low: 5, info: 0 },
         publishedCounts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
         ingestStatus: "success",
-        ingestDetail: "reconciled against claude-profile origin/master 84b701c (canonical; local master is 21 commits ahead and unpushed). 2026-10-05 audit: 4 low findings (bootstrap refusal after partial writes, template decoding on WinPS 5.1, evacuator output decoding, telemetry labelling), all fixed in #24 (219b2a2), on origin/master: resolved 4. The 2026-09-28 audit (1 medium, 5 low) is closed on origin/master by #17 (a81a5a5) and its follow-ups #18 (92a321a), #20 and #21: carried closed 6 (carriedClosedCounts). closedLastRun = 10 = 4 + 6, all verified on origin/master. The separate review-to-resolution ledger (29 findings, 28 resolved) lives only on unpushed local commits and is not counted here. 0 open.",
+        ingestDetail: "reconciled against claude-profile origin/master 84b701c (canonical; local master is 21 commits ahead and unpushed). 2026-10-05 audit: 4 low findings (bootstrap refusal after partial writes, template decoding on WinPS 5.1, evacuator output decoding, telemetry labelling), all fixed in #24 (219b2a2), on origin/master: resolved 4. The 2026-09-28 audit (1 medium, 5 low) is closed on origin/master by #17 (a81a5a5) and its follow-ups #18 (92a321a), #20 and #21: carried closed 6 (carriedClosedCounts). closedLastRun = 4 (this report's findings only); the 6 carried closures are verified on origin/master but are historical and not recounted as current-cycle closures. The separate review-to-resolution ledger (29 findings, 28 resolved) lives only on unpushed local commits and is not counted here. 0 open.",
         counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
-        closedLastRun: 10,
+        closedLastRun: 4,
         open: [],
         unknown: []
       },
@@ -1207,9 +1211,9 @@ window.DASHBOARD_DATA = {
         carriedClosedCounts: { critical: 0, high: 0, medium: 3, low: 6, info: 0 },
         publishedCounts: { critical: 0, high: 0, medium: 0, low: 1, info: 0 },
         ingestStatus: "success",
-        ingestDetail: "reconciled against claude-tools origin/main 56b109c (canonical). Tracking set 20 = the 2026-10-05 audit's 7 findings + the 13 findings of the 2026-09-28 audit (22) that are not verified closed on origin/main. Resolved 6: 10-05 M1, M2, L1-L4, fixed in #17 (56b109c). Unknown 1: 10-05 L5, a hypothesis that did not reproduce (cleanup already in place since #15, 04a7a3e, plus a regression test); a check on a volume without hard links is pending. Awaiting integration 13: 09-28 M4-M8 and L7-L14, fixed only on unpushed local branches (that work has never been pushed to origin/main), so not counted closed. Carried closed 9 (carriedClosedCounts): 09-28 M1-M3 via #12 (c71225c) and L1-L6 via #13 (5bbc724), both on origin/main. closedLastRun = 15 = 6 resolved + 9 carried. This supersedes the earlier figure of 29, which counted the 13 branch-only fixes and the unreproduced hypothesis. 0 open.",
+        ingestDetail: "reconciled against claude-tools origin/main 56b109c (canonical). Tracking set 20 = the 2026-10-05 audit's 7 findings + the 13 findings of the 2026-09-28 audit (22) that are not verified closed on origin/main. Resolved 6: 10-05 M1, M2, L1-L4, fixed in #17 (56b109c). Unknown 1: 10-05 L5, a hypothesis that did not reproduce (cleanup already in place since #15, 04a7a3e, plus a regression test); a check on a volume without hard links is pending. Awaiting integration 13: 09-28 M4-M8 and L7-L14, fixed only on unpushed local branches (that work has never been pushed to origin/main), so not counted closed. Carried closed 9 (carriedClosedCounts): 09-28 M1-M3 via #12 (c71225c) and L1-L6 via #13 (5bbc724), both on origin/main. closedLastRun = 6 (this cycle's verified closures); the 9 carried closures (merged 2026-09-29, already credited to the 09-28 history entry) are not recounted. This supersedes the earlier figures of 29 and 15, which counted the 13 branch-only fixes, the unreproduced hypothesis and the carried closures. 0 open.",
         counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
-        closedLastRun: 15,
+        closedLastRun: 6,
         open: [],
         unknown: [
           { id: "2026-10-05-L5", severity: "low", title: "A failed hard-link during an evacuation might leave a partial staged copy behind; hypothesis not reproduced (cleanup already present, regression test passes), check on a volume without hard links pending", source: "2026-10-05 slop-audit" }
@@ -1254,7 +1258,7 @@ window.DASHBOARD_DATA = {
         lastRun: "2026-09-06",
         runType: "/review-all on the Window 3 pass; last full audit 2026-09-01 (Phase 1A, F-1..F-5 fixed).",
         cadence: "ad-hoc (/review-all per PR)",
-        trend: "stable",
+        trend: "flat",
         reportPath: "F:\\Evidence Compiler\\docs\\reviews\\2026-09-06__review-all__w3-pass.md",
         reportFile: "evidence-compiler/2026-09-06__review-all__w3-pass.md",
         ledgerPath: "F:\\Evidence Compiler\\docs",
@@ -1277,7 +1281,8 @@ window.DASHBOARD_DATA = {
         counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
         closedLastRun: 0,
         open: [],
-        unknown: []
+        unknown: [],
+        trendNote: "Legacy label 'stable' mapped to flat: 0 open at both the 2026-09-01 and 2026-09-06 snapshots. No later audit is on record."
       },
       lastActivity: {
         date: "2026-09-21",
@@ -1341,7 +1346,7 @@ window.DASHBOARD_DATA = {
         awaitingIntegrationCounts: { critical: 0, high: 5, medium: 16, low: 15, info: 0 },
         publishedCounts: { critical: 0, high: 0, medium: 0, low: 1, info: 0 },
         ingestStatus: "success",
-        ingestDetail: "37 findings across the standard review (6 blockers + 27 follow-ups), the quick review (2) and the final review (2); 36 implemented with tests on the local-only Phase 1a branch (and the routing-lock fix in the AI-Server repo) = implemented, awaiting integration; origin/master is 1d3ce46, which has none of them. Raw 37 = 1 open + 36 implemented-awaiting-integration + 0 verified-closed on origin/master; closedLastRun = 0. The 1 open LOW is mitigated, not yet measured. Re-verified 2026-10-06: canonical is origin/master 1d3ce46 (equals local master); the fixes live on one unpushed local branch (60 commits ahead) and in the AI-Server repo on unmerged branches, none on a canonical branch. The reconciliation head is corrected from that local branch's commit (bf81dd7) to the canonical 1d3ce46. Trend is unknown: nothing is verified closed on origin/master this cycle, so there is no comparable closure evidence for improving, and awaiting integration is not closure.",
+        ingestDetail: "37 findings across the standard review (6 blockers + 27 follow-ups), the quick review (2) and the final review (2); 36 implemented with tests on the local-only Phase 1a branch (and the routing-lock fix in the AI-Server repo) = implemented, awaiting integration; origin/master is 1d3ce46, which has none of them. Raw 37 = 1 open + 36 implemented-awaiting-integration + 0 verified-closed on origin/master; closedLastRun = 0. The 1 open LOW is mitigated, not yet measured. Re-verified 2026-10-06: canonical is origin/master 1d3ce46 (equals local master); the fixes live on one unpushed local branch (60 commits ahead) and in the AI-Server repo on unmerged branches, none on a canonical branch. The reconciliation head is corrected from that local branch's commit (bf81dd7) to the canonical 1d3ce46. Trend is unknown: nothing is verified closed on origin/master this cycle, so there is no comparable closure evidence for improving, and awaiting integration is not closure. Dependency (2026-10-06): a newer Local Intel report exists on disk but the Local Intel session confirmed it is mid-work (AI labeling run in progress) and that no finalized audit-count report is available for Dashboard ingest; the card is not updated until that owner confirms one. No Local Intel files were read for counts or changed.",
         counts: { critical: 0, high: 0, medium: 0, low: 1, info: 0 },
         closedLastRun: 0,
         open: [
@@ -1383,7 +1388,7 @@ window.DASHBOARD_DATA = {
         lastRun: "2026-09-13",
         runType: "/review-all on the scaffold commit; all 10 retained findings (F1-F9, N1) fixed same day.",
         cadence: "ad-hoc (/review-all)",
-        trend: "stable",
+        trend: "unknown",
         reportPath: "F:\\Personal-OCR\\reviews\\2026-09-13__review-all.md",
         reportFile: "personal-ocr/2026-09-13__review-all.md",
         ledgerPath: "F:\\Personal-OCR\\reviews",
@@ -1405,7 +1410,8 @@ window.DASHBOARD_DATA = {
         counts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
         closedLastRun: 0,
         open: [],
-        unknown: []
+        unknown: [],
+        trendNote: "Legacy label 'stable' retired. Only one audit snapshot (2026-09-13 scaffold review, 10 findings fixed) is on record, so there is nothing to compare."
       },
       lastActivity: {
         date: "2026-09-13",

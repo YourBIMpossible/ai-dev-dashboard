@@ -32,15 +32,18 @@ A finding is in exactly one of four states. Each has one home in the data model:
   can close several findings and one finding can need several commits.
 - **Historical closures** (verified closed on the canonical branch in an earlier baseline) are kept
   in `carriedClosedCounts`, a separate histogram. They are outside the active-baseline arithmetic
-  and `closedLastRun` may include them only up to `resolved + carriedClosed` (it means "since prior
-  run").
+  and are never added to `resolvedCounts` or `closedLastRun`: `closedLastRun` is this report's
+  verified closures only (`closedLastRun <= resolvedCounts`), so a historical closure is not
+  counted again as a current-cycle closure. The audit UI shows carried closures as their own chip.
 - **`ingestStatus: "unverified"`** marks a card whose source evidence cannot be inspected (for
   example an install with no git repository). Its `ingestDetail` must state the limitation; counts
   are carried, not re-derived, and nothing is invented to make them add up.
 - **`trend`** = `improving | flat | worsening | unknown`. `improving` requires findings verified
   closed on the canonical branch between comparable snapshots; an implemented fix awaiting
   integration is not closure, and an unverified card cannot be `improving`. `unknown` means no
-  comparable evidence. `stable` is a legacy alias of `flat`.
+  comparable evidence. The field holds exactly one of those four tokens; narrative goes in
+  `trendNote`. The legacy `stable` (alias of `flat`), `recovered` and free-text values are rejected
+  by `validate_dashboard.py` (the UI still renders a stale `stable` as flat).
 - Never merge or push a branch for the purpose of improving a dashboard count.
 - Applies to: every audit ingest. Worked examples (2026-10-06):
   - **ai-brain-data**: 44 findings = 2 open + 42 implemented-awaiting-integration + 0 verified-closed.
@@ -84,7 +87,17 @@ A finding is in exactly one of four states. Each has one home in the data model:
   `node_modules`, `.git`, `.DS_Store`; checked against wrangler 4.110.0). It reads neither
   `.gitignore` nor `.assetsignore`: `.assetsignore` is a Workers static-assets mechanism, so its
   rules do not filter a Pages upload, and the live site does serve tracked `*.py` and `.github/**`.
-  Everything tracked is therefore public; do not rely on `.assetsignore` to hide anything.
+  Everything tracked is therefore public; do not rely on `.assetsignore` to hide anything (it now
+  carries an "inert" header saying so; its rules are retained only in case of a move to Workers assets).
+  The GitHub repo (`YourBIMpossible/ai-dev-dashboard`) is itself **public**, so tracked == public in two
+  places. A Pages-only staging/allowlist step would not narrow disclosure (the same bytes stay in the
+  public repo and its history), so none is used: the control is keeping private material **untracked**
+  (`local/`, the external private-evidence folder) and keeping topology out of tracked text.
+- **Verifying a deploy:** `python check_live_boundary.py` prints the simulated upload manifest (tracked
+  files minus wrangler's skip list) and GETs cache-busted URLs on the live site. Excluded paths pass on
+  404 or on the SPA fallback (body equals `index.html`) and fail when the body equals the file's own
+  bytes; positive controls (`index.html`, `data.js`) must return their exact bytes. Exit 0 = holds,
+  1 = violation, 2 = site unreachable (unverified).
 - **Known limitation:** a manual `wrangler pages deploy .` from a working tree WOULD upload `local/`
   (and every other untracked file), because neither ignore file is honoured. Never do that. The
   supported path is the clean-checkout GitHub Actions deploy. No script in this repo deploys from a

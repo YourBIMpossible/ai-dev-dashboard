@@ -428,6 +428,20 @@ h2.page{font-size:var(--ts-lg);font-weight:700;letter-spacing:-.01em;margin-bott
 .au-latest{font-size:var(--ts-sm);color:var(--muted);margin-top:2px;}
 .au-run{font-size:var(--ts-sm);color:var(--muted);line-height:1.5;margin-top:5px;}
 .au-latest b{color:var(--text);font-family:Sora,sans-serif;font-weight:600;}
+/* audit accounting: open / implemented-awaiting / unknown / verified closed / carried closed */
+.trend.unknown,.trend.unrecognized{color:var(--dim);}
+.trend-note{color:var(--dim);font-weight:400;}
+.au-acct{margin-top:12px;}
+.au-chips{display:flex;flex-wrap:wrap;gap:5px;}
+.au-chip{display:inline-flex;gap:5px;align-items:baseline;padding:2px 8px;border-radius:6px;font-size:var(--ts-xs);border:1px solid var(--border);color:var(--muted);}
+.au-chip b{font-family:Sora,sans-serif;font-weight:600;color:var(--text);}
+.au-chip.c-wait,.au-chip.c-unk{border-color:rgba(251,191,36,.28);background:rgba(251,191,36,.05);}
+.au-chip.c-res{border-color:rgba(52,211,153,.28);background:rgba(52,211,153,.06);}
+.au-qual{font-size:var(--ts-sm);color:var(--status-warn);margin-top:8px;line-height:1.45;}
+.au-note{font-size:var(--ts-sm);color:var(--muted);margin-top:8px;line-height:1.45;}
+.au-limit{margin-top:10px;padding:8px 10px;border-radius:8px;border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.05);font-size:var(--ts-sm);color:var(--muted);line-height:1.5;}
+.au-limit-h{font-weight:700;color:var(--status-warn);margin-bottom:3px;}
+.au-warnline{color:var(--status-warn);font-size:var(--ts-sm);}
 /* interactive severity pills + per-project breakdown */
 .sevpill{cursor:pointer;user-select:none;transition:filter .15s,border-color .15s;}
 .sevpill:hover,.sevpill:focus-visible{filter:brightness(1.3);outline:none;}
@@ -1389,10 +1403,11 @@ function cohortMetricsHtml(p,cohorts){
 }
 function auditSummary(p){
   if(!p.audit)return null;
-  const c=p.audit.counts||{};
+  const c=auCounts(p.audit);
+  const x=auAcct(p.audit);
   const total=SEVS.reduce((s,k)=>s+(c[k]||0),0);
   const hot=(c.critical||0)+(c.high||0);
-  return{total,hot,c};
+  return{total,hot,c,awaiting:x.awaiting,unknown:x.unknown,pending:x.pending,limited:x.limited,status:x.status};
 }
 function getTC(tasks){const c={done:0,active:0,pending:0,blocked:0};tasks.forEach(t=>{if(c[t.status]!==undefined)c[t.status]++;});return c;}
 function buildTS(c){
@@ -1558,8 +1573,11 @@ function badges(p,isP){
   const b=[];
   const as=auditSummary(p);
   if(as){
-    if(as.total===0)b.push('<span class="badge st-ok">✓ Audit clear</span>');
-    else b.push(`<span class="badge ${as.hot?'st-danger':'st-warn'}">${as.total} open findings</span>`);
+    const pend=[as.awaiting?as.awaiting+' awaiting integration':'',as.unknown?as.unknown+' unknown':''].filter(Boolean).join(' · ');
+    if(as.total===0&&!as.pending&&!as.limited)b.push('<span class="badge st-ok">✓ Audit clear</span>');
+    else if(as.total===0&&as.pending)b.push(`<span class="badge st-warn" title="No open findings, but these are neither closed nor open">No open · ${esc(pend)}</span>`);
+    else if(as.total>0)b.push(`<span class="badge ${as.hot?'st-danger':'st-warn'}"${pend?` title="plus ${esc(pend)} (not counted as open)"`:''}>${as.total} open findings${pend?' + '+esc(pend):''}</span>`);
+    if(as.limited)b.push(`<span class="badge st-warn" title="${esc(AU_LIMITED[as.status])} — not a verified all-clear">Audit ${esc(as.status)}</span>`);
   }
   const dec=(p.pendingDecisions||[]).length;
   if(dec)b.push(`<span class="badge st-warn">◆ ${dec} decision${dec>1?'s':''}</span>`);
@@ -1602,7 +1620,131 @@ function tlItem(raw){
   return`<div class="tl-i"><div class="tl-dot ${dc}"></div><div class="tl-body"><div class="tl-date">${esc(date)}</div><div class="tl-text">${esc(text)}</div></div></div>`;
 }
 
-function sevBadge(k){return`<span class="sev sev-${k}">${SEVLBL[k]}</span>`;}
+function sevBadge(k){return SEVLBL[k]?`<span class="sev sev-${k}">${SEVLBL[k]}</span>`:`<span class="sev">${esc(k||'unclassified')}</span>`;}
+
+// ── Audit accounting (docs/COVERAGE-AND-DISCLOSURE-POLICY.md section 1) ─────────────────
+// A finding is exactly one of: open (no fix anywhere) | implemented, awaiting integration |
+// verified closed | unknown. `counts` is strictly OPEN, so an open total of 0 never reads as
+// "nothing owed" while awaiting / unknown findings or an unverified evidence base exist.
+const AU_TRENDS=['improving','flat','worsening','unknown'];
+const AU_LIMITED={unverified:'Evidence not verified',partial:'Evidence partial',failed:'Reconciliation failed'};
+// open[] items spell severity `sev` (REFRESH-SPEC, reconcile_audit.py) or `severity` (data.js cards).
+function auSev(f){return(f&&(f.sev||f.severity))||'';}
+function auCounts(a){return(a&&(a.counts||a.openCounts))||{};}
+function auTot(h){return h&&typeof h==='object'?SEVS.reduce((s,k)=>s+(Number.isInteger(h[k])&&h[k]>0?h[k]:0),0):0;}
+function auSevStr(h){return SEVS.filter(k=>h&&h[k]>0).map(k=>SEVLBL[k]+' '+h[k]).join(' · ');}
+// Trend contract: improving|flat|worsening|unknown; `stable` is a legacy alias of flat; a legacy
+// "token -- note" string yields its token + note; anything else is shown as unrecognized (never
+// guessed, never used as a CSS class), with the raw text kept as a note. A missing trend is
+// `unknown`, not `flat`. audit.trendNote is secondary free text and wins over a legacy tail.
+function auTrend(a){
+  const raw=a&&a.trend!=null?String(a.trend).trim():'';
+  const own=a&&a.trendNote?String(a.trendNote).trim():'';
+  if(!raw)return{token:'unknown',label:'unknown',note:own};
+  const i=raw.indexOf(' -- ');
+  const head=(i<0?raw:raw.slice(0,i)).trim().toLowerCase();
+  const tail=i<0?'':raw.slice(i+4).trim();
+  const tok=head==='stable'?'flat':head;
+  if(AU_TRENDS.includes(tok))return{token:tok,label:tok,note:own||tail};
+  return{token:'unrecognized',label:'unrecognized',note:own||raw};
+}
+function auTrendHtml(a){
+  const t=auTrend(a),n=t.note;
+  const short=n.length>90?n.slice(0,90).replace(/\s+\S*$/,'')+'…':n;
+  return`<span class="trend ${t.token}"${n?` title="${esc(n)}"`:''}>${esc(t.label)}</span>`
+    +(n?`<span class="trend-note" title="${esc(n)}"> — ${esc(short)}</span>`:'');
+}
+function auTrendBadge(a){
+  const t=auTrend(a),n=t.note;
+  const cls=t.token==='improving'?'st-ok':t.token==='worsening'?'st-danger':'st-dim';
+  return`<span class="badge ${cls}"${n?` title="${esc(n)}"`:''}>${esc(t.label)}</span>`;
+}
+function auAcct(a){
+  a=a||{};
+  const c=auCounts(a);
+  const unknown=a.unknownCounts?auTot(a.unknownCounts):(Array.isArray(a.unknown)?a.unknown.length:0);
+  const awaiting=auTot(a.awaitingIntegrationCounts);
+  const status=a.ingestStatus||'';
+  return{open:(a.counts||a.openCounts)?auTot(c):(Array.isArray(a.open)?a.open.length:0),
+    awaiting,unknown,pending:awaiting+unknown,
+    resolved:auTot(a.resolvedCounts),carried:auTot(a.carriedClosedCounts),
+    raw:a.rawCounts?auTot(a.rawCounts):null,
+    status,limited:Object.prototype.hasOwnProperty.call(AU_LIMITED,status),
+    detail:String(a.ingestDetail||'').trim()};
+}
+// "N open + M implemented, awaiting integration + K unknown" - empty when nothing else is owed.
+function auQual(x){
+  if(!x.pending)return'';
+  return[`${x.open} open`,x.awaiting?`${x.awaiting} implemented, awaiting integration`:'',
+    x.unknown?`${x.unknown} unknown`:''].filter(Boolean).join(' + ');
+}
+function auChip(n,label,cls,tip){return`<span class="au-chip ${cls}"${tip?` title="${esc(tip)}"`:''}><b>${n}</b> ${esc(label)}</span>`;}
+function auAcctHtml(a,x){
+  x=x||auAcct(a);
+  if(x.raw===null&&!x.pending&&!x.resolved&&!x.carried)return'';
+  const os=auSevStr(auCounts(a));
+  let h=`<div class="au-acct"><div class="ah-h">Accounting${x.raw!==null?` · ${x.raw} finding${x.raw!==1?'s':''} in the report`:''}</div><div class="au-chips">`;
+  h+=auChip(x.open,'open','c-open','No fix implemented anywhere'+(os?' — '+os:''));
+  if(x.awaiting)h+=auChip(x.awaiting,'implemented, awaiting integration','c-wait','A fix exists but is not on the canonical branch: not open, not closed — '+auSevStr(a.awaitingIntegrationCounts));
+  if(x.unknown)h+=auChip(x.unknown,'unknown status','c-unk','Status could not be determined: not open, not closed');
+  if(x.resolved)h+=auChip(x.resolved,'verified closed','c-res','Verified closed on the canonical branch in this report');
+  if(x.carried)h+=auChip(x.carried,'carried closed (earlier baselines)','c-car','Closed in an earlier baseline; outside this report\'s arithmetic — '+auSevStr(a.carriedClosedCounts));
+  h+='</div>';
+  if(x.pending)h+=`<p class="au-qual">${esc(auQual(x))} — the open count excludes the awaiting and unknown findings; neither is closed.</p>`;
+  return h+'</div>';
+}
+function auEvidenceNote(a,x){
+  x=x||auAcct(a);
+  if(!x.limited)return'';
+  const d=x.detail||'The source evidence for this card could not be fully inspected, so its figures are carried, not re-verified.';
+  return`<div class="au-limit" role="note"><div class="au-limit-h">${esc(AU_LIMITED[x.status])} · ingest status ${esc(x.status)} — not a verified all-clear</div>${foldText(d,'au-limit-d','Full note')}</div>`;
+}
+function auFinding(f){return`<div class="find"><span class="fid">${sevBadge(auSev(f))}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`;}
+// What to say where the open total is 0: never a bare "All clear" while something is still owed
+// or the evidence is limited.
+function auCleanLabel(x){
+  if(x.pending)return{warn:true,text:'No open · '+[x.awaiting?x.awaiting+' awaiting integration':'',x.unknown?x.unknown+' unknown':''].filter(Boolean).join(' · ')};
+  if(x.limited)return{warn:true,text:'None recorded · '+AU_LIMITED[x.status].toLowerCase()};
+  return{warn:false,text:'✓ All clear'};
+}
+// Project-detail audit card.
+function auditCard(p){
+  const a=p.audit,x=auAcct(a),c=auCounts(a),tot=auTot(c);
+  const open=Array.isArray(a.open)?a.open:[];
+  const unk=Array.isArray(a.unknown)?a.unknown:[];
+  let au=`<div class="card ca-green" data-ord="40" data-move="1"><h3>Audit</h3>`;
+  au+=`<div class="au-latest">Latest run · <b>${esc(a.lastRun)}</b></div>`;
+  // runType is a free-text ledger field, not a label — BIMpossible's is 2,894 chars and used to
+  // render as one unbroken run-on beside the date.
+  au+=foldText(a.runType,'au-run','Full run note');
+  au+=`<div class="sevcounts" style="margin:13px 0 ${tot?'13px':'4px'}">`;
+  SEVS.forEach(k=>{
+    const n=c[k]||0;
+    au+=`<div class="sevpip${(k==='critical'||k==='high')&&n?' hot':''}"><span class="n" style="color:${n?(k==='critical'?'var(--red)':k==='high'?'var(--amber)':'var(--text)'):'var(--dim)'}">${n}</span><span class="k">${SEVLBL[k]}</span></div>`;
+  });
+  au+=`</div>`;
+  // The full open-findings list ran 4,200px on the largest project — taller than the whole
+  // dedicated Audit view. Show the first six (severity-ordered upstream) and fold the rest.
+  if(tot){
+    au+=`<div class="ah-h">Open findings · ${tot}</div>`+open.slice(0,6).map(auFinding).join('');
+    au+=revealBlock(open.slice(6).map(auFinding).join(''),open.length-6,'finding');
+  }
+  else if(x.pending)au+=`<p class="au-warnline">No open findings — but ${esc(auQual(x))} remain unresolved.</p>`;
+  else if(x.limited)au+=`<p class="au-warnline">No open findings recorded — evidence is ${esc(x.status)}; this is not a verified all-clear.</p>`;
+  else au+=`<p class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of the last run.</p>`;
+  au+=auAcctHtml(a,x);
+  if(unk.length){
+    au+=`<div class="ah-h" style="margin-top:12px">Unknown status · ${unk.length} <span style="text-transform:none;letter-spacing:0">(not counted as open)</span></div>`+unk.slice(0,6).map(auFinding).join('');
+    au+=revealBlock(unk.slice(6).map(auFinding).join(''),unk.length-6,'finding');
+  }
+  if(x.awaiting)au+=`<p class="au-note">${x.awaiting} implemented, awaiting integration (${esc(auSevStr(a.awaitingIntegrationCounts))}) — item detail is not published; unresolved until merged to the canonical branch.</p>`;
+  au+=auEvidenceNote(a,x);
+  const cl=Number.isInteger(a.closedLastRun)?`${a.closedLastRun} closed last run${x.limited?' (carried from an unverified record)':''}`:'';
+  au+=`<p style="font-size:var(--ts-sm);color:var(--dim);margin-top:10px">${auTrendHtml(a)}${cl?' · '+cl:''}${a.cadence?' · '+esc(a.cadence):''}</p>`;
+  au+=auditHistory(p);
+  au+=`<div class="links" style="margin-top:8px">${a.reportPath?pathLink(a.reportPath,'Full report'):''}${a.ledgerPath?pathLink(a.ledgerPath,'Audit ledger'):''}</div></div>`;
+  return au;
+}
 function auPill(k){
   const el=document.getElementById('au-break-'+k);if(!el)return;
   const open=el.classList.toggle('open');
@@ -1692,7 +1834,8 @@ function buildSide(){
   h+='<div class="grp-lbl">BIMpossible Work</div>';
   WORK.forEach(id=>{const p=D.projects.find(q=>q.id===id);if(p)h+=navI(p.id,ICO[p.icon]||ICO.cube,p.name,pctStr(p),null,p.status,false);});
   h+='<div class="grp-sep"></div><div class="grp-lbl">Reference</div>';
-  h+=navI('audit',ICO.shield,'Audit',totO?(totO+''):ICO.checkI,totH?'color:var(--red)':'color:var(--green)',null,false,!totO);
+  const totP=D.projects.reduce((s,p)=>{const a=auditSummary(p);return s+(a?a.pending+(a.limited?1:0):0);},0);
+  h+=navI('audit',ICO.shield,'Audit',totO||totP?totO+(totP?'+'+totP:''):ICO.checkI,totH?'color:var(--red)':totP?'color:var(--status-warn)':'color:var(--green)',null,false,!totO&&!totP);
   h+=navI('graph',ICO.graph,'Codebase',gmL?gmL+'':'');
   h+=navI('roadmap',ICO.layers,'Roadmap');
   const _si=getStrategyItems(),_sp=_si.filter(i=>i.status==='pending').length;
@@ -1828,8 +1971,9 @@ function overview(){
       const as=auditSummary(bp);
       h+=`<div style="padding-top:10px;border-top:1px solid var(--border)">`;
       h+=`<div style="font-size:var(--ts-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:5px">Audit</div>`;
-      if(as.total===0)h+=`<div style="font-size:var(--ts-sm);color:var(--status-ok)">✓ All clear</div>`;
-      else h+=`<div style="font-size:var(--ts-sm);color:var(--status-warn)">${as.total} open · ${as.hot} crit/high</div>`;
+      const lab=auCleanLabel(auAcct(bp.audit));
+      if(as.total===0)h+=`<div style="font-size:var(--ts-sm);color:${lab.warn?'var(--status-warn)':'var(--status-ok)'}">${esc(lab.text)}</div>`;
+      else h+=`<div style="font-size:var(--ts-sm);color:var(--status-warn)">${as.total} open · ${as.hot} crit/high${as.pending?' · +'+as.pending+' not counted as open':''}</div>`;
       h+=`</div>`;
     }
     if((bp.pendingDecisions||[]).length){
@@ -1962,32 +2106,7 @@ function project(p){
   if((p.reminders||[]).length)rail.push(`<div class="card ca-grey" data-ord="23"><h3>Watch items</h3><ul class="alist">${p.reminders.map(r=>`<li class="rem">${esc(r)}</li>`).join('')}</ul></div>`);
 
   // Audit
-  if(p.audit){
-    const a=p.audit;const tot=SEVS.reduce((s,k)=>s+(a.counts[k]||0),0);
-    let au=`<div class="card ca-green" data-ord="40" data-move="1"><h3>Audit</h3>`;
-    au+=`<div class="au-latest">Latest run · <b>${esc(a.lastRun)}</b></div>`;
-    // runType is a free-text ledger field, not a label — BIMpossible's is 2,894 chars and used to
-    // render as one unbroken run-on beside the date.
-    au+=foldText(a.runType,'au-run','Full run note');
-    au+=`<div class="sevcounts" style="margin:13px 0 ${tot?'13px':'4px'}">`;
-    SEVS.forEach(k=>{
-      const n=a.counts[k]||0;
-      au+=`<div class="sevpip${(k==='critical'||k==='high')&&n?' hot':''}"><span class="n" style="color:${n?(k==='critical'?'var(--red)':k==='high'?'var(--amber)':'var(--text)'):'var(--dim)'}">${n}</span><span class="k">${SEVLBL[k]}</span></div>`;
-    });
-    au+=`</div>`;
-    // The full open-findings list ran 4,200px on the largest project — taller than the whole
-    // dedicated Audit view. Show the first six (severity-ordered upstream) and fold the rest.
-    if(tot){
-      const F=f=>`<div class="find"><span class="fid">${sevBadge(f.sev)}</span><div class="ft"><b style="font-family:Sora;font-weight:600">${esc(f.id)}</b> – ${esc(f.title)}${f.where?` <span class="fw">(${esc(f.where)})</span>`:''}</div></div>`;
-      au+=`<div class="ah-h">Open findings · ${tot}</div>`+a.open.slice(0,6).map(F).join('');
-      au+=revealBlock(a.open.slice(6).map(F).join(''),a.open.length-6,'finding');
-    }
-    else au+=`<p class="clean">${ICO.shield.replace('<svg',`<svg width="15" height="15" style="stroke:var(--green)">`)} No open findings — all clear as of the last run.</p>`;
-    au+=`<p style="font-size:var(--ts-sm);color:var(--dim);margin-top:10px"><span class="trend ${a.trend||'flat'}">${a.trend||'flat'}</span> · ${a.closedLastRun||0} closed last run${a.cadence?' · '+esc(a.cadence):''}</p>`;
-    au+=auditHistory(p);
-    au+=`<div class="links" style="margin-top:8px">${a.reportPath?pathLink(a.reportPath,'Full report'):''}${a.ledgerPath?pathLink(a.ledgerPath,'Audit ledger'):''}</div></div>`;
-    rail.push(au);
-  }
+  if(p.audit)rail.push(auditCard(p));
 
   rail.push(`<div class="card ca-grey" data-ord="50" data-move="1"><h3>Commit activity (14 days)</h3>${areaChart(p.activity||[],360,140,p.id+'x')}</div>`);
   if((p.links||[]).length)rail.push(`<div class="card ca-grey" data-ord="65" data-move="1"><h3>Key files</h3><div class="links">${p.links.map(l=>pathLink(l.path,l.label)).join('')}</div></div>`);
@@ -2120,13 +2239,18 @@ function auditHistory(p){
 function auditView(){
   const wa=D.projects.filter(p=>p.audit);
   const agg={critical:0,high:0,medium:0,low:0,info:0};
-  wa.forEach(p=>SEVS.forEach(k=>agg[k]+=(p.audit.counts[k]||0)));
+  wa.forEach(p=>SEVS.forEach(k=>agg[k]+=(auCounts(p.audit)[k]||0)));
   const totO=SEVS.reduce((s,k)=>s+agg[k],0);
   const closed=wa.reduce((s,p)=>s+(p.audit.closedLastRun||0),0);
 
   // Split: hot (has unresolved open findings) vs clean vs unaudited
-  const hotProjs  =wa.filter(p=>(p.audit.open||[]).length>0);
-  const cleanProjs=wa.filter(p=>(p.audit.open||[]).length===0);
+  const isHot=p=>auTot(auCounts(p.audit))>0||(p.audit.open||[]).length>0;
+  const hotProjs  =wa.filter(isHot);
+  const cleanProjs=wa.filter(p=>!isHot(p));
+  // "Clean" only means no OPEN findings. Projects that still owe awaiting-integration / unknown
+  // findings, or whose evidence is unverified/partial/failed, are listed separately below.
+  const owedProjs=wa.filter(p=>{const x=auAcct(p.audit);return x.pending||x.limited;});
+  const totPend=wa.reduce((s,p)=>s+auAcct(p.audit).pending,0);
   const noAudit   =D.projects.filter(p=>!p.audit);
 
   let h='<div class="crumbs">Audit</div><h2 class="page">Audit Findings</h2>';
@@ -2137,11 +2261,13 @@ function auditView(){
   h+=`<div class="ov-cmd-dot"></div>`;
   h+=`<div class="ov-cmd-items">`;
   if(totO===0){
-    h+=`<span style="color:var(--status-ok);font-weight:600">All clear — no open findings across ${wa.length} audited projects</span>`;
+    h+=owedProjs.length
+      ?`<span style="color:var(--status-warn);font-weight:600">No open findings across ${wa.length} audited projects — but ${totPend?totPend+' implemented-awaiting-integration / unknown finding'+(totPend!==1?'s':'')+' and ':''}${owedProjs.filter(p=>auAcct(p.audit).limited).length} limited-evidence card${owedProjs.filter(p=>auAcct(p.audit).limited).length!==1?'s':''} remain below; not a verified all-clear</span>`
+      :`<span style="color:var(--status-ok);font-weight:600">All clear — no open findings across ${wa.length} audited projects</span>`;
   } else {
     SEVS.filter(k=>agg[k]).forEach(k=>{
       const cls=(k==='critical'||k==='high')?'st-danger':k==='medium'?'st-warn':'st-dim';
-      const nP=wa.filter(p=>(p.audit.counts[k]||0)>0).length;
+      const nP=wa.filter(p=>(auCounts(p.audit)[k]||0)>0).length;
       h+=`<span class="badge ${cls} sevpill" role="button" tabindex="0" aria-expanded="false" data-sev="${k}" title="${agg[k]} open ${SEVLBL[k].toLowerCase()} finding${agg[k]!==1?'s':''} across ${nP} project${nP!==1?'s':''} — click for per-project breakdown" onclick="auPill('${k}')" onkeydown="auPillKey(event,'${k}')">${agg[k]} ${SEVLBL[k].toLowerCase()}<span class="caret">▾</span></span>`;
     });
   }
@@ -2169,13 +2295,13 @@ function auditView(){
   SEVS.filter(k=>agg[k]).forEach(k=>{
     const nCol=k==='critical'||k==='high'?'var(--status-danger)':k==='medium'?'var(--status-warn)':'var(--status-dim)';
     h+=`<div class="card au-break" id="au-break-${k}">`;
-    wa.filter(p=>(p.audit.counts[k]||0)>0).forEach(p=>{
-      const rows=FIND&&FIND[p.id]?FIND[p.id].filter(f=>f.sev===k):null;
-      const openRows=(p.audit.open||[]).filter(f=>f.sev===k).length;
+    wa.filter(p=>(auCounts(p.audit)[k]||0)>0).forEach(p=>{
+      const rows=FIND&&FIND[p.id]?FIND[p.id].filter(f=>auSev(f)===k):null;
+      const openRows=(p.audit.open||[]).filter(f=>auSev(f)===k).length;
       h+=`<div class="au-break-row au-break-head">`;
-      h+=`<span class="au-break-n" style="color:${nCol}">${p.audit.counts[k]}</span>`;
+      h+=`<span class="au-break-n" style="color:${nCol}">${auCounts(p.audit)[k]}</span>`;
       h+=`<span class="au-break-nm">${esc(p.name)}</span>`;
-      h+=`<span class="au-break-meta">unresolved as of ${esc(p.audit.lastRun||'?')}</span>`;
+      h+=`<span class="au-break-meta">open as of ${esc(p.audit.lastRun||'?')}</span>`;
       if(openRows)h+=`<span class="au-jump" onclick="auJump('${k}')">flash ${openRows} below ↓</span>`;
       if(p.audit.reportFile)h+=`<span class="au-jump" role="button" tabindex="0" data-report-file="${esc(p.audit.reportFile)}" data-report-title="${esc(p.name+' — latest audit report')}">read report here</span>`;
       if(p.audit.reportPath)h+=pathLink(p.audit.reportPath,'editor');
@@ -2186,7 +2312,7 @@ function auditView(){
           h+=`<div class="find"><span class="fid">${esc(f.id)}</span><span class="ft">${esc(f.t)}${f.s==='carry'?'<span class="au-carry" title="carried open from the 2026-07-01 deep audit">carry</span>':''}</span>${f.w?`<span class="fw">${esc(f.w)}</span>`:''}</div>`;
         });
         h+=`</div>`;
-        if(rows.length!==(p.audit.counts[k]||0))h+=`<div class="au-break-meta" style="padding:6px 0">listing ${rows.length} of ${p.audit.counts[k]} — counts and local detail have drifted; re-run the audit refresh</div>`;
+        if(rows.length!==(auCounts(p.audit)[k]||0))h+=`<div class="au-break-meta" style="padding:6px 0">listing ${rows.length} of ${auCounts(p.audit)[k]} — counts and local detail have drifted; re-run the audit refresh</div>`;
       }else{
         h+=`<div class="au-break-meta" style="padding:4px 0 8px">Item-level detail isn't bundled in this deployment (findings stay local by design) — read the report above on the local monitor.</div>`;
       }
@@ -2197,28 +2323,28 @@ function auditView(){
   // 2. Open findings — severity-led, project-attributed
   //    These are CURRENTLY UNRESOLVED items, NOT findings from the latest run.
   if(hotProjs.length){
-    h+=`<div class="sh fade" style="animation-delay:.04s">Currently unresolved <small>${totO} finding${totO!==1?'s':''}</small></div>`;
+    h+=`<div class="sh fade" style="animation-delay:.04s">Open — no fix implemented <small>${totO} finding${totO!==1?'s':''}</small></div>`;
     hotProjs.forEach((p,pi)=>{
       (p.audit.open||[]).forEach((f,fi)=>{
-        const isCrit=(f.sev==='critical'||f.sev==='high');
-        h+=`<div class="card ${isCrit?'ca-red':'ca-amber'} au-finding fade" data-sev="${esc(f.sev)}" style="animation-delay:${.06+pi*.04+fi*.02}s">`;
+        const fs=auSev(f);
+        const isCrit=(fs==='critical'||fs==='high');
+        h+=`<div class="card ${isCrit?'ca-red':'ca-amber'} au-finding fade" data-sev="${esc(fs)}" style="animation-delay:${.06+pi*.04+fi*.02}s">`;
         h+=`<div class="au-finding-row">`;
-        h+=`<div class="au-sev-col">${sevBadge(f.sev)}</div>`;
+        h+=`<div class="au-sev-col">${sevBadge(fs)}</div>`;
         h+=`<div class="au-finding-body">`;
         h+=`<div class="au-finding-title">${esc(f.id)} — ${esc(f.title)}</div>`;
         h+=`<div class="au-finding-meta">`;
         h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="12" height="12" style="stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0"`);
         h+=`<span style="font-weight:600">${esc(p.name)}</span>`;
         if(f.where)h+=`<span class="au-where">${esc(f.where)}</span>`;
-        h+=`<span class="au-confirmed">unresolved as of ${esc(p.audit.lastRun)}</span>`;
-        const tCls=p.audit.trend==='improving'?'st-ok':p.audit.trend==='worsening'?'st-danger':'st-dim';
-        h+=`<span class="badge ${tCls}">${p.audit.trend||'flat'}</span>`;
+        h+=`<span class="au-confirmed">open as of ${esc(p.audit.lastRun)}</span>`;
+        h+=auTrendBadge(p.audit);
         h+=`</div></div></div></div>`;
       });
     });
   } else if(!totO){
     h+=`<div class="card ca-green fade" style="animation-delay:.04s;padding:18px 22px">`;
-    h+=`<div class="clean" style="font-size:var(--ts-base)">${ICO.shield.replace('<svg',`<svg width="18" height="18" style="stroke:var(--status-ok)">`)} No open findings across ${wa.length} audited project${wa.length!==1?'s':''}</div>`;
+    h+=`<div class="clean" style="font-size:var(--ts-base)">${ICO.shield.replace('<svg',`<svg width="18" height="18" style="stroke:var(--status-ok)">`)} No open findings across ${wa.length} audited project${wa.length!==1?'s':''}${owedProjs.length?' (see the qualified cards below)':''}</div>`;
     if(closed>0)h+=`<div style="font-size:var(--ts-sm);color:var(--muted);margin-top:6px">${closed} findings closed in the most recent runs</div>`;
     h+=`</div>`;
   }
@@ -2234,14 +2360,15 @@ function auditView(){
       h+=`<div style="display:flex;align-items:center;gap:10px">`;
       h+=(ICO[p.icon]||ICO.cube).replace('<svg',`<svg width="14" height="14" style="stroke:var(--muted);stroke-width:2;fill:none;flex-shrink:0"`);
       h+=`<span style="font-family:Sora,sans-serif;font-weight:600;flex:1">${esc(p.name)}</span>`;
-      h+=`<span style="color:var(--status-ok);font-size:var(--ts-sm)">✓ All clear</span>`;
+      const lab=auCleanLabel(auAcct(p.audit));
+      h+=`<span style="color:${lab.warn?'var(--status-warn)':'var(--status-ok)'};font-size:var(--ts-sm)">${esc(lab.text)}</span>`;
       h+=`</div>`;
       h+=`<div class="au-clean-meta">`;
       h+=`<span>Last run ${esc(p.audit.lastRun)}${stale?` <span style="color:var(--status-warn)">(stale — ${age}d)</span>`:''}</span>`;
       if(p.audit.closedLastRun)h+=`<span style="color:var(--status-ok)">${p.audit.closedLastRun} closed last run</span>`;
-      const tCls2=p.audit.trend==='improving'?'st-ok':p.audit.trend==='worsening'?'st-danger':'st-dim';
-      h+=`<span class="badge ${tCls2}">${p.audit.trend||'flat'}</span>`;
+      h+=auTrendBadge(p.audit);
       h+=`</div>`;
+      h+=auEvidenceNote(p.audit);
       if((p.audit.history||[]).length){
         h+=`<div class="au-compact-hist">`;
         p.audit.history.slice(0,2).forEach(r=>{
@@ -2254,6 +2381,20 @@ function auditView(){
       h+=`</div>`;
     });
     h+=`</div>`;
+  }
+
+  // 3b. Not counted as open — awaiting integration / unknown / limited evidence. These are neither
+  //     open nor closed, so they get their own section rather than vanishing into "Clean".
+  if(owedProjs.length){
+    h+=`<div class="sh fade" style="animation-delay:.16s">Not counted as open <small>${owedProjs.length} project${owedProjs.length!==1?'s':''}</small></div>`;
+    owedProjs.forEach(p=>{
+      const x=auAcct(p.audit);
+      h+=`<div class="card au-owed fade" data-id="${esc(p.id)}" style="margin-bottom:10px"><div style="display:flex;align-items:center;gap:10px"><span style="font-family:Sora,sans-serif;font-weight:600;flex:1">${esc(p.name)}</span>${auTrendBadge(p.audit)}</div>`;
+      h+=auAcctHtml(p.audit,x);
+      h+=(Array.isArray(p.audit.unknown)?p.audit.unknown:[]).map(auFinding).join('');
+      h+=auEvidenceNote(p.audit,x);
+      h+=`</div>`;
+    });
   }
 
   // 4. Unaudited projects — tertiary, compact chips

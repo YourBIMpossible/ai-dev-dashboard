@@ -29,7 +29,18 @@
  *   - a finding whose severity is not one of SEV_ORDER is counted as unclassified,
  *     never dropped;
  *   - cards with no `audit` block are counted and named, and every report states
- *     its own coverage, so no total here can be read as estate-wide.
+ *     its own coverage, so no total here can be read as estate-wide;
+ *   - an open[] item may spell its severity `sev` (REFRESH-SPEC / reconciler) or
+ *     `severity` (data.js cards); both are read, so neither is misfiled as
+ *     unclassified.
+ *
+ * Accounting categories (docs/COVERAGE-AND-DISCLOSURE-POLICY.md section 1). A finding is
+ * exactly one of: open (no fix anywhere) | implemented, awaiting integration
+ * (awaitingIntegrationCounts) | verified closed (resolvedCounts) | unknown
+ * (unknownCounts / unknown[]). carriedClosedCounts are historical closures outside that
+ * partition. ingestStatus/ingestDetail say how far the evidence can be trusted. "Open"
+ * is never presented as the whole unresolved obligation: awaiting and unknown findings,
+ * missing accounting fields, and unverified/partial/failed evidence are all stated next to it.
  *
  * Pure reader. Never mutates data.js or any dashboard state.
  */
@@ -60,6 +71,21 @@ function sevRank(s) {
   const r = SEV_RANK[s];
   return r === undefined ? SEV_ORDER.length : r;  // unclassified sorts last, deterministically
 }
+// Sum of a severity histogram ({critical:n,...}); null when the card does not carry it, so
+// "not recorded" stays distinguishable from a recorded 0.
+function histTotal(h) {
+  if (!h || typeof h !== "object") return null;
+  return SEV_ORDER.reduce((s, k) => s + (Number.isInteger(h[k]) && h[k] > 0 ? h[k] : 0), 0);
+}
+function histCopy(h) {
+  return h && typeof h === "object" ? Object.fromEntries(SEV_ORDER.map((k) => [k, Number.isInteger(h[k]) ? h[k] : 0])) : null;
+}
+// ingestStatus values that mean the card's figures are not a verified, current reading.
+const LIMITED = {
+  unverified: "evidence not verified",
+  partial: "evidence partial",
+  failed: "reconciliation failed",
+};
 function countBySev(findings) {
   const c = Object.fromEntries(SEV_BUCKETS.map((b) => [b, 0]));
   for (const f of findings) c[f.sev] += 1;
@@ -121,18 +147,35 @@ function collect() {
     const fresh = (FRESH.projects || {})[p.id] || null;
     const open = (a.open || [])
       .map((f) => {
-        const sev = normSev(f.sev);
-        return sev === f.sev ? f : { ...f, sev, sevRaw: f.sev };
+        const raw = f.sev !== undefined && f.sev !== null ? f.sev : f.severity;
+        const sev = normSev(raw);
+        const { severity: _drop, ...rest } = f;
+        return sev === raw ? { ...rest, sev } : { ...rest, sev, sevRaw: raw };
       })
       .sort((x, y) => sevRank(x.sev) - sevRank(y.sev));
     // Counts are DERIVED from open[]. The declared `counts` block is only
     // cross-checked: rendering declared severities beside a derived open total
     // produced a table whose columns did not add up to its own headline.
     const counts = countBySev(open);
-    const declared = a.counts || {};
+    const declared = a.counts || a.openCounts || {};
     const countMismatch = SEV_ORDER
       .filter((sv) => (declared[sv] || 0) !== counts[sv])
       .map((sv) => ({ sev: sv, declared: declared[sv] || 0, derived: counts[sv] }));
+    const awaiting = histTotal(a.awaitingIntegrationCounts);
+    const unknownN = a.unknownCounts ? histTotal(a.unknownCounts) : (Array.isArray(a.unknown) ? a.unknown.length : null);
+    const resolved = histTotal(a.resolvedCounts);
+    const carried = histTotal(a.carriedClosedCounts);
+    const rawTotal = histTotal(a.rawCounts);
+    const status = typeof a.ingestStatus === "string" ? a.ingestStatus : null;
+    // rawCounts = open + awaiting + resolved + unknown, per severity. Checked here (open from
+    // the canonical open[] records) so a report never shows categories that do not add up.
+    const partitionMismatch = a.rawCounts
+      ? SEV_ORDER.map((sv) => {
+          const sum = counts[sv] + ((a.awaitingIntegrationCounts || {})[sv] || 0) +
+            ((a.resolvedCounts || {})[sv] || 0) + ((a.unknownCounts || {})[sv] || 0);
+          return { sev: sv, raw: (a.rawCounts[sv] || 0), sum };
+        }).filter((m) => m.raw !== m.sum)
+      : [];
     rows.push({
       id: p.id,
       name: p.name || p.id,
@@ -144,6 +187,24 @@ function collect() {
       countMismatch,
       closedLastRun: a.closedLastRun ?? null,
       trend: a.trend || null,
+      trendNote: a.trendNote || null,
+      accounting: {
+        awaiting, unknown: unknownN, resolved, carried, raw: rawTotal,
+        awaitingCounts: histCopy(a.awaitingIntegrationCounts),
+        unknownCounts: histCopy(a.unknownCounts),
+        resolvedCounts: histCopy(a.resolvedCounts),
+        carriedClosedCounts: histCopy(a.carriedClosedCounts),
+        rawCounts: histCopy(a.rawCounts),
+        // true when the card carries none of the category fields at all (legacy shape)
+        missing: awaiting === null && unknownN === null && resolved === null && rawTotal === null,
+        partitionMismatch,
+      },
+      ingestStatus: status,
+      ingestDetail: typeof a.ingestDetail === "string" ? a.ingestDetail : null,
+      limited: Object.prototype.hasOwnProperty.call(LIMITED, status),
+      unknownItems: (Array.isArray(a.unknown) ? a.unknown : []).map((f) => ({
+        id: f.id, title: f.title, sev: normSev(f.sev !== undefined && f.sev !== null ? f.sev : f.severity), where: f.where || null,
+      })),
       reportFile: a.reportFile || null,
       reportPath: a.reportPath || null,
       stale: fresh ? !!fresh.stale : null,
@@ -173,6 +234,9 @@ const mismatchRows = rows.filter((r) => r.countMismatch.length);
 // Cards audit-freshness.js says nothing about: their sync state is unknown, so
 // they may not be swept into an "all in sync" claim either.
 const unknownFreshness = rows.filter((r) => r.stale === null);
+const limitedRows = rows.filter((r) => r.limited);
+const accountingMissing = rows.filter((r) => r.accounting.missing);
+const partitionRows = rows.filter((r) => r.accounting.partitionMismatch.length);
 
 // ---- aggregate totals ----
 // Every number here comes from the same source - the open[] records - so the
@@ -181,7 +245,15 @@ function totals() {
   const t = Object.fromEntries(SEV_BUCKETS.map((b) => [b, 0]));
   t.open = 0;
   t.closedLastRun = 0;
+  t.awaiting = 0;
+  t.unknownStatus = 0;
+  t.resolved = 0;
+  t.carried = 0;
   for (const r of rows) {
+    t.awaiting += r.accounting.awaiting || 0;
+    t.unknownStatus += r.accounting.unknown || 0;
+    t.resolved += r.accounting.resolved || 0;
+    t.carried += r.accounting.carried || 0;
     for (const b of SEV_BUCKETS) t[b] += r.counts[b];
     t.open += r.open.length;
     t.closedLastRun += (r.closedLastRun || 0);
@@ -190,6 +262,16 @@ function totals() {
 }
 const T = totals();
 const staleProjects = rows.filter((r) => r.stale);
+// What the open total leaves out. A report whose open total is 0 is only a clean bill of health
+// if none of these exist.
+const PENDING = T.awaiting + T.unknownStatus;
+function pendingSentence() {
+  const parts = [];
+  if (T.awaiting) parts.push(`${T.awaiting} implemented, awaiting integration (fix not on the canonical branch)`);
+  if (T.unknownStatus) parts.push(`${T.unknownStatus} unknown status`);
+  if (!parts.length) return "";
+  return `Not counted as open and not closed: ${parts.join("; ")}.`;
+}
 
 // ---- markdown ----
 function esc(s) {
@@ -199,6 +281,9 @@ function sevBadge(s) {
   return ({ critical: "🔴 Critical", high: "🟠 High", medium: "🟡 Medium", low: "🔵 Low", info: "⚪ Info",
     [SEV_UNKNOWN]: "⚫ Unclassified" }[s]) || s;
 }
+
+// "—" = the card does not carry the field (not recorded); a recorded zero prints 0.
+function cell(n) { return n === null || n === undefined ? "—" : String(n); }
 
 function toMarkdown({ openOnly } = {}) {
   const L = [];
@@ -215,6 +300,35 @@ function toMarkdown({ openOnly } = {}) {
     (T[SEV_UNKNOWN] ? ` · ${T[SEV_UNKNOWN]} unclassified severity` : "") + ". " +
     `${T.closedLastRun} closed in the most recent cycle. All severity counts are derived from the open findings themselves.`);
   L.push("");
+  // Accounting: the open total above is NOT the whole unresolved obligation.
+  L.push(`**Accounting** — ${T.open} open (no fix implemented) · ${T.awaiting} implemented, awaiting integration · ` +
+    `${T.unknownStatus} unknown status · ${T.resolved} verified closed on the canonical branch · ` +
+    `${T.carried} carried closed from earlier baselines (outside this arithmetic; not part of the cycle figure).`);
+  L.push("");
+  if (PENDING) {
+    L.push(`> ⚠️ **${T.open} open is not the unresolved total.** ${pendingSentence()} ` +
+      `Unresolved = ${T.open + PENDING} until the awaiting fixes are merged and the unknowns are determined.`);
+    L.push("");
+  }
+  if (accountingMissing.length) {
+    L.push(`> ❓ **Accounting categories not recorded for ${accountingMissing.length} card(s)** (legacy shape: no awaiting / unknown / verified-closed fields): ` +
+      accountingMissing.map((r) => esc(r.name)).join(", ") + ". Their open counts say nothing about work awaiting integration or of unknown status.");
+    L.push("");
+  }
+  if (limitedRows.length) {
+    L.push(`> ⚠️ **Evidence limitation on ${limitedRows.length} card(s) — not verified all-clears:**`);
+    for (const r of limitedRows) {
+      L.push(`> - ${esc(r.name)}: ingest status \`${esc(r.ingestStatus)}\` (${LIMITED[r.ingestStatus]})` +
+        (r.ingestDetail ? ` — ${esc(r.ingestDetail)}` : "") + ".");
+    }
+    L.push("");
+  }
+  if (partitionRows.length) {
+    L.push(`> ⚠️ **Accounting does not add up** (rawCounts != open + awaiting + verified closed + unknown) on ${partitionRows.length} card(s): ` +
+      partitionRows.map((r) => `${esc(r.name)} (` +
+        r.accounting.partitionMismatch.map((m) => `${m.sev}: raw ${m.raw}, categories ${m.sum}`).join("; ") + ")").join("; ") + ".");
+    L.push("");
+  }
   L.push(`_${COVERAGE_LINE}_`);
   L.push("");
   if (COVERAGE.withoutAudit) {
@@ -247,18 +361,20 @@ function toMarkdown({ openOnly } = {}) {
   // summary table
   L.push("## By project");
   L.push("");
-  L.push("| Project | Last run | Fresh | Crit | High | Med | Low | Info | Unclass | Open | Closed (cycle) |");
-  L.push("|---|---|:--:|--:|--:|--:|--:|--:|--:|--:|--:|");
+  L.push("| Project | Last run | Fresh | Crit | High | Med | Low | Info | Unclass | Open | Awaiting integration | Unknown | Verified closed | Carried closed | Closed (cycle) | Evidence |");
+  L.push("|---|---|:--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|");
   for (const r of rows) {
     const fresh = r.stale === null ? "❓ unknown" : (r.stale ? "⚠️ stale" : "✅");
     L.push(`| ${esc(r.name)} | ${esc(r.lastRun) || "—"} | ${fresh} | ` +
       `${r.counts.critical} | ${r.counts.high} | ${r.counts.medium} | ` +
-      `${r.counts.low} | ${r.counts.info} | ${r.counts[SEV_UNKNOWN]} | ${r.open.length} | ${r.closedLastRun ?? "—"} |`);
+      `${r.counts.low} | ${r.counts.info} | ${r.counts[SEV_UNKNOWN]} | ${r.open.length} | ` +
+      `${cell(r.accounting.awaiting)} | ${cell(r.accounting.unknown)} | ${cell(r.accounting.resolved)} | ${cell(r.accounting.carried)} | ` +
+      `${r.closedLastRun ?? "—"} | ${r.limited ? "⚠️ " + esc(r.ingestStatus) : (r.ingestStatus ? esc(r.ingestStatus) : "—")} |`);
   }
   // Unmeasured cards get a row too - a card that vanishes from the table reads
   // as a card with nothing to report.
   for (const c of cardsWithoutAudit) {
-    L.push(`| ${esc(c.name)} | _no audit data_ | ❓ | — | — | — | — | — | — | — | — |`);
+    L.push(`| ${esc(c.name)} | _no audit data_ | ❓ | — | — | — | — | — | — | — | — | — | — | — | — | — |`);
   }
   L.push("");
   L.push(`_${COVERAGE_LINE}_`);
@@ -269,7 +385,10 @@ function toMarkdown({ openOnly } = {}) {
   L.push("");
   const withFindings = rows.filter((r) => r.open.length);
   if (!withFindings.length) {
-    L.push(`_No open findings on any of the ${COVERAGE.withAudit} card(s) that carry audit data._`);
+    L.push(`_No open findings on any of the ${COVERAGE.withAudit} card(s) that carry audit data` +
+      (PENDING || limitedRows.length || accountingMissing.length
+        ? ` — this is NOT an all-clear: see the accounting and evidence notes above._`
+        : `._`));
     L.push("");
   }
   for (const r of withFindings) {
@@ -279,7 +398,7 @@ function toMarkdown({ openOnly } = {}) {
     if (r.lastRun) meta.push(`last run **${r.lastRun}**`);
     if (r.runType) meta.push(r.runType);
     if (r.cadence) meta.push(`cadence: ${r.cadence}`);
-    if (r.trend) meta.push(`trend: ${r.trend}`);
+    if (r.trend) meta.push(`trend: ${r.trend}${r.trendNote ? ` (${esc(r.trendNote)})` : ""}`);
     if (r.reportFile) meta.push(`report: \`${r.reportFile}\``);
     if (meta.length) { L.push(meta.join(" · ")); L.push(""); }
     L.push("| ID | Severity | Finding | Where |");
@@ -289,6 +408,21 @@ function toMarkdown({ openOnly } = {}) {
       L.push(`| ${esc(f.id)} | ${sevCell} | ${esc(f.title)} | ${esc(f.where) || "—"} |`);
     }
     L.push("");
+  }
+
+  // Findings that are neither open nor closed. Listed so they cannot vanish from the report.
+  const withUnknown = rows.filter((r) => r.unknownItems.length);
+  if (withUnknown.length) {
+    L.push("## Unknown status (not counted as open)");
+    L.push("");
+    for (const r of withUnknown) {
+      L.push(`### ${r.name} — ${r.unknownItems.length} unknown`);
+      L.push("");
+      L.push("| ID | Severity | Finding | Where |");
+      L.push("|---|---|---|---|");
+      for (const f of r.unknownItems) L.push(`| ${esc(f.id)} | ${sevBadge(f.sev)} | ${esc(f.title)} | ${esc(f.where) || "—"} |`);
+      L.push("");
+    }
   }
 
   // history digest
@@ -318,12 +452,21 @@ function toJSON() {
     coverage: COVERAGE,
     totals: T,
     countMismatch: mismatchRows.map((r) => ({ id: r.id, name: r.name, mismatch: r.countMismatch })),
+    accounting: {
+      open: T.open, awaitingIntegration: T.awaiting, unknown: T.unknownStatus,
+      verifiedClosed: T.resolved, carriedClosed: T.carried, unresolved: T.open + PENDING,
+      notRecorded: accountingMissing.map((r) => ({ id: r.id, name: r.name })),
+      limitedEvidence: limitedRows.map((r) => ({ id: r.id, name: r.name, ingestStatus: r.ingestStatus, ingestDetail: r.ingestDetail })),
+      partitionMismatch: partitionRows.map((r) => ({ id: r.id, name: r.name, mismatch: r.accounting.partitionMismatch })),
+    },
     freshnessUnknown: unknownFreshness.map((r) => ({ id: r.id, name: r.name })),
     stale: staleProjects.map((r) => ({ id: r.id, name: r.name, lastRun: r.lastRun, newestOnDisk: r.newestOnDisk })),
     projects: rows.map((r) => ({
       id: r.id, name: r.name, lastRun: r.lastRun, runType: r.runType, cadence: r.cadence,
       counts: r.counts, declaredCounts: r.declaredCounts, countMismatch: r.countMismatch,
-      closedLastRun: r.closedLastRun, trend: r.trend,
+      closedLastRun: r.closedLastRun, trend: r.trend, trendNote: r.trendNote,
+      accounting: r.accounting, ingestStatus: r.ingestStatus, ingestDetail: r.ingestDetail,
+      unknown: r.unknownItems,
       reportFile: r.reportFile, reportPath: r.reportPath,
       stale: r.stale, newestOnDisk: r.newestOnDisk,
       open: r.open, history: r.history,
@@ -346,6 +489,16 @@ console.log(`Audit findings: ${T.open} open ` +
   `(${T.critical}C / ${T.high}H / ${T.medium}M / ${T.low}L / ${T.info}I` +
   (T[SEV_UNKNOWN] ? ` / ${T[SEV_UNKNOWN]} unclassified` : "") + `), ` +
   `${T.closedLastRun} closed last cycle.`);
+console.log(`Accounting: ${T.open} open / ${T.awaiting} awaiting integration / ${T.unknownStatus} unknown / ` +
+  `${T.resolved} verified closed / ${T.carried} carried closed.`);
+if (PENDING) console.log(`⚠️  ${T.open} open is not the unresolved total: ${PENDING} more are awaiting integration or of unknown status.`);
+if (accountingMissing.length) {
+  console.log(`❓  accounting categories not recorded for ${accountingMissing.length} card(s): ` + accountingMissing.map((r) => r.name).join(", "));
+}
+if (limitedRows.length) {
+  console.log(`⚠️  evidence limited on ${limitedRows.length} card(s) (not verified all-clears): ` +
+    limitedRows.map((r) => `${r.name} [${r.ingestStatus}]`).join(", "));
+}
 console.log(COVERAGE_LINE);
 if (COVERAGE.withoutAudit) {
   console.log(`   unmeasured (no audit block): ${COVERAGE.missing.map((c) => c.name).join(", ")}`);

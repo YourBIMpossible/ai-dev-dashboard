@@ -164,6 +164,37 @@ try {
     Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue
 }
 
+# 11. Endpoint resolution (step 1i). The expression that picks the inference endpoint is lifted from
+#     Refresh-Dashboard.ps1 via the AST and executed against the real process environment: the
+#     AISERVER_INFERENCE_BASE_URL override must be honoured verbatim, and with no override the step
+#     must still resolve to a well-formed endpoint (so the scheduled run is unchanged) - a missing
+#     endpoint is handled by section 3 (null status JSON -> reminder, ok=false, no abort).
+#     The tracked default literal is the subject of an owner decision (test_deploy_boundary.py
+#     ratchets it); this test is deliberately independent of whether a literal remains.
+$asgAst = $ast.Find({ param($n)
+    $n -is [System.Management.Automation.Language.AssignmentStatementAst] -and
+    $n.Left -is [System.Management.Automation.Language.VariableExpressionAst] -and
+    $n.Left.VariablePath.UserPath -eq 'aiBaseUrl' }, $true)
+Assert-True ($null -ne $asgAst) 'endpoint resolution: $aiBaseUrl assignment found in Refresh-Dashboard.ps1'
+if ($null -ne $asgAst) {
+    $prevOverride = [Environment]::GetEnvironmentVariable('AISERVER_INFERENCE_BASE_URL', 'Process')
+    try {
+        [Environment]::SetEnvironmentVariable('AISERVER_INFERENCE_BASE_URL', 'http://override.invalid:1234/v1', 'Process')
+        Invoke-Expression $asgAst.Extent.Text
+        Assert-True ($aiBaseUrl -eq 'http://override.invalid:1234/v1') 'endpoint resolution: AISERVER_INFERENCE_BASE_URL override is honoured verbatim'
+
+        [Environment]::SetEnvironmentVariable('AISERVER_INFERENCE_BASE_URL', $null, 'Process')
+        Invoke-Expression $asgAst.Extent.Text
+        Assert-True (($aiBaseUrl -match '^https?://[^/\s]+/v1$')) 'endpoint resolution: no override still resolves to a well-formed /v1 endpoint'
+
+        [Environment]::SetEnvironmentVariable('AISERVER_INFERENCE_BASE_URL', '', 'Process')
+        Invoke-Expression $asgAst.Extent.Text
+        Assert-True (($aiBaseUrl -match '^https?://[^/\s]+/v1$')) 'endpoint resolution: empty override is treated as unset'
+    } finally {
+        [Environment]::SetEnvironmentVariable('AISERVER_INFERENCE_BASE_URL', $prevOverride, 'Process')
+    }
+}
+
 Write-Host ""
 Write-Host "$script:passed passed, $script:fails failed"
 if ($script:fails -gt 0) { exit 1 } else { exit 0 }
