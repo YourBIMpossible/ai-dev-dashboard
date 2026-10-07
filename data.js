@@ -289,10 +289,10 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [20,34,12,12,0,2,38,1,2,0,0,0,49,33],
+      activity: [20,34,12,12,0,2,38,1,2,0,0,0,49,37],
       lastActivity: {
         date: "2026-10-06",
-        summary: "Merge pull request #203 from YourBIMpossible/claude/restore-direct-publish (dc9f753)"
+        summary: "docs(status): add machine-readable completion-% block to PHASE-STATUS (16ba51c)"
       },
       branch: "main at 52f24add; 0 ahead, 5 behind origin/main (37ce4483)",
       git: { warn: "15 worktrees, 147 local branches, ~204 local-only commits (was 21/233 before the 10-05/06 housekeeping) -- mostly squash residue of merged PRs (t7xx and p13/* lanes). Genuinely local-only: AU 2026 competitive analysis (4 commits), arch/config familiarization map (1), ordinary-member hub-discovery slice (a) + decision package (4, 10-06), plan-comparison archive (6), nl-filter policy lanes (7), merge-hook r4 (1). Dirty worktrees: w5/p1f4 (6 uncommitted cache files), p13-apply-boundary (1 test file), arch-config review (1 untracked north-star draft); 2 detached worktrees (post-merge main, CI-failure triage). Main checkout clean (the review folder is gone). 4 open PRs: #783/#784 (Cfg stack), #786/#812 (dependency bumps)." },
@@ -785,7 +785,7 @@ window.DASHBOARD_DATA = {
         { label: "GitHub repo", path: "https://github.com/YourBIMpossible/AI-Server" }
       ],
       recent: [
-        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 18:35)",
+        "Endpoint up · models: gemma4:26b-a4b-it-q4_K_M (snapshot 19:42)",
         "2026-10-06 - Local, unpushed (claude/worker-routing-review, 07cb617): router couples to the evaluation GPU lock and fails closed when a configured lock path cannot be established (d706357, c3e59b4, 29d74d0, 7fc6a09); lock heartbeat + lock-aware GPU-window dead-man (0b86dc4, ff05596); start grace and brief-lock-absence tolerance (73ca19d, 494bd50); GPU-window apply/run/restore scripts + dedicated lock dir (07cb617). 380 passed / 1 skipped. Nothing deployed",
         "2026-10-05 - Worker-routing reviewed and repaired (local): 3 high, 3 medium, 1 low fixed with 10 regression tests, 347 passed (30be001, 54bb30b); publication lock set so no worktree can push",
         "2026-10-05 - Opt-in worker-routing foundation beside the one-endpoint contract (4ce3494, owner-directed, NORTHSTAR untouched); whole-repo RAG source roots disabled and shipped config pinned empty (5250eb4, local main, unpushed)",
@@ -931,10 +931,10 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 88, note: "Agent/skill surface grew: on disk now 6 skills (incl. wiki), 7 agents, 7 commands. 10-05/06 changes: bim-office-hours born-in-place design docs stay live until closure (#182), GRRP entry/exit blocks across audit workflows (#193), scheduled weekly-audit prompts gained G4 per-config size signal and startup-context telemetry (#175, #177, #184)." }
         ]
       },
-      activity: [8,4,1,1,0,2,29,1,1,0,0,0,31,25],
+      activity: [8,4,1,1,0,2,29,1,1,0,0,0,31,29],
       lastActivity: {
         date: "2026-10-06",
-        summary: "Merge pull request #203 from YourBIMpossible/claude/restore-direct-publish (dc9f753)"
+        summary: "docs(status): add machine-readable completion-% block to PHASE-STATUS (16ba51c)"
       },
       branch: "main at f2d358f on origin; local main in sync, clean; worktree canon-filing-1005 (claude/canonical-filing-2026-10-05) holds unpushed commit 2b04e2c; worktree closeout-1006 (claude/audit-closeout-2026-10-06-p4) pushed, no PR; 4 older local-only 09-12 branches hold 7 unpushed commits (incl. 5312cfd on docs/review-all-gatea-canonical-filing)",
       git: null,
@@ -969,10 +969,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Scheduled-only (Task Scheduler daily 06:00 -> Dashboard-auto) + on-demand (Refresh-Now.cmd). Confirmed 09-26..10-06: every run 'result 0', pushes landing on attempt 1." }
         ]
       },
-      activity: [5,3,3,6,3,4,3,3,3,3,2,4,4,10],
+      activity: [5,3,3,6,3,4,3,3,3,3,2,4,4,12],
       lastActivity: {
         date: "2026-10-06",
-        summary: "data.js: drop stray CR before ai-brain-data audit (ebbe6f3)"
+        summary: "fix(dashboard): close review findings F-1..F-7 (audit accounting, disclosure, PCT parser) (8200688)"
       },
       branch: "main; Dashboard-auto and the human clone Dashboard were both in sync with origin/main when last verified (2026-10-06); the former human-clone stash was removed and a recovery tag is retained",
       git: null,
