@@ -10,7 +10,9 @@ Instructions for any Claude session (scheduled or on-demand "refresh dashboard")
 1. **`sync_ledgers.py` — phases + waves (deterministic, NO model).** Renders
    `progress.phases[]` (name + status note) and the `waves` block straight from the
    owner-maintained ledgers (`BIMpossible_PHASE-STATUS.md`, `BIMpossible_WAVE-STATUS.md`).
-   Preserves curated `pct` + `tasks`. This is the anti-drift core: phase numbering can
+   `pct` is owned by the ledger's PCT block when the block is present (see "Phase pct
+   ownership"); otherwise the dashboard's own `pct` in `data.js` is preserved. `tasks`
+   are always preserved. This is the anti-drift core: phase numbering can
    only come from the ledger. Idempotent; run it any time.
 2. **`sync_dashboard.py` — soft prose only (GitHub Models, on source-repo push).** Updates
    `oneLiner` / `focus` / `recent` / `reminders` etc. **Hard-blocked from `progress` and
@@ -152,9 +154,9 @@ For each project, find the newest audit report, then populate its `audit` block:
 - other projects - only if an audit report exists; otherwise omit the `audit` block (they show under "Not yet audited").
 
 Extraction rules:
-- List only **OPEN** findings (resolved/closed ones drop off - they feed `closedLastRun` + `trend`, not `open`).
+- List only **OPEN** findings: no fix implemented anywhere. Verified-closed findings drop off (they feed `closedLastRun` + `trend`, not `open`). A finding whose fix is implemented but not yet on the repo's canonical branch is neither open nor closed: it is "implemented, awaiting integration", counted only in `awaitingIntegrationCounts`, and stays out of `open[]`, `resolvedCounts` and `closedLastRun`. Full convention and the `rawCounts` arithmetic invariant: `docs/COVERAGE-AND-DISCLOSURE-POLICY.md` section 1.
 - Map each finding's severity to one of: `critical | high | medium | low | info` (Critical/High/Medium/Low tiers; "owed smoke / docs / nice-to-have" -> `info`). Fill `counts` with the open tally per severity.
-- `closedLastRun` = how many findings the latest run resolved vs the prior run (from the report's "resolved"/"change since last run" section). `trend` = improving | flat | worsening.
+- `closedLastRun` = how many findings the latest run verified closed on the canonical branch vs the prior run (from the report's "resolved"/"change since last run" section); branch-only fixes never count. `trend` = improving | flat | worsening.
 - `lastRun` = report date; `runType` = the report's kind; `cadence` = "weekly Mon 6am + on-demand" for bimpossible, "on-demand" otherwise.
 - Keep each finding one line: `{ id, sev, title, where? }`. Cap `open` at ~12; if more, keep the worst by severity and note the overflow in the project's `reminders`.
 - If the newest report says everything is closed, set all counts to 0 and `open: []` (the UI shows "all clear").
@@ -190,7 +192,7 @@ renumber lands without a fresh hand-edit (the historical cause of dashboard phas
 
 1. **Phase ≠ Wave.** "Phase" = product arc; "Wave" = execution ledger — different axes (Phase 7 Write-back = Wave 8). Do NOT put a Wave bucket inside `progress.phases[]`; wave status comes only from the wave ledger (previous section).
 2. Parse the ledger table `Phase | Name | Status | Gate/depends on | Note`. Use **Name** verbatim for `progress.phases[].name`, and **Status**/**Note** for the phase `note`. Canonical numbering (never renumber a phase to match a wave): 6 = Platform/Billing + Client-Mgmt; 7 = Revit Link Write-back; 11 = Model QA & Health; 12 = Content Authoring. "Phase 6 = content authoring" and "Phase 7 = Model QA" are DEPRECATED/VOID — never emit them.
-3. `pct` per phase follows the Progress rules below (100 only on evidence; BUILT/not-hardened = 60–90).
+3. `pct` per phase: the ledger's PCT block owns it when present (see "Phase pct ownership" below); only when the block is absent does the dashboard's own `pct` in `data.js` carry over. The value itself follows the Progress rules below (100 only on evidence; BUILT/not-hardened = 60–90).
 4. Full definitions, history, and the old→new mapping live in `00_Strategy\2026-06-23__Phase_Canonical_Guide_and_HardRules_v2-Reviewed.md` — consult it if a row is ambiguous; never re-derive phase meanings from prose docs (that is what caused the drift).
 5. Ledger missing -> keep the previous `progress.phases` block, add a reminder.
 
@@ -218,6 +220,7 @@ window.DASHBOARD_DATA = {
                                        //   held|conditional|placeholder; weight: >0 number (v1 always 1).
                  tasks?: [{ label, status, note? }] }]  // status in done|active|pending|blocked.
                                        // pct 0-100 per phase; shell averages ACTIVE phases for the donut.
+                                       // pct is OWNED by the ledger PCT block when present ("Phase pct ownership").
                                        // PRESERVE existing tasks across refreshes; flip statuses as work lands.
     },
     baselineCohorts?: [{ id, label, frozenAt, sourceCommit,   // bimpossible only (v1). A frozen set of
@@ -232,7 +235,7 @@ window.DASHBOARD_DATA = {
     audit: {                             // OMIT entirely if the project has never been audited
       lastRun, runType, cadence,         // report date, kind, "weekly Mon 6am + on-demand" | "on-demand"
       counts: { critical, high, medium, low, info },  // OPEN tally per severity
-      closedLastRun, trend,              // resolved-since-prior count; improving|flat|worsening
+      closedLastRun, trend,              // verified-closed-on-canonical since prior; improving|flat|worsening
       reportPath, ledgerPath?,           // Windows paths to the newest report + run ledger
       open: [{ id, sev, title, where? }] // OPEN findings only; [] when all clear
     },
@@ -294,7 +297,7 @@ Every phase declares exactly one `bucket`:
 Changing scope = changing a phase's `bucket`, and nothing else:
 
 - Ratify a proposal → `proposed` → `active` (it now enters the headline).
-- Pause active work → `active` → `held` (drops out of the headline; pct is preserved).
+- Pause active work → `active` → `held` (drops out of the headline; its pct is unchanged by the move).
 - Resolve a condition → `conditional` → `active`; drop it → leave `conditional` or `held`.
 
 Never encode scope in the note text again. The note is prose; the bucket is the source of truth.
@@ -326,10 +329,56 @@ a fixed cohort with a moving score, not a hardcoded number:
 - `frozenAt` / `sourceCommit` / `approvedBy` / `approvedAt` / `rationale` are provenance for the
   freeze; they are curated fields and are preserved across refreshes.
 
+### Phase pct ownership (bimpossible only)
+
+`sync_ledgers.py` takes phase `pct` from the ledger's machine-readable PCT block when the block
+is present; when it is absent, the dashboard's own `pct` in `data.js` is preserved (the
+pre-block behaviour). A phase not listed in a present block also keeps its `data.js` `pct`.
+A hand-edit of `data.js` `pct` for a phase the block lists is overwritten on the next refresh,
+so edit the ledger, not `data.js`.
+
+- **Ledger:** `F:\BIMpossible-Workspace\00_Strategy\BIMpossible_PHASE-STATUS.md` (the
+  `sync_ledgers.py` default: `$BIMPOSSIBLE_WORKSPACE` or `F:\BIMpossible-Workspace`, plus
+  `00_Strategy\BIMpossible_PHASE-STATUS.md`).
+- **Block format:** exactly one HTML comment block:
+
+  ```
+  <!-- PCT-BEGIN
+  <phase id>: <integer>      # optional trailing comment
+  PCT-END -->
+  ```
+
+  One `<phase id>: <integer>` per line; blank lines are ignored; CRLF is tolerated.
+- **Supported ids** are the phase keys the dashboard parses from the ledger's phase table:
+  `P` + the table's Phase cell with the en-dash normalized to a hyphen. Verified 2026-10-06 with
+  `parse_phase_ledger` on the real ledger: `P0-2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13,
+  P14, P15, P16, P17, P18, P19` (18 ids). `P0-2` is ONE phase covering 0-2, so this is not a
+  contiguous `P0..P18` range. The list is derived from the table and changes when the table does.
+- **Values:** integers 0..100 inclusive.
+- **Hard failures** (the refresh aborts with a diagnostic, writes nothing, leaves `data.js`
+  untouched): a line that does not parse; a value over 100; a duplicate id; an id not in the
+  table; a `PCT-BEGIN` without a matching `PCT-END`; more than one block.
+- **How the scheduled refresh surfaces a failure.** `Refresh-Dashboard.ps1` (run from
+  `F:\AI-Dashboard\Dashboard-auto`) calls `sync_ledgers.py` as step 1 through `Invoke-Logged`,
+  which appends the script's output, including the diagnostic, to `_backups\refresh-log.txt`.
+  A nonzero exit calls `Alert-Failure "sync_ledgers.py failed."`, which logs `ALERT:`, writes
+  `_backups\REFRESH-FAILED.flag`, and best-effort sends a desktop `msg.exe` broadcast. The loop
+  then breaks with result 1 (no retry; retries are only for rejected pushes), nothing is staged,
+  committed or pushed, and the script exits 1. The live board keeps its last published data and
+  goes stale until the ledger is fixed and the next run; the alert text names only the script, so
+  read `refresh-log.txt` for the specific line. The flag is cleared only by a later fully clean run.
+  The automation clone first resets to `origin/main`, so this behaviour only takes effect in the
+  scheduled run once the `sync_ledgers.py` change is on `origin/main`.
+- **Drift check.** `python sync_ledgers.py --check` lists `phase Pn: pct changed` when `data.js`
+  `pct` lags the block.
+- **Working tree, not a committed ref.** The refresh reads the Workspace working tree, so a PCT
+  edit takes effect on the next refresh before it is published; publishing the ledger to its own
+  origin is a separate step.
+
 ### Sync preservation guarantee
 
 `sync_ledgers.py build_progress()` rebuilds `progress.phases` from the ledger on every refresh.
-It **preserves** the curated *phase-level* model fields by joining old→new on phase `id` first
+`pct` is taken from the ledger PCT block where listed (see "Phase pct ownership"). It **preserves** the curated *phase-level* model fields by joining old→new on phase `id` first
 (then phase number as a fallback): `id`, `bucket`, `weight`, and any optional per-phase metadata
 (`ratifiedAt`, `evidenceUpdatedAt`, `scoreBasis`) carry through (this is the `_PRESERVE_OPTIONAL`
 tuple, applied per phase). The project-level registries `baselineCohorts` / `phaseAliases` are

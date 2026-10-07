@@ -19,7 +19,16 @@ wave ledgers are plain Markdown tables — a parser reads them exactly, every ti
 Ownership split, by field:
   * phase NAME  <- ledger (locked; this is the thing that drifts)
   * phase NOTE  <- ledger Status + Note (so an owner status flip shows with no hand-edit)
-  * phase PCT   <- PRESERVED from data.js (a human judgement; ledger only sanity-checks it)
+  * phase PCT   <- the ledger's PCT block when present, else PRESERVED from data.js.
+    The block is an owner-curated HTML comment in the phase ledger:
+        <!-- PCT-BEGIN
+        P9: 35   # optional comment
+        PCT-END -->
+    Ids are the dashboard's real phase keys (`P` + key, e.g. P0-2, P3..P19), values are
+    integers 0-100, one block per file. A phase missing from the block, or a ledger with no
+    block at all, keeps its data.js pct. A malformed block (bad line, >100, duplicate or
+    unknown id, missing PCT-END, second block, stray PCT-END) aborts the run with a nonzero
+    exit and writes nothing - `--check` included. See REFRESH-SPEC.md for the full rules.
   * phase TASKS <- PRESERVED from data.js (curated build detail: PR #s, dates, smokes)
   * phase BUCKET/WEIGHT <- PRESERVED from data.js (completion-model v1 scope). data.js is
     their ONLY store, so losing them on a rebuild is unrecoverable: an existing phase that
@@ -172,7 +181,8 @@ def parse_phase_ledger(path: Path) -> list[dict]:
     return rows
 
 
-_PCT_BLOCK_RE = re.compile(r"<!--\s*PCT-BEGIN(.*?)PCT-END\s*-->", re.S)
+_PCT_BEGIN_RE = re.compile(r"<!--\s*PCT-BEGIN\b")
+_PCT_END_RE = re.compile(r"PCT-END\s*-->")
 _PCT_LINE_RE = re.compile(r"^\s*(P[0-9A-Za-z-]+)\s*:\s*(\d{1,3})\s*(?:#.*)?$")
 
 
@@ -180,19 +190,50 @@ def parse_pct_block(path: Path, known_ids: set[str] | None = None) -> dict[str, 
     """Owner-curated completion % per phase, from the ledger's machine-readable block:
 
         <!-- PCT-BEGIN
-        P9: 35
+        P9: 35          # optional trailing comment
         P13: 48
         PCT-END -->
 
-    Returns {} when the block is absent (callers then keep data.js's pct, the pre-block
-    behaviour). Values must be 0-100 and ids unique/known; anything else aborts, so a
-    typo can never silently publish a wrong percentage.
+    Contract (REFRESH-SPEC.md documents the same):
+      * No `PCT-BEGIN` anywhere -> {} (callers then keep data.js's pct: the pre-block
+        behaviour, so a ledger without the block is not an error).
+      * Exactly one block. Lines are `<id>: <int>` (0-100 inclusive) with an optional
+        `# comment`; blank lines are ignored; CRLF is fine.
+      * Anything malformed ABORTS (sys.exit naming the file and the problem) so a typo
+        can never silently publish a wrong percentage, and `--check` fails loudly too:
+        an unparseable line (a negative value is unparseable), a value > 100, a
+        duplicate id, an id not in `known_ids`, a PCT-BEGIN with no PCT-END after it,
+        more than one block, or a PCT-END with no BEGIN before it.
+      * `known_ids` is the dashboard's ACTUAL phase-key set parsed from the ledger table
+        (`P` + key, e.g. P0-2, P3..P19) - never an assumed contiguous range. None skips
+        the membership check.
+
+    The BEGIN/END markers are located independently (not by one non-greedy regex), so an
+    unterminated block can never swallow a LATER block's terminator.
     """
-    m = _PCT_BLOCK_RE.search(path.read_text(encoding="utf-8"))
-    if not m:
+    text = path.read_text(encoding="utf-8")
+    begins = list(_PCT_BEGIN_RE.finditer(text))
+    ends = list(_PCT_END_RE.finditer(text))
+    if not begins and not ends:
         return {}
+    if not begins:
+        sys.exit(f"ERROR: {path.name} has a PCT-END with no PCT-BEGIN before it")
+    if len(begins) > 1:
+        first, second = begins[0], begins[1]
+        if not any(first.end() <= e.start() < second.start() for e in ends):
+            sys.exit(f"ERROR: {path.name} has a PCT-BEGIN with no PCT-END before the next "
+                     "PCT-BEGIN (an unterminated block)")
+        sys.exit(f"ERROR: {path.name} has {len(begins)} PCT blocks; more than one is not allowed")
+    begin = begins[0]
+    if not ends:
+        sys.exit(f"ERROR: {path.name} has a PCT-BEGIN with no PCT-END after it")
+    if len(ends) > 1:
+        sys.exit(f"ERROR: {path.name} has {len(ends)} PCT-END markers for one PCT-BEGIN")
+    end = ends[0]
+    if end.start() < begin.end():
+        sys.exit(f"ERROR: {path.name} has a PCT-END before its PCT-BEGIN")
     out: dict[str, int] = {}
-    for raw in m.group(1).splitlines():
+    for raw in text[begin.end():end.start()].splitlines():
         if not raw.strip():
             continue
         lm = _PCT_LINE_RE.match(raw)
@@ -251,7 +292,8 @@ def parse_wave_ledger(path: Path) -> tuple[list[dict], str]:
 
 
 # --------------------------------------------------------------------------- #
-# Read current card structure (robustly, via node) so we can preserve pct + tasks
+# Read current card structure (robustly, via node) so we can preserve tasks, curated
+# fields and (absent a ledger PCT block) pct
 # --------------------------------------------------------------------------- #
 _DUMP_JS = (
     "const p=process.argv[1];global.window={};require(p);"
@@ -288,7 +330,8 @@ def _phase_num_of(name: str) -> str:
 VALID_BUCKETS = {"active", "proposed", "held", "conditional", "placeholder"}
 
 # Curated PHASE-level completion-model fields that MUST survive every ledger rebuild.
-# `pct` and `tasks` were always preserved; the rest are the v1 phase-completion-model
+# `tasks` is always preserved and `pct` is preserved from data.js unless the ledger's PCT
+# block overrides it (see parse_pct_block); the rest are the v1 phase-completion-model
 # schema. Without this, the nightly ledger refresh would silently wipe bucket/weight/etc.
 # NOTE: project-level registries (baselineCohorts, phaseAliases) are deliberately NOT in
 # this tuple. They live outside `progress`/`waves`, and render() rewrites only those two

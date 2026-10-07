@@ -8,6 +8,8 @@ two FACTUAL fields that tell you whether a project is alive:
 
   - activity      : 14-int array, commits/day over the rolling 14-day window
   - lastActivity  : { date, summary } of the newest commit across the project's repos
+  - git.latestCommit : (only on a single-repo card that already has one) short SHA of the
+                       repo's default-branch HEAD; multi-repo cards are skipped
 
 plus the top-level `activitySince` (window start = today-13d) that the heat grid and
 area chart index from.
@@ -24,6 +26,8 @@ Field ownership (one writer per field, so nothing fights)
 ---------------------------------------------------------
   progress, waves            -> sync_ledgers.py   (the ledgers)
   activity, lastActivity     -> THIS script        (git truth; fenced out of the bot)
+  git.latestCommit           -> THIS script        (single-repo cards that already carry one;
+                                                   HEAD short sha, any position in `git: {}`)
   oneLiner / focus / recent  -> sync_dashboard.py  (model bot, prose only)
 
 Reuses sync_dashboard.py's splice/validate machinery (extract_block / apply_patch /
@@ -205,19 +209,105 @@ def head_sha(source):
     return sha if re.fullmatch(r"[0-9a-f]{7}", sha) else None
 
 
-# `git: { latestCommit: "<sha>" ...}` as it sits in a card. It is rewritten textually
-# (not via apply_patch) because the field can share a line with `branch:`, which
-# apply_patch's one-key-per-line scanner cannot see.
-_LATEST_COMMIT_RE = re.compile(r'(\bgit:\s*\{\s*latestCommit:\s*")[0-9a-f]{7,40}(")')
+_SHA_VALUE_RE = re.compile(r"[0-9a-f]{7,40}")
+_IDENT_CHAR_RE = re.compile(r"[\w$]")
+
+
+def _js_tokens(text: str):
+    """Minimal JS-literal tokenizer for a card block: yields (kind, start, end, value)
+    with kind in {"str", "ident", "punct"}. String contents (', ", `, with backslash
+    escapes) and comments (// and /* */) are consumed whole, so a brace, colon or key
+    name inside prose can never be mistaken for structure. Raises ValueError on an
+    unterminated string/comment - the caller then leaves the block alone."""
+    i, n = 0, len(text)
+    while i < n:
+        ch = text[i]
+        if ch.isspace():
+            i += 1
+        elif text.startswith("//", i):
+            j = text.find("\n", i)
+            i = n if j < 0 else j + 1
+        elif text.startswith("/*", i):
+            j = text.find("*/", i + 2)
+            if j < 0:
+                raise ValueError("unterminated comment")
+            i = j + 2
+        elif ch in "\"'`":
+            j = i + 1
+            while j < n and text[j] != ch:
+                j += 2 if text[j] == "\\" else 1
+            if j >= n:
+                raise ValueError("unterminated string")
+            yield "str", i, j + 1, text[i + 1:j]
+            i = j + 1
+        elif _IDENT_CHAR_RE.match(ch):
+            j = i + 1
+            while j < n and _IDENT_CHAR_RE.match(text[j]):
+                j += 1
+            yield "ident", i, j, text[i:j]
+            i = j
+        else:
+            yield "punct", i, i + 1, ch
+            i += 1
+
+
+def _latest_commit_span(block: str):
+    """(start, end) of the sha characters of `git.latestCommit` inside `block`, or None.
+    Only a `git` key that is a real object-member key (outside strings/comments, right
+    after `{` or `,`) counts - the shallowest, first one - and only a DIRECT child
+    `latestCommit` of that object with a hex-sha string value. Position-independent:
+    the key may be first, middle or last, quoted or bare."""
+    try:
+        toks = list(_js_tokens(block))
+    except ValueError:
+        return None
+
+    def is_key(t, name):
+        return t[0] in ("ident", "str") and t[3] == name
+
+    def is_punct(t, ch):
+        return t[0] == "punct" and t[3] == ch
+
+    depth, depths = 0, []
+    for kind, _s, _e, val in toks:
+        if kind == "punct" and val in "}])":
+            depth -= 1
+        depths.append(depth)
+        if kind == "punct" and val in "{[(":
+            depth += 1
+
+    git_open = None  # index of the `{` token opening the shallowest `git` object
+    for k in range(1, len(toks) - 2):
+        if (is_key(toks[k], "git") and is_punct(toks[k + 1], ":") and is_punct(toks[k + 2], "{")
+                and (is_punct(toks[k - 1], "{") or is_punct(toks[k - 1], ","))):
+            if git_open is None or depths[k + 2] < depths[git_open]:
+                git_open = k + 2
+    if git_open is None:
+        return None
+    child_depth = depths[git_open] + 1
+    k = git_open + 1
+    while k < len(toks) and depths[k] >= child_depth:
+        if (depths[k] == child_depth and is_key(toks[k], "latestCommit")
+                and k + 2 < len(toks) and is_punct(toks[k + 1], ":")
+                and toks[k + 2][0] == "str" and _SHA_VALUE_RE.fullmatch(toks[k + 2][3])):
+            _, start, end, _ = toks[k + 2]
+            return start + 1, end - 1
+        k += 1
+    return None
 
 
 def sync_latest_commit(block: str, repos) -> str:
-    """Refresh `git.latestCommit` on a single-repo card that carries one. Multi-repo
-    cards are skipped: there is no single HEAD to name."""
-    if len(repos) != 1 or not _LATEST_COMMIT_RE.search(block):
+    """Refresh `git.latestCommit` on a single-repo card that carries one, wherever the key
+    sits inside the `git: { ... }` object. Only the sha characters change. Multi-repo
+    cards are skipped (no single HEAD to name); no `git.latestCommit`, an unreadable HEAD
+    (head_sha falsy) or an unparseable block leave the block untouched."""
+    if len(repos) != 1:
+        return block
+    span = _latest_commit_span(block)
+    if span is None:
         return block
     sha = head_sha(repos[0])
-    return _LATEST_COMMIT_RE.sub(lambda m: m.group(1) + sha + m.group(2), block, count=1) if sha else block
+    return block[:span[0]] + sha + block[span[1]:] if sha else block
 
 
 def main() -> int:

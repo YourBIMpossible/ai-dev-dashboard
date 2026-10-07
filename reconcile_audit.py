@@ -444,7 +444,16 @@ class ReconcileResult:
           rawCounts       - severity histogram of ALL report findings
           openCounts      - strictly-OPEN (no valid closure, ownership known)
           unknownCounts   - retained-but-unproven (a declared repo was unreadable)
-          resolvedCounts  - closed by valid, implementation-backed closure evidence
+          resolvedCounts  - findings verified CLOSED ON THE REPO'S CANONICAL BRANCH by
+                            valid, implementation-backed closure evidence. A fix that
+                            exists only on a feature/unmerged branch is NOT resolved.
+          awaitingIntegrationCounts
+                          - (contract, not yet emitted by audit_fields) findings whose
+                            fix exists only on a non-canonical branch, awaiting merge.
+                            They are counted in neither openCounts nor resolvedCounts.
+                            The partition is:
+                            rawCounts = openCounts + awaitingIntegrationCounts
+                                        + resolvedCounts + unknownCounts
           publishedCounts - openCounts + unknownCounts (everything still shown).
                             The ONLY combined number, and it is NOT called 'open'.
           counts          - alias of openCounts, kept so the existing severity badge
