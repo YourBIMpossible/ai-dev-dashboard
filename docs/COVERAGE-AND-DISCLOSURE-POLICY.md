@@ -9,7 +9,7 @@ A finding is in exactly one of four states. Each has one home in the data model:
 
 | State | Meaning | Where it is counted |
 |---|---|---|
-| **Open** | No fix is implemented anywhere. | `counts`, `openCounts`, `open[]`, `publishedCounts` (all strictly open) |
+| **Open** | No fix is implemented anywhere. | `counts`, `openCounts`, `open[]`; `publishedCounts` also carries `unknown[]` items (open + unknown) |
 | **Implemented, awaiting integration** | A fix exists but is not on the canonical branch. | `awaitingIntegrationCounts` only |
 | **Verified closed** | The fix is verified on the canonical branch, in the relevant report/cycle. | `resolvedCounts`, `closedLastRun` |
 | **Unknown** | Status could not be determined. | `unknownCounts`, kept separate from all of the above |
@@ -17,6 +17,10 @@ A finding is in exactly one of four states. Each has one home in the data model:
 - **Canonical branch** = the repo's designated branch: its default branch at the remote, or the
   local default branch for remote-less repos. Branch-only, worktree-only or committed-but-unmerged
   fixes are never counted in `resolvedCounts` or `closedLastRun`.
+  `reconcile_audit.py` resolves it per repo, never from the checked-out branch: `--canonical-ref`
+  override, then its `CANONICAL_REF_POLICY` table (remote-less repos), then the remote's `HEAD`.
+  If none resolves, attribution is **unverified** (findings are held unknown, or the run fails with
+  a diagnostic). It never falls back to `HEAD`. The ref and SHA used go into `ingestDetail`.
 - **"implemented, awaiting integration"** is the exact label for the second state. Those findings
   are unresolved: they are not in `open[]`, not in `resolvedCounts`, not in `closedLastRun`. They
   are recorded as the aggregate field `awaitingIntegrationCounts`, a severity histogram shaped
@@ -26,12 +30,25 @@ A finding is in exactly one of four states. Each has one home in the data model:
   `counts` equals `openCounts`, and `counts` must equal the composition of `open[]`.
 - **A fix count is not a finding count.** Never equate commits or fixes with findings; one commit
   can close several findings and one finding can need several commits.
+- **Historical closures** (verified closed on the canonical branch in an earlier baseline) are kept
+  in `carriedClosedCounts`, a separate histogram. They are outside the active-baseline arithmetic
+  and `closedLastRun` may include them only up to `resolved + carriedClosed` (it means "since prior
+  run").
+- **`ingestStatus: "unverified"`** marks a card whose source evidence cannot be inspected (for
+  example an install with no git repository). Its `ingestDetail` must state the limitation; counts
+  are carried, not re-derived, and nothing is invented to make them add up.
+- **`trend`** = `improving | flat | worsening | unknown`. `improving` requires findings verified
+  closed on the canonical branch between comparable snapshots; an implemented fix awaiting
+  integration is not closure, and an unverified card cannot be `improving`. `unknown` means no
+  comparable evidence. `stable` is a legacy alias of `flat`.
 - Never merge or push a branch for the purpose of improving a dashboard count.
 - Applies to: every audit ingest. Worked examples (2026-10-06):
   - **ai-brain-data**: 44 findings = 2 open + 42 implemented-awaiting-integration + 0 verified-closed.
-  - **aiserver**, 2026-09-13 report: 9 findings = 4 open + 5 verified-closed. A separate
-    2026-10-05 routing review has 8 findings, all implemented-awaiting-integration (own histogram;
-    it is a different report, so it is not added into the 9).
+  - **aiserver**: the 2026-09-13 report has 9 findings (4 open + 5 verified-closed) and the
+    2026-10-05 routing review has 8 (all implemented-awaiting-integration). The ID sets are disjoint,
+    so the card carries the combined baseline: 17 = 4 open + 8 awaiting + 5 closed. `reconcile_audit.py`
+    refuses to overwrite a newer or larger stored baseline with an older report unless
+    `--replace-baseline` is given.
 - **Contract note for `reconcile_audit.py`.** Its `resolvedCounts` docstring ("closed by valid,
   implementation-backed closure evidence") must be read as **verified closed on the canonical
   branch**. Implementation-backed evidence on a non-canonical branch does not qualify.
@@ -62,8 +79,22 @@ A finding is in exactly one of four states. Each has one home in the data model:
   runner and then `pages deploy .` of that checkout, so only tracked files exist to upload.
   Ignored files such as `local/` are never uploaded. `push-dashboard.ps1` only delegates to
   `Refresh-Dashboard.ps1`, which pushes `main` and does not deploy.
-- Consequence: never run a manual `wrangler pages deploy` from a working tree. A local working tree
-  contains `local/`, and that path would bypass this guarantee.
+- **What the boundary actually is:** the git-tracked set. `wrangler pages deploy` skips only its
+  own fixed list (`_worker.js`, `_redirects`, `_headers`, `_routes.json`, `functions`, `.wrangler`,
+  `node_modules`, `.git`, `.DS_Store`; checked against wrangler 4.110.0). It reads neither
+  `.gitignore` nor `.assetsignore`: `.assetsignore` is a Workers static-assets mechanism, so its
+  rules do not filter a Pages upload, and the live site does serve tracked `*.py` and `.github/**`.
+  Everything tracked is therefore public; do not rely on `.assetsignore` to hide anything.
+- **Known limitation:** a manual `wrangler pages deploy .` from a working tree WOULD upload `local/`
+  (and every other untracked file), because neither ignore file is honoured. Never do that. The
+  supported path is the clean-checkout GitHub Actions deploy. No script in this repo deploys from a
+  working tree, and nothing copies `local/` into a deployable directory.
+- **Private evidence** (text removed from public files) is kept outside this repository, under
+  `F:\Claude-Tools\reports\private\2026-10-06__dashboard-closeout-private-evidence\`, a path the
+  Claude-Tools repo ignores (`/reports/`). It must never be moved into `local/` or any tracked
+  path. `test_deploy_boundary.py` asserts that `local/` is gitignored and holds no tracked files,
+  that only `deploy.yml` invokes `pages deploy`, and that text from that private folder appears in
+  no tracked, untracked-unignored or `local/` file (it skips when the private folder is absent).
 
 ## 3. Discovery dispositions (top-level folders found during the 2026-10-06 sweep)
 
