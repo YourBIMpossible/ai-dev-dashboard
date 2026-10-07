@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-10-06 18:24:36",
+  "checked": "2026-10-06 18:33:13",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,

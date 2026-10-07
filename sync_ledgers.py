@@ -42,6 +42,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -169,6 +170,45 @@ def parse_phase_ledger(path: Path) -> list[dict]:
     if not rows:
         sys.exit(f"ERROR: no phase rows parsed from {path}")
     return rows
+
+
+_PCT_BLOCK_RE = re.compile(r"<!--\s*PCT-BEGIN(.*?)PCT-END\s*-->", re.S)
+_PCT_LINE_RE = re.compile(r"^\s*(P[0-9A-Za-z-]+)\s*:\s*(\d{1,3})\s*(?:#.*)?$")
+
+
+def parse_pct_block(path: Path, known_ids: set[str] | None = None) -> dict[str, int]:
+    """Owner-curated completion % per phase, from the ledger's machine-readable block:
+
+        <!-- PCT-BEGIN
+        P9: 35
+        P13: 48
+        PCT-END -->
+
+    Returns {} when the block is absent (callers then keep data.js's pct, the pre-block
+    behaviour). Values must be 0-100 and ids unique/known; anything else aborts, so a
+    typo can never silently publish a wrong percentage.
+    """
+    m = _PCT_BLOCK_RE.search(path.read_text(encoding="utf-8"))
+    if not m:
+        return {}
+    out: dict[str, int] = {}
+    for raw in m.group(1).splitlines():
+        if not raw.strip():
+            continue
+        lm = _PCT_LINE_RE.match(raw)
+        if not lm:
+            sys.exit(f"ERROR: unparseable line in {path.name} PCT block: {raw.strip()!r}")
+        pid, val = lm.group(1), int(lm.group(2))
+        if val > 100:
+            sys.exit(f"ERROR: {path.name} PCT block: {pid} = {val} is outside 0-100")
+        if pid in out:
+            sys.exit(f"ERROR: {path.name} PCT block lists {pid} twice")
+        out[pid] = val
+    if known_ids is not None:
+        unknown = sorted(set(out) - known_ids)
+        if unknown:
+            sys.exit(f"ERROR: {path.name} PCT block names phases not in the ledger table: {unknown}")
+    return out
 
 
 def parse_wave_ledger(path: Path) -> tuple[list[dict], str]:
@@ -304,7 +344,8 @@ def _curated_problems(pid: str, cur: dict) -> list[str]:
 
 
 def build_progress(current_progress: dict, phases: list[dict],
-                   *, allow_defaults: bool = False) -> dict:
+                   *, allow_defaults: bool = False,
+                   pct_overrides: dict[str, int] | None = None) -> dict:
     """Rebuild every phase from the ledger, carrying the curated fields through.
 
     A phase ABSENT from data.js is genuinely new and is seeded with the v1 defaults
@@ -326,7 +367,7 @@ def build_progress(current_progress: dict, phases: list[dict],
         cur = by_id.get(pid) or by_num.get(ph["key"], {})
         status = ph["status"]
         band = STATUS_PCT.get(_status_key(status), STATUS_PCT.get(status, 0))
-        pct = cur.get("pct", band)
+        pct = (pct_overrides or {}).get(pid, cur.get("pct", band))  # ledger PCT block wins
         note = f"{status} — {ph['note']}" if ph["note"] else status
         if cur and not allow_defaults:
             losses.extend(_curated_problems(pid, cur))
@@ -491,8 +532,10 @@ def render(data_path: Path, phase_ledger: Path, wave_ledger: Path,
     phases = parse_phase_ledger(phase_ledger)
     waves, updated = parse_wave_ledger(wave_ledger)
 
+    pct_overrides = parse_pct_block(phase_ledger, {f"P{ph['key']}" for ph in phases})
     new_progress = build_progress(bim.get("progress") or {}, phases,
-                                  allow_defaults=allow_defaults)
+                                  allow_defaults=allow_defaults,
+                                  pct_overrides=pct_overrides)
     new_waves = build_waves(waves, updated, wave_ledger)
 
     changes = summarize_changes(bim, new_progress, new_waves)

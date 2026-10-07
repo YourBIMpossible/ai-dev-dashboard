@@ -1,5 +1,5 @@
 window.AUDIT_FRESHNESS = {
-  "checked": "2026-10-06 18:24:36",
+  "checked": "2026-10-06 18:33:12",
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
@@ -32,6 +32,13 @@ window.AUDIT_FRESHNESS = {
     "aiserver": {
       "name": "AI-Server",
       "lastRun": "2026-10-05",
+      "newestOnDisk": null,
+      "stale": false,
+      "action": null
+    },
+    "ai-brain-data": {
+      "name": "AI Brain Data",
+      "lastRun": "2026-10-06",
       "newestOnDisk": null,
       "stale": false,
       "action": null
