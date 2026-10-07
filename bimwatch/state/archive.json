@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-06T06:11:04.019104Z",
- "count": 472,
+ "generated_at": "2026-10-07T06:10:06.860885Z",
+ "count": 480,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"78e5f379687d3834e7fb44218ed48e1b-gzip\"",
+   "etag": "\"9eda0a32e0d4fcd717a819a0848e08b2-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Sun, 04 Oct 2026 02:57:35 GMT",
+   "last_modified": "Tue, 06 Oct 2026 19:27:03 GMT",
    "last_status": 200,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": true,
-   "stale_reason": "no new items in 62 days (expects ~7)"
+   "stale_reason": "no new items in 63 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-10-05T15:34:31Z",
-   "last_modified": "Mon, 05 Oct 2026 15:55:31 GMT",
+   "last_item_published": "2026-10-07T05:39:45Z",
+   "last_modified": "Wed, 07 Oct 2026 05:39:45 GMT",
    "last_status": 200,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,21 +27,21 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-05T17:03:31Z",
+   "last_item_published": "2026-10-06T18:01:20Z",
    "last_status": 200,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"edadbf7179ace6a2c65d2a2f584228c3\"",
+   "etag": "W/\"2820b94db9d39ac84407481ffb843816\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
    "last_item_published": "2026-09-29T12:32:53Z",
-   "last_modified": "Thu, 01 Oct 2026 13:03:23 GMT",
+   "last_modified": "Wed, 07 Oct 2026 06:10:03 GMT",
    "last_status": 200,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -51,42 +51,42 @@
    "last_item_count": 8,
    "last_modified": "Thu, 01 Oct 2026 14:01:27 GMT",
    "last_status": 200,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"ee05ced06aa119fe8dff9939a3673805\"",
+   "etag": "W/\"50c148dc551cc99d25da72f3ed36093d\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-05T18:09:20Z",
+   "last_item_published": "2026-10-06T19:29:53Z",
    "last_status": 200,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-06T01:13:00Z",
-   "last_modified": "Tue, 6 Oct 2026 01:48:37 GMT",
+   "last_item_published": "2026-10-07T01:05:00Z",
+   "last_modified": "Wed, 7 Oct 2026 03:59:57 GMT",
    "last_status": 200,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 86,
+   "consecutive_failures": 87,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-06T06:11:04.019104Z",
+   "last_failure": "2026-10-07T06:10:06.860885Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "86 consecutive failures: HTTP 403"
+   "stale_reason": "87 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-07-25T21:05:05Z",
    "last_status": 304,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"1d4fee3fe268352688d5d4f0ceb60da8\"",
+   "etag": "W/\"f0b8d04309c528189a46939ebe0bae4a\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,155 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-06T06:11:04.019104Z",
+   "last_success": "2026-10-07T06:10:06.860885Z",
    "stale": true,
-   "stale_reason": "no new items in 112 days (expects ~30)"
+   "stale_reason": "no new items in 113 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Pirros adds AI-powered QA/QC to its Revit-centric platform",
+   "url": "https://aecmag.com/bim/pirros-adds-ai-powered-qa-qc-to-its-revit-centric-platform/",
+   "source": "aec-magazine",
+   "published": "2026-10-07T05:39:45Z",
+   "summary": "Allows users to check entire Revit projects against codes, standards, specifications, and model performance Pirros, the AI project hub for architects and engineers, has added a new AI-powered Quality Management System (QMS) that allows users to review an entire Revit project throughout design development — against codes, their firm’s standards, project specifications, and model performance. Any issues that are found can then be assigned to an individual, tracked, and resolved before they become RFIs or rework. Issues can also be assigned to Mira, the Pirros AI agent , to make the fix directly in the Revit model. According to Ari Baranian, the CEO of Pirros, “Our QMS is different from most QA/QC drawing checkers in the market, which typically work with exported drawing sets that are disconnected from the Revit model data and often require users to input findings manually.” With Pirros, Mira carries out the review with the context it already has of the firm’s standards, Revit models, and project specifications. This allows it to identify quality issues in context and proactively suggest or make fixes directly in the project. Findings are surfaced in the model, but never…",
+   "id": "6723c1b087933564",
+   "fetched_at": "2026-10-07T06:10:06.860885Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Third-party QA/QC platform built on Revit API; watch the direction but not actionable for your add-in work.",
+    "topics": [
+     "revit-ecosystem",
+     "qc-automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-07T06:10:06.860885Z"
+   }
+  },
+  {
+   "title": "Free CA Bulk Exporter: PDF and DWG Batch Export",
+   "url": "http://revitaddons.blogspot.com/2026/10/free-ca-bulk-exporter-pdf-and-dwg-batch.html",
+   "source": "revit-addons",
+   "published": "2026-10-07T01:05:00Z",
+   "summary": "Executive summary CA Bulk Exporter is a free Revit productivity add-in developed by CA Tools to consolidate repetitive drawing-issue work into one batch process. It can export multiple sheets to PDF, DWG, or both; apply model-based DWG export setups; automate deliverable naming; and report progress and exceptions. The Autodesk App Store listing positions it as a one-screen issue-production utility for Revit. Core capabilities Batch output: Exports any number of selected sheets to PDF, DWG, or both in one run, replacing repeated use of Revit’s Print and Export dialogs. PDF packaging: Creates one PDF per sheet or a single combined PDF for the selected package. Standards-based DWG output: Reads named DWG Export Setups stored in the active model, preserving established layer mappings, units, and other office export standards. Flexible naming: Builds filenames from sheet number, sheet name, revision, project fields, and configurable text or separators. Sheet-set support: Loads existing Revit sheet sets for rapid reuse of predefined issue packages. Selection tools: Displays sheet number, name, current revision, and sheet set; supports filtering, sorting, individual selection, and bulk…",
+   "id": "59fbd573052389fe",
+   "fetched_at": "2026-10-07T06:10:06.860885Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 60,
+    "why": "Free open-source batch export add-in; concrete example of sheet/DWG automation and potentially useful library pattern for your own tooling.",
+    "topics": [
+     "revit-addin",
+     "batch-automation",
+     "export"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-07T06:10:06.860885Z"
+   }
+  },
+  {
+   "title": "pyRevit v7.0.0",
+   "url": "https://github.com/pyrevitlabs/pyRevit/releases/tag/v7.0.0.26278%2B2233",
+   "source": "pyrevit-releases",
+   "published": "2026-10-06T19:29:53Z",
+   "summary": "Two new features land in pyRevit itself. The agent runtime. pyRevit can now be driven by any MCP-capable coding agent — Claude Code, Codex, Cursor, VS Code, OpenCode — reading and changing a live Revit model by sending Python programs , not by calling hundreds of per-API tools. The Revit API is the toolset; MCP is only the control protocol. The human stays in control: by default, the model changes a run makes are approved inside Revit. The interactive Python Shell. A real IronPython console now lives in the pyRevit ribbon, with an AvalonEdit code editor, available as a modal window, a modeless window, or a dockable pane that stays open next to your model. Alongside those, this release lands a large batch of build-and-release infrastructure work on top of the C# ModularPipelines pipeline introduced in 6.5.5, plus loader, theming, engine and output-window work accumulated since then. 📖 Docs: Interactive Python Shell · Agent runtime Easier to support us too: Highlights Agent runtime (MCP) — an opt-in in-Revit host plus an MCP server over stdio. Agents get get_context , inspect_elements , lookup_revit_api , show_elements , capture_view , run_query , run_modify , get_run and get_skill…",
+   "id": "16a68f8de4714a28",
+   "fetched_at": "2026-10-07T06:10:06.860885Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 85,
+    "why": "Major pyRevit release with MCP agent runtime and interactive shell; directly changes how you script and test automation against live models.",
+    "topics": [
+     "pyrevit",
+     "automation",
+     "api-tools"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-07T06:10:06.860885Z"
+   }
+  },
+  {
+   "title": "AI Developer Accelerator with Microsoft, Silicon Valley",
+   "url": "https://aps.autodesk.com/event/ai-developer-accelerator-microsoft-silicon-valley",
+   "source": "aps-blog",
+   "published": "2026-10-06T18:01:20Z",
+   "summary": "AI Developer Accelerator with Microsoft, Silicon Valley julia.brun@aut… 6 Oct 2026 Benefit from dedicated time to develop your Autodesk Platform Services application – with direct help and training from APS engineering experts in Mountain View, CA. This event will be hosted at Microsoft corporate office . Register March 9 March 12",
+   "id": "5c69b15b1878d9c3",
+   "fetched_at": "2026-10-07T06:10:06.860885Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 15,
+    "why": "Event registration announcement; no technical content or change to act on.",
+    "topics": [
+     "event"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-07T06:10:06.860885Z"
+   }
+  },
+  {
+   "title": "Volve AI to help automate tendering and pre-construction tasks",
+   "url": "https://aecmag.com/construction/volve-ai-to-help-automate-tendering-and-pre-construction-tasks/",
+   "source": "aec-magazine",
+   "published": "2026-10-06T12:30:34Z",
+   "summary": "New orchestration layer enables contractors to more easily compare information across specifications, drawings and BIM models Volve, an AI platform for tendering and pre-construction, has added an orchestration layer designed to automate more complex tasks across calculations, estimating and the interpretation of drawings and BIM models. The new capabilities allow users to give the system a task in natural language — for example, to “check that the quantities in the specification match the drawings and the IFC model”. Volve says the platform can determine the steps required, run those checks across a tender and verify the results before returning its findings, with the source behind each finding. The aim is to reduce the manual work involved in comparing information across specifications, drawings and BIM models. Today, Volve says, identifying discrepancies between these sources can require someone to review each one manually. By bringing the checks into the tender and estimating process, teams can potentially identify inconsistencies while an estimate is still being developed. The platform can also support decisions such as whether to bid, how to price the work and which risks to…",
+   "id": "ecd5de5dfa326b21",
+   "fetched_at": "2026-10-07T06:10:06.860885Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "Third-party AI orchestration over specs and BIM; watch for IFC and model-checking techniques but not directly part of your add-in practice.",
+    "topics": [
+     "ai-bim",
+     "ifc",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-07T06:10:06.860885Z"
+   }
+  },
+  {
+   "title": "Vectorworks 2027 targets real-world workflows",
+   "url": "https://aecmag.com/bim/vectorworks-2027-targets-real-world-workflows/",
+   "source": "aec-magazine",
+   "published": "2026-10-06T11:29:20Z",
+   "summary": "Latest release promises enhanced performance, better visualisation, expanded support for Revit Families and more Vectorworks 2027, the latest release of the CAD/BIM software for Windows and Mac, includes several new tools to simplify routine tasks, and make it easier to visualise, document, coordinate, and exchange information. The new release promises ‘faster, more faithful’ visualisation at every stage of design thanks to ‘modernised texture resources’ built on a modern physically-based rendering (PBR) system, alongside a redesigned Edit Texture dialog with live previews, which is said to make it easier to create and refine materials. Graphics acceleration, powered by direct GPU support through Vulkan (Windows) and Metal (Mac) is also said to improve the responsiveness of everyday navigation of 3D models in different modes by shifting more processing from the CPU to the GPU According to Vectorworks, designers can see performance gains of up to 15x to 35x in workflows like panning and zooming, making it possible to navigate larger 3D models. Additionally, the AI Visualizer supports Google’s frontier Nano Banana AI models so architects can explore design concepts and generate…",
+   "id": "7dc9bc27a0041283",
+   "fetched_at": "2026-10-07T06:10:06.860885Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Vectorworks competitor release with improved Revit Family support; worth knowing the direction but not actionable for your Revit-centric tooling.",
+    "topics": [
+     "competitor",
+     "interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-07T06:10:06.860885Z"
+   }
+  },
+  {
+   "title": "QA/QC platform links BIM models and drawing sets",
+   "url": "https://aecmag.com/bim/qa-qc-platform-links-bim-models-and-drawing-sets/",
+   "source": "aec-magazine",
+   "published": "2026-10-06T08:15:38Z",
+   "summary": "In Structured AI, a problem found on a drawing can now be traced to the element in the Revit model Structured AI the QA/QC platform for drawing packages, can now bring BIM models and the documents around them into a single review. Design teams have typically checked models in one tool and drawings in another, with specifications, schedules and manuals reviewed by hand in between. Structured AI instead lets teams load BIM models, as IFC or native Revit files, alongside PDF drawing sets, specifications, codes, client and project manuals and schedules. Its AI agents then check them against each other. A drawing can be checked against its specification, schedule or governing code, and any issues found on a sheet can be traced to the affected element in the model. Structured AI explains that every finding is cited to the exact location on the sheet or in the model, and all of them sit in one issues list, wherever they were raised. Inside Revit the same findings are opened in a pane beside the model, and selecting one takes the engineer straight to the element concerned. The add-in can also run checks on the live model and propose fixes, which are applied only once an engineer approves…",
+   "id": "372fdd0b2af1a39f",
+   "fetched_at": "2026-10-07T06:10:06.860885Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "QA/QC linking native Revit and IFC against drawing sets; concrete example of cross-format model audit and coordination you could build into your own tooling.",
+    "topics": [
+     "audit-tooling",
+     "revit-api",
+     "ifc"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-07T06:10:06.860885Z"
+   }
+  },
   {
    "title": "OkPy: An AI-Assisted Python Development Environment for Revit",
    "url": "http://revitaddons.blogspot.com/2026/10/okpy-ai-assisted-revit-python.html",
@@ -208,6 +351,25 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
+  {
+   "title": "Bring Creo into the Data Exchange ecosystem",
+   "url": "https://aps.autodesk.com/blog/bring-creo-data-exchange-ecosystem",
+   "source": "aps-blog",
+   "published": "2026-10-05T12:45:41Z",
+   "summary": "Bring Creo into the Data Exchange ecosystem Anna Baranova 6 Oct 2026 Anna Baranova Share Join Autodesk and CCTech to explore how the Data Exchange Connector for PTC Creo can help connect engineering and AEC workflows, making it easier for teams to share the design information they need without repeatedly exporting, converting, and rebuilding models. PTC Creo, developed by PTC, originally Parametric Technology Corporation, is a 3D CAD and engineering platform used by designers and engineers to create, develop, and manage complex 3D models and assemblies. It supports workflows such as mechanical design, detailed engineering, drawings, simulation, and manufacturing preparation, making it a core design environment for many engineering teams. The challenge is that these products often need to be coordinated with buildings, facilities, or infrastructure projects designed in completely different environments. A manufacturer may own the product design in Creo, while architects, engineers, and contractors coordinate the surrounding project in applications such as Revit, Forma Data Management or Navisworks. Today, this handoff can involve repeated exports to formats such as STEP, IFC, or…",
+   "id": "5c986c391f01a018",
+   "fetched_at": "2026-10-07T06:10:06.860885Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Mechanical CAD connector announcement; outside AEC and not relevant to your Revit add-in or BIM model work.",
+    "topics": [
+     "interop"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-07T06:10:06.860885Z"
    }
   },
   {
