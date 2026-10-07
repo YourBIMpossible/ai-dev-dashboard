@@ -189,6 +189,37 @@ def build_patch(repos, window_start, today):
     return patch, len(in_window)
 
 
+def head_sha(source):
+    """Short SHA of the default-branch HEAD for one PROJECT_REPOS entry, or None if it
+    can't be read (callers then leave the card's value alone)."""
+    try:
+        if isinstance(source, Path):
+            cmd = ["git", "-C", str(source), "rev-parse", "--short=7", "HEAD"]
+        else:
+            cmd = ["gh", "api", f"repos/{source}/commits/HEAD", "--jq", ".sha[0:7]"]
+        sha = subprocess.run(cmd, capture_output=True, encoding="utf-8", check=True).stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError, UnicodeDecodeError) as exc:
+        detail = getattr(exc, "stderr", "") or str(exc)
+        print(f"  (warn) HEAD lookup failed for {source}: {detail.strip()[:200]}", file=sys.stderr)
+        return None
+    return sha if re.fullmatch(r"[0-9a-f]{7}", sha) else None
+
+
+# `git: { latestCommit: "<sha>" ...}` as it sits in a card. It is rewritten textually
+# (not via apply_patch) because the field can share a line with `branch:`, which
+# apply_patch's one-key-per-line scanner cannot see.
+_LATEST_COMMIT_RE = re.compile(r'(\bgit:\s*\{\s*latestCommit:\s*")[0-9a-f]{7,40}(")')
+
+
+def sync_latest_commit(block: str, repos) -> str:
+    """Refresh `git.latestCommit` on a single-repo card that carries one. Multi-repo
+    cards are skipped: there is no single HEAD to name."""
+    if len(repos) != 1 or not _LATEST_COMMIT_RE.search(block):
+        return block
+    sha = head_sha(repos[0])
+    return _LATEST_COMMIT_RE.sub(lambda m: m.group(1) + sha + m.group(2), block, count=1) if sha else block
+
+
 def main() -> int:
     data_path = Path(__file__).with_name("data.js")
     data_js = data_path.read_text(encoding="utf-8")
@@ -206,7 +237,8 @@ def main() -> int:
             print(f"  (skip) {pid}: all repo fetches errored - left untouched", file=sys.stderr)
             continue
         i, j, block = sd.extract_block(data_js, pid)
-        spliced = data_js[:i] + "\n    " + sd.apply_patch(block, patch) + ",\n    " + data_js[j:]
+        new_block = sync_latest_commit(sd.apply_patch(block, patch), repos)
+        spliced = data_js[:i] + "\n    " + new_block + ",\n    " + data_js[j:]
         if spliced != data_js:
             data_js = spliced
             changed += 1

@@ -265,9 +265,9 @@ function Sync-GraphStalenessReminder {
     }
     $stale = ($null -eq $newestDate) -or ($ageDays -gt 7)
     $reminderText = if ($newestDate) {
-        "Codebase graph stale - newest graphify snapshot $newestDate (${ageDays}d old); push or run a wave to refresh"
+        "Codebase trend metrics last recorded $newestDate (${ageDays}d ago) - graph-metrics.js is appended only by the manual Update-Graph.ps1; the graph itself rebuilds weekly, see graphify-health"
     } else {
-        "Codebase graph stale - graph-metrics.js is missing, empty, or unparseable; push or run a wave to refresh"
+        "Codebase trend metrics unavailable - graph-metrics.js is missing, empty, or unparseable; run Update-Graph.ps1"
     }
 
     $dataText = [System.IO.File]::ReadAllText($DataPath)
@@ -312,7 +312,7 @@ function Sync-GraphStalenessReminder {
     if ($sb.ToString().Trim()) { $items.Add($sb.ToString().Trim()) }
     $items = @($items | Where-Object { $_ -ne '' })
 
-    $kept = @($items | Where-Object { $_ -notmatch '^"Codebase graph stale' })
+    $kept = @($items | Where-Object { $_ -notmatch '^"Codebase (graph stale|trend metrics)' })
     if ($stale) { $kept += ('"' + ($reminderText -replace '\\', '\\\\' -replace '"', '\"') + '"') }
 
     $newInner = $kept -join ','

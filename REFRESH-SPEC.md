@@ -74,7 +74,7 @@ explicit decision.
     `graph-metrics.js`. On each refresh, read the LAST entry of `window.GRAPH_METRICS` in
     `Dashboard\graph-metrics.js` and compare its `ts` (date part) to `generated`. If the newest snapshot is
     **>7 days old** (or the file is missing/empty), add ONE reminder to the `bimpossible` project:
-    `Codebase graph stale - newest graphify snapshot <YYYY-MM-DD> (<N>d old); push or run a wave to refresh`.
+    `Codebase trend metrics last recorded <YYYY-MM-DD> (<N>d ago) - graph-metrics.js is appended only by the manual Update-Graph.ps1; the graph itself rebuilds weekly, see graphify-health`. This is a **metrics-ledger** freshness signal, not a graph-rebuild signal (the weekly refresh and `graphify-health.js` own that); relabeled 2026-10-06 after it read as a stopped refresh.
     If <=7 days, add no reminder. Surfaces a lagging graph as a normal `reminders[]` entry without ever
     writing `graph-metrics.js`.
     **Implementation status (2026-09-07):** wired into `Refresh-Dashboard.ps1` (step 1f2,
