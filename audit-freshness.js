@@ -1,19 +1,19 @@
 window.AUDIT_FRESHNESS = {
-  "checked": "2026-10-06 17:56:59",
+  "checked": "2026-10-06 18:09:45",
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
-      "lastRun": "2026-09-26",
+      "lastRun": "2026-10-05",
       "newestOnDisk": "2026-10-05",
-      "stale": true,
-      "action": "new audit report detected; manual reconciled ingest required"
+      "stale": false,
+      "action": null
     },
     "addins": {
       "name": "Add-Ins / RevitLink",
-      "lastRun": "2026-09-26",
-      "newestOnDisk": "2026-10-06",
-      "stale": true,
-      "action": "new audit report detected; manual reconciled ingest required"
+      "lastRun": "2026-10-05",
+      "newestOnDisk": "2026-10-05",
+      "stale": false,
+      "action": null
     },
     "site": {
       "name": "BIMpossible Site",
@@ -31,24 +31,24 @@ window.AUDIT_FRESHNESS = {
     },
     "aiserver": {
       "name": "AI-Server",
-      "lastRun": "2026-09-13",
+      "lastRun": "2026-10-05",
       "newestOnDisk": null,
       "stale": false,
       "action": null
     },
     "claude-profile": {
       "name": "Claude Profile",
-      "lastRun": "2026-09-21",
+      "lastRun": "2026-10-05",
       "newestOnDisk": "2026-10-05",
-      "stale": true,
-      "action": "new audit report detected; manual reconciled ingest required"
+      "stale": false,
+      "action": null
     },
     "claude-tools": {
       "name": "Claude-Tools",
-      "lastRun": "2026-09-23",
+      "lastRun": "2026-10-05",
       "newestOnDisk": "2026-10-05",
-      "stale": true,
-      "action": "new audit report detected; manual reconciled ingest required"
+      "stale": false,
+      "action": null
     },
     "evidence-compiler": {
       "name": "Evidence Compiler",
@@ -59,8 +59,8 @@ window.AUDIT_FRESHNESS = {
     },
     "local-intel": {
       "name": "Local Intel",
-      "lastRun": "2026-09-06",
-      "newestOnDisk": null,
+      "lastRun": "2026-10-06",
+      "newestOnDisk": "2026-10-06",
       "stale": false,
       "action": null
     },
