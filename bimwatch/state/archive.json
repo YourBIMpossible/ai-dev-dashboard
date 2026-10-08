@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-07T06:10:06.860885Z",
- "count": 480,
+ "generated_at": "2026-10-08T06:11:24.759824Z",
+ "count": 487,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"9eda0a32e0d4fcd717a819a0848e08b2-gzip\"",
+   "etag": "\"9ece7380fa04189dd014bafb641a2d4d-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Tue, 06 Oct 2026 19:27:03 GMT",
+   "last_modified": "Wed, 07 Oct 2026 21:47:28 GMT",
    "last_status": 200,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": true,
-   "stale_reason": "no new items in 63 days (expects ~7)"
+   "stale_reason": "no new items in 64 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-10-07T05:39:45Z",
-   "last_modified": "Wed, 07 Oct 2026 05:39:45 GMT",
+   "last_item_published": "2026-10-07T15:37:38Z",
+   "last_modified": "Wed, 07 Oct 2026 15:37:55 GMT",
    "last_status": 200,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,39 +29,39 @@
    "last_item_count": 10,
    "last_item_published": "2026-10-06T18:01:20Z",
    "last_status": 200,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"2820b94db9d39ac84407481ffb843816\"",
+   "etag": "W/\"20a158974aa98514098d2f4171d61f66\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
-   "last_item_published": "2026-09-29T12:32:53Z",
-   "last_modified": "Wed, 07 Oct 2026 06:10:03 GMT",
+   "last_item_published": "2026-10-07T06:33:55Z",
+   "last_modified": "Wed, 07 Oct 2026 07:00:53 GMT",
    "last_status": 200,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"43a5a44f46b6a187c6562783ad400542\"",
+   "etag": "W/\"2f0b9586daeba5304dcb66b52c1ec310\"",
    "last_item_count": 8,
-   "last_modified": "Thu, 01 Oct 2026 14:01:27 GMT",
+   "last_modified": "Wed, 07 Oct 2026 16:42:16 GMT",
    "last_status": 200,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"50c148dc551cc99d25da72f3ed36093d\"",
+   "etag": "W/\"5b9e7b3153570cb34e3489f11d7687ab\"",
    "last_item_count": 10,
    "last_item_published": "2026-10-06T19:29:53Z",
    "last_status": 200,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -69,24 +69,24 @@
    "consecutive_failures": 0,
    "last_item_count": 25,
    "last_item_published": "2026-10-07T01:05:00Z",
-   "last_modified": "Wed, 7 Oct 2026 03:59:57 GMT",
+   "last_modified": "Thu, 8 Oct 2026 02:47:31 GMT",
    "last_status": 200,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 87,
+   "consecutive_failures": 88,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-07T06:10:06.860885Z",
+   "last_failure": "2026-10-08T06:11:24.759824Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "87 consecutive failures: HTTP 403"
+   "stale_reason": "88 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,27 +94,27 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-templates-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"9ece14ea2b708b3773c43956671c09f3\"",
-   "last_item_count": 0,
-   "last_item_published": "2026-07-25T21:05:05Z",
-   "last_status": 304,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "etag": "W/\"e6e99a3b037f885a29d08c5c43d55df3\"",
+   "last_item_count": 10,
+   "last_item_published": "2026-10-07T20:35:35Z",
+   "last_status": 200,
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"f0b8d04309c528189a46939ebe0bae4a\"",
+   "etag": "W/\"cab11ca6a0a17841d55491d141b4a526\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,150 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-07T06:10:06.860885Z",
+   "last_success": "2026-10-08T06:11:24.759824Z",
    "stale": true,
-   "stale_reason": "no new items in 113 days (expects ~30)"
+   "stale_reason": "no new items in 114 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Revit add-in templates 6.3.0",
+   "url": "https://github.com/Nice3point/RevitTemplates/releases/tag/6.3.0",
+   "source": "revit-templates-releases",
+   "published": "2026-10-07T20:35:35Z",
+   "summary": "Logging moves to Microsoft.Extensions.Logging , the code shared by an application and its modules moves to the new service defaults template, and the installer builds from a manifest. In existing projects, update the SDK version and follow the migration guide . Templates Microsoft.Extensions.Logging Add-ins log through Microsoft.Extensions.Logging with source-generated LoggerMessage methods. The Serilog packages are no longer referenced. The logging option is available when dependency injection is enabled, and one call registers the providers: builder . AddLoggingDefaults ( ) ; public sealed partial class ProjectService ( ILogger < ProjectService > logger ) { public void Save ( Document document ) { document . Save ( ) ; LogProjectSaved ( logger , document . Title ) ; } [ LoggerMessage ( LogLevel . Information , \"The project {Title} is saved.\" ) ] private static partial void LogProjectSaved ( ILogger < ProjectService > logger , string title ) ; } Records with the Error level and above are written to the Revit journal through the Nice3point.Revit.Logging provider. With hosting, the Logging:RevitJournal:LogLevel configuration section changes the level. Unhandled AppDomain exceptions…",
+   "id": "84c8b2c4f78b022b",
+   "fetched_at": "2026-10-08T06:11:24.759824Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 75,
+    "why": "Breaking changes to add-in logging and dependency injection framework; existing projects need migration to stay current.",
+    "topics": [
+     "revit-api",
+     "breaking-change",
+     "toolchain"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-08T06:11:24.759824Z"
+   }
+  },
+  {
+   "title": "Graphisoft unveils Archicad 30 and shares AI roadmap",
+   "url": "https://aecmag.com/bim/graphisoft-unveils-archicad-30-and-shares-ai-roadmap/",
+   "source": "aec-magazine",
+   "published": "2026-10-07T15:37:38Z",
+   "summary": "Graphisoft introduces workflow improvements, expanded AI ambitions, a new Max subscription and connected design tools Graphisoft has unveiled Archicad 30, the 30th release of its BIM software, as part of its 2026 product portfolio. The launch combines modelling and documentation updates with an expanded AI roadmap, a new subscription tier and connections to the forthcoming Nemetschek Creator platform. For Archicad users, the release includes Dark Mode for Windows, improved visibility of walls across multiple storeys, more flexible documentation controls and expanded drawing label options. Graphisoft has also updated Project Info management and introduced customisable Navigator organisation, targeting the tasks involved in managing and documenting BIM projects. Alongside these changes, the company is laying the groundwork for AI integration, including planned support for Model Context Protocol (MCP). The announcement does not detail how that connectivity will work in practice or specify when it will become available. Graphisoft’s AI roadmap includes an updated AI Visualizer, with a choice of image generation models such as Nano Banana Pro. The company says the update will deliver…",
+   "id": "7eea63cc2b586cbc",
+   "fetched_at": "2026-10-08T06:11:24.759824Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Competitor product update; worth knowing Archicad's direction but no direct impact on your Revit tooling.",
+    "topics": [
+     "competitor",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-08T06:11:24.759824Z"
+   }
+  },
+  {
+   "title": "Faro launches Focus i.1 laser scanners",
+   "url": "https://aecmag.com/reality-capture-modelling/faro-launches-focus-i-1-laser-scanners/",
+   "source": "aec-magazine",
+   "published": "2026-10-07T11:28:30Z",
+   "summary": "Scanners promise faster colourised scanning, while mobile capture package aims to bring reality capture to a wider audience Faro Insight has introduced to two new terrestrial laser scanners, the Focus i.1 and Focus i.1 X, plus a new mobile reality capture package, the Rovi i.1, in partnership with Manifold Tech. The new Focus laser scanners are said to combine enhanced hardware, improved measurement performance with object scanning accuracy up to 0.9 mm, faster colourised scanning, and advanced positioning technologies. For outdoor and geospatial applications, Focus i.1 X includes a GNSS/RTK mountable receiver and a 400-metre scanning range, helping users geo-reference data. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here For cloud-based collaboration, both scanners connect to the Faro Sphere XG digital reality platform. Users are also given access to processing and AI data cleaning capabilities through Faro’s Scene software, which is available through a new subscription model. Meanwhile, the Rovi i.1 is a new reality capture solution is designed to bring digital reality to a wider…",
+   "id": "fa3d83f4f83a76ad",
+   "fetched_at": "2026-10-08T06:11:24.759824Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Hardware product launch unrelated to Revit, add-in development, or BIM authoring.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-08T06:11:24.759824Z"
+   }
+  },
+  {
+   "title": "XGrids unveils Lixel L3 spatial scanner",
+   "url": "https://aecmag.com/reality-capture-modelling/xgrids-unveils-lixel-l3-spatial-scanner/",
+   "source": "aec-magazine",
+   "published": "2026-10-07T10:50:35Z",
+   "summary": "Handheld device can capture true-colour point clouds, detailed meshes and photorealistic gaussian splats in a single workflow. XGrids has unveiled the Lixel L3, a handheld spatial scanner that combines LiDAR, true-colour imaging, Real-Time Kinematic (RTK) positioning and a built-in display in a single system XGrids says the device can capture true-colour point clouds, detailed meshes and photorealistic 3D Gaussian Splatting (3DGS) models in a single workflow and can deliver a validated relative accuracy of 5 mm and a real-time absolute accuracy of 2.5 cm. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here According to the company, the scanner can cover around 100 square metres in 10 minutes when capturing high-accuracy data and photorealistic 3D models. The L3 uses an integrated SLAM system alongside vision-aided localisation and levelling optimisation to maintain scan stability and limit accumulated drift during longer scanning sessions. Its 1/1.3-inch CMOS 4K HDR imaging system is designed to capture colour, dynamic range and surface detail. The scanner features a 4.3-inch display showing…",
+   "id": "a3f1fa4b318cf9fd",
+   "fetched_at": "2026-10-08T06:11:24.759824Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Scanning hardware product announcement; no technique or integration path to your work.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-08T06:11:24.759824Z"
+   }
+  },
+  {
+   "title": "Buildcheck raises $12m in Series A",
+   "url": "https://aecmag.com/construction/buildcheck-raises-12m-in-series-a/",
+   "source": "aec-magazine",
+   "published": "2026-10-07T08:12:43Z",
+   "summary": "Contractor-focused “drawing intelligence” platform uses vision-based AI for drawing reviews Buildcheck has secured $12m in Series A funding to accelerate the development of its AI-powered “drawing intelligence” platform designed to help teams catch issues, understand changes, and apply standards before construction begins. The software can turn a contractor’s QA/QC playbooks into custom AI review agents, isolate changes between drawing revisions, identify code issues, and “surface value-engineering opportunities.” Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here Buildcheck uses computer vision to reads drawings in the “same way a reviewer does”, including components, segments, geometry, dimensions, and spatial relationships. It works from 2D PDFs, with no BIM model, metadata, or special export required. According to the company, it can catch things that a text-based AI structurally can’t, such as a pipe running through a column. It offers four kinds of checks: drawing health, which identifies missing tags and dimensions, sheet index mismatches, and broken detail references; 2D clash…",
+   "id": "6f0bf6e27e690365",
+   "fetched_at": "2026-10-08T06:11:24.759824Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "AI-driven drawing review tool; adjacent to model audit work, but no concrete technique or API detail disclosed.",
+    "topics": [
+     "ai",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-08T06:11:24.759824Z"
+   }
+  },
+  {
+   "title": "vBrief aims to take control of project information",
+   "url": "https://aecmag.com/data-management/vbrief-aims-to-take-control-of-project-information/",
+   "source": "aec-magazine",
+   "published": "2026-10-07T07:17:23Z",
+   "summary": "AEC platform uses AI to help to stop valuable information “drowning in inboxes and folders” vBrief has re-engineered its AEC platform to help teams keep track of project-critical information, turning it into what the company describes as a verified, traceable knowledge base. CEO & Co-Founder James Wright-Zhang describes the software as a “modern practice notebook” — a place to record the information needed to operate a project. But unlike a traditional notebook, he says, the platform structures that information in a more digitally useful way. It can help identify contradictions and duplicates, makes information easy to share across a team, and keeps each piece of information linked to its source document and change history. Project data can be brought into vBrief through an Outlook connector for emails and attachments, or by uploading PDFs, documents, meeting notes, chats or schedules. The system uses AI to surface key information from each source and pre-categorise it for review. However, nothing enters the “trusted record” until the user has verified it in its original context. Once inside the platform, data can be viewed in several ways. Flexible fields allow users to produce,…",
+   "id": "42ed7ebb6d1bfc26",
+   "fetched_at": "2026-10-08T06:11:24.759824Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Project information platform marketing; no technical substance or actionable learning for add-in development.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-08T06:11:24.759824Z"
+   }
+  },
+  {
+   "title": "Same bridge, three IFC files: which one will your client send back?",
+   "url": "https://bimcorner.com/same-bridge-three-ifc-files/",
+   "source": "bim-corner",
+   "published": "2026-10-07T06:33:55Z",
+   "summary": ".bc-box{ --bc-navy:#0B2A4A; --bc-green:#10B981; --bc-amber:#F59E0B; --bc-red:#DC2626; --bc-grey:#666; font-family:'Montserrat',system-ui,sans-serif; border-radius:10px; padding:24px 26px; margin:32px 0; } .bc-box p{margin:0 0 12px} .bc-box p:last-child{margin:0} .bc-box h3{margin:0 0 14px !important} .bc-check{background:#F4F6F9; border-left:5px solid #10B981} .bc-check ol{margin:0; padding-left:22px} .bc-check li{margin:0 0 12px; line-height:1.6} .bc-check li:last-child{margin:0} .bc-check li b{color:#0B2A4A} .bc-note{background:#FFF8EC; border-left:5px solid #F59E0B} .bc-trap{background:#FEF2F2; border-left:5px solid #DC2626} .bc-tablewrap{overflow-x:auto; margin:28px 0} table.bc-table{ border-collapse:collapse; width:100%; min-width:520px; font-family:'Montserrat',system-ui,sans-serif; font-size:15px} table.bc-table th,table.bc-table td{ padding:11px 14px; border-bottom:1px solid #E2E8F0; text-align:left} table.bc-table thead th{ background:#0B2A4A; color:#fff; font-weight:700; font-size:13px; letter-spacing:.5px; text-transform:uppercase} table.bc-table tbody tr:nth-child(even){background:#F8FAFC} table.bc-table td.num{text-align:right; font-variant-numeric:tabular-nums}…",
+   "id": "b0f17a3ae67fbd74",
+   "fetched_at": "2026-10-08T06:11:24.759824Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 60,
+    "why": "IFC round-tripping and schema variance directly relevant to your interoperability and model audit work.",
+    "topics": [
+     "ifc",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-08T06:11:24.759824Z"
+   }
+  },
   {
    "title": "Pirros adds AI-powered QA/QC to its Revit-centric platform",
    "url": "https://aecmag.com/bim/pirros-adds-ai-powered-qa-qc-to-its-revit-centric-platform/",
