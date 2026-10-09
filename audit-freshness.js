@@ -1,5 +1,5 @@
 window.AUDIT_FRESHNESS = {
-  "checked": "2026-10-08 06:00:18",
+  "checked": "2026-10-09 06:00:18",
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
@@ -67,7 +67,7 @@ window.AUDIT_FRESHNESS = {
     "local-intel": {
       "name": "Local Intel",
       "lastRun": "2026-10-06",
-      "newestOnDisk": "2026-10-07",
+      "newestOnDisk": "2026-10-09",
       "stale": true,
       "action": "new audit report detected; manual reconciled ingest required"
     },

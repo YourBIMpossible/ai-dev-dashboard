@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-10-08 06:00:18",
+  "checked": "2026-10-09 06:00:19",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -18,9 +18,9 @@ window.NARRATIVE_FRESHNESS = {
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-10-07",
+      "lastActivity": "2026-10-08",
       "newestRecent": "2026-10-06",
-      "lagDays": 1,
+      "lagDays": 2,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-10-08",
+      "lastActivity": "2026-10-09",
       "newestRecent": "2026-10-06",
-      "lagDays": 2,
+      "lagDays": 3,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -128,9 +128,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-next-state": {
       "name": "/next State Store",
       "status": "active",
-      "lastActivity": "2026-09-25",
+      "lastActivity": "2026-10-08",
       "newestRecent": "2026-10-06",
-      "lagDays": -11,
+      "lagDays": 2,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -138,9 +138,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-profile": {
       "name": "Claude Profile",
       "status": "active",
-      "lastActivity": "2026-10-05",
+      "lastActivity": "2026-10-06",
       "newestRecent": "2026-10-06",
-      "lagDays": -1,
+      "lagDays": 0,
       "evaluated": true,
       "stale": false,
       "reason": null
