@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-08T06:11:24.759824Z",
- "count": 487,
+ "generated_at": "2026-10-09T06:11:54.945844Z",
+ "count": 491,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"9ece7380fa04189dd014bafb641a2d4d-gzip\"",
+   "etag": "\"2067fa64248482da167edb5ed5d24ffa-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Wed, 07 Oct 2026 21:47:28 GMT",
+   "last_modified": "Thu, 08 Oct 2026 16:20:25 GMT",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": true,
-   "stale_reason": "no new items in 64 days (expects ~7)"
+   "stale_reason": "no new items in 65 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
    "last_item_published": "2026-10-07T15:37:38Z",
-   "last_modified": "Wed, 07 Oct 2026 15:37:55 GMT",
+   "last_modified": "Thu, 08 Oct 2026 07:28:36 GMT",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-10-06T18:01:20Z",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-07T06:33:55Z",
    "last_modified": "Wed, 07 Oct 2026 07:00:53 GMT",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"2f0b9586daeba5304dcb66b52c1ec310\"",
+   "etag": "W/\"1e746d894db5f423e1679f81a9b780b2\"",
    "last_item_count": 8,
-   "last_modified": "Wed, 07 Oct 2026 16:42:16 GMT",
+   "last_modified": "Fri, 09 Oct 2026 05:35:01 GMT",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"5b9e7b3153570cb34e3489f11d7687ab\"",
+   "etag": "W/\"edcf6f2b7ce306dccaf0e0c29e83956f\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-06T19:29:53Z",
+   "last_item_published": "2026-10-08T14:06:05Z",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-07T01:05:00Z",
-   "last_modified": "Thu, 8 Oct 2026 02:47:31 GMT",
+   "last_item_published": "2026-10-09T00:35:00Z",
+   "last_modified": "Fri, 9 Oct 2026 04:04:21 GMT",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 88,
+   "consecutive_failures": 89,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-08T06:11:24.759824Z",
+   "last_failure": "2026-10-09T06:11:54.945844Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "88 consecutive failures: HTTP 403"
+   "stale_reason": "89 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,27 +94,27 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-templates-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"e6e99a3b037f885a29d08c5c43d55df3\"",
+   "etag": "W/\"fccf36d7eccb17f71feeb3efd11f3a1e\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-07T20:35:35Z",
+   "last_item_published": "2026-10-08T16:11:28Z",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"cab11ca6a0a17841d55491d141b4a526\"",
+   "etag": "W/\"d33de5eaca9658710b7d8ee548f594fb\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,73 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-08T06:11:24.759824Z",
+   "last_success": "2026-10-09T06:11:54.945844Z",
    "stale": true,
-   "stale_reason": "no new items in 114 days (expects ~30)"
+   "stale_reason": "no new items in 115 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Free Section Box Pro: Expands the Native Section-Box Workflow",
+   "url": "http://revitaddons.blogspot.com/2026/10/free-section-box-pro-expands-native.html",
+   "source": "revit-addons",
+   "published": "2026-10-09T00:35:00Z",
+   "summary": "Executive summary Section Box Pro is a free Revit add-in from Penguin Tools that expands the native section-box workflow for rapid 3D isolation, detailing, coordination, and documentation. Instead of manually creating a 3D view, enabling its section box, dragging six faces, orienting the camera, and renaming the result, users can select model elements and generate a tightly cropped, predictably named 3D view. Its principal differentiators are independent directional buffers, alignment to selected geometry, linked-model support, preset camera orientations, batch creation of one view per element, and automated view naming. Core capabilities Instant cropped 3D views: Creates and activates a new 3D view whose section box is calculated from the selected element or elements. Six-direction buffer control: Allows separate offsets for top, bottom, left, right, front, and back, supporting asymmetric working space rather than a single uniform margin. Quick presets: Vendor documentation identifies Tight (150 mm), Context (500 mm), and Clash (0 mm) presets for common inspection and detailing conditions. Automatic alignment: Can align the section box to the primary rotation of selected walls,…",
+   "id": "00cd22ac9a1afafd",
+   "fetched_at": "2026-10-09T06:11:54.945844Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "A polished free add-in for section-box automation; useful workflow reference but not a technique or API insight.",
+    "topics": [
+     "revit-addins",
+     "workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-09T06:11:54.945844Z"
+   }
+  },
+  {
+   "title": "Revit add-in templates 6.3.1",
+   "url": "https://github.com/Nice3point/RevitTemplates/releases/tag/6.3.1",
+   "source": "revit-templates-releases",
+   "published": "2026-10-08T16:11:28Z",
+   "summary": "The SDK is cross-platform now. Templates Generated code follows the .editorconfig rules of the solution: if statements have braces, and using directives are sorted the way the IDE sorts them. The code style no longer wraps a long assignment after = : resharper_prefer_wrap_around_eq is set to avoid . SDK Add-ins build on Linux and macOS. The SDK enables EnableWindowsTargeting outside Windows, and a project no longer needs to set it. Repacking runs on Linux and macOS through the dotnet host. Outside Windows, DeployAddin skips the deployment with a message unless AddinDeployDir is set. The build no longer fails on the missing %AppData% folder. The publish message shows the correct path when AddinPublishDir is an absolute path. Full changelog : 6.3.0...6.3.1",
+   "id": "8703922a9680147b",
+   "fetched_at": "2026-10-09T06:11:54.945844Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 75,
+    "why": "SDK cross-platform build support and code-style changes affect your add-in toolchain and CI/CD for C# projects.",
+    "topics": [
+     "revit-sdk",
+     "build-tooling",
+     "dotnet"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-09T06:11:54.945844Z"
+   }
+  },
+  {
+   "title": "OkPy Review: Create Fully Functional Revit Add-ins with Zero Coding, with Examples!",
+   "url": "http://revitaddons.blogspot.com/2026/10/okpy-review-create-fully-functional.html",
+   "source": "revit-addons",
+   "published": "2026-10-08T01:47:00Z",
+   "summary": "Recently we posted about OkPy and its parent, the Orkestra add-in. I've been using OkPy for several days and have created a few add-ins with it, with zero coding. (I haven't even so much as looked at code.) Here I'll detail my add-ins and the prompts I used to create them. It's a good cross section, from a simple scripting task to a model scanner to interactive element selection, with some snazzy dialog box design and Excel interoperability thrown in for good measure. A little about my programming background: I have about 30 years of development experience, though it has been almost exclusively with Bentley products, especially MicroStation (I know, boo, hiss!), and primarily with Visual Basic. A few months ago, I tried to create a Revit add-in the traditional way, with C#, but you need to configure Visual Studio to work with Revit and I couldn't find a modern reference for how to do that, so I didn't even get out of the starting block. First, let's cover an add-in I named Hammer Sync. I wanted a tool that would sync, reload selected links, and sync again. Something I could kickoff and walk away from. This process is handy before exporting CAD files to make sure everything's up to…",
+   "id": "a0d01e64a00782bc",
+   "fetched_at": "2026-10-09T06:11:54.945844Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "An LLM-driven no-code add-in builder; interesting trend but not applicable to your API-first, C# practice.",
+    "topics": [
+     "ai-codegen",
+     "revit-addins"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-09T06:11:54.945844Z"
+   }
+  },
   {
    "title": "Revit add-in templates 6.3.0",
    "url": "https://github.com/Nice3point/RevitTemplates/releases/tag/6.3.0",
@@ -547,6 +608,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-06T06:11:04.019104Z"
+   }
+  },
+  {
+   "title": "More Webhook Events for Issues API: Track Comments and Attachments",
+   "url": "https://aps.autodesk.com/blog/more-webhook-events-issues-api-track-comments-and-attachments",
+   "source": "aps-blog",
+   "published": "2026-10-05T02:26:30Z",
+   "summary": "More Webhook Events for Issues API: Track Comments and Attachments xiaodong.liang… 8 Oct 2026 Xiaodong Liang Share Autodesk Forma Issues API now supports more Webhook events, making it easier to build integrations that stay up to date with changes to issues and their related objects. In previous versions, the Issues API provided webhook events for issue creation, updates, and deletion etc. With this release, webhook support is extended to changes to objects associated with an issue, including comments and attachments . These new events are currently available as Public Beta. New Webhook Events The following webhook events are now available for issues: comment.created-1.0 — Triggered when a comment is created on an issue. attachment.created-1.0 — Triggered when an attachment is added to an issue. attachment.deleted-1.0 — Triggered when an attachment is deleted from an issue. These events work in the same way as the existing Issues webhook events. You can subscribe to them using the Webhooks API and receive notifications when the corresponding changes occur. For a walkthrough of how to use Issues webhooks, see our previous blog post: Webhooks API for ACC Issues is Released . Get the…",
+   "id": "ca976f40ea13a079",
+   "fetched_at": "2026-10-09T06:11:54.945844Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Forma Issues API webhook expansion is useful for cloud workflows but outside your primary desktop add-in scope.",
+    "topics": [
+     "aps",
+     "webhooks"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-09T06:11:54.945844Z"
    }
   },
   {
