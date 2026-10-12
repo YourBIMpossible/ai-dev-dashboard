@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-11T06:10:14.770555Z",
- "count": 495,
+ "generated_at": "2026-10-12T06:17:43.409422Z",
+ "count": 501,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 08 Oct 2026 16:20:25 GMT",
    "last_status": 200,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": true,
-   "stale_reason": "no new items in 67 days (expects ~7)"
+   "stale_reason": "no new items in 68 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-10-07T15:37:38Z",
-   "last_modified": "Thu, 08 Oct 2026 07:28:36 GMT",
-   "last_status": 304,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-10-11T08:00:28Z",
+   "last_modified": "Sun, 11 Oct 2026 08:00:28 GMT",
+   "last_status": 200,
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-10-09T12:29:24Z",
    "last_status": 200,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-07T06:33:55Z",
    "last_modified": "Wed, 07 Oct 2026 07:00:53 GMT",
    "last_status": 200,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"50c4145667189bdd286989a8817346a3\"",
+   "etag": "W/\"12921381aad6cf62ed68382b044b251e\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 09 Oct 2026 16:22:24 GMT",
+   "last_modified": "Mon, 12 Oct 2026 01:09:49 GMT",
    "last_status": 200,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"88988a42cf0d954e8b4b5d225dca17be\"",
+   "etag": "W/\"c7715a5ec557a582ee8804f12ef994f9\"",
    "last_item_count": 10,
    "last_item_published": "2026-10-10T09:40:36Z",
    "last_status": 200,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-10T00:26:00Z",
-   "last_modified": "Sat, 10 Oct 2026 17:04:53 GMT",
+   "last_item_published": "2026-10-11T20:26:27.809000Z",
+   "last_modified": "Mon, 12 Oct 2026 00:10:33 GMT",
    "last_status": 200,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 91,
+   "consecutive_failures": 92,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-11T06:10:14.770555Z",
+   "last_failure": "2026-10-12T06:17:43.409422Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "91 consecutive failures: HTTP 403"
+   "stale_reason": "92 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-08T16:11:28Z",
    "last_status": 304,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"7db8fbdf12d6deee883ce4196414dd7e\"",
+   "etag": "W/\"a61bb958af4e236cbb9c4667a29715d7\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,132 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-11T06:10:14.770555Z",
+   "last_success": "2026-10-12T06:17:43.409422Z",
    "stale": true,
-   "stale_reason": "no new items in 117 days (expects ~30)"
+   "stale_reason": "no new items in 118 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Free Color Tabs Pro: Includes User-Defined Rules-Based Processing",
+   "url": "http://revitaddons.blogspot.com/2026/10/free-color-tabs-pro.html",
+   "source": "revit-addons",
+   "published": "2026-10-11T20:26:27.809000Z",
+   "summary": "Executive Summary Color Tabs Pro is a free Revit productivity add-in that visually organizes open document and view tabs. It automatically applies color and styling according to the source document, view type, file category, or user-defined rules. Its purpose is to reduce navigation errors in busy Revit sessions, particularly when users have many views open across multiple projects and family files. Instead of relying only on truncated tab names, users gain an immediate visual cue indicating which document or view category each tab belongs to. Core Capabilities Unique color per document: Automatically assigns a distinct color from a curated palette to each open project, allowing all views from the same model to be recognized instantly. Color by view type: Uses different colors for functional view categories such as Sheets, Floor Plans, 3D Views, and Schedules. Single-color mode: Applies a consistent color to a selected document category—for example, displaying all Revit family documents in green. Separate project and family behavior: Allows .rvt and .rfa documents to use different coloring modes and styles. Multiple visual styles: Offers Solid Fill, Striped, Top Bar, and Border…",
+   "id": "c3a378e38833cfe9",
+   "fetched_at": "2026-10-12T06:17:43.409422Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 15,
+    "why": "UI productivity add-in with no API relevance or technical depth; useful but outside your core tooling scope.",
+    "topics": [
+     "revit-addon",
+     "ui"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-12T06:17:43.409422Z"
+   }
+  },
+  {
+   "title": "Free Bulk Rename Pro: Clean Up Model Naming Conventions at Scale",
+   "url": "http://revitaddons.blogspot.com/2026/10/free-bulk-rename-pro-clean-up-model.html",
+   "source": "revit-addons",
+   "published": "2026-10-11T20:01:45.946000Z",
+   "summary": "Executive Summary Bulk Rename Pro is a Revit productivity add-in from Penguin Tools designed to standardize and clean up model naming conventions at scale. Rather than editing names one item at a time, users can assemble rename rules, preview the proposed results, and apply consistent changes across multiple categories. The Autodesk Marketplace listing positions it for BIM managers, architects, and engineers who need faster naming cleanup, repeatable standards, and fewer manual errors. Core Capabilities Live before-and-after preview: Displays existing and proposed names in a sortable, filterable table so users can inspect results before committing changes. Case conversion: Converts names to uppercase, lowercase, Title Case, Sentence case, camelCase, or PascalCase. Find and replace: Replaces literal text and supports regular expressions for advanced pattern matching, extraction, and restructuring. Prefix and suffix rules: Adds project, discipline, package, status, or revision identifiers to many names in one operation. Trimming and insertion: Removes leading or trailing characters and whitespace, or inserts text at a specified character position. Symbol and spacing cleanup:…",
+   "id": "df141d64804e1f39",
+   "fetched_at": "2026-10-12T06:17:43.409422Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Batch naming automation at scale is adjacent to your audit and repair tooling; worth seeing a working implementation.",
+    "topics": [
+     "revit-addon",
+     "batch-operations"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-12T06:17:43.409422Z"
+   }
+  },
+  {
+   "title": "Matterport embraces point clouds",
+   "url": "https://aecmag.com/reality-capture-modelling/matterport-embraces-point-clouds/",
+   "source": "aec-magazine",
+   "published": "2026-10-11T08:00:28Z",
+   "summary": "Matterport Point Cloud Import enables firms to bring registered E57 files into Matterport’s cloud platform At Autodesk University 2026, Matterport demonstrated a new Point Cloud Import capability that allows users to bring an existing, registered E57 point cloud directly into a Matterport account, automatically generating a navigable 3D reality model. Once imported, the model can be explored and shared as a Matterport “digital twin.” Users can open it in a browser on any device, move through the space, take measurements, add contextual information and extract spatial data. People who were never on site can mark up conflicts, check clearances and leave questions tied to specific pieces of equipment. Matterport also showed workflows with Autodesk software. Autodesk Forma, for example, can receive anchored RFIs and issues through a bidirectional plug-in, while Matterport also provides direct workflows into Revit and Autodesk Tandem. “Importantly, Matterport allows you to lock the registration and preserve the geometry contained in the E57 during import. The survey-grade point cloud, typically captured with a Leica, Faro, Trimble, or NavVis scanner, retains its existing registration.”…",
+   "id": "393530cfe539035a",
+   "fetched_at": "2026-10-12T06:17:43.409422Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Point cloud interop relevant if you work cross-platform, but Matterport-specific and not a Revit-side change.",
+    "topics": [
+     "interop",
+     "point-clouds"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-12T06:17:43.409422Z"
+   }
+  },
+  {
+   "title": "Hexagon to acquire Rocscience for $535m",
+   "url": "https://aecmag.com/news/hexagon-to-acquire-rocscience-for-535m/",
+   "source": "aec-magazine",
+   "published": "2026-10-11T07:34:06Z",
+   "summary": "Deal aims to connect geotechnical simulation with live monitoring data across infrastructure and mining projects Hexagon has signed an agreement to acquire geotechnical analysis software developer Rocscience from TA Associates and the company’s founders and management. The transaction values the Toronto-based business at US$535 million on a cash-free, debt-free basis and is expected to close in the fourth quarter of 2026, subject to customary conditions. Rocscience develops software for modelling the behaviour of rock, soil and structures, analysing slope stability and ground movement, and assessing the performance of tunnels, dams and other infrastructure. Its products are used by mining, civil engineering and energy customers in around 125 countries. The software also offers AI-assisted workflows, including a natural-language interface. The acquisition is intended to bring Rocscience’s simulation capabilities together with Hexagon’s sensor and monitoring technologies, including radar monitoring systems. Hexagon envisages a continuous feedback loop in which live sensor data informs, updates and calibrates engineering models throughout design, construction and operation. Discover…",
+   "id": "db27c551acd548d7",
+   "fetched_at": "2026-10-12T06:17:43.409422Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "M&A news; Rocscience is geotechnical/mining, not AEC design or BIM authoring infrastructure relevant to you.",
+    "topics": [
+     "corporate"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-12T06:17:43.409422Z"
+   }
+  },
+  {
+   "title": "IES Sync for Revit launches",
+   "url": "https://aecmag.com/sustainability/ies-sync-for-revit-launches/",
+   "source": "aec-magazine",
+   "published": "2026-10-11T07:26:45Z",
+   "summary": "Connection said to greatly reduce the need to rebuild models when moving from building design to energy analysis IES has unveiled IES Sync for Revit which offers a native connection between Revit and its building-performance simulation platform IES VE. IES Sync for Revit is designed to streamline the handover from design model to simulation. Rather than exporting an IFC or gbXML file, or reconstructing a model in IESVE from a 2D DXF file, IES Sync connects Revit directly to the IES ecosystem through a shared data intelligence layer that carries geometry, including voids and air plenums, and, in future versions, energy-relevant data. IES has also launched a major new update for IES VE. The 2026 release is said to cut repeated set-up, checking and rework from everyday analysis while retaining the building physics and technical depth required for complex projects across key HVAC Design, Data Centre, Compliance, and BIM to BEM workflows. The update introduces a guided HVAC design workflow, stronger safeguards for parametric studies, bulk editing for room-level HVAC controllers and a new workflow supporting overheating assessments under CIBSE TM59:2026. It also adds a dedicated feature…",
+   "id": "80e6969a8c573971",
+   "fetched_at": "2026-10-12T06:17:43.409422Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 60,
+    "why": "Native Revit add-in for interop with external simulation; useful pattern for understanding Revit data handoff APIs.",
+    "topics": [
+     "revit-api",
+     "interop",
+     "ifc"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-12T06:17:43.409422Z"
+   }
+  },
+  {
+   "title": "GPT-6 Astra and the future of BIM modelling",
+   "url": "https://aecmag.com/bim/gpt-6-astra-and-the-future-of-bim-modelling/",
+   "source": "aec-magazine",
+   "published": "2026-10-11T06:00:00Z",
+   "summary": "AI has made a significant leap forward in working with 3D geometry. Open AI’s latest model, GPT-6 Astra, can turn drawings, photographs and instructions into 3D models. For AEC, the bigger question is how this capability will fit into a design process in which almost everything is subject to change, writes Martyn Day There is something disconcerting about watching software attempt work that has occupied professionals for decades. Give Open AI’s new GPT-6 Astra model references of building, connect it to 3D modelling software and leave it to work, and geometry appears, sometimes looking more resolved than it is. Models once built object by object can now be attempted through conversation or uploaded drawings. Experiments by architects with ChatGPT Astra deserve attention. A general-purpose AI can interpret references, plan modelling operations, write code, inspect the result and make corrections. Tests in Blender, Rhino and Revit range from impressive reconstructions to models that would make a BIM manager wince. AEC has spent decades investing in digital building models, with skilled people translating design decisions into objects, parameters and relationships. Automating more of…",
+   "id": "4031e2b9fb10d1c8",
+   "fetched_at": "2026-10-12T06:17:43.409422Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "AI model capability for 3D from sketches is interesting directionally, but no concrete technique or Revit API integration shown.",
+    "topics": [
+     "ai",
+     "modeling"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-12T06:17:43.409422Z"
+   }
+  },
   {
    "title": "Free Auto Sync Pro: Automatic Sync, Relinquish, Link Reloading, Idle Exit, Compact & Backup Cleanup",
    "url": "http://revitaddons.blogspot.com/2026/10/free-auto-sync-pro-automatic-sync.html",
