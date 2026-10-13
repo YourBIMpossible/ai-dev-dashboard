@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-10-12 06:00:22",
+  "checked": "2026-10-13 06:00:26",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -8,9 +8,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-10-12",
+      "lastActivity": "2026-10-13",
       "newestRecent": "2026-10-06",
-      "lagDays": 6,
+      "lagDays": 7,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -18,9 +18,9 @@ window.NARRATIVE_FRESHNESS = {
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-10-09",
+      "lastActivity": "2026-10-12",
       "newestRecent": "2026-10-06",
-      "lagDays": 3,
+      "lagDays": 6,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -88,9 +88,9 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-10-12",
+      "lastActivity": "2026-10-13",
       "newestRecent": "2026-10-06",
-      "lagDays": 6,
+      "lagDays": 7,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-10-12",
+      "lastActivity": "2026-10-13",
       "newestRecent": "2026-10-06",
-      "lagDays": 6,
+      "lagDays": 7,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -138,9 +138,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-profile": {
       "name": "Claude Profile",
       "status": "active",
-      "lastActivity": "2026-10-11",
+      "lastActivity": "2026-10-13",
       "newestRecent": "2026-10-06",
-      "lagDays": 5,
+      "lagDays": 7,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -148,9 +148,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-tools": {
       "name": "Claude-Tools",
       "status": "active",
-      "lastActivity": "2026-10-10",
+      "lastActivity": "2026-10-13",
       "newestRecent": "2026-10-06",
-      "lagDays": 4,
+      "lagDays": 7,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -158,9 +158,9 @@ window.NARRATIVE_FRESHNESS = {
     "evidence-compiler": {
       "name": "Evidence Compiler",
       "status": "active",
-      "lastActivity": "2026-10-11",
+      "lastActivity": "2026-10-12",
       "newestRecent": "2026-10-06",
-      "lagDays": 5,
+      "lagDays": 6,
       "evaluated": true,
       "stale": false,
       "reason": null
