@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-13T06:12:56.545976Z",
- "count": 503,
+ "generated_at": "2026-10-14T06:10:08.883619Z",
+ "count": 507,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"2067fa64248482da167edb5ed5d24ffa-gzip\"",
+   "etag": "\"62b1f9c4290d3dbbfea486f0288c0f84-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Thu, 08 Oct 2026 16:20:25 GMT",
+   "last_modified": "Tue, 13 Oct 2026 23:54:41 GMT",
    "last_status": 200,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": true,
-   "stale_reason": "no new items in 69 days (expects ~7)"
+   "stale_reason": "no new items in 70 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 200,
+   "last_item_count": 0,
    "last_item_published": "2026-10-12T16:58:40Z",
    "last_modified": "Mon, 12 Oct 2026 17:21:47 GMT",
-   "last_status": 200,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_status": 304,
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,66 +27,66 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-09T12:29:24Z",
+   "last_item_published": "2026-10-13T20:11:33Z",
    "last_status": 200,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"20a158974aa98514098d2f4171d61f66\"",
+   "etag": "W/\"c74a20b47fe3b31e91f757a6cddcd430\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-07T06:33:55Z",
-   "last_modified": "Wed, 07 Oct 2026 07:00:53 GMT",
+   "last_item_published": "2026-10-13T08:32:06Z",
+   "last_modified": "Tue, 13 Oct 2026 08:39:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"545de5ad0d3b61c8672e1d6851a9114e\"",
+   "etag": "W/\"3e71e64ea3dd06ffe4ae3edceff2fdf5\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 12 Oct 2026 20:58:01 GMT",
+   "last_modified": "Tue, 13 Oct 2026 16:01:57 GMT",
    "last_status": 200,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"9aecf127ac19f6c1a26e9aea2a928813\"",
+   "etag": "W/\"f28bc614a3ab620e784d2f1907f43970\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-12T19:28:35Z",
+   "last_item_published": "2026-10-13T19:49:41Z",
    "last_status": 200,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-13T00:32:00Z",
-   "last_modified": "Tue, 13 Oct 2026 01:09:16 GMT",
+   "last_item_published": "2026-10-14T00:18:00Z",
+   "last_modified": "Wed, 14 Oct 2026 03:15:41 GMT",
    "last_status": 200,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 94,
+   "consecutive_failures": 95,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-13T06:12:56.545976Z",
+   "last_failure": "2026-10-14T06:10:08.883619Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "94 consecutive failures: HTTP 403"
+   "stale_reason": "95 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-08T16:11:28Z",
    "last_status": 304,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"e08e3576922347a268ed8dab76e77776\"",
+   "etag": "W/\"0a8f8f6f3be8374191951d0ab98a8f02\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,93 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-13T06:12:56.545976Z",
+   "last_success": "2026-10-14T06:10:08.883619Z",
    "stale": true,
-   "stale_reason": "no new items in 119 days (expects ~30)"
+   "stale_reason": "no new items in 120 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Opening Handing: Calculate, Review, and Record Door and Window Handing at Scale",
+   "url": "http://revitaddons.blogspot.com/2026/10/opening-handing-calculate-review-and.html",
+   "source": "revit-addons",
+   "published": "2026-10-14T00:18:00Z",
+   "summary": "Executive Summary Opening Handing is a Revit automation and QA/QC add-in from Penguin Tools for calculating, reviewing, and recording door and window handing. It analyzes opening geometry, swing direction, wall insertion orientation, and adjacent room context to determine standard architectural handing values such as Left Hand (LH), Right Hand (RH), Left Hand Reverse (LHR), and Right Hand Reverse (RHR). The calculated result can then be mapped to a chosen Revit parameter for schedules, door and window data, hardware coordination, and model checking. Its primary value is replacing repetitive visual interpretation and manual parameter entry with a consistent, reviewable process. Core Capabilities Automated handing calculation: Determines LH, RH, LHR, and RHR classifications from the modeled orientation and swing behavior of an opening. Inward/outward interpretation: Can identify whether an opening swings inward or outward, adding useful directional context beyond a simple left/right result. Geometry-based analysis: Evaluates swing geometry, insertion vectors, wall orientation, mirrored state, and room-bounding relationships rather than relying only on family names. Flexible…",
+   "id": "8b653985c26b97e6",
+   "fetched_at": "2026-10-14T06:10:08.883619Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "A Revit add-in product for door/window handing automation; worth knowing the direction but you build similar tooling yourself.",
+    "topics": [
+     "revit-addins",
+     "door-window-automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-14T06:10:08.883619Z"
+   }
+  },
+  {
+   "title": "3-legged OAuth vs Secure Service Accounts",
+   "url": "https://aps.autodesk.com/blog/3-legged-oauth-vs-secure-service-accounts",
+   "source": "aps-blog",
+   "published": "2026-10-13T20:11:33Z",
+   "summary": "3-legged OAuth vs Secure Service Accounts adam.nagy 13 Oct 2026 Adam Nagy Share There is a detailed blog post on Secure Service Accounts , but it does not discuss when to use normal 3-legged authentication instead of Secure Service Accounts . As the above picture shows, if you need to do things on behalf of a specific user and the operations take place while the user is running your application, then relying on normal 3-legged authentication is fine. Since the user is in front of your application, even if the token refresh goes wrong, you can ask them to log in again - it should not cause any major issues. The main problem is if you are trying to do things on a user's behalf while they are away from your app, e.g. running automation tasks on a server. Then if the token refresh goes wrong, you might not be able to get the user to log in quickly enough, which can cause system downtime. The bottom line: - 3-legged OAuth : Best for user-facing apps - Secure Service Accounts : Best for automation and jobs Authentication SSA",
+   "id": "31b89a26a3a11dac",
+   "fetched_at": "2026-10-14T06:10:08.883619Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Clarifies APS authentication patterns; directly relevant if you distribute add-ins or build back-end services for them.",
+    "topics": [
+     "aps",
+     "authentication",
+     "oauth"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-14T06:10:08.883619Z"
+   }
+  },
+  {
+   "title": "Revit Add-ons Advertising Sale: Save 35% and Get 3 Months Free!",
+   "url": "http://revitaddons.blogspot.com/2026/10/revit-advertising-sale-save-35-and-get.html",
+   "source": "revit-addons",
+   "published": "2026-10-13T19:26:18.416000Z",
+   "summary": "",
+   "id": "907448776249b07d",
+   "fetched_at": "2026-10-14T06:10:08.883619Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Marketing promotion with no technical content or actionable information.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-14T06:10:08.883619Z"
+   }
+  },
+  {
+   "title": "Dynamo vs Grasshopper for Revit: who wins the BIM automation battle for engineers and architects?",
+   "url": "https://bimcorner.com/dynamo-vs-grasshopper-for-revit/",
+   "source": "bim-corner",
+   "published": "2026-10-13T08:32:06Z",
+   "summary": "If you work in Revit, this is one of the most useful practical questions you can ask. Together with Gavin Nicholls, I put Dynamo and Grasshopper through ten rounds focused on real BIM automation tasks. Gavin entered the ring representing Dynamo, while I defended Grasshopper. This was not a theoretical comparison of features. We opened both tools, tested workflows side by side, discussed where they become difficult to use, and scored them based on their performance in real AEC work. The purpose was not to prove that one tool is always better. It was to understand which tool works best for a particular problem. Table of Contents Here is the page for those who want to watch the full recording and download the bonus materials, including Dynamo and Grasshopper scripts: [Watch the full recording and get the bonus files here] Round 1: Complex geometries This is the environment in which Grasshopper feels most natural. It handles complex geometry, non-linear forms, meshes, NURBS, terrain models, voxel-based workflows, and large geometric datasets more comfortably. Dynamo can also create and process geometry. The problem appears when the scale and complexity begin to increase. Dense meshes…",
+   "id": "dd8664e7ec1f2858",
+   "fetched_at": "2026-10-14T06:10:08.883619Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Comparison of Dynamo and Grasshopper workflows; useful context but neither is your primary tooling stack.",
+    "topics": [
+     "dynamo",
+     "grasshopper",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-14T06:10:08.883619Z"
+   }
+  },
   {
    "title": "Free Model Upgrader Pro: Process Interdependent Model Sets Systematically",
    "url": "http://revitaddons.blogspot.com/2026/10/free-model-upgrader-pro-process.html",
