@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-10-14T06:10:08.883619Z",
- "count": 507,
+ "generated_at": "2026-10-15T06:10:40.750869Z",
+ "count": 509,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"62b1f9c4290d3dbbfea486f0288c0f84-gzip\"",
+   "etag": "\"28aa137c78c1de6439109e84843e51be-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Tue, 13 Oct 2026 23:54:41 GMT",
+   "last_modified": "Wed, 14 Oct 2026 17:30:54 GMT",
    "last_status": 200,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": true,
-   "stale_reason": "no new items in 70 days (expects ~7)"
+   "stale_reason": "no new items in 71 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-10-12T16:58:40Z",
    "last_modified": "Mon, 12 Oct 2026 17:21:47 GMT",
    "last_status": 304,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-10-13T20:11:33Z",
    "last_status": 200,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-13T08:32:06Z",
    "last_modified": "Tue, 13 Oct 2026 08:39:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"3e71e64ea3dd06ffe4ae3edceff2fdf5\"",
+   "etag": "W/\"230e57bdb1d4872139a3126effb874e6\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 13 Oct 2026 16:01:57 GMT",
+   "last_modified": "Thu, 15 Oct 2026 00:30:11 GMT",
    "last_status": 200,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"f28bc614a3ab620e784d2f1907f43970\"",
+   "etag": "W/\"23790e754ff9638f07311cb3a2e598b2\"",
    "last_item_count": 10,
    "last_item_published": "2026-10-13T19:49:41Z",
    "last_status": 200,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-14T00:18:00Z",
-   "last_modified": "Wed, 14 Oct 2026 03:15:41 GMT",
+   "last_item_published": "2026-10-15T00:27:00Z",
+   "last_modified": "Thu, 15 Oct 2026 01:04:45 GMT",
    "last_status": 200,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 95,
+   "consecutive_failures": 96,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-14T06:10:08.883619Z",
+   "last_failure": "2026-10-15T06:10:40.750869Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "95 consecutive failures: HTTP 403"
+   "stale_reason": "96 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-08T16:11:28Z",
    "last_status": 304,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"0a8f8f6f3be8374191951d0ab98a8f02\"",
+   "etag": "W/\"a0bb081e05580f08c3a7d877baf902d7\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-14T06:10:08.883619Z",
+   "last_success": "2026-10-15T06:10:40.750869Z",
    "stale": true,
-   "stale_reason": "no new items in 120 days (expects ~30)"
+   "stale_reason": "no new items in 121 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Revision Manager Pro: Make Revision Administration Faster and More Consistent",
+   "url": "http://revitaddons.blogspot.com/2026/10/revision-manager-pro-make-revision.html",
+   "source": "revit-addons",
+   "published": "2026-10-15T00:27:00Z",
+   "summary": "Executive Summary Revision Manager Pro is a free Revit productivity and QA/QC add-in from Penguin Tools designed to simplify revision creation, editing, sheet assignment, removal, and reporting. It organizes the work into two main stages: first managing the project’s revision records, and then applying selected revisions to filtered groups of sheets. Its strongest value is scale: operations that normally require repeated dialog navigation and sheet-by-sheet checking can be carried out across hundreds of sheets through a reviewable interface. Core Capabilities Two-step interface: Separates revision definition and maintenance from revision-to-sheet assignment, making the workflow easier to understand and audit. Revision creation: Creates new project revisions and supports quick templates for recurring descriptions such as Tender, Construction, or other office-standard issue stages. Description history: Reuses standard or previously entered descriptions to reduce retyping and improve consistency. Bulk editing: Updates descriptions or dates for multiple revision records at the same time. Bulk sheet assignment: Applies a selected revision to large numbers of sheets with a single…",
+   "id": "fbc5f955b236d506",
+   "fetched_at": "2026-10-15T06:10:40.750869Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A well-built revision-automation add-in worth knowing exists, but you likely build similar tooling or use other workflows.",
+    "topics": [
+     "revit-addins",
+     "sheet-automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-15T06:10:40.750869Z"
+   }
+  },
   {
    "title": "Opening Handing: Calculate, Review, and Record Door and Window Handing at Scale",
    "url": "http://revitaddons.blogspot.com/2026/10/opening-handing-calculate-review-and.html",
@@ -188,6 +208,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-14T06:10:08.883619Z"
+   }
+  },
+  {
+   "title": "AI-native APS: From idea to outcome, with context, control, and trust",
+   "url": "https://aps.autodesk.com/blog/ai-native-aps-idea-outcome-context-control-and-trust",
+   "source": "aps-blog",
+   "published": "2026-10-13T17:03:10Z",
+   "summary": "AI-native APS: From idea to outcome, with context, control, and trust arunima.kumar 14 Oct 2026 Tulika Garg Arunima Kumar Share This blog may contain forward-looking statements about our products and product capabilities, and strategies. Statements regarding planned or future development efforts for our products merely reflect our current plans and are based on factors currently known to us. Purchasing decisions should not be made based upon reliance on these statements. At this year's Platform Leadership Forum at AU, we shared how Autodesk Platform Services is becoming AI-native – working with you at every stage of your development journey. If you missed it, that recap is here: The new APS: A developer platform for the AI era . In this post, we will walk through what AI-native APS looks like in practice by following one developer, and one app, from a problem statement to a distributed product. The app: a Revit model viewer that extracts element parameters and schedules for filtering. Simple to state. As you'll see, harder to get right, and that's exactly where an AI-native platform changes the developer journey. Build with context from the start Every developer starts with the…",
+   "id": "2c4b49fa2eac28e7",
+   "fetched_at": "2026-10-15T06:10:40.750869Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Forward-looking marketing statement with no concrete APS capabilities, API changes, or technical detail to act on.",
+    "topics": [
+     "aps",
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-15T06:10:40.750869Z"
    }
   },
   {
