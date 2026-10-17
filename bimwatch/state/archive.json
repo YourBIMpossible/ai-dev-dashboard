@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-16T06:10:10.637701Z",
- "count": 514,
+ "generated_at": "2026-10-17T06:08:38.495101Z",
+ "count": 516,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 14 Oct 2026 17:30:54 GMT",
    "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": true,
-   "stale_reason": "no new items in 72 days (expects ~7)"
+   "stale_reason": "no new items in 73 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-10-15T09:53:35Z",
-   "last_modified": "Thu, 15 Oct 2026 09:55:45 GMT",
+   "last_item_published": "2026-10-16T14:24:48Z",
+   "last_modified": "Fri, 16 Oct 2026 14:45:50 GMT",
    "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-10-13T20:11:33Z",
    "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-13T08:32:06Z",
    "last_modified": "Tue, 13 Oct 2026 08:39:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"9554dba0a2d1e9207a1e3272821382cf\"",
+   "etag": "W/\"f9dc70ea1a7c97bc8f297d4ef0e5b8f5\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 16 Oct 2026 05:24:47 GMT",
+   "last_modified": "Fri, 16 Oct 2026 14:44:28 GMT",
    "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"f4d50069e4020a76bce118f5472693b6\"",
+   "etag": "W/\"30530a3b3e27317a9cd196d0d2ceadb8\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-15T20:51:35Z",
+   "last_item_published": "2026-10-16T18:57:44Z",
    "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-16T01:26:58.552000Z",
-   "last_modified": "Fri, 16 Oct 2026 04:49:05 GMT",
+   "last_item_published": "2026-10-17T00:36:00Z",
+   "last_modified": "Sat, 17 Oct 2026 02:11:37 GMT",
    "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 97,
+   "consecutive_failures": 98,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-16T06:10:10.637701Z",
+   "last_failure": "2026-10-17T06:08:38.495101Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "97 consecutive failures: HTTP 403"
+   "stale_reason": "98 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,27 +94,27 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-templates-releases": {
    "consecutive_failures": 0,
    "etag": "W/\"7e5777a3b9b627a56d300571d92e12be\"",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
-   "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_status": 304,
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"00a0692fe7f92e7d625aac73980c2a1a\"",
+   "etag": "W/\"42826873b71f04e98a494ce16a446de1\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,51 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-16T06:10:10.637701Z",
+   "last_success": "2026-10-17T06:08:38.495101Z",
    "stale": true,
-   "stale_reason": "no new items in 122 days (expects ~30)"
+   "stale_reason": "no new items in 123 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Version QR Codes: Drawing Version Control",
+   "url": "http://revitaddons.blogspot.com/2026/10/version-qr-codes-drawing-version-control.html",
+   "source": "revit-addons",
+   "published": "2026-10-17T00:36:00Z",
+   "summary": "Overview Version QR Codes is a Revit add-in from Penguin Tools that connects issued or printed sheets to live digital information through unique QR codes. Its principal use is drawing version control: a person in the office or on site scans the code with a standard phone or tablet camera to reach the latest PDF, a common data environment (CDE) location, a project URL, or a 3D model, and can determine whether the physical drawing is current or superseded. The product is intended to close the information gap between paper deliverables and the project’s digital source of truth. Penguin Tools reports more than 19,000 active codes in use; this is a vendor claim rather than independently verified usage data. How It Works Define the identifier. By default, the add-in uses the Revit Sheet Number. Users can combine built-in parameters and custom shared parameters assigned to the Sheets category to form a drawing name or data payload. Configure a profile. A profile controls appearance, data links, and title-block placement. Profiles can be created for purposes such as client issue or internal review, saved for reuse, and loaded from a central network location to support company standards.…",
+   "id": "c2bca79eae05be0a",
+   "fetched_at": "2026-10-17T06:08:38.495101Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 15,
+    "why": "A vendor product announcement with no technical depth, API surface, or implementation technique for your add-in work.",
+    "topics": [
+     "product-announcement"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-17T06:08:38.495101Z"
+   }
+  },
+  {
+   "title": "Autodesk’s most ambitious AI play yet",
+   "url": "https://aecmag.com/ai/autodesks-most-ambitious-ai-play-yet/",
+   "source": "aec-magazine",
+   "published": "2026-10-16T14:24:48Z",
+   "summary": "At Autodesk University Autodesk presented an AI ambition that goes beyond faster tools: a connected Assistant that decides how to solve tasks on your behalf. But as Greg Corke found on the Expo floor, there’s also a growing appetite for local AI, keeping data and costs firmly under control Autodesk no longer just wants to sell you better software; it wants to do a lot of your work for you. At Autodesk University 2026, that ambition was presented as ‘Project Intelligence’, described by Autodesk CEO Andrew Anagnost during his keynote as a “connected brain at the centre that brings every data point, every decision, every discipline together – a brain that grows smarter as a project advances.” Naturally, AI dominated the agenda. Almost every major announcement came wrapped in talk of agents, models and context. What set this AU apart from the previous two, however, was a shift from talk of time-saving features in individual CAD and BIM tools to a more ambitious AI proposition: an intelligent AI intended to turn a user’s stated intent into work they can review, refine, and use, without them having to navigate products, workflows, data and complex UIs. In other words, users state what…",
+   "id": "724d285627ea6919",
+   "fetched_at": "2026-10-17T06:08:38.495101Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Autodesk's AI direction matters for your platform, but this is marketing messaging; watch for concrete API or platform changes.",
+    "topics": [
+     "autodesk-strategy",
+     "ai"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-17T06:08:38.495101Z"
+   }
+  },
   {
    "title": "Orkestra Review: Distributing Tools—Dynamo or Grasshopper Graphs or OkPy Add-ins",
    "url": "http://revitaddons.blogspot.com/2026/10/orkestra-review-distributing.html",
