@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-10-16T13:00:27Z",
+  "generated": "2026-10-17T13:00:21Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 27383,
       "edges": 68225,
       "commit": "2c4a0ebe",
-      "commitsBehind": 20,
+      "commitsBehind": 24,
       "builtAt": "2026-10-10",
       "stale": false
     },
@@ -31,7 +31,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 288,
         "churn": 52,
-        "risk": 37.6
+        "risk": 37.7
       },
       {
         "label": "assistant.py",
@@ -87,7 +87,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 401,
         "churn": 52,
-        "risk": 24.5
+        "risk": 24.6
       },
       {
         "label": "Base",
