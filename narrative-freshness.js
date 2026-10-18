@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-10-17 06:00:22",
+  "checked": "2026-10-18 06:00:32",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-10-17",
+      "lastActivity": "2026-10-18",
       "newestRecent": "2026-10-06",
-      "lagDays": 11,
+      "lagDays": 12,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -138,9 +138,9 @@ window.NARRATIVE_FRESHNESS = {
     "claude-profile": {
       "name": "Claude Profile",
       "status": "active",
-      "lastActivity": "2026-10-13",
+      "lastActivity": "2026-10-17",
       "newestRecent": "2026-10-06",
-      "lagDays": 7,
+      "lagDays": 11,
       "evaluated": true,
       "stale": false,
       "reason": null

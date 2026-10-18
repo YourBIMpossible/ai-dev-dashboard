@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-10-17T13:00:21Z",
+  "generated": "2026-10-18T13:00:30Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,16 +12,16 @@ window.NETWORKX_IMPACT = {
       "nodes": 27383,
       "edges": 68225,
       "commit": "2c4a0ebe",
-      "commitsBehind": 24,
+      "commitsBehind": 33,
       "builtAt": "2026-10-10",
-      "stale": false
+      "stale": true
     },
     "cycles": {
       "count": 0,
       "baseline": 0,
       "delta": 0,
       "rootCauses": [],
-      "excludedExternal": 24,
+      "excludedExternal": 47,
       "examples": []
     },
     "hubs": [
@@ -42,28 +42,28 @@ window.NETWORKX_IMPACT = {
         "risk": 36.3
       },
       {
-        "label": "aec/router.py",
-        "file": "aec/router.py",
-        "kind": "file",
-        "degree": 138,
-        "churn": 40,
-        "risk": 34.6
-      },
-      {
         "label": "admin_router.py",
         "file": "admin_router.py",
         "kind": "file",
         "degree": 124,
-        "churn": 27,
-        "risk": 32.3
+        "churn": 28,
+        "risk": 33.2
       },
       {
         "label": "account_router.py",
         "file": "account_router.py",
         "kind": "file",
         "degree": 106,
-        "churn": 25,
-        "risk": 31.1
+        "churn": 26,
+        "risk": 32.0
+      },
+      {
+        "label": "aec/router.py",
+        "file": "aec/router.py",
+        "kind": "file",
+        "degree": 138,
+        "churn": 42,
+        "risk": 30.3
       },
       {
         "label": "aps/router.py",
@@ -71,7 +71,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 104,
         "churn": 32,
-        "risk": 28.3
+        "risk": 28.2
       },
       {
         "label": "hub_tenancy.py",
@@ -87,7 +87,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 401,
         "churn": 52,
-        "risk": 24.6
+        "risk": 24.8
       },
       {
         "label": "Base",
@@ -119,7 +119,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 233,
         "churn": 52,
-        "risk": 18.7
+        "risk": 18.8
       }
     ],
     "baseline": {
@@ -137,7 +137,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 0,
-      "finding": "No circular imports. 24 third-party symbols excluded (graphify credits them to the importing file).",
+      "finding": "No circular imports. 47 third-party symbols excluded (graphify credits them to the importing file).",
       "category": "clear"
     },
     {
