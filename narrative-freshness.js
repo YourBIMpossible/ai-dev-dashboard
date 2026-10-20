@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-10-19 06:00:23",
+  "checked": "2026-10-20 06:00:32",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -98,9 +98,9 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-10-19",
+      "lastActivity": "2026-10-20",
       "newestRecent": "2026-10-06",
-      "lagDays": 13,
+      "lagDays": 14,
       "evaluated": true,
       "stale": false,
       "reason": null
@@ -168,9 +168,9 @@ window.NARRATIVE_FRESHNESS = {
     "local-intel": {
       "name": "Local Intel",
       "status": "gated",
-      "lastActivity": "2026-09-07",
+      "lastActivity": "2026-10-19",
       "newestRecent": "2026-10-06",
-      "lagDays": -29,
+      "lagDays": 13,
       "evaluated": true,
       "stale": false,
       "reason": null
