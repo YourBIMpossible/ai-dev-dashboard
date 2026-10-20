@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-19T07:24:47.996264Z",
- "count": 518,
+ "generated_at": "2026-10-20T06:10:22.341579Z",
+ "count": 522,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 14 Oct 2026 17:30:54 GMT",
    "last_status": 200,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": true,
-   "stale_reason": "no new items in 75 days (expects ~7)"
+   "stale_reason": "no new items in 76 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-10-16T14:24:48Z",
-   "last_modified": "Fri, 16 Oct 2026 14:45:50 GMT",
-   "last_status": 304,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-10-19T09:45:25Z",
+   "last_modified": "Mon, 19 Oct 2026 09:52:34 GMT",
+   "last_status": 200,
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-13T20:11:33Z",
+   "last_item_published": "2026-10-19T18:03:57Z",
    "last_status": 200,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-13T08:32:06Z",
    "last_modified": "Tue, 13 Oct 2026 08:39:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"b481ae05b1da2f87edc189ddd9da9244\"",
+   "etag": "W/\"627a22650722766603537bd92c6608fb\"",
    "last_item_count": 8,
-   "last_modified": "Sun, 18 Oct 2026 10:59:24 GMT",
+   "last_modified": "Mon, 19 Oct 2026 15:58:30 GMT",
    "last_status": 200,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"fa3ec813bf5c3a7237ca08219638140a\"",
+   "etag": "W/\"88741b73c932a51c447af6fa696f0b04\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-19T03:30:06Z",
+   "last_item_published": "2026-10-19T16:59:38Z",
    "last_status": 200,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-18T21:06:23.904000Z",
-   "last_modified": "Sun, 18 Oct 2026 21:41:09 GMT",
+   "last_item_published": "2026-10-20T01:12:00Z",
+   "last_modified": "Tue, 20 Oct 2026 02:02:50 GMT",
    "last_status": 200,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 101,
+   "consecutive_failures": 102,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-19T07:24:47.996264Z",
+   "last_failure": "2026-10-20T06:10:22.341579Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "101 consecutive failures: HTTP 403"
+   "stale_reason": "102 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"eb42665fa16f33e7f4bab5989559710a\"",
+   "etag": "W/\"ce78f1db7bfec3977d9d39a0de3e430d\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,74 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-19T07:24:47.996264Z",
+   "last_success": "2026-10-20T06:10:22.341579Z",
    "stale": true,
-   "stale_reason": "no new items in 125 days (expects ~30)"
+   "stale_reason": "no new items in 126 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Karo.WhatsChanged: A Local Change-Audit and Investigation Layer",
+   "url": "http://revitaddons.blogspot.com/2026/10/karowhatschanged-change-audit-and.html",
+   "source": "revit-addons",
+   "published": "2026-10-20T01:12:00Z",
+   "summary": "Overview Karo.WhatsChanged is a model-coordination add-in for Autodesk Revit that records a reference state and identifies what changed after linked consultant models are reloaded. It is designed to replace broad visual comparison with an element-level audit that surfaces additions, deletions, moved geometry, coordinate changes, and parameter modifications. The add-in keeps comparison data locally in SQLite rather than uploading project geometry to a cloud service. Its principal audience is BIM coordinators, architects, engineers, and multidisciplinary delivery teams that need to assess the impact of updated architectural, structural, or MEP links. Core Workflow Establish a baseline. The add-in records a personal reference state for the host model and its links on the user’s workstation. Reload updated links. When a consultant model is refreshed, WhatsChanged compares the new state with the stored baseline. Review detected changes. An audit grid groups and counts Added, Modified, and Deleted elements and supports filtering by change status, category, and source document. Inspect the delta. Select an item to review before-and-after parameter values and geometry or coordinate…",
+   "id": "c4eb59edda5c5d8f",
+   "fetched_at": "2026-10-20T06:10:22.341579Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 72,
+    "why": "Model audit tooling at element level with local SQLite storage directly mirrors your audit practice; concrete technique worth studying for integration.",
+    "topics": [
+     "model-audit",
+     "linked-models",
+     "revit-api"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-20T06:10:22.341579Z"
+   }
+  },
+  {
+   "title": "Check Egress Travel Distance Directly in the Viewer",
+   "url": "https://aps.autodesk.com/blog/check-egress-travel-distance-directly-viewer",
+   "source": "aps-blog",
+   "published": "2026-10-19T18:03:57Z",
+   "summary": "Check Egress Travel Distance Directly in the Viewer Joao Martins 19 Oct 2026 João Martins Share Introduction One frequent use case I hear when talking with customers about APS automation is design check. Among the many code checks, there's one we can address by combining the right Viewer capabilities: the exit access travel distance calculation, or how far someone has to walk from the most remote point of a floor to the nearest exit. Usually that means someone draws a polyline around walls and furniture by hand, measures it, finds the right row in the code table, and repeats the whole process each time the layout changes. Since the geometry is already in the Viewer, we can combine its methods to calculate the travel path from two points in a 2d plane. That's what we'll cover in this blog post. Prerequisites A model translated with Model Derivative. The sample uses the Revit `rac_basic_sample_project` by default. Nothing else. All of the work happens on the client. How it works It all starts with a well-known problem: find the shortest path between two points. This is already addressed if we think in terms of graphs with famous algorithms, such as A*. For a primer on these…",
+   "id": "6091a211e9f20b4b",
+   "fetched_at": "2026-10-20T06:10:22.341579Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 45,
+    "why": "APS Viewer geometry and rule-based checking technique; useful pattern for compliance automation even if not your current stack.",
+    "topics": [
+     "aps",
+     "design-check",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-20T06:10:22.341579Z"
+   }
+  },
+  {
+   "title": "Boosting graphics performance in Revit and AutoCAD – Special Report",
+   "url": "https://aecmag.com/sponsored-content/boosting-revit-autocad-2027-special-report/",
+   "source": "aec-magazine",
+   "published": "2026-10-19T09:45:25Z",
+   "summary": "Accelerate CAD and BIM workflows with the latest HP Z Workstations powered by the AMD Ryzen AI Max PRO processor Autodesk® AutoCAD® 2027 and Autodesk® Revit® 2027 both embrace modern graphics technology, shifting more power to the GPU for ultra-smooth navigation of drawings and 3D models. Paired with the AMD Ryzen AI Max PRO processor, the latest HP Z Workstations deliver professional-grade performance for CAD and BIM in compact, energy-efficient form factors. Download this special report to discover how: Accelerated Graphics technology in Revit 2027 significantly improves performance in both 3D and 2D views. AutoCAD 2026 & 2027 feels faster and smoother than previous versions when navigating 3D models, thanks to Graphics System Fabric (GSF), a graphics engine built on DirectX 12 that harnesses the power of modern GPUs. The AMD Ryzen AI Max PRO processor with integrated Radeon GPU delivers impressive performance for CAD, viz and AI – without the need for a discrete GPU. The HP ZBook Ultra G1a (slimline 14-inch mobile workstation), HP ZBook Ultra G3a (slimline 16-inch mobile workstation) and HP Z2 Mini G1a (mini desktop workstation) can handle the most demanding workflows in Revit…",
+   "id": "0534b1b78e3d3a62",
+   "fetched_at": "2026-10-20T06:10:22.341579Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 15,
+    "why": "Hardware vendor advertorial; GPU improvements in Revit 2027 are interesting but this is a sponsored report, not technical documentation.",
+    "topics": [
+     "revit-2027",
+     "performance"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-20T06:10:22.341579Z"
+   }
+  },
   {
    "title": "Product Roundup: Penguin Tools (PTP)",
    "url": "http://revitaddons.blogspot.com/2026/10/product-roundup-penguin-tools-ptp.html",
@@ -210,7 +272,7 @@
    }
   },
   {
-   "title": "Orkestra Review: Distributing Tools—Dynamo or Grasshopper Graphs or OkPy Add-ins",
+   "title": "Orkestra Review: Distributing Tools—Dynamo or Grasshopper Scripts or OkPy Add-ins",
    "url": "http://revitaddons.blogspot.com/2026/10/orkestra-review-distributing.html",
    "source": "revit-addons",
    "published": "2026-10-16T01:26:58.552000Z",
@@ -7576,6 +7638,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-07-25T20:06:02.422958Z"
+   }
+  },
+  {
+   "title": "AEC Magazine March / April 2026",
+   "url": "https://aecmag.com/technology/aec-magazine-march-april-2026/",
+   "source": "aec-magazine",
+   "published": "2026-03-03T07:00:36Z",
+   "summary": "The March/April edition of AEC Magazine dives deep into the future of AI in AEC — moving beyond image generators and chatbots to explore the rise of agentic BIM and what it really means for our industry It’s available to view now, free, along with all our back issues . Subscribe to the digital edition free + all the latest AEC technology news in your inbox, or take out a print subscription for $49 per year (free to UK AEC professionals). Highlights of our AI-in-AEC special edition Cover story: the agentic future of BIM With AI, could solver-driven design tools radically reshape our industry in as little as five years? _ Architecture: the missing AI middle AI is reshaping architecture at the extremes of massing and viz, but the profession’s value remains in the missing middle _ NXT BLD 2026: a decade of looking around corners With design automation, AI, and data-driven approaches set to reshape AEC, NXT BLD has never felt more important _ AI, design, and re-shaping the AEC industry AI could consolidate AEC firms, reshape design practice and elevate full-stack designers, transforming BIM into an intelligent, integrated decision hub _ AI in AEC: collapse cognition, not geometry If AI…",
+   "id": "068c5979a290dc52",
+   "fetched_at": "2026-10-20T06:10:22.341579Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Magazine table-of-contents and subscription pitch; 'agentic BIM' framing without concrete techniques is generic AI discourse.",
+    "topics": [
+     "ai",
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-20T06:10:22.341579Z"
    }
   },
   {
