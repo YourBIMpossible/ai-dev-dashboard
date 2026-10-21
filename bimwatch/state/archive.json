@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-20T06:10:22.341579Z",
- "count": 522,
+ "generated_at": "2026-10-21T06:10:15.835566Z",
+ "count": 523,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 14 Oct 2026 17:30:54 GMT",
    "last_status": 200,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": true,
-   "stale_reason": "no new items in 76 days (expects ~7)"
+   "stale_reason": "no new items in 77 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
    "last_item_published": "2026-10-19T09:45:25Z",
-   "last_modified": "Mon, 19 Oct 2026 09:52:34 GMT",
+   "last_modified": "Tue, 20 Oct 2026 16:12:14 GMT",
    "last_status": 200,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,64 +29,64 @@
    "last_item_count": 10,
    "last_item_published": "2026-10-19T18:03:57Z",
    "last_status": 200,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"c74a20b47fe3b31e91f757a6cddcd430\"",
+   "etag": "W/\"04c88ccbd6487e7313bd6c9ae47566c0\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
    "last_item_published": "2026-10-13T08:32:06Z",
-   "last_modified": "Tue, 13 Oct 2026 08:39:23 GMT",
+   "last_modified": "Tue, 20 Oct 2026 19:44:46 GMT",
    "last_status": 200,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"627a22650722766603537bd92c6608fb\"",
+   "etag": "W/\"28b1f1223f0338cfccfae34061b2452a\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 19 Oct 2026 15:58:30 GMT",
+   "last_modified": "Tue, 20 Oct 2026 20:36:49 GMT",
    "last_status": 200,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"88741b73c932a51c447af6fa696f0b04\"",
+   "etag": "W/\"69f00beff516f6be37a3d2fb48f9881b\"",
    "last_item_count": 10,
    "last_item_published": "2026-10-19T16:59:38Z",
    "last_status": 200,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-20T01:12:00Z",
-   "last_modified": "Tue, 20 Oct 2026 02:02:50 GMT",
+   "last_item_published": "2026-10-21T00:47:00Z",
+   "last_modified": "Wed, 21 Oct 2026 02:44:01 GMT",
    "last_status": 200,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 102,
+   "consecutive_failures": 103,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-20T06:10:22.341579Z",
+   "last_failure": "2026-10-21T06:10:15.835566Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "102 consecutive failures: HTTP 403"
+   "stale_reason": "103 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"ce78f1db7bfec3977d9d39a0de3e430d\"",
+   "etag": "W/\"0645609b42c30461099c9a0bf781c1ee\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-20T06:10:22.341579Z",
+   "last_success": "2026-10-21T06:10:15.835566Z",
    "stale": true,
-   "stale_reason": "no new items in 126 days (expects ~30)"
+   "stale_reason": "no new items in 127 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Karo.WhyHidden: A Visibility-Diagnostics Add-in",
+   "url": "http://revitaddons.blogspot.com/2026/10/karowhyhidden-visibility-diagnostics.html",
+   "source": "revit-addons",
+   "published": "2026-10-21T00:47:00Z",
+   "summary": "Overview Karo.WhyHidden is a Revit visibility-diagnostics add-in from Karo Modum. It investigates why a known element does not appear in a particular view, bringing together checks that would otherwise require opening several Revit settings dialogs. The vendor describes 16 visibility checks covering direct hiding, graphics settings, spatial clipping, worksets, phasing, design options, linked-model display, and view-template control. Findings appear as diagnostic cards identifying relevant settings, filters, or worksets. Selected issues have one-click fixes; others receive guidance. The product is primarily a troubleshooting aid rather than a model-wide QA engine or an automatic redesign of view standards. [1-3] Typical Workflow Identify the element: Select it in a view where it is visible, or use its element ID. This is a targeted investigation of a known object, not a search for an unidentified missing object. Activate the problem view: Switch to the plan, section, elevation, or 3D view where the element should appear. Run Why Hidden: Launch the command from the Karo ribbon tab. Review diagnostics: Read the cards identifying visibility blockers and the settings responsible.…",
+   "id": "d13978aa1948462f",
+   "fetched_at": "2026-10-21T06:10:15.835566Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 28,
+    "why": "A third-party visibility troubleshooting tool—useful reference for your audit practice, but not a change to your own work or the platform.",
+    "topics": [
+     "revit-addon",
+     "visibility-diagnostics"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-21T06:10:15.835566Z"
+   }
+  },
   {
    "title": "Karo.WhatsChanged: A Local Change-Audit and Investigation Layer",
    "url": "http://revitaddons.blogspot.com/2026/10/karowhatschanged-change-audit-and.html",
