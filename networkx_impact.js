@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-10-20T13:00:30Z",
+  "generated": "2026-10-21T13:00:30Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -31,7 +31,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 291,
         "churn": 51,
-        "risk": 38.6
+        "risk": 38.7
       },
       {
         "label": "assistant.py",
@@ -39,7 +39,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 148,
         "churn": 31,
-        "risk": 36.8
+        "risk": 36.9
       },
       {
         "label": "admin_router.py",
@@ -47,7 +47,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 101,
         "churn": 28,
-        "risk": 33.2
+        "risk": 33.3
       },
       {
         "label": "account_router.py",
@@ -55,7 +55,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 81,
         "churn": 26,
-        "risk": 29.4
+        "risk": 29.5
       },
       {
         "label": "aps/router.py",
@@ -63,7 +63,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 96,
         "churn": 31,
-        "risk": 27.2
+        "risk": 27.3
       },
       {
         "label": "hub_tenancy.py",
@@ -71,7 +71,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 156,
         "churn": 25,
-        "risk": 25.7
+        "risk": 25.8
       },
       {
         "label": "Base",
@@ -79,7 +79,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 90,
         "churn": 51,
-        "risk": 22.5
+        "risk": 22.6
       },
       {
         "label": "aec/router.py",
@@ -103,7 +103,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 368,
         "churn": 51,
-        "risk": 20.3
+        "risk": 20.4
       },
       {
         "label": "assert_project_access()",
