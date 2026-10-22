@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-10-21T13:00:30Z",
+  "generated": "2026-10-22T13:00:27Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -12,7 +12,7 @@ window.NETWORKX_IMPACT = {
       "nodes": 27763,
       "edges": 68557,
       "commit": "eeac8dd5",
-      "commitsBehind": 0,
+      "commitsBehind": 7,
       "builtAt": "2026-10-17",
       "stale": false
     },
@@ -21,7 +21,7 @@ window.NETWORKX_IMPACT = {
       "baseline": 0,
       "delta": 0,
       "rootCauses": [],
-      "excludedExternal": 12,
+      "excludedExternal": 16,
       "examples": []
     },
     "hubs": [
@@ -31,7 +31,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 291,
         "churn": 51,
-        "risk": 38.7
+        "risk": 38.3
       },
       {
         "label": "assistant.py",
@@ -39,39 +39,39 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 148,
         "churn": 31,
-        "risk": 36.9
+        "risk": 36.4
       },
       {
         "label": "admin_router.py",
         "file": "admin_router.py",
         "kind": "file",
         "degree": 101,
-        "churn": 28,
-        "risk": 33.3
+        "churn": 29,
+        "risk": 33.9
       },
       {
         "label": "account_router.py",
         "file": "account_router.py",
         "kind": "file",
         "degree": 81,
-        "churn": 26,
-        "risk": 29.5
+        "churn": 28,
+        "risk": 30.9
       },
       {
         "label": "aps/router.py",
         "file": "aps/router.py",
         "kind": "file",
         "degree": 96,
-        "churn": 31,
-        "risk": 27.3
+        "churn": 32,
+        "risk": 27.7
       },
       {
         "label": "hub_tenancy.py",
         "file": "aec/hub_tenancy.py",
         "kind": "file",
         "degree": 156,
-        "churn": 25,
-        "risk": 25.8
+        "churn": 26,
+        "risk": 26.1
       },
       {
         "label": "Base",
@@ -79,7 +79,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 90,
         "churn": 51,
-        "risk": 22.6
+        "risk": 22.3
       },
       {
         "label": "aec/router.py",
@@ -87,7 +87,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 69,
         "churn": 42,
-        "risk": 22.4
+        "risk": 22.2
       },
       {
         "label": "change_set_router.py",
@@ -95,7 +95,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 68,
         "churn": 25,
-        "risk": 20.7
+        "risk": 20.5
       },
       {
         "label": "Firm",
@@ -110,7 +110,7 @@ window.NETWORKX_IMPACT = {
         "file": "aec/hub_tenancy.py",
         "kind": "symbol",
         "degree": 125,
-        "churn": 25,
+        "churn": 26,
         "risk": 20.3
       },
       {
@@ -119,7 +119,7 @@ window.NETWORKX_IMPACT = {
         "kind": "symbol",
         "degree": 218,
         "churn": 51,
-        "risk": 17.8
+        "risk": 17.9
       }
     ],
     "baseline": {
@@ -137,7 +137,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "cycle_detection",
       "nodes": 0,
-      "finding": "No circular imports. 12 third-party symbols excluded (graphify credits them to the importing file).",
+      "finding": "No circular imports. 16 third-party symbols excluded (graphify credits them to the importing file).",
       "category": "clear"
     },
     {
