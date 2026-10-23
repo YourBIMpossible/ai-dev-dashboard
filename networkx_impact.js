@@ -1,5 +1,5 @@
 window.NETWORKX_IMPACT = {
-  "generated": "2026-10-22T13:00:27Z",
+  "generated": "2026-10-23T13:00:30Z",
   "stats": {
     "repos": 4,
     "tools": 3,
@@ -30,8 +30,8 @@ window.NETWORKX_IMPACT = {
         "file": "db/models.py",
         "kind": "file",
         "degree": 291,
-        "churn": 51,
-        "risk": 38.3
+        "churn": 50,
+        "risk": 38.0
       },
       {
         "label": "assistant.py",
@@ -39,7 +39,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 148,
         "churn": 31,
-        "risk": 36.4
+        "risk": 36.6
       },
       {
         "label": "admin_router.py",
@@ -47,7 +47,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 101,
         "churn": 29,
-        "risk": 33.9
+        "risk": 34.1
       },
       {
         "label": "account_router.py",
@@ -55,7 +55,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 81,
         "churn": 28,
-        "risk": 30.9
+        "risk": 31.1
       },
       {
         "label": "aps/router.py",
@@ -63,7 +63,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 96,
         "churn": 32,
-        "risk": 27.7
+        "risk": 27.9
       },
       {
         "label": "hub_tenancy.py",
@@ -71,15 +71,7 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 156,
         "churn": 26,
-        "risk": 26.1
-      },
-      {
-        "label": "Base",
-        "file": "db/models.py",
-        "kind": "symbol",
-        "degree": 90,
-        "churn": 51,
-        "risk": 22.3
+        "risk": 26.2
       },
       {
         "label": "aec/router.py",
@@ -87,23 +79,23 @@ window.NETWORKX_IMPACT = {
         "kind": "file",
         "degree": 69,
         "churn": 42,
-        "risk": 22.2
+        "risk": 22.3
       },
       {
-        "label": "change_set_router.py",
-        "file": "aec/change_set_router.py",
-        "kind": "file",
-        "degree": 68,
-        "churn": 25,
-        "risk": 20.5
+        "label": "Base",
+        "file": "db/models.py",
+        "kind": "symbol",
+        "degree": 90,
+        "churn": 50,
+        "risk": 22.0
       },
       {
         "label": "Firm",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 368,
-        "churn": 51,
-        "risk": 20.4
+        "churn": 50,
+        "risk": 20.3
       },
       {
         "label": "assert_project_access()",
@@ -114,12 +106,20 @@ window.NETWORKX_IMPACT = {
         "risk": 20.3
       },
       {
+        "label": "change_set_router.py",
+        "file": "aec/change_set_router.py",
+        "kind": "file",
+        "degree": 68,
+        "churn": 24,
+        "risk": 19.9
+      },
+      {
         "label": "AccountAuditLog",
         "file": "db/models.py",
         "kind": "symbol",
         "degree": 218,
-        "churn": 51,
-        "risk": 17.9
+        "churn": 50,
+        "risk": 17.8
       }
     ],
     "baseline": {
@@ -147,7 +147,7 @@ window.NETWORKX_IMPACT = {
       "tool": "graphify",
       "algo": "degree \u00d7 90d churn",
       "nodes": 12,
-      "finding": "db/models.py is the hotspot \u2014 291 dependents, 51 commits in 90d",
+      "finding": "db/models.py is the hotspot \u2014 291 dependents, 50 commits in 90d",
       "category": "watch"
     },
     {
