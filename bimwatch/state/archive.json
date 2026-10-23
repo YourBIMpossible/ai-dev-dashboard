@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-22T06:10:07.279877Z",
- "count": 526,
+ "generated_at": "2026-10-23T06:10:18.855023Z",
+ "count": 535,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 21 Oct 2026 21:50:48 GMT",
    "last_status": 200,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": true,
-   "stale_reason": "no new items in 78 days (expects ~7)"
+   "stale_reason": "no new items in 79 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-10-19T09:45:25Z",
-   "last_modified": "Wed, 21 Oct 2026 16:56:53 GMT",
+   "last_item_published": "2026-10-22T18:57:09Z",
+   "last_modified": "Thu, 22 Oct 2026 18:57:38 GMT",
    "last_status": 200,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,66 +27,66 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-21T10:27:27Z",
+   "last_item_published": "2026-10-22T21:20:18Z",
    "last_status": 200,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"a9faa074efcd3be4fb9c02e2c8a900d3\"",
+   "etag": "W/\"3105a643349d486cc064109dc6bb7bcd\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
    "last_item_published": "2026-10-21T08:35:31Z",
-   "last_modified": "Wed, 21 Oct 2026 08:48:54 GMT",
+   "last_modified": "Thu, 22 Oct 2026 09:45:21 GMT",
    "last_status": 200,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"01ef274240dfd42accd655b7dbbf7253\"",
+   "etag": "W/\"b9c633ec07c6b510b6042f983e6bbaf6\"",
    "last_item_count": 8,
-   "last_modified": "Wed, 21 Oct 2026 16:52:37 GMT",
+   "last_modified": "Thu, 22 Oct 2026 21:05:08 GMT",
    "last_status": 200,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"ca3753e8fe0230d9f81ef5664cfc3eb5\"",
+   "etag": "W/\"955d6372535af740dbe9b5c1f287786e\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-21T06:20:44Z",
+   "last_item_published": "2026-10-23T06:00:39Z",
    "last_status": 200,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-22T00:25:00Z",
-   "last_modified": "Thu, 22 Oct 2026 00:59:16 GMT",
+   "last_item_published": "2026-10-23T00:41:00Z",
+   "last_modified": "Fri, 23 Oct 2026 02:58:09 GMT",
    "last_status": 200,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 104,
+   "consecutive_failures": 105,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-22T06:10:07.279877Z",
+   "last_failure": "2026-10-23T06:10:18.855023Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "104 consecutive failures: HTTP 403"
+   "stale_reason": "105 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"961c16b4516f86ef42fdbecfeb601ea8\"",
+   "etag": "W/\"82ae4675b9f035f7a65f78ae951964e6\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,195 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-22T06:10:07.279877Z",
+   "last_success": "2026-10-23T06:10:18.855023Z",
    "stale": true,
-   "stale_reason": "no new items in 128 days (expects ~30)"
+   "stale_reason": "no new items in 129 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Karo.Segments: Creating & Managing Architectural Segments as Plates on Host Geometry",
+   "url": "http://revitaddons.blogspot.com/2026/10/karosegments-for-creating-managing.html",
+   "source": "revit-addons",
+   "published": "2026-10-23T00:41:00Z",
+   "summary": "Overview Karo.Segments is a Revit add-in from Karo Modum for creating and managing user-defined architectural segments as plates on host geometry. Its advertised applications include flashings, trims, parapet copings, cover strips, drips, panels, cassettes, and sheet-material layouts. It combines face-and-edge-based placement, a mark-based catalog, dimensional editing, overlap controls, schedules, and display management. The central proposition is a connected modeling-and-documentation workflow for repeated envelope components, rather than a collection of separately modeled details. The vendor’s manual and demonstration are the principal evidence for this summary; they do not constitute independent testing. [1, 2] Placement and Editing Workflow Choose or define a segment: Select an existing catalog mark or enter type parameters. The placement form foregrounds type and length, with additional fields available in an expanded view. Reference model geometry: Placement uses a selected planar face and reference edge. The manual describes magnetic snapping near segment ends and face corners, with other positions moving along the edge in 5 mm increments. Set orientation: Rotation and…",
+   "id": "1b07aca6a56a7e2a",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A third-party add-in for envelope components; worth knowing the market direction but not your core work.",
+    "topics": [
+     "revit-addins",
+     "modeling-workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "AI in the Real World",
+   "url": "https://aps.autodesk.com/blog/ai-real-world",
+   "source": "aps-blog",
+   "published": "2026-10-22T21:20:18Z",
+   "summary": "AI in the Real World KrisztianHegedus 22 Oct 2026 Krisztian Hegedus Julia Brun Share Leading AEC firms 🏗 like PEC are pushing past the AI hype and finding valuable, practical applications that address how engineering work actually gets done. Pop quiz: When is cutting costs or time on a project by 15% considered bad news? The answer: In conversations about AI, where many people seem to expect multiweek workflows to be accomplished with the push of a button, rather than more practical process improvements. At least, that’s what AI conversations were like 12 to 18 months ago, when most people were still learning the basics about how to use generative AI chatbots, let alone AI agents. At that time, social media was flooded with people making predictions about how buildings would soon be designed in an afternoon, lawyers and software engineers would all be replaced by AI agents, and we would all be watching custom movies, generated in an instant. Ironically, as AI tools have become more powerful, expectations have grown more modest. But the technology has also grown far more valuable, at least for those who are using it strategically. The companies leading the way are not spending huge…",
+   "id": "2691837a84bfbd9f",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Generic 'AI is now practical' think-piece with no concrete techniques or tools you can apply.",
+    "topics": [
+     "ai-industry"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "Compliance software in AEC",
+   "url": "https://aecmag.com/cad/compliance-software-in-aec/",
+   "source": "aec-magazine",
+   "published": "2026-10-22T18:57:09Z",
+   "summary": "Two years ago there were a handful of compliance tools helping AEC professionals navigate building codes and regulations. There are now at least nineteen. Allister Lewis looks at what is available, what these tools can and cannot do, and what happens when one of them misses something Rule-based checking software has existed for years in AEC but it required someone to translate written regulation into machine readable rules and then maintain them. That changed with Artificial Intelligence. AI models can read drawings, models and regulations as they are actually written and compare one against the other, without that translation step. That is a major reason why compliance has become one of the fastest growing categories in ConTech. Compliance matters to clients and contractors because they need the design information to meet the project requirements. Where a building is not compliant the result is delay, additional cost and increased risk, and resolving that early leads to better outcomes on site. This article looks at what compliance actually covers, what the options are and why this is a critical moment for consultants, clients and contractors to consider what this shift means for…",
+   "id": "2af4c340082aa979",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "AI-driven compliance checking is shifting how rule validation works; relevant to audit tooling you build.",
+    "topics": [
+     "ai-technique",
+     "model-checking",
+     "compliance"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "AI’s next bottleneck is the engineer’s desk",
+   "url": "https://aecmag.com/automation/ais-next-bottleneck-is-the-engineers-desk/",
+   "source": "aec-magazine",
+   "published": "2026-10-22T18:51:23Z",
+   "summary": "Nomic is helping Arcadis automate engineering reviews, but AI’s next bottleneck may be the senior engineers still responsible for checking them. Martyn Day spoke with Nomic CEO Andriy Mulyar and Arcadis global AI enablement director Freek Matheij to learn more Andriy Mulyar, founder and CEO of Nomic , recognises the problem inside his own company. As AI accelerates software development, he says the constraint becomes “the mental bandwidth of our senior engineering staff’s ability to review things.” He applies the same reasoning to global design and engineering consultancy Arcadis, where Nomic’s software supports engineering reviews: preparing the work takes less time, but accepting responsibility for it remains a human job. Nomic CEO Andriy Mulyar I was introduced to Mulyar by Freek Matheij, global AI enablement director at Arcadis, who had contacted me the previous week to discuss the firm’s AI strategy. I had expected another conversation about Microsoft Copilot, but Matheij was far more enthusiastic about software that could work directly with project and asset data. “Nomic is maybe not the most sexy AEC platform out there, but it really helps in terms of everything in the…",
+   "id": "42d9ba044d192255",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 40,
+    "why": "Concrete case of AI review automation and where the real bottleneck is; applicable pattern for your tooling.",
+    "topics": [
+     "ai-technique",
+     "automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "Revizto: putting the ‘I’ in BIM to work",
+   "url": "https://aecmag.com/collaboration/revizto-putting-the-i-in-bim-to-work/",
+   "source": "aec-magazine",
+   "published": "2026-10-22T18:43:08Z",
+   "summary": "Revizto now has a Model Context Protocol (MCP) server, but more interestingly packaged it with reusable Claude skills by learning what project teams actually do. Martyn Day spoke with CPO Marc Schuetz about getting more from BIM data without giving customers another job — or another bill. Adding an MCP server is becoming another item on the AEC software developer’s checklist. Connect the application to an AI assistant, demonstrate some natural-language queries and announce that customers can now talk to their projects. After watching a few of these demonstrations, I usually have the same question: what are the actual benefits? Marc Schuetz has been asking much the same thing. Revizto ’s chief product officer, whose appointment was announced in January 2026, previously worked at Bentley Systems and PTC. He described watching compressed videos of lengthy AI tasks and wondering whether the work could have been done faster conventionally. “What’s the benefit of it?” is a fair question when the demonstration needs speeding up to hold your attention. Schuetz summed up the customer problem as “there’s an ambition about digitalisation, and there’s the reality of no one has time.” Project…",
+   "id": "56787238c2a53752",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 60,
+    "why": "MCP server integration and Claude skills for BIM queries show a new surface for connecting add-ins to AI agents.",
+    "topics": [
+     "aps-integration",
+     "ai-technique",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "Qonic edges towards BIM authoring",
+   "url": "https://aecmag.com/bim/qonic-edges-towards-bim-authoring/",
+   "source": "aec-magazine",
+   "published": "2026-10-22T18:37:23Z",
+   "summary": "Qonic’s latest updates push its browser-based BIM platform further into authoring, so users can start to build complete models from scratch, writes Martyn Day Qonic ’s latest updates add native components, streamed site context, rebuilt measurement tools, and a project-wide issues view. The company says this is the point at which a complete building can be modelled without leaving the browser. That is a bigger claim than the feature list initially suggests. Closing the gap ‘Components’ is the headline feature. It puts doors, windows, furniture, and MEP terminals into the modelling system. Walls and slabs were already there, but without components there was a limit to how much of a project anyone could develop before going back to Revit. Qonic says users no longer need external component libraries, and that the new elements behave as functional, reusable components carrying properties rather than lumps of geometry. They remain part of the structured model. Components such as Windows are where that gets tested, as they are among the most relationally awkward objects in a building model, tied to sills, reveals, lintels, casings, and the thickness of the host wall. The usual answer…",
+   "id": "f3aa5ae340a6d722",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Browser-based competitor pushing into authoring; worth knowing but does not change Revit API work.",
+    "topics": [
+     "competitor",
+     "authoring-workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "Ten conceptual designs before lunch…",
+   "url": "https://aecmag.com/cad/ten-conceptual-designs-before-lunch/",
+   "source": "aec-magazine",
+   "published": "2026-10-22T18:34:19Z",
+   "summary": "But, two weeks to check and sign the drawings The largest productivity prize in architecture is the industrial production of drawings that are ready to issue: generated from the model, checked, compared against the last release and fit to be signed. That is where the fee sits, where the delays happen, and where the signatures are. But automating the drawing is the beginning of that prize, not the whole of it, writes Richard Harpham Judging by the exhibition floors, product launches and conference programs of the past two years, architectural AI has a favourite subject: the beginning of a project. Text-to-image concept exploration. Generative massing across a hundred site permutations. Agentic assistants that will interrogate a planning code, sketch a façade, or turn out a morning’s worth of alternatives where a studio used to manage three. Much of it is impressive, and some of it will change how buildings are conceived. Now count the demos about drawing production. The 400-sheet consultant-coordinated set. The dimension strings. The tag that overlaps a door swing on sheet A-204. The thing that gets built from. Not everyone has missed it. At NXT BLD this year, Robert Gräbert of…",
+   "id": "0b16a11d04deb77c",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Focus on drawing production and sign-off automation from models is core to what you build; concrete workflow insight.",
+    "topics": [
+     "drawing-automation",
+     "sheet-viewport",
+     "workflow"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "BuildingConnected API Enhancements: Opportunity NDAs, Member Signature Tracking, and NDA-Based Access Controls",
+   "url": "https://aps.autodesk.com/blog/buildingconnected-api-enhancements-opportunity-ndas-member-signature-tracking-and-nda-based",
+   "source": "aps-blog",
+   "published": "2026-10-22T08:37:23Z",
+   "summary": "BuildingConnected API Enhancements: Opportunity NDAs, Member Signature Tracking, and NDA-Based Access Controls naveen.kumar.t… 22 Oct 2026 Naveen Kumar Thalaivirichan Xiaodong Liang Share This release brings a security improvement to the BuildingConnected API. It adds endpoints for retrieving and signing an opportunity's NDA, adds NDA signature tracking to opportunity members, and applies NDA-based access controls across the Opportunities and Opportunity Project Pairs resources. It also changes how opportunity project pairs are returned when their opportunity has been deleted. Several existing endpoints now return 403 Forbidden when an opportunity requires an NDA that the current user has not signed, so integrations that work with NDA-protected opportunities should review the sections below. For the complete list, see the BuildingConnected change log . What follows covers the main changes. Opportunities A general contractor (GC) can attach an NDA to an opportunity. Until now, the API had no endpoints for working with that NDA, so an integration could not download the document or sign it, and opportunity responses did not show which members had signed. This release adds both, and…",
+   "id": "f8fbb68cbc474706",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "BuildingConnected API security feature; relevant only if you integrate with that platform.",
+    "topics": [
+     "aps-api",
+     "security"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "Action required for users of the Get Forms and Put Forms Values APIs",
+   "url": "https://aps.autodesk.com/blog/action-required-users-get-forms-and-put-forms-values-apis",
+   "source": "aps-blog",
+   "published": "2026-10-22T07:38:24Z",
+   "summary": "Action required for users of the Get Forms and Put Forms Values APIs xiaodong.liang… 22 Oct 2026 Xiaodong Liang Share If you are have used the v1 Get Forms, Get Values or Put Form Values API endpoints. These endpoints will be retired on June 30, 2027, and action is required. Background Autodesk Forma Forms is a component within Autodesk Forma that lets teams create, fill out, and manage forms and other structured data. In April 2026, Autodesk released new Forma Forms API endpoints to public beta, including new endpoints in v2 and endpoints that were upgraded from v1 to v2. Please refer to the Forms API Migration Guide (2026 April Release) for more information. The Forma Forms (v2) API endpoints from the April 2026 release have moved to general availability and are ready for production use today. As a result, the two v1 endpoints listed below will be retired on June 30, 2027. Action Required If you are using the following two Forma Forms (v1) API endpoints, you will need to migrate to their v2 replacements by June 30, 2027 , at which point these two v1 endpoints will be retired and stop functioning. Failure to migrate in a timely manner will result in breaking the workflow in your…",
+   "id": "23a49bcb7e9bb63d",
+   "fetched_at": "2026-10-23T06:10:18.855023Z",
+   "classification": {
+    "tier": "alert",
+    "relevance": 35,
+    "why": "Forma Forms v1 endpoints retire June 2027; action required if any add-in or dashboard uses these endpoints.",
+    "topics": [
+     "aps-api",
+     "deprecation",
+     "migration-deadline"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
   {
    "title": "Karo.ModelGuard: Enforce Selected BIM Standards While Users Work",
    "url": "http://revitaddons.blogspot.com/2026/10/karomodelguard-enforce-selected-bim.html",
