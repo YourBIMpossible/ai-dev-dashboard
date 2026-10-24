@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-10-23 06:00:31",
+  "checked": "2026-10-24 06:00:18",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -8,22 +8,22 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-10-21",
+      "lastActivity": "2026-10-23",
       "newestRecent": "2026-10-06",
-      "lagDays": 15,
+      "lagDays": 17,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-10-21) is 15 days ahead of the newest recent[] entry (2026-10-06)"
+      "reason": "git activity (2026-10-23) is 17 days ahead of the newest recent[] entry (2026-10-06)"
     },
     "addins": {
       "name": "Add-Ins / RevitLink",
       "status": "active",
-      "lastActivity": "2026-10-22",
+      "lastActivity": "2026-10-23",
       "newestRecent": "2026-10-06",
-      "lagDays": 16,
+      "lagDays": 17,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-10-22) is 16 days ahead of the newest recent[] entry (2026-10-06)"
+      "reason": "git activity (2026-10-23) is 17 days ahead of the newest recent[] entry (2026-10-06)"
     },
     "site": {
       "name": "BIMpossible Site",
@@ -68,12 +68,12 @@ window.NARRATIVE_FRESHNESS = {
     "aiserver": {
       "name": "AI-Server",
       "status": "active",
-      "lastActivity": "2026-09-22",
+      "lastActivity": "2026-10-23",
       "newestRecent": "2026-10-06",
-      "lagDays": -14,
+      "lagDays": 17,
       "evaluated": true,
-      "stale": false,
-      "reason": null
+      "stale": true,
+      "reason": "git activity (2026-10-23) is 17 days ahead of the newest recent[] entry (2026-10-06)"
     },
     "ai-brain-data": {
       "name": "AI Brain Data",
@@ -88,22 +88,22 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible-workspace": {
       "name": "BIMpossible Workspace",
       "status": "active",
-      "lastActivity": "2026-10-15",
-      "newestRecent": "2026-10-06",
-      "lagDays": 9,
-      "evaluated": true,
-      "stale": false,
-      "reason": null
-    },
-    "dashboard-auto": {
-      "name": "Dashboard (Auto Clone)",
-      "status": "active",
       "lastActivity": "2026-10-23",
       "newestRecent": "2026-10-06",
       "lagDays": 17,
       "evaluated": true,
       "stale": true,
       "reason": "git activity (2026-10-23) is 17 days ahead of the newest recent[] entry (2026-10-06)"
+    },
+    "dashboard-auto": {
+      "name": "Dashboard (Auto Clone)",
+      "status": "active",
+      "lastActivity": "2026-10-24",
+      "newestRecent": "2026-10-06",
+      "lagDays": 18,
+      "evaluated": true,
+      "stale": true,
+      "reason": "git activity (2026-10-24) is 18 days ahead of the newest recent[] entry (2026-10-06)"
     },
     "pc-monitor": {
       "name": "PC Monitor",
@@ -138,22 +138,22 @@ window.NARRATIVE_FRESHNESS = {
     "claude-profile": {
       "name": "Claude Profile",
       "status": "active",
-      "lastActivity": "2026-10-22",
+      "lastActivity": "2026-10-23",
       "newestRecent": "2026-10-06",
-      "lagDays": 16,
+      "lagDays": 17,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-10-22) is 16 days ahead of the newest recent[] entry (2026-10-06)"
+      "reason": "git activity (2026-10-23) is 17 days ahead of the newest recent[] entry (2026-10-06)"
     },
     "claude-tools": {
       "name": "Claude-Tools",
       "status": "active",
-      "lastActivity": "2026-10-13",
+      "lastActivity": "2026-10-23",
       "newestRecent": "2026-10-06",
-      "lagDays": 7,
+      "lagDays": 17,
       "evaluated": true,
-      "stale": false,
-      "reason": null
+      "stale": true,
+      "reason": "git activity (2026-10-23) is 17 days ahead of the newest recent[] entry (2026-10-06)"
     },
     "evidence-compiler": {
       "name": "Evidence Compiler",
