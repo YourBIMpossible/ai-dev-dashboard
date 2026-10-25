@@ -5,9 +5,9 @@
 //   The GitHub-Models prose bot has no trigger on the code repos, so prose only moves on an
 //   on-demand "refresh dashboard" pass and goes stale between passes. See REFRESH-SPEC.md.
 window.DASHBOARD_DATA = {
-  generated: "2026-10-24",
+  generated: "2026-10-25",
   generatedBy: "scheduled refresh",
-  activitySince: "2026-10-11",
+  activitySince: "2026-10-12",
   projects: [
     /* PROJECT:bimpossible:START */
     {
@@ -289,7 +289,7 @@ window.DASHBOARD_DATA = {
         }
       ],
       phaseAliases: { "P11.1": "P11" },
-      activity: [8,20,20,3,4,4,15,1,0,0,20,0,5,0],
+      activity: [20,20,3,4,4,15,1,0,0,20,0,5,0,0],
       lastActivity: {
         date: "2026-10-23",
         summary: "APS rebuild: integration line (3.6 + 3.8 + 3.9) into main (#900) (83be1d7)"
@@ -299,7 +299,7 @@ window.DASHBOARD_DATA = {
       nextActions: ["Revit end-user verification (owner-only, queue REVIT-END-USER-WORKFLOW-VERIFY, blocked_owner): the review-folder evidence blocker is cleared; decide which add-in build to certify (AddIns main with Link-PDF fixes #168/#171/#173 is deployed to 2024-2027, hashes verified), then run Invoke-RevitLiveVerification on a Revit 2026/2027 cloud model; Link-PDF runtime load/placement (RE-C54) moved to the PDF tool workstream","Phase 13: frontend now carries #762/#764/#765 (refreshed at a7093a00 on 10-06); run the attended Apply live matrix (L1/L4/L7/L10/L12/L13 feasible; L6/L8 need an invite + read share), write the Increment 2 Task 8 reconciliation, then open Increment 3. Change-set locking is CI + isolated-DB proven only, not live-exercised","Cfg PR-1 (#783, agent secret controls: gate hook, contract exposure checks, migrator refusals) then PR-2 (#784, placement migrator + cutover records): owner reviews the permission-settings deny list and hook order, merges, and only then runs the owner-only live-environment migration (not yet run; live environment unchanged)","Ordinary-member hub discovery (queue HUB-DISCOVERY-NO-MANUAL-GRANT, ready): members of a firm without a manual hub grant see no Autodesk hubs; run the separate design/fix session (consolidated decision package + slice (a) per-user discovery caches exist on an unpushed local branch), and confirm the production Autodesk-first flag state first","Ordinary-member signed-in share-list check (owner): sign in with a third Autodesk identity that has no firm membership, then say 'run the ordinary-member check' (runbook + self-tested fixture ready; admin downgrade/removal check already passed on rerun)","Phase 17 (code-complete, dormant): owner closes the closeout C.1 policy decisions plus the Teams conditions (dedicated key, one live test-tenant consent before enabling), runs the one-sitting operational gate (backup, migrate outbox/delivery tables, readiness check all DISABLED), then Slack-then-Teams pilot once the pilot firm/workspace/tenant exist","Phase 9: flag-on activation of product ingestion (A6/A7 + flag-on smoke) now that the flag-gated ingest trigger exists (#748); no flag-on proof yet","Autodesk-first rollout (queue AUTODESK-FIRST-ROLLOUT-DELIVERY, ready): complete the per-user authority model, wire FE canDownload control-hiding, then enable the access flag; w5/p1f4 worktree still holds 6 uncommitted cache files","Architecture: the 4 owner-deferred 09-11 items (ARCH-1A/2A/3A, RE-2A) are the only open audit findings; sequence them against the ratified modularization backlog (#802) and the landed ARCH-AUTH-01 slice (#808)","Owner git hygiene: 10-05/06 housekeeping pruned merged lanes (21 -> 15 worktrees, 233 -> 147 branches); keep/push/discard what is still genuinely local-only (AU 2026 competitive analysis, arch/config familiarization map, plan-comparison archive, hub-discovery slice, nl-filter lanes) and the dormant w5/p1f4 lane","Carried owner-gated: P6 Client-Mgmt E launch (flag-dark, verified non-prod); Phase 15c live-read broker flip after T5 under AUTH-INH; AUTHZ-AUDIT-ROW-SIGNING scheme; P14-14g residency/redaction ratification; WAVE-STATUS rows 49-52 added 10-06 (49 SHIPPED, 50 BUILT, 51/52 PARTIAL) -- the card's waves block lags (automation-owned)"],
       pendingDecisions: ["Phase 13 apply contract (decisions/2026-09-26__phase13-apply-contract-PROPOSED.md): owner rows 3a, 10b, 11a, 12a, 13a, 15a, 16a, 20a-c unratified; draft/in-review Apply refusal kept as current policy pending an owner call; Increment 3 stays closed until the Increment 2 Task 8 record conflict is reconciled in writing.","Phase 17 policy set (closeout C.1): outbox/delivery-ledger retention, composite change_set FK, kill-switch scope beyond the answer path, newer-schema outbox rows (hold vs close out), dispatch lock/send timeouts, deep-link host, backfill on enable, pilot-evidence model, notification routing, key-management deprecation/vault/rotation ownership; Teams tenant-binding (#778) accepted with conditions: dedicated crypto key + one live test-tenant consent before enabling, admin-consent nonce flow before multi-firm onboarding.","Which installed add-in build the Revit end-user verification certifies: the deployed AddIns main build (Link-PDF fixes #168/#171/#173, hashes verified 2024-2027) replaces the earlier unmerged-branch DLL; owner confirms that is the certification target (AddIns/Glass lane).","Cfg PR-1/PR-2 (#783/#784): owner review of the agent permission-settings deny list and hook order; reclassify (or keep) a connection-URL setting the contract marks non-secret but the gate treats as secret-shaped; PR-2 is stacked on PR-1; the live-environment migrator stays owner-only.","Ordinary-member hub discovery: decide the authorization model for member hub visibility (today membership AND a manual firm hub grant AND Autodesk entitlement; the 10-06 consolidated decision package proposes discovery on the user's own Autodesk authorization) and whether to ship slice (a) per-user discovery/content caches.","Delivery-control stack is settled by merge (#768 reset, #755/#760 landed, #763 closed unmerged); remaining call: #753's 3c proposal (ratify a Status: live|closed doc marker).","Waves 1-9 closeout open owner actions (decisions/2026-09-26__waves1-9-closeout-open-owner-actions.md): keep/merge/discard four local-only follow-up lanes, adopt strict truthiness for the 17 sensitive gates or keep the permissive design, branch/worktree pruning. (Merged-lane worktree/branch pruning executed 10-05/06; four local-only follow-up lanes remain.)","Schedule-push: staleness cadence, classifier rules, fidelity-degradation list, SPF ship location -- still direction-only, no code. The write-spine role SPF anticipated is now filled by the Phase 13 Write Engine; re-scope SPF against it before building.","Ceilings/Flooring dedicated shapers (Wave 16 placeholders) vs. Wave 15 Civil shapers (also pending) -- build now or batch them? Neither built; no demand signal forcing it. Furniture shaper already shipped.","D-5 (AKP): provider routing for local LLM inference -- gated on C-2 (provider runtime abstraction). Model routing 1A (#537) now gives a compiled registry + resolver, but only 'anthropic' is runtime_supported; re-check whether C-2 is now partially satisfied before deciding.","D-8 (AKP): where the audit hash-chain tip anchors outside the DB -- dormant until a B-6 STEP-0 trigger fires (2nd DB-writer, or a client/contract/insurer record on file). None has: single-operator deployment.","Phase 15 has no PhaseDefinition / ratification doc -- unlike Phase 13 (ACTIVE 2026-07-16) and Phase 14 (ACTIVE 2026-08-17), it entered build with no proposal; the PHASE-STATUS row carries its own flag. Owner still owes the definition doc.","Owner architecture calls on the 4 deferred 09-11 audit items: single tenancy-enforcement idiom (ARCH-1A), URN-keyed hub resolution helper (ARCH-2A), persisted write-approval record (ARCH-3A), failed-provisioning rollback (RE-2A); the ratified modularization backlog (#802) is the natural sequencing home.","Autodesk-first: D1 authority model ratified 2026-09-21 (viewing = membership AND firm hub grant AND firm authority AND Autodesk entitlement); remaining call is enablement timing and how it interacts with hub discovery."],
       blockers: [],
-      reminders: ["main branch protection (checked 2026-10-06 via the API): pull-request required with 0 approvals, force-push disabled; enforce_admins is OFF and no required status checks are configured now (the earlier strict required-checks + enforce_admins setting is gone) -- local Verify-Local-CI and Push-And-Verify are the real gate.","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239, and again 09-28 -> #773-#778 on 09-30) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Status ladder is merged -> deployed on the local stack -> browser-smoked -> end-user (Revit) verified; the 09-23..09-30 Phase 13/17/9 and share-link work sits at the first three rungs only (change-set locking: CI + isolated-DB proof) -- no production or end-user claim until the attended Revit run.","The backend serves source bind-mounted from the F:\\BIMpossible main checkout: anything untracked or dirty there fails deploy evidence (exit 3), and pulling main changes what the backend runs on its next restart.","Docs budget (G4): ceilings never raised; since 2026-10-05 only largestDocWords blocks and total volume/file count/ratio are report-only telemetry (335,000-word line still the reference). Scope guard fails closed on any ceiling/mode/exclude change without a decision record.","Ledger definitions: remediation-ledger closed/resolved/disproven record merge + test/static proof, not live verification; the authenticated ordinary-member share check is the one live check still outstanding.","Codebase trend metrics last recorded 2026-09-25 (29d ago) - graph-metrics.js is appended only by the manual Update-Graph.ps1; the graph itself rebuilds weekly, see graphify-health"],
+      reminders: ["main branch protection (checked 2026-10-06 via the API): pull-request required with 0 approvals, force-push disabled; enforce_admins is OFF and no required status checks are configured now (the earlier strict required-checks + enforce_admins setting is gone) -- local Verify-Local-CI and Push-And-Verify are the real gate.","The weekly audit report is point-in-time and has twice been superseded within hours by a same-day fix PR (07-27 #231, 08-04 #239, and again 09-28 -> #773-#778 on 09-30) -- always check the repo's git log before trusting its counts.","Add-Ins test-count baseline is an attribute count (~904: Fact + Theory), NOT the ~1473 dotnet-test prints -- Theories expand across InlineData rows; conflating them caused a false '634 vs 895' scare.","D-N ID collision: the AKP decision series (AKP-D4/D5/D8, from Account_Key_Pairing_Remediation_Plan §4.2) and the PDP series (PDP-D1..D8, Production-Data-Protection-Plan) reuse the same D-numbers for different decisions -- always namespace by plan when citing a D-item.","Status ladder is merged -> deployed on the local stack -> browser-smoked -> end-user (Revit) verified; the 09-23..09-30 Phase 13/17/9 and share-link work sits at the first three rungs only (change-set locking: CI + isolated-DB proof) -- no production or end-user claim until the attended Revit run.","The backend serves source bind-mounted from the F:\\BIMpossible main checkout: anything untracked or dirty there fails deploy evidence (exit 3), and pulling main changes what the backend runs on its next restart.","Docs budget (G4): ceilings never raised; since 2026-10-05 only largestDocWords blocks and total volume/file count/ratio are report-only telemetry (335,000-word line still the reference). Scope guard fails closed on any ceiling/mode/exclude change without a decision record.","Ledger definitions: remediation-ledger closed/resolved/disproven record merge + test/static proof, not live verification; the authenticated ordinary-member share check is the one live check still outstanding.","Codebase trend metrics last recorded 2026-09-25 (30d ago) - graph-metrics.js is appended only by the manual Update-Graph.ps1; the graph itself rebuilds weekly, see graphify-health"],
       links: [
         { label: "STATE doc (canonical, 06-12, archived)", path: "F:\\BIMpossible-Workspace\\99_Archive\\00_Strategy\\state-snapshots\\BIMpossible_STATE_2026-06-12.md" },
         { label: "True-prod deploy runbook (06-12)", path: "F:\\BIMpossible-Workspace\\02_Reference\\2026-06-12__true-prod-deploy-runbook.md" },
@@ -403,7 +403,7 @@ window.DASHBOARD_DATA = {
           { name: "Project Conformance Engine (new, #10)", pct: 55, note: "Revit-free core + collector adapters merged 08-04 (94b21ab) — the first landing against the 06-28 design spec's 4-part spine (STANDARD data → INSPECT → EVALUATE → APPLY/REPORT); INSPECT+EVALUATE are the new work here, APPLY/REPORT reuse existing ModelQA.Core/setup-service pieces. No firm-standard data file authored yet. pct is a first-cut estimate against the spec's stages, not ledger-derived." }
         ]
       },
-      activity: [0,4,6,0,2,0,0,0,0,0,6,29,30,0],
+      activity: [4,6,0,2,0,0,0,0,0,6,29,30,0,0],
       lastActivity: {
         date: "2026-10-23",
         summary: "Merge pull request #219 from YourBIMpossible/claude/wip-keynote-server-v1 (a0c2808)"
@@ -707,7 +707,7 @@ window.DASHBOARD_DATA = {
           { name: "AI-Server UI", pct: 0, note: "No dedicated status widget yet -- only this generic phase-progress row exists. Needs an aiserver.js panel + card in index.html, sourced via data.js per REFRESH-SPEC.md's pattern, backed by the already-merged F:\\AI-Server\\scripts\\aiserver_status.py (PR #5, a7c8724). Endpoint up/down, loaded models, last digest/rollup/drift summaries. Confirmed 2026-09-13: no work in flight." }
         ]
       },
-      activity: [0,0,3,0,0,0,0,0,0,0,0,0,1,0],
+      activity: [0,3,0,0,0,0,0,0,0,0,0,1,0,0],
       lastActivity: {
         date: "2026-10-23",
         summary: "Merge pull request #30 from YourBIMpossible/ccr-42a68d31-begcqr (249839f)"
@@ -880,7 +880,7 @@ window.DASHBOARD_DATA = {
           { name: "Prompts + skills", pct: 88, note: "Agent/skill surface grew: on disk now 6 skills (incl. wiki), 7 agents, 7 commands. 10-05/06 changes: bim-office-hours born-in-place design docs stay live until closure (#182), GRRP entry/exit blocks across audit workflows (#193), scheduled weekly-audit prompts gained G4 per-config size signal and startup-context telemetry (#175, #177, #184)." }
         ]
       },
-      activity: [0,16,17,0,2,0,0,0,0,0,19,0,4,0],
+      activity: [16,17,0,2,0,0,0,0,0,19,0,4,0,0],
       lastActivity: {
         date: "2026-10-23",
         summary: "Merge pull request #221 from YourBIMpossible/wip/row-s1-12-pr111-audit-docs (6f12c96)"
@@ -918,10 +918,10 @@ window.DASHBOARD_DATA = {
           { name: "Refresh model", pct: 100, note: "Local :8081 monitor REMOVED 2026-07-21 (e1aae72) after repeatedly dying into a silently-stale orphan. Scheduled-only (Task Scheduler daily 06:00 -> Dashboard-auto) + on-demand (Refresh-Now.cmd). Confirmed 09-26..10-06: every run 'result 0', pushes landing on attempt 1." }
         ]
       },
-      activity: [3,4,3,3,3,3,3,3,4,3,3,3,3,1],
+      activity: [4,3,3,3,3,3,3,4,3,3,3,3,3,1],
       lastActivity: {
-        date: "2026-10-24",
-        summary: "chore: live billing sync 2026-10-24 (4320277)"
+        date: "2026-10-25",
+        summary: "chore: live billing sync 2026-10-25 (c7c33e5)"
       },
       branch: "main; Dashboard-auto and the human clone Dashboard were both in sync with origin/main when last verified (2026-10-06); the former human-clone stash was removed and a recovery tag is retained",
       git: null,
@@ -1153,7 +1153,7 @@ window.DASHBOARD_DATA = {
         date: "2026-10-23",
         summary: "Merge pull request #43 from YourBIMpossible/ccr-42a68d31-begcqr (532a718)"
       },
-      activity: [12,24,33,0,0,0,1,0,0,0,0,12,1,0]
+      activity: [24,33,0,0,0,1,0,0,0,0,12,1,0,0]
     },
     /* PROJECT:claude-profile:END */
 
@@ -1223,7 +1223,7 @@ window.DASHBOARD_DATA = {
         date: "2026-10-23",
         summary: "Merge pull request #26 from YourBIMpossible/ccr-42a68d31-begcqr (8c74131)"
       },
-      activity: [0,17,12,0,0,0,0,0,0,0,0,1,3,0]
+      activity: [17,12,0,0,0,0,0,0,0,0,1,3,0,0]
     },
     /* PROJECT:claude-tools:END */
 
@@ -1288,7 +1288,7 @@ window.DASHBOARD_DATA = {
         date: "2026-10-12",
         summary: "Merge pull request #26 from YourBIMpossible/claude/compound-determinism-isolation (99cad71)"
       },
-      activity: [4,7,0,0,0,0,0,0,0,0,0,0,0,0]
+      activity: [7,0,0,0,0,0,0,0,0,0,0,0,0,0]
     },
     /* PROJECT:evidence-compiler:END */
 
@@ -1358,7 +1358,7 @@ window.DASHBOARD_DATA = {
         date: "2026-10-19",
         summary: "Merge pull request #7 from YourBIMpossible/lane/lazy-LI-001 (eda5576)"
       },
-      activity: [0,0,0,0,0,0,0,0,3,0,0,0,0,0]
+      activity: [0,0,0,0,0,0,0,3,0,0,0,0,0,0]
     },
     /* PROJECT:local-intel:END */
 
