@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-24T06:09:26.487460Z",
- "count": 536,
+ "generated_at": "2026-10-25T06:09:25.669735Z",
+ "count": 537,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,9 +9,9 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 21 Oct 2026 21:50:48 GMT",
    "last_status": 200,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": true,
-   "stale_reason": "no new items in 80 days (expects ~7)"
+   "stale_reason": "no new items in 81 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-10-22T18:57:09Z",
    "last_modified": "Thu, 22 Oct 2026 18:57:38 GMT",
    "last_status": 304,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-10-22T21:20:18Z",
    "last_status": 200,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-21T08:35:31Z",
    "last_modified": "Thu, 22 Oct 2026 09:45:21 GMT",
    "last_status": 200,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"fd966e022307acc11253c933a7217843\"",
+   "etag": "W/\"e2c99288003d3418292d0fe966a5f73f\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 23 Oct 2026 12:31:19 GMT",
+   "last_modified": "Sun, 25 Oct 2026 01:52:36 GMT",
    "last_status": 200,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"33391a9318b810c2d27c21e6caaffdaf\"",
+   "etag": "W/\"1fc9394318dff7bf8bffb7a173db023a\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-23T17:27:35Z",
+   "last_item_published": "2026-10-25T04:03:47Z",
    "last_status": 200,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-24T00:16:00Z",
-   "last_modified": "Sat, 24 Oct 2026 02:39:56 GMT",
+   "last_item_published": "2026-10-24T20:05:36.718000Z",
+   "last_modified": "Sat, 24 Oct 2026 21:36:30 GMT",
    "last_status": 200,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 106,
+   "consecutive_failures": 107,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-24T06:09:26.487460Z",
+   "last_failure": "2026-10-25T06:09:25.669735Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "106 consecutive failures: HTTP 403"
+   "stale_reason": "107 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"66393de3980e48cd1ace29c0d8c5c49b\"",
+   "etag": "W/\"f82c6cef3e7358d5ed9a11f770d17a84\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-24T06:09:26.487460Z",
+   "last_success": "2026-10-25T06:09:25.669735Z",
    "stale": true,
-   "stale_reason": "no new items in 130 days (expects ~30)"
+   "stale_reason": "no new items in 131 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Free ModelMedic: Model-Health Checks and Selective Remediation",
+   "url": "http://revitaddons.blogspot.com/2026/10/free-modelmedic-model-health-checks-and.html",
+   "source": "revit-addons",
+   "published": "2026-10-24T20:05:36.718000Z",
+   "summary": "Overview ModelMedic is a model-health and QA/QC toolkit for Autodesk Revit published by ME Solutions, identified in its privacy policy as Mohamed Elzaiat. It brings six focused tools into one add-in: ModelCheck, LinkTrace, Warnalyzer, ModelMop, GridSync, and JoinMaster. Together they address repeatable model checks, link-coordinate investigation, selected warning fixes, targeted cleanup, element-to-grid alignment, and geometry join order. Its distinguishing proposition is the combination of inspection and remediation: users can identify selected problems and then address supported cases within Revit rather than collecting a report alone. The current marketplace lists the add-in as free. [1, 2] ModelMedic - Main Window 1. ModelCheck — Repeatable Model-Health Reviews ModelCheck lets teams set project thresholds, run health checks, review pass/fail results, share settings, and export reports to Excel (.xlsx). The developer describes a distributed workflow in which a BIM manager defines thresholds and exports settings, team members import them and run checks, and results return for review. This could support recurring coordination checks and pre-issue reviews using consistent…",
+   "id": "3161870b56e7f0ee",
+   "fetched_at": "2026-10-25T06:09:25.669735Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Audit tooling you already build; worth knowing what's available, but no API or technique specifics disclosed.",
+    "topics": [
+     "audit-tooling",
+     "revit-addins"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-25T06:09:25.669735Z"
+   }
+  },
   {
    "title": "Product Roundup: Karo Modum",
    "url": "http://revitaddons.blogspot.com/2026/10/product-roundup-karo-modum.html",
