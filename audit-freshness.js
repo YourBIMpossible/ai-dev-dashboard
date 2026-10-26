@@ -1,5 +1,5 @@
 window.AUDIT_FRESHNESS = {
-  "checked": "2026-10-25 06:00:26",
+  "checked": "2026-10-26 06:00:24",
   "projects": {
     "bimpossible": {
       "name": "BIMpossible Platform",
@@ -46,14 +46,14 @@ window.AUDIT_FRESHNESS = {
     "claude-profile": {
       "name": "Claude Profile",
       "lastRun": "2026-10-05",
-      "newestOnDisk": "2026-10-12",
+      "newestOnDisk": "2026-10-26",
       "stale": true,
       "action": "new audit report detected; manual reconciled ingest required"
     },
     "claude-tools": {
       "name": "Claude-Tools",
       "lastRun": "2026-10-05",
-      "newestOnDisk": "2026-10-12",
+      "newestOnDisk": "2026-10-26",
       "stale": true,
       "action": "new audit report detected; manual reconciled ingest required"
     },

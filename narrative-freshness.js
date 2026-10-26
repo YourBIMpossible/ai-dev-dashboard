@@ -1,5 +1,5 @@
 window.NARRATIVE_FRESHNESS = {
-  "checked": "2026-10-25 06:00:26",
+  "checked": "2026-10-26 06:00:24",
   "staleDays": 14,
   "cards": 19,
   "evaluated": 19,
@@ -8,12 +8,12 @@ window.NARRATIVE_FRESHNESS = {
     "bimpossible": {
       "name": "BIMpossible Platform",
       "status": "active",
-      "lastActivity": "2026-10-23",
+      "lastActivity": "2026-10-25",
       "newestRecent": "2026-10-06",
-      "lagDays": 17,
+      "lagDays": 19,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-10-23) is 17 days ahead of the newest recent[] entry (2026-10-06)"
+      "reason": "git activity (2026-10-25) is 19 days ahead of the newest recent[] entry (2026-10-06)"
     },
     "addins": {
       "name": "Add-Ins / RevitLink",
@@ -98,12 +98,12 @@ window.NARRATIVE_FRESHNESS = {
     "dashboard-auto": {
       "name": "Dashboard (Auto Clone)",
       "status": "active",
-      "lastActivity": "2026-10-25",
+      "lastActivity": "2026-10-26",
       "newestRecent": "2026-10-06",
-      "lagDays": 19,
+      "lagDays": 20,
       "evaluated": true,
       "stale": true,
-      "reason": "git activity (2026-10-25) is 19 days ahead of the newest recent[] entry (2026-10-06)"
+      "reason": "git activity (2026-10-26) is 20 days ahead of the newest recent[] entry (2026-10-06)"
     },
     "pc-monitor": {
       "name": "PC Monitor",
