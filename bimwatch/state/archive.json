@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-26T07:27:01.891600Z",
- "count": 538,
+ "generated_at": "2026-10-27T06:10:48.256679Z",
+ "count": 543,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,9 +9,9 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Wed, 21 Oct 2026 21:50:48 GMT",
    "last_status": 200,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": true,
-   "stale_reason": "no new items in 82 days (expects ~7)"
+   "stale_reason": "no new items in 83 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
@@ -19,7 +19,7 @@
    "last_item_published": "2026-10-22T18:57:09Z",
    "last_modified": "Thu, 22 Oct 2026 18:57:38 GMT",
    "last_status": 304,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-22T21:20:18Z",
+   "last_item_published": "2026-10-26T16:14:51Z",
    "last_status": 200,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-21T08:35:31Z",
    "last_modified": "Thu, 22 Oct 2026 09:45:21 GMT",
    "last_status": 200,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"343f6470dd170bf52e87a5485c8739e4\"",
+   "etag": "W/\"35ca4ee199dbae792f0f4bfd8da3dde3\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 26 Oct 2026 07:10:09 GMT",
+   "last_modified": "Mon, 26 Oct 2026 16:13:00 GMT",
    "last_status": 200,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"7af6dfcc261d9440f1d1e20998ebb306\"",
+   "etag": "W/\"1fc283ff365df6f42b4fa2c0e1c0127e\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-25T22:18:05Z",
+   "last_item_published": "2026-10-26T20:31:23Z",
    "last_status": 200,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-25T20:39:00Z",
-   "last_modified": "Sun, 25 Oct 2026 21:18:12 GMT",
+   "last_item_published": "2026-10-27T00:47:00Z",
+   "last_modified": "Tue, 27 Oct 2026 01:22:08 GMT",
    "last_status": 200,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 109,
+   "consecutive_failures": 110,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-26T07:27:01.891600Z",
+   "last_failure": "2026-10-27T06:10:48.256679Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "109 consecutive failures: HTTP 403"
+   "stale_reason": "110 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"9a5e3a9886ed8dbbb3c4051d5e013002\"",
+   "etag": "W/\"7b6b7862a0eb1a7fdf0ea99686cbafdc\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,52 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-26T07:27:01.891600Z",
+   "last_success": "2026-10-27T06:10:48.256679Z",
    "stale": true,
-   "stale_reason": "no new items in 132 days (expects ~30)"
+   "stale_reason": "no new items in 133 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "LengthMEP: Measure and Tabulate the Lengths of MEP Elements",
+   "url": "http://revitaddons.blogspot.com/2026/10/lengthmep-measure-and-tabulate-lengths.html",
+   "source": "revit-addons",
+   "published": "2026-10-27T00:47:00Z",
+   "summary": "Overview LengthMEP is a focused Autodesk Revit add-in from DQ Projects for measuring and tabulating the lengths of mechanical, electrical, and plumbing elements. Its documented capabilities combine length checks on preselected elements with the creation of category-specific and multicategory quantity schedules. The publisher also describes measurement in views and updating total values by diameter or size. Its primary purpose is quantity reporting rather than system design or engineering calculations. Supported Revit Categories Electrical: conduits, wires, and cable trays. Mechanical: ducts and flex ducts. Plumbing and piping: pipes and flex pipes. These are the seven categories explicitly identified in the Autodesk Marketplace description. Fittings, accessories, equipment, fabrication parts, and linked-model elements are not expressly identified as supported measurement categories. Their treatment should therefore be confirmed rather than assumed. Principal Commands and Outputs LengthMEP command: creates quantity schedules for the supported categories, creates a multicategory schedule, and updates total values by diameter or size. This provides a reporting-oriented workflow for…",
+   "id": "2f329a8275196bfd",
+   "fetched_at": "2026-10-27T06:10:48.256679Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "A third-party product announcement with no technical content or API technique relevant to your add-in work.",
+    "topics": [
+     "product-announcement"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-27T06:10:48.256679Z"
+   }
+  },
+  {
+   "title": "Data Exchange GraphQL API vs. .NET SDK: when and which one should you use?",
+   "url": "https://aps.autodesk.com/blog/data-exchange-graphql-api-vs-net-sdk-when-and-which-one-should-you-use",
+   "source": "aps-blog",
+   "published": "2026-10-26T16:14:51Z",
+   "summary": "Data Exchange GraphQL API vs. .NET SDK: when and which one should you use? denis_grigor 26 Oct 2026 Denis Grigor Share If you are building applications around Autodesk Data Exchange, sooner or later you will face a choice: should you use the GraphQL API or the .NET SDK? At first glance, they seem to do similar things. Both give developers access to Data Exchanges, both can read element properties, and both work with exchanges created by connectors such as Revit, Inventor, Rhino, Tekla, Civil 3D and so on, but the similarities can be misleading. In what follows we will see which one is better suited for specific tasks and the scenarios when they complement each other perfectly. One exchange, two ways to access. A Data Exchange is a curated, versioned subset of a model stored in the cloud as granular data. An exchange produced by Forma, Revit, Inventor, Rhino, Tekla or other supported connector can be accessed by both tools, with some exceptions, yet the main difference is just how your application reaches and manipulates that data. The differences at a glance Below is presented a nice head-to-head comparison, but the main idea is the following: You need multiplatform and/or OS…",
+   "id": "fd96f6ed06ebd5d8",
+   "fetched_at": "2026-10-27T06:10:48.256679Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 72,
+    "why": "Concrete guidance on Data Exchange GraphQL API vs .NET SDK—directly relevant if you integrate cloud model data into desktop tooling.",
+    "topics": [
+     "aps",
+     "data-exchange",
+     "api-design"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-27T06:10:48.256679Z"
+   }
+  },
   {
    "title": "Bnotes: Advanced Keynote Manager",
    "url": "http://revitaddons.blogspot.com/2026/10/bnotes-advanced-keynote-manager.html",
@@ -148,6 +188,27 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-26T06:13:11.013158Z"
+   }
+  },
+  {
+   "title": "Understanding Revit publish settings and using Design Automation to make custom views available to Data Exchange",
+   "url": "https://aps.autodesk.com/blog/understanding-revit-publish-settings-and-using-design-automation-make-custom-views-available",
+   "source": "aps-blog",
+   "published": "2026-10-25T09:19:48Z",
+   "summary": "Understanding Revit publish settings and using Design Automation to make custom views available to Data Exchange denis_grigor 26 Oct 2026 Denis Grigor Share When working with Revit models in Autodesk Forma (former ACC), you may discover that some views available in Revit are missing. This can affect several workflows, from displaying specific views in Autodesk Viewer to building custom applications with APS or creating Data Exchanges from selected model elements. The reason is not always obvious: a view can exist in the Revit file without being included in the views extracted by ACC. Understanding how Revit publish settings control this process is essential when you need to make custom views available to downstream applications. In this article, we'll explore how ACC determines which Revit views to extract, how to register additional views using the Revit API, and how the Exchange Creator .NET sample brings these steps together. The file carries the list If a Revit file has no publish settings, Autodesk Forma falls back to its default views. When a Revit file has publish settings, Forma extracts only the views listed there, whatever other 3D views the file contains. The decision…",
+   "id": "b79fca2ca569b88e",
+   "fetched_at": "2026-10-27T06:10:48.256679Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Explains Revit publish settings and Design Automation to expose custom views in Data Exchange—useful for cloud-connected workflows.",
+    "topics": [
+     "aps",
+     "design-automation",
+     "data-exchange"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-27T06:10:48.256679Z"
    }
   },
   {
@@ -188,6 +249,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-24T06:09:26.487460Z"
+   }
+  },
+  {
+   "title": "Denver Accelerator from Data Exchange perspective",
+   "url": "https://aps.autodesk.com/blog/denver-accelerator-data-exchange-perspective",
+   "source": "aps-blog",
+   "published": "2026-10-23T20:09:57Z",
+   "summary": "Denver Accelerator from Data Exchange perspective denis_grigor 26 Oct 2026 Denis Grigor Share From October 13 to 16, the Denver Developer Accelerator brought partner developers and our team together for four days of coding, daily stand-ups, and a Demo Day. As developer advocates, our job was to help each team make progress with their project. We answered how-to questions, pointed to relevant documentation, consulted on approaches and sometimes wrote a quick sample on the spot to test an idea. However, the collaboration was not one-way only. Every question a participant asked was also a small test of our documentation, our tutorials, and our samples, and the answers we gave in the room told us where those three fell short. This post looks at the outcomes from our side - some research topics, some new samples, some workflow ideas and all this primarily from a Data Exchange perspective. Exchange Maker: from the design open in the Viewer Usually, to illustrate the Data Exchange GraphQL workflow we use the Data Exchange Model Explorer tool, which is ok, as it shows the GraphQL call for the needed tasks, including how to create exchanges, but during discussions with some Accelerator…",
+   "id": "d752a51de5dd010f",
+   "fetched_at": "2026-10-27T06:10:48.256679Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Event summary with no concrete technical insights; mentions Data Exchange but no actionable techniques or API changes.",
+    "topics": [
+     "aps",
+     "community"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-27T06:10:48.256679Z"
    }
   },
   {
@@ -330,6 +411,27 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-23T06:10:18.855023Z"
+   }
+  },
+  {
+   "title": "Build your own Webhooks for Revit Cloud Model changes",
+   "url": "https://aps.autodesk.com/blog/build-your-own-webhooks-revit-cloud-model-changes",
+   "source": "aps-blog",
+   "published": "2026-10-22T14:35:45Z",
+   "summary": "Build your own Webhooks for Revit Cloud Model changes pedro.nadal@au… 26 Oct 2026 Pedro Nadal Share Disclaimer: This post was written with the help of AI (Claude) and reviewed by the author. Autodesk Platform Services can notify you when a Revit cloud model is published or synced. What it doesn't tell you is what changed . If your integration cares about something specific, say \"a new model was just linked into the architectural host\", the generic event isn't enough. You can close that gap by building your own webhooks on top of two APIs: Webhooks API : the model publish and sync events tell you when to look. AEC Data Model API : a GraphQL API that lets you query a model's contents and diff versions, so you can work out what changed. Your service sits in the middle. It listens to the APS events, queries the AEC Data Model, filters and classifies the changes, and then fires your own, more meaningful events ( revit.link.added , or anything else you define) to whichever systems care. This post uses a newly added Revit link as the running example, but the pattern works for any change you can describe in terms of model elements, as long as the AEC Data Model tracks it (more on that…",
+   "id": "8842a2d639027118",
+   "fetched_at": "2026-10-27T06:10:48.256679Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 78,
+    "why": "Shows how to build webhooks for cloud model changes and diff using Webhooks + AEC Data Model APIs—directly applicable to audit and sync tooling.",
+    "topics": [
+     "aps",
+     "webhooks",
+     "cloud-models"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-27T06:10:48.256679Z"
    }
   },
   {
