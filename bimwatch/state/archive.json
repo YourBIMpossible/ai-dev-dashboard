@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-27T06:10:48.256679Z",
- "count": 543,
+ "generated_at": "2026-10-28T06:07:55.164438Z",
+ "count": 549,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"09d4cae990bb5d1870893fc013c22e10-gzip\"",
+   "etag": "\"c2dd13b7abeceee1219caca530895aa7-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Wed, 21 Oct 2026 21:50:48 GMT",
+   "last_modified": "Wed, 28 Oct 2026 00:10:41 GMT",
    "last_status": 200,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": true,
-   "stale_reason": "no new items in 83 days (expects ~7)"
+   "stale_reason": "no new items in 84 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-10-22T18:57:09Z",
-   "last_modified": "Thu, 22 Oct 2026 18:57:38 GMT",
-   "last_status": 304,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-10-27T12:13:38Z",
+   "last_modified": "Tue, 27 Oct 2026 12:58:48 GMT",
+   "last_status": 200,
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-26T16:14:51Z",
+   "last_item_published": "2026-10-27T17:28:52Z",
    "last_status": 200,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-21T08:35:31Z",
    "last_modified": "Thu, 22 Oct 2026 09:45:21 GMT",
    "last_status": 200,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"35ca4ee199dbae792f0f4bfd8da3dde3\"",
+   "etag": "W/\"f719e17b557812eec8afbf1f08870959\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 26 Oct 2026 16:13:00 GMT",
+   "last_modified": "Wed, 28 Oct 2026 05:45:33 GMT",
    "last_status": 200,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"1fc283ff365df6f42b4fa2c0e1c0127e\"",
+   "etag": "W/\"88427c68f059ceca22ce0d989b9a4e1e\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-26T20:31:23Z",
+   "last_item_published": "2026-10-27T22:24:57Z",
    "last_status": 200,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-27T00:47:00Z",
-   "last_modified": "Tue, 27 Oct 2026 01:22:08 GMT",
+   "last_item_published": "2026-10-28T00:36:00Z",
+   "last_modified": "Wed, 28 Oct 2026 01:08:08 GMT",
    "last_status": 200,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 110,
+   "consecutive_failures": 111,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-27T06:10:48.256679Z",
+   "last_failure": "2026-10-28T06:07:55.164438Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "110 consecutive failures: HTTP 403"
+   "stale_reason": "111 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"7b6b7862a0eb1a7fdf0ea99686cbafdc\"",
+   "etag": "W/\"bb0de28b0eba0cb5f2d50a972974f27a\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,92 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-27T06:10:48.256679Z",
+   "last_success": "2026-10-28T06:07:55.164438Z",
    "stale": true,
-   "stale_reason": "no new items in 133 days (expects ~30)"
+   "stale_reason": "no new items in 134 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "BPM — BIM Production Manager: A Dashboard for Managing Drawing-Sheet Production Inside Revit",
+   "url": "http://revitaddons.blogspot.com/2026/10/bpm-bim-production-manager-dashboard.html",
+   "source": "revit-addons",
+   "published": "2026-10-28T00:36:00Z",
+   "summary": "Overview and Purpose BPM, short for BIM Production Manager, is a Revit add-in from BREVIT LLC focused on managing drawing-sheet production inside the authoring environment. It brings sheet status, tasks, assignments, production phases, reference links, notes, sketches, PDF export, and print-set preparation into a single dashboard. Its scope is drawing-production coordination rather than geometric modeling, engineering analysis, or clash detection. Dashboard and Sheet Management Modeless interface: the dashboard can remain open while users work in Revit, reducing the need to repeatedly close a dialog to return to the model. Sheet-set visibility: sheet cards provide an overview of the drawing set and its production status, with a detail panel for selected-sheet information. Grouping: sheets can be organized into groups and moved between them to support the team’s production structure. Sheet metadata: the documented detail workflow includes editing sheet number, sheet name, and a Reference / Link field. Bulk selection: selecting several sheet-row checkboxes switches the panel into bulk-edit mode. Sheet numbers and names are locked in this mode to prevent accidental collective…",
+   "id": "07c8cb95f6efa199",
+   "fetched_at": "2026-10-28T06:07:55.164438Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Production dashboard add-in; worth knowing the direction but not your core modeling/family/audit work.",
+    "topics": [
+     "revit-addins",
+     "sheets-viewports"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-28T06:07:55.164438Z"
+   }
+  },
+  {
+   "title": "Revit Add-ons Eclipses 4,000 Post Mark!",
+   "url": "http://revitaddons.blogspot.com/2026/10/revit-add-ons-eclipses-4000-post-mark.html",
+   "source": "revit-addons",
+   "published": "2026-10-27T21:45:23.594000Z",
+   "summary": "We recently made our 4,000th post with Product Roundup: Karo Modum . We knew we were close, but still ticked past the benchmark. We now sit at 4,009 published posts and slightly over 4.8 million pageviews. That makes us happy. var now = new Date(); var start = new Date(now.getFullYear(), 0, 0); var diff = now - start; var oneDay = 1000 * 60 * 60 * 24; var dayOfYear = Math.floor(diff / oneDay); var arraylength = 1; var numadvertisers = arraylength + 1; var numoffset = dayOfYear % numadvertisers; var indx = new Array(arraylength); for (i = 0; i = numadvertisers) { indx[index] = indx[index] - numadvertisers; } if (index === arraylength) { break; } } var images = new Array(arraylength); images[indx[0]] = \" \"; images[indx[1]] = \" \"; var currentdate = new Date(); var numSeconds = currentdate.getSeconds(); var uBound = images.length; for (i = uBound; i > 0; i--) { index = i - 1; if (numSeconds % i === 0) { document.write(images[index]); } if (numSeconds % i === 0) { break; } } Advertisement",
+   "id": "1538da1576232688",
+   "fetched_at": "2026-10-28T06:07:55.164438Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Milestone announcement with no technical content or actionable detail.",
+    "topics": [
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-28T06:07:55.164438Z"
+   }
+  },
+  {
+   "title": "October News Recap",
+   "url": "https://aps.autodesk.com/blog/october-news-recap-2",
+   "source": "aps-blog",
+   "published": "2026-10-27T17:28:52Z",
+   "summary": "October News Recap carolyn.albee@… 27 Oct 2026 Yvette Gong Share We don’t want you to miss any updates! Below you’ll find a recap of all APS blog posts published since our last recap—including new API releases and plenty of tutorials. Announcements Introducing Passthrough Billing: A Flexible Way to Manage API Costs With passthrough billing, eligible API usage generated through applications can use customers' available capacity. It's rolling out in two phases, and you'll need to take action to opt-in. Learn how to prepare . Introducing APS Usage Insights in Autodesk Assistant Knowing how your applications actually consume APIs matters. That's why we're adding APS Usage Insights to Autodesk Assistant, so you can get that picture by asking for it. Explore the capability . Action Required for Users of the Get Forms and Put Forms Values APIs The v1 Get Forms, Get Values, or Put Form Values API endpoints will be retired on June 30, 2027 and users will need to migrate to their replacements. Learn what you need to do . Industry News Autodesk Completes Acquisition Deal With BIMDeX Autodesk has completed its acquisition of select BIMDeX technology assets and intellectual property, and a…",
+   "id": "4d52254ddd121bf1",
+   "fetched_at": "2026-10-28T06:07:55.164438Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "APS updates and passthrough billing may affect your add-in deployment costs; skim for specifics.",
+    "topics": [
+     "aps",
+     "licensing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-28T06:07:55.164438Z"
+   }
+  },
+  {
+   "title": "Autodesk: beyond the seat, the meter",
+   "url": "https://aecmag.com/ai/autodesk-beyond-the-seat-the-meter/",
+   "source": "aec-magazine",
+   "published": "2026-10-27T12:13:38Z",
+   "summary": "How much of the new AEC computing stack does Autodesk intend to own, and how many meters does it intend to attach to it? Autodesk’s vision of agentic AI isn’t difficult to understand. Forma, Assistant, AI Orchestrator, Model Context Protocol (MCP), Context and Autodesk’s AI models point towards a future where users specify what they want and agents work out how to do it. This arrives just as AI threatens the economics that have served Autodesk so well. For decades, more people doing more design and documentation generally meant more application seats. If one architect can supervise agents performing work previously undertaken by several Revit users, that relationship starts to break down. Autodesk University 2026 offered some clues as to what comes next . Autodesk isn’t giving up on the seat. It is building orchestration and consumption above it – the implications of which extend beyond which applications Autodesk’s AI agents will use. Autodesk is already introducing charges for machine-driven compute and data access, while its position on licensing existing Revit automation remains unclear. The question is whether AI will reduce the cost of producing buildings or simply introduce…",
+   "id": "94bccf4c03252790",
+   "fetched_at": "2026-10-28T06:07:55.164438Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Strategic shift toward agentic AI and metered consumption; understand how Autodesk's economics may change licensing or API pricing for your practice.",
+    "topics": [
+     "licensing",
+     "aps",
+     "strategy"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-28T06:07:55.164438Z"
+   }
+  },
   {
    "title": "LengthMEP: Measure and Tabulate the Lengths of MEP Elements",
    "url": "http://revitaddons.blogspot.com/2026/10/lengthmep-measure-and-tabulate-lengths.html",
@@ -171,7 +251,27 @@
    }
   },
   {
-   "title": "Bnotes: Advanced Keynote Manager",
+   "title": "Introducing APS Usage Insights in Autodesk Assistant",
+   "url": "https://aps.autodesk.com/blog/introducing-aps-usage-insights-autodesk-assistant",
+   "source": "aps-blog",
+   "published": "2026-10-26T04:47:55Z",
+   "summary": "Introducing APS Usage Insights in Autodesk Assistant Dwanill Mehta 27 Oct 2026 Dwanill Mehta Share As more Autodesk Platform Services APIs move to consumption-based pricing, and more API usage comes included with eligible Autodesk product subscriptions, knowing how your applications actually consume APIs matters more than it used to. Today we're adding APS Usage Insights to Autodesk Assistant, so you can get that picture by asking for it. Ask about your usage Until now, understanding your consumption meant opening usage reports, filtering by application and API, and comparing periods by hand. With APS Usage Insights, you ask instead — and the answer comes back grounded in your actual APS usage data. You can explore consumption for a single application, across a hub, or at team level: what an application used last month, which API drove it, how this month compares with last, which application in a hub consumed the most. From what you used to what comes next Autodesk Assistant already understands APS. It explains what the APIs do, walks you through implementation, and estimates what a planned solution will cost through Cost Advisor. What it didn't have was your consumption. That's…",
+   "id": "1365b20d9f587c56",
+   "fetched_at": "2026-10-28T06:07:55.164438Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 50,
+    "why": "APS Usage Insights via Assistant could help you monitor and optimize API consumption in add-ins you build or deploy.",
+    "topics": [
+     "aps",
+     "cost-management"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-28T06:07:55.164438Z"
+   }
+  },
+  {
+   "title": "BNotes: Advanced Keynote Manager",
    "url": "http://revitaddons.blogspot.com/2026/10/bnotes-advanced-keynote-manager.html",
    "source": "revit-addons",
    "published": "2026-10-25T20:39:00Z",
@@ -188,6 +288,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-26T06:13:11.013158Z"
+   }
+  },
+  {
+   "title": "Webinar: Discover Autodesk Data Exchange in Infrastructure. One Project, Many Tools",
+   "url": "https://aps.autodesk.com/blog/webinar-discover-autodesk-data-exchange-infrastructure-one-project-many-tools",
+   "source": "aps-blog",
+   "published": "2026-10-25T13:36:31Z",
+   "summary": "Webinar: Discover Autodesk Data Exchange in Infrastructure. One Project, Many Tools Anna Baranova 27 Oct 2026 Anna Baranova Share Working on infrastructure projects? Discover how Autodesk Data Exchange helps teams connect Civil 3D, Revit, and other tools while keeping shared design information up to date. Join our upcoming webinar to see how it works. Infrastructure projects bring together many people, disciplines, and software tools. Civil engineers design roads and utilities in Autodesk Civil 3D . Structural engineers work on bridges and stations in Revit . Other teams use tools such as Tekla Structures , Navisworks , and Power BI . But what happens when one team needs information from another? Too often, the answer is to export and share an entire model, even when only a small part is needed. That can mean large files, extra coordination work, and uncertainty about whether everyone is using the latest design. And when that design changes, the process often starts all over again. What if every team could access an up-to-date reference to exactly what they need in the tools they already use—without repeating the export process every time? That's the idea behind Autodesk Data…",
+   "id": "6052ad211f4053db",
+   "fetched_at": "2026-10-28T06:07:55.164438Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Webinar promotion; no concrete technique or capability described.",
+    "topics": [
+     "marketing",
+     "training"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-28T06:07:55.164438Z"
    }
   },
   {

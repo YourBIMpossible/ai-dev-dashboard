@@ -1,22 +1,22 @@
 {
  "adsk-news": {
   "consecutive_failures": 0,
-  "etag": "\"09d4cae990bb5d1870893fc013c22e10-gzip\"",
+  "etag": "\"c2dd13b7abeceee1219caca530895aa7-gzip\"",
   "last_item_count": 0,
   "last_item_published": "2026-08-04T16:30:13Z",
-  "last_modified": "Wed, 21 Oct 2026 21:50:48 GMT",
+  "last_modified": "Wed, 28 Oct 2026 00:10:41 GMT",
   "last_status": 200,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": true,
-  "stale_reason": "no new items in 83 days (expects ~7)"
+  "stale_reason": "no new items in 84 days (expects ~7)"
  },
  "aec-magazine": {
   "consecutive_failures": 0,
-  "last_item_count": 0,
-  "last_item_published": "2026-10-22T18:57:09Z",
-  "last_modified": "Thu, 22 Oct 2026 18:57:38 GMT",
-  "last_status": 304,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_item_count": 200,
+  "last_item_published": "2026-10-27T12:13:38Z",
+  "last_modified": "Tue, 27 Oct 2026 12:58:48 GMT",
+  "last_status": 200,
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -24,9 +24,9 @@
   "consecutive_failures": 0,
   "last_failure": "2026-08-21T06:09:01.488497Z",
   "last_item_count": 10,
-  "last_item_published": "2026-10-26T16:14:51Z",
+  "last_item_published": "2026-10-27T17:28:52Z",
   "last_status": 200,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -38,52 +38,52 @@
   "last_item_published": "2026-10-21T08:35:31Z",
   "last_modified": "Thu, 22 Oct 2026 09:45:21 GMT",
   "last_status": 200,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
  "graphisoft": {
   "consecutive_failures": 0,
-  "etag": "W/\"35ca4ee199dbae792f0f4bfd8da3dde3\"",
+  "etag": "W/\"f719e17b557812eec8afbf1f08870959\"",
   "last_item_count": 8,
-  "last_modified": "Mon, 26 Oct 2026 16:13:00 GMT",
+  "last_modified": "Wed, 28 Oct 2026 05:45:33 GMT",
   "last_status": 200,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
  "pyrevit-releases": {
   "consecutive_failures": 0,
-  "etag": "W/\"1fc283ff365df6f42b4fa2c0e1c0127e\"",
+  "etag": "W/\"88427c68f059ceca22ce0d989b9a4e1e\"",
   "last_item_count": 10,
-  "last_item_published": "2026-10-26T20:31:23Z",
+  "last_item_published": "2026-10-27T22:24:57Z",
   "last_status": 200,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
  "revit-addons": {
   "consecutive_failures": 0,
   "last_item_count": 25,
-  "last_item_published": "2026-10-27T00:47:00Z",
-  "last_modified": "Tue, 27 Oct 2026 01:22:08 GMT",
+  "last_item_published": "2026-10-28T00:36:00Z",
+  "last_modified": "Wed, 28 Oct 2026 01:08:08 GMT",
   "last_status": 200,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
  "revit-blog": {
-  "consecutive_failures": 110,
+  "consecutive_failures": 111,
   "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
   "last_error": "HTTP 403",
-  "last_failure": "2026-10-27T06:10:48.256679Z",
+  "last_failure": "2026-10-28T06:07:55.164438Z",
   "last_item_count": 0,
   "last_item_published": "2026-07-22T21:10:26Z",
   "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
   "last_status": 304,
   "last_success": "2026-07-25T19:27:39.918043Z",
   "stale": true,
-  "stale_reason": "110 consecutive failures: HTTP 403"
+  "stale_reason": "111 consecutive failures: HTTP 403"
  },
  "revit-pure": {
   "consecutive_failures": 0,
@@ -91,7 +91,7 @@
   "last_item_count": 0,
   "last_item_published": "2026-09-21T10:00:00Z",
   "last_status": 304,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -101,17 +101,17 @@
   "last_item_count": 0,
   "last_item_published": "2026-10-15T18:13:42Z",
   "last_status": 304,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
  "revitlookup-releases": {
   "consecutive_failures": 0,
-  "etag": "W/\"7b6b7862a0eb1a7fdf0ea99686cbafdc\"",
+  "etag": "W/\"bb0de28b0eba0cb5f2d50a972974f27a\"",
   "last_item_count": 10,
   "last_item_published": "2026-09-06T20:58:32Z",
   "last_status": 200,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": false,
   "stale_reason": ""
  },
@@ -121,8 +121,8 @@
   "last_item_count": 0,
   "last_item_published": "2026-06-15T16:47:47Z",
   "last_status": 304,
-  "last_success": "2026-10-27T06:10:48.256679Z",
+  "last_success": "2026-10-28T06:07:55.164438Z",
   "stale": true,
-  "stale_reason": "no new items in 133 days (expects ~30)"
+  "stale_reason": "no new items in 134 days (expects ~30)"
  }
 }
