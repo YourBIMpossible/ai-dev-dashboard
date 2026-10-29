@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-28T06:07:55.164438Z",
- "count": 549,
+ "generated_at": "2026-10-29T06:08:11.258507Z",
+ "count": 556,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"c2dd13b7abeceee1219caca530895aa7-gzip\"",
+   "etag": "\"60f2644e5f6ade3aa49ff38f7ff160b0-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Wed, 28 Oct 2026 00:10:41 GMT",
+   "last_modified": "Wed, 28 Oct 2026 15:45:51 GMT",
    "last_status": 200,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": true,
-   "stale_reason": "no new items in 84 days (expects ~7)"
+   "stale_reason": "no new items in 85 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-10-27T12:13:38Z",
-   "last_modified": "Tue, 27 Oct 2026 12:58:48 GMT",
+   "last_item_published": "2026-10-28T15:38:23Z",
+   "last_modified": "Wed, 28 Oct 2026 15:39:16 GMT",
    "last_status": 200,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,66 +27,66 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-27T17:28:52Z",
+   "last_item_published": "2026-10-28T15:23:11Z",
    "last_status": 200,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"3105a643349d486cc064109dc6bb7bcd\"",
+   "etag": "W/\"4601eb08805068a825fd8ecfddb15238\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-21T08:35:31Z",
-   "last_modified": "Thu, 22 Oct 2026 09:45:21 GMT",
+   "last_item_published": "2026-10-28T12:33:57Z",
+   "last_modified": "Wed, 28 Oct 2026 12:56:48 GMT",
    "last_status": 200,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"f719e17b557812eec8afbf1f08870959\"",
+   "etag": "W/\"5013555ec295784746f05be838c494f9\"",
    "last_item_count": 8,
-   "last_modified": "Wed, 28 Oct 2026 05:45:33 GMT",
+   "last_modified": "Thu, 29 Oct 2026 05:54:22 GMT",
    "last_status": 200,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"88427c68f059ceca22ce0d989b9a4e1e\"",
+   "etag": "W/\"a558f405806d3189120d7564edbf8c41\"",
    "last_item_count": 10,
    "last_item_published": "2026-10-27T22:24:57Z",
    "last_status": 200,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-28T00:36:00Z",
-   "last_modified": "Wed, 28 Oct 2026 01:08:08 GMT",
+   "last_item_published": "2026-10-29T01:12:00Z",
+   "last_modified": "Thu, 29 Oct 2026 02:26:53 GMT",
    "last_status": 200,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 111,
+   "consecutive_failures": 112,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-28T06:07:55.164438Z",
+   "last_failure": "2026-10-29T06:08:11.258507Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "111 consecutive failures: HTTP 403"
+   "stale_reason": "112 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"bb0de28b0eba0cb5f2d50a972974f27a\"",
+   "etag": "W/\"d2d4f6c4f18c1bf67544d5ddddc7fdf9\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,153 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-28T06:07:55.164438Z",
+   "last_success": "2026-10-29T06:08:11.258507Z",
    "stale": true,
-   "stale_reason": "no new items in 134 days (expects ~30)"
+   "stale_reason": "no new items in 135 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "ModelData: A Schedule-Centered Data Workbench",
+   "url": "http://revitaddons.blogspot.com/2026/10/modeldata-schedule-centered-data.html",
+   "source": "revit-addons",
+   "published": "2026-10-29T01:12:00Z",
+   "summary": "Overview ModelData is an Autodesk Revit add-in from underbim, a Portugal-based BIM consultancy with experience in BIM, Revit training, consulting, and software development since 2001. It is one of eight add-ins in ub.Suite Edition 1, released in late October 2026. underbim positions it as a “data workbench” to “build, inspect, calculate and refine Revit schedule and model data with more control over the logic behind the result.” Rather than replacing Revit schedules with a separate data viewer, ModelData extends the schedule workflow with richer field sources, logical filters, grouping, calculated and combined values, investigation in the model, and reusable definitions and results. It is sold individually or as part of the complete ub.Suite. This summary is based primarily on the text of the official ModelData product page, supplemented by underbim’s website and suite announcement. The product page is marketing material: it describes capabilities at a high level, and some feature areas are named without detailed explanation. No user guide content, independent review, or hands-on testing was available, so those gaps are identified in the open-questions section rather than filled…",
+   "id": "d82a64ec61ab3ac2",
+   "fetched_at": "2026-10-29T06:08:11.258507Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Third-party schedule-extension add-in; not built on new API surfaces or techniques relevant to your own development.",
+    "topics": [
+     "revit-addins",
+     "schedules"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-29T06:08:11.258507Z"
+   }
+  },
+  {
+   "title": "FilterToSchedule: Revit Schedule Snapshots With OR Statements",
+   "url": "http://revitaddons.blogspot.com/2026/10/filtertoschedule-revit-schedule.html",
+   "source": "revit-addons",
+   "published": "2026-10-29T00:36:00Z",
+   "summary": "Overview FilterToSchedule (F2S) is an Autodesk Revit add-in from underbim, a BIM consultancy with experience in BIM, Revit training, consulting, and software development since 2001. It is one of eight add-ins in ub.Suite Edition 1, released in late October 2026, and can be purchased individually or as part of the suite. underbim summarizes its purpose as “Filter once. Keep the result.” The add-in turns defined Revit filter results into persistent native Revit schedule snapshots that can be reviewed, refreshed, duplicated, and carried into the next workflow, either as a stored .ubr result or directly in ModelData. This summary is based primarily on the text of the official FilterToSchedule product page, supplemented by the ModelData product page, underbim’s website and suite announcement, and Autodesk documentation on native schedule filters. The product page is marketing material: some feature areas are described in detail, while others are only named. No user guide, independent review, or hands-on testing was available, so the remaining gaps are listed as open questions rather than filled with assumptions. Core Concept: Make the Result Persist underbim observes that a filter is…",
+   "id": "a9a0f0aa4bd313e2",
+   "fetched_at": "2026-10-29T06:08:11.258507Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Competitor add-in for schedule workflow; useful to know the direction but no actionable technique for your tooling.",
+    "topics": [
+     "revit-addins",
+     "schedules"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-29T06:08:11.258507Z"
+   }
+  },
+  {
+   "title": "Allplan Max delivers engineering AI across portfolio",
+   "url": "https://aecmag.com/bim/allplan-max-delivers-engineering-ai-across-portfolio/",
+   "source": "aec-magazine",
+   "published": "2026-10-28T15:38:23Z",
+   "summary": "Purpose-built engineering AI helps firms automate repetitive work and get “expert guidance” Nemetschek brand Allplan has launched Allplan Max 2027, a new generation of “practical AI” designed specifically for engineering workflows, from modelling and analysis to detailing and fabrication. Allplan Max is designed to work with the tools engineers already use, extending AI across Allplan’s broad engineering portfolio including the 2027 versions of Allplan, Allplan Civil, Frilo, SCIA, and SDS2. The aim is to tackle time-consuming processes for engineering teams, including searching for information, checking models, preparing reports, creating formulas, cleaning drawings and repeating routine tasks. The company stresses that Allplan Max supports engineering judgement rather than replacing it, and engineers remain responsible for design intent, review, approval and final outcomes. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here Allplan, the product, brings AI into BIM, detailing and workflow customisation through capabilities such as Feature Builder, Workflow Builder, AI Formula Writer, AI BIM…",
+   "id": "33da92157da88fbd",
+   "fetched_at": "2026-10-29T06:08:11.258507Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Nemetschek competitor move; worth awareness but Allplan is outside your Revit-focused practice.",
+    "topics": [
+     "competitor",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-29T06:08:11.258507Z"
+   }
+  },
+  {
+   "title": "Your Innovation, Your Stage: Speak at Autodesk DevCon 2027",
+   "url": "https://aps.autodesk.com/blog/your-innovation-your-stage-speak-autodesk-devcon-2027",
+   "source": "aps-blog",
+   "published": "2026-10-28T15:23:11Z",
+   "summary": "Your Innovation, Your Stage: Speak at Autodesk DevCon 2027 cyrille.fauvel… 28 Oct 2026 Cyrille Fauvel Yvette Gong Share Autodesk DevCon is back, bringing together developers, business leaders, and innovators from across the Design and Make industries to explore what’s possible with Autodesk Platform Services (APS). This year, we’re focusing on real-world AI implementations that deliver measurable business and technical value. From automating workflows to connecting enterprise systems, DevCon is where the community comes together to share practical solutions, exchange ideas, and inspire innovation. Call for Proposals (CFP) Is Open We’re excited to announce that the Call for Proposals for Autodesk DevCon 2027 is now open! Have you built a solution that uses AI and APS to solve real-world challenges? Whether you’re a developer, architect, business leader, customer, or Autodesk partner, we invite you to share your expertise with a global community of technology innovators. Key Dates: Proposal submission deadline: December 9, 2026 Speaker notifications: January 2027 Submit a Proposal What We’re Looking For We’re looking for real implementations that demonstrate how AI and APS deliver…",
+   "id": "0888427609f80230",
+   "fetched_at": "2026-10-29T06:08:11.258507Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Conference call for speakers; promotional event announcement with no technical content.",
+    "topics": [
+     "event"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-29T06:08:11.258507Z"
+   }
+  },
+  {
+   "title": "Can you trust AI with IFC properties? 4 ways it makes them up",
+   "url": "https://bimcorner.com/ai-ifc-properties/",
+   "source": "bim-corner",
+   "published": "2026-10-28T12:33:57Z",
+   "summary": "Think back to the last time you received a Level of Information Need document in an Excel spreadsheet. Hundreds of rows and some defined requirements. Your project uses IFC delivery. So you ask a chatbot to point you to where each requirement lives in IFC. Any requirement: the fire rating of external walls, the load-bearing status of footings, the pressure class of pipes, the G-value of the glazing. You get an answer in a second. A neat property set, a property inside it, sometimes even the data type. It looks like it was copied straight from the buildingSMART documentation. Sometimes it was. But sometimes the property set doesn’t exist at all. Obviously, you can add your own properties to IFC. Every project I've worked on does it, and Revit, ArchiCAD, Tekla and others all export user-defined property sets (here is how to do it in Revit ). There's only one rule. The prefix Pset_ is reserved for property sets defined in the IFC standard. Your own set can be called almost anything, but not Pset_Something . The IFC documentation says it in plain words: every set starting with Pset_ has to be a standard set, with the right properties on the right objects. And that's exactly the rule…",
+   "id": "c6a5cb7b405f65cf",
+   "fetched_at": "2026-10-29T06:08:11.258507Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 60,
+    "why": "Concrete guidance on IFC property reliability and AI hallucination risks; directly applicable to your audit and interop tooling.",
+    "topics": [
+     "ifc",
+     "ai-reliability",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-29T06:08:11.258507Z"
+   }
+  },
+  {
+   "title": "Chaos continues to expand Enscape beyond arch viz",
+   "url": "https://aecmag.com/visualisation/chaos-continues-to-expand-enscape-beyond-arch-viz/",
+   "source": "aec-magazine",
+   "published": "2026-10-28T11:02:39Z",
+   "summary": "Vyssuals acquisition to add live BIM data insights to Enscape as Chaos broadens its role in architectural design Chaos is expanding Enscape beyond traditional real-time visualisation with the acquisition of Vyssuals, a BIM data visualisation platform that helps architects make better use of project information through interactive, live dashboards. Connecting directly to Revit and Industry Foundation Classes (IFC) models, Vyssuals stays in sync as designs change, allowing teams to track quantities, costs, room counts and embodied carbon in real-time. It can also compare model versions, check model health and flag missing BIM parameters before they lead to coordination problems or requests for information (RFIs). “For too long, valuable BIM data has been difficult to access and even harder to act on,” said Allan Poore, chief product officer at Chaos. “Vyssuals brings that data directly into the design workflow, turning information already in the model into clear, actionable insights – so designers can make better-informed decisions while they can still influence the outcome.” Discover what’s new in technology for architecture, engineering and construction — read the latest edition…",
+   "id": "0b95ddbb2bd7630b",
+   "fetched_at": "2026-10-29T06:08:11.258507Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Chaos acquires BIM data viz; Revit/IFC connectivity is noted but acquisition news, not technique or API change.",
+    "topics": [
+     "market",
+     "interoperability"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-29T06:08:11.258507Z"
+   }
+  },
+  {
+   "title": "Don't forget the file extension!",
+   "url": "https://aps.autodesk.com/blog/dont-forget-file-extension",
+   "source": "aps-blog",
+   "published": "2026-10-28T10:38:22Z",
+   "summary": "Don't forget the file extension! adam.nagy 28 Oct 2026 Adam Nagy Share Many people when getting started with the Model Derivative API think that the name of the file uploaded to a bucket can just have any ID on its own , like \"f789643d-bc65-4f32-8411-9a7c61f238b9\" However, the Model Derivative API relies on the file extension in order to determine which translator it should use. So the file name can be anything, but do not forget to keep the file extension. Without that you'll get an HTTP 400 / Bad Request error with this message: {\"diagnostic\":\"Failed to trigger translation for this file.\"} and x-ads-troubleshooting header saying: \"The system does not support this file format\" Model Derivative API",
+   "id": "1a9c9c091c64cb46",
+   "fetched_at": "2026-10-29T06:08:11.258507Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 45,
+    "why": "Model Derivative API gotcha on file extensions; relevant if you're building cloud-side tooling with APS.",
+    "topics": [
+     "aps",
+     "model-derivative-api",
+     "api-usage"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-29T06:08:11.258507Z"
+   }
+  },
   {
    "title": "BPM — BIM Production Manager: A Dashboard for Managing Drawing-Sheet Production Inside Revit",
    "url": "http://revitaddons.blogspot.com/2026/10/bpm-bim-production-manager-dashboard.html",
@@ -230,7 +371,7 @@
    }
   },
   {
-   "title": "Data Exchange GraphQL API vs. .NET SDK: when and which one should you use?",
+   "title": "Data Exchange GraphQL API vs .NET SDK: when and which one should you use?",
    "url": "https://aps.autodesk.com/blog/data-exchange-graphql-api-vs-net-sdk-when-and-which-one-should-you-use",
    "source": "aps-blog",
    "published": "2026-10-26T16:14:51Z",
