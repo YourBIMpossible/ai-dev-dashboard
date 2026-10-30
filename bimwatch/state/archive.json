@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-10-29T06:08:11.258507Z",
- "count": 556,
+ "generated_at": "2026-10-30T06:07:54.789386Z",
+ "count": 560,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"60f2644e5f6ade3aa49ff38f7ff160b0-gzip\"",
+   "etag": "\"7c190846310cf8a47e88ce8927c85802-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Wed, 28 Oct 2026 15:45:51 GMT",
+   "last_modified": "Thu, 29 Oct 2026 17:41:30 GMT",
    "last_status": 200,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": true,
-   "stale_reason": "no new items in 85 days (expects ~7)"
+   "stale_reason": "no new items in 86 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-10-28T15:38:23Z",
-   "last_modified": "Wed, 28 Oct 2026 15:39:16 GMT",
+   "last_item_published": "2026-10-29T15:38:39Z",
+   "last_modified": "Thu, 29 Oct 2026 15:39:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,66 +27,66 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-28T15:23:11Z",
+   "last_item_published": "2026-10-29T07:58:23Z",
    "last_status": 200,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"4601eb08805068a825fd8ecfddb15238\"",
+   "etag": "W/\"f2288dedb54139a1ac3788ace7be6777\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
    "last_item_published": "2026-10-28T12:33:57Z",
-   "last_modified": "Wed, 28 Oct 2026 12:56:48 GMT",
+   "last_modified": "Thu, 29 Oct 2026 08:43:04 GMT",
    "last_status": 200,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"5013555ec295784746f05be838c494f9\"",
+   "etag": "W/\"037f09956b59e99bf5ff0b44d6bf5df2\"",
    "last_item_count": 8,
-   "last_modified": "Thu, 29 Oct 2026 05:54:22 GMT",
+   "last_modified": "Fri, 30 Oct 2026 06:07:13 GMT",
    "last_status": 200,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"a558f405806d3189120d7564edbf8c41\"",
+   "etag": "W/\"2568fc52e34b4dee0a1091d544cd03ca\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-27T22:24:57Z",
+   "last_item_published": "2026-10-29T10:47:40Z",
    "last_status": 200,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-29T01:12:00Z",
-   "last_modified": "Thu, 29 Oct 2026 02:26:53 GMT",
+   "last_item_published": "2026-10-30T01:47:00Z",
+   "last_modified": "Fri, 30 Oct 2026 02:51:45 GMT",
    "last_status": 200,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 112,
+   "consecutive_failures": 113,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-29T06:08:11.258507Z",
+   "last_failure": "2026-10-30T06:07:54.789386Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "112 consecutive failures: HTTP 403"
+   "stale_reason": "113 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"d2d4f6c4f18c1bf67544d5ddddc7fdf9\"",
+   "etag": "W/\"d48e1dd39f8f4fd30d0be2592ffeba00\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,93 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-29T06:08:11.258507Z",
+   "last_success": "2026-10-30T06:07:54.789386Z",
    "stale": true,
-   "stale_reason": "no new items in 135 days (expects ~30)"
+   "stale_reason": "no new items in 136 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "ProjectManager: Project Cleanup with Context Attached",
+   "url": "http://revitaddons.blogspot.com/2026/10/projectmanager-project-cleanup-with.html",
+   "source": "revit-addons",
+   "published": "2026-10-30T01:47:00Z",
+   "summary": "Overview ProjectManager is an Autodesk Revit add-in from underbim, a Portugal-based BIM consultancy with experience in BIM, Revit training, consulting, and software development since 2001. It is one of eight add-ins in ub.Suite Edition 1, released in late October 2026, and can be purchased individually or as part of the suite. underbim summarizes its purpose as “Know what is in the project. Decide what stays.” The add-in audits recurring Revit project resources—V/G filters, scope boxes, view templates, and views—classifies them as used, unused, or unreferenced, shows their dependencies, and supports batch view management and controlled cleanup. Its defining principle is “audit first, change second”: discovery and filtering are kept separate from destructive operations, every change can be previewed before it is applied, and an applied operation retains a single Revit Undo path. This summary is based primarily on the text of the official ProjectManager product page, supplemented by underbim’s website, suite overview, and announcement. The product page is marketing material: the Views workflow and delete behavior are described in detail, while some feature areas are summarized…",
+   "id": "9f26660bbf6c2eee",
+   "fetched_at": "2026-10-30T06:07:54.789386Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "A third-party audit and cleanup add-in for views/filters/scopes; solid tooling but not your core work or API-level concern.",
+    "topics": [
+     "revit-addins",
+     "model-audit"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-30T06:07:54.789386Z"
+   }
+  },
+  {
+   "title": "InterferenceInvestigator: Interference Management in Revit",
+   "url": "http://revitaddons.blogspot.com/2026/10/interferenceinvestigator-interference.html",
+   "source": "revit-addons",
+   "published": "2026-10-30T01:08:00Z",
+   "summary": "Overview InterferenceInvestigator is an Autodesk Revit add-in from underbim, a Portugal-based BIM consultancy with experience in BIM, Revit training, consulting, and software development since 2001. It is one of eight add-ins in ub.Suite Edition 1, released in late October 2026, and can be purchased individually or as part of the suite. underbim summarizes its purpose as “See the clash. Understand the pair.” The add-in focuses on the work after interference detection: moving from an interference result to the exact host and linked elements involved, locating them in the Revit model, recovering enough surrounding context to understand the problem, tracking a review state for each occurrence, and turning the investigation into an actionable result. Reviewed results can become a native Revit schedule, a .ubr result package, or input to ModelData . This summary is based primarily on the text of the official InterferenceInvestigator product page, supplemented by the ModelData and FilterToSchedule product pages, underbim’s website and suite announcement, and Autodesk documentation on the native Interference Check. The product page is marketing material: several feature areas are…",
+   "id": "8747ca13fe2f5420",
+   "fetched_at": "2026-10-30T06:07:54.789386Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 32,
+    "why": "Interference tracking add-in from the same vendor; adjacent to audit work but not your build practice.",
+    "topics": [
+     "revit-addins",
+     "clash-detection"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-30T06:07:54.789386Z"
+   }
+  },
+  {
+   "title": "Snaptrude Agent launches for BIM workflows",
+   "url": "https://aecmag.com/bim/snaptrude-agent-launches-for-bim-workflows/",
+   "source": "aec-magazine",
+   "published": "2026-10-29T15:38:39Z",
+   "summary": "AI agent supports workflows from early concept design to detailed BIM modelling, structural systems, MEP and construction documentation. Snaptrude has introduced Snaptrude Agent, an AI agent for its BIM platform designed to support teams from early concept studies to construction-ready LoD 400 models incorporating structure, mechanical, electrical and plumbing (MEP), and drawings. Users are said to retain control of the process: they give the Agent a prompt or problem, review its proposed plan, then approve it or provide further direction. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here According to Snaptrude, the Agent can automate tasks across the design process, including concept modelling, detailed BIM modelling and construction documentation. It can generate multiple massing options from a site analysis, ranging from a handful of alternatives to hundreds. The company says the Agent can convert massing models into detailed LoD 400 BIM models in minutes. For components not available in existing libraries, users can supply vendor specification sheets for the Agent to use in modelling…",
+   "id": "31a14f48f7f6528f",
+   "fetched_at": "2026-10-30T06:07:54.789386Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 28,
+    "why": "Snaptrude Agent is a competing BIM platform's AI feature; worth knowing the direction, not actionable for Revit work.",
+    "topics": [
+     "competitor-product",
+     "ai-bim"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-30T06:07:54.789386Z"
+   }
+  },
+  {
+   "title": "From prompt to automation: build an APS Design Automation app with a Claude Code skill",
+   "url": "https://aps.autodesk.com/blog/prompt-automation-build-aps-design-automation-app-claude-code-skill",
+   "source": "aps-blog",
+   "published": "2026-10-29T07:58:23Z",
+   "summary": "From prompt to automation: build an APS Design Automation app with a Claude Code skill madhukar.mooga… 29 Oct 2026 Madhukar Moogala Share From one prompt to a deployed APS Automation app : the skill builds the plugin, checks access, runs the WorkItem, and puts the result back in Forma. Image credit: AI-assisted illustration, reviewed by the author. Getting a first Design Automation app running means getting many things right at once: a headless .NET plugin, an AppBundle and an Activity, authentication, and a WorkItem that reads your drawing and returns a result. When the drawing lives in Forma, there is more, because files are protected by user permissions and the app needs a Secure Service Account and a signed activity. aps-da-acad-c3d is a Claude Code plugin that builds APS Automation apps for AutoCAD and Civil 3D from a plain-language request. You say what you want done and where the drawing is. It builds, deploys, runs, and delivers the result. The drawing can be on local disk, at a URL, or in Forma, and Forma is the showcase here because the result can go straight back into the same folder. Here it is end to end on a drawing in Forma: one prompt extracts the layers of…",
+   "id": "f4cb4a9fb1a94fd1",
+   "fetched_at": "2026-10-30T06:07:54.789386Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 72,
+    "why": "Concrete technique: Claude Code skill for building APS Design Automation apps from prompt; directly relevant to your add-in toolchain and automation practice.",
+    "topics": [
+     "aps",
+     "design-automation",
+     "ai-integration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-30T06:07:54.789386Z"
+   }
+  },
   {
    "title": "ModelData: A Schedule-Centered Data Workbench",
    "url": "http://revitaddons.blogspot.com/2026/10/modeldata-schedule-centered-data.html",
