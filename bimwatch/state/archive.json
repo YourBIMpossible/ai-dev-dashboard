@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-30T06:07:54.789386Z",
- "count": 560,
+ "generated_at": "2026-10-31T06:05:44.425915Z",
+ "count": 565,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 29 Oct 2026 17:41:30 GMT",
    "last_status": 200,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": true,
-   "stale_reason": "no new items in 86 days (expects ~7)"
+   "stale_reason": "no new items in 87 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 200,
+   "last_item_count": 0,
    "last_item_published": "2026-10-29T15:38:39Z",
    "last_modified": "Thu, 29 Oct 2026 15:39:23 GMT",
-   "last_status": 200,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_status": 304,
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,66 +27,66 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-29T07:58:23Z",
+   "last_item_published": "2026-10-30T17:33:54Z",
    "last_status": 200,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"f2288dedb54139a1ac3788ace7be6777\"",
+   "etag": "W/\"ee0005b96999494a3bd1df697c7c234d\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-28T12:33:57Z",
-   "last_modified": "Thu, 29 Oct 2026 08:43:04 GMT",
+   "last_item_published": "2026-10-30T11:52:05Z",
+   "last_modified": "Fri, 30 Oct 2026 13:19:23 GMT",
    "last_status": 200,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"037f09956b59e99bf5ff0b44d6bf5df2\"",
+   "etag": "W/\"9bb0cf93b8609dd838f60b91ca6b61f5\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 30 Oct 2026 06:07:13 GMT",
+   "last_modified": "Fri, 30 Oct 2026 17:27:24 GMT",
    "last_status": 200,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"2568fc52e34b4dee0a1091d544cd03ca\"",
+   "etag": "W/\"ef99299a504242c9022702d4d1a972ec\"",
    "last_item_count": 10,
-   "last_item_published": "2026-10-29T10:47:40Z",
+   "last_item_published": "2026-10-30T14:41:58Z",
    "last_status": 200,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-30T01:47:00Z",
-   "last_modified": "Fri, 30 Oct 2026 02:51:45 GMT",
+   "last_item_published": "2026-10-31T01:12:00Z",
+   "last_modified": "Sat, 31 Oct 2026 02:48:30 GMT",
    "last_status": 200,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 113,
+   "consecutive_failures": 114,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-10-30T06:07:54.789386Z",
+   "last_failure": "2026-10-31T06:05:44.425915Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "113 consecutive failures: HTTP 403"
+   "stale_reason": "114 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"d48e1dd39f8f4fd30d0be2592ffeba00\"",
+   "etag": "W/\"ad408a6b38e4434dfd2dd5d0ab182fcd\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,109 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-10-30T06:07:54.789386Z",
+   "last_success": "2026-10-31T06:05:44.425915Z",
    "stale": true,
-   "stale_reason": "no new items in 136 days (expects ~30)"
+   "stale_reason": "no new items in 137 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "ConstraintScanner: Inspecting Constraints in Revit Projects",
+   "url": "http://revitaddons.blogspot.com/2026/10/constraintscanner-inspecting.html",
+   "source": "revit-addons",
+   "published": "2026-10-31T01:12:00Z",
+   "summary": "Overview ub.ConstraintScanner is an Autodesk Revit add-in from underbim, a Portugal-based BIM consultancy that has worked in BIM, Revit training, consulting, and software development since 2001. It is one of eight independent add-ins in ub.Suite Edition 1, which launched in late October 2026, and is positioned as a model diagnosis tool. Its tagline, \"See the relationships. Inspect what they mean,\" sums up the approach. It scans Revit constraints, dependencies, and model conditions, narrows the results to the relationships that matter, and lets users go straight from the evidence to the elements involved, without changing the model. Note on sources: This summary is based mainly on underbim's full ConstraintScanner product page, which covers the workflow, feature explorer, coverage, and licensing. The background on Revit constraints comes from Autodesk documentation and community forums. An independent review or hands-on test wasn't found, and gaps are listed under Open Questions. The Problem It Addresses: Constraints in Revit Constraints build intelligence into a Revit model by setting relationships between elements. They're powerful, but they're also a common source of confusion…",
+   "id": "1d9f5e6af0a64c51",
+   "fetched_at": "2026-10-31T06:05:44.425915Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A third-party model audit add-in; worth knowing it exists, but no technical detail on constraints API or implementation.",
+    "topics": [
+     "revit-addons",
+     "model-auditing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-31T06:05:44.425915Z"
+   }
+  },
+  {
+   "title": "New to APS? Start here with Autodesk Assistant",
+   "url": "https://aps.autodesk.com/blog/new-aps-start-here-autodesk-assistant",
+   "source": "aps-blog",
+   "published": "2026-10-30T17:33:54Z",
+   "summary": "New to APS? Start here with Autodesk Assistant ana.hogben@aut… 30 Oct 2026 Ana Hogben Share If you’re new to Autodesk Platform Services (APS), the hardest part is often knowing where to start. APS is a set of tools and APIs, the connections that let software share data and tasks. With them, you can view designs, work with model data, automate tasks in Autodesk desktop products, and connect to Autodesk Forma. You don’t need to know all of it before you begin. Autodesk Assistant on the APS website lets you ask questions in plain language and points you to the APIs and documentation that fit what you’re trying to do. You don’t need to know the right technical term to begin. Start with your goal, and let Assistant help you find the way in. To open Assistant, sign in with your APS account, and then select the Assistant icon in the bottom-right corner of any page on the APS website. When you’re ready to put APS to work, you’ll also need an APS subscription , even if you start on the free plan. What can I ask? Here are the kinds of questions that help you get oriented, with an example for each. Understand APS “What is Autodesk Platform Services, and what can I do with it?” Explore what’s…",
+   "id": "4dbd9ae8c43a0a01",
+   "fetched_at": "2026-10-31T06:05:44.425915Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 35,
+    "why": "Autodesk Assistant for APS discovery could speed finding APIs for desktop automation or cloud workflows you're building.",
+    "topics": [
+     "aps",
+     "api-discovery"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-31T06:05:44.425915Z"
+   }
+  },
+  {
+   "title": "Team Admin API",
+   "url": "https://aps.autodesk.com/resource/team-admin-api",
+   "source": "aps-blog",
+   "published": "2026-10-30T15:45:18Z",
+   "summary": "Team Admin API ana.hogben@aut… 30 Oct 2026 Manage team users and product assignments in code. Automate HR onboarding, assign products by job role, or free up seats from people who left. /developer/overview/team-admin-api Type API Capabilities Automation Industries Cross-Industry Languages REST API Search Terms team admin team administration Administration admin API user management user administration access management user provisioning invite users license agreement license management user provisioning product assignment product pools seat management onboarding automation Autodesk Account account admin Location Cloud Priority 1 Badge Beta Environments Stage (aps-stg.autodesk.com) Dev (aps-dev.autodesk.com) Internal resource Off",
+   "id": "d19ea53b1bfbb78c",
+   "fetched_at": "2026-10-31T06:05:44.425915Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Team admin automation via API; only relevant if you're building multi-seat tooling or managing team provisioning at scale.",
+    "topics": [
+     "aps",
+     "administration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-31T06:05:44.425915Z"
+   }
+  },
+  {
+   "title": "Protected: From Design Rules to a Working Revit Tool: Personal Automation with Codex",
+   "url": "https://bimcorner.com/revit-ai-codex-design-rules/",
+   "source": "bim-corner",
+   "published": "2026-10-30T11:52:05Z",
+   "summary": "This content is password-protected. To view it, please enter the password below. Password: The post Protected: From Design Rules to a Working Revit Tool: Personal Automation with Codex appeared first on Bim Corner .",
+   "id": "88b2f82b3b166b70",
+   "fetched_at": "2026-10-31T06:05:44.425915Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 0,
+    "why": "Password-protected content; no actual information to assess or act on.",
+    "topics": [],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-31T06:05:44.425915Z"
+   }
+  },
+  {
+   "title": "APS Viewer v8 preview is here!",
+   "url": "https://aps.autodesk.com/blog/aps-viewer-v8-preview-here",
+   "source": "aps-blog",
+   "published": "2026-10-30T10:31:33Z",
+   "summary": "APS Viewer v8 preview is here! petr.broz@auto… 30 Oct 2026 Petr Broz Share At Autodesk University 2026 we gave you a first look at the next major version of APS Viewer . Today, the first v8 preview build is available for everyone, side by side with v7, so you can start exploring it in your own applications. Version 8 is the biggest step the Viewer has taken in years. It renders with WebGPU, loads every model through the Large Model Experience pipeline, and replaces three.js with the new Scene API, which lets you embed custom 3D content as well as read geometry and material data of models loaded from our platform. It's also the first release under a new, predictable rollout model: a three-month public preview, a fixed switch-over date, and a clear support window for the previous version. In this post, we'll walk through what's new, what the timeline looks like, and how you can start testing today. How to get the preview The preview is published alongside v7 and you load it the same way, just with different file names: <script src=\"https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D-v8.min.js\"></script> <link…",
+   "id": "5d3f51550746c2cc",
+   "fetched_at": "2026-10-31T06:05:44.425915Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 50,
+    "why": "APS Viewer v8 adds Scene API for custom 3D embedding and geometry reading; could enable new cloud-based dashboarding or model inspection workflows.",
+    "topics": [
+     "aps-viewer",
+     "api-changes"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-10-31T06:05:44.425915Z"
+   }
+  },
   {
    "title": "ProjectManager: Project Cleanup with Context Attached",
    "url": "http://revitaddons.blogspot.com/2026/10/projectmanager-project-cleanup-with.html",
