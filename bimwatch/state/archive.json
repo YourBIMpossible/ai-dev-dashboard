@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-02T07:06:38.761764Z",
- "count": 566,
+ "generated_at": "2026-11-03T06:06:53.989945Z",
+ "count": 570,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"7c190846310cf8a47e88ce8927c85802-gzip\"",
+   "etag": "\"4f96f8ef9a4ec382a7b018dad03b733b-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Thu, 29 Oct 2026 17:41:30 GMT",
+   "last_modified": "Tue, 03 Nov 2026 04:55:43 GMT",
    "last_status": 200,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": true,
-   "stale_reason": "no new items in 89 days (expects ~7)"
+   "stale_reason": "no new items in 90 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-10-29T15:38:39Z",
-   "last_modified": "Thu, 29 Oct 2026 15:39:23 GMT",
-   "last_status": 304,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-11-02T15:37:43Z",
+   "last_modified": "Mon, 02 Nov 2026 15:55:41 GMT",
+   "last_status": 200,
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,64 +29,64 @@
    "last_item_count": 10,
    "last_item_published": "2026-10-30T17:33:54Z",
    "last_status": 200,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"f2288dedb54139a1ac3788ace7be6777\"",
+   "etag": "W/\"474309e984a1fcb4fc5c87775ab88319\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
    "last_item_published": "2026-10-30T11:52:05Z",
-   "last_modified": "Thu, 29 Oct 2026 08:43:04 GMT",
+   "last_modified": "Mon, 02 Nov 2026 19:25:26 GMT",
    "last_status": 200,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"f9257bf3bd9c964c2c3a7fbdf55ad90e\"",
+   "etag": "W/\"b7888f285f9a70b36c6d02e8bad283c8\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 02 Nov 2026 05:36:51 GMT",
+   "last_modified": "Mon, 02 Nov 2026 23:00:40 GMT",
    "last_status": 200,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"1e4491547df58f2877eb7fabd3450f72\"",
+   "etag": "W/\"4129a2e79a58a10262c320febdb12017\"",
    "last_item_count": 10,
    "last_item_published": "2026-11-01T22:34:10Z",
    "last_status": 200,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-10-31T22:11:00Z",
-   "last_modified": "Sun, 1 Nov 2026 19:29:54 GMT",
+   "last_item_published": "2026-11-03T02:28:00Z",
+   "last_modified": "Tue, 3 Nov 2026 03:26:40 GMT",
    "last_status": 200,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 117,
+   "consecutive_failures": 118,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-02T07:06:38.761764Z",
+   "last_failure": "2026-11-03T06:06:53.989945Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "117 consecutive failures: HTTP 403"
+   "stale_reason": "118 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"281338482cb9e25dee3844a1e4c6ae00\"",
+   "etag": "W/\"96b528c4e8bb3248c2096b95935fec94\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,73 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-02T07:06:38.761764Z",
+   "last_success": "2026-11-03T06:06:53.989945Z",
    "stale": true,
-   "stale_reason": "no new items in 139 days (expects ~30)"
+   "stale_reason": "no new items in 140 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "BackupMover: Keeping Revit Backups Out of the Working Folder",
+   "url": "http://revitaddons.blogspot.com/2026/11/backupmover-keeping-revit-backups-out.html",
+   "source": "revit-addons",
+   "published": "2026-11-03T02:28:00Z",
+   "summary": "Overview ub.BackupMover is an Autodesk Revit add-in from underbim, a Portugal-based BIM consultancy that has worked in BIM, Revit training, consulting, and software development since 2001. It is one of eight independent add-ins in ub.Suite Edition 1, which launched in late October 2026, and is positioned as a file safety utility. Its tagline, \"Move the backups. Keep the folder clear,\" sums up the approach. It finds genuine Revit project and family backup files beside the current document and moves them into a controlled subfolder, keeping the working folder readable. It can run manually or automatically after each Save. Note on sources: This summary is based mainly on underbim's full BackupMover product page, which covers the workflow, feature explorer, detection rules, manual and automatic modes, destination handling, and licensing. Background on how Revit creates backups comes from Autodesk documentation, Autodesk forums, and Revit community blogs. An independent review or hands-on test was not found, and gaps are listed under Open Questions. The Problem Area: Revit Backup Files Revit creates backup files automatically whenever a model is saved or synchronized. Where they go and…",
+   "id": "550b710e623bba6f",
+   "fetched_at": "2026-11-03T06:06:53.989945Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A third-party add-in for backup management; useful pattern but not your core work or API development.",
+    "topics": [
+     "revit-addins",
+     "file-management"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-03T06:06:53.989945Z"
+   }
+  },
+  {
+   "title": "Elevations: Top and Bottom Elevation Data for Revit Elements",
+   "url": "http://revitaddons.blogspot.com/2026/11/elevations-top-and-bottom-elevation.html",
+   "source": "revit-addons",
+   "published": "2026-11-03T01:35:00Z",
+   "summary": "Overview ub.Elevations is an Autodesk Revit add-in from underbim, a Portugal-based BIM consultancy that has worked in BIM, Revit training, consulting, and software development since 2001. It is one of eight independent add-ins in ub.Suite Edition 1, which launched in late October 2026. Despite its name, it doesn't create elevation views. It's a vertical data tool. Its tagline, \"Know where every element starts and ends,\" sums up the approach. It calculates each element's upper and lower elevations from its extents in the Revit model and writes them to usable instance parameters, using either Project or Survey coordinates as the reference. Note on sources: This summary is based mainly on underbim's full Elevations product page, which covers the workflow, feature explorer, coordinate references, parameter output, and licensing. Background on Revit's elevation parameters and coordinate system comes from Autodesk documentation and community forums. An independent review or hands-on test wasn't found. The Problem Area: Vertical Data in Revit Knowing the absolute top and bottom elevation of elements matters for coordination, clearance checks, scheduling, tagging, and handing data to…",
+   "id": "b10ab7800586ce7a",
+   "fetched_at": "2026-11-03T06:06:53.989945Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 30,
+    "why": "A product built on the Revit API for elevation data extraction; worth knowing exists but not actionable for your practice.",
+    "topics": [
+     "revit-api",
+     "revit-addins"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-03T06:06:53.989945Z"
+   }
+  },
+  {
+   "title": "The home brew estate: Q&A with AMC Bridge",
+   "url": "https://aecmag.com/ai/the-home-brew-estate-qa-with-amc-bridge/",
+   "source": "aec-magazine",
+   "published": "2026-11-02T15:37:43Z",
+   "summary": "With AI, making AEC software is easy, but making it safe, supportable and accountable is another matter entirely. AEC Magazine spoke with Igor Tsinman, CEO of AMC Bridge, about the opportunities, risks and responsibilities of AI-driven software development Inside most large AEC firms there is now a layer of software nobody commissioned. AI coding tools have let architects, engineers, and estimators build working applications in days. The result is a growing estate of vibe-coded utilities with no documentation, no named owner, and in some cases write access to live project models. This follow a familiar patten. A decade ago, Dynamo and Grasshopper bred the same culture of personal scripts, but now the volume and speed are new, and so is the proximity to production data, client information, and contractual output. Igor Tsinman, CEO of AMC Bridge, has spent twenty-five years building software for the CAD vendors and integrating their systems for the firms that depend on them, which gives him an unusually clear view of the distance between a prototype that works and an application a business can rely on. We asked him what that estate looks like from the inside, what it really costs to…",
+   "id": "1f2f309ec3936a8a",
+   "fetched_at": "2026-11-03T06:06:53.989945Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Addresses governance and safety of AI-coded utilities in AEC shops—directly relevant to your own add-in distribution and the risks of uncontrolled tooling.",
+    "topics": [
+     "ai",
+     "governance",
+     "software-safety"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-03T06:06:53.989945Z"
+   }
+  },
   {
    "title": "ScopeViews: Scope Box–Driven View Creation for Revit",
    "url": "http://revitaddons.blogspot.com/2026/11/scopeviews-scope-boxdriven-view.html",
@@ -285,6 +346,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-30T06:07:54.789386Z"
+   }
+  },
+  {
+   "title": "Team Admin API",
+   "url": "https://aps.autodesk.com/developer/overview/team-admin-api",
+   "source": "aps-blog",
+   "published": "2026-10-29T23:05:49Z",
+   "summary": "Team Admin API ana.hogben@aut… 2 Nov 2026 Team Admin API Add members, assign licenses, and recover seats from leavers Use REST APIs to manage Autodesk teams, members, product seats, and license assignments. Automate onboarding from your HR or identity systems, add outside collaborators, and reclaim licenses from people who left. View documentation View API reference Fundamentals If you're looking to explore the API further, here are some basic resources to get started. Walkthroughs Learn the most common API workflows by following our how-to guides. Team Admin API features Manage teams, users, product pools, and assignments with code instead of Autodesk Account. Automate onboarding from your HR system, assign products by role, and free up seats from people who left. See the API reference for every operation and its required parameters. Community and support Connect with other developers working with the Team Admin API. Ask questions, share tips, and learn from the community. Autodesk Developer Network Join the Autodesk Developer Network for technical support, early access to new APIs, and help from Autodesk engineers. Developer community blog Read up on the latest news, code…",
+   "id": "b5dcb3da28f98f17",
+   "fetched_at": "2026-11-03T06:06:53.989945Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Autodesk Platform Services API for team management; useful for large organizations but not applicable to a one-person practice.",
+    "topics": [
+     "aps",
+     "licensing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-03T06:06:53.989945Z"
    }
   },
   {
