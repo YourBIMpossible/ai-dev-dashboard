@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-03T06:06:53.989945Z",
- "count": 570,
+ "generated_at": "2026-11-04T06:06:45.416683Z",
+ "count": 575,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"4f96f8ef9a4ec382a7b018dad03b733b-gzip\"",
+   "etag": "\"ce6af959d6aff259269a41976b1edd95-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Tue, 03 Nov 2026 04:55:43 GMT",
+   "last_modified": "Tue, 03 Nov 2026 19:14:19 GMT",
    "last_status": 200,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": true,
-   "stale_reason": "no new items in 90 days (expects ~7)"
+   "stale_reason": "no new items in 91 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-11-02T15:37:43Z",
-   "last_modified": "Mon, 02 Nov 2026 15:55:41 GMT",
+   "last_item_published": "2026-11-03T15:38:49Z",
+   "last_modified": "Tue, 03 Nov 2026 15:38:49 GMT",
    "last_status": 200,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-30T17:33:54Z",
+   "last_item_published": "2026-11-03T10:12:23Z",
    "last_status": 200,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,52 +41,52 @@
    "last_item_published": "2026-10-30T11:52:05Z",
    "last_modified": "Mon, 02 Nov 2026 19:25:26 GMT",
    "last_status": 200,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"b7888f285f9a70b36c6d02e8bad283c8\"",
+   "etag": "W/\"648ba94691883ed99205d915b6d82ffd\"",
    "last_item_count": 8,
-   "last_modified": "Mon, 02 Nov 2026 23:00:40 GMT",
+   "last_modified": "Tue, 03 Nov 2026 15:22:19 GMT",
    "last_status": 200,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"4129a2e79a58a10262c320febdb12017\"",
+   "etag": "W/\"fdd00439d83faa47d72658e436035deb\"",
    "last_item_count": 10,
-   "last_item_published": "2026-11-01T22:34:10Z",
+   "last_item_published": "2026-11-04T00:13:16Z",
    "last_status": 200,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-11-03T02:28:00Z",
-   "last_modified": "Tue, 3 Nov 2026 03:26:40 GMT",
+   "last_item_published": "2026-11-04T01:47:00Z",
+   "last_modified": "Wed, 4 Nov 2026 04:14:10 GMT",
    "last_status": 200,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 118,
+   "consecutive_failures": 119,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-03T06:06:53.989945Z",
+   "last_failure": "2026-11-04T06:06:45.416683Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "118 consecutive failures: HTTP 403"
+   "stale_reason": "119 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"96b528c4e8bb3248c2096b95935fec94\"",
+   "etag": "W/\"d4388ca6cc22eaecff71c79374171839\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,90 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-03T06:06:53.989945Z",
+   "last_success": "2026-11-04T06:06:45.416683Z",
    "stale": true,
-   "stale_reason": "no new items in 140 days (expects ~30)"
+   "stale_reason": "no new items in 141 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Product Roundup: underbim (ub.Suite Edition 1)",
+   "url": "http://revitaddons.blogspot.com/2026/11/product-roundup-underbim-ubsuite.html",
+   "source": "revit-addons",
+   "published": "2026-11-04T01:47:00Z",
+   "summary": "Overview underbim was created around one idea: BIM technology should make real work easier. It is a focused, independent company built on about 25 years of hands-on BIM and Revit experience, starting in October 2001. It took shape as underbim around a decade ago, when practice, consultancy, and development came together under one identity. Its current product line, ub.Suite, turns real workflows into focused Revit software. Key Takeaways Practice first: underbim did not start as a software company looking for problems to solve. It grew out of years of work with BIM models, project teams, training, and real production constraints. Workflow before software: The approach is to observe the real problem, structure the workflow, and then build a focused tool around it. Anything Revit already does well natively is kept, and unnecessary steps are removed. One person across the whole chain: The founder identifies workflow problems, analyzes them, designs the solution, writes the software, and understands how it behaves in a real BIM environment. Focused, ownable products: ub.Suite is a collection of focused tools that extend Revit where everyday workflows can be made clearer, faster, and…",
+   "id": "dde40c57a5ba5975",
+   "fetched_at": "2026-11-04T06:06:45.416683Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Product announcement with no technical detail, API surface, or technique to learn from.",
+    "topics": [
+     "product-announcement"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-04T06:06:45.416683Z"
+   }
+  },
+  {
+   "title": "Autom8Labs launches AEC skills for AI agents",
+   "url": "https://aecmag.com/automation/autom8labs-launches-aec-skills-for-ai-agents/",
+   "source": "aec-magazine",
+   "published": "2026-11-03T15:38:49Z",
+   "summary": "Guides AI agent through tasks in Revit, AutoCAD, 3ds Max and more, with “clear steps” for doing the work and checking the result Autom8Labs has released 22 free MCP Skills, which work alongside the company’s relevant MCP Connectors for Revit, AutoCAD, Navisworks, Grasshopper, MicroStation, 3ds Max, Rhino, Civil 3D and Advance Steel. Rather than simply telling an AI agent what to do, each MCP skill guides it through the steps an experienced professional would follow. “Giving an AI agent access to a design application doesn’t automatically mean it knows the best way to work in it,” said James Gray, Autom8Labs. “The MCP Connectors give your AI agent the tools. Skills give it the method.” Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here The majority of skills focus on Revit and include family creation, scan-to-BIM, model health, structure, MEP, coordination, site, and document control. For Grasshopper, a computational design skill is designed to build parametric definitions the way a computational designer would, while 3ds Max skills sets up Corona or V-Ray the way a visualiser would.…",
+   "id": "e60e12c61edc43aa",
+   "fetched_at": "2026-11-04T06:06:45.416683Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "MCP Skills for Revit/AutoCAD show AI agent automation patterns you could integrate into your tooling.",
+    "topics": [
+     "ai-agents",
+     "revit-automation",
+     "mcp"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-04T06:06:45.416683Z"
+   }
+  },
+  {
+   "title": "nCircleTech launches nVibe AI app builder",
+   "url": "https://aecmag.com/automation/ncircletech-launches-nvibe-ai-app-builder/",
+   "source": "aec-magazine",
+   "published": "2026-11-03T15:00:54Z",
+   "summary": "AEC professionals describe the workflow and AI application platform builds the app nCircleTech has launched nVibe, an AI-powered development platform designed specifically to help AEC professionals turn ideas into working applications without needing coding skills. Domain experts, including site managers, project engineers and VDC leads, can describe a workflow in plain language, and nVibe builds the application within a sandboxed environment designed to give IT teams control over security, permissions and deployment. According to nCircleTech, nVibe differs from general-purpose AI coding tools through its built-in understanding of AEC terminology and workflows. This includes concepts such as Work Breakdown Structure (WBS) codes, CSI MasterFormat, RFIs, submittals and LoD 100–500. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here nVibe also comes with pre-built connectors for AEC systems, including Autodesk Forma, Autodesk Platform Services (APS), Autodesk AEC Data Model, SAP and other ERP systems, and Model Context Protocol (MCP). Integrations with Navisworks, Procore, AutoCAD and Revit…",
+   "id": "2a85be8a44229664",
+   "fetched_at": "2026-11-04T06:06:45.416683Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "No-code AI app builder for AEC; worth knowing exists but not directly applicable to C# add-in work.",
+    "topics": [
+     "ai-platforms"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-04T06:06:45.416683Z"
+   }
+  },
+  {
+   "title": "AI Developer Accelerator, Bengaluru",
+   "url": "https://aps.autodesk.com/event/ai-developer-accelerator-bengaluru",
+   "source": "aps-blog",
+   "published": "2026-11-03T10:12:23Z",
+   "summary": "AI Developer Accelerator, Bengaluru Geetha Vasudeva Rao 3 Nov 2026 Benefit from dedicated time to develop your Autodesk Platform Services application using AI – with direct help and training from APS engineering experts in Bengaluru India. Register February 9 February 12",
+   "id": "b4cc22b419ade989",
+   "fetched_at": "2026-11-04T06:06:45.416683Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Regional event announcement with no technical content or direct relevance to your location/work.",
+    "topics": [
+     "event"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-04T06:06:45.416683Z"
+   }
+  },
   {
    "title": "BackupMover: Keeping Revit Backups Out of the Working Folder",
    "url": "http://revitaddons.blogspot.com/2026/11/backupmover-keeping-revit-backups-out.html",
@@ -269,6 +347,27 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-31T06:05:44.425915Z"
+   }
+  },
+  {
+   "title": "Introducing the Team admin API, now in public beta!",
+   "url": "https://aps.autodesk.com/blog/introducing-team-admin-api-now-public-beta",
+   "source": "aps-blog",
+   "published": "2026-10-30T13:10:32Z",
+   "summary": "Introducing the Team admin API, now in public beta! Joao Martins 3 Nov 2026 João Martins Share Introduction Managing who has access to which Autodesk products gets harder as your team scales. Today we're releasing the Team Admin API in public beta, so you can automate team license management from your own scripts and apps. The beta runs in production and changes real teams, users, and product assignments. Test with a team that's safe to modify, and don't use the API for production integrations yet. What you can do Find Your Teams : List the teams you administer. Manage Users : List team users, look up a user by exact email address or user id, and invite new users. Check Product Availability : View product pools with total and assigned seats. Manage Product Assignments : View, create, and remove direct product assignments for individual users. For example, one script can invite a new employee to a team and assign their products in a single run. It's safe to rerun. What's in the beta Individual assignment only. Bulk operations aren't supported yet, so you add users and manage assignments one at a time. Direct assignments only. You can view assignments inherited from groups or teams,…",
+   "id": "567f9b814dc11015",
+   "fetched_at": "2026-11-04T06:06:45.416683Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Team admin API automates license management at scale; useful if distributing add-ins across teams.",
+    "topics": [
+     "aps",
+     "licensing",
+     "api"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-04T06:06:45.416683Z"
    }
   },
   {
