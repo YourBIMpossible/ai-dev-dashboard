@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-04T06:06:45.416683Z",
- "count": 575,
+ "generated_at": "2026-11-05T06:06:46.218137Z",
+ "count": 578,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"ce6af959d6aff259269a41976b1edd95-gzip\"",
+   "etag": "\"f3fe6c0e1127070d445078edf0965b66-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Tue, 03 Nov 2026 19:14:19 GMT",
+   "last_modified": "Wed, 04 Nov 2026 16:31:10 GMT",
    "last_status": 200,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": true,
-   "stale_reason": "no new items in 91 days (expects ~7)"
+   "stale_reason": "no new items in 92 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-11-03T15:38:49Z",
-   "last_modified": "Tue, 03 Nov 2026 15:38:49 GMT",
+   "last_item_published": "2026-11-04T14:00:11Z",
+   "last_modified": "Wed, 04 Nov 2026 14:00:11 GMT",
    "last_status": 200,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,66 +27,66 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-11-03T10:12:23Z",
+   "last_item_published": "2026-11-04T14:29:04Z",
    "last_status": 200,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"474309e984a1fcb4fc5c87775ab88319\"",
+   "etag": "W/\"ba8cb09615b1ed753a9269812e2cc909\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
-   "last_item_published": "2026-10-30T11:52:05Z",
-   "last_modified": "Mon, 02 Nov 2026 19:25:26 GMT",
+   "last_item_published": "2026-11-04T07:00:00Z",
+   "last_modified": "Wed, 04 Nov 2026 07:00:00 GMT",
    "last_status": 200,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"648ba94691883ed99205d915b6d82ffd\"",
+   "etag": "W/\"6444ed66849f848600cdf81ffb805322\"",
    "last_item_count": 8,
-   "last_modified": "Tue, 03 Nov 2026 15:22:19 GMT",
+   "last_modified": "Wed, 04 Nov 2026 16:26:56 GMT",
    "last_status": 200,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"fdd00439d83faa47d72658e436035deb\"",
+   "etag": "W/\"0d616fcd64bab1101100b29cbce152a6\"",
    "last_item_count": 10,
-   "last_item_published": "2026-11-04T00:13:16Z",
+   "last_item_published": "2026-11-05T00:13:25Z",
    "last_status": 200,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-11-04T01:47:00Z",
-   "last_modified": "Wed, 4 Nov 2026 04:14:10 GMT",
+   "last_item_published": "2026-11-05T01:26:00Z",
+   "last_modified": "Thu, 5 Nov 2026 02:54:17 GMT",
    "last_status": 200,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 119,
+   "consecutive_failures": 120,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-04T06:06:45.416683Z",
+   "last_failure": "2026-11-05T06:06:46.218137Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "119 consecutive failures: HTTP 403"
+   "stale_reason": "120 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"d4388ca6cc22eaecff71c79374171839\"",
+   "etag": "W/\"4a34c0c60a49c391457c77b597d3e4af\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,73 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-04T06:06:45.416683Z",
+   "last_success": "2026-11-05T06:06:46.218137Z",
    "stale": true,
-   "stale_reason": "no new items in 141 days (expects ~30)"
+   "stale_reason": "no new items in 142 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "BIMIT by Integrated Projects (IPX): Scan-to-BIM as a Service",
+   "url": "http://revitaddons.blogspot.com/2026/11/bimit-by-integrated-projects-ipx-scan.html",
+   "source": "revit-addons",
+   "published": "2026-11-05T01:26:00Z",
+   "summary": "Overview BIMIT is Integrated Projects' (IPX) scan-to-BIM product. You upload a registered point cloud of a building, and BIMIT turns it into a Revit model, floor plans, CAD drawings, and a quality report. It's sold as a standardized product with published prices, not as a custom modeling engagement. IPX launched BIMIT 4.0, a new engine, on October 15, 2026. It offers three settings. BIMIT 100 and 200 are fully automated, and BIMIT 300 adds an architect's review. IPX says its starting price is 4¢ per square foot for fully automated models, delivered in hours. Note on sources and scope: BIMIT is an online ordering and delivery service, and what you get back is a Revit model (.rvt) that you open in Revit as normal. This summary is based on IPX's own BIMIT pages, its help center, developer documentation, and launch posts. I found no independent reviews or hands-on tests, so the speed, cost, and accuracy figures below are IPX's own claims. What BIMIT Is, and Isn't IPX's help center describes BIMIT as a fixed-price product that turns a point cloud into a usable building model, built to confirm square footage and equipment counts quickly. IPX is explicit about what it is and isn't: It…",
+   "id": "571095412df0daa0",
+   "fetched_at": "2026-11-05T06:06:46.218137Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Scan-to-BIM service competitor; worth knowing the direction, not directly relevant to add-in work.",
+    "topics": [
+     "scan-to-bim",
+     "competitor"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-05T06:06:46.218137Z"
+   }
+  },
+  {
+   "title": "Bringing Revit Cloud Worksharing migration to AI assistants with APS and MCP",
+   "url": "https://aps.autodesk.com/blog/bringing-revit-cloud-worksharing-migration-ai-assistants-aps-and-mcp",
+   "source": "aps-blog",
+   "published": "2026-11-04T14:29:04Z",
+   "summary": "Bringing Revit Cloud Worksharing migration to AI assistants with APS and MCP zhong.wu@autod… 4 Nov 2026 Zhong Wu João Martins Share Background During our Autodesk Platform Services (APS) Accelerator in Denver last year, Moses Scott from Woolpert shared a challenge: migrating Revit Cloud Worksharing (RCW) models between Autodesk hubs/projects, particularly when those models have links and dependencies. That conversation inspired the RCW migration automation sample , which I introduced in a previous APS blog . The sample uses Design Automation for Revit to migrate RCW models between projects without requiring users to run Revit desktop software. Woolpert subsequently developed an industry solution addressing the additional challenges of linked-model migration. At Autodesk University 2026, Moses, João Martins, and I presented this work in Revit Cloud Worksharing Migration Has Arrived But Linked Models Still Need a Control Plane . Building on that experience, I wanted to explore how an AI assistant could help users discover RCW models, initiate migrations, and monitor the results using natural language. The result is the APS MCP RCW Migration sample , an extension of our AU 2026…",
+   "id": "715ccccf05fdd3b6",
+   "fetched_at": "2026-11-05T06:06:46.218137Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Design Automation + APS for RCW migration shows interop technique; RCW models and linking are production concerns you audit.",
+    "topics": [
+     "aps",
+     "design-automation",
+     "revit-cloud-worksharing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-05T06:06:46.218137Z"
+   }
+  },
+  {
+   "title": "Mach9 adds aerial LiDAR and photogrammetry support",
+   "url": "https://aecmag.com/civil-engineering/mach9-adds-aerial-lidar-and-photogrammetry-support/",
+   "source": "aec-magazine",
+   "published": "2026-11-04T14:00:11Z",
+   "summary": "AI CAD software combines feature extraction, point cloud editing and surface modelling for aerial survey workflows Mach9 has extended its web-based AI CAD software for civil engineering enabling it to process aerial LiDAR and photogrammetry -derived datasets from drones, helicopters and aircraft. Previously focused on ground-based scanning, the software can now extract features from aerial point clouds, classify points and build surfaces for civil engineering and GIS applications. Mach9 says its AI can produce an initial draft in hours, which survey teams then check and edit before delivery. The development addresses a familiar problem in reality capture: collecting data is often considerably faster than producing useful engineering drawings from it. Users upload point clouds and orthomosaic imagery, then work through extraction, editing and surface creation within the same application. Automated extraction covers kerbs, building footprints, pavement edges and vegetation outlines as 3D points and lines, with Mach9 claiming centimetre-level accuracy at infrastructure scale. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of…",
+   "id": "98d7451529c3c42c",
+   "fetched_at": "2026-11-05T06:06:46.218137Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "Civil/GIS point cloud tooling; outside building BIM scope and your add-in practice.",
+    "topics": [
+     "point-cloud",
+     "civil-engineering"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-05T06:06:46.218137Z"
+   }
+  },
   {
    "title": "Product Roundup: underbim (ub.Suite Edition 1)",
    "url": "http://revitaddons.blogspot.com/2026/11/product-roundup-underbim-ubsuite.html",
@@ -171,7 +232,7 @@
    }
   },
   {
-   "title": "nCircleTech launches nVibe AI app builder",
+   "title": "nCircle Tech launches nVibe AI app builder",
    "url": "https://aecmag.com/automation/ncircletech-launches-nvibe-ai-app-builder/",
    "source": "aec-magazine",
    "published": "2026-11-03T15:00:54Z",
@@ -371,7 +432,7 @@
    }
   },
   {
-   "title": "Protected: From Design Rules to a Working Revit Tool: Personal Automation with Codex",
+   "title": "From Design Rules to a Working Revit Tool: Personal Automation with Codex",
    "url": "https://bimcorner.com/revit-ai-codex-design-rules/",
    "source": "bim-corner",
    "published": "2026-10-30T11:52:05Z",
