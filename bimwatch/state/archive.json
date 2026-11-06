@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-05T06:06:46.218137Z",
- "count": 578,
+ "generated_at": "2026-11-06T06:06:57.071660Z",
+ "count": 583,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"f3fe6c0e1127070d445078edf0965b66-gzip\"",
+   "etag": "\"b4bf82fa8e70281e224e3970b4f5bc09-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Wed, 04 Nov 2026 16:31:10 GMT",
+   "last_modified": "Thu, 05 Nov 2026 23:49:31 GMT",
    "last_status": 200,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": true,
-   "stale_reason": "no new items in 92 days (expects ~7)"
+   "stale_reason": "no new items in 93 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-11-04T14:00:11Z",
-   "last_modified": "Wed, 04 Nov 2026 14:00:11 GMT",
+   "last_item_published": "2026-11-05T17:38:11Z",
+   "last_modified": "Thu, 05 Nov 2026 18:55:13 GMT",
    "last_status": 200,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,64 +29,64 @@
    "last_item_count": 10,
    "last_item_published": "2026-11-04T14:29:04Z",
    "last_status": 200,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "W/\"ba8cb09615b1ed753a9269812e2cc909\"",
+   "etag": "\"ba8cb09615b1ed753a9269812e2cc909\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
    "last_item_published": "2026-11-04T07:00:00Z",
    "last_modified": "Wed, 04 Nov 2026 07:00:00 GMT",
    "last_status": 200,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"6444ed66849f848600cdf81ffb805322\"",
+   "etag": "W/\"9dd137622ca1a3dd8d3ed42377811437\"",
    "last_item_count": 8,
-   "last_modified": "Wed, 04 Nov 2026 16:26:56 GMT",
+   "last_modified": "Fri, 06 Nov 2026 05:44:23 GMT",
    "last_status": 200,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"0d616fcd64bab1101100b29cbce152a6\"",
+   "etag": "W/\"8f592921c508fbdbedec094d43b7d3c9\"",
    "last_item_count": 10,
-   "last_item_published": "2026-11-05T00:13:25Z",
+   "last_item_published": "2026-11-05T22:27:38Z",
    "last_status": 200,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-11-05T01:26:00Z",
-   "last_modified": "Thu, 5 Nov 2026 02:54:17 GMT",
+   "last_item_published": "2026-11-06T02:17:00Z",
+   "last_modified": "Fri, 6 Nov 2026 02:32:11 GMT",
    "last_status": 200,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 120,
+   "consecutive_failures": 121,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-05T06:06:46.218137Z",
+   "last_failure": "2026-11-06T06:06:57.071660Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "120 consecutive failures: HTTP 403"
+   "stale_reason": "121 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"4a34c0c60a49c391457c77b597d3e4af\"",
+   "etag": "W/\"23aa41abf9f84dd86a4a25923499aee9\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,92 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-05T06:06:46.218137Z",
+   "last_success": "2026-11-06T06:06:57.071660Z",
    "stale": true,
-   "stale_reason": "no new items in 142 days (expects ~30)"
+   "stale_reason": "no new items in 143 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Free Ze’Connect: Batch Export, Link Management, and Scheduling",
+   "url": "http://revitaddons.blogspot.com/2026/11/free-zeconnect-batch-export-link.html",
+   "source": "revit-addons",
+   "published": "2026-11-06T02:17:00Z",
+   "summary": "Overview Ze’Connect is a Revit add-in from ZestineTech that automates some of the most repetitive coordination chores: exporting models for review, keeping links pointing at the right files, and moving models to the cloud. Its main idea is to stop opening files one by one. Pick a set of Revit models, local or in Autodesk Forma or BIM 360 projects, and Ze’Connect processes them in the background without opening each model in the Revit window. ZestineTech's product page lists five tools in one add-in: Batch NWC Export, Batch DWG/PDF Export, Batch IFC Export, Link Remapper, and Cloud Collaborate. A later update added Scheduled Export, which runs the exports automatically, even when Revit is closed, and Auto Open Revit, which opens a chosen model at a set time. ZestineTech describes it as a flagship product. Note on sources: This summary is based on ZestineTech's product page and its \"how it works\" page, the Autodesk App Store listing, ZestineTech's two YouTube tutorials, and a third-party directory entry. Autodesk's documentation provides background on cloud models and supported Revit versions. I found no independent reviews or hands-on tests, so time-saving claims, such as the…",
+   "id": "dc836df7a9825d61",
+   "fetched_at": "2026-11-06T06:06:57.071660Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 35,
+    "why": "Batch automation add-in; worth knowing the direction but not your architectural pattern.",
+    "topics": [
+     "revit-addons",
+     "batch-processing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-06T06:06:57.071660Z"
+   }
+  },
+  {
+   "title": "Free Ze’Diag: Revit Journal Analyzer",
+   "url": "http://revitaddons.blogspot.com/2026/11/free-zediag-revit-journal-analyzer.html",
+   "source": "revit-addons",
+   "published": "2026-11-06T01:37:00Z",
+   "summary": "Overview Ze’Diag is a free diagnostic tool from ZestineTech that explains why Revit crashed or misbehaved. Revit records every action, add-in call, and error in a session in a plain-text journal file. These files run to thousands of lines and are hard to read by hand. With Ze’Diag, you upload a journal and get back a structured, readable report. The report covers whether Revit crashed, the likely root cause, the errors and warnings raised, links that failed to load, where time was lost, and which add-ins may have been involved. It also links to known Autodesk solutions where they apply. The report can be downloaded as a PDF to share with the team. ZestineTech's pitch is to diagnose crashes \"in minutes, not hours.\" Note on sources and scope: Ze’Diag isn’t installed inside Revit. It’s a web application you open in a browser, and it’s listed on the Autodesk App Store as a \"web-based Autodesk Revit journal analyzer.\" Some directories group it under Revit add-ins and scripts because it’s part of the Revit tool ecosystem. This summary is based on ZestineTech’s product page, the Ze’Diag web app’s own pages, the Autodesk App Store listing, ZestineTech’s LinkedIn posts, a third-party…",
+   "id": "5fa8659214f26297",
+   "fetched_at": "2026-11-06T06:06:57.071660Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Journal parsing and crash diagnosis can tighten your add-in debugging and customer support workflow.",
+    "topics": [
+     "revit-api",
+     "debugging",
+     "diagnostics"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-06T06:06:57.071660Z"
+   }
+  },
+  {
+   "title": "LightYX connects layout and verification",
+   "url": "https://aecmag.com/construction/lightyx-connects-layout-and-verification/",
+   "source": "aec-magazine",
+   "published": "2026-11-05T17:38:11Z",
+   "summary": "New v3 platform combines laser-guided layout, installation guidance, verification and visual documentation in one connected workflow LightYX, which uses lasers to project full-scale CAD drawings onto construction surfaces and verify what’s been installed, has updated its platform to bring layout and verification together in a single, connected workflow. The LightYX system projects coordinated drawings from BIM and CAD at full scale onto floors, ceilings, and walls as a visible laser image, showing construction teams exactly where drywall, framing, MEP points, hanger locations, anchor points, and other elements should go. The aim is to reduce manual measuring, chalk lines, and plan interpretation. Once the work is installed, the platform scans it and compares it against the design. The new connected workflow in LightYX V3 is designed to reduce repetitive layout steps, identify discrepancies earlier and improve coordination between site and office teams. “With LightYX V3, a line in the model becomes a line you can build from. The same platform then stays with the crew through installation, verification and documentation, turning digital design into a complete field execution…",
+   "id": "960f538f2b5dc185",
+   "fetched_at": "2026-11-06T06:06:57.071660Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Construction verification hardware; not relevant to your Revit API and automation tooling work.",
+    "topics": [
+     "field-tech"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-06T06:06:57.071660Z"
+   }
+  },
+  {
+   "title": "Qonic AI launches inside BIM platform",
+   "url": "https://aecmag.com/bim/qonic-ai-launches-inside-bim-platform/",
+   "source": "aec-magazine",
+   "published": "2026-11-05T09:34:32Z",
+   "summary": "AI agents work directly inside the model, letting users find, check, fix and create BIM data using plain language Qonic has introduced Qonic AI, a collection of agents built into its cloud-based, collaborative BIM modelling platform. Qonic AI works directly inside the BIM model, rather than sitting alongside it. Qonic has also launched an MCP server, which lets users connect their own AI assistant to the platform. Inside Qonic, through the “Ask Qonic” chatbot, users describe what they want in plain language, and Qonic’s agents find, check and update elements using the platform’s own tools. Tasks include completing missing properties, building reports and editing geometry. “Anything you can do in Qonic in terms of geometry and data creation, editing, and manipulation can be done through prompting,” said Qonic’s Jacob De Sutter. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here The developers stress that users remain in control. Qonic AI can only change models the user is permitted to edit, and its changes can be undone in the same way as any manual operation. To mark the release, Qonic has…",
+   "id": "c33087cdc8ab4cc4",
+   "fetched_at": "2026-11-06T06:06:57.071660Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 40,
+    "why": "Competitor BIM platform with AI agents; shows market direction but does not change your Revit add-in work.",
+    "topics": [
+     "competitor",
+     "ai-bim"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-06T06:06:57.071660Z"
+   }
+  },
   {
    "title": "BIMIT by Integrated Projects (IPX): Scan-to-BIM as a Service",
    "url": "http://revitaddons.blogspot.com/2026/11/bimit-by-integrated-projects-ipx-scan.html",
@@ -368,6 +448,27 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-10-31T06:05:44.425915Z"
+   }
+  },
+  {
+   "title": "AI Can Write the Code. Who Guides the Choices?",
+   "url": "https://aps.autodesk.com/blog/ai-can-write-code-who-guides-choices",
+   "source": "aps-blog",
+   "published": "2026-10-30T22:15:12Z",
+   "summary": "AI Can Write the Code. Who Guides the Choices? Neeraj Yedekar 5 Nov 2026 Neeraj Yedekar Whitney Lawrence Yvette Gong Share Autodesk AI brings connected intelligence into Design & Make workflows to help teams make better decisions and get work done. But what does this mean for developers? How does Autodesk AI change how they work? Let’s explore. Picture a developer leaving a project meeting with a simple request such as, could we see the 3D model and properties of our asset with the project's open issues in one view, so the team does not have to keep jumping between systems? Now, with Autodesk MCP servers, a developer can open an AI coding tool, describe the outcome, and soon a solution appears, with the model on one side, floating parameters block and the issues beside it. A workflow that once sounded like a small software project now looks almost finished. As the solution's UI takes shape, a second, less visible build is happening underneath. The AI coding tool is translating a human outcome into a chain of platform decisions such as how the user should authenticate, which permissions the app needs, which Autodesk Platform Services (APS) capabilities and APIs can prepare the…",
+   "id": "0b4506749415e70f",
+   "fetched_at": "2026-11-06T06:06:57.071660Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 65,
+    "why": "Autodesk MCP servers let you wire AI assistants into your add-in workflows; concrete platform capability for integration.",
+    "topics": [
+     "aps",
+     "ai-integration",
+     "mcp"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-06T06:06:57.071660Z"
    }
   },
   {
