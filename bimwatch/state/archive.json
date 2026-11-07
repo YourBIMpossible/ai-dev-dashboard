@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-06T06:06:57.071660Z",
- "count": 583,
+ "generated_at": "2026-11-07T06:05:37.681401Z",
+ "count": 587,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"b4bf82fa8e70281e224e3970b4f5bc09-gzip\"",
+   "etag": "\"c5d79aecda57d6a78b78837eeaaab1fb-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Thu, 05 Nov 2026 23:49:31 GMT",
+   "last_modified": "Fri, 06 Nov 2026 11:04:31 GMT",
    "last_status": 200,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": true,
-   "stale_reason": "no new items in 93 days (expects ~7)"
+   "stale_reason": "no new items in 94 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-11-05T17:38:11Z",
-   "last_modified": "Thu, 05 Nov 2026 18:55:13 GMT",
+   "last_item_published": "2026-11-06T12:08:04Z",
+   "last_modified": "Fri, 06 Nov 2026 12:20:34 GMT",
    "last_status": 200,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,66 +27,66 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-11-04T14:29:04Z",
+   "last_item_published": "2026-11-06T14:18:39Z",
    "last_status": 200,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "\"ba8cb09615b1ed753a9269812e2cc909\"",
+   "etag": "\"551e1520d614f7b1918afe3b5d25f256\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
    "last_item_published": "2026-11-04T07:00:00Z",
-   "last_modified": "Wed, 04 Nov 2026 07:00:00 GMT",
+   "last_modified": "Fri, 06 Nov 2026 08:45:58 GMT",
    "last_status": 200,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"9dd137622ca1a3dd8d3ed42377811437\"",
+   "etag": "W/\"c105d4f9a6d5ede8faf14abd5bebbe9d\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 06 Nov 2026 05:44:23 GMT",
+   "last_modified": "Fri, 06 Nov 2026 14:56:07 GMT",
    "last_status": 200,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"8f592921c508fbdbedec094d43b7d3c9\"",
+   "etag": "W/\"36a830f33f21ce12868b8ed6f7d594b3\"",
    "last_item_count": 10,
-   "last_item_published": "2026-11-05T22:27:38Z",
+   "last_item_published": "2026-11-06T21:11:51Z",
    "last_status": 200,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-11-06T02:17:00Z",
-   "last_modified": "Fri, 6 Nov 2026 02:32:11 GMT",
+   "last_item_published": "2026-11-07T01:26:00Z",
+   "last_modified": "Sat, 7 Nov 2026 02:06:35 GMT",
    "last_status": 200,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 121,
+   "consecutive_failures": 122,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-06T06:06:57.071660Z",
+   "last_failure": "2026-11-07T06:05:37.681401Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "121 consecutive failures: HTTP 403"
+   "stale_reason": "122 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"23aa41abf9f84dd86a4a25923499aee9\"",
+   "etag": "W/\"7290f13faecc261012236faf33312d8c\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,91 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-06T06:06:57.071660Z",
+   "last_success": "2026-11-07T06:05:37.681401Z",
    "stale": true,
-   "stale_reason": "no new items in 143 days (expects ~30)"
+   "stale_reason": "no new items in 144 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Room 2 Model: Finishes from Revit Rooms",
+   "url": "http://revitaddons.blogspot.com/2026/11/room-2-model-finishes-from-revit-rooms.html",
+   "source": "revit-addons",
+   "published": "2026-11-07T01:26:00Z",
+   "summary": "Overview Room 2 Model (also written Room2Model) is a Revit add-in from PROISAC-BIM-VDC that creates finishes directly from the Rooms already in a project. Instead of drawing each floor finish, wall finish, or ceiling by hand, you select Rooms in a floor plan view and the add-in builds the finish elements from the room shapes and room data. The Autodesk App Store listing describes it as a way to create finishes \"in seconds, as easy as selecting and clicking.\" An optional setting uses the doors in each room to extend the floor finishes so they line up with the doors, which gives a cleaner result. Note on sources: This summary is based on the Autodesk App Store listing, PROISAC's own store page, PROISAC's publisher profiles, and a third-party directory page. I found no independent reviews or hands-on tests. The Autodesk listing shows one 5-star rating, and the directory page reads like a generated write-up of the listing, so I treated it as a copy of the vendor's description, not as a review. The listings give only brief descriptions, so detail on settings and behavior is limited. Key Facts Developer: PROISAC-BIM-VDC (Prometheus Ingenieros SAC), a BIM and VDC company that develops…",
+   "id": "de85df64e4da03f9",
+   "fetched_at": "2026-11-07T06:05:37.681401Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A product built on Revit API; useful to know the market, but not your own work.",
+    "topics": [
+     "revit-ecosystem",
+     "add-in-market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-07T06:05:37.681401Z"
+   }
+  },
+  {
+   "title": "From IFC to Action: Connect, Coordinate and Analyze with Data Exchange",
+   "url": "https://aps.autodesk.com/blog/ifc-action-connect-coordinate-and-analyze-data-exchange",
+   "source": "aps-blog",
+   "published": "2026-11-06T14:18:39Z",
+   "summary": "From IFC to Action: Connect, Coordinate and Analyze with Data Exchange Trupti Deshpande 6 Nov 2026 Trupti Deshpande Share IFC files help teams share building and infrastructure information across disciplines, even when working with different design tools. But a whole model often contains far more data than a particular task requires. The Data Exchange Cloud Connector for IFC lets teams create focused Data Exchanges from IFC files stored in Autodesk Forma, selecting only the elements and properties needed for their workflows. Join us for a Data Exchange webinar to see how IFC data can move beyond traditional file exchange and support design coordination, analysis, and reporting. In this webinar, we'll demonstrate how to: Create a Data Exchange directly from an IFC file using the Cloud Connector. Apply filters to select relevant elements and properties. Load the resulting Data Exchange into Revit using the Revit Connector and explore model information in Power BI using the Power BI Connector . What does this mean for real-world projects? Imagine receiving IFC models from consultants, collaborators, or subcontractors. Once uploaded to Forma, these files can become the source for…",
+   "id": "0d04b68a3850dcb2",
+   "fetched_at": "2026-11-07T06:05:37.681401Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 55,
+    "why": "Data Exchange API for IFC workflows and cross-discipline coordination; relevant to interoperability work.",
+    "topics": [
+     "ifc",
+     "data-exchange",
+     "aps"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-07T06:05:37.681401Z"
+   }
+  },
+  {
+   "title": "Chaos brings AI deeper into V-Ray Collection",
+   "url": "https://aecmag.com/visualisation/chaos-brings-ai-deeper-into-v-ray-collection/",
+   "source": "aec-magazine",
+   "published": "2026-11-06T12:08:04Z",
+   "summary": "Features include in-product AI guidance, MCP support and 3D asset generation to streamline visualisation workflows Chaos has released a major AI-focused update to the V-Ray Collection, a suite of 3D visualisation tools built around photorealistic rendering software V-Ray. The update aims to bring AI further into the visualisation workflow to help artists automate some of their most time-consuming tasks. New tools allow users to generate 3D assets, while Model Context Protocol (MCP) servers enable them to connect external AI assistants, such as Claude and ChatGPT, directly to their workflows. V-Ray also gains an integrated AI assistant for guided analysis and advice on settings. “Every industry is going through a push and pull with AI right now, as they attempt to figure out what’s actually useful,” said Allan Poore, Chief Product Officer at Chaos. “This new update justifies itself on day one, not only by dramatically shrinking the V-Ray learning curve, but also allowing creators to direct the process across assets, automation, and analysis, making their visions much easier to attain.” Discover what’s new in technology for architecture, engineering and construction — read the…",
+   "id": "09dbda772f996996",
+   "fetched_at": "2026-11-07T06:05:37.681401Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Rendering and visualization tooling; not your production work.",
+    "topics": [
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-07T06:05:37.681401Z"
+   }
+  },
+  {
+   "title": "Chaos brings AI design exploration into Enscape",
+   "url": "https://aecmag.com/visualisation/chaos-brings-ai-design-exploration-into-enscape/",
+   "source": "aec-magazine",
+   "published": "2026-11-06T10:53:04Z",
+   "summary": "Enscape 4.22 integrates Veras 2.0 more closely into the visualisation workflow, alongside new AI tools for design exploration and asset creation. Chaos has enhanced the integration between its Enscape real-time visualisation software and AI visualisation tool Veras 2.0, bringing AI-powered design exploration directly into the Enscape interface. The update aims to help architects incorporate AI more easily into their existing workflows, generate design variations and experiment with different materials and moods. Launching today as part of Enscape 4.22, the integration removes the need to bring up a separate Veras window, allowing architects to access AI rendering tools directly within Enscape. New AI video models also offer additional ways to visualise and communicate design ideas. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here Petr Mitev, VP Product, Solutions for Designers, said: “AI has enormous potential to support architects’ creativity, not just improve efficiency. “By bringing Veras closer to the Enscape workflow, we’re making it easier for designers to explore different…",
+   "id": "5a46aed8b92787c8",
+   "fetched_at": "2026-11-07T06:05:37.681401Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Rendering and design visualization features; outside your domain.",
+    "topics": [
+     "visualization"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-07T06:05:37.681401Z"
+   }
+  },
   {
    "title": "Free Ze’Connect: Batch Export, Link Management, and Scheduling",
    "url": "http://revitaddons.blogspot.com/2026/11/free-zeconnect-batch-export-link.html",
