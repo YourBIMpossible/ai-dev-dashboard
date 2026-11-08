@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-11-07T06:05:37.681401Z",
- "count": 587,
+ "generated_at": "2026-11-08T06:06:05.098392Z",
+ "count": 588,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Fri, 06 Nov 2026 11:04:31 GMT",
    "last_status": 200,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": true,
-   "stale_reason": "no new items in 94 days (expects ~7)"
+   "stale_reason": "no new items in 95 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 200,
+   "last_item_count": 0,
    "last_item_published": "2026-11-06T12:08:04Z",
    "last_modified": "Fri, 06 Nov 2026 12:20:34 GMT",
-   "last_status": 200,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_status": 304,
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,7 +29,7 @@
    "last_item_count": 10,
    "last_item_published": "2026-11-06T14:18:39Z",
    "last_status": 200,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -37,56 +37,56 @@
    "consecutive_failures": 0,
    "etag": "\"551e1520d614f7b1918afe3b5d25f256\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-11-04T07:00:00Z",
    "last_modified": "Fri, 06 Nov 2026 08:45:58 GMT",
-   "last_status": 200,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_status": 304,
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"c105d4f9a6d5ede8faf14abd5bebbe9d\"",
+   "etag": "W/\"e0714eaf57c2a75f122e7eb4331701fc\"",
    "last_item_count": 8,
-   "last_modified": "Fri, 06 Nov 2026 14:56:07 GMT",
+   "last_modified": "Sat, 07 Nov 2026 07:44:26 GMT",
    "last_status": 200,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"36a830f33f21ce12868b8ed6f7d594b3\"",
+   "etag": "W/\"7adb0e77cac4e563f524dcd657de78f6\"",
    "last_item_count": 10,
-   "last_item_published": "2026-11-06T21:11:51Z",
+   "last_item_published": "2026-11-07T18:24:39Z",
    "last_status": 200,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-addons": {
    "consecutive_failures": 0,
    "last_item_count": 25,
-   "last_item_published": "2026-11-07T01:26:00Z",
-   "last_modified": "Sat, 7 Nov 2026 02:06:35 GMT",
+   "last_item_published": "2026-11-07T20:32:00Z",
+   "last_modified": "Sat, 7 Nov 2026 21:57:18 GMT",
    "last_status": 200,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 122,
+   "consecutive_failures": 123,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-07T06:05:37.681401Z",
+   "last_failure": "2026-11-08T06:06:05.098392Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "122 consecutive failures: HTTP 403"
+   "stale_reason": "123 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"7290f13faecc261012236faf33312d8c\"",
+   "etag": "W/\"94c8a943130e439b36753021963a2546\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,32 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-07T06:05:37.681401Z",
+   "last_success": "2026-11-08T06:06:05.098392Z",
    "stale": true,
-   "stale_reason": "no new items in 144 days (expects ~30)"
+   "stale_reason": "no new items in 145 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Free BIMK.XPorter: Multi-Format Export Manager",
+   "url": "http://revitaddons.blogspot.com/2026/11/free-bimkxporter-multi-format-export.html",
+   "source": "revit-addons",
+   "published": "2026-11-07T20:32:00Z",
+   "summary": "Overview BIMK.XPorter is a free Revit add-in from BIMK-TOOLS that gives BIM users a single workspace for preparing and running exports. Instead of repeating export steps across several Revit dialogs, you pick the sheets and views you need, switch on the output formats, preview the file names, check the destination folder, and watch the export's readiness and progress. The Autodesk App Store listing calls it a \"professional multi-format export manager\" and says it helps users run export workflows \"in a clearer and more controlled way.\" It's aimed at BIM production teams, coordinators, engineers, modelers, and documentation users, and it's the first application from BIMK-TOOLS, a developer working on further Revit tools. Note on sources: This summary is based on the Autodesk App Store listing, the BIMK-TOOLS publisher profile, and two LinkedIn posts by the developer, one with a feature walkthrough. I found no independent reviews or hands-on tests. Key Facts Developer: BIMK-TOOLS is the publisher on the Autodesk App Store. The add-in is announced on LinkedIn by Khaled ElSagheer, who says he built it as his graduation project for an Application Development diploma, using C#, WPF, and…",
+   "id": "e1b047963e2981a3",
+   "fetched_at": "2026-11-08T06:06:05.098392Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "A free export UI wrapper; potentially useful but no technical depth on API integration, extensibility, or how it handles batch operations differently than native Revit.",
+    "topics": [
+     "revit-addins",
+     "export-automation"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-08T06:06:05.098392Z"
+   }
+  },
   {
    "title": "Room 2 Model: Finishes from Revit Rooms",
    "url": "http://revitaddons.blogspot.com/2026/11/room-2-model-finishes-from-revit-rooms.html",
