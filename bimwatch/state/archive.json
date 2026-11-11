@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-10T06:06:34.332190Z",
- "count": 592,
+ "generated_at": "2026-11-11T06:06:52.966136Z",
+ "count": 596,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"c5d79aecda57d6a78b78837eeaaab1fb-gzip\"",
+   "etag": "\"19f774c1c2c7e74a41264ed97d6ad8a6-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Fri, 06 Nov 2026 11:04:31 GMT",
+   "last_modified": "Wed, 11 Nov 2026 01:22:35 GMT",
    "last_status": 200,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": true,
-   "stale_reason": "no new items in 97 days (expects ~7)"
+   "stale_reason": "no new items in 98 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
-   "last_item_count": 0,
-   "last_item_published": "2026-11-06T12:08:04Z",
-   "last_modified": "Fri, 06 Nov 2026 12:20:34 GMT",
-   "last_status": 304,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_item_count": 200,
+   "last_item_published": "2026-11-10T18:22:40Z",
+   "last_modified": "Tue, 10 Nov 2026 18:23:45 GMT",
+   "last_status": 200,
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -29,39 +29,39 @@
    "last_item_count": 10,
    "last_item_published": "2026-11-06T14:18:39Z",
    "last_status": 200,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
   "bim-corner": {
    "consecutive_failures": 0,
-   "etag": "\"59129928c3b8555538b1aeaa3eccca7e\"",
+   "etag": "\"4bdf13e8860a5e0d8bcfebdfb21c7a26\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
    "last_item_count": 10,
    "last_item_published": "2026-11-04T07:00:00Z",
-   "last_modified": "Mon, 09 Nov 2026 07:54:17 GMT",
+   "last_modified": "Tue, 10 Nov 2026 07:44:38 GMT",
    "last_status": 200,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"e5dfa0505d69e5089f89c8f3cd60f115\"",
+   "etag": "W/\"65ae87cbefc0d862a5b419307feb1a20\"",
    "last_item_count": 9,
-   "last_modified": "Tue, 10 Nov 2026 05:24:39 GMT",
+   "last_modified": "Wed, 11 Nov 2026 05:59:39 GMT",
    "last_status": 200,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"f6c78488c61166b580c72260d1b969aa\"",
+   "etag": "W/\"e298d56f610d3d59696f3008bb410825\"",
    "last_item_count": 10,
-   "last_item_published": "2026-11-09T19:31:15Z",
+   "last_item_published": "2026-11-10T19:35:47Z",
    "last_status": 200,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -69,24 +69,24 @@
    "consecutive_failures": 0,
    "last_item_count": 25,
    "last_item_published": "2026-11-10T01:47:00Z",
-   "last_modified": "Tue, 10 Nov 2026 02:16:23 GMT",
+   "last_modified": "Tue, 10 Nov 2026 16:37:13 GMT",
    "last_status": 200,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 126,
+   "consecutive_failures": 127,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-10T06:06:34.332190Z",
+   "last_failure": "2026-11-11T06:06:52.966136Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "126 consecutive failures: HTTP 403"
+   "stale_reason": "127 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"9686da9f58265604e31b4c66702f0b78\"",
+   "etag": "W/\"4c570390b30a3b18401fcbf9abb6d5a7\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,90 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-10T06:06:34.332190Z",
+   "last_success": "2026-11-11T06:06:52.966136Z",
    "stale": true,
-   "stale_reason": "no new items in 147 days (expects ~30)"
+   "stale_reason": "no new items in 148 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "SketchUp 2027 bridges design workflows",
+   "url": "https://aecmag.com/cad/sketchup-2027-bridges-design-workflows/",
+   "source": "aec-magazine",
+   "published": "2026-11-10T18:22:40Z",
+   "summary": "Trimble introduces non-destructive modelling and enhanced Revit interoperability to streamline design development, collaboration and documentation With the release of SketchUp 2027, Trimble has introduced Procedures, a new non-destructive modelling system, and improved interoperability with Revit, helping to bridge the gap between early-stage conceptual design and detailed Revit documentation. According to Trimble, these advances address two of the most costly sources of rework in design: rebuilding a model every time a design changes and rebuilding it again every time it moves into another tool. Trimble is also aiming to improve project collaboration with the Trimble Connect Design Hub (Labs), a centralised design communication and collaboration capability built on the Trimble Connect platform. It automatically captures designer and client communications, bringing 3D models, file management and project administration together in a single project record. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here For SketchUp 2027, the non-destructive modelling system Procedures is designed to…",
+   "id": "82065b199e893159",
+   "fetched_at": "2026-11-11T06:06:52.966136Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "SketchUp interop matters for early-stage work, but you are Revit-native; monitor competitor direction without acting on it.",
+    "topics": [
+     "interoperability",
+     "revit-integration"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-11T06:06:52.966136Z"
+   }
+  },
+  {
+   "title": "Ageiro launches Ark Watcher",
+   "url": "https://aecmag.com/project-management/ageiro-launches-ark-watcher/",
+   "source": "aec-magazine",
+   "published": "2026-11-10T13:48:30Z",
+   "summary": "Continuously monitors project information across Autodesk Forma, Oracle Aconex, Procore, Microsoft SharePoint, Dropbox and more Ageiro has launched Ark Watcher, a new capability within its “ Agentic Reasoning Knowledgebase” AECO project intelligence platform, designed to continuously monitor project information across popular contractor systems, including Autodesk Forma , Oracle Aconex , Procore , Microsoft SharePoint, and Dropbox. Rather than relying on individuals to manually check multiple systems, Ark Watcher monitors two key areas: project conditions that require human review and potential issues that could put the project at risk. By tracking changes, inconsistencies and emerging conditions, project teams can identify potential issues earlier and make better-informed decisions. Ark Watcher’s capabilities include comparing specifications as they change, identifying inconsistencies in estimates, highlighting gaps between tender and subcontractor pricing, reviewing RFIs and submittals, checking information against ISO 19650 requirements and contractor BIM rules, and providing early warnings of potential claim events. Discover what’s new in technology for architecture,…",
+   "id": "eca5938935a98897",
+   "fetched_at": "2026-11-11T06:06:52.966136Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Project intelligence platform with no technique or API surface relevant to add-in development or model tooling.",
+    "topics": [
+     "project-management"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-11T06:06:52.966136Z"
+   }
+  },
+  {
+   "title": "Trimble embeds AI across AECO",
+   "url": "https://aecmag.com/collaboration/trimble-embeds-ai-across-aeco/",
+   "source": "aec-magazine",
+   "published": "2026-11-10T09:19:34Z",
+   "summary": "Trimble Connect platform introduces AI agents and automation to improve project coordination, manage risk and streamline workflows Trimble has embedded AI within Trimble Connect , expanding the platform beyond its traditional role as a common data environment (CDE) to connect site information with design, cost and operational workflows. The new capabilities are intended to help teams identify and mitigate risks across the project lifecycle, while keeping human judgement at the centre of decision-making. Unveiled at Trimble’s Dimensions User Conference, the AI capabilities span design, construction and project operations. In design, they include generating architectural options using live as-built point-cloud data, converting natural-language prompts into constructible structural models, and automatically classifying scanned point clouds into structural elements. For construction teams, applications include AI-powered diagnostics for machine-control systems, converting 360-degree site walk videos into 3D point clouds, and voice-driven site inspections that automatically transcribe observations and link them to project drawings. Discover what’s new in technology for architecture,…",
+   "id": "e5abf57ca7a458e0",
+   "fetched_at": "2026-11-11T06:06:52.966136Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 20,
+    "why": "Trimble embedding AI into CDE is market motion worth knowing; no concrete technique applicable to your Revit automation work yet.",
+    "topics": [
+     "ai",
+     "market-direction"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-11T06:06:52.966136Z"
+   }
+  },
+  {
+   "title": "G2 Digital launches quad-GPU 2U server",
+   "url": "https://aecmag.com/workstations/g2-digital-launches-quad-gpu-2u-server/",
+   "source": "aec-magazine",
+   "published": "2026-11-10T07:50:27Z",
+   "summary": "UK-manufactured 2U Q-Power offers firms an on-premise alternative to premium cloud AI services G2 Digital, a UK specialist in custom-built rack-mount computers, has launched the 2U Q-Power, a high-performance GPU server designed for complex AI workloads and rendering. The system can accommodate up to four dual slot Nvidia RTX GPUs, offering twice the capacity of most conventional 2U servers and greater computing density within a rack. This is made possible by a custom chassis design that mounts the GPUs horizontally, parallel to the motherboard. When configured with four Nvidia RTX Pro 6000 Blackwell Max-Q GPUs, the Q-Power delivers 384 GB of combined GPU memory, enabling organisations to run demanding AI workloads entirely on-site. This includes large language models (LLMs) with 70 billion parameters at full precision, as well as significantly larger models using lower-precision formats and quantisation. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here According to G2 Digital, the system can deliver up to 18 times lower costs per million tokens than premium cloud AI APIs when operating…",
+   "id": "537edcc8e1c7815b",
+   "fetched_at": "2026-11-11T06:06:52.966136Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Hardware infrastructure announcement; not relevant to add-in development, Revit API, or your tooling practice.",
+    "topics": [
+     "hardware"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-11T06:06:52.966136Z"
+   }
+  },
   {
    "title": "BIM Specialist: Room and Schedule Productivity Toolkit",
    "url": "http://revitaddons.blogspot.com/2026/11/bim-specialist-room-and-schedule.html",
@@ -670,7 +748,7 @@
    }
   },
   {
-   "title": "Introducing the Team admin API, now in public beta!",
+   "title": "Introducing the Team Admin API, now in public beta!",
    "url": "https://aps.autodesk.com/blog/introducing-team-admin-api-now-public-beta",
    "source": "aps-blog",
    "published": "2026-10-30T13:10:32Z",
