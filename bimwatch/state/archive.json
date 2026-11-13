@@ -1,25 +1,25 @@
 {
- "generated_at": "2026-11-12T06:06:57.812114Z",
- "count": 598,
+ "generated_at": "2026-11-13T06:06:44.859000Z",
+ "count": 601,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
-   "etag": "\"19f774c1c2c7e74a41264ed97d6ad8a6-gzip\"",
+   "etag": "\"ffccbfee08000a0ef953741edd9a3f22-gzip\"",
    "last_item_count": 0,
    "last_item_published": "2026-08-04T16:30:13Z",
-   "last_modified": "Wed, 11 Nov 2026 01:22:35 GMT",
+   "last_modified": "Thu, 12 Nov 2026 20:35:25 GMT",
    "last_status": 200,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": true,
-   "stale_reason": "no new items in 99 days (expects ~7)"
+   "stale_reason": "no new items in 100 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-11-11T11:56:35Z",
-   "last_modified": "Wed, 11 Nov 2026 12:29:11 GMT",
+   "last_item_published": "2026-11-12T09:55:20Z",
+   "last_modified": "Thu, 12 Nov 2026 09:56:34 GMT",
    "last_status": 200,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-11-06T14:18:39Z",
+   "last_item_published": "2026-11-12T18:38:13Z",
    "last_status": 200,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -37,31 +37,31 @@
    "consecutive_failures": 0,
    "etag": "\"e3ae32a3c2dad2b234ff799a2c161232\"",
    "last_failure": "2026-09-28T07:26:48.068986Z",
-   "last_item_count": 10,
+   "last_item_count": 0,
    "last_item_published": "2026-11-11T11:51:48Z",
    "last_modified": "Wed, 11 Nov 2026 11:51:50 GMT",
-   "last_status": 200,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_status": 304,
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"592cb379a128580916b1e59b468f7361\"",
+   "etag": "W/\"6441d101e8fc063f49a52fda39814489\"",
    "last_item_count": 9,
-   "last_modified": "Thu, 12 Nov 2026 04:13:37 GMT",
+   "last_modified": "Fri, 13 Nov 2026 04:25:42 GMT",
    "last_status": 200,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"ad371d2aaa443d52d4a5bbefcb442d7f\"",
+   "etag": "W/\"3070372b122a1228efcaeddf0da9f161\"",
    "last_item_count": 10,
-   "last_item_published": "2026-11-11T19:04:06Z",
+   "last_item_published": "2026-11-12T09:47:59Z",
    "last_status": 200,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -69,24 +69,24 @@
    "consecutive_failures": 0,
    "last_item_count": 25,
    "last_item_published": "2026-11-10T01:47:00Z",
-   "last_modified": "Tue, 10 Nov 2026 16:37:13 GMT",
+   "last_modified": "Thu, 12 Nov 2026 22:31:23 GMT",
    "last_status": 200,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 128,
+   "consecutive_failures": 129,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-12T06:06:57.812114Z",
+   "last_failure": "2026-11-13T06:06:44.859000Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "128 consecutive failures: HTTP 403"
+   "stale_reason": "129 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"378719f7a478c0187f8d0f5c4b039d53\"",
+   "etag": "W/\"47d119a75ea2eba0b12600c1e77338fc\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,52 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-12T06:06:57.812114Z",
+   "last_success": "2026-11-13T06:06:44.859000Z",
    "stale": true,
-   "stale_reason": "no new items in 149 days (expects ~30)"
+   "stale_reason": "no new items in 150 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "profileImage field removed from the usage-queries API (Business Success Plan)",
+   "url": "https://aps.autodesk.com/blog/profileimage-field-removed-usage-queries-api-business-success-plan",
+   "source": "aps-blog",
+   "published": "2026-11-12T18:38:13Z",
+   "summary": "profileImage field removed from the usage-queries API (Business Success Plan) Deepali Srivastava 12 Nov 2026 Deepali Srivastava Share What changed On Oct. 15, we removed the optional profileImage field from the /usage-queries API as part of our migration from Oxygen V2 to Profile V2. What it means for you - Requests that pass profileImage in the fields array now return a 400 Bad Request error. - The request and response structure is otherwise unchanged. - Your integration needs no other updates. What to do If you haven't already, remove profileImage from the fields array in your /usage-queries requests. Learn more See the usage-queries POST reference (https://aps.autodesk.com/en/docs/insights/v1/reference/http/usage-queries-POST/) and the supported fields and metrics ( https://aps.autodesk.com/en/docs/insights/v1/reference/fields-and-metrics/ ). Business Platform Updates",
+   "id": "a813ce6972ba8a05",
+   "fetched_at": "2026-11-13T06:06:44.859000Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 15,
+    "why": "APS API field removal; only relevant if you use usage-queries in a cloud add-in or integration layer.",
+    "topics": [
+     "aps",
+     "api-change"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-13T06:06:44.859000Z"
+   }
+  },
+  {
+   "title": "Rhino World 2026: McNeel lets AI in",
+   "url": "https://aecmag.com/cad/rhino-world-2026-mcneel-lets-ai-in/",
+   "source": "aec-magazine",
+   "published": "2026-11-12T09:55:20Z",
+   "summary": "As McNeel quietly rolls out Rhino 9, Campbell Yule reports on how the company is embracing AI, accelerating development and reshaping its software while retaining its distinctive business model. On the final afternoon of Rhino World 2026, in a session that had not been on the agenda and was added to fill a gap, someone in the audience asked the question that had hung over three days of talks about Rhino 9. When will it ship? “When do you want it?” asked Bob McNeel, the company’s founder and CEO. “Yesterday,” came a shout from the floor, followed by: “Next week. But not Monday.” “So Tuesday? Or how about Wednesday? I’ll see what we can do.” Five days later, on Wednesday 28 October, Rhino 9 was released. True to form, it happened quietly. The buy and downloads pages were updated, and on the day the Rhino home page still said Rhino 8. It was a very McNeel way to set a launch date. There was no countdown and no date on a slide, just a conversation with the room that turned into a commitment. Much of the week had that character. The way McNeel sells Rhino has not moved, and the company made a point of saying so. However, the way it builds Rhino has changed since March, and AI is the…",
+   "id": "34e9e9b9e377bcb0",
+   "fetched_at": "2026-11-13T06:06:44.859000Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Rhino 9 released with AI features; worth knowing competitor direction but no direct impact on Revit workflow.",
+    "topics": [
+     "competitor",
+     "market"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-13T06:06:44.859000Z"
+   }
+  },
   {
    "title": "Archiboost looks beyond construction document checking",
    "url": "https://aecmag.com/data-management/archiboost-looks-beyond-construction-document-checking/",
@@ -266,6 +306,26 @@
     ],
     "model": "claude-haiku-4-5-20251001",
     "classified_at": "2026-11-10T06:06:34.332190Z"
+   }
+  },
+  {
+   "title": "Build faster with APS: API documentation now available through Autodesk Product Help MCP",
+   "url": "https://aps.autodesk.com/blog/build-faster-aps-api-documentation-now-available-through-autodesk-product-help-mcp",
+   "source": "aps-blog",
+   "published": "2026-11-09T20:59:42Z",
+   "summary": "Build faster with APS: API documentation now available through Autodesk Product Help MCP Dwanill Mehta 12 Nov 2026 Dwanill Mehta Share Building with Autodesk Platform Services (APS) keeps getting easier! APS API reference documentation is now accessible through the Autodesk Product Help MCP Server . This brings APS knowledge directly into AI coding tools such as Cursor and Claude Code. Whether you're automating design workflows, integrating Autodesk Forma and Fusion data, building cloud applications, or connecting Autodesk services with enterprise systems, your AI coding assistant can now access relevant APS API documentation and help you write code. Less time switching between documentation and your development environment. More time building with APS. Your APS documentation, right where you build Autodesk Platform Services offers APIs spanning design and manufacturing data, construction workflows, cloud automation, and enterprise integrations. Developers can use the AEC Data Model API to query building information, Automation APIs to process design files in the cloud, Data Exchange to share design data across applications, and Webhooks to build event-driven integrations. Each…",
+   "id": "cf79d14f139dd694",
+   "fetched_at": "2026-11-13T06:06:44.859000Z",
+   "classification": {
+    "tier": "learn",
+    "relevance": 35,
+    "why": "APS docs now available via AI coding assistants; useful if you build cloud integrations or use AI pair programming.",
+    "topics": [
+     "aps",
+     "developer-tooling"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-13T06:06:44.859000Z"
    }
   },
   {
