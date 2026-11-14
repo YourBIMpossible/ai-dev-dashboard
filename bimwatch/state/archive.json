@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-11-13T06:06:44.859000Z",
- "count": 601,
+ "generated_at": "2026-11-14T06:05:53.315536Z",
+ "count": 604,
  "health": {
   "adsk-news": {
    "consecutive_failures": 0,
@@ -9,17 +9,17 @@
    "last_item_published": "2026-08-04T16:30:13Z",
    "last_modified": "Thu, 12 Nov 2026 20:35:25 GMT",
    "last_status": 200,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": true,
-   "stale_reason": "no new items in 100 days (expects ~7)"
+   "stale_reason": "no new items in 101 days (expects ~7)"
   },
   "aec-magazine": {
    "consecutive_failures": 0,
    "last_item_count": 200,
-   "last_item_published": "2026-11-12T09:55:20Z",
-   "last_modified": "Thu, 12 Nov 2026 09:56:34 GMT",
+   "last_item_published": "2026-11-13T11:17:46Z",
+   "last_modified": "Fri, 13 Nov 2026 14:36:09 GMT",
    "last_status": 200,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -27,9 +27,9 @@
    "consecutive_failures": 0,
    "last_failure": "2026-08-21T06:09:01.488497Z",
    "last_item_count": 10,
-   "last_item_published": "2026-11-12T18:38:13Z",
+   "last_item_published": "2026-11-13T15:26:28Z",
    "last_status": 200,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -41,27 +41,27 @@
    "last_item_published": "2026-11-11T11:51:48Z",
    "last_modified": "Wed, 11 Nov 2026 11:51:50 GMT",
    "last_status": 304,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
   "graphisoft": {
    "consecutive_failures": 0,
-   "etag": "W/\"6441d101e8fc063f49a52fda39814489\"",
+   "etag": "W/\"d52e77d7293a8482a35d7652ed4f225b\"",
    "last_item_count": 9,
-   "last_modified": "Fri, 13 Nov 2026 04:25:42 GMT",
+   "last_modified": "Fri, 13 Nov 2026 16:17:09 GMT",
    "last_status": 200,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
   "pyrevit-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"3070372b122a1228efcaeddf0da9f161\"",
+   "etag": "W/\"e213a75669ba6d00c97030e354e50b19\"",
    "last_item_count": 10,
-   "last_item_published": "2026-11-12T09:47:59Z",
+   "last_item_published": "2026-11-13T18:25:30Z",
    "last_status": 200,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -71,22 +71,22 @@
    "last_item_published": "2026-11-10T01:47:00Z",
    "last_modified": "Thu, 12 Nov 2026 22:31:23 GMT",
    "last_status": 200,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
   "revit-blog": {
-   "consecutive_failures": 129,
+   "consecutive_failures": 130,
    "etag": "W/\"f97e3c696f4aefceea2a4e8c356b1481-gzip\"",
    "last_error": "HTTP 403",
-   "last_failure": "2026-11-13T06:06:44.859000Z",
+   "last_failure": "2026-11-14T06:05:53.315536Z",
    "last_item_count": 0,
    "last_item_published": "2026-07-22T21:10:26Z",
    "last_modified": "Wed, 22 Jul 2026 21:14:50 GMT",
    "last_status": 304,
    "last_success": "2026-07-25T19:27:39.918043Z",
    "stale": true,
-   "stale_reason": "129 consecutive failures: HTTP 403"
+   "stale_reason": "130 consecutive failures: HTTP 403"
   },
   "revit-pure": {
    "consecutive_failures": 0,
@@ -94,7 +94,7 @@
    "last_item_count": 0,
    "last_item_published": "2026-09-21T10:00:00Z",
    "last_status": 304,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -104,17 +104,17 @@
    "last_item_count": 0,
    "last_item_published": "2026-10-15T18:13:42Z",
    "last_status": 304,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
   "revitlookup-releases": {
    "consecutive_failures": 0,
-   "etag": "W/\"47d119a75ea2eba0b12600c1e77338fc\"",
+   "etag": "W/\"4a53ccb3a0c918921630ac2cbfba3a1c\"",
    "last_item_count": 10,
    "last_item_published": "2026-09-06T20:58:32Z",
    "last_status": 200,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": false,
    "stale_reason": ""
   },
@@ -124,12 +124,72 @@
    "last_item_count": 0,
    "last_item_published": "2026-06-15T16:47:47Z",
    "last_status": 304,
-   "last_success": "2026-11-13T06:06:44.859000Z",
+   "last_success": "2026-11-14T06:05:53.315536Z",
    "stale": true,
-   "stale_reason": "no new items in 150 days (expects ~30)"
+   "stale_reason": "no new items in 151 days (expects ~30)"
   }
  },
  "items": [
+  {
+   "title": "Reclaim unused licenses with the Team Admin API",
+   "url": "https://aps.autodesk.com/blog/reclaim-unused-licenses-team-admin-api",
+   "source": "aps-blog",
+   "published": "2026-11-13T15:26:28Z",
+   "summary": "Reclaim unused licenses with the Team Admin API Joao Martins 13 Nov 2026 João Martins Share Introduction As your team evolves, people change roles, finish projects, or move on, and some of the licenses assigned to them stop being used. Sooner or later you need to consider unassigning those licenses so they can go to someone who needs them. The first step is knowing who is inactive. The second is acting on it. This sample covers both, with the focus on the second: using the Team Admin API to unassign the licenses you identified. Prerequisites An APS app of type Traditional Web App. The Team Admin API supports only this app type, so it is required. Access to the Team Admin API for your app. To use the Reporting API as the usage source, also add access to the Business Success Plan Reporting API. Team admin rights in Autodesk Account. .NET 10 SDK . Review the license activity You have two options to check inactivity: Manually, in the manage portal. On manage.autodesk.com , you can review usage and download a report. Upload that report. With the Business Success Plan Reporting API . If your team has the reporting benefit, the sample runs a usage query and gets the latest usage per user…",
+   "id": "27db8a57d54e1122",
+   "fetched_at": "2026-11-14T06:05:53.315536Z",
+   "classification": {
+    "tier": "fyi",
+    "relevance": 25,
+    "why": "Team Admin API for license management is useful for practices managing multiple seats, but not core to your add-in or tooling work.",
+    "topics": [
+     "autodesk-platform-services",
+     "licensing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-14T06:05:53.315536Z"
+   }
+  },
+  {
+   "title": "AI makes scanned buildings searchable",
+   "url": "https://aecmag.com/cafm/ai-makes-scanned-buildings-searchable/",
+   "source": "aec-magazine",
+   "published": "2026-11-13T11:17:46Z",
+   "summary": "qentin helps facility managers find assets, check safety features and explore “digital twins“ using natural language. Finding all the fire extinguishers, checking for damage or locating a piece of equipment by its asset tag in a large building could become considerably easier with qentin, an AI agent that lets facility managers search laser-scanned “digital twins” using natural language. Currently in early access, the software is developed by Austrian startup qapture, which has spent the past six years laser scanning buildings across Austria, Switzerland and Germany. Its projects include 38 Ikea sites covering more than 2 million square metres. Once a building has been scanned and georeferenced, qentin uses AI to automatically detect, label and locate objects. It can also read labels and asset tags directly from the scans using text recognition. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here Facility managers can then ask questions in German or English through a chat interface and receive answers displayed directly in the 3D viewer. Each answer is pinned to a location in the digital…",
+   "id": "50c4e5794d4922b8",
+   "fetched_at": "2026-11-14T06:05:53.315536Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 5,
+    "why": "Product announcement for facility management AI; no technique, API, or interop detail relevant to Revit authoring or add-in work.",
+    "topics": [
+     "ai",
+     "marketing"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-14T06:05:53.315536Z"
+   }
+  },
+  {
+   "title": "SketchUp add-on brings BIM to smaller practices",
+   "url": "https://aecmag.com/bim/sketchup-add-on-brings-bim-to-smaller-practices/",
+   "source": "aec-magazine",
+   "published": "2026-11-13T09:45:34Z",
+   "summary": "Archeform BIM brings BIM elements, drawings, schedules and IFC to SketchUp, with new 1.1 release targeting renovation workflows Archeform BIM, a SketchUp extension designed to bring BIM tools and “permit-ready drawings” within reach of smaller practices, has released version 1.1, which has a major focus on renovation projects. With Archeform BIM, users model walls, slabs, roofs, stairs, windows and doors as BIM elements. The software then generates plans, sections and elevations, complete with symbols, layer-based hatches and line weights. Every element in the BIM model carries its IFC class, properties and quantities, and can be exported to IFC4 with its material layers. Discover what’s new in technology for architecture, engineering and construction — read the latest edition of AEC Magazine Subscribe FREE here The new release brings existing, demolished and new construction together in a single SketchUp model, with a separate set of drawings for each. Building services (MEP) also have their own drawing sets. Also new is the ability to generate material schedules for walls, slabs and roofs, showing area, volume and count by material and thickness, with a breakdown by storey if…",
+   "id": "7cfb04ceb754dfde",
+   "fetched_at": "2026-11-14T06:05:53.315536Z",
+   "classification": {
+    "tier": "noise",
+    "relevance": 10,
+    "why": "Competitor product release (SketchUp add-on); interesting market move but no technical detail or cross-tool technique to apply.",
+    "topics": [
+     "competitor",
+     "bim-tools"
+    ],
+    "model": "claude-haiku-4-5-20251001",
+    "classified_at": "2026-11-14T06:05:53.315536Z"
+   }
+  },
   {
    "title": "profileImage field removed from the usage-queries API (Business Success Plan)",
    "url": "https://aps.autodesk.com/blog/profileimage-field-removed-usage-queries-api-business-success-plan",
